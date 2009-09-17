@@ -1,0 +1,10 @@
+body{ background-image:url(../images/top_bg.jpg); background-repeat:repeat-x;margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;}
+.logininf{ color:#3f6293}
+.top_title{ float:left; width:91px; height:39px;background-image:url(../images/top_title_bg.jpg); background-repeat:no-repeat; line-height:39px; font-size:14px; color:#FFFFFF; margin-left:5px; margin-right:3px;}
+.top_title:link { color:#FFFFFF; text-decoration:none; }
+.top_title:hover { color:#FFFFFF; text-decoration:none;}
+.top_title1{ float:left; width:91px; height:39px; line-height:39px;font-size:14px; color:#4b6888;}
+.top_title1:link { color:#4b6888; text-decoration:none; }
+.top_title1:hover { color:#000000; text-decoration:none;}
+.top_title_m{float:left;width:2px; height:39px;margin-left:5px; margin-right:3px;}
+.ttmbg{ background-image:url(../images/top_title_m.jpg); background-repeat:no-repeat; background-position: 0px 9px;}

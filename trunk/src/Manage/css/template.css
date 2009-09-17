@@ -1,0 +1,5 @@
+.TempItem{ width:230px; height:45px;text-align:left; padding-top:15px; padding-left:20px; float:left; margin-top:8px; margin-left:8px; margin-right:8px;}
+.TempItem img { float: left; margin-right:8px;}
+.TempItem a{ float:left;width:170px; line-height:18px; color:#2864a6; font-weight:bold;}
+.TempItem a:hover{ text-decoration:none;color:#2864a6;}
+.tempitembg { background-image:url(../images/tempinfo_bg.jpg)}
