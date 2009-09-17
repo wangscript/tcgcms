@@ -1,0 +1,20 @@
+.btn {BORDER-RIGHT: #0a8fda 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #0a8fda 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 14px; PADDING-BOTTOM: 5px; BORDER-LEFT: #0a8fda 1px solid; WIDTH: 172px; PADDING-TOP: 5px; BORDER-BOTTOM: #0a8fda 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR:#e8f9ff; font-weight:bold;}
+.btn1 {BORDER-RIGHT: #9ecc00 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #9ecc00 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 14px; PADDING-BOTTOM: 5px; BORDER-LEFT: #9ecc00 1px solid; WIDTH: 172px; PADDING-TOP: 5px; BORDER-BOTTOM: #9ecc00 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR:#e8f9ff; font-weight:bold;}
+
+.login{ margin:auto;width:373px; text-align:left; height:356px;margin-top:200px;background-image:url(../images/login/login_bg.jpg); background-repeat:no-repeat}
+.login_title{ width:100%;height:75px;text-align:left;}
+.month{ float:left; font-size:28px; color:#FFFFFF; font-family:""; margin-top:10px;}
+.title{ float:left; width:236px; padding-left:68px;height:33px; font-weight:bold;font-size:18px; font-family:""; margin-top:46px;}
+.login_input_p{ line-height:55px;margin-left:40px; height:55px;}
+
+.btn_submit{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_submint.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;}
+
+.btn_c{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_c.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;}
+
+body{ background-color:#66693a}
+.txt1{ color:#000000}
+.txt2{ color:#666666;}
+.STYLE1 {color: #639e21}
+.errText{ margin-left:32px;height:32px; width:180px; line-height:32px;}
+.lodertxt{color:#f49507}
+.errTextW {  margin-left:32px;height:32px;background-image:url(../images/cue_01.gif); background-repeat:no-repeat; background-position: 0px 0px; padding-left:20px; color:#FF0000;}

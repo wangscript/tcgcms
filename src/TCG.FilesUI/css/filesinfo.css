@@ -1,0 +1,45 @@
+body { background:#FFF; text-align:center; border:0px; padding:0px; margin:0px;}
+table{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+div{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+input{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+select{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+textarea { font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+img { border:0px;}
+form{margin:0px;padding:0px;}
+h1{font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h2{font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h3{font-weight:normal;font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h4{font-size:12px;margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h5{font-weight:normal; font-size:12px;margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h6{ margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+ul{ margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+p { margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+li{font-family:Arial, Helvetica, sans-serif;padding: 0px;list-style-image: none;list-style-type: none;margin: 0px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+a { color:#424242; text-decoration:none; list-style-type:none; list-style:none;}
+a:link { color:#424242; text-decoration:none; }
+a:hover { color:#FF6600; text-decoration:underline;}
+li{ text-align:left}
+.hid{display:none;}
+.bold{font-weight:bold;}
+
+
+.uploadfilebg{filter:Alpha(Opacity=30);-moz-opacity:0.3;z-index:1003;left:0px; top:0px;position:absolute; width:400px; height:400px; background-color:#666666;}
+.uploaddiv{ z-index:1004;left:0px; top:0px;position:absolute;width:400px; height:300px; background-color:#FFFFFF;}
+
+.addfilebtn{ margin-left:80px;margin-top:6px;width:63px; height:25px; float:left;background-image:url(../images/btn_addpic.jpg);}
+.startupbtn{ z-index:1010; left:23px; position:absolute;margin-top:6px; width:63px; height:25px; float:left;background-image:url(../images/btn_startupload.jpg);}
+.alldelbtn{ margin-top:6px; margin-right:18px;width:63px; height:25px; float:right;background-image:url(../images/btn_alldel.jpg);}
+.cbtn{ margin-top:6px; margin-right:18px;width:63px; height:25px; float:right;background-image:url(../images/btn_cflile.jpg);}
+.uploadDiv_w{ border:#d3e3f2 solid 2px; float:left; width:550px; height:330px;}
+.uploadDiv_Title{ height:35px; line-height:35px; text-align:left; padding-left:20px; border-bottom:#d3e3f2 solid 1px;}
+.uploaddiv_info{width:542px; height:286px; border:#d3e3f2 solid 1px; margin:3px;}
+.uploaddiv_info_title{ background-color:#e9f6fc; height:30px;border-bottom:#d3e3f2 solid 1px; text-align:left; line-height:30px; color:#5f5f5f; padding-left:10px;}
+.uploaddiv_info_title_emu{ padding-left:10px; height:25px;text-align:left; line-height:30px; color:#5f5f5f;}
+.emubg{background-color:#e3f7ff;}
+.emu_tittle{ float:left;width:300px;}
+.emu_state{ float:left; width:170px;}
+.emu_state2{ float:left; width:170px; height:11px; border:#abc1e9 solid 1px; background-image:url(../images/jdbg.jpg); margin-top:6px; background-repeat:no-repeat; background-position:-170px 0px;}
+.emu_manage{ float:right; width:60px; text-align:center;}
+.emu_manage_a{float:left; width:10px; height:10px; background-image:url(../images/ajaxclose.gif); background-position:0px 0px; background-repeat:no-repeat; margin-top:8px; margin-left:25px;}
+.fileitem{ position:absolute; top:12px; left:0px;filter:Alpha(Opacity=0);-moz-opacity:0;z-index:99; width:210px; border:0px;height:30px;}
+.uploadfileFinsh{ position:absolute; top:150px; left:150px; border:#abc1e9 solid 1px;font-size:14px; height:30px; line-height:30px; width:200px;background-color:#e3f7ff;}

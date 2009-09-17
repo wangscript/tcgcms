@@ -1,0 +1,38 @@
+
+
+.tnew{ float:left; width:75px; height:26px;  line-height:26px;}
+.nbg{background-image:url(../images/page_title_meu.gif); background-repeat:no-repeat; background-position:0px 0px;}
+
+.tnew1{ float:left; width:85px; height:26px;  line-height:26px;}
+.nbg1{background-image:url(../images/page_title_meu1.gif); background-repeat:no-repeat; background-position:0px 0px;}
+
+.tnew span {float:left; margin-left:5px;}
+.tnew img {float:left; margin-left:6px; margin-top:5px;margin-right:5px;}
+
+.tnew1 span {float:left; margin-left:5px;}
+.tnew1 img {float:left; margin-left:6px; margin-top:5px;margin-right:5px;}
+
+.alist_left{ float:left; width:100px; background-color:#666666; height:100%}
+.list_title{clear:left;background-image:url(../images/list_title_bg.gif); height:19px; line-height:19px;border-top:#d7d7d7 solid 1px; border-bottom:#d7d7d7 solid 1px;}
+.list_title_c{height:22px; line-height:22px;border-bottom:#d7d7d7 solid 1px;}
+.newslistt{ text-align:left; border-bottom:#f7f7f7 solid 4px; height:24px; line-height:24px; padding-left:10px;margin-top:10px;}
+
+.l_check{ float:left; width:30px;}
+.l_rg{border-right:#d7d7d7 solid 1px;}
+.l_id{ float:left; width:50px;}
+.l_classname{ float:left; width:200px;}
+.l_Directory{ float:left; width:250px;}
+.l_updatedate{ float:right;width:120px;}
+.l_classname img { margin-left:18px; margin-top:5px; float:left;}
+.l_classname:hover{color:#000000}
+.lb_1{ background-color:#f7f7f7;}
+.lb_2{background-color:#fffdd7;}
+.list_bottom{ padding-left:10px;height:30px; line-height:30px;border-top:#f7f7f7 solid 4px;}
+
+.CreateClassDiv{position:absolute; z-index:100;width:1px; height:1px; background-color:#999999; top:0px; left:0px; }
+.CreateClassDivClose{ text-align:right; position:relative; top:-17px; left:-3px;}
+.CBackg{ z-index:99; position:absolute; top:0px; left:0px; background-color:#CCCCCC; filter:Alpha(Opacity=30);-moz-opacity:0.3}
+
+.selectDiv{position:absolute; width:18px; height:19px; float:left; background-position:1px 1px; background-color:#FFFFFF;}
+.sl_bg1{background-image:url(../images/icon/sl_one.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
+.sl_bg2{background-image:url(../images/icon/sl_sc.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
