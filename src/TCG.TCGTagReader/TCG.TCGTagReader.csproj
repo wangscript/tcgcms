@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FC6DB84F-5DF5-4872-88EF-5B7F33CD77A7}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCG.TCGTagReader.Entity\TCGTagPagerInfo.cs" />
     <Compile Include="TCG.TCGTagReader.Handlers\TCGTagAttributeHandlers.cs" />
     <Compile Include="TCG.TCGTagReader.Handlers\TCGTagHandlers.cs" />
@@ -68,6 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
     <Folder Include="TCG.TCGTagReader.Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

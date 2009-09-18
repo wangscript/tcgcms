@@ -52,7 +52,6 @@
     <Compile Include="Origin.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptsMain.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -78,6 +77,9 @@
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{255EA1B1-F597-4047-B9C1-7688668B5BD6}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="TCG.Template.Entity\TemplateInfo.cs" />
     <Compile Include="TCG.Template.Handlers\TemplateHandlers.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCG.Template.Utils\TemplateConstant.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +52,9 @@
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
