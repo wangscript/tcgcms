@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="Interop.MSXML2, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Interop.MSXML2.dll</HintPath>
+      <HintPath>..\..\contrib\DLL\Interop.MSXML2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -44,10 +44,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
-    <Reference Include="TCG.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TCG.Data\bin\Debug\TCG.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionSpanEnum.cs" />
@@ -65,9 +61,6 @@
     <Compile Include="Cookie.cs" />
     <Compile Include="DbProviderEnum.cs" />
     <Compile Include="Fetch.cs" />
-    <Compile Include="Origin.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCG.Release\Property.cs" />
     <Compile Include="RegExp.cs" />

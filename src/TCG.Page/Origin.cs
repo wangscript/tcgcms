@@ -1,16 +1,18 @@
-namespace TCG.Utils
-{
-    using System;
-    using System.Configuration;
-    using System.Data;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using TCG.Utils.Release;
-    using TCG.Data;
+ï»¿using System;
+using System.Configuration;
+using System.Data;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using TCG.Utils.Release;
+using TCG.Data;
+using TCG.Utils;
 
+
+namespace TCG.Pages
+{
     public class Origin : Page
     {
         public Origin()
@@ -22,13 +24,13 @@ namespace TCG.Utils
         {
             if (Fetch.Get("staff") != "")
             {
-                string text1 = "ÏµÍ³Ãû³Æ: " + Property.SystemName + "<br />";
-                text1 = text1 + "ÏµÍ³°æ±¾: " + Property.SystemVersion + "<br />";
-                text1 = text1 + "¿ª ·¢ Õß: " + Property.Designer + "<br />";
-                text1 = text1 + "µç×ÓĞÅÏä: <a href='mailto:sanyungui&#64;xzdsw&#46;com'>sanyungui&#64;xzdsw&#46;com</a><br />";
-                text1 = text1 + "¹Ù·½ÍøÕ¾: <a href='" + Config.Settings["www_Site"] + "' target='_blank'>" + Config.Settings["www_Site"] + "</a>";
-                this.Throw(text1, "Öø×÷Ç©Ãû", null, null, false);
-           }
+                string text1 = "ç³»ç»Ÿåç§°: " + Property.SystemName + "<br />";
+                text1 = text1 + "ç³»ç»Ÿç‰ˆæœ¬: " + Property.SystemVersion + "<br />";
+                text1 = text1 + "å¼€ å‘ è€…: " + Property.Designer + "<br />";
+                text1 = text1 + "ç”µå­ä¿¡ç®±: <a href='mailto:sanyungui&#64;xzdsw&#46;com'>sanyungui&#64;xzdsw&#46;com</a><br />";
+                text1 = text1 + "å®˜æ–¹ç½‘ç«™: <a href='" + Config.Settings["www_Site"] + "' target='_blank'>" + Config.Settings["www_Site"] + "</a>";
+                this.Throw(text1, "è‘—ä½œç­¾å", null, null, false);
+            }
         }
 
         protected virtual void Alert(string message)
@@ -225,7 +227,7 @@ namespace TCG.Utils
             {
                 case null:
                 case "":
-                    text1 = "ÂèµÄ|ÄãÂè|ËûÂè|Âèb|Âè±È|ÎÒÈÕ|ÎÒ²Ù|·¨ÂÖ|fuck|shit";
+                    text1 = "å¦ˆçš„|ä½ å¦ˆ|ä»–å¦ˆ|å¦ˆb|å¦ˆæ¯”|æˆ‘æ—¥|æˆ‘æ“|æ³•è½®|fuck|shit";
                     break;
 
                 default:
@@ -267,7 +269,7 @@ namespace TCG.Utils
             new Terminator().Throw(message, title, links, autojump, showback);
         }
 
-        protected virtual void Throw(int errvalue,string autojump, bool showbak)
+        protected virtual void Throw(int errvalue, string autojump, bool showbak)
         {
             new Terminator().Throw(errvalue, autojump, showbak);
         }
@@ -363,4 +365,3 @@ namespace TCG.Utils
         private Connection _conn;
     }
 }
-
