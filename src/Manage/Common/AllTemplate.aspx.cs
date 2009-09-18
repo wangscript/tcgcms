@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Template.Handlers;
-using TCG.Scripts.Kernel;
+using TCG.Pages;
 
 public partial class Common_AllTemplate : ScriptsMain
 {

@@ -13,7 +13,7 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Utils.Entity;
-using TCG.Manage.Kernel;
+using TCG.Pages;
 using TCG.Manage.Utils;
 
 public partial class ConfigSetting : adminMain

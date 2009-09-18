@@ -52,9 +52,9 @@
       <Project>{02750DA5-7DF5-4B90-890E-7EC9C9E32DAF}</Project>
       <Name>TCG.News</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.Scripts\TCG.Scripts.csproj">
-      <Project>{81FBD613-1B01-43CC-8642-4D5AA7028C64}</Project>
-      <Name>TCG.Scripts</Name>
+    <ProjectReference Include="..\TCG.Page\TCG.Pages.csproj">
+      <Project>{812DDE97-3E93-42A3-B5E9-81997139F718}</Project>
+      <Name>TCG.Pages</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Template\TCG.Template.csproj">
       <Project>{255EA1B1-F597-4047-B9C1-7688668B5BD6}</Project>

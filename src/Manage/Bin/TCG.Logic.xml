@@ -4,25 +4,6 @@
         <name>TCG.Logic</name>
     </assembly>
     <members>
-        <member name="M:TCG.Logic.TypeWorker.Instantiated(System.Type)">
-            <summary>
-            根据类型获得类实例
-            </summary>
-            <param name="objtype">类型</param>
-            <returns>实例化后的对象</returns>
-        </member>
-        <member name="M:TCG.Logic.TypeWorker.PropertyInfos(System.Object)">
-            <summary>
-            获取当前对象类型内所有的公开属性
-            </summary>
-            <param name="obj">对象类</param>
-            <returns></returns>
-        </member>
-        <member name="T:TCG.Logic.objectLogic">
-            <summary>
-            通用对象处理方法
-            </summary>
-        </member>
         <member name="T:TCG.Logic.BaseLogic">
             <summary>
             数据处理逻辑层基类
@@ -75,6 +56,25 @@
         <member name="P:TCG.Logic.BaseLogic.conn">
             <summary>
             数据访问方法，页面从该处调用
+            </summary>
+        </member>
+        <member name="M:TCG.Logic.TypeWorker.Instantiated(System.Type)">
+            <summary>
+            根据类型获得类实例
+            </summary>
+            <param name="objtype">类型</param>
+            <returns>实例化后的对象</returns>
+        </member>
+        <member name="M:TCG.Logic.TypeWorker.PropertyInfos(System.Object)">
+            <summary>
+            获取当前对象类型内所有的公开属性
+            </summary>
+            <param name="obj">对象类</param>
+            <returns></returns>
+        </member>
+        <member name="T:TCG.Logic.objectLogic">
+            <summary>
+            通用对象处理方法
             </summary>
         </member>
         <member name="M:TCG.Logic.objectLogic.Load(System.Type,System.Type,System.Int32)">

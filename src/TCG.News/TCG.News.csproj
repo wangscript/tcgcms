@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{02750DA5-7DF5-4B90-890E-7EC9C9E32DAF}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -39,10 +39,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TCG.TCGTagReader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TCG.TCGTagReader\bin\Debug\TCG.TCGTagReader.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TCG.News.Entity\ClassInfo.cs" />
@@ -50,16 +46,10 @@
     <Compile Include="TCG.News.Entity\NewsFromInfo.cs" />
     <Compile Include="TCG.News.Entity\NewsInfo.cs" />
     <Compile Include="TCG.News.Entity\NewsSpecialityInfo.cs" />
-    <Compile Include="TCG.News.Forums\ArticleBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="TCG.News.Handlers\classHandlers.cs" />
     <Compile Include="TCG.News.Handlers\newsFromHandlers.cs" />
     <Compile Include="TCG.News.Handlers\newsInfoHandlers.cs" />
     <Compile Include="TCG.News.Handlers\NewsSpecialityHandlers.cs" />
-    <Compile Include="TCG.News.Kernel\NewsMain.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
