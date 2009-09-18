@@ -59,12 +59,8 @@
   <ItemGroup>
     <Compile Include="TCG.Manage.Controls\AjaxDiv.cs" />
     <Compile Include="TCG.Manage.Entity\Admin.cs" />
-    <Compile Include="TCG.Manage.Kernel\AdminLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCG.Manage.Handlers\adminHandlers.cs" />
-    <Compile Include="TCG.Manage.Kernel\adminMain.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="TCG.Manage.Utils\ManageConst.cs" />
   </ItemGroup>
   <ItemGroup>

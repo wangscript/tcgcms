@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Manage.Kernel;
+using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
 using TCG.News.Handlers;

@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Manage.Kernel;
+using TCG.Pages;
 using TCG.Manage.Utils;
 
 public partial class adminadd : adminMain

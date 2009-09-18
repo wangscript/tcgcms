@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 
 using TCG.Utils;
-using TCG.Manage.Kernel;
+using TCG.Pages;
 using TCG.Manage.Utils;
 
 public partial class AjaxMethod_Text_GetErrText : adminMain
