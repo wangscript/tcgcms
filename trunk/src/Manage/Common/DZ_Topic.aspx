@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DZ_Topic.aspx.cs" Inherits="Common_DZ_Topic" %>
