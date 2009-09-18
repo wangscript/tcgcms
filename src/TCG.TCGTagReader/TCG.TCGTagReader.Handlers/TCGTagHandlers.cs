@@ -133,6 +133,7 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$mainSite$_", config["mainSite"]);
             this._temphtml = _temphtml.Replace("_$itSite$_", config["itSite"]);
             this._temphtml = _temphtml.Replace("_$SysTitle$_", config["SysTitle"]);
+            this._temphtml = _temphtml.Replace("_$SoftCopyright$_", config["SoftCopyright"]);
         }
 
         private void Save()
