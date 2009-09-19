@@ -124,7 +124,7 @@ public partial class news_createhtml : adminMain
         item.vcShortContent = Text.Left(Text.JSEncode(Text.GetTextWithoutHtml(item.vcContent)), 100, false);
         item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
 
-        int rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref id, ref filepath);
+        int rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref id);
         if (rtn < 0)
         {
             text1 = "<a>更新文章信息失败...ID:" + id.ToString() + "</a>";

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B151A9AB-28A9-4343-B1BA-62825DE9DDE4}</ProjectGuid>
+    <ProjectGuid>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TCG.KeyWordSplit</RootNamespace>
-    <AssemblyName>TCG.KeyWordSplit</AssemblyName>
+    <RootNamespace>TCG.Entity</RootNamespace>
+    <AssemblyName>TCG.Entity</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,18 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KeyWordTree.cs" />
-    <Compile Include="KeyWordTreeNode.cs" />
-    <Compile Include="Pinyin.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
-      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
-      <Name>TCG.Entity</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

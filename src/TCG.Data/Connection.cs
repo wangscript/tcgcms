@@ -13,7 +13,7 @@ namespace TCG.Data
         private string[] ConnStr = new string[30];   //DB连接串数组
         public Connection()
         {
-            ConnStr[0] = "server=127.0.0.1;Database=TCG.CMS.XTUCS;User Id=sa;Password=woziji112;";
+            ConnStr[0] = "server=127.0.0.1;Database=Manage86865;User Id=sa;Password=woziji112;";
             ConnStr[1] = ConnStr[0];
             ConnStr[2] = ConnStr[0];
             ConnStr[3] = ConnStr[0];

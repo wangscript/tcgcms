@@ -117,7 +117,7 @@ public partial class news_newsthief : adminMain
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.admin.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo.iId = Bases.ToInt(Fetch.Post("iClassId"));
+            nif.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")), false);
             nif.FromInfo.iId = 1;
             nif.cChecked = "Y";
             nif.cCreated = "Y";
@@ -134,7 +134,7 @@ public partial class news_newsthief : adminMain
                 int rtn = 0;
                 try
                 {
-                    rtn = nihdl.AddNewsInfoForSheif(base.conn, base.config["FileExtension"], nif, ref newid, ref filepath);
+                    rtn = nihdl.AddNewsInfoForSheif(base.conn, base.config["FileExtension"], nif, ref newid);
                 }
                 catch { }
             }

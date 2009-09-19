@@ -81,7 +81,7 @@ public partial class news_newsAdd : adminMain
         item.vcContent = Fetch.Post("iContent");
         item.vcAuthor = Fetch.Post("iAuthor");
         item.vcKeyWord = Fetch.Post("iKeyWords");
-        item.ClassInfo.iId = Bases.ToInt(Fetch.Post("iClassId"));
+        item.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
         item.FromInfo.iId = Bases.ToInt(Fetch.Post("iFrom"));
         item.iId = Bases.ToInt(Fetch.Post("iNewsId"));
         item.vcSpeciality = Fetch.Post("iSpeciality");
@@ -125,15 +125,15 @@ public partial class news_newsAdd : adminMain
         int rtn = 0;
         if (!ismdy)
         {
-            rtn = nihdl.AddNewsInfo(base.conn, base.config["FileExtension"], item, ref newid, ref filepath);
+            rtn = nihdl.AddNewsInfo(base.conn, base.config["FileExtension"], item, ref newid);
         }
         else
         {
-            rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref newid, ref filepath);
+            rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref newid);
         }
 
         item.iId = newid;
-        filepath = Server.MapPath("~" + filepath);
+        filepath = Server.MapPath("~" + item.vcFilePath);
         if (rtn == 1)
         {
             classHandlers clhdl = new classHandlers();
