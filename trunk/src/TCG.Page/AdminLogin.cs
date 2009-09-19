@@ -118,7 +118,7 @@ namespace TCG.Pages
             bool rtn = false;
             for (int i = 0; i < ManageConst.SpecialPages.Length; i++)
             {
-                string text2 = config["WebSite"] + ManageConst.SpecialPages[i];
+                string text2 = config["WebSite"] + config["ManagePath"] + ManageConst.SpecialPages[i];
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -129,7 +129,7 @@ namespace TCG.Pages
             bool rtn = false;
             for (int i = 0; i < ManageConst.OnlineLoginPages.Length; i++)
             {
-                string text2 = config["WebSite"] + ManageConst.OnlineLoginPages[i];
+                string text2 = config["WebSite"] + config["ManagePath"] + ManageConst.OnlineLoginPages[i];
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -139,16 +139,9 @@ namespace TCG.Pages
         {
             if (this._admin.PopedomUrls.Rows.Count == 0) return false;
             string text = this._currenturl.ToLower().Trim();
-            text = text.Replace("http://", "").Trim();
-            if (config["WebSite"] == "/")
-            {
-                text = text.Substring(text.IndexOf('/')+1).Trim();
-            }
-            else
-            {
-                text = text.Substring(text.IndexOf('/')).Trim();
-                text = text.ToLower().Replace(config["WebSite"].ToLower(), "").Trim();
-            }
+
+            text = text.ToLower().Replace(config["WebSite"].ToLower() + config["ManagePath"].ToLower(), "").Trim();
+          
             DataRow[] rows = this._admin.PopedomUrls.Select("vcUrl='" + text + "'");
             if (rows.Length > 0) return true;
             rows = this._admin.PopedomUrls.Select("vcUrl='" + "$filesite$" + text + "'");

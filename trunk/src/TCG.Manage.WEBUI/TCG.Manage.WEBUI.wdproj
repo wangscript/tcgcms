@@ -40,6 +40,10 @@
       <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
       <Name>TCG.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.Files\TCG.Files.csproj">
+      <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
+      <Name>TCG.Files</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Logic\TCG.Logic.csproj">
       <Project>{563C9F18-3B0A-4A7E-8D9B-A971304DD439}</Project>
       <Name>TCG.Logic</Name>
@@ -55,6 +59,14 @@
     <ProjectReference Include="..\TCG.Page\TCG.Pages.csproj">
       <Project>{812DDE97-3E93-42A3-B5E9-81997139F718}</Project>
       <Name>TCG.Pages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.Release\TCG.Release.csproj">
+      <Project>{7B10337D-32C6-48BE-8C7D-68B7D9D95B91}</Project>
+      <Name>TCG.Release</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.TCGTagReader\TCG.TCGTagReader.csproj">
+      <Project>{FC6DB84F-5DF5-4872-88EF-5B7F33CD77A7}</Project>
+      <Name>TCG.TCGTagReader</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Template\TCG.Template.csproj">
       <Project>{255EA1B1-F597-4047-B9C1-7688668B5BD6}</Project>

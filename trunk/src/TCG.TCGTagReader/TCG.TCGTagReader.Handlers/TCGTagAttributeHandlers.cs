@@ -180,7 +180,7 @@ namespace TCG.TCGTagReader.Handlers
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        nifhd.UpdateNewsInfo(this._conn, this._config["FileExtension"], item, ref outid, ref filepatch);
+                        nifhd.UpdateNewsInfo(this._conn, this._config["FileExtension"], item, ref outid);
                     }
                 }
                 catch { }
