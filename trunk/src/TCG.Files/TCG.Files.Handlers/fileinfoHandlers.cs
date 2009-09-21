@@ -87,7 +87,7 @@ namespace TCG.Files.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.Substring(0, 8) != config["FileSite"].Substring(0, 8) && temp.IndexOf(text1) == -1)
+                if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
                     fileclasshandlers fchdl = new fileclasshandlers();
@@ -118,7 +118,7 @@ namespace TCG.Files.Handlers
                             }
                             else
                             {
-                                content = content.Replace(text1, config["FileSite"] + "attach-" + imgfile.iID.ToString() + config["FileExtension"]);
+                                content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
                                 temp = text1 + "@@@" + temp;
                             }
                         }
@@ -143,7 +143,7 @@ namespace TCG.Files.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.Substring(0, 8) != config["FileSite"].Substring(0, 8) && temp.IndexOf(text1) == -1)
+                if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
                     fileclasshandlers fchdl = new fileclasshandlers();
@@ -175,7 +175,7 @@ namespace TCG.Files.Handlers
                             }
                             else
                             {
-                                content = content.Replace(text1, config["FileSite"] + "attach-" + imgfile.iID.ToString() + config["FileExtension"]);
+                                content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
                                 temp = text1 + "@@@" + temp;
                             }
                         }

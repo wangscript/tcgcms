@@ -10,11 +10,11 @@ function CheckAdd(){
 	if(!(CheckValueIsNull('iTitle','titlemsg')&&CheckValueIsNull('iClassName','classmsg')&&CheckValueIsNull('iAuthor','autmsg')&&CheckValueIsNull('iKeyWords','keymsg'))){
 		return false;
 	}
+
+	SetAjaxDiv("loader", false, "正在发送请求...");
 	
-	SetAjaxDiv("loader",false,"正在发送请求...");
-	
-	$("iContent").value = FCKeditorAPI.GetInstance("iContent").GetXHTML();
-	
+    //输入框数据赋值
+	setContent();
 	$("form1").action = "../files/ConentImgCheck.aspx";
 	ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
 
@@ -22,8 +22,8 @@ function CheckAdd(){
 }
 
 function CheckImgBack(val) {
-	$("iContent").value = val;
-	$("form1").action = "newsadd.aspx";
+    $("iContent_HtmlEditorContent").value = val;
+    $("form1").action = "newsadd.aspx";
 	var work = $("work");
 	if(work.value=="AddNew"){
 		ajax.postf($("form1"),function(obj) { NewsAddPostBack(obj.responseText);});

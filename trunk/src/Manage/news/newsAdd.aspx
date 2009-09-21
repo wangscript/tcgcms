@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="newsAdd.aspx.cs" Inherits="news_newsAdd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+
 <%@ Register Namespace="FredCK.FCKeditorV2" Assembly="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+<%@ Register src="../htmleditor/WebUserControl.ascx" tagname="WebUserControl" tagprefix="TCG" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -72,10 +74,10 @@
 	<div class="Page_arrb arb_pr1">
 		<img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectBigImg(this)">设置大图片</a>
 		<img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
+	    
 	</div>
 	<div class="Page_arrb arb_pr1 templateaddnew1">
-		
-		<FCKeditorV2:FCKeditor id="iContent" Height="300" runat="server" />
+		<TCG:WebUserControl ID="iContent" runat="server" />
 	</div>
 	<div class="imgPace hid" id="imgPace"></div>
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="submit" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
