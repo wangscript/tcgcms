@@ -130,11 +130,10 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$WebSite$_", config["WebSite"]);
             this._temphtml = _temphtml.Replace("_$ScriptsSite$_", config["ScriptsSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", config["PageSize"]);
-            this._temphtml = _temphtml.Replace("_$msSite$_", config["msSite"]);
-            this._temphtml = _temphtml.Replace("_$mainSite$_", config["mainSite"]);
-            this._temphtml = _temphtml.Replace("_$itSite$_", config["itSite"]);
-            this._temphtml = _temphtml.Replace("_$SysTitle$_", config["SysTitle"]);
+            this._temphtml = _temphtml.Replace("_$WebTitle$_", config["WebTitle"]);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
+            this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
+            this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
         }
 
         private void Save()

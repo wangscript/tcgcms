@@ -31,5 +31,21 @@ namespace TCG.Release
             return Math.Floor(v1).ToString() + "." + Math.Floor(v2).ToString() + "."
                 + Math.Floor(v3).ToString() + "." + Math.Floor(v4).ToString();
         }
+
+        public static string Author
+        {
+            get
+            {
+                return "≮三云鬼≯";
+            }
+        }
+
+        public static string WebSite
+        {
+            get
+            {
+                return "http://www.tcgcms.cn/";
+            }
+        }
     }
 }
