@@ -19,7 +19,7 @@ public partial class Main : adminMain
     {
         if (!Page.IsPostBack)
         {
-            this.title.Text = base.config["SysTitle"];
+            this.title.Text = base.config["WebTitle"];
         }
     }
 }
