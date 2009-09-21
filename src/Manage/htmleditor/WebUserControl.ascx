@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WebUserControl.ascx.cs" Inherits="htmleditor_WebUserControl" %>
-<script language="JAVASCRIPT" src="<%=config["WebSite"]%>htmleditor/Resources/editfunc.js" type="text/javascript"></script>
-<script language="JAVASCRIPT" src="<%=config["WebSite"]%>htmleditor/Resources/colorSelect.js" type="text/javascript"></script>
+<script language="JAVASCRIPT" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/editfunc.js" type="text/javascript"></script>
+<script language="JAVASCRIPT" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/colorSelect.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">
@@ -42,7 +42,7 @@ BODY {
 </style>
 <table style="border-right: #abbdd1 1px solid; border-top: #abbdd1 1px solid; font-size: 12px;
     border-left: #abbdd1 1px solid; border-bottom: #abbdd1 1px solid" cellspacing="0"
-    cellpadding="0" width="100%" background="<%=config["WebSite"]%>htmleditor/Resources/bg.gif" border="0">
+    cellpadding="0" width="100%" background="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/bg.gif" border="0">
     <tbody>
         <tr>
             <td style="padding-left: 5px" height="30">
@@ -52,81 +52,81 @@ BODY {
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="format('Cut')" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/1.gif" width="20"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/1.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="format('Copy')" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/2.gif" width="20"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/2.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="粘" onclick="format('Paste')" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/3.gif" width="20"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/3.gif" width="20"></td>
                             <td class="ico">
-                                <img height="20" src="<%=config["WebSite"]%>htmleditor/Resources/line.gif" width="4"></td>
+                                <img height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/line.gif" width="4"></td>
                             <td class="ico2">
                                 <img onmousedown="fSetBorderMouseDown(this)" id="imgFontface" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="fGetEv(event);fDisplayElement('fontface','')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/4.gif" width="25"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/4.gif" width="25"></td>
                             <td class="ico2">
                                 <img onmousedown="fSetBorderMouseDown(this)" id="imgFontsize" onmouseover="fSetBorderMouseOver(this)"
                                     title="趾" onclick="fGetEv(event);fDisplayElement('fontsize','')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/5.gif" width="25"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/5.gif" width="25"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="哟" onclick="format('Bold');" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/6.gif" width="20"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/6.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="斜" onclick="format('Italic');" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/7.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/7.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="禄" onclick="format('Underline')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/8.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/8.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="format('Justifyleft')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/9.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/9.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="屑" onclick="format('Justifycenter')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/10.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/10.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="叶" onclick="format('Justifyright')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/11.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/11.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="直" onclick="format('Insertorderedlist')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/12.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/12.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="目" onclick="format('Insertunorderedlist')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/13.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/13.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="format('Outdent')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/14.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/14.gif" width="20"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="format('Indent')" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/15.gif" width="20"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/15.gif" width="20"></td>
                             <td class="ico3">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="色" onclick="foreColor(event)" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/16.gif" width="23"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/16.gif" width="23"></td>
                             <td class="ico2">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="色" onclick="backColor(event)" onmouseout="fSetBorderMouseOut(this)"
-                                    height="20" src="<%=config["WebSite"]%>htmleditor/Resources/17.gif" width="24"></td>
+                                    height="20" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/17.gif" width="24"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="" onclick="createLink()" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/18.gif" width="21"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/18.gif" width="21"></td>
                             <td class="ico">
                                 <img onmousedown="fSetBorderMouseDown(this)" onmouseover="fSetBorderMouseOver(this)"
                                     title="图片" onclick="createImg()" onmouseout="fSetBorderMouseOut(this)" height="20"
-                                    src="<%=config["WebSite"]%>htmleditor/Resources/19.gif" width="21"></td>
+                                    src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/19.gif" width="21"></td>
                             <td class="ico4">&nbsp;
                           </td>
                             <td style="font-size: 12px">&nbsp;
