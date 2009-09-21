@@ -21,8 +21,8 @@ public partial class aLogin : adminMain
         if (!Page.IsPostBack)
         {
           
-            this.title.Text = base.config["SysTitle"];
-            this.ltitle.Text = base.config["SysTitle"];
+            this.title.Text = base.config["WebTitle"];
+            this.ltitle.Text = base.config["WebTitle"];
             this.month.Text = DateTime.Now.Month.ToString();
 
             HttpCookie lname = Cookie.Get(ManageConst.AdminLoginName);

@@ -201,8 +201,9 @@ namespace TCG.News.Handlers
             SqlParameter sp19 = new SqlParameter("@iId", SqlDbType.Int, 4); sp19.Value = inf.iId;
             SqlParameter sp20 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp20.Value = inf.vcTitleColor;
             SqlParameter sp21 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp21.Value = inf.cStrong;
+            SqlParameter sp22 = new SqlParameter("@iCount", SqlDbType.Char, 1); sp22.Value = inf.iCount;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21}, new int[] {14, 15 }) ;
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21,sp22}, new int[] { 14, 15 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -374,7 +375,7 @@ namespace TCG.News.Handlers
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + "/";
             text += objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2) + objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += nif.ClassInfo.iId.ToString() + "-" + nif.dAddDate.ToString("hhmmss") + "-" + Pinyin.GetPinyinByChineses(nif.vcTitle) + extion;
+            text += Pinyin.GetPinyinByChineses(nif.vcTitle) + extion;
             return text;
         }
     }
