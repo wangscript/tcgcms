@@ -75,7 +75,7 @@ public partial class news_newsAdd : adminMain
 
     private void NewsManage(bool ismdy)
     {
-        NewsInfo item = new NewsInfo();
+        NewsInfo item = nihdl.GetNewsInfoById(base.conn, Bases.ToInt(Fetch.Post("iNewsId")));
         item.vcTitle = Fetch.Post("iTitle");
         item.vcUrl = Fetch.Post("iUrl");
         item.vcContent = Fetch.Post("iContent");
@@ -83,7 +83,6 @@ public partial class news_newsAdd : adminMain
         item.vcKeyWord = Fetch.Post("iKeyWords");
         item.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
         item.FromInfo.iId = Bases.ToInt(Fetch.Post("iFrom"));
-        item.iId = Bases.ToInt(Fetch.Post("iNewsId"));
         item.vcSpeciality = Fetch.Post("iSpeciality");
         item.vcBigImg = Fetch.Post("iBigImg");
         item.vcSmallImg = Fetch.Post("iSmallImg");
