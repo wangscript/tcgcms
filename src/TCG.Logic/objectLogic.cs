@@ -285,5 +285,77 @@ namespace TCG.Logic
             base._revalue = base.conn.Execute(SQL);
             return true;
         }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="servicetype"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Update(Object entity)
+        {
+            if (entity == null) return false;
+            //获得当前属性
+            PropertyInfo[] PropertyInfos = TypeWorker.PropertyInfos(entity);
+
+            //获得查询语句
+
+            string SQL = "UPDATE " + entity.GetType().Name + " SET ";
+
+            for (int i = 0; i < PropertyInfos.Length; i++)
+            {
+                if (PropertyInfos[i].Name.ToLower() == "id") continue;
+                //最后一位不输出,号
+                string text2 = (i != (PropertyInfos.Length - 1)) ? "," : "";
+                //获取当前属性的类型
+
+                Type tTemp = PropertyInfos[i].PropertyType;
+
+
+                //判断当前属性类型是否为系统类型，如为系统类型则为System起始，否则为用户自定义class
+                if (tTemp.ToString().IndexOf("System.DateTime") == 0)
+                {
+                    //如果是日期类型
+                    SQL += PropertyInfos[i].Name.ToLower() + "= '" + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + "'" + text2 + " ";
+                }
+                else if (tTemp.ToString().IndexOf("System.Int64") == 0)
+                {
+                    //如果是int类型
+                    SQL += PropertyInfos[i].Name.ToLower() + " = " + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + text2 + " ";
+                }
+                else if (tTemp.ToString().IndexOf("System.Int") == 0)
+                {
+                    //如果是int类型
+                    SQL += PropertyInfos[i].Name.ToLower() + " = " + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + text2 + " ";
+                }
+                else if (tTemp.ToString().IndexOf("System.Single") == 0)
+                {
+                    //如果是float类型
+                    SQL += PropertyInfos[i].Name.ToLower() + " = " + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + text2 + " ";
+                }
+                else if (tTemp.ToString().IndexOf("System.Decimal") == 0)
+                {
+                    //如果是Decimal类型
+                    SQL += PropertyInfos[i].Name.ToLower() + " = " + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + text2 + " ";
+                }
+                else
+                {
+                    //如果是string类型
+                    SQL += PropertyInfos[i].Name.ToLower() + " ='" + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null)) + "'" + text2 + " ";
+                }
+            }
+
+            for (int i = 0; i < PropertyInfos.Length; i++)
+            {
+                if (PropertyInfos[i].Name.ToLower() == "id") SQL += " WHERE ID = " + objectHandlers.ToString(PropertyInfos[i].GetValue(entity, null));
+            }
+
+
+            //初始化数据访问
+            if (base.Clear() < 0) return false;
+            //获取数据
+            base._revalue = base.conn.Execute(SQL);
+            return true;
+        }
     }
 }
