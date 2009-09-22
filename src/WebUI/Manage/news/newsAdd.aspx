@@ -1,8 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="newsAdd.aspx.cs" Inherits="news_newsAdd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
-
-<%@ Register Namespace="FredCK.FCKeditorV2" Assembly="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Register src="../htmleditor/WebUserControl.ascx" tagname="WebUserControl" tagprefix="TCG" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >

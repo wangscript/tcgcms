@@ -48,6 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.81.0.1407, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\contrib\DLL\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -60,6 +64,7 @@
     <Compile Include="TCG.Files.Entity\FileClassInfo.cs" />
     <Compile Include="TCG.Files.Handlers\fileclasshandlers.cs" />
     <Compile Include="TCG.Files.Handlers\fileinfoHandlers.cs" />
+    <Compile Include="TCG.Files.Handlers\fileZip.cs" />
     <Compile Include="TCG.Files.Utils\FilesConst.cs" />
   </ItemGroup>
   <ItemGroup>
