@@ -51,7 +51,6 @@
     <Compile Include="EnCode.cs" />
     <Compile Include="objectHandlers.cs" />
     <Compile Include="socket.cs" />
-    <Compile Include="TCG.Release\Authorization.cs" />
     <Compile Include="Caching.cs" />
     <Compile Include="CheckGetEnum.cs" />
     <Compile Include="CodeImage.cs">
@@ -61,7 +60,6 @@
     <Compile Include="Cookie.cs" />
     <Compile Include="DbProviderEnum.cs" />
     <Compile Include="Fetch.cs" />
-    <Compile Include="TCG.Release\Property.cs" />
     <Compile Include="RegExp.cs" />
     <Compile Include="SessionState.cs" />
     <Compile Include="TCG.Utils.Entity\ConfigItem.cs" />

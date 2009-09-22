@@ -43,6 +43,10 @@
     <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
+      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
+      <Name>TCG.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
