@@ -7,13 +7,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/login.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+	<link href="css/adminlist.css" rel="stylesheet" type="text/css" />
+	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
 <div class="login">
-	<form id="form1" runat="server" onsubmit="return FromPost();">
+	<form id="form1" runat="server">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
 		<td><ul class="title">
@@ -25,7 +27,7 @@
 	  </tr>
 	</table>
 
-	<table width="100%" height="111" border="0" cellpadding="0" cellspacing="0">
+	<table width="100%" height="111" border="0" cellpadding="0" cellspacing="0" id="tblogin" >
 	  <tr>
 	    <td width="23%" align="right"><span class="txt1">用户名：</span></td>
         <td width="77%" align="left"><span>
@@ -43,11 +45,14 @@
         <span class="txt1">记住登录名</span></td>
 	  </tr>
 	</table>
+	<div id="tbupdate" style=" display:none;"></div>
 	<table width="100%" height="44" border="0" cellpadding="0" cellspacing="0">
 	  <tr>
 		<td align="center">
-	    <input type="submit" class="btn_submit" value="">
-		<input name="重置" type="reset" class="btn_c" value="" onclick="return oncunle();">
+		<input type="hidden" id="SqlSep" name="SqlSep" value="1" />
+		<input type="hidden" id="Work" name="Work" value="LOGIN" />
+	    <input type="submit" class="btn_submit" value="登陆" id="btn_ok" />
+		<input name="btn_ret" type="reset" class="btn_c" value="重置" onclick="return oncunle();" id="btn_ret" />
 		</td>
 	  </tr>
   </table>

@@ -49,6 +49,7 @@
     <Compile Include="ActionSpanEnum.cs" />
     <Compile Include="Bases.cs" />
     <Compile Include="EnCode.cs" />
+    <Compile Include="errHandlers.cs" />
     <Compile Include="objectHandlers.cs" />
     <Compile Include="socket.cs" />
     <Compile Include="Caching.cs" />

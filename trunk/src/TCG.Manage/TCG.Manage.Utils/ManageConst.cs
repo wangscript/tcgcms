@@ -14,7 +14,8 @@ namespace TCG.Manage.Utils
         public static string[] SpecialPages = {
             "login.aspx",
             "AjaxMethod/Text_GetErrText.aspx",
-            "files/ConentImgCheck.aspx"
+            "files/ConentImgCheck.aspx",
+            "version/ver.aspx"
         };
 
         public static string[] OnlineLoginPages = {

@@ -69,6 +69,10 @@
       <Project>{6C22537A-90F1-4169-9261-102B75346CEC}</Project>
       <Name>TCG.Manage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.Release\TCG.Release.csproj">
+      <Project>{7B10337D-32C6-48BE-8C7D-68B7D9D95B91}</Project>
+      <Name>TCG.Release</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.TCGTagReader\TCG.TCGTagReader.csproj">
       <Project>{FC6DB84F-5DF5-4872-88EF-5B7F33CD77A7}</Project>
       <Name>TCG.TCGTagReader</Name>
