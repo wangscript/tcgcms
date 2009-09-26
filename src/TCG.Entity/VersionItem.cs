@@ -22,10 +22,15 @@ namespace TCG.Entity
         /// 更新说明文档
         /// </summary>
         public string LogUrl { get { return this._logurl; } set { this._logurl = value; } }
+        /// <summary>
+        /// SQL语句文本个数
+        /// </summary>
+        public int Sqls { get { return this._sqls; } set { this._sqls = value; } }
 
         private string _text;
         private int _ver;
         private DateTime _date;
         private string _logurl;
+        private int _sqls;
     }
 }

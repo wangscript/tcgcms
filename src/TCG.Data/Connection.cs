@@ -14,6 +14,7 @@ namespace TCG.Data
         public Connection()
         {
             ConnStr[0] = "server=127.0.0.1;Database=Manage86865;User Id=sa;Password=woziji112;";
+            //ConnStr[0] = "server=dsc-03.hichina.com;Database=dsc030154_db;User Id=dsc030154;Password=woziji112;";
             ConnStr[1] = ConnStr[0];
             ConnStr[2] = ConnStr[0];
             ConnStr[3] = ConnStr[0];

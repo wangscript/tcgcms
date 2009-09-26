@@ -427,7 +427,7 @@ namespace TCG.TCGTagReader.Handlers
                     if (!string.IsNullOrEmpty(afields[i]))
                     {
                         fieldC = afields[i].Replace("%", ",");
-                        arrshowfied.Add(afields[i]);
+                        arrshowfied.Add(fieldC);
                     }
                 }
             }

@@ -7,9 +7,11 @@
 .title{ float:left; width:236px; padding-left:68px;height:33px; font-weight:bold;font-size:18px; font-family:""; margin-top:46px;}
 .login_input_p{ line-height:55px;margin-left:40px; height:55px;}
 
-.btn_submit{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_submint.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;}
+.btn_submit{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_submint.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;
+             font-size:14px; font-weight:bold; color:#076499;}
 
-.btn_c{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_c.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;}
+.btn_c{BORDER-TOP-WIDTH: 0px; DISPLAY: inline; BORDER-LEFT-WIDTH: 0px; BACKGROUND-IMAGE: url(../images/login/login_c.jpg); BORDER-BOTTOM-WIDTH: 0px; WIDTH: 86px; CURSOR: pointer! important; BACKGROUND-REPEAT: no-repeat; HEIGHT: 33px; BORDER-RIGHT-WIDTH: 0px;
+      font-size:14px; font-weight:bold; color:#5dc16d}
 
 body{ background-color:#66693a}
 .txt1{ color:#000000}
@@ -18,3 +20,7 @@ body{ background-color:#66693a}
 .errText{ margin-left:32px;height:32px; width:180px; line-height:32px;}
 .lodertxt{color:#f49507}
 .errTextW {  margin-left:32px;height:32px;background-image:url(../images/cue_01.gif); background-repeat:no-repeat; background-position: 0px 0px; padding-left:20px; color:#FF0000;}
+
+
+#tbupdate { background-color:#c5f5cd; width:320px; margin-left:auto; margin-right:auto; height:111px; overflow:auto;
+             border:#54d369 solid 1px;color: #639e21; padding:3px;}

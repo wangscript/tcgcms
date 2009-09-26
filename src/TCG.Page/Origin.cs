@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TCG.Utils.Release;
 using TCG.Data;
 using TCG.Utils;
+using TCG.Release;
 
 
 namespace TCG.Pages
@@ -24,11 +24,11 @@ namespace TCG.Pages
         {
             if (Fetch.Get("staff") != "")
             {
-                string text1 = "系统名称: " + Property.SystemName + "<br />";
-                text1 = text1 + "系统版本: " + Property.SystemVersion + "<br />";
-                text1 = text1 + "开 发 者: " + Property.Designer + "<br />";
-                text1 = text1 + "电子信箱: <a href='mailto:sanyungui&#64;xzdsw&#46;com'>sanyungui&#64;xzdsw&#46;com</a><br />";
-                text1 = text1 + "官方网站: <a href='" + Config.Settings["www_Site"] + "' target='_blank'>" + Config.Settings["www_Site"] + "</a>";
+                string text1 = "系统名称: " + Versions.version + "<br />";
+                text1 = text1 + "系统版本: " + Versions.GetVerStr(Versions.Ver) + "<br />";
+                text1 = text1 + "开 发 者: " + Versions.Author + "<br />";
+
+                text1 = text1 + "官方网站: <a href='" + Versions.WebSite + "' target='_blank'>" + Versions.WebSite + "</a>";
                 this.Throw(text1, "著作签名", null, null, false);
             }
         }
