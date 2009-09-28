@@ -206,6 +206,7 @@ function foreColor(e) {
 	gSetColorType = "foreColor";
 	if(gIsIE) format(gSetColorType, sColor);
 }
+
 function backColor(e){
 	var sColor = fDisplayColorBoard(e);
 	if(gIsIE)
@@ -214,6 +215,7 @@ function backColor(e){
 		gSetColorType = "backcolor";
 	if(gIsIE) format(gSetColorType, sColor);
 }
+
 function fDisplayColorBoard(e){
 	if(gIsIE){
 		var e = window.event;
@@ -238,12 +240,21 @@ function createLink() {
 		format("CreateLink", sURL);
 	}
 }
-function createImg()	{
-	var sPhoto=prompt("ͼƬλ:", "http://");
-	if ((sPhoto!=null) && (sPhoto!="http://")){
-		format("InsertImage", sPhoto);
-	}
+
+
+
+var UploadFile = new UploadFile();
+function createImg() {
+    setContent();
+    $("imghid").value = $("iContent_HtmlEditorContent").value;
+    UploadFile.Default = { w: (document.all == null) ? -189 : -193, h: (document.all == null) ? -197 : -194 }
+    UploadFile.ClassId = fileclassid;
+    UploadFile.CallBack = "UpdateBack";
+    UploadFile.MaxNum = 5;
+    UploadFile.Start();  
+    
 }
+
 function addPortrait(e){
 	if(gIEVer<=5.01 && gIsIE){
 		var imgurl = showModalDialog("portraitSelect.htm","", "font-family:Verdana; font-size:12; status:no; unadorned:yes; scroll:no; resizable:yes;dialogWidth:40em; dialogHeight:20em");

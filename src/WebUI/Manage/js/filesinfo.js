@@ -51,7 +51,7 @@ function AddClassBack(val){
 	refinsh();
 }
 
-function AddFiles(){
+function AddFiles() {
 	var c=$("iClassId").value;
 	if(c==0){
 		return;

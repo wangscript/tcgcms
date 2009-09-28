@@ -41,8 +41,8 @@ public partial class aMenu : adminMain
         script += "var btNum =" + Rows.Length.ToString() + ";\r\n";
         for (int i = 0; i < Rows.Length; i++)
         {
-            string Url = Rows[i]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"]);
-            Url = Rows[i]["vcUrl"].ToString().Replace("$bbssite$", base.config["bbsSite"]);
+            string Url = Rows[i]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"] + base.config["ManagePath"]);
+            
             if (0 == i) script += "window.parent.main.location.href='" + Url + "';\r\n";
             str += string.Format(tempClass, i, Url, Rows[i]["vcPopName"].ToString());
             DataRow[] sRows = dt.Select("iParentId=" + Rows[i]["iId"].ToString() + " AND cValid='Y'");
@@ -50,8 +50,8 @@ public partial class aMenu : adminMain
             script += "stNums[" + i.ToString() + "]=" + sRows.Length.ToString() + ";\r\n";
             for (int n = 0; n < sRows.Length; n++)
             {
-                string Url1 = sRows[n]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"]);
-                Url1 = Url1.Replace("$bbssite$", base.config["bbsSite"]);
+                string Url1 = sRows[n]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"] + base.config["ManagePath"]);
+
                 str += string.Format(tempSClass, i, n, Url1, sRows[n]["vcPopName"].ToString(), sRows[n]["iId"].ToString());
             }
         }

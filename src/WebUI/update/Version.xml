@@ -3,29 +3,8 @@
 	<SoftVersions>
 		<Item>
 			<Text>网站自动更新程序</Text>
-			<Ver>13</Ver>
+			<Ver>100</Ver>
 			<Date>2008-12-11</Date>
-			<Sqls>2</Sqls>
-			<LogUrl>http://www.tcgcms.cn/gengxin/wangzhanzidonggengxinchengxu.htm</LogUrl>
-		</Item>
-		<Item>
-			<Text>网站自动更新程序</Text>
-			<Ver>14</Ver>
-			<Date>2009-12-11</Date>
-			<Sqls>2</Sqls>
-			<LogUrl>http://www.tcgcms.cn/gengxin/wangzhanzidonggengxinchengxu.htm</LogUrl>
-		</Item>
-		<Item>
-			<Text>网站自动更新程序</Text>
-			<Ver>15</Ver>
-			<Date>2009-12-16</Date>
-			<Sqls>2</Sqls>
-			<LogUrl>http://www.tcgcms.cn/gengxin/wangzhanzidonggengxinchengxu.htm</LogUrl>
-		</Item>
-		<Item>
-			<Text>网站自动更新程序</Text>
-			<Ver>19</Ver>
-			<Date>2009-12-16</Date>
 			<Sqls>2</Sqls>
 			<LogUrl>http://www.tcgcms.cn/gengxin/wangzhanzidonggengxinchengxu.htm</LogUrl>
 		</Item>

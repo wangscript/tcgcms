@@ -80,7 +80,7 @@ function StartUpdateById(id){
 
 var setps=0;
 var Backvalue=[];
-function UpdateBack(id,val){
+function UpdateBack(id, val) {
 	Items[id].Sep=2;
 	var sid="sep_"+id;
 	var o=$(sid);
@@ -103,7 +103,7 @@ function UpdateBack(id,val){
 }
 
 var TimeClear=null;
-function ClearUpdateFile(){
+function ClearUpdateFile() {
 	eval("window.parent."+CallBack+"(Backvalue)");
 	window.parent.document.body.removeChild(window.parent.$("uploadfilebg"));
 	window.parent.document.body.removeChild(window.parent.$("uploaddiv"));

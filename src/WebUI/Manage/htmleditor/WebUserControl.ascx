@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WebUserControl.ascx.cs" Inherits="htmleditor_WebUserControl" %>
+<script type="text/javascript" src="<%=config["WebSite"]%><%=config["ManagePath"]%>js/uploadfiles.js"></script>
 <script language="JAVASCRIPT" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/editfunc.js" type="text/javascript"></script>
 <script language="JAVASCRIPT" src="<%=config["WebSite"]%>/<%=config["ManagePath"]%>htmleditor/Resources/colorSelect.js" type="text/javascript"></script>
+<link href="<%=config["WebSite"]%><%=config["ManagePath"]%>css/filesinfo.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">
@@ -205,10 +207,12 @@ BODY {
                                 
                                 
 <div id="divEditor">
-    <table width="100%" height="287px" border="0" cellspacing="0" cellpadding="0" ><tr><td style="border:1px solid #abbdd1; border-top:0;"><IFRAME class="HtmlEditor" ID="HtmlEditor" name="HtmlEditor" style=" height:286px;width:100%" frameBorder="0" marginHeight=0 marginWidth=0 ></IFRAME></td></tr></table>
+    <table width="100%" height="287px" border="0" cellspacing="0" cellpadding="0" ><tr><td style="border:1px solid #abbdd1; border-top:0;">
+        <IFRAME class="HtmlEditor" ID="HtmlEditor" name="HtmlEditor" style=" height:286px;width:100%" frameBorder="0" marginHeight=0 marginWidth=0 ></IFRAME></td></tr></table>
 </div>
 <textarea ID="sourceEditor" style="height:280px;width:100%;display:none" ></textarea>
 <input id="HtmlEditorContent" type="hidden" name="HtmlEditorContent" runat="server"  />
+<input type="hidden" id="imghid" value="" />
 <script language="javascript" type="text/javascript">
 function setContent(){
 	if(gMode==true){
@@ -219,4 +223,25 @@ function setContent(){
 	document.getElementById("<%=HtmlEditorContent.ClientID %>").value = body.innerHTML ;
 }
 InitDocument("<%=HtmlEditorContent.ClientID %>");
+
+function UpdateBack(obj) {
+    if (gMode == true) {
+        setMode(false);
+    }
+
+    var f = window.frames["HtmlEditor"];
+    f.document.designMode = "On";
+    
+    var body = f.document.getElementsByTagName("BODY")[0];
+    body.innerHTML = $("imghid").value;
+    if (obj != null) {
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].Url != null) {
+                body.innerHTML += "<img src='" + obj[i].Url + "' />";
+            }
+        }
+    }
+    
+    UploadFile.hid();  
+}
 </script>

@@ -6,42 +6,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title>文件管理列表</title>
-	<link href="<%=base.config["WebSite"]%>css/base.css" rel="stylesheet" type="text/css" />
-	<link href="<%=base.config["WebSite"]%>css/adminlist.css" rel="stylesheet" type="text/css" />
-	<link href="<%=base.config["WebSite"]%>css/admininfo.css" rel="stylesheet" type="text/css" />
-	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
+	<link href="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>css/base.css" rel="stylesheet" type="text/css" />
+	<link href="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>css/adminlist.css" rel="stylesheet" type="text/css" />
+	<link href="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>css/admininfo.css" rel="stylesheet" type="text/css" />
+	<link href="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>css/filesinfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/common.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/listcommon.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/MenuDiv.js"></script>
-	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/newscommon.js"></script>
-	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/AllFileClass.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/pager.js"></script>
-	<script type="text/javascript" src="../js/uploadfiles.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/filesinfo.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/common.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/listcommon.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/MenuDiv.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>Common/newscommon.aspx"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>Common/AllFileClass.aspx"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/pager.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/uploadfiles.js"></script>
+	<script type="text/javascript" src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>js/filesinfo.js"></script>
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckFrom();">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="ShowFilesCreate(this);">
-			<img src="<%=base.config["WebSite"]%>images/icon/24.gif" />新建
+			<img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/24.gif" />新建
 		</a>
 		<a href="#" class="tnew1" onmouseover="this.className='tnew1 nbg1'" onmouseout="this.className='tnew1'" onclick="MoveFiles(this);">
-			<img src="<%=base.config["WebSite"]%>images/icon/move.gif" />移动
+			<img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/move.gif" />移动
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FilesDel();">
-			<img src="<%=base.config["WebSite"]%>images/icon/08.gif" />删除
+			<img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/08.gif" />删除
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="<%=base.config["WebSite"]%>images/icon/07.gif" />刷新
+			<img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/07.gif" />刷新
 		</a>
 	</div>
 	<div class="newslistt" id="classTitle"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
-		<span class="l_id bold l_rg"><img src="<%=base.config["WebSite"]%>images/icon/9.gif"  class="fileico"/></span>
+		<span class="l_id bold l_rg"><img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/9.gif"  class="fileico"/></span>
 		<span class="l_classname bold l_rg ">标题</span>
 		<span class="l_classname bold l_rg ">备注</span>
 		<span class="l_classname bold l_rg newsclass">大小</span>
@@ -61,7 +61,7 @@
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="FileClassCheckID" type="checkbox" value="<TCG:Span id='FileClassID' runat='server' />" onclick="ForBgCheck(this)" /></span>
 		<TCG:Span class="l_id" id='sFileClassId' runat='server' />
-		<span class="l_id"><img src="<%=base.config["WebSite"]%>images/icon/24.gif" class="fileico"/></span>
+		<span class="l_id"><img src="<%=base.config["WebSite"]%><%=base.config["ManagePath"]%>images/icon/24.gif" class="fileico"/></span>
 		<TCG:Span class='l_classname  hidover' id='sTitle' runat='server' />
 		<TCG:Span class="l_classname " id='sInfo' runat='server'  />
 		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
