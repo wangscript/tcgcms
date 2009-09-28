@@ -1,0 +1,18 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+margin: 0;padding: 0;}
+table {border-collapse: collapse;border-spacing: 0;}
+body{ text-align:center; font-size:12px; font-family:Tahoma,Verdana,Arial,Simsun; }
+input{ font-size:12px; border:#8b8b8b solid 1px;}
+ul{list-style:none}
+fieldset,img {border: 0;}
+input,textarea,select {font-family: inherit;font-size: inherit;font-weight: inherit;}
+a{ color:#000; text-decoration:none}
+a:hover{ color:#ff4e00; text-decoration:none}
+.clear{ clear:both}
+li.important a{color:#ff4e00;}
+.important a{color:#ff4e00;}
+.orange{ color:#ff4e00}
+.blue{ color:#4484da}
+.hid{display:none};
+
+.margin-bottom2px{ margin-bottom:2px;}
