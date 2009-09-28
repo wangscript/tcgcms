@@ -54,16 +54,17 @@ public partial class upload_uploadSave : adminMain
                     if (CheckType(ex))
                     {
                         item.vcType = ex.Replace(".", "");
-                        url = base.config["FileSite"] + "attach-" + item.iID.ToString() + ex;
+                        url = base.config["FileSite"] + base.config["ManagePath"] + "attach.aspx?attach=" + item.iID.ToString();
                         fileclasshandlers fchdl = new fileclasshandlers();
 
                         string filepath = fchdl.GetFilesPathByClassId(base.conn, item.iClassId);
                         filepath += item.iID.ToString().Substring(0, 6) + "/"
-                        + item.iID.ToString().Substring(7, 2) + "/" + item.iID.ToString() + ex;
+                        + item.iID.ToString().Substring(6, 2) + "/" + item.iID.ToString() + ex;
                         bool create = false;
                         try
                         {
                             filepath = Server.MapPath("~" + filepath);
+                            Text.SaveFile(filepath, "");
                             PF.SaveAs(filepath);
                             create = true;
                         }

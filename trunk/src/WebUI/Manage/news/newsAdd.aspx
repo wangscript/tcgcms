@@ -16,11 +16,10 @@
 	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/newscommon.aspx"></script>
 	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/AllNewsFrom.aspx"></script>
 	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/AllNewsSpeciality.aspx"></script>
-	<script type="text/javascript" src="../js/uploadfiles.js"></script>
 
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
-	
+	<script type="text/javascript">var fileclassid = <%=base.config["NewsFileClass"] %> ;</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>

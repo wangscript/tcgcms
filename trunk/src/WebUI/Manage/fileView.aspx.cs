@@ -23,7 +23,7 @@ public partial class View : FilesMain
         if (!Page.IsPostBack)
         {
             long iId = Bases.ToLong(Fetch.Get("fileId"));
-            this.ImageShow.Src = "attach-" + iId.ToString() + base.config["FileExtension"];
+            this.ImageShow.Src = "attach.aspx?attach=" + iId.ToString() ;
         }
     }
 }

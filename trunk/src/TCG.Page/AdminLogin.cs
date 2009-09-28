@@ -87,12 +87,14 @@ namespace TCG.Pages
             {
                 if (this._admin == null)
                 {
-                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + "login.aspx", config["WebSite"] + "login.aspx", false);
+                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + config["ManagePath"]
+                        + "login.aspx", config["WebSite"] + config["ManagePath"] + "login.aspx", false);
                     return;
                 }
                 if (string.IsNullOrEmpty(this._admin.vcAdminName))
                 {
-                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + "login.aspx", config["WebSite"] + "login.aspx", false);
+                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + config["ManagePath"]
+                        + "login.aspx", config["WebSite"] + config["ManagePath"] + "login.aspx", false);
                     return;
                 }
 

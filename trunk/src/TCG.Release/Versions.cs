@@ -12,7 +12,7 @@ namespace TCG.Release
 {
     public class Versions
     {
-        public static int Ver = 13;                         //系统版本号
+        public static int Ver = 45;                         //系统版本号
         private static string SystemName = "TCG CMS System"; //系统名称
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace TCG.Release
         {
             get
             {
-                return "≮三云鬼≯";
+                return "≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com";
             }
         }
 

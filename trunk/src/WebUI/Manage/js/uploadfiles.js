@@ -1,5 +1,5 @@
 
-var FileSite="http://files.xzdsw.com/";
+var FileSite="http://www.tcgcms.cn/manage/";
 
 function UploadFile(){
 	this.Screen={w:window.screen.availWidth,h:window.screen.availHeight};
@@ -7,15 +7,22 @@ function UploadFile(){
 	this.ClassId=0;
 	this.CallBack="";
 	this.MaxNum=1;
-	
-	this.Start=function(){
-		this.Screen={w:window.screen.availWidth,h:window.screen.availHeight};
-		this.uploadfilebg=$("uploadfilebg");
-		if(this.uploadfilebg==null)document.body.innerHTML +=this.Html;
-		this.uploaddiv=$("uploaddiv");
-		this.uploadfilebg=$("uploadfilebg");
-		this.uploadfile=$("uploadfile");
-		this.init();
+
+	this.Start = function() {
+	    this.Screen = { w: window.screen.availWidth, h: window.screen.availHeight };
+	    this.uploadfilebg = $("uploadfilebg");
+	    if (this.uploadfilebg == null) document.body.innerHTML += this.Html;
+	    this.uploaddiv = $("uploaddiv");
+	    this.uploadfilebg = $("uploadfilebg");
+	    this.uploadfile = $("uploadfile");
+	    this.init();
+	}
+
+	this.hid = function() {
+	    this.uploadfilebg = $("uploadfilebg");
+	    if (this.uploadfilebg != null) {
+	        this.uploadfilebg.style.display = "none";
+	    }
 	}
 	
 	this.init=function(){

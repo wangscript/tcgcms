@@ -131,6 +131,8 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$ScriptsSite$_", config["ScriptsSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", config["PageSize"]);
             this._temphtml = _temphtml.Replace("_$WebTitle$_", config["WebTitle"]);
+            this._temphtml = _temphtml.Replace("_$WebKeyWords$_", config["WebKeyWords"]);
+            this._temphtml = _temphtml.Replace("_$WebDescription$_", config["WebDescription"]);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);

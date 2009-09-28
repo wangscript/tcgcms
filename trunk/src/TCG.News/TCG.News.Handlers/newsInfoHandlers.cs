@@ -306,7 +306,11 @@ namespace TCG.News.Handlers
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     string filepath = HttpContext.Current.Server.MapPath("~" + dt.Rows[i]["vcFilePath"].ToString());
-                    System.IO.File.Delete(filepath);
+                    try
+                    {
+                        System.IO.File.Delete(filepath);
+                    }
+                    catch { }
                 }
             }
             else
@@ -375,8 +379,9 @@ namespace TCG.News.Handlers
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + "/";
             text += objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2) + objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += Pinyin.GetPinyinByChineses(nif.vcTitle) + extion;
+            text += Pinyin.GetPinyinByChineses(Text.GetTextWithoutHtml(nif.vcTitle).Replace(" ","").Replace("¡¡","")) + extion;
             return text;
         }
+
     }
 }
