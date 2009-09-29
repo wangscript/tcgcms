@@ -136,6 +136,22 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
+
+            //更新文章标题
+            if (!string.IsNullOrEmpty(this._pagerinfo.PageTitle))
+            {
+                Match mh = Regex.Match(this._temphtml,@"(<title>)(.*?)(</title>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                if (mh.Success)
+                {
+                    this._temphtml = Regex.Replace(this._temphtml, @"(<title>)(.*?)(</title>)",
+                    "$1" + this._pagerinfo.PageTitle + " - $2$3", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    this._pagerinfo.PageTitle = string.Empty;
+                }
+
+                mh = null;
+                
+            }
+
         }
 
         private void Save()

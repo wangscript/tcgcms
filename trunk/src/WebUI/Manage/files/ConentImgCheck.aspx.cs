@@ -30,7 +30,8 @@ public partial class files_ConentImgCheck : adminMain
         {
             string content = Fetch.Post("iContent$HtmlEditorContent");
             fileinfoHandlers fihdl = new fileinfoHandlers();
-            Response.Write(fihdl.ImgPatchInit(base.conn, content, base.admin.adminInfo.vcAdminName, FilesConst.msImgeClassId, base.config));
+            Response.Write(fihdl.ImgPatchInit(base.conn, content, base.admin.adminInfo.vcAdminName,
+                objectHandlers.ToInt(base.config["NewsFileClass"]), base.config));
             base.Finish();
         }
     }

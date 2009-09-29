@@ -174,7 +174,8 @@ namespace TCG.TCGTagReader.Handlers
                 //替换正文内容，检查图片
                 try
                 {
-                    string tContent = flfhdl.ImgPatchInit(this._conn, item.vcContent, "admin", FilesConst.msImgeClassId, this._config);
+                    string tContent = flfhdl.ImgPatchInit(this._conn, item.vcContent, "admin",
+                        objectHandlers.ToInt(this._config["NewsFileClass"]), this._config);
                     if (tContent != item.vcContent)
                     {
                         item.vcContent = tContent;
@@ -199,6 +200,8 @@ namespace TCG.TCGTagReader.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.iId.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
                     chdl.GetTopicClassTitleList(this._conn, this._config, item.ClassInfo.iId, " > "));
+
+                pagerinfo.PageTitle = item.vcTitle;
             }
             else
             {
@@ -239,6 +242,8 @@ namespace TCG.TCGTagReader.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.iParent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
                     chdl.GetTopicClassTitleList(this._conn, this._config, item.iId, " > "));
+
+            pagerinfo.PageTitle = item.vcClassName;
 
             chdl = null;
             item = null;
