@@ -29,6 +29,5 @@ namespace TCG.Files.Utils
         public static string alowFileType = "'gif','bmp','jpg','rar','zip','png'";
         public static int fileSize = 500*1024;
 
-        public static int msImgeClassId = 22;
     }
 }

@@ -126,7 +126,7 @@ public partial class news_newsthief : adminMain
             if (nihdl.CheckThiefTopic(base.conn, nif.ClassInfo.iId, nif.vcTitle) == 1)
             {
                 nif.vcContent = fihdl.ImgPatchInit(base.conn, item.Result("$2"), TopicWebPath,
-                    base.admin.adminInfo.vcAdminName, FilesConst.msImgeClassId, base.config);
+                    base.admin.adminInfo.vcAdminName, objectHandlers.ToInt(base.config["NewsFileClass"]), base.config);
 
                 nif.vcShortContent = Text.Left(Text.GetTextWithoutHtml(nif.vcContent), 200, false);
 
