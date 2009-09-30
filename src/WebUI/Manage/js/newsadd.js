@@ -40,8 +40,8 @@ function SelectSmallImg(obj){
 	imgPace.style.top=(pos.y+obj.offsetHeight)+"px";
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
-	$("iContent").value = FCKeditorAPI.GetInstance("iContent").GetXHTML();
-	var iContent=$("iContent").value;
+	setContent();
+	var iContent = $("iContent_HtmlEditorContent").value;
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
 	if (result != null) {
@@ -62,8 +62,9 @@ function SelectBigImg(obj){
 	imgPace.style.top=(pos.y+obj.offsetHeight)+"px";
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
-	var iContent = $("iContent").value;
-	$("iContent").value = FCKeditorAPI.GetInstance("iContent").GetXHTML();
+	setContent();
+	var iContent = $("iContent_HtmlEditorContent").value;
+	
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
 	if(result!=null){
