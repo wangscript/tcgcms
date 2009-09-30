@@ -51,6 +51,7 @@ public partial class news_newsAdd : adminMain
                 this.iBigImg.Value = item.vcBigImg;
                 this.iTitleColor.Value = item.vcTitleColor;
                 this.iStrong.Checked = (item.cStrong == "Y") ? true : false;
+                this.isContent.Value = item.vcShortContent;
                 item = null;
                 nihdl = null;
             }
@@ -88,6 +89,7 @@ public partial class news_newsAdd : adminMain
         item.vcSmallImg = Fetch.Post("iSmallImg");
         item.vcTitleColor = Fetch.Post("sTitleColor");
         item.cStrong = Fetch.Post("iStrong");
+        item.vcShortContent = objectHandlers.Post("isContent");
 
         if (string.IsNullOrEmpty(item.vcTitle))
         {
@@ -119,7 +121,6 @@ public partial class news_newsAdd : adminMain
         item.cChecked = "Y";
         item.cCreated = "Y";
         item.vcEditor = base.admin.adminInfo.vcAdminName;
-        item.vcShortContent = Text.Left(Text.GetTextWithoutHtml(item.vcContent), 200, false);
         int newid = 0; string filepath = "";
         int rtn = 0;
         if (!ismdy)

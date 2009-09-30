@@ -76,6 +76,10 @@
 	<div class="Page_arrb arb_pr1 templateaddnew1">
 		<TCG:WebUserControl ID="iContent" runat="server" />
 	</div>
+	<div class="Page_arrb arb_pr1" style=" height:60px;">
+		<span class="p_a_t1">摘 要：</span><textarea id="isContent" name="isContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:670px; height:60px;" runat="server"/>
+		
+	</div>
 	<div class="imgPace hid" id="imgPace"></div>
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="submit" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>
