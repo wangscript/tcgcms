@@ -8,15 +8,43 @@ namespace TCG.News.Entity
     public class ClassInfo
     {
         public int iId { get { return this._iid; } set { this._iid = value; } }
+        /// <summary>
+        /// 父类ID
+        /// </summary>
         public int iParent { get { return this._iparent; } set { this._iparent = value; } }
+        /// <summary>
+        /// 文章模版
+        /// </summary>
         public int iTemplate { get { return this._itemplate; } set { this._itemplate = value; } }
+        /// <summary>
+        /// 列表模版
+        /// </summary>
         public int iListTemplate { get { return this._ilisttemplate; } set { this._ilisttemplate = value; } }
+        /// <summary>
+        /// 排序
+        /// </summary>
         public int iOrder { get { return this._iorder; } set { this._iorder = value; } }
+        /// <summary>
+        /// 更新时间
+        /// </summary>
         public DateTime dUpdateDate { get { return this._dupdatedate; } set { this._dupdatedate = value; } }
+        /// <summary>
+        /// 分类名称
+        /// </summary>
         public string vcClassName { get { return this._vcclassname; } set { this._vcclassname = value; } }
+        /// <summary>
+        /// 别名
+        /// </summary>
         public string vcName { get { return this._vcname; } set { this._vcname = value; } }
+        /// <summary>
+        /// 磁盘路径
+        /// </summary>
         public string vcDirectory { get { return this._vcdirectory; } set { this._vcdirectory = value; } }
         public string vcUrl { get { return this._vcurl; } set { this._vcurl = value; } }
+        /// <summary>
+        /// 是否显示
+        /// </summary>
+        public string cVisible { get { return this._cvisible; } set { this._cvisible = value; } }
 
         private int _iid;
         private int _iparent;
@@ -28,5 +56,6 @@ namespace TCG.News.Entity
         private string _vcname;
         private string _vcdirectory;
         private string _vcurl;
+        private string _cvisible;
     }
 }
