@@ -66,8 +66,10 @@ li.important a{color:#ff4e00;}
 .news .prod .smcont1 a { font-size:14px; color:#3372a2;}
 
 .news .log{float:left; width:361px; height:368px; border:#dae9f2 solid 1px; margin-left:5px;}
-.news .log .logd{ width:341px; line-height:20px; color:#3372a2;margin-left:auto; margin-right:auto; margin-top:5px;}
-.news .log .logd a{color:#3372a2; }
+.news .log ul {width:340px;color:#3372a2;margin-left:auto; margin-right:auto; margin-top:20px;}
+.news .log ul a{color:#3372a2;}
+.news .log ul li {width:340px; line-height:25px; height:25px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.news .log ul span{ color:#808080;}
 
 .news .list{ float:left; width:681px; border:#dae9f2 solid 1px; }
 .news .list ul{ width:628px; margin-left:auto; margin-right:auto; margin-top:18px; }

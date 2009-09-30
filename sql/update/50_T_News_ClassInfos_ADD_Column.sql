@@ -1,0 +1,1 @@
+ALTER TABLE T_News_ClassInfo ADD Visible CHAR(1) DEFAULT(N'Y') NOT NULL;
