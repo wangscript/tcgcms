@@ -26,7 +26,7 @@ namespace TCG.News.Handlers
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder FROM T_News_ClassInfo WITH (NOLOCK)"
+                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)"
                     + " WHERE iParent = " + parentid.ToString();
                 return conn.GetDataTable(Sql);
             }
@@ -51,7 +51,7 @@ namespace TCG.News.Handlers
         public DataTable GetClassInfos(Connection conn)
         {
             conn.Dblink = DBLinkNums.News;
-            string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder FROM T_News_ClassInfo WITH (NOLOCK)";
+            string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
@@ -127,7 +127,7 @@ namespace TCG.News.Handlers
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder FROM T_News_ClassInfo WITH (NOLOCK)"
+                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)"
                     + " WHERE iID =" + iClassID.ToString();
                 dt = conn.GetDataTable(Sql);
             }
@@ -159,6 +159,7 @@ namespace TCG.News.Handlers
                 cif.vcName = (string)Row["vcName"];
                 cif.vcUrl = (string)Row["vcUrl"];
                 cif.dUpdateDate = (DateTime)Row["dUpdateDate"];
+                cif.cVisible = (string)Row["Visible"];
                 return cif;
             }
             return null;
@@ -178,22 +179,23 @@ namespace TCG.News.Handlers
         /// <param name="url"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public int AddNewsClass(Connection conn, string adminname, string classname, string lname, int parentid, int templateid, int ltemplateid, string dir, string url, int order)
+        public int AddNewsClass(Connection conn, ClassInfo cif, string adminname)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
-            SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classname;
-            SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = lname;
-            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = parentid;
-            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.Int, 4); sp5.Value = templateid;
-            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.Int, 4); sp6.Value = ltemplateid;
-            SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = dir;
-            SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = url;
-            SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = order;
+            SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
+            SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = cif.vcName;
+            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = cif.iParent;
+            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.Int, 4); sp5.Value = cif.iTemplate;
+            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.Int, 4); sp6.Value = cif.iListTemplate;
+            SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = cif.vcDirectory;
+            SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = cif.vcUrl;
+            SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = cif.iOrder;
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
-            string[] reValues = conn.Execute("SP_News_AddClassInfo", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10}, new int[] { 10 });
+            SqlParameter sp11 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp11.Value = cif.cVisible;
+            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
+                sp7, sp8, sp9 ,sp10,sp11}, new int[] { 10 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -226,8 +228,9 @@ namespace TCG.News.Handlers
             SqlParameter sp10 = new SqlParameter("@action", SqlDbType.Char, 2); sp10.Value = "02";
             SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp11.Value = classinf.iId;
             SqlParameter sp12 = new SqlParameter("@reValue", SqlDbType.Int); sp12.Direction = ParameterDirection.Output;
-            string[] reValues = conn.Execute("SP_News_AddClassInfo", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11,sp12}, new int[] { 12 });
+            SqlParameter sp13 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp13.Value = classinf.cVisible;
+            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
+                sp7, sp8, sp9 ,sp10,sp11,sp12,sp13}, new int[] { 12 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));

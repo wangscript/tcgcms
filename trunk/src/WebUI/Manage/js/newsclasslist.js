@@ -233,3 +233,72 @@ function GetPostClassChild(id){
 function CreateBack(val){
 	CreateDiv.SetSep(val);
 }
+
+function MdyFeild(obj, vname) {
+    var iAction = $("iAction");
+    iAction.value = "MDY";
+    var o = $("iFeildName");
+    o.value = vname;
+    var iMdyID = $("iMdyID");
+    var form = $("form1");
+    iMdyID.value = GetCheckColumnCheckID(obj);
+    var ci = new CreateInput();
+    ci.obj = obj;
+    ci.fobj = form;
+    ci.Id = "KeyValue";
+    bluraction = "CheckMdyFild()";
+    imgaction = "ImgCheck();";
+    ci.inputClassName = "itxt3";
+    ci.Create();
+    ci = null;
+}
+
+function GetCheckColumnCheckID(obj) {
+    if (obj == null) return;
+    var o = obj.parentNode;
+    var os = (document.all) ? o.children : o.childNodes
+    if (os == null) return "";
+
+    for (var i = 0; i < os.length; i++) {
+        if (os[i].className == "l_check") {
+            var oss = (document.all) ? os[i].children : os[i].childNodes
+            return oss[0].value;
+        }
+    }
+    var oo = o.parentNode;
+    if (oo == null) return "";
+    os = (document.all) ? oo.children : oo.childNodes
+    for (var i = 0; i < os.length; i++) {
+        if (os[i].className == "l_check") {
+            var oss = (document.all) ? os[i].children : os[i].childNodes
+            return oss[0].value;
+        }
+    }
+    return "";
+}
+
+function CheckMdyFild() {
+    var KeyValue = $("KeyValue");
+    if (KeyValue == null) return;
+    if (KeyValue.value == "") {
+        $("form1").removeChild(KeyValue);
+        var CloseImg = $("CloseImg");
+        if (CloseImg != null) document.body.removeChild(CloseImg);
+    } else {
+        ajax.postf($("form1"), function(obj) { NewsSMDYPostBack(obj.responseText); });
+    }
+}
+
+function ImgCheck() {
+}
+
+function NewsSMDYPostBack(val) {
+    var KeyValue = $("KeyValue");
+    if (KeyValue == null) return;
+    $("form1").removeChild(KeyValue);
+    var aValue = KeyValue.value;
+    var CloseImg = $("CloseImg");
+    if (CloseImg != null) document.body.removeChild(CloseImg);
+    if (GetErrText(val)) return;
+    SetInnerText(CreateInputobj, aValue);
+}

@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="../js/DivMove.js"></script>
 	<script type="text/javascript" src="../js/CreateDiv.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
+	<script type="text/javascript" src="../js/CreateInput.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
@@ -46,7 +47,8 @@
 		<span class="l_id bold l_rg">ID</span>
 		<span class="l_classname bold l_rg">资源分类名称</span>
 		<span class="l_classname bold l_rg">分类别名</span>
-		<span class="l_Directory bold l_rg">生成目录</span>
+		<span class="l_classname bold l_rg">生成目录</span>
+		<span class="l_id bold l_rg">排序</span>
 		<span class="l_updatedate bold">更新时间</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
@@ -56,7 +58,8 @@
 		<TCG:Span class='l_id' id='sId' runat='server'/>
 		<TCG:Span class='l_classname' id='classname' runat='server' />
 		<TCG:Span class='l_classname hidover' id='lname' runat='server' />
-		<TCG:Anchor class='l_Directory' id='directory' runat='server' />
+		<TCG:Anchor class='l_classname' id='directory' runat='server' />
+		<TCG:Span class='l_id' id='sOrder' onclick="MdyFeild(this,'Order')" runat='server'/>
 		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
 	</div>	
 		</ItemTemplate>
@@ -68,6 +71,9 @@
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
 	<input type="hidden" id="DelClassId" name="DelClassId" runat="server" />
 	<input type="hidden" id="work" name="work"/>
+	<input type="hidden" id="iFeildName" name="iFeildName" runat="server" />
+	<input type="hidden" id="iAction" name="iAction"/>
+	<input type="hidden" id="iMdyID" name="iMdyID"/>
 	<div id="CreateClassDiv" class="CreateClassDiv">
 		
 		<iframe id="ifCreateAdd" width="0" height="0" frameborder="0"></iframe>
