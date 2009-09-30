@@ -136,6 +136,7 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
+            this._temphtml = _temphtml.Replace("_$ManagePath$_", config["ManagePath"]);
 
             //更新文章标题
             if (!string.IsNullOrEmpty(this._pagerinfo.PageTitle))
