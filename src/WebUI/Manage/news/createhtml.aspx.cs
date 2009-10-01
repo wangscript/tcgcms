@@ -121,8 +121,15 @@ public partial class news_createhtml : adminMain
        
         item.cCreated = "Y";
         item.vcTitle = Text.ToDBC(Text.GetTextWithoutHtml(item.vcTitle));
-        item.vcShortContent = Text.Left(Text.JSEncode(Text.GetTextWithoutHtml(item.vcContent)), 100, false);
-        item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
+        if (string.IsNullOrEmpty(item.vcShortContent))
+        {
+            item.vcShortContent = Text.Left(Text.JSEncode(Text.GetTextWithoutHtml(item.vcContent)), 100, false);
+        }
+        //如果没有关键字，自动分词
+        if (string.IsNullOrEmpty(item.vcKeyWord))
+        {
+            item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
+        }
 
         int rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref id);
         if (rtn < 0)

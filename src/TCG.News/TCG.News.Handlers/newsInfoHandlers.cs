@@ -193,17 +193,17 @@ namespace TCG.News.Handlers
             SqlParameter sp11 = new SqlParameter("@vcSpeciality", SqlDbType.VarChar, 100); sp11.Value = inf.vcSpeciality;
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
             SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Value = inf.vcFilePath;
-            SqlParameter sp14 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp14.Direction = ParameterDirection.Output;
-            SqlParameter sp15 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp15.Direction = ParameterDirection.Output;
-            SqlParameter sp16 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp16.Value = Extension;
-            SqlParameter sp17 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp17.Value = inf.cCreated;
-            SqlParameter sp18 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp18.Value = "02";
-            SqlParameter sp19 = new SqlParameter("@iId", SqlDbType.Int, 4); sp19.Value = inf.iId;
-            SqlParameter sp20 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp20.Value = inf.vcTitleColor;
-            SqlParameter sp21 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp21.Value = inf.cStrong;
-            SqlParameter sp22 = new SqlParameter("@iCount", SqlDbType.Char, 1); sp22.Value = inf.iCount;
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = Extension;
+            SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
+            SqlParameter sp16 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp16.Value = "02";
+            SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.Int, 4); sp17.Value = inf.iId;
+            SqlParameter sp18 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp18.Value = inf.vcTitleColor;
+            SqlParameter sp19 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp19.Value = inf.cStrong;
+            SqlParameter sp20 = new SqlParameter("@iCount", SqlDbType.Int, 4); sp20.Value = inf.iCount;
+            SqlParameter sp21 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp21.Direction = ParameterDirection.Output;
+            SqlParameter sp22 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp22.Direction = ParameterDirection.Output;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21,sp22}, new int[] { 14, 15 });
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21,sp22}, new int[] { 21, 22 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -233,7 +233,7 @@ namespace TCG.News.Handlers
                 item.iCount = (int)ds.Tables[0].Rows[0]["iCount"];
                 item.vcKeyWord = (string)ds.Tables[0].Rows[0]["vcKeyWord"];
                 item.vcEditor = (string)ds.Tables[0].Rows[0]["vcEditor"];
-                item.cChecked = (string)ds.Tables[0].Rows[0]["cCreated"];
+                item.cCreated = (string)ds.Tables[0].Rows[0]["cCreated"];
                 item.vcSmallImg = (string)ds.Tables[0].Rows[0]["vcSmallImg"];
                 item.vcBigImg = (string)ds.Tables[0].Rows[0]["vcBigImg"];
                 item.vcShortContent = (string)ds.Tables[0].Rows[0]["vcShortContent"];
