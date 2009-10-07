@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sandy3.0介绍 - TCG CMS System Version 0.0.5.54</title>
+<meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
+<meta name="description" content="专注于中小企业,商家网络信息化建设">
+<meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
+<meta NAME="copyright" content="Copyright 2009-2009 - TCGCMS.CN ">
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.1.3.2.js"></script>
+<script language="javascript" src="/js/header.js"></script>
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="/images/logo.gif" /></a></div>
+        <div class="topr">
+        	<ul>
+            	<li>咨询QQ：48419248  644139466</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	
+        	<li><a href="/index.htm" >首页</a></li>
+            
+        	<li><a href="/version/ver.htm" >产品发布</a></li>
+            
+        	<li><a href="/anli/al.htm" >案例展示</a></li>
+            
+        	<li><a href="/log/log.htm" >更新日志</a></li>
+            
+        	<li><a href="/help/help.htm" >帮助中心</a></li>
+            
+        	<li><a href="/news/news.htm" >ASP.NET</a></li>
+            
+        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+            
+            <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
+        </ul>
+    </div>
+</div>
+<div class="header_banner2"></div>
+<div class="Announcement" id="Announcement">
+	<ul>
+<script type="text/javascript" src="/js/gonggao.js"></script>
+    </ul>
+</div>
+
+<div class="news">
+<div class="mainleft1">
+	
+    <div class="newslist">
+    	<div class="title"><a>TCG CMS System</a></div>
+        <ul>
+        
+        </ul>
+    </div>
+    
+    <div class="newslist">
+    	<div class="title"><a>Flash Sandy</a></div>
+        <ul>
+        
+       	<li><a href="/help/sandy/2009/1003/qianyanhuomulu.htm" >前言和目录</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/Sandy3.0jieshao.htm" >Sandy3.0介绍</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/anzhuang.htm" >安装</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/sanxingdaimajiaocheng.htm" >三行代码教程</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jianshanjiyuan-lifangti.htm" >简单基元-立方体</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jijiyuanshangshai.htm" >给基元上色</a></li>
+        
+        </ul>
+    </div>
+    
+</div>
+	<div class="list">
+    	<div class="title"><a>Sandy3.0介绍</a></div>
+    	<script language="javascript" src="/Manage/interface/click.aspx?topicid=18&shownum=false"></script>    
+        <div class="content">
+         	<P><STRONG>与Sandy 3.0共起舞</STRONG></P>
+<DIV></DIV>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<DIV>版本3.0的 Sandy 是第一个AS3实现的官方引擎。新版本使用了AVM2和AS3新增的强大功能。</DIV></BLOCKQUOTE>
+<DIV></DIV>
+<DIV><STRONG>这个版本能老的1.x的版本快多少?</STRONG></DIV>
+<DIV></DIV>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<DIV>首先, 由于Sandy 3.0建立在AS3和AVM2之上, 其性能肯定比AS2(AVM1)版本的引擎要好很多。Sandy3.0 至少可以比 Sandy 1.2 多渲染10次多边形(Sandy1.2是AS2的最后一个可靠版本)。</DIV></BLOCKQUOTE>
+<DIV></DIV>
+<DIV><STRONG>3.0带来的新特性</STRONG></DIV>
+<DIV></DIV>
+<BLOCKQUOTE>
+<DIV>对于早期发布的Sandy来讲最为普遍的问题就是学习API的困难。渲染效率也是一个主要问题。</DIV>
+<DIV></DIV>
+<DIV>因此我们在这两件事上一直努力。</DIV>
+<DIV></DIV>
+<DIV><STRONG>我们大量简化了API! </STRONG>现在, 创建一个Sandy的演示相当简单。旧的Java风格的API虽然很好但是它有两个主要缺点:</DIV>
+<UL>
+<LI>使用Flash的大多是设计人员和艺术工作者而非高水平的语言专家(或爱好者) 
+<LI>Flash并不要求一个Java外观的API, 所以我们使用getter/setter方法简化了大量的命令语法。 </LI></UL>
+<P>现在, 简化的API 适合Flash使用者(Flashers)的需求了</P>
+<P>[<EM>译者注:作者创造了Flasher这个单词来描述介于视觉设计和应用开发之间的一种Flash工作者。作者的幽默, 同时也表达了一种无奈。从Sandy简化API的第一个原因我们可以看出, 作者并不真正认为原来的API有什么问题, 而觉得真正问题来自大部分的Flash开发者在程序语言上并不专业。</EM>]</P>
+<P>新引擎的改进:</P>
+<UL>
+<LI>视锥剔除(Frustum culling) - 视锥(in the camera field of view)之外的物体将不会做计算. 这项改进提高了很多性能.<BR>[<EM>译者注:视锥又叫视域(或视区)是某台摄像机(camera)和投影屏幕(screen)所决定的一个方锥体, 该方锥体内的物体均有可能投影到screen上(即有可能被看到).而方锥外的物体则不可能投影到screen上。更多信息请参考计算机图形学</EM>] 
+<LI>视锥裁剪(Frustum clipping) 
+<LI>更多的材质。新材质的实现更加强大而且非常容易扩展。 
+<LI>定点法矢量(Vertex normals). 可以产生一些令人惊叹的效果和材质扩展。 
+<LI>完成冒泡事件系统。可以直接在物体级别或者到根节点捕获事件。现在, 它可以赢得你和你的应用程序架构的信赖。 </LI></UL></BLOCKQUOTE>
+<P><STRONG>我的代码从AS2 1.x的版本进行移植有多困难?</STRONG></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<P>即便是AS3与AS2没有太多不同, 全新的Sandy API仍然有非常多改变! 但是别担心 ;) 算法逻辑仍然是相同的, 并且很多东西现在更简单了。如果你学了 1.x的API，你再学习新版本会非常容易!</P></BLOCKQUOTE>
+<P><STRONG>我的代码从AS2 2.x移植有多困难?</STRONG></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<P>简言之: 2.x和3.x非常相似。一旦你熟悉AS2和AS3之间的少量改变，你就能让你的例子工作在3.x下。</P></BLOCKQUOTE>
+<P><STRONG>Sandy 3.0的介绍</STRONG></P>
+<BLOCKQUOTE>
+<P>一个Sandy应用程序总是基于以下几点:</P>
+<UL>
+<LI>World 是着手点(entry point) 
+<LI>Camera 显示整个世界(world)并且将世界绘制在屏幕(screen)上 
+<LI>Group连接场景中的元素和世界world 
+<LI>main loop 处理透视效果 </LI></UL></BLOCKQUOTE>
+      </div>
+        <div class="pager"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">var ClassId=10;</script>
+<div class="copyright">
+	<ul>
+    	<li>Copyright ? 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>

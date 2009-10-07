@@ -1,0 +1,120 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+$13行代码教程 - TCG CMS System Version 0.0.5.54</title>
+<meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
+<meta name="description" content="专注于中小企业,商家网络信息化建设">
+<meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
+<meta NAME="copyright" content="Copyright 2009-2009 - TCGCMS.CN ">
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.1.3.2.js"></script>
+<script language="javascript" src="/js/header.js"></script>
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="/images/logo.gif" /></a></div>
+        <div class="topr">
+        	<ul>
+            	<li>咨询QQ：48419248  644139466</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	
+        	<li><a href="/index.htm" >首页</a></li>
+            
+        	<li><a href="/version/ver.htm" >产品发布</a></li>
+            
+        	<li><a href="/anli/al.htm" >案例展示</a></li>
+            
+        	<li><a href="/log/log.htm" >更新日志</a></li>
+            
+        	<li><a href="/help/help.htm" >帮助中心</a></li>
+            
+        	<li><a href="/news/news.htm" >ASP.NET</a></li>
+            
+        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+            
+            <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
+        </ul>
+    </div>
+</div>
+<div class="header_banner2"></div>
+<div class="Announcement" id="Announcement">
+	<ul>
+<script type="text/javascript" src="/js/gonggao.js"></script>
+    </ul>
+</div>
+
+<div class="news">
+<div class="mainleft1">
+	
+    <div class="newslist">
+    	<div class="title"><a>Flash Sandy</a></div>
+        <ul>
+        
+       	<li><a href="/help/sandy/2009/1003/qianyanhuomulu.htm" target="_blank">前言和目录</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/Sandy3.0jieshao.htm" target="_blank">Sandy 3.0 介绍</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/anzhuang.htm" target="_blank">安装</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/3xingdaimajiaocheng.htm" target="_blank">3行代码教程</a></li>
+        
+        </ul>
+    </div>
+    
+</div>
+	<div class="list">
+    	<div class="title"><a>3行代码教程</a></div>
+    	<script language="javascript" src="/Manage/interface/click.aspx?topicid=20&shownum=false"></script>    
+        <div class="content">
+         	<DIV>这个课程里, 我将想你展示一种方法仅用3行代码来创建你的第一个Sandy 3D程序。</DIV>
+<DIV></DIV>
+<DIV>看代码:</DIV>
+<DIV class="code actionscript"><SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>core</SPAN>.<SPAN class=me1>Scene3D</SPAN>; <BR><SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>core</SPAN>.<SPAN class=me1>scenegraph</SPAN>.<SPAN class=me1>*</SPAN>; <BR><SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>primitive</SPAN>.<SPAN class=me1>*</SPAN>; <BR><BR><SPAN class=co1>// -- creation of the scene. You give it a container, a camera and a root group to add your object into.</SPAN> <BR><SPAN class=kw2>var</SPAN> scene:Scene3D = <SPAN class=kw2>new</SPAN> Scene3D<SPAN class=br0>(</SPAN> <SPAN class=st0>"myScene"</SPAN>, <SPAN class=kw3>this</SPAN>, <SPAN class=kw2>new</SPAN> Camera3D<SPAN class=br0>(</SPAN> <SPAN class=nu0>550</SPAN>, <SPAN class=nu0>400</SPAN> <SPAN class=br0>)</SPAN>, <SPAN class=kw2>new</SPAN> Group<SPAN class=br0>(</SPAN><SPAN class=st0>"root"</SPAN><SPAN class=br0>)</SPAN> <SPAN class=br0>)</SPAN>; <BR><SPAN class=co1>// -- you add an object to the scene you've just created</SPAN> <BR>scene.<SPAN class=me1>root</SPAN>.<SPAN class=me1>addChild</SPAN><SPAN class=br0>(</SPAN><SPAN class=kw2>new</SPAN> Sphere<SPAN class=br0>(</SPAN> <SPAN class=st0>"mySphere"</SPAN> <SPAN class=br0>)</SPAN> <SPAN class=br0>)</SPAN>; <BR><SPAN class=co1>// -- and you ask the scene to render</SPAN> <BR>scene.<SPAN class=me1>render</SPAN><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;</DIV>
+<P>好吧，确实是6行代码, 但是其中3句是import语句, Sandy实际上是不处理它们的。如果你正确地设置了你的Flash CS3环境，应该能得到下图所示的网格球。</P>
+<P><IMG src="http://www.tcgcms.cn/Manage/attach.aspx?attach=20091003125111754"></P>
+<P>喔，太棒了，你在Flash里用Sandy做的第一个3D物体.</P>
+<P><STRONG>给刚才的球贴图</STRONG></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<P>我猜你现在很想知道怎么给刚才那个球体贴个图。</P>
+<P>编译这个例子前, 请在你的Flash 资源库(file's library)中导入一个位图。然后打开这个位图的属性检查框，设置它的Linkage Class名为"Texture"。</P>
+<DIV class=code><PRE class="code actionscript"><SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>core</SPAN>.<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A>;
+<SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>core</SPAN>.<SPAN class=kw3>scenegraph</SPAN>.<SPAN class=me1>*</SPAN>;
+<SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>primitive</SPAN>.<SPAN class=me1>*</SPAN>;
+<SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>materials</SPAN>.<SPAN class=me1>*</SPAN>;
+ 
+<SPAN class=co1>// -- creation of the scene. You give it a container, a camera and a root group to add your object into.</SPAN>
+<SPAN class=kw2>var</SPAN> <SPAN class=kw3>scene</SPAN>:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=st0>"myScene"</SPAN>, <SPAN class=kw3>this</SPAN>, <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Camera3D.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Camera3D</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=nu0>550</SPAN>, <SPAN class=nu0>400</SPAN> <SPAN class=br0>)</SPAN>, <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A><SPAN class=br0>(</SPAN><SPAN class=st0>"root"</SPAN><SPAN class=br0>)</SPAN> <SPAN class=br0>)</SPAN>;
+<SPAN class=kw2>var</SPAN> sphere:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/primitive/Sphere.html" target=_blank><SPAN class=kw52><FONT color=#005e95>Sphere</FONT></SPAN></A> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/primitive/Sphere.html" target=_blank><SPAN class=kw52><FONT color=#005e95>Sphere</FONT></SPAN></A><SPAN class=br0>(</SPAN><SPAN class=st0>"mySphere"</SPAN><SPAN class=br0>)</SPAN>;
+<SPAN class=co1>// "Texture" must match the name of the Linkage Class set for a bitmap in the FLA file's library</SPAN>
+sphere.<SPAN class=kw3>appearance</SPAN> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/materials/Appearance.html" target=_blank><SPAN class=kw48><FONT color=#005e95>Appearance</FONT></SPAN></A><SPAN class=br0>(</SPAN>  <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/materials/BitmapMaterial.html" target=_blank><SPAN class=kw48><FONT color=#005e95>BitmapMaterial</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=kw2>new</SPAN> Texture<SPAN class=br0>(</SPAN><SPAN class=nu0>0</SPAN>,<SPAN class=nu0>0</SPAN><SPAN class=br0>)</SPAN> <SPAN class=br0>)</SPAN> <SPAN class=br0>)</SPAN>;
+<SPAN class=co1>// -- you add an object to the scene you've just created</SPAN>
+<SPAN class=kw3>scene</SPAN>.<SPAN class=kw3>root</SPAN>.<SPAN class=kw3>addChild</SPAN><SPAN class=br0>(</SPAN> sphere <SPAN class=br0>)</SPAN>;
+<SPAN class=co1>// -- and you ask the scene to render</SPAN>
+<SPAN class=kw3>scene</SPAN>.<SPAN class=kw3>render</SPAN><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;</PRE></DIV>
+<P>好, 最后我们应该看到类似下图的影片:</P>
+<P><IMG src="http://www.tcgcms.cn/Manage/attach.aspx?attach=20091003125111801">&nbsp;</P>
+<P>现在, 我们应该去解释些更有意思的东西。</P>
+<P></P></BLOCKQUOTE>
+      </div>
+        <div class="pager"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">var ClassId=10;</script>
+<div class="copyright">
+	<ul>
+    	<li>Copyright ? 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>

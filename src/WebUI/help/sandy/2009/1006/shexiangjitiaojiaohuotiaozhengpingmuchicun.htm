@@ -1,0 +1,119 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>摄像机调焦和调整屏幕尺寸 - TCG CMS System Version 0.0.5.54</title>
+<meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
+<meta name="description" content="专注于中小企业,商家网络信息化建设">
+<meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
+<meta NAME="copyright" content="Copyright 2009-2009 - TCGCMS.CN ">
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.1.3.2.js"></script>
+<script language="javascript" src="/js/header.js"></script>
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="/images/logo.gif" /></a></div>
+        <div class="topr">
+        	<ul>
+            	<li>咨询QQ：48419248  644139466</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	
+        	<li><a href="/index.htm" >首页</a></li>
+            
+        	<li><a href="/version/ver.htm" >产品发布</a></li>
+            
+        	<li><a href="/anli/al.htm" >案例展示</a></li>
+            
+        	<li><a href="/log/log.htm" >更新日志</a></li>
+            
+        	<li><a href="/help/tcg/2009/1003/xitongjianjie.htm" >帮助中心</a></li>
+            
+        	<li><a href="/news/news.htm" >ASP.NET</a></li>
+            
+        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+            
+            <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
+        </ul>
+    </div>
+</div>
+<div class="header_banner2"></div>
+<div class="Announcement" id="Announcement">
+	<ul>
+<script type="text/javascript" src="/js/gonggao.js"></script>
+    </ul>
+</div>
+
+<div class="news">
+<div class="mainleft1">
+	
+    <div class="newslist">
+    	<div class="title"><a>TCG CMS System</a></div>
+        <ul>
+        
+       	<li><a href="/help/tcg/2009/1003/xitongjianjie.htm" >系统简介</a></li>
+        
+        </ul>
+    </div>
+    
+    <div class="newslist">
+    	<div class="title"><a>Flash Sandy</a></div>
+        <ul>
+        
+       	<li><a href="/help/sandy/2009/1003/qianyanhuomulu.htm" >前言和目录</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/Sandy3.0jieshao.htm" >Sandy3.0介绍</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/anzhuang.htm" >安装</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/sanxingdaimajiaocheng.htm" >三行代码教程</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jianshanjiyuan-lifangti.htm" >简单基元-立方体</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jijiyuanshangshai.htm" >给基元上色</a></li>
+        
+       	<li><a href="/help/sandy/2009/1006/shexiangjitiaojiaohuotiaozhengpingmuchicun.htm" >摄像机调焦和调整屏幕尺寸</a></li>
+        
+        </ul>
+    </div>
+    
+</div>
+	<div class="list">
+    	<div class="title"><a>摄像机调焦和调整屏幕尺寸</a></div>
+    	<script language="javascript" src="/Manage/interface/click.aspx?topicid=27&shownum=false"></script>    
+        <div class="content">
+         	<P>指南目标</P>
+<P>在这个指南里我们有很多用代码渲染3D物品的实际尺寸的需求。我们想我们的摄像机可以为此提供一些帮助...但显然它没有。</P>
+<P>前期准备</P>
+<P>我们最少要完成了最简单的例子（ simplest tutorial. ）</P>
+<P>视图域，可视点的高度和集距(Field of view, viewport height and focal length)</P>
+<P>在Sandy中camera 有表示视图角度的垂直域（vertical field of view angle） 的fov 属性。fov和可视点的高度的关系的图解如下：</P>
+<P><IMG src="http://www.tcgcms.cn/Manage/attach.aspx?attach=20091006102611988"></P>
+<P>在这里我们很容易就可以计算出集距：</P>
+<P>var fl:Numer = (viewport.height / 2) / Math.tan (camera.fov / 2 * (Math.PI / 180));</P>
+<P>这个平台后面的所有东西看上去都会比“实际”小，而平面前面的东西会显得比实际大。</P>
+<P>调整屏幕尺寸</P>
+<P>如上文所述，我们怎么在改变屏幕大小时维持对象为1：1的关系呢？ 诀窍是捕获Event.RESIZE事件和重置camera的fov属性以维持必要的焦距。下面是实例的代码：</P>
+<P>import flash.display.*;<BR>import flash.events.*;<BR>&nbsp;<BR>import sandy.core.Scene3D;<BR>import sandy.core.scenegraph.*;<BR>import sandy.primitive.*;<BR>import sandy.materials.*;<BR>&nbsp;<BR>// make texture, assuming class Texture extends BitmapData<BR>var tex:BitmapData = new Texture (0, 0);<BR>&nbsp;<BR>// set stage to no-scale mode<BR>stage.scaleMode = StageScaleMode.NO_SCALE; stage.align = StageAlign.TOP_LEFT;<BR>&nbsp;<BR>// some standard Sandy stuff<BR>var scene:Scene3D = new Scene3D ("myScene", this, new Camera3D (100, 100), new Group ("myRoot"));<BR>var plane:Plane3D = new Plane3D ("myPlane", tex.height, tex.width);<BR>plane.appearance = new Appearance (new BitmapMaterial (tex));<BR>&nbsp;<BR>// add plane to scene and render it to fill its view matrix<BR>scene.root.addChild (plane); scene.render ();<BR>&nbsp;<BR>// finally, make resize handler<BR>function onResize (e:Event):void<BR>{<BR>&nbsp;// get new stage dimensions<BR>&nbsp;var w:Number = stage.stageWidth;<BR>&nbsp;var h:Number = stage.stageHeight;<BR>&nbsp;// update the viewport<BR>&nbsp;scene.camera.viewport.width = w;<BR>&nbsp;scene.camera.viewport.height = h;<BR>&nbsp;// get plane distance to camera<BR>&nbsp;var d:Number = plane.getPosition ("camera").getNorm ();<BR>&nbsp;// focus camera on wz = d for 1:1 scale<BR>&nbsp;scene.camera.fov = 2 * Math.atan2 (h / 2, d) * (180 / Math.PI);<BR>&nbsp;// re-render the scene<BR>&nbsp;scene.render();<BR>}<BR>&nbsp;<BR>stage.addEventListener (Event.RESIZE, onResize); onResize (null);</P>
+      </div>
+        <div class="pager"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">var ClassId=10;</script>
+<div class="copyright">
+	<ul>
+    	<li>Copyright ? 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>
