@@ -1,10 +1,12 @@
 ﻿package
 {
 	import flash.display.*;
+	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
 	import flash.net.URLLoader;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
+	import flash.external.ExternalInterface;
 	import org.papervision3d.core.animation.channel.MatrixChannel3D;
 	import org.papervision3d.core.math.Sphere3D;
 	import sandy.bounds.BBox;
@@ -40,9 +42,13 @@
 		private var totalFileSize:int;
 		private var totalfilecount:int;
 		private var logNUm:int;
+	
 		
 		public function Main():void
 		{
+			stage.scaleMode = "noScale"; 
+			stage.align = "LT";
+			
 			var loader:URLLoader=new URLLoader(new URLRequest("photos.xml"));
 			loader.addEventListener(Event.COMPLETE, imgxmlcompleteHandler);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, xmlloadError); 
@@ -93,6 +99,7 @@
 			var root:Group = createScene();
 			scene = new Scene3D( "scene", this, camera, root );
 			addEventListener( Event.ENTER_FRAME, enterFrameHandler );
+			
 			myText.visible = false;
 		}
 

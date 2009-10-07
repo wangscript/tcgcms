@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="Main.swf" />
     <movie fps="30" />
-    <movie width="998" />
-    <movie height="700" />
+    <movie width="1024" />
+    <movie height="768" />
     <movie version="9" />
     <movie background="#000000" />
   </output>
@@ -77,6 +77,6 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="True" />
-    <option testMovie="Default" />
+    <option testMovie="NewWindow" />
   </options>
 </project>
