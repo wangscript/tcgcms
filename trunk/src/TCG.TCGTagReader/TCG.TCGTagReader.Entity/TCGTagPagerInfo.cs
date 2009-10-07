@@ -13,6 +13,7 @@ namespace TCG.TCGTagReader.Entity
         public int curPage { get { return this._curpage; } set { this._curpage = value; } }
         public int TopicCount { get { return this._topiccount; } set { this._topiccount = value; } }
         public string PageTitle { get { return this._pagetitle; } set { this._pagetitle = value; } }
+        public string ScriptCss { get { return this._scriptcss; } set { this._scriptcss = value; } }
 
         private int _curpage = 1;
         private int _topiccount = 0;
@@ -21,5 +22,6 @@ namespace TCG.TCGTagReader.Entity
         private bool _needpager = false;
         private bool _read = true;
         private string _pagetitle = string.Empty;
+        private string _scriptcss = string.Empty;
     }
 }

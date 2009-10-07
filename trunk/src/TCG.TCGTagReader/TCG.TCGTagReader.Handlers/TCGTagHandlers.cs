@@ -137,11 +137,16 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
             this._temphtml = _temphtml.Replace("_$ManagePath$_", config["ManagePath"]);
+        }
 
-            //更新文章标题
+        /// <summary>
+        /// 更新文章标题
+        /// </summary>
+        private void UpdateTopicsTitle()
+        {
             if (!string.IsNullOrEmpty(this._pagerinfo.PageTitle))
             {
-                Match mh = Regex.Match(this._temphtml,@"(<title>)(.*?)(</title>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                Match mh = Regex.Match(this._temphtml, @"(<title>)(.*?)(</title>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 if (mh.Success)
                 {
                     this._temphtml = Regex.Replace(this._temphtml, @"(<title>)(.*?)(</title>)",
@@ -150,13 +155,62 @@ namespace TCG.TCGTagReader.Handlers
                 }
 
                 mh = null;
-                
+            }
+        }
+
+        /// <summary>
+        /// 更新CSS和脚本链接
+        /// </summary>
+        private void UpdateScriptCss()
+        {
+            if (!string.IsNullOrEmpty(this._pagerinfo.ScriptCss))
+            {
+                string text = string.Empty;
+                if (this._pagerinfo.ScriptCss.IndexOf("|") > -1)
+                {
+                    string[] txt = this._pagerinfo.ScriptCss.Split('|');
+                    for (int i = 0; i < txt.Length; i++)
+                    {
+                        if (txt[i].IndexOf(".css") > -1)
+                        {
+                            text += "<link href=\"" + txt[i] + "\" rel=\"stylesheet\" type=\"text/css\" />";
+                        }
+                        else
+                        {
+                            text += "<script language=\"javascript\" src=\"" + txt[i] + "\"></script>";
+                        }
+                    }
+                }
+                else
+                {
+                    if (this._pagerinfo.ScriptCss.IndexOf(".css") > -1)
+                    {
+                        text += "<link href=\"" + this._pagerinfo.ScriptCss + "\" rel=\"stylesheet\" type=\"text/css\" />";
+                    }
+                    else
+                    {
+                        text += "<script language=\"javascript\" src=\"" + this._pagerinfo.ScriptCss + "\"></script>";
+                    }
+                }
+
+                Match head = Regex.Match(this._temphtml, @"(<head>)([\s\S]*)(</head>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                if (head.Success)
+                {
+                    this._temphtml = Regex.Replace(this._temphtml, @"(<head>)([\s\S]*)(</head>)",
+                    "$1$2" + text + "\r\n$3", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    this._pagerinfo.ScriptCss = string.Empty;
+                }
+
+                head = null;
             }
 
         }
 
         private void Save()
         {
+            this.UpdateTopicsTitle();
+            this.UpdateScriptCss();
+
             if (NeedCreate)
             {
                 Text.SaveFile(this.GetFilePath(), this._temphtml);
