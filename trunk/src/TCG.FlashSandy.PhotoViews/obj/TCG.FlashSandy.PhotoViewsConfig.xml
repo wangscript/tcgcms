@@ -7,7 +7,7 @@
       <path-element>D:\SDK\Papervision3D_2.0.883</path-element>
       <path-element>D:\SDK\Sandy3-1-1_src_rev1008</path-element>
       <path-element>D:\SDK</path-element>
-      <path-element>D:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
+      <path-element>d:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
@@ -16,7 +16,7 @@
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>30</default-frame-rate>
   <default-size>
-    <width>998</width>
-    <height>700</height>
+    <width>1024</width>
+    <height>768</height>
   </default-size>
 </flex-config>
