@@ -22,7 +22,7 @@ namespace TCG.TCGTagReader.Handlers
     {
         public TCGTagAttributeHandlers()
         {
-            this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%()$<>]+)""";
+            this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%()$<>\/]+)""";
             this._tagstringhdl = new TCGTagStringFunHandlers();
         }
 
@@ -80,9 +80,17 @@ namespace TCG.TCGTagReader.Handlers
                 case "newsclasslist":
                     this.TagForNewsClassList(ref pagerinfo);
                     break;
+                case "scriptcss":
+                    this.TagForScriptCss(ref pagerinfo);
+                    break;
             }
         }
 
+        /// <summary>
+        /// 跟标签名获得标志属性
+        /// </summary>
+        /// <param name="feild"></param>
+        /// <returns></returns>
         public string GetAttribute(string feild)
         {
             string value = "";
@@ -100,6 +108,15 @@ namespace TCG.TCGTagReader.Handlers
                     break;
             }
             return value;
+        }
+
+        /// <summary>
+        /// 获得标签
+        /// </summary>
+        /// <param name="pagerinfo"></param>
+        private void TagForScriptCss(ref TCGTagPagerInfo pagerinfo)
+        {
+            pagerinfo.ScriptCss = this.GetAttribute("text");
         }
 
         private void TagForNewsClassList(ref TCGTagPagerInfo pagerinfo)
@@ -165,6 +182,7 @@ namespace TCG.TCGTagReader.Handlers
             NewsInfo item = nifhd.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
+                pagerinfo.PageTitle = item.vcTitle;
 
                 if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
                     + item.vcTitle + "</font>";
@@ -201,7 +219,7 @@ namespace TCG.TCGTagReader.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
                     chdl.GetTopicClassTitleList(this._conn, this._config, item.ClassInfo.iId, " > "));
 
-                pagerinfo.PageTitle = item.vcTitle;
+                
             }
             else
             {

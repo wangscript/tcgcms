@@ -1,4 +1,4 @@
-//ͷ��ѡ�״̬
+//头部选项卡状态
 $(document).ready(function() {
     var o = { onClass: "on" }
     var emus = $(".emu").eq(0).find("li");
@@ -16,4 +16,15 @@ $(document).ready(function() {
     } else {
         emus.eq(0).addClass(o.onClass).siblings().removeClass(o.onClass);
     }
+
+    setInterval('AutoScroll("#Announcement")', 3000)
+
 });
+
+function AutoScroll(obj) {
+    $(obj).find("ul:first").animate({
+        marginTop: "-28px"
+    }, 20, function() {
+        $(this).css({ marginTop: "8px" }).find("li:first").appendTo(this);
+    });
+}

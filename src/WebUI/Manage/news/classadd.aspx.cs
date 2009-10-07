@@ -16,6 +16,7 @@ using TCG.Template.Handlers;
 using TCG.Template.Utils;
 using TCG.Manage.Utils;
 using TCG.News.Handlers;
+using TCG.News.Entity;
 
 public partial class news_classadd : adminMain
 {
@@ -27,24 +28,25 @@ public partial class news_classadd : adminMain
         }
         else
         {
-            string classname = Fetch.Post("iClassName");
-            string lname = Fetch.Post("iName");
-            string dir = Fetch.Post("iDirectory");
-            string url = Fetch.Post("iUrl");
-            int parentid = Bases.ToInt(Fetch.Post("iClassId"));
-            int sTemplate = (int)Convert.ChangeType(Fetch.Post("sTemplate"),typeof(int));
-            int slTemplate = (int)Convert.ChangeType(Fetch.Post("slTemplate"), typeof(int));
-            int order = Bases.ToInt(Fetch.Post("iOrder"));
-            if (string.IsNullOrEmpty(classname) || string.IsNullOrEmpty(lname))
+            ClassInfo cif = new ClassInfo();
+            cif.vcClassName = Fetch.Post("iClassName");
+            cif.vcName = Fetch.Post("iName");
+            cif.vcDirectory = Fetch.Post("iDirectory");
+            cif.vcUrl = Fetch.Post("iUrl");
+            cif.iParent = Bases.ToInt(Fetch.Post("iClassId"));
+            cif.iTemplate = (int)Convert.ChangeType(Fetch.Post("sTemplate"),typeof(int));
+            cif.iListTemplate = (int)Convert.ChangeType(Fetch.Post("slTemplate"), typeof(int));
+            cif.iOrder = Bases.ToInt(Fetch.Post("iOrder"));
+            if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch("-1");
                 base.Finish();
                 return;
             }
 
-            if (parentid != 0)
+            if (cif.iParent != 0)
             {
-                if (sTemplate < 0 || slTemplate < 0)
+                if (cif.iTemplate < 0 || cif.iListTemplate < 0)
                 {
                     base.AjaxErch("-1");
                     base.Finish();
@@ -53,7 +55,7 @@ public partial class news_classadd : adminMain
             }
 
             classHandlers chdl = new classHandlers();
-            int rtn = chdl.AddNewsClass(base.conn, base.admin.adminInfo.vcAdminName, classname, lname, parentid, sTemplate, slTemplate, dir, url, order);
+            int rtn = chdl.AddNewsClass(base.conn,cif, base.admin.adminInfo.vcAdminName);
             Caching.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
             chdl = null;
