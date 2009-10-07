@@ -1,0 +1,173 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简单基元-立方体 - TCG CMS System Version 0.0.5.54</title>
+<meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
+<meta name="description" content="专注于中小企业,商家网络信息化建设">
+<meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
+<meta NAME="copyright" content="Copyright 2009-2009 - TCGCMS.CN ">
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.1.3.2.js"></script>
+<script language="javascript" src="/js/header.js"></script>
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="/images/logo.gif" /></a></div>
+        <div class="topr">
+        	<ul>
+            	<li>咨询QQ：48419248  644139466</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	
+        	<li><a href="/index.htm" >首页</a></li>
+            
+        	<li><a href="/version/ver.htm" >产品发布</a></li>
+            
+        	<li><a href="/anli/al.htm" >案例展示</a></li>
+            
+        	<li><a href="/log/log.htm" >更新日志</a></li>
+            
+        	<li><a href="/help/help.htm" >帮助中心</a></li>
+            
+        	<li><a href="/news/news.htm" >ASP.NET</a></li>
+            
+        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+            
+            <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
+        </ul>
+    </div>
+</div>
+<div class="header_banner2"></div>
+<div class="Announcement" id="Announcement">
+	<ul>
+<script type="text/javascript" src="/js/gonggao.js"></script>
+    </ul>
+</div>
+
+<div class="news">
+<div class="mainleft1">
+	
+    <div class="newslist">
+    	<div class="title"><a>TCG CMS System</a></div>
+        <ul>
+        
+        </ul>
+    </div>
+    
+    <div class="newslist">
+    	<div class="title"><a>Flash Sandy</a></div>
+        <ul>
+        
+       	<li><a href="/help/sandy/2009/1003/qianyanhuomulu.htm" >前言和目录</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/Sandy3.0jieshao.htm" >Sandy3.0介绍</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/anzhuang.htm" >安装</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/sanxingdaimajiaocheng.htm" >三行代码教程</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jianshanjiyuan-lifangti.htm" >简单基元-立方体</a></li>
+        
+       	<li><a href="/help/sandy/2009/1003/jijiyuanshangshai.htm" >给基元上色</a></li>
+        
+        </ul>
+    </div>
+    
+</div>
+	<div class="list">
+    	<div class="title"><a>简单基元-立方体</a></div>
+    	<script language="javascript" src="/Manage/interface/click.aspx?topicid=21&shownum=false"></script>    
+        <div class="content">
+         	<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
+
+<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
+
+<DIV><STRONG>教学目标</STRONG></DIV>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<DIV>我们这节课将展示如何使用简单基元(simple primitive):立方体。其他教程将展示如何使用其他的基元(primitive)。在开始教程之前，我们将采用"代码策略(code strategy)", 对我来讲意味着我们需要一种方法来写出我们的代码。为了实现这个目标 我会遵循Petit给的建议。基本来讲就是这些意思:</DIV>
+<UL>
+<LI>类的构造方法中创建摄像机(Camera)和场景(Scene) 
+<LI>我们用一个名为"createScene()"的私有方法来创建所有的对象 
+<LI>添加一个事件监听(EventListener)来处理渲染和用户交互 </LI></UL>
+<P>我们所有的课程都将会使用类似的方法。</P></BLOCKQUOTE>
+<P dir=ltr><STRONG>怎么做</STRONG></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<P dir=ltr>设置</P>
+<HR>
+
+<P></P>
+<P dir=ltr>我们需要定义两个类: 一个叫 Example001.fla, 另一个叫Example001.as。 你可以在附件中找到这两个文件。</P>
+<P dir=ltr><A class="media mediafile mf_rar" title=tutorials:3.0:example001.rar href="http://www.flashsandy.org/_media/tutorials/3.0/example001.rar?id=tutorials%3A3.0%3Asandy_cs3_tut01&amp;cache=cache" target=_blank><FONT color=#005e95>example001.rar</FONT></A></P>
+<P dir=ltr>第一个文件是个控制帧频、场景大小和连接文档类(Document class)等基本信息的CS3 对象。第一个文件只有有两个重要的东东要设置: 场景的大小和文档类(Document class)的名称。</P>
+<P dir=ltr>我们将场景设为: 300px X 300px, 而文档类(Document class)将设为 Example001(没有后缀 .as)。</P>
+<P dir=ltr></P>
+<P dir=ltr>AS代码</P>
+<HR>
+
+<P></P>
+<P dir=ltr>本节中我们贴出AS代码作为参考, 代码的解释在后面一段中.</P>
+<P dir=ltr><SPAN class=kw3>package</SPAN> <SPAN class=br0>{</SPAN><BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>flash</SPAN>.<SPAN class=kw3>display</SPAN>.<A href="http://livedocs.adobe.com/flex%20class=" target=_blank html="html" sprite="sprite" display="display" flash="flash" index="index" langref="langref" kw3="kw3"><SPAN class=kw24><FONT color=#005e95>Sprite</FONT></SPAN></A>; <BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>flash</SPAN>.<SPAN class=kw3>events</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>core</SPAN>.<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>core</SPAN>.<SPAN class=kw3>data</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>core</SPAN>.<SPAN class=kw3>scenegraph</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>materials</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>materials</SPAN>.<SPAN class=kw3>attributes</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> <SPAN class=kw3>sandy</SPAN>.<SPAN class=kw3>primitive</SPAN>.<SPAN class=me1>*</SPAN>;<BR><BR>&nbsp;&nbsp; <SPAN class=kw3>public</SPAN> <SPAN class=kw2>class</SPAN> Example001 <SPAN class=kw3>extends</SPAN> <A href="http://livedocs.adobe.com/flex%20class=" target=_blank html="html" sprite="sprite" display="display" flash="flash" index="index" langref="langref" kw3="kw3"><SPAN class=kw24><FONT color=#005e95>Sprite</FONT></SPAN></A> <SPAN class=br0>{</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>private</SPAN> <SPAN class=kw2>var</SPAN> <SPAN class=kw3>scene</SPAN>:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A>;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>private</SPAN> <SPAN class=kw2>var</SPAN> <SPAN class=kw3>camera</SPAN>:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Camera3D.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Camera3D</FONT></SPAN></A>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>public</SPAN> <SPAN class=kw2>function</SPAN> Example001<SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN> <SPAN class=br0>{</SPAN> <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>camera</SPAN> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Camera3D.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Camera3D</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=nu0>300</SPAN>, <SPAN class=nu0>300</SPAN> <SPAN class=br0>)</SPAN>;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>camera</SPAN>.<SPAN class=kw3>z</SPAN> = <SPAN class=nu0>-400</SPAN>;</P><SPAN class=kw2>var</SPAN> <SPAN class=kw3>root</SPAN>:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A> = <SPAN class=kw3>createScene</SPAN><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>scene</SPAN> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=st0>"scene"</SPAN>, <SPAN class=kw3>this</SPAN>, <SPAN class=kw3>camera</SPAN>, <SPAN class=kw3>root</SPAN> <SPAN class=br0>)</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>addEventListener</SPAN><SPAN class=br0>(</SPAN> <A href="http://livedocs.adobe.com/flex%20class=" target=_blank html="html" flash="flash" index="index" langref="langref" kw3="kw3" events="events" event="event"><SPAN class=kw26><FONT color=#005e95>Event</FONT></SPAN></A>.<SPAN class=kw3>ENTER_FRAME</SPAN>, enterFrameHandler <SPAN class=br0>)</SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=br0>}</SPAN><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>private</SPAN> <SPAN class=kw2>function</SPAN> <SPAN class=kw3>createScene</SPAN><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A> <SPAN class=br0>{</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw2>var</SPAN> g:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw2>var</SPAN> box = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/primitive/Box.html" target=_blank><SPAN class=kw52><FONT color=#005e95>Box</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=st0>"box"</SPAN>,<SPAN class=nu0>100</SPAN>,<SPAN class=nu0>100</SPAN>,<SPAN class=nu0>100</SPAN><SPAN class=br0>)</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; box.<SPAN class=kw3>rotateX</SPAN> = <SPAN class=nu0>30</SPAN>;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; box.<SPAN class=kw3>rotateY</SPAN> = <SPAN class=nu0>30</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g.<SPAN class=kw3>addChild</SPAN><SPAN class=br0>(</SPAN> box <SPAN class=br0>)</SPAN>;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw1>return</SPAN> g;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=br0>}</SPAN><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>private</SPAN> <SPAN class=kw2>function</SPAN> enterFrameHandler<SPAN class=br0>(</SPAN> <SPAN class=kw3>event</SPAN> : <A href="http://livedocs.adobe.com/flex%20class=" target=_blank html="html" flash="flash" index="index" langref="langref" kw3="kw3" events="events" event="event"><SPAN class=kw26><FONT color=#005e95>Event</FONT></SPAN></A> <SPAN class=br0>)</SPAN> : <SPAN class=kw3>void</SPAN> <SPAN class=br0>{</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=kw3>scene</SPAN>.<SPAN class=kw3>render</SPAN><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SPAN class=br0>}</SPAN><BR>&nbsp;&nbsp; <SPAN class=br0>}</SPAN><BR><SPAN class=br0>}</SPAN></BLOCKQUOTE>
+<P dir=ltr style="MARGIN-RIGHT: 0px"><SPAN class=br0><STRONG>解释代码</STRONG></SPAN></P>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+<P dir=ltr style="MARGIN-RIGHT: 0px"><SPAN class=br0>我们来看看这些代码都做些什么:</SPAN></P>
+<P dir=ltr style="MARGIN-RIGHT: 0px"><SPAN class=br0>首先是package的声明。现在我们不管它</SPAN></P>
+<P dir=ltr style="MARGIN-RIGHT: 0px"><SPAN class=br0><SPAN class=kw3>package</SPAN> <SPAN class=br0>{</SPAN> ...<SPAN class=br0>}</SPAN></SPAN></P>
+<P dir=ltr style="MARGIN-RIGHT: 0px"><SPAN class=br0><SPAN class=br0><STRONG>导入需要的package</STRONG> </SPAN></SPAN></P>
+<HR>
+
+<P>紧接着是一段导入Sandy和Flash类的代码。导入Sandy的package以后程序就可以识别Sandy的类了(如果你想浏览Sandy的文件夹, 你能找到这些类的源文件).</P>
+<P>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> flash.<SPAN class=me1>display</SPAN>.<SPAN class=me1>Sprite</SPAN>; <BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> flash.<SPAN class=me1>events</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>core</SPAN>.<SPAN class=me1>Scene3D</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>core</SPAN>.<SPAN class=kw3>data</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>core</SPAN>.<SPAN class=me1>scenegraph</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>materials</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>materials</SPAN>.<SPAN class=kw3>attributes</SPAN>.<SPAN class=me1>*</SPAN>;<BR>&nbsp;&nbsp; <SPAN class=kw3>import</SPAN> sandy.<SPAN class=me1>primitive</SPAN>.<SPAN class=me1>*</SPAN>;</P>
+<P><STRONG>声明 3D场景(Scene3D)和3D摄像机(Camera3D) </STRONG>
+<P>构造函数中，我们做的第一件事情就是设置3D摄像机。下一节,我们将会将其向后移动400个像素来获得整个场景的画面。</P>
+<P><SPAN class=kw3>camera</SPAN> = <SPAN class=kw2>new</SPAN> Camera3D<SPAN class=br0>(</SPAN> <SPAN class=nu0>300</SPAN>, <SPAN class=nu0>300</SPAN> <SPAN class=br0>)</SPAN>;</P>
+<P>摄像机其实就是整个场景的用户观察点。它可以放在场景中, 这样我们可以告诉摄像机往哪里看。(其它课程中, 我们将会讨论摄像机如何工作)。请注意: 这个摄像机的设置 Camera3D(300,300)和我们刚才设置的.fla文件是相同的。确实，通常视野和场景的尺寸应该是相同的。</P>
+<P><STRONG>摆放摄像机</STRONG></P>
+<P>下面，我们需要放置摄像机, 默认的位置是在点(0,0,0).</P>
+<P><SPAN class=kw3>camera</SPAN>.<SPAN class=me1>z</SPAN> = <SPAN class=nu0>-400</SPAN>;</P>
+<P>设置相机到 -400 意思是我们从场景原点往后退着走了400像素. 场景原点(Origin of the Scene)总是在视野的中心。</P>
+<P><STRONG>创建一个组</STRONG></P>
+<P>接下来我们将创建"Group"对象。</P>
+<P><SPAN class=kw2>var</SPAN> root:Group = createScene<SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;</P>
+<P>这是我们场景中所有对象的根组。你可以想象这个模型, 我们的所有的物体之间的关系就像一棵"树", 每个树枝都可以是一个转换组(transformation group), 一个简单组(simple group)或者一个3D形状的物体。根组(root group)定义在私有方法 createScene()中, 稍后我们将会讨论。</P>
+<P>接下来我们定义3D场景</P>
+<P><SPAN class=kw3>scene</SPAN> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/Scene3D.html" target=_blank><SPAN class=kw41><FONT color=#005e95>Scene3D</FONT></SPAN></A><SPAN class=br0>(</SPAN> <SPAN class=st0>"scene"</SPAN>, <SPAN class=kw3>this</SPAN>, <SPAN class=kw3>camera</SPAN>, <SPAN class=kw3>root</SPAN> <SPAN class=br0>)</SPAN>;</P>
+<P>这个例子中我们为构造方法传入了4个变量: 场景名称、场景容器(使用"this"是因为我们的类继承自AS的基础类:Sprite, 这是一种容器对象), 摄像机用来观察场景——我们物体树的根节点。</P>
+<P><STRONG>添加事件监听</STRONG></P>
+<P>最后一件重要的事情就是我们要添加一个事件监听(event listener)用来渲染场景。</P>
+<P>addEventListener<SPAN class=br0>(</SPAN> Event.<SPAN class=me1>ENTER_FRAME</SPAN>, enterFrameHandler <SPAN class=br0>)</SPAN>;</P>
+<P>在这个详细的例子中，如果我们不打算做任何事情或是仅仅代替scene.render()命令我们就不需要一个事件监听(event listener); 但是这里, 为了符合良好实践(good practice)我们应当把这个命令放入事件处理函数(event handler)。</P>
+<P><STRONG>本课程主要的关注点</STRONG></P>
+<P>这个课程的一个主要部分:如何构建场景中的物体? 我们的例子中是一个立方体。在createScene()方法中首要的事情就是定义组元(Group element), 这个组元将会作为一个scene3D对象类型的参数被传回类的构造方法。</P>
+<P><SPAN class=kw2>var</SPAN> g:<A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A> = <SPAN class=kw2>new</SPAN> <A href="http://www.flashsandy.org/documentation/3.0/index.html?sandy/core/scenegraph/Group.html" target=_blank><SPAN class=kw45><FONT color=#005e95>Group</FONT></SPAN></A><SPAN class=br0>(</SPAN><SPAN class=br0>)</SPAN>;</P>
+<P><STRONG>构建盒子(Box)</STRONG></P>
+<P>我们接着创建一个每边100像素的简单"立方体".</P>
+<P><SPAN class=kw2>var</SPAN> box = <SPAN class=kw2>new</SPAN> Box<SPAN class=br0>(</SPAN> <SPAN class=st0>"box"</SPAN>,<SPAN class=nu0>100</SPAN>,<SPAN class=nu0>100</SPAN>,<SPAN class=nu0>100</SPAN><SPAN class=br0>)</SPAN>;</P>
+<P><STRONG>旋转盒子(Box)</STRONG></P>
+<P>接下来我们将盒子绕着X和Y坐标轴各旋转30°来产生一个立体的效果。盒子渲染后看起来会像扁平四边形。</P>
+<P>box.<SPAN class=me1>rotateX</SPAN> = <SPAN class=nu0>30</SPAN>;<BR>box.<SPAN class=me1>rotateY</SPAN> = <SPAN class=nu0>30</SPAN>;</P>
+<P><STRONG>将盒子填入组(Group)中</STRONG></P>
+<P>最后，我们得把我们的创造物加入Group中, 否则我们的引擎就不知道该渲染些什么。</P>
+<P>g.<SPAN class=me1>addChild</SPAN><SPAN class=br0>(</SPAN> box <SPAN class=br0>)</SPAN>;<BR><SPAN class=kw1>return</SPAN> g;</P>
+<P>太多的编码了，让我们看看结果.</P></BLOCKQUOTE>
+      </div>
+        <div class="pager"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">var ClassId=10;</script>
+<div class="copyright">
+	<ul>
+    	<li>Copyright ? 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>

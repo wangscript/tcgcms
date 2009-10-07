@@ -1,0 +1,92 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FLASH AS3读XML - TCG CMS System Version 0.0.5.54</title>
+<meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
+<meta name="description" content="专注于中小企业,商家网络信息化建设">
+<meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
+<meta NAME="copyright" content="Copyright 2009-2009 - TCGCMS.CN ">
+<link href="/css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.1.3.2.js"></script>
+<script language="javascript" src="/js/header.js"></script>
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="/images/logo.gif" /></a></div>
+        <div class="topr">
+        	<ul>
+            	<li>咨询QQ：48419248  644139466</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	
+        	<li><a href="/index.htm" >首页</a></li>
+            
+        	<li><a href="/version/ver.htm" >产品发布</a></li>
+            
+        	<li><a href="/anli/al.htm" >案例展示</a></li>
+            
+        	<li><a href="/log/log.htm" >更新日志</a></li>
+            
+        	<li><a href="/help/tcg/2009/1003/xitongjianjie.htm" >帮助中心</a></li>
+            
+        	<li><a href="/news/news.htm" >ASP.NET</a></li>
+            
+        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+            
+            <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
+        </ul>
+    </div>
+</div>
+<div class="header_banner2"></div>
+<div class="Announcement" id="Announcement">
+	<ul>
+<script type="text/javascript" src="/js/gonggao.js"></script>
+    </ul>
+</div>
+<div class="setmap">
+	<a href="/flashsandy/index.htm" target="_blank">FLASH 3D 开源引擎</a>
+</div>
+<div class="news">
+	<div class="detail">
+    	<div class="title"><a>FLASH AS3读XML</a><span>发布：2009年10月05日  浏览：
+<script language="javascript" src="/Manage/interface/click.aspx?topicid=25&shownum=true"></script>次</span></div>
+        <div class="content">
+         	<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
+
+<P>1、先看xml文件</P>
+<P>&lt;?xml version="1.0" encoding="utf-8"?&gt;<BR>&lt;root&gt;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\1.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\2.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\3.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt; <BR>&lt;/root&gt;</P>
+<P>&nbsp;</P>
+<P>2、FLA文件第1帧的代码：</P>
+<P>System.useCodePage=true;//编码支持中文,as3默认ignoreWhite为true，故无须指定。<BR>var myxml:XML;<BR>var totalcount:Number;<BR>var loader:URLLoader=new URLLoader(new URLRequest("imgconfig.xml"));<BR>loader.addEventListener(Event.COMPLETE,completeHandler);&nbsp; |<BR>loader.addEventListener(IOErrorEvent.IO_ERROR,xmlloadError); </P>
+<P><BR>function completeHandler(e:Event){&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; myxml=new XML(e.target.da<WBR>ta);//此时，外部的xml数据被完全转存到内存myxml文件中&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; parseXML();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>} </P>
+<P>function parseXML(){<BR>&nbsp; totalcount=myxml.descendants("image").length();//得到图片总数,此处为3<BR>&nbsp; var i:int;//int效率快过Number<BR>&nbsp; for(i=0;i&lt;totalcount;i++){<BR>&nbsp;&nbsp; trace(myxml.image[i].@url);//@符号是读xml文件中带=号形式的属性的专用语法<BR>&nbsp; }&nbsp; <BR>}</P>
+<P>//函数功能：捕获Xml配置文件加载异常（主要是URL错误异常）<BR>function xmlloadError(evt:IOErrorEvent) {<BR>&nbsp;&nbsp;&nbsp; evt.currentTarget.removeEventListener(IOErrorEvent.IO_ERROR,xmlloadError);<BR>&nbsp;&nbsp;&nbsp; //loader_txt.text="Sorry,未能找到Xml配置文件！";<BR>}</P>
+      </div>
+        <div class="pager"></div>
+    </div>
+
+<div class="mainleft">
+    <div class="newslist">
+    	<div class="title"><a>最新动态</a></div>
+        <ul>
+       <script language="javascript" src="/js/news.js"></script>
+        </ul>
+    </div>
+</div>
+</div>
+<script type="text/javascript">var ClassId=9;</script>
+<div class="copyright">
+	<ul>
+    	<li>Copyright ? 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>
