@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角度与弧度的转换 - TCG CMS System Version 0.0.5.54</title>
+<title>FLASHAS3读XML - TCG CMS System Version 0.0.5.54</title>
 <meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
 <meta name="description" content="专注于中小企业,商家网络信息化建设">
 <meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
@@ -38,7 +38,7 @@
             
         	<li><a href="/news/news.htm" >ASP.NET</a></li>
             
-        	<li><a href="/flashsandy/index.htm" >Flash Sandy</a></li>
+        	<li><a href="/sheji/index.htm" >设计库</a></li>
             
             <li><a href="http://www.q4mx.com"  target="_blank"><font color="#01DF01">赞助本站</font></a></li>
         </ul>
@@ -51,22 +51,23 @@
     </ul>
 </div>
 <div class="setmap">
-	<a href="/flashsandy/index.htm" target="_blank">FLASH 3D 开源引擎</a>
+	<a href="/sheji/index.htm" target="_blank">FLASH 3D 开源引擎</a>
 </div>
 <div class="news">
 	<div class="detail">
-    	<div class="title"><a>角度与弧度的转换</a><span>发布：2009年10月07日  浏览：
-<script language="javascript" src="/Manage/interface/click.aspx?topicid=28&shownum=true"></script>次</span></div>
+    	<div class="title"><a>FLASHAS3读XML</a><span>发布：2009年10月08日  浏览：
+<script language="javascript" src="/Manage/interface/click.aspx?topicid=25&shownum=true"></script>次</span></div>
         <div class="content">
          	<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
 
-<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
-
-<P>弧度=角度*Math.PI/180<BR>角度=弧度*180/Math.PI<BR><BR><STRONG>以下内容以弧度与角度的相互转换为基础</STRONG><BR><BR><FONT color=#ff0000>圆周率:</FONT> PI 3.1416(弧度)<BR><FONT color=#ff0000>圆:</FONT>2Pi&nbsp;&nbsp; 6.2832(弧度)<BR><BR>弧度是角的度量单位<BR><BR><BR><STRONG>弧长等于圆半径长的弧所对的圆心角为1弧度。<BR></STRONG><BR>由上面这条推导出 2Pi r, 周长就是 3.14*2(圆弧度) * 半径 ,就是这样来的<BR><BR>同理 PId也是一样&nbsp;&nbsp; 3.14*2*半径 = 直径*3.14<BR><BR><BR><BR>角度与弧度的转化就是等比公式的运算<BR><BR>角度 / 360&nbsp;&nbsp; = 弧度 / 6.28 (<FONT color=#ff0000>请自行理解成分式</FONT>)<BR><BR>角度 =&nbsp;&nbsp; 弧度*360/6.28(<STRONG>2PI</STRONG>)&nbsp;&nbsp; = 弧度/<STRONG>2PI</STRONG>*360&nbsp;&nbsp; &gt;&gt;(<STRONG>除2</STRONG>) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI<BR>弧度 = 角度*6.28(<STRONG>2PI</STRONG>) /360&nbsp;&nbsp; = 角度/360*<STRONG>2PI</STRONG>&nbsp;&nbsp; &gt;&gt;(<STRONG>除2</STRONG>) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180<BR><BR><BR><STRONG>弧度 = 角度 * Math.PI / 180<BR>角度 = 弧度 * 180 / Math.PI</STRONG><BR><BR><STRONG>就系咁样推导出来的~~~~~~~</STRONG></P>
-<P></P>
-<P></P>
-<P></P>
-<DIV class=t_msgfont>脑袋夹门了~~~~~~~<BR><BR>貌似是 <BR><BR>1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式)<BR>推成 1角度 =&nbsp;&nbsp; 180x = 3.14&nbsp;&nbsp; &gt;&gt;&nbsp;&nbsp; x = 3.14 / 180&nbsp;&nbsp;<BR><BR>&gt;&gt; 弧度 = 角度 *&nbsp;&nbsp; (Math.PI / 180)<BR><BR><BR>1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式)<BR>推成 1弧度 = 3.14x = 180&nbsp;&nbsp; &gt;&gt;&nbsp;&nbsp; x = 180 / 3.14 <BR><BR>&gt;&gt; 角度 = 弧度 *&nbsp;&nbsp; (180 / Math.PI)<BR><BR><BR>1弧度 约等于 57.2958角度</DIV>
+<P>1、先看xml文件</P>
+<P>&lt;?xml version="1.0" encoding="utf-8"?&gt;<BR>&lt;root&gt;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\1.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\2.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;image url="image\3.jpg" link="<A href="http://www.163.com%22/"><FONT color=#3c8266>http://www.163.com"/</FONT></A>&gt; <BR>&lt;/root&gt;</P>
+<P>&nbsp;</P>
+<P>2、FLA文件第1帧的代码：</P>
+<P>System.useCodePage=true;//编码支持中文,as3默认ignoreWhite为true，故无须指定。<BR>var myxml:XML;<BR>var totalcount:Number;<BR>var loader:URLLoader=new URLLoader(new URLRequest("imgconfig.xml"));<BR>loader.addEventListener(Event.COMPLETE,completeHandler);&nbsp; |<BR>loader.addEventListener(IOErrorEvent.IO_ERROR,xmlloadError); </P>
+<P><BR>function completeHandler(e:Event){&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; myxml=new XML(e.target.da<WBR>ta);//此时，外部的xml数据被完全转存到内存myxml文件中&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; parseXML();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>} </P>
+<P>function parseXML(){<BR>&nbsp; totalcount=myxml.descendants("image").length();//得到图片总数,此处为3<BR>&nbsp; var i:int;//int效率快过Number<BR>&nbsp; for(i=0;i&lt;totalcount;i++){<BR>&nbsp;&nbsp; trace(myxml.image[i].@url);//@符号是读xml文件中带=号形式的属性的专用语法<BR>&nbsp; }&nbsp; <BR>}</P>
+<P>//函数功能：捕获Xml配置文件加载异常（主要是URL错误异常）<BR>function xmlloadError(evt:IOErrorEvent) {<BR>&nbsp;&nbsp;&nbsp; evt.currentTarget.removeEventListener(IOErrorEvent.IO_ERROR,xmlloadError);<BR>&nbsp;&nbsp;&nbsp; //loader_txt.text="Sorry,未能找到Xml配置文件！";<BR>}</P>
       </div>
         <div class="pager"></div>
     </div>
