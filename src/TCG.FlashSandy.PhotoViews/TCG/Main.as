@@ -1,9 +1,11 @@
 ﻿package
 {
+	import adobe.utils.CustomActions;
 	import flash.display.*;
 	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
 	import flash.net.URLLoader;
+	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	import flash.external.ExternalInterface;
@@ -42,13 +44,19 @@
 		private var totalFileSize:int;
 		private var totalfilecount:int;
 		private var logNUm:int;
-	
+		private var css:myCss  = new myCss();
+
+		
+		//文字显示
+		private var logText:TextField = new TextField();
+		private var copyright:TextField = new TextField();
+		private var Contact:TextField = new TextField();
 		
 		public function Main():void
 		{
+			//设置影片居中
 			stage.scaleMode = "noScale"; 
 			stage.align = "LT";
-			
 			var loader:URLLoader=new URLLoader(new URLRequest("photos.xml"));
 			loader.addEventListener(Event.COMPLETE, imgxmlcompleteHandler);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, xmlloadError); 
@@ -70,10 +78,43 @@
 			myText.width = 300;
 			myText.x = stage.stageWidth/2;
 			myText.y = stage.stageHeight/2;
-			myText.textColor = 0xffcc00; 
-			myText.appendText("loading...");
+			myText.htmlText = "<p class='loading'>loading...</p>";
+			myText.styleSheet = css;
 			this.addChild(myText);
 			logNUm = 1;
+			
+			logText.x = 20;
+			logText.y = 20;
+
+			
+			logText.styleSheet =  css;
+			logText.htmlText = "<p class='logo'>TaoYanXi.CN</p>";
+			logText.width = 280;
+			logText.height = 30;
+			
+			
+			copyright.width = 330;
+			copyright.height = 30;
+			
+			copyright.x = (stage.stageWidth -330)/2;
+			copyright.y = stage.stageHeight - 60;
+			copyright.styleSheet = css;
+			
+			copyright.htmlText = "<p class='copyright'>Copyright @ 2009 - 2009 TCG CMS system All Rights Reserved</p>";
+			
+			Contact.width = 230;
+			Contact.height = 30;
+			
+			Contact.x = (stage.stageWidth -230)/2;
+			Contact.y = stage.stageHeight - 35;
+			Contact.styleSheet = css;
+			
+			Contact.htmlText = "<p class='copyright'>Email:sanyungui@vip.qq.com QQ:644139466</p>";
+			
+			
+			this.addChild(Contact);
+			this.addChild(copyright);
+			this.addChild(logText);
 			
 			queue.addEventListener(SandyEvent.QUEUE_COMPLETE, loadComplete );
 			queue.addEventListener(QueueEvent.QUEUE_RESOURCE_LOADED, queueLoadResource);
@@ -87,7 +128,7 @@
 		
 		public function queueLoadResource(event:QueueEvent ):void 
 		{
-			myText.text = "loading..." + logNUm / totalfilecount * 100 +"%";
+			myText.htmlText = "<p class='loading'>loading..." + parseInt( (logNUm / totalfilecount * 100).toString()) +"%</p>";
 			logNUm++;
 		}
 
@@ -158,13 +199,13 @@
 		
 		private function imgMouseOverHandler(pEvt:Shape3DEvent):void
 		{
-			if (sObj&&sObj.name!= pEvt.shape.name) sObj.rotateY = 0;
-			sObj = pEvt.shape;
+			//if (sObj&&sObj.name!= pEvt.shape.name) sObj.rotateY = 0;
+			//sObj = pEvt.shape;
 		}
 		
 		private function imgMouseOutHandler(pEvt:Shape3DEvent):void
 		{
-			if (sObj && sObj.name != pEvt.shape.name) pEvt.shape.rotateY = 0;
+			//if (sObj && sObj.name != pEvt.shape.name) pEvt.shape.rotateY = 0;
 		}
 		
 		private function imgMouseDownHandler(pEvt:Shape3DEvent):void
@@ -183,13 +224,13 @@
 			
 			if (m)
 			{
-				//m.rotateX += 1;
+				m.rotateX += 1;
 				m.rotateY += 1;
 			}
 			/*
 			var Bbox:Box = (group.getChildByName("BigBox") as Box);
 			
-			if (Bbox)
+			if (Bbox) 
 			{
 				Bbox.rotateX += 1;
 				Bbox.rotateY += 1;
@@ -206,12 +247,7 @@
 				}
 			}
 			*/
-			
-			if (sObj)
-			{
-				sObj.rotateY += 6;
-			}
-			
+	
 			scene.render();
 		}
 
