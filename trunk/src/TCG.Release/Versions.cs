@@ -26,7 +26,7 @@ namespace TCG.Release
 {
     public class Versions
     {
-        public static int Ver = 54;                         //系统版本号
+        public static int Ver = 64;                         //系统版本号
         private static string SystemName = "TCG CMS System"; //系统名称
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace TCG.Release
                 List<VersionItem> vers = WebVersionHistory;
                 if (vers == null) return null;
                 if (vers.Count == 0) return null;
-                int small = 0;
+                int small = -1;
                 int tempver = Ver;
                 for (int i = 0; i < vers.Count; i++)
                 {
@@ -112,7 +112,7 @@ namespace TCG.Release
                         }
                     }
                 }
-               return vers[small];
+                return small==-1?null:vers[small];
             }
         }
 
