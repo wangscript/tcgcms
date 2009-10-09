@@ -1,12 +1,19 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <tcgCmsSystem>
 	<SoftVersions>
 		<Item>
-			<Text>网站自动更新程序</Text>
-			<Ver>100</Ver>
-			<Date>2008-12-11</Date>
-			<Sqls>2</Sqls>
-			<LogUrl>http://www.tcgcms.cn/gengxin/wangzhanzidonggengxinchengxu.htm</LogUrl>
+			<Text>官方网站配置</Text>
+			<Ver>64</Ver>
+			<Date>2009-10-10</Date>
+			<Sqls>0</Sqls>
+			<LogUrl>#</LogUrl>
+		</Item>
+		<Item>
+			<Text>版本更新调试</Text>
+			<Ver>65</Ver>
+			<Date>2009-10-10</Date>
+			<Sqls>0</Sqls>
+			<LogUrl>#</LogUrl>
 		</Item>
 	</SoftVersions>
 </tcgCmsSystem>
