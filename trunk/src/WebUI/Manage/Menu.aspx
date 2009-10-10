@@ -6,8 +6,9 @@
     <title>功能列表</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/menu.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/commonV2.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
 </head>
 <script type="text/javascript">var stNums = new Array();</script>
