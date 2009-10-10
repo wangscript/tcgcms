@@ -44,7 +44,7 @@ function LoginCkBack(data) {
 	}
 
 	$.ajax({
-	    type: "GET", url: "/manage/Version/Ver.aspx", data: "action=IsHaveHigherVer",
+	    type: "GET", url: "/manage/Version/Ver.aspx?temptime=" + new Date().toString(), data: "action=IsHaveHigherVer",
 	    errror: function() { top.location.href = "main.aspx"; },
 	    success: function(data) {
 	        if (data.state) {

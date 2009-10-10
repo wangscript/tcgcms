@@ -15,5 +15,12 @@
 			<Sqls>0</Sqls>
 			<LogUrl>#</LogUrl>
 		</Item>
+		<Item>
+			<Text>文章生成路径改变</Text>
+			<Ver>68</Ver>
+			<Date>2009-10-10</Date>
+			<Sqls>0</Sqls>
+			<LogUrl>#</LogUrl>
+		</Item>
 	</SoftVersions>
 </tcgCmsSystem>

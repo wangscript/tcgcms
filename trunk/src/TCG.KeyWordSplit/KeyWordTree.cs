@@ -67,7 +67,7 @@ namespace TCG.KeyWordSplit
         /// <returns>分词结果</returns>
         public static string FindKeyWord(string strText, string splitstr)
         {
-
+            strText = strText.ToLower();
             List<KeyWordTreeNode> tmpRoot = Root.ChildList;
             StringBuilder strBuilder = new StringBuilder();
             int CC = 0;    //已经查到字符数 ,为了找不到的时候，判断是否退回一个字符

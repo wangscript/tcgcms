@@ -186,21 +186,34 @@ function GetClassItems(v){
 	}
 	return items
 }
-
+var tempWork;
 function ClassInit() {
-    ColorInit();//初始化颜色选择
-	var iClassName=$("iClassName");
-	var iClassId=$("iClassId");
-	var SelectDivW=$("SelectDivW");
-	var pos = getAbsolutePositionXY(iClassName);
-	SelectDivW.style.top=(pos.y+1)+"px";
-	SelectDivW.style.left=(pos.x+iClassName.offsetWidth-20)+"px";
-	var o=GetNewsItemById(iClassId.value);
-	if(o==null){
-		iClassName.value="请选择资讯分类...";
-	}else{
-		iClassName.value=o[2];
-	}
+    SetAjaxDiv("loader", false, "正在加载关键字词库...");
+    tempWork = $("work").value;
+    var work = $("work");
+    work.value = "KeyWordLoad";
+    ajax.postf($("form1"), function(obj) { KeyWordLoadBack(obj.responseText); });
+
+}
+
+function KeyWordLoadBack(val) {
+    if (GetErrText(val)) return;
+    SetAjaxDiv("ok", false, "词库加载成功！");
+
+    ColorInit(); //初始化颜色选择
+    var iClassName = $("iClassName");
+    var iClassId = $("iClassId");
+    var SelectDivW = $("SelectDivW");
+    var pos = getAbsolutePositionXY(iClassName);
+    SelectDivW.style.top = (pos.y + 1) + "px";
+    SelectDivW.style.left = (pos.x + iClassName.offsetWidth - 20) + "px";
+    var o = GetNewsItemById(iClassId.value);
+    if (o == null) {
+        iClassName.value = "请选择资讯分类...";
+    } else {
+        iClassName.value = o[2];
+    }
+    $("work").value = tempWork;
 }
 
 function selebg1(){
