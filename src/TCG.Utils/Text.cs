@@ -52,6 +52,37 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// 去掉标点符号！
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string ReplaceBD(string str)
+        {
+            str = ToDBC(str).Replace("?", "");
+            str = ToDBC(str).Replace(",", "");
+            str = ToDBC(str).Replace(".", "");
+            str = ToDBC(str).Replace(" ", "");
+            str = ToDBC(str).Replace("。", "");
+            str = ToDBC(str).Replace("`", "");
+            str = ToDBC(str).Replace("@", "");
+            str = ToDBC(str).Replace("#", "");
+            str = ToDBC(str).Replace("$", "");
+            str = ToDBC(str).Replace("%", "");
+            str = ToDBC(str).Replace("^", "");
+            str = ToDBC(str).Replace("&", "");
+            str = ToDBC(str).Replace("*", "");
+            str = ToDBC(str).Replace("(", "");
+            str = ToDBC(str).Replace(")", "");
+            str = ToDBC(str).Replace("[", "");
+            str = ToDBC(str).Replace("]", "");
+            str = ToDBC(str).Replace("{", "");
+            str = ToDBC(str).Replace("}", "");
+            str = ToDBC(str).Replace("'", "");
+            str = ToDBC(str).Replace("\"", "");
+            return str;
+        }
+
+        /// <summary>
         /// 转全角的函数(SBC case)
         /// </summary>
         /// <param name="input">任意字符串</param>

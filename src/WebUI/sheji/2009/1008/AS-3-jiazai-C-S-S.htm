@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角度与弧度的转换 - TCG CMS System Version 0.0.6.64</title>
+<title>AS3加载CSS - TCG CMS System Version 0.0.6.64</title>
 <meta NAME="keywords" CONTENT="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统">
 <meta name="description" content="专注于中小企业,商家网络信息化建设">
 <meta NAME="author" CONTENT="≮三云鬼≯ QQ:644139466,Email:sanyungui@vip.qq.com">
@@ -55,18 +55,11 @@
 </div>
 <div class="news">
 	<div class="detail">
-    	<div class="title"><a>角度与弧度的转换</a><span>发布：2009年10月10日  浏览：
-<script language="javascript" src="/Manage/interface/click.aspx?topicid=28&shownum=true"></script>次</span></div>
+    	<div class="title"><a>AS3加载CSS</a><span>发布：2009年10月10日  浏览：
+<script language="javascript" src="/Manage/interface/click.aspx?topicid=30&shownum=true"></script>次</span></div>
         <div class="content">
          	<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
-
-<STYLE type=text/css>body{font-size:12px; padding:3px;}</STYLE>
-
-<P>弧度=角度*Math.PI/180<BR>角度=弧度*180/Math.PI<BR><BR><STRONG>以下内容以弧度与角度的相互转换为基础</STRONG><BR><BR><FONT color=#ff0000>圆周率:</FONT> PI 3.1416(弧度)<BR><FONT color=#ff0000>圆:</FONT>2Pi&nbsp;&nbsp; 6.2832(弧度)<BR><BR>弧度是角的度量单位<BR><BR><BR><STRONG>弧长等于圆半径长的弧所对的圆心角为1弧度。<BR></STRONG><BR>由上面这条推导出 2Pi r, 周长就是 3.14*2(圆弧度) * 半径 ,就是这样来的<BR><BR>同理 PId也是一样&nbsp;&nbsp; 3.14*2*半径 = 直径*3.14<BR><BR><BR><BR>角度与弧度的转化就是等比公式的运算<BR><BR>角度 / 360&nbsp;&nbsp; = 弧度 / 6.28 (<FONT color=#ff0000>请自行理解成分式</FONT>)<BR><BR>角度 =&nbsp;&nbsp; 弧度*360/6.28(<STRONG>2PI</STRONG>)&nbsp;&nbsp; = 弧度/<STRONG>2PI</STRONG>*360&nbsp;&nbsp; &gt;&gt;(<STRONG>除2</STRONG>) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI<BR>弧度 = 角度*6.28(<STRONG>2PI</STRONG>) /360&nbsp;&nbsp; = 角度/360*<STRONG>2PI</STRONG>&nbsp;&nbsp; &gt;&gt;(<STRONG>除2</STRONG>) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180<BR><BR><BR><STRONG>弧度 = 角度 * Math.PI / 180<BR>角度 = 弧度 * 180 / Math.PI</STRONG><BR><BR><STRONG>就系咁样推导出来的~~~~~~~</STRONG></P>
-<P></P>
-<P></P>
-<P></P>
-<DIV class=t_msgfont>脑袋夹门了~~~~~~~<BR><BR>貌似是 <BR><BR>1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式)<BR>推成 1角度 =&nbsp;&nbsp; 180x = 3.14&nbsp;&nbsp; &gt;&gt;&nbsp;&nbsp; x = 3.14 / 180&nbsp;&nbsp;<BR><BR>&gt;&gt; 弧度 = 角度 *&nbsp;&nbsp; (Math.PI / 180)<BR><BR><BR>1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式)<BR>推成 1弧度 = 3.14x = 180&nbsp;&nbsp; &gt;&gt;&nbsp;&nbsp; x = 180 / 3.14 <BR><BR>&gt;&gt; 角度 = 弧度 *&nbsp;&nbsp; (180 / Math.PI)<BR><BR><BR>1弧度 约等于 57.2958角度</DIV>
+fla的文件就是这样的AS，content是在_root下的一个TextField：<BR><BR>var ss:TextField.StyleSheet = new TextField.StyleSheet();<BR>ss.load("sample.css");<BR>content.styleSheet = ss; <BR>content.multiline= true;<BR>content.wordWrap = true;<BR>content.html = true; <BR>story = new XML();<BR>story.ignoreWhite = true;<BR>story.load("sample.html");<BR>story.onLoad = function () { <BR>content.htmlText = story;<BR>} <BR>sample.html和sample.css就是一个网页有内容和图片，里面有几个自定义的tag，在css文件设置了css的样式，插入图片是用的&lt;img&gt;，但是&lt;img&gt;在那里面的align好像只支持left和right，，，设置成center是没用的。。。
       </div>
         <div class="pager"></div>
     </div>

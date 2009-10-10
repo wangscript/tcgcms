@@ -390,10 +390,13 @@ namespace TCG.News.Handlers
         public string CreateNewsInfoFilePath(string extion, NewsInfo nif)
         {
             string text = string.Empty;
+            string mtitle = Text.GetTextWithoutHtml(nif.vcTitle).Replace(" ", "").Replace("　", "");    //去掉标题里面的HTML，空格
+            mtitle = KeyWordTree.FindKeyWord(mtitle, "-");
+            mtitle = Text.ReplaceBD(mtitle);
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + "/";
             text += objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2) + objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += Pinyin.GetPinyinByChineses(Text.GetTextWithoutHtml(nif.vcTitle).Replace(" ","").Replace("　","")) + extion;
+            text += Pinyin.GetPinyinByChineses(mtitle) + extion;
             return text;
         }
 

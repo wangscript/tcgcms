@@ -63,7 +63,7 @@ public partial class news_createhtml : adminMain
 
                 while (Reader.Peek() != -1)
                 {
-                    string[] tmp = Reader.ReadLine().Split('|');
+                    string[] tmp = Reader.ReadLine().ToLower().Split('|');
                     KeyWordTree.AddKeyWord(tmp[0]);
 
                 }

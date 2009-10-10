@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Configuration;
+using System.Collections.Generic;
 using System.Collections;
 using System.Web;
 using System.Web.Security;
@@ -8,6 +10,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+
+using System.Text;
+using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
@@ -19,6 +24,7 @@ using TCG.News.Entity;
 using TCG.Template.Entity;
 using TCG.Template.Handlers;
 using TCG.TCGTagReader.Handlers;
+using TCG.KeyWordSplit;
 
 public partial class news_newsAdd : adminMain
 {
@@ -68,10 +74,52 @@ public partial class news_newsAdd : adminMain
                 case "MdyNews":
                     ismdy = true;
                     break;
+                case "KeyWordLoad":
+                    this.KeyWordLoad();
+                    break;
             }
 
             this.NewsManage(ismdy);
         }
+    }
+
+    private void KeyWordLoad()
+    {
+        if (KeyWordTree.Root.ChildList.Count == 0)
+        {
+            string path = Fetch.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
+            if (File.Exists(path))
+            {
+                StreamReader Reader = new StreamReader(path, Encoding.Default);
+                List<KeyWordTreeNode> tmpRoot = KeyWordTree.Root.ChildList;
+
+                while (Reader.Peek() != -1)
+                {
+                    string[] tmp = Reader.ReadLine().ToLower().Split('|');
+                    KeyWordTree.AddKeyWord(tmp[0]);
+
+                }
+
+                Reader.Close();
+                Reader.Dispose();
+
+                if (KeyWordTree.Root.ChildList.Count == 0)
+                {
+                    base.Finish();
+                    base.AjaxErch("-1000000070");
+                    return;
+                }
+            }
+            else
+            {
+                base.Finish();
+                base.AjaxErch("-1000000070");
+                return;
+            }
+        }
+
+        base.Finish();
+        base.AjaxErch("加载关键词成功！");
     }
 
     private void NewsManage(bool ismdy)
