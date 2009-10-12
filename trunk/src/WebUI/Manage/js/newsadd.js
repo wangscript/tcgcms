@@ -22,7 +22,7 @@ function CheckAdd(){
 }
 
 function CheckImgBack(val) {
-    $("iContent_HtmlEditorContent").value = val;
+    $("iContent_content").value = val;
     $("form1").action = "newsadd.aspx";
 	var work = $("work");
 	if(work.value=="AddNew"){
@@ -41,7 +41,7 @@ function SelectSmallImg(obj){
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("iContent_HtmlEditorContent").value;
+	var iContent = $("iContent_content").value;
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
 	if (result != null) {
@@ -63,7 +63,7 @@ function SelectBigImg(obj){
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("iContent_HtmlEditorContent").value;
+	var iContent = $("iContent_content").value;
 	
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);

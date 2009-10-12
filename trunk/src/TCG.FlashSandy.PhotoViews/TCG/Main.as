@@ -58,6 +58,10 @@ package
 		private var totalFileSize:int;
 		private var totalfilecount:int;
 		private var logNUm:int;
+		
+		private var tGroupMove:Boolean = false;
+		private var oldXyTGroup:Object = null;
+		
 		private var css:myCss  = new myCss();
 
 		
@@ -154,10 +158,48 @@ package
 			var root:Group = createScene();
 			scene = new Scene3D( "scene", this, camera, root );
 			addEventListener( Event.ENTER_FRAME, enterFrameHandler );
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, onmousedownHandler);
+			stage.addEventListener(MouseEvent.MOUSE_UP, onmouseupHandler);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, onmousemoveHandler);
 			
 			myText.visible = false;
 		}
 
+		//鼠标按下左键
+		private function onmousedownHandler(evEn:MouseEvent):void {
+			this.tGroupMove = true;	//中心物体可以移动
+			this.oldXyTGroup = null;
+		}
+		
+		//鼠标左前释放
+		private function onmouseupHandler(evEn:MouseEvent):void {
+			this.tGroupMove = false;
+		}
+		
+		private function onmousemoveHandler(evEn:MouseEvent):void {
+			var myScene:Scene3D = this.scene;
+			var group:Group = myScene.root;
+			
+			if (this.tGroupMove) {
+				
+				if (!this.oldXyTGroup)
+				{
+					this.oldXyTGroup = { x:stage.mouseX, y:stage.mouseY };
+					
+				}else{
+					var m:TransformGroup = (group.getChildByName("SmllTeam") as TransformGroup);
+					if (m)
+					{
+						var x:Number = Math.atan2(stage.mouseY - this.oldXyTGroup.y , stage.mouseX - this.oldXyTGroup.x);
+						var y = x * 180 / Math.PI;	
+						m.rotateX += x;
+						//m.rotateY += 90 - y; 
+					}
+					this.oldXyTGroup = { x:stage.mouseX, y:stage.mouseY };
+				}
+			}
+		}
+		
 		// Create the scene graph based on the root Group of the scene
 		private function createScene():Group
 		{
@@ -234,13 +276,7 @@ package
 			var myScene:Scene3D = this.scene;
 			var group:Group = myScene.root;
 			
-			var m:TransformGroup = (group.getChildByName("SmllTeam") as TransformGroup);
 			
-			if (m)
-			{
-				m.rotateX += 1;
-				m.rotateY += 1;
-			}
 			/*
 			var Bbox:Box = (group.getChildByName("BigBox") as Box);
 			

@@ -127,7 +127,7 @@ public partial class news_newsAdd : adminMain
         NewsInfo item = nihdl.GetNewsInfoById(base.conn, Bases.ToInt(Fetch.Post("iNewsId")));
         item.vcTitle = Fetch.Post("iTitle");
         item.vcUrl = Fetch.Post("iUrl");
-        item.vcContent = Fetch.Post("iContent$HtmlEditorContent");
+        item.vcContent = Fetch.Post("iContent$content");
         item.vcAuthor = Fetch.Post("iAuthor");
         item.vcKeyWord = Fetch.Post("iKeyWords");
         item.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
