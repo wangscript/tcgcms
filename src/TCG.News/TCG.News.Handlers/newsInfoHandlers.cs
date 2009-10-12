@@ -391,8 +391,9 @@ namespace TCG.News.Handlers
         {
             string text = string.Empty;
             string mtitle = Text.GetTextWithoutHtml(nif.vcTitle).Replace(" ", "").Replace("　", "");    //去掉标题里面的HTML，空格
-            mtitle = KeyWordTree.FindKeyWord(mtitle, "-");
-            mtitle = Text.ReplaceBD(mtitle);
+            //mtitle = KeyWordTree.FindKeyWord(mtitle, "-");    //暂时还不分词吧，分词系统太薄弱
+            mtitle = Text.ReplaceBD(mtitle);    //去掉标点
+            mtitle = nif.iId.ToString() + "-" + mtitle;
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + "/";
             text += objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2) + objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";

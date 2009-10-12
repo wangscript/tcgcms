@@ -28,7 +28,7 @@ public partial class files_ConentImgCheck : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string content = Fetch.Post("iContent$HtmlEditorContent");
+            string content = Fetch.Post("iContent$content");
             fileinfoHandlers fihdl = new fileinfoHandlers();
             Response.Write(fihdl.ImgPatchInit(base.conn, content, base.admin.adminInfo.vcAdminName,
                 objectHandlers.ToInt(base.config["NewsFileClass"]), base.config));
