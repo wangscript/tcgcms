@@ -142,6 +142,7 @@ public partial class news_createhtml : adminMain
         TCGTagHandlers tcgthl = new TCGTagHandlers();
         tcgthl.Template = tif.vcContent.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
+        tcgthl.NeedCreate = base.config["IsReWrite"] != "True" ? true : false;
         tcgthl.Replace(base.conn, base.config);
 
         if (tcgthl.PagerInfo.PageCount > 1)

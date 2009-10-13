@@ -184,19 +184,22 @@ public partial class news_newsAdd : adminMain
         filepath = Server.MapPath("~" + item.vcFilePath);
         if (rtn == 1)
         {
-            classHandlers clhdl = new classHandlers();
-            ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
-            clhdl = null;
-            TemplateHandlers ntlhdl = new TemplateHandlers();
-            TemplateInfo titem = ntlhdl.GetTemplateInfoByID(base.conn, cif.iTemplate);
-            cif = null;
+            if (base.config["IsReWrite"] != "True")
+            {
+                classHandlers clhdl = new classHandlers();
+                ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
+                clhdl = null;
+                TemplateHandlers ntlhdl = new TemplateHandlers();
+                TemplateInfo titem = ntlhdl.GetTemplateInfoByID(base.conn, cif.iTemplate);
+                cif = null;
 
-            TCGTagHandlers tcgth = new TCGTagHandlers();
-            tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
-            titem = null;
-            tcgth.FilePath = filepath;
-            tcgth.Replace(base.conn, base.config);
-            tcgth = null;
+                TCGTagHandlers tcgth = new TCGTagHandlers();
+                tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
+                titem = null;
+                tcgth.FilePath = filepath;
+                tcgth.Replace(base.conn, base.config);
+                tcgth = null;
+            }
 
         }
         base.AjaxErch(rtn.ToString());

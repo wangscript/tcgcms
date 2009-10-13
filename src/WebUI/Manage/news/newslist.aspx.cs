@@ -192,6 +192,12 @@ public partial class news_newslist : adminMain
             base.AjaxErch("-1000000051");
             return;
         }
+
+        if (base.config["IsReWrite"] == "True")
+        {
+            base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
+        }
+
         newsInfoHandlers nifhd = new newsInfoHandlers();
         NewsInfo item = nifhd.GetNewsInfoById(base.conn, id);
         if (item == null) return;

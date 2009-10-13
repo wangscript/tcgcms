@@ -31,9 +31,9 @@ public partial class Test :  Origin
         //string fileName = System.IO.Path.GetFileName(fullName);
         //fileZip.UnZipFile(fileName, dir);
 
-        List<VersionItem> vers = Versions.WebVersionHistory;
+        //List<VersionItem> vers = Versions.WebVersionHistory;
 
-        Response.Write(Versions.GetVerStr( Versions.HigherVersion.Ver));
+       // Response.Write(Versions.GetVerStr( Versions.HigherVersion.Ver));
         
 
     }
