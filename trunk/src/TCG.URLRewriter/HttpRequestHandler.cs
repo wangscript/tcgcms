@@ -11,6 +11,7 @@ using TCG.Template.Entity;
 using TCG.Template.Handlers;
 using TCG.News.Handlers;
 using TCG.News.Entity;
+
 using TCG.TCGTagReader.Handlers;
 
 namespace TCG.URLRewriter
@@ -94,9 +95,55 @@ namespace TCG.URLRewriter
                 }
             }
 
+            string DpagePath = Request.Url.AbsolutePath;
+            int DcurPage = 1;
             //检测文件名特性
-            string pattern = @"(\d+)t-([\s\S]*)\" + config["FileExtension"];
+            string pattern = @"([\s\S]*)-c(\d+)\" + config["FileExtension"];
             Match match = Regex.Match(pagepath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            if (match.Success)
+            {
+                pagepath = match.Result("$1") + config["FileExtension"];
+                DpagePath = DpagePath.Substring(0, DpagePath.LastIndexOf('/')) + "/" + pagepath;
+                DcurPage = objectHandlers.ToInt(match.Result("$2"));
+            }
+
+            //检测分类文件
+            classHandlers chld = new classHandlers();
+            DataTable dt = chld.GetClassInfoByCach(conn,false);
+            if (dt != null && dt.Rows.Count != 0)
+            {
+                if(!string.IsNullOrEmpty(pagepath))
+                {
+                    string [] p = pagepath.Split('.');
+                    string exp = p[p.Length-1];
+                    int num = DpagePath.LastIndexOf("." + exp);
+                    string Qp = DpagePath.Substring(0, num);
+                    string SQL = "vcUrl ='" + Qp + "'";
+                    DataRow[] Rows = dt.Select(SQL);
+                    if (Rows.Length > 0)
+                    {
+                        TemplateHandlers tlhdl = new TemplateHandlers();
+                        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(conn, objectHandlers.ToInt(Rows[0]["iListTemplate"]), false);
+
+                        TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
+                        tcgthdl1.Template = tlif.vcContent.Replace("_$ClassId$_", Rows[0]["iId"].ToString());
+                        tcgthdl1.NeedCreate = false;
+                        tcgthdl1.PagerInfo.DoAllPage = false;
+                        tcgthdl1.PagerInfo.Page = DcurPage;
+                        tcgthdl1.WebPath = Rows[0]["vcUrl"].ToString() + config["FileExtension"];
+                        tcgthdl1.Replace(conn, config);
+
+                        Response.Write(tcgthdl1.Template);
+                        Response.End();
+                        tcgthdl1 = null;
+
+                    }
+                }
+            }
+
+            //检测文件名特性
+            pattern = @"(\d+)t-([\s\S]*)\" + config["FileExtension"];
+            match = Regex.Match(pagepath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
                 int topicid = objectHandlers.ToInt(match.Result("$1"));
@@ -110,7 +157,7 @@ namespace TCG.URLRewriter
                         //获得分类信息
                        
                         TemplateHandlers ntlhdl = new TemplateHandlers();
-                        TemplateInfo titem = ntlhdl.GetTemplateInfoByID(conn, item.ClassInfo.iTemplate);
+                        TemplateInfo titem = ntlhdl.GetTemplateInfoByID(conn, item.ClassInfo.iTemplate,false);
                        
 
                         TCGTagHandlers tcgth = new TCGTagHandlers();

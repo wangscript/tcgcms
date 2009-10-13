@@ -161,7 +161,7 @@ public partial class Template_newlist : adminMain
             return;
         }
         TemplateHandlers tlhdl = new TemplateHandlers();
-        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, iTemplate);
+        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, iTemplate,false);
         tlhdl = null;
         if (tlif == null)
         {

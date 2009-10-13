@@ -190,7 +190,7 @@ public partial class news_newsAdd : adminMain
                 ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
                 clhdl = null;
                 TemplateHandlers ntlhdl = new TemplateHandlers();
-                TemplateInfo titem = ntlhdl.GetTemplateInfoByID(base.conn, cif.iTemplate);
+                TemplateInfo titem = ntlhdl.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
                 cif = null;
 
                 TCGTagHandlers tcgth = new TCGTagHandlers();

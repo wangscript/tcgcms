@@ -234,20 +234,46 @@ namespace TCG.Template.Handlers
             return item;
         }
 
-        public TemplateInfo GetTemplateInfoByID(Connection conn, int templateid)
+        public TemplateInfo GetTemplateInfoByID(Connection conn, int templateid,bool readdb)
         {
-            DataTable dt = this.GetTemplateByID(conn, templateid,false);
-            if (dt == null) return null;
-            if (dt.Rows.Count != 1) return null;
-            TemplateInfo item = new TemplateInfo();
-            item.iId = (int)dt.Rows[0]["iId"];
-            item.iSiteId = (int)dt.Rows[0]["iSiteId"];
-            item.iType = (int)dt.Rows[0]["iType"];
-            item.iParentId = (int)dt.Rows[0]["iParentId"];
-            item.iSystemType = (int)dt.Rows[0]["iSystemType"];
-            item.vcTempName = (string)dt.Rows[0]["vcTempName"];
-            item.vcContent = (string)dt.Rows[0]["vcContent"];
-            item.vcUrl = (string)dt.Rows[0]["vcUrl"];
+            TemplateInfo item = null;
+
+            if (readdb)
+            {
+                DataTable dt = this.GetTemplateByID(conn, templateid, false);
+                if (dt == null) return null;
+                if (dt.Rows.Count != 1) return null;
+                item = new TemplateInfo();
+                item.iId = (int)dt.Rows[0]["iId"];
+                item.iSiteId = (int)dt.Rows[0]["iSiteId"];
+                item.iType = (int)dt.Rows[0]["iType"];
+                item.iParentId = (int)dt.Rows[0]["iParentId"];
+                item.iSystemType = (int)dt.Rows[0]["iSystemType"];
+                item.vcTempName = (string)dt.Rows[0]["vcTempName"];
+                item.vcContent = (string)dt.Rows[0]["vcContent"];
+                item.vcUrl = (string)dt.Rows[0]["vcUrl"];
+            }
+            else
+            {
+                DataSet ds = GetAllTemplates(conn, false);
+                if (ds != null && ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
+                {
+                    DataRow[] rows = ds.Tables[0].Select("iid =" + templateid.ToString());
+                    if (rows.Length == 1)
+                    {
+                        item = new TemplateInfo();
+                        item.iId = (int)rows[0]["iId"];
+                        item.iSiteId = (int)ds.Tables[0].Rows[0]["iSiteId"];
+                        item.iType = (int)rows[0]["iType"];
+                        item.iParentId = (int)rows[0]["iParentId"];
+                        item.iSystemType = (int)rows[0]["iSystemType"];
+                        item.vcTempName = (string)rows[0]["vcTempName"];
+                        item.vcContent = (string)rows[0]["vcContent"];
+                        item.vcUrl = (string)rows[0]["vcUrl"];
+                    }
+                }
+            }
+
             return item;
         }
     }
