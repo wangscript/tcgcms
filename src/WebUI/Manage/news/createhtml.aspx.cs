@@ -102,7 +102,7 @@ public partial class news_createhtml : adminMain
         chdl = null;
         if (cif == null) { base.AjaxErch(""); return; }
         TemplateHandlers tlhd = new TemplateHandlers();
-        TemplateInfo tif = tlhd.GetTemplateInfoByID(base.conn, cif.iTemplate);
+        TemplateInfo tif = tlhd.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
         if (tif == null) { base.AjaxErch(""); return; }
         tlhd = null;
 

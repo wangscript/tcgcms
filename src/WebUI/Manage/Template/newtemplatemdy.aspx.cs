@@ -27,7 +27,7 @@ public partial class Template_newtemplatemdy : adminMain
         
         if (!Page.IsPostBack)
         {
-            TemplateInfo item = nthdl.GetTemplateInfoByID(base.conn, templateid);
+            TemplateInfo item = nthdl.GetTemplateInfoByID(base.conn, templateid,false);
             if (item == null)
             {
                 base.Finish();

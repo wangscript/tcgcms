@@ -14,7 +14,7 @@ using TCG.Utils;
 using TCG.Entity;
 using TCG.Release;
 
-public partial class Test :  Origin
+public partial class index :  Origin
 {
     protected void Page_Load(object sender, EventArgs e)
     {

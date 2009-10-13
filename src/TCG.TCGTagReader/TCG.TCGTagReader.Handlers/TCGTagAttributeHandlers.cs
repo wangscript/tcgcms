@@ -294,7 +294,7 @@ namespace TCG.TCGTagReader.Handlers
                 return;
             }
             TemplateHandlers ntlhdl = new TemplateHandlers();
-            TemplateInfo item = ntlhdl.GetTemplateInfoByID(this._conn, id);
+            TemplateInfo item = ntlhdl.GetTemplateInfoByID(this._conn, id,false);
             if (item != null)
             {
                 this._tagtext = item.vcContent.Replace("tcg:item", "tcg:itemTemp" + id.ToString());

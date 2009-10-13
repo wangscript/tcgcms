@@ -28,6 +28,7 @@ namespace TCG.TCGTagReader.Entity
         public int TopicCount { get { return this._topiccount; } set { this._topiccount = value; } }
         public string PageTitle { get { return this._pagetitle; } set { this._pagetitle = value; } }
         public string ScriptCss { get { return this._scriptcss; } set { this._scriptcss = value; } }
+        public bool DoAllPage { get { return this._doallpage; } set { this._doallpage = value; } }
 
         private int _curpage = 1;
         private int _topiccount = 0;
@@ -37,5 +38,6 @@ namespace TCG.TCGTagReader.Entity
         private bool _read = true;
         private string _pagetitle = string.Empty;
         private string _scriptcss = string.Empty;
+        private bool _doallpage = true; // 是否生成所有页面
     }
 }

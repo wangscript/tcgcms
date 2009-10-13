@@ -87,7 +87,7 @@ namespace TCG.TCGTagReader.Handlers
             {
                 if (!this._pagerinfo.Read) return this._pagerinfo.Read;
 
-                if (this._pagerinfo.NeedPager && this._pagerinfo.Page > 1)
+                if (this._pagerinfo.NeedPager && this._pagerinfo.DoAllPage &&this._pagerinfo.Page > 1)
                 {
                     Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (item.Success)
@@ -108,13 +108,19 @@ namespace TCG.TCGTagReader.Handlers
 
                 if (this._listtemp != null)
                 {
-                    if (this._pagerinfo.NeedPager && this._pagerinfo.Page == 1) this._template = this._temphtml;
+                    if (this._pagerinfo.NeedPager)
+                    {
+                        if (this._pagerinfo.Page == 1 || !this._pagerinfo.DoAllPage)
+                        {
+                            this._template = this._temphtml;
+                        }
+                    }
                     this._temphtml = this._listtemp.Replace(this._temphtml);
                     this._temphtml = this._temphtml.Replace("__$pager$__", this.GetPager());
                 }
                 this._start = false;
                 this.Save();
-                if (this._pagerinfo.NeedPager)
+                if (this._pagerinfo.NeedPager&&this._pagerinfo.DoAllPage)
                 {
                     this._pagerinfo.Page++;
                     if (this._pagerinfo.Page <= this._pagerinfo.PageCount && this._pagerinfo.PageCount != 0)
@@ -237,7 +243,7 @@ namespace TCG.TCGTagReader.Handlers
             {
                 string text1 = this._filepath.Substring(0, this._filepath.LastIndexOf("."));
                 string text2 = this._filepath.Substring(this._filepath.LastIndexOf("."), this._filepath.Length - this._filepath.LastIndexOf("."));
-                return text1 + this._pagerinfo.Page.ToString() + text2;
+                return text1 + "-c" + this._pagerinfo.Page.ToString() + text2;
             }
             else
             {
@@ -251,7 +257,7 @@ namespace TCG.TCGTagReader.Handlers
             {
                 string text1 = this._webpath.Substring(0, this._webpath.LastIndexOf("."));
                 string text2 = this._webpath.Substring(this._webpath.LastIndexOf("."), this._webpath.Length - this._webpath.LastIndexOf("."));
-                return pager(text1 + "{0}" + text2, this._pagerinfo.Page, this._pagerinfo.PageCount, this._pagerinfo.TopicCount, this._pagerinfo.curPage, true);
+                return pager(text1 + "-c{0}" + text2, this._pagerinfo.Page, this._pagerinfo.PageCount, this._pagerinfo.TopicCount, this._pagerinfo.curPage, true);
             }
             return "";
         }
@@ -261,7 +267,7 @@ namespace TCG.TCGTagReader.Handlers
         {
             if (i == 1)
             {
-                return s.Replace("{0}", "").Replace("{p}", "");
+                return s.Replace("-c{0}", "").Replace("{p}", "");
             }
             else
             {
@@ -290,8 +296,10 @@ namespace TCG.TCGTagReader.Handlers
             return s;
         }
 
-
-
+        /// <summary>
+        /// 当前页
+        /// </summary>
+        public int CurrentPage { get { return this._currentpage; } set { this._currentpage = value; } }
 
         public string WebPath { get { return this._webpath; } set { this._webpath = value; } }
         /// <summary>
@@ -332,5 +340,6 @@ namespace TCG.TCGTagReader.Handlers
         private List<TCGTagAttributeHandlers> _tagtemplates = null;
         private TCGTagAttributeHandlers _tagtemplate = null;
         private bool _needcreate = true;
+        private int _currentpage = 0;                         /// 当前页
     }
 }

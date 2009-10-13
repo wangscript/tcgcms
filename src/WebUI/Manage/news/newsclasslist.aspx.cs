@@ -172,7 +172,7 @@ public partial class news_newsclasslist : adminMain
         }
 
         TemplateHandlers tlhdl = new TemplateHandlers();
-        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, cif.iListTemplate);
+        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, cif.iListTemplate,false);
         tlhdl = null;
         if (tlif == null)
         {
@@ -213,7 +213,7 @@ public partial class news_newsclasslist : adminMain
                 for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
                     string num = (i == 1) ? "" : i.ToString();
-                    text1 += "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + num + base.config["FileExtension"] + "...</a>";
+                    text1 += "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + "-c" + num + base.config["FileExtension"] + "...</a>";
                 }
             }
             else
