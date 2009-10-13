@@ -39,16 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpModuleRoles.cs" />
-    <Compile Include="HttpRewrites.cs" />
-    <Compile Include="HttpWriter.cs" />
-    <Compile Include="LoadingRewrites.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
+      <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
+      <Name>TCG.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.News\TCG.News.csproj">
+      <Project>{02750DA5-7DF5-4B90-890E-7EC9C9E32DAF}</Project>
+      <Name>TCG.News</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.TCGTagReader\TCG.TCGTagReader.csproj">
+      <Project>{FC6DB84F-5DF5-4872-88EF-5B7F33CD77A7}</Project>
+      <Name>TCG.TCGTagReader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.Template\TCG.Template.csproj">
+      <Project>{255EA1B1-F597-4047-B9C1-7688668B5BD6}</Project>
+      <Name>TCG.Template</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HttpModule.cs" />
+    <Compile Include="HttpRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
