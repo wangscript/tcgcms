@@ -155,6 +155,7 @@ namespace TCG.TCGTagReader.Handlers
             this._temphtml = _temphtml.Replace("_$WebDescription$_", config["WebDescription"]);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
+            this._temphtml = _temphtml.Replace("_$SystemName$_", Versions.SystemName);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
             this._temphtml = _temphtml.Replace("_$ManagePath$_", config["ManagePath"]);
         }

@@ -26,8 +26,8 @@ namespace TCG.Release
 {
     public class Versions
     {
-        public static int Ver = 68;                         //系统版本号
-        private static string SystemName = "TCG CMS System"; //系统名称
+        public static int Ver = 72;                         //系统版本号
+        public static string SystemName = "TCG CMS"; //系统名称
 
         /// <summary>
         /// 获得版本好的文字内容

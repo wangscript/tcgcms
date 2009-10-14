@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>edit-download by http://www.codefans.net</title>
+<title></title>
+<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
-<meta name="keywords" content="XH.WebV7.0.0-Blog">
 <meta http-equiv="pragma" content="no-cache">
 <style>
 Body {font-size:12px;margin:0px;font-family:宋体;height:100%}
@@ -43,15 +43,15 @@ Body {font-size:12px;margin:0px;font-family:宋体;height:100%}
 .M4down {margin-left:1px;height:45px;padding-top:1px;border:1px #0078FF solid;background:#CBE7FD}
 .FaceOn {background:#2EA7FB}
 </style>
-
 <script type="text/javascript" language="javascript">
-//表情图片所在路径 默认共135个 从0.gif - 134.gif,可自行修改
-var FaceUrl = "images/face/";
 
+//表情图片所在路径 默认共135个 从0.gif - 134.gif,可自行修改
+
+
+var FaceUrl = "images/face/";
 //信纸图片所在路径,默认10张  从 1.jpg - 10.jpg,可自行修改 
 var BgUrl   = "images/BlogBg/"
 
-function $(sID) {return document.getElementById(sID)}
 var OnMenu=null;
 var FullWin=0,OldWinW,OldWinH,OldWinBg;
 function GetMenu(Num) {
@@ -83,7 +83,8 @@ function GetMenu(Num) {
         case 14: E.document.execCommand('Justifyright'); break;
         case 15: E.document.execCommand('justifyfull'); break;
         //调试 
-        case 22: var _Obj = parent.document.getElementById("ContentWin");
+        case 22:
+            var _Obj = parent.document.getElementById("ContentWin");
             if (FullWin == 0) {
                 FullWin = 1;
                 OldWinW = _Obj.style.width;
@@ -96,16 +97,16 @@ function GetMenu(Num) {
                 _Obj.style.height = "100%";
                 _Obj.style.left = "0px";
                 _Obj.style.top = "0px";
-                $("FullWinImg").style.background = 'url(ico.gif) -157px -143px';
+                $("#FullWinImg").css({ background: 'url(ico.gif) -157px -143px' });
             } else {
                 FullWin = 0;
                 _Obj.style.position = "";
                 _Obj.style.width = OldWinW;
                 _Obj.style.height = OldWinH;
                 _Obj.style.background = OldWinBg;
-                $("FullWinImg").style.background = 'url(ico.gif) -109px -143px';
+                $("#FullWinImg").css({ background: "url(ico.gif) -109px -143px" });
             }
-            $("BodyFoot").style.height = (document.documentElement.clientHeight - 71) + "px";
+            $("#BodyFoot").css({ height: (document.documentElement.clientHeight - 71) + "px" });
             break;
     }
 }
@@ -122,15 +123,15 @@ function InfoHtml(Value, Types, Text) {
             if (ColorSNum == 0) { E.document.execCommand('ForeColor', false, Value) } else { E.document.execCommand('BackColor', false, Value) }
             break;
         case "fontsize":
-            $("S26_T").innerHTML = Text;
+            $("#S26_T").html(Text);
             E.document.execCommand('fontsize', false, Value);
             break;
         case "FontName":
-            $("S25_T").innerHTML = Text;
+            $("#S25_T").html(Text);
             document.execCommand('FontName', false, Value)
             break;
         case "Bg":
-            $("S24_T").innerHTML = Text;
+            $("#S24_T").html(Text);
             if (Value == 0) {
                 xh_bgvalue = "";
                 E.document.body.style.background = "";
@@ -153,8 +154,8 @@ function RemoveHTML(strText) {
 var FileName,FileAlign=null;
 function InfoFile(TypeName) {
     if (TypeName == 0) {
-        var Value = $("FileUrl").value;
-        if (Value == "" || Value == "http://") { $("FileText").innerHTML = "<font color=red>请输入文件路径!</font>"; return; }
+        var Value = $("#FileUrl").val();
+        if (Value == "" || Value == "http://") { $("#FileText").html("<font color=red>请输入文件路径!</font>"); return; }
         HtmlEditor.focus();
         var R = self['HtmlEditor'].document.selection.createRange();
         var _Content;
@@ -166,23 +167,23 @@ function InfoFile(TypeName) {
             if (FileAlign !== null) { _Content = "<p align='" + FileAlign + "'>" + _Content + "</p>" }
         }
         R.pasteHTML(_Content);
-        $("FileView").innerHTML = "";
+        $("#FileView").html("");
         MenuType(0);
         return
     }
     if (TypeName == 1) {
-        var Value = $("FileUrl").value;
-        if (Value == "" || Value == "http://") { $("FileText").innerHTML = "<font color=red>请输入文件路径!</font>"; return; }
+        var Value = $("#FileUrl").val();
+        if (Value == "" || Value == "http://") { $("#FileText").html("<font color=red>请输入文件路径!</font>"); return; }
         switch (FileName) {
-            case "图片": $("FileView").innerHTML = "<img src='" + Value + "' onerror=\"$('FileView').innerHTML='<p><br><br><font color=red>图片地址错误</font></p>'\">"; break;
-            case "FLASH动画": $("FileView").innerHTML = InfoFile(2); break;
-            case "MP3/WMA音乐": $("FileView").innerHTML = InfoFile(2); break;
-            case "WMV视频": $("FileView").innerHTML = InfoFile(2); break;
+            case "图片": $("#FileView").html("<img src='" + Value + "' onerror=\"$('#FileView').html('<p><br><br><font color=red>图片地址错误</font></p>');\">"); break;
+            case "FLASH动画": $("#FileView").html(InfoFile(2)); break;
+            case "MP3/WMA音乐": $("#FileView").html( InfoFile(2)); break;
+            case "WMV视频": $("#FileView").html(InfoFile(2)); break;
         }
         return
     }
     if (TypeName == 2) {
-        var Value = $("FileUrl").value, _ObjHtml;
+        var Value = $("#FileUrl").val(), _ObjHtml;
         switch (FileName) {
             case "FLASH动画": _ObjHtml = "<object  classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0' width='195' height='205'><param name='movie' value='" + Value + "'><param name='quality' value='high'><param name='menu' value='false'><param name='wmode' value='transparent'><embed src='" + Value + "' width='195' height='205' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' menu='false' wmode='transparent'></embed></object>"; break;
             case "MP3/WMA音乐": _ObjHtml = "<OBJECT width='250' height='60' ID='showplay' classid='CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6'>" +
@@ -209,32 +210,42 @@ function InfoFile(TypeName) {
     }
     FileAlign = null;
     FileName = TypeName;
+
+    if (TypeName == 3) {
+        var updateInfoHtml = "<table width='100%' border=0 cellSpacing=1 style='background:#9CD2FD' cellPadding=0><tr style='background:#EDF6FD'><td style='height:25px;width:60%;text-align:left;padding-left:5px;font-weight:bold;background:#9CD2FD;color:#ffffff;letter-spacing:2px'>本地上传</td>" +
+		"<td width='40%' align=center rowspan=3><div id='FileView' style='width:192px;height:200px;overflow:auto;text-align:center'><br><br>" + TypeName + "<br><br>预 览 区</div></td></tr>" +
+		"<tr style='background:#ffffff'><td style='height:150px;text-align:left;padding-left:15px;color:#666666' valign=top><div id='FileText'>请输入完整的URL地址,点击确定插入</div><b>URL地址:</b><br><input id='FileUrl' name='FileUrl' size='34' onblur='InfoFile(1)'><br><br><b>对齐方式</b>:<br><input type='radio' onclick='FileAlign=null' name='FA' checked>无　<input name='FA' type='radio' onclick=\"FileAlign='left'\">左对齐　<input type='radio' name='FA' onclick=\"FileAlign='center'\">居中对齐　<input name='FA' type='radio' onclick=\"FileAlign='right'\">右对齐</td></tr>" +
+		"<tr style='background:#ffffff'><td style='height:30px'><input value='确定' type='button' class='button' onclick='InfoFile(0)'>　<input value='预览' type='button' class='button' onclick='InfoFile(1)'></td></tr></table>";
+        return updateInfoHtml;
+    }
+    
     var InfoHtml = "<table width='100%' border=0 cellSpacing=1 style='background:#9CD2FD' cellPadding=0><tr style='background:#EDF6FD'><td style='height:25px;width:60%;text-align:left;padding-left:5px;font-weight:bold;background:#9CD2FD;color:#ffffff;letter-spacing:2px'>插入" + TypeName + "</td>" +
 		"<td width='40%' align=center rowspan=3><div id='FileView' style='width:192px;height:200px;overflow:auto;text-align:center'><br><br>" + TypeName + "<br><br>预 览 区</div></td></tr>" +
 		"<tr style='background:#ffffff'><td style='height:150px;text-align:left;padding-left:15px;color:#666666' valign=top><div id='FileText'>请输入完整的URL地址,点击确定插入</div><b>URL地址:</b><br><input id='FileUrl' name='FileUrl' size='34' onblur='InfoFile(1)'><br><br><b>对齐方式</b>:<br><input type='radio' onclick='FileAlign=null' name='FA' checked>无　<input name='FA' type='radio' onclick=\"FileAlign='left'\">左对齐　<input type='radio' name='FA' onclick=\"FileAlign='center'\">居中对齐　<input name='FA' type='radio' onclick=\"FileAlign='right'\">右对齐</td></tr>" +
 		"<tr style='background:#ffffff'><td style='height:30px'><input value='确定' type='button' class='button' onclick='InfoFile(0)'>　<input value='预览' type='button' class='button' onclick='InfoFile(1)'></td></tr></table>";
+    
     return InfoHtml;
 }
 
 var DivNoneH,DivNoneT,DivNoneN,OnSMenu;
 function ChangeDiv(_DW, _DH) {
     if (_DW != 0 && _DH != 0) {
-        $("DivNone").innerHTML = "<p align=left>请稍候...</p>";
+        $("#DivNone").html("<p align=left>请稍候...</p>");
         DivNoneN = 0;
-        $("DivNone").style.width = _DW + 'px';
-        $("DivNone").style.height = '0px';
+        $("#DivNone").css({ width: _DW + 'px' });
+        $("#DivNone").css({ height: '0px' });
         var _L;
-        if (OnMenu != null) { _L = $(OnMenu).L - _DW / 2 } else { _L = $(OnSMenu).L - _DW / 2 }
+        if (OnMenu != null) { _L = $("#" + OnMenu)[0].L - _DW / 2 } else { _L = $("#" + OnSMenu)[0].L - _DW / 2 }
         if (_L < 5) _L = 5;
         var _SeenW = document.body.clientWidth;
         if (_DW + _L > _SeenW) _L = _SeenW - _DW - 12;
-        $("DivNone").style.left = _L + "px";
+        $("#DivNone").css({left: _L + "px"});
         DivNoneH = _DH
     }
-    var _H = $("DivNone").clientHeight;
+    var _H = $("#DivNone")[0].clientHeight;
     if (_H < DivNoneH - 20) { DivNoneN = DivNoneN + 20 } else { DivNoneN = DivNoneN + 1 }
     if (_H < DivNoneH) {
-        $("DivNone").style.height = DivNoneN + "px"
+        $("#DivNone").css({ height: DivNoneN + "px" });
         DivNoneT = window.setTimeout("ChangeDiv(0,0)", 10)
     } else {
         if (OnMenu != null) {
@@ -245,13 +256,14 @@ function ChangeDiv(_DW, _DH) {
                         ii++;
                         if (ii == 16 && i < 134) { FaceStr = FaceStr + "</tr><tr style='background:#ffffff'>"; ii = 1 }
                     }
-                    $("DivNone").innerHTML = "<table class='AllTab' style='height:100%;background:#cccccc' cellSpacing=1 cellPadding=0><tr style='background:#ffffff'>" + FaceStr + "</tr></table>";
+                    $("#DivNone").html("<table class='AllTab' style='height:100%;background:#cccccc' cellSpacing=1 cellPadding=0><tr style='background:#ffffff'>" + FaceStr + "</tr></table>");
                     break;
-                //图片 
-                case "S17": $("DivNone").innerHTML = InfoFile("图片"); break;
-                case "S18": $("DivNone").innerHTML = InfoFile("FLASH动画"); break;
-                case "S19": $("DivNone").innerHTML = InfoFile("MP3/WMA音乐"); break;
-                case "S20": $("DivNone").innerHTML = InfoFile("WMV视频"); break;
+                //图片
+                case "S17": $("#DivNone").html(InfoFile("图片")); break;
+                case "S30": $("#DivNone").html(InfoFile(3)); break;
+                case "S18": $("#DivNone").html(InfoFile("FLASH动画")); break;
+                case "S19": $("#DivNone").html( InfoFile("MP3/WMA音乐")); break;
+                case "S20": $("#DivNone").html(InfoFile("WMV视频")); break;
                 //大头贴 
                 //case "S21":	var _PhotoStr=	"开发中..."; 
                 //	$("DivNone").innerHTML=_PhotoStr; 
@@ -260,9 +272,9 @@ function ChangeDiv(_DW, _DH) {
         } else {
             switch (OnSMenu) {
                 case "S22": ColorSNum = 0; if (ColorSelect == null) { ColorSelect = drawCube() }
-                    $("DivNone").innerHTML = ColorSelect; break;
+                    $("#DivNone").html(ColorSelect); break;
                 case "S23": ColorSNum = 1; if (ColorSelect == null) { ColorSelect = drawCube() }
-                    $("DivNone").innerHTML = ColorSelect; break;
+                    $("#DivNone").html(ColorSelect); break;
                 case "S25": var _Html = "<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='宋体'>宋体</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='黑体' style='FONT-FAMILY:黑体'>黑体</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='楷体_GB2312' style='FONT-FAMILY:楷体_GB2312'>楷体_GB2312</div></a><br>" +
@@ -274,7 +286,7 @@ function ChangeDiv(_DW, _DH) {
 							"<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='Courier New' style='FONT-FAMILY:Impact'>Courier New</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='Times New Roman' style='FONT-FAMILY:Times New Roman'>Times New Roman</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(innerText,'FontName',innerText)\"><div class='SizeDiv' title='Georgia' style='FONT-FAMILY:Georgia'>Georgia</div></a>";
-                    $("DivNone").innerHTML = "<div style='line-height:40%'>" + _Html + "</div>";
+                    $("#DivNone").html("<div style='line-height:40%'>" + _Html + "</div>");
                     break;
                 case "S26": var _Html = "<a href='#' onClick=\"return InfoHtml(1,'fontsize',innerText)\"><div class='SizeDiv' title='1.极小'>1.极小</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(2,'fontsize',innerText)\"><div class='SizeDiv' title='2.特小'>2.特小</div></a><br>" +
@@ -283,7 +295,7 @@ function ChangeDiv(_DW, _DH) {
 							"<a href='#' onClick=\"return InfoHtml(5,'fontsize',innerText)\"><div class='SizeDiv' title='5.偏大'>5.偏大</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(6,'fontsize',innerText)\"><div class='SizeDiv' title='6.特大'>6.特大</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml(7,'fontsize',innerText)\"><div class='SizeDiv' title='7.极大'>7.极大</div></a>";
-                    $("DivNone").innerHTML = "<div style='line-height:40%'>" + _Html + "</div>";
+                    $("#DivNone").html("<div style='line-height:40%'>" + _Html + "</div>");
                     break;
                 //信纸 
                 case "S24": var _Html = "<a href='#' onClick=\"return InfoHtml(0,'Bg','信纸')\"><div class='SizeDiv' title='移除信纸'>空白</div></a><br>" +
@@ -297,7 +309,7 @@ function ChangeDiv(_DW, _DH) {
 							"<a href='#' onClick=\"return InfoHtml('" + BgUrl + "8.jpg','Bg',innerText)\"><div class='SizeDiv' title='信纸08'>信纸08</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml('" + BgUrl + "9.jpg','Bg',innerText)\"><div class='SizeDiv' title='信纸09'>信纸09</div></a><br>" +
 							"<a href='#' onClick=\"return InfoHtml('" + BgUrl + "10.jpg','Bg',innerText)\"><div class='SizeDiv' title='信纸10'>信纸10</div></a>";
-                    $("DivNone").innerHTML = "<div style='line-height:40%'>" + _Html + "</div>";
+                    $("#DivNone").html("<div style='line-height:40%'>" + _Html + "</div>");
                     break;
             }
         }
@@ -306,36 +318,35 @@ function ChangeDiv(_DW, _DH) {
 
 function MenuType(DivId, Num, _W, _H) {
     if (DivId == 0) {
-        $("DivNone").innerHTML = "";
-        $("DivNone").style.display = "none";
-        if ($(OnMenu) != null) { $(OnMenu).className = 'M4' }
+        $("#DivNone").html("");
+        $("#DivNone").css({display:"none"});
+        if (!$("#" + OnMenu) && !$("#" + OnMenu)[0]) { $("#" + OnMenu)[0].className = 'M4' }
         OnMenu = null;
         OnSMenu = null;
         return;
     }
     switch (Num) {
-        case 0: $(DivId).className = 'M4on'; break;
-        case 1: if (OnMenu != DivId) { $(DivId).className = 'M4' }
+        case 0: $("#" + DivId)[0].className = 'M4on'; break;
+        case 1: if (OnMenu != DivId) { $("#" + DivId)[0].className = 'M4' }
             break;
-        case 2: $(DivId).className = 'M4down'; break;
-        case 3: $(DivId).className = 'M4on';
+        case 2: $("#" + DivId)[0].className = 'M4down'; break;
+        case 3: $("#" + DivId)[0].className = 'M4on';
             if (OnMenu != DivId) {
                 if (OnMenu != null) MenuType(0);
                 OnMenu = DivId;
-                $("DivNone").style.display = '';
-                $("DivNone").style.top = "52px";
+                $("#DivNone").css({ display: '', top: '52px' });
                 ChangeDiv(_W, _H)
             } else {
                 OnMenu = null;
-                $("DivNone").style.display = "none"
+                $("#DivNone").css({ display: "none" });
             }
             break;
         case 4: if (OnMenu != null) MenuType(0);
-            if (OnSMenu == DivId) { $("DivNone").style.display = 'none'; OnSMenu = null; return }
-            $("DivNone").style.display = '';
+            if (OnSMenu == DivId) { $("#DivNone").css({ display: "none" }); OnSMenu = null; return }
+            $("#DivNone").css({ display: "block" });
             var _WT = 52;
             if (DivId != "S22" && DivId != "S23") _WT = 4;
-            $("DivNone").style.top = _WT + "px";
+            $("#DivNone").css({ top: _WT + "px" });
             OnSMenu = DivId;
             ChangeDiv(_W, _H)
             break;
@@ -343,7 +354,7 @@ function MenuType(DivId, Num, _W, _H) {
 }
 
 //改变CSS
-function C(Obj,Cname) {if($(Obj)) $(Obj).className=Cname}
+function C(Obj, Cname) { if ($("#" + Obj)[0]) $("#" + Obj)[0].className = Cname }
 
 var xh_content;
 function BlankHtml() {
@@ -432,7 +443,7 @@ window.onload = function() {
     E.document.close();
     E.document.designMode = "on";
     //获取可工作区高度
-    $("BodyFoot").style.height = (document.documentElement.clientHeight - 71) + "px";
+    $("#BodyFoot").css({height : (document.documentElement.clientHeight - 71) + "px"});
     setLinkedField()
 }
 
@@ -474,9 +485,10 @@ function AttachReset() {
 <div id='A1' style="margin-left:6px;width:18px" class='M1' onmouseover="C(this.id,'M1on')" onmouseout="C(this.id,'M1')" onmousedown="C(this.id,'M1down')" onmouseup="C(this.id,'M1on');GetMenu(12)" title="左对齐"><img src='b.gif' style='background:url(ico.gif) -200px -2px'></div>
 <div id='A2' style="margin-left:8px;width:18px" class='M1' onmouseover="C(this.id,'M1on')" onmouseout="C(this.id,'M1')" onmousedown="C(this.id,'M1down')" onmouseup="C(this.id,'M1on');GetMenu(13)" title="居中对齐"><img src='b.gif' style='background:url(ico.gif) -218px -2px'></div>
 <div id='A3' style="margin-left:8px;width:18px" class='M1' onmouseover="C(this.id,'M1on')" onmouseout="C(this.id,'M1')" onmousedown="C(this.id,'M1down')" onmouseup="C(this.id,'M1on');GetMenu(14)" title="右对齐"><img src='b.gif' style='background:url(ico.gif) -235px -2px'></div>
-</td><td rowspan=2 class='MenuLine'>&nbsp;</td><td rowspan=2 width=192 nowrap>
+</td><td rowspan=2 class='MenuLine'>&nbsp;</td><td rowspan=2 width=224 nowrap>
 <div id='S16' L='326' style="margin-left:5px;width:32px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,250)" title="插入表情"><img src='b.gif' style='background:url(ico.gif) -13px -90px'></div>
 <div id='S17' L='361' style="width:32px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,216)" title="插入图片"><img src='b.gif' style='background:url(ico.gif) -58px -90px'></div>
+<div id='S30' L='3622' style="width:32px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,216)" title="上传图片"><img src='b.gif' style='background:url(ico.gif) -58px -90px'></div>
 <div id='S18' L='398' style="width:36px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,216)" title="插入FLASH动画"><img src='b.gif' style='background:url(ico.gif) -107px -90px'></div>
 <div id='S19' L='435' style="width:32px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,216)" title="插入MP3音乐"><img src='b.gif' style='background:url(ico.gif) -158px -90px'></div>
 <div id='S20' L='470' style="width:32px" class='M4' onmouseover="MenuType(this.id,0)" onmouseout="MenuType(this.id,1)" onmousedown="MenuType(this.id,2)" onmouseup="MenuType(this.id,3,500,216)" title="插入视频文件"><img src='b.gif' style='background:url(ico.gif) -204px -90px'></div>
