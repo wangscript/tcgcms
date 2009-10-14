@@ -1,5 +1,5 @@
 
-var FileSite="http://www.tcgcms.cn/manage/";
+var FileSite="http://code.tcgcms.cn/manage/";
 
 function UploadFile(){
 	this.Screen={w:window.screen.availWidth,h:window.screen.availHeight};
