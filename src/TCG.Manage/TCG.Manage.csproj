@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TCG.Manage.Controls\AjaxDiv.cs" />
-    <Compile Include="TCG.Manage.Handlers\adminHandlers.cs" />
     <Compile Include="TCG.Manage.Utils\ManageConst.cs" />
   </ItemGroup>
   <ItemGroup>

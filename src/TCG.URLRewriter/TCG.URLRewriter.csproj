@@ -47,13 +47,9 @@
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.News\TCG.News.csproj">
-      <Project>{02750DA5-7DF5-4B90-890E-7EC9C9E32DAF}</Project>
-      <Name>TCG.News</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.TCGTagReader\TCG.TCGTagReader.csproj">
-      <Project>{FC6DB84F-5DF5-4872-88EF-5B7F33CD77A7}</Project>
-      <Name>TCG.TCGTagReader</Name>
+    <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
+      <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
+      <Name>TCG.Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Template\TCG.Template.csproj">
       <Project>{255EA1B1-F597-4047-B9C1-7688668B5BD6}</Project>

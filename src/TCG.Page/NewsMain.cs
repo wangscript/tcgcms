@@ -21,7 +21,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using TCG.Utils;
-using TCG.TCGTagReader.Handlers;
+using TCG.Handlers;
 
 namespace TCG.Pages
 {

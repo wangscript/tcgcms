@@ -13,7 +13,7 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
-using TCG.News.Handlers;
+using TCG.Handlers;
 
 
 public partial class news_NewsSpecialityInfo : adminMain

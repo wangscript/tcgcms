@@ -17,7 +17,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
-using TCG.News.Handlers;
+using TCG.Handlers;
 
 public partial class news_newsRecovery : adminMain
 {

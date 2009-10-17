@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.News.Handlers;
+using TCG.Handlers;
 
 
 public partial class jsMethod_AllNewsClass : adminMain
