@@ -21,7 +21,7 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Data;
-using TCG.Manage.Entity;
+using TCG.Entity;
 using TCG.Manage.Utils;
 using TCG.Manage.Handlers;
 

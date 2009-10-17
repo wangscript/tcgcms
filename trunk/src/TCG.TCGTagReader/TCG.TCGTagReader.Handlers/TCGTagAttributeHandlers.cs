@@ -21,11 +21,11 @@ using System.Collections;
 
 using TCG.Data;
 using TCG.Utils;
-using TCG.TCGTagReader.Entity;
-using TCG.News.Entity;
+using TCG.Entity;
+using TCG.Entity;
 using TCG.News.Handlers;
 using TCG.Template.Handlers;
-using TCG.Template.Entity;
+using TCG.Entity;
 using TCG.Files.Handlers;
 
 using TCG.Files.Utils;

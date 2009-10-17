@@ -20,9 +20,9 @@ using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
 using TCG.News.Handlers;
-using TCG.News.Entity;
+using TCG.Entity;
 
-using TCG.Template.Entity;
+using TCG.Entity;
 using TCG.Template.Handlers;
 using TCG.Template.Utils;
 using TCG.TCGTagReader.Handlers;

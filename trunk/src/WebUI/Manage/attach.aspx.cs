@@ -14,7 +14,7 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Files.Utils;
-using TCG.Files.Entity;
+using TCG.Entity;
 using TCG.Pages;
 using TCG.Files.Handlers;
 

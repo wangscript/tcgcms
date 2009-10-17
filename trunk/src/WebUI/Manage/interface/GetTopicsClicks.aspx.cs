@@ -14,7 +14,7 @@ using TCG.Data;
 using TCG.Template.Handlers;
 using TCG.Pages;
 
-using TCG.News.Entity;
+using TCG.Entity;
 using TCG.News.Handlers;
 
 public partial class Manage_interface_GetTopicsClicks : ScriptsMain

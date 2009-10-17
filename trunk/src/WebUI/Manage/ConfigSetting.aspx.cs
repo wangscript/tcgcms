@@ -12,7 +12,7 @@ using System.Xml;
 using System.Text;
 
 using TCG.Utils;
-using TCG.Utils.Entity;
+using TCG.Entity;
 using TCG.Pages;
 using TCG.Manage.Utils;
 

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 
 using TCG.Data;
 using TCG.Utils;
-using TCG.TCGTagReader.Entity;
+using TCG.Entity;
 using TCG.Release;
 
 namespace TCG.TCGTagReader.Handlers

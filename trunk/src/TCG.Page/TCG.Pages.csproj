@@ -61,6 +61,10 @@
       <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
       <Name>TCG.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
+      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
+      <Name>TCG.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Files\TCG.Files.csproj">
       <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
       <Name>TCG.Files</Name>

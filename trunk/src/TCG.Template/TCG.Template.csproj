@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCG.Template.Entity\TemplateInfo.cs" />
     <Compile Include="TCG.Template.Handlers\TemplateHandlers.cs" />
     <Compile Include="TCG.Template.Utils\TemplateConstant.cs" />
   </ItemGroup>
@@ -47,6 +46,10 @@
     <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
       <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
       <Name>TCG.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
+      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
+      <Name>TCG.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>

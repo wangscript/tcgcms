@@ -17,10 +17,10 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
-using TCG.News.Entity;
+using TCG.Entity;
 using TCG.News.Handlers;
 
-using TCG.Template.Entity;
+using TCG.Entity;
 using TCG.Template.Handlers;
 using TCG.Template.Utils;
 

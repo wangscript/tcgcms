@@ -11,7 +11,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Files.Entity;
+using TCG.Entity;
 using TCG.Files.Utils;
 using TCG.Pages;
 

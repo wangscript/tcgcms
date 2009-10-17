@@ -14,7 +14,7 @@
 
 namespace TCG.Pages
 {
-    using TCG.Manage.Entity;
+    using TCG.Entity;
     using TCG.Manage.Handlers;
     using TCG.Utils;
     using TCG.Data;

@@ -16,7 +16,7 @@ using TCG.Template.Handlers;
 using TCG.Template.Utils;
 using TCG.Manage.Utils;
 using TCG.News.Handlers;
-using TCG.News.Entity;
+using TCG.Entity;
 
 public partial class news_classmdy : adminMain
 {

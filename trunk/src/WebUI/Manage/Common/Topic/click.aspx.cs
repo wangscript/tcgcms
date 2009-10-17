@@ -13,7 +13,7 @@ using TCG.Utils;
 using TCG.Files.Handlers;
 using TCG.Pages;
 
-using TCG.News.Entity;
+using TCG.Entity;
 using TCG.News.Handlers;
 
 public partial class Common_Topic_click : ScriptsMain
