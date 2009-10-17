@@ -18,7 +18,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
-using TCG.News.Handlers;
+using TCG.Handlers;
 using TCG.Entity;
 
 

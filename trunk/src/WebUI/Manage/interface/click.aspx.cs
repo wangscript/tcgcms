@@ -11,11 +11,11 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Data;
-using TCG.Template.Handlers;
+using TCG.Handlers;
 using TCG.Pages;
 
 using TCG.Entity;
-using TCG.News.Handlers;
+using TCG.Handlers;
 
 public partial class Manage_interface_click : ScriptsMain
 {

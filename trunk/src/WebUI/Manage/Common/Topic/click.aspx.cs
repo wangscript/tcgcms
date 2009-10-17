@@ -10,11 +10,11 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Files.Handlers;
+using TCG.Handlers;
 using TCG.Pages;
 
 using TCG.Entity;
-using TCG.News.Handlers;
+using TCG.Handlers;
 
 public partial class Common_Topic_click : ScriptsMain
 {

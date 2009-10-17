@@ -8,12 +8,11 @@ using System.Data.OleDb;
 using System.Web.UI.WebControls;
 
 using TCG.Pages;
-using TCG.Files.Handlers;
+using TCG.Handlers;
 
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Release;
-using TCG.Entity;
 using TCG.Attribute;
 
 using System.Reflection;

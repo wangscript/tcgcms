@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCG.Template.Handlers\TemplateHandlers.cs" />
     <Compile Include="TCG.Template.Utils\TemplateConstant.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,11 +14,11 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Entity;
 using TCG.Manage.Utils;
-using TCG.Template.Handlers;
+using TCG.Handlers;
 using TCG.Template.Utils;
 using TCG.Data;
 
-using TCG.TCGTagReader.Handlers;
+using TCG.Handlers;
 
 public partial class Template_newlist : adminMain
 {

@@ -56,10 +56,6 @@
       <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
       <Name>TCG.Files</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.News\TCG.News.csproj">
-      <Project>{02750DA5-7DF5-4B90-890E-7EC9C9E32DAF}</Project>
-      <Name>TCG.News</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCG.Release\TCG.Release.csproj">
       <Project>{7B10337D-32C6-48BE-8C7D-68B7D9D95B91}</Project>
       <Name>TCG.Release</Name>

@@ -12,10 +12,10 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
-using TCG.Template.Handlers;
+using TCG.Handlers;
 using TCG.Template.Utils;
 using TCG.Manage.Utils;
-using TCG.News.Handlers;
+using TCG.Handlers;
 using TCG.Entity;
 
 public partial class news_classmdy : adminMain

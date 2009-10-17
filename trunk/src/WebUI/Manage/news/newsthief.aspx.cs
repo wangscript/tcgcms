@@ -13,12 +13,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using TCG.Utils;
-using TCG.Files.Handlers;
+using TCG.Handlers;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
-using TCG.News.Handlers;
+using TCG.Handlers;
 using TCG.Entity;
 using TCG.Files.Utils;
 

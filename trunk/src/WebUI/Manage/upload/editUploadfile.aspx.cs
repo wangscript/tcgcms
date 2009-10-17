@@ -8,7 +8,7 @@ using TCG.Utils;
 using TCG.Pages;
 using TCG.Files.Utils;
 using TCG.Entity;
-using TCG.Files.Handlers;
+using TCG.Handlers;
 
 public partial class Manage_upload_editUploadfile : adminMain
 {

@@ -17,7 +17,7 @@ using TCG.Manage.Utils;
 
 using TCG.Files.Utils;
 using TCG.Entity;
-using TCG.Files.Handlers;
+using TCG.Handlers;
 
 public partial class files_fileinfos : adminMain
 {

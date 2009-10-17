@@ -8,11 +8,11 @@ using System.Text.RegularExpressions;
 using TCG.Utils;
 using TCG.Data;
 using TCG.Entity;
-using TCG.Template.Handlers;
-using TCG.News.Handlers;
+using TCG.Handlers;
+using TCG.Handlers;
 using TCG.Entity;
 
-using TCG.TCGTagReader.Handlers;
+using TCG.Handlers;
 
 namespace TCG.URLRewriter
 {

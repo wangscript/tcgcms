@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Template.Handlers;
+using TCG.Handlers;
 using TCG.Pages;
 
 public partial class Common_AllTemplate : ScriptsMain

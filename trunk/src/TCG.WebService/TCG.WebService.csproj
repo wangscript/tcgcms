@@ -57,6 +57,10 @@
       <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
       <Name>TCG.Files</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
+      <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
+      <Name>TCG.Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Page\TCG.Pages.csproj">
       <Project>{812DDE97-3E93-42A3-B5E9-81997139F718}</Project>
       <Name>TCG.Pages</Name>
