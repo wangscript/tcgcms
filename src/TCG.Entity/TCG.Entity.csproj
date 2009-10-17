@@ -36,9 +36,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Item.cs" />
+    <Compile Include="Admin\Admin.cs" />
+    <Compile Include="ConfigItem.cs" />
+    <Compile Include="Files\FileClassInfo.cs" />
+    <Compile Include="Files\FileInfos.cs" />
+    <Compile Include="News\ClassInfo.cs" />
+    <Compile Include="News\NewsFromInfo.cs" />
+    <Compile Include="News\NewsInfo.cs" />
+    <Compile Include="News\NewsSpecialityInfo.cs" />
+    <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionItem.cs" />
+    <Compile Include="TCGTagReader\TCGTagPagerInfo.cs" />
+    <Compile Include="Template\TemplateInfo.cs" />
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserPay.cs" />
+    <Compile Include="User\UserState.cs" />
+    <Compile Include="Version\VersionItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

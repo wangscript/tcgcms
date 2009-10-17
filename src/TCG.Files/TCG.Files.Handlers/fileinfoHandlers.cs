@@ -26,7 +26,7 @@ using System.Text.RegularExpressions;
 using TCG.Utils;
 using TCG.Data;
 using TCG.Files.Utils;
-using TCG.Files.Entity;
+using TCG.Entity;
 
 
 namespace TCG.Files.Handlers

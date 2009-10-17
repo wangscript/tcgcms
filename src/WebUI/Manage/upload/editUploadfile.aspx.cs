@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using TCG.Utils;
 using TCG.Pages;
 using TCG.Files.Utils;
-using TCG.Files.Entity;
+using TCG.Entity;
 using TCG.Files.Handlers;
 
 public partial class Manage_upload_editUploadfile : adminMain

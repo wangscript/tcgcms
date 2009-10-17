@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Data;
-using TCG.Template.Entity;
+using TCG.Entity;
 using TCG.Template.Handlers;
 using TCG.News.Handlers;
-using TCG.News.Entity;
+using TCG.Entity;
 
 using TCG.TCGTagReader.Handlers;
 

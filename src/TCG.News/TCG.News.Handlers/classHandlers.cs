@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 
 using TCG.Data;
 using TCG.Utils;
-using TCG.News.Entity;
+using TCG.Entity;
 
 
 namespace TCG.News.Handlers

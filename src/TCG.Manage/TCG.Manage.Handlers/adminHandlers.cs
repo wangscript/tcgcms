@@ -21,7 +21,7 @@ using System.Data.SqlClient;
 using TCG.Data;
 using TCG.Utils;
 using TCG.Manage.Utils;
-using TCG.Manage.Entity;
+using TCG.Entity;
 
 namespace TCG.Manage.Handlers
 {

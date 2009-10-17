@@ -19,7 +19,7 @@ using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
 using TCG.News.Handlers;
-using TCG.News.Entity;
+using TCG.Entity;
 
 
 public partial class news_NewsSpecialityList : adminMain

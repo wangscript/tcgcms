@@ -14,7 +14,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Template.Handlers;
-using TCG.Template.Entity;
+using TCG.Entity;
 using TCG.Template.Utils;
 using TCG.Data;
 

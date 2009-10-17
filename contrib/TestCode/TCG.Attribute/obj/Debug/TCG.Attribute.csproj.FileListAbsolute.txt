@@ -1,0 +1,5 @@
+E:\TCG.V9\src\TCG.Test\bin\Debug\TCG.Attribute.dll
+E:\TCG.V9\src\TCG.Test\bin\Debug\TCG.Attribute.pdb
+E:\TCG.V9\src\TCG.Test\obj\Debug\ResolveAssemblyReference.cache
+E:\TCG.V9\src\TCG.Test\obj\Debug\TCG.Attribute.dll
+E:\TCG.V9\src\TCG.Test\obj\Debug\TCG.Attribute.pdb

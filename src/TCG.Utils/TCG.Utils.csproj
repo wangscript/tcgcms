@@ -63,7 +63,6 @@
     <Compile Include="Fetch.cs" />
     <Compile Include="RegExp.cs" />
     <Compile Include="SessionState.cs" />
-    <Compile Include="TCG.Utils.Entity\ConfigItem.cs" />
     <Compile Include="Terminator.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="TxtReader.cs" />
