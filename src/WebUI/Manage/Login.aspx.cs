@@ -25,7 +25,6 @@ public partial class aLogin : adminMain
     {
         if (!Page.IsPostBack)
         {
-
             this.title.Text = base.config["WebTitle"] + " " + Versions.version;
             this.ltitle.Text = base.config["WebTitle"];
             this.month.Text = DateTime.Now.Month.ToString();

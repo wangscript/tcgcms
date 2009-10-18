@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ActionSpanEnum.cs" />
     <Compile Include="Bases.cs" />
+    <Compile Include="ConfigService.cs" />
     <Compile Include="EnCode.cs" />
     <Compile Include="errHandlers.cs" />
     <Compile Include="objectHandlers.cs" />
@@ -68,6 +69,12 @@
     <Compile Include="TxtReader.cs" />
     <Compile Include="UbbCode.cs" />
     <Compile Include="UsingTagEnum.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
+      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
+      <Name>TCG.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
