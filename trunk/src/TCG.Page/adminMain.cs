@@ -81,6 +81,23 @@ namespace TCG.Pages
             if ((this._conn != null) && this._conn.Connected){this._conn.Close();}
             if (this._admin != null) this._admin = null;
         }
+
+
+        /// <summary>
+        /// 获得基本配置信息
+        /// </summary>
+        protected ConfigService configService
+        {
+            get
+            {
+                if (this._configservice == null)
+                {
+                    this._configservice = new ConfigService();
+                }
+                return this._configservice;
+            }
+        }
+        private ConfigService _configservice = null;
     }
 }
 
