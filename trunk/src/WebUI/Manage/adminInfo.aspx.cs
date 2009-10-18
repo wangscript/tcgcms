@@ -14,13 +14,15 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 
+using TCG.Entity;
+
 public partial class adminInfo : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-            int iRoleId =  Bases.ToInt(Fetch.Get("roleid",CheckGetEnum.Safety));
+            int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Safety));
 
             if (iRoleId == 0)
             {
@@ -40,7 +42,7 @@ public partial class adminInfo : adminMain
             int rolecount = 0;
 
 
-            int rtn = base.admin.AdminHandlers.GetAdminList(iRoleId, ref admincount, ref rolecount, ref strRolename, ref ds);
+            int rtn = base.handlerService.adminHandlers.GetAdminList(iRoleId, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
                 base.Finish();
@@ -75,11 +77,11 @@ public partial class adminInfo : adminMain
         {
             iLock.Src = "images/AdminUnLock.gif";
         }
-        loginName.Href = "adminmdy.aspx?adminname=" + Fetch.UrlEncode(Row["vcAdminName"].ToString());
+        loginName.Href = "adminmdy.aspx?adminname=" + objectHandlers.UrlEncode(Row["vcAdminName"].ToString());
         CheckID.Text = Row["vcAdminName"].ToString();
         nickname.Text = Row["vcNickName"].ToString();
         adminrole.Text = Row["vcRoleName"].ToString();
-        adminrole.Href = "adminrolemdy.aspx?roleid=" + Fetch.UrlEncode(Row["iID"].ToString());
+        adminrole.Href = "adminrolemdy.aspx?roleid=" + objectHandlers.UrlEncode(Row["iID"].ToString());
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy年MM月dd日");
     }
 }

@@ -20,7 +20,7 @@ public partial class AjaxMethod_Admin_logout : adminMain
     {
         if (!Page.IsPostBack)
         {
-            base.admin.Logout();
+            base.handlerService.adminLoginHandlers.Logout();
             base.Finish();
         }
     }

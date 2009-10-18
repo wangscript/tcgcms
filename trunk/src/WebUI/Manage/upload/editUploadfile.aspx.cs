@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.Files.Utils;
+
 using TCG.Entity;
 using TCG.Handlers;
 
@@ -17,7 +17,7 @@ public partial class Manage_upload_editUploadfile : adminMain
         if (Page.IsPostBack)
         {
             FileInfos item = new FileInfos();
-            item.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+            item.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
             item.iClassId = objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]);
 
             HttpFileCollection Fs = Request.Files;
@@ -29,7 +29,7 @@ public partial class Manage_upload_editUploadfile : adminMain
                 HttpPostedFile PF = Fs[0];
                 string filename = PF.FileName;
                 item.iSize = PF.ContentLength / 1024;
-                if (item.iSize <= FilesConst.fileSize)
+                if (item.iSize <= objectHandlers.ToInt(base.configService.baseConfig["fileSize"]))
                 {
                     string ex = filename.Substring(filename.LastIndexOf("."), filename.Length - filename.LastIndexOf("."));
                     item.vcFileName = filename.Substring(filename.LastIndexOf("\\") + 1, filename.Length - filename.LastIndexOf("\\") - 1);
@@ -38,16 +38,16 @@ public partial class Manage_upload_editUploadfile : adminMain
                     {
                         item.vcType = ex.Replace(".", "");
                         url = base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"] + "attach.aspx?attach=" + item.iID.ToString();
-                        FileClassHandlers fchdl = new FileClassHandlers();
+                       
 
-                        string filepath = fchdl.GetFilesPathByClassId(base.conn, item.iClassId);
+                        string filepath = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId( item.iClassId);
                         filepath += item.iID.ToString().Substring(0, 6) + "/"
                         + item.iID.ToString().Substring(6, 2) + "/" + item.iID.ToString() + ex;
                         bool create = false;
                         try
                         {
                             filepath = Server.MapPath("~" + filepath);
-                            Text.SaveFile(filepath, "");
+                            objectHandlers.SaveFile(filepath, "");
                             PF.SaveAs(filepath);
                             create = true;
                         }
@@ -59,8 +59,8 @@ public partial class Manage_upload_editUploadfile : adminMain
 
                         if (create)
                         {
-                            FileInfoHandlers flfh = new FileInfoHandlers();
-                            int rtn = flfh.AddFileInfoByAdmin(base.conn, base.admin.adminInfo.vcAdminName, item);
+                            
+                            int rtn = base.handlerService.fileService.fileInfoHandlers.AddFileInfoByAdmin( base.adminInfo.vcAdminName, item);
                             if (rtn < 0)
                             {
                                 err = "数据库保存错误";
@@ -75,7 +75,7 @@ public partial class Manage_upload_editUploadfile : adminMain
                 }
                 else
                 {
-                    err = "超过" + FilesConst.fileSize.ToString() + "K";
+                    err = "超过" + base.configService.baseConfig["fileSize"] + "K";
                 }
             }
 
@@ -87,7 +87,7 @@ public partial class Manage_upload_editUploadfile : adminMain
     private bool CheckType(string str)
     {
         string t = str.Replace(".", "");
-        string text = FilesConst.alowFileType.Replace("'", "");
+        string text = base.configService.baseConfig["alowFileType"].Replace("'", "");
         string[] te = text.Split(',');
         for (int i = 0; i < te.Length; i++)
         {

@@ -20,14 +20,14 @@ public partial class AjaxMethod_Admin_DelAdminRole : adminMain
     {
         if (!Page.IsPostBack)
         {
-            int iRole = Bases.ToInt(Fetch.Post("iRole"));
+            int iRole = objectHandlers.ToInt(objectHandlers.Post("iRole"));
             if (iRole == 0)
             {
                 base.AjaxErch("-1");
                 base.Finish();
                 return;
             }
-            int rtn = base.admin.AdminHandlers.DelAdminRole(base.admin.adminInfo.vcAdminName, iRole);
+            int rtn = base.handlerService.adminHandlers.DelAdminRole(base.adminInfo.vcAdminName, iRole);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

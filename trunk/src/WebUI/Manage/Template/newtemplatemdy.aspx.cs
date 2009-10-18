@@ -22,12 +22,12 @@ public partial class Template_newtemplatemdy : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        TemplateHandlers nthdl = new TemplateHandlers();
-        int templateid = Bases.ToInt(Fetch.Get("templateid"));
+
+        int templateid = objectHandlers.ToInt(objectHandlers.Get("templateid"));
         
         if (!Page.IsPostBack)
         {
-            TemplateInfo item = nthdl.GetTemplateInfoByID(base.conn, templateid,false);
+            TemplateInfo item = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, templateid,false);
             if (item == null)
             {
                 base.Finish();
@@ -49,17 +49,16 @@ public partial class Template_newtemplatemdy : adminMain
                 }
             }
             item = null;
-            nthdl = null;
             base.Finish();
         }
         else
         {
             TemplateInfo item = new TemplateInfo();
-            item.vcTempName = Fetch.Post("vcTempName");
-            item.iType = Bases.ToInt(Fetch.Post("tType"));
-            item.vcUrl = Fetch.Post("vcUrl");
-            item.vcContent = Fetch.Post("vcContent");
-            item.iSiteId = Bases.ToInt(Fetch.Post("iSiteId"));
+            item.vcTempName = objectHandlers.Post("vcTempName");
+            item.iType = objectHandlers.ToInt(objectHandlers.Post("tType"));
+            item.vcUrl = objectHandlers.Post("vcUrl");
+            item.vcContent = objectHandlers.Post("vcContent");
+            item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
             if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.vcContent))
             {
                 base.AjaxErch("-1");
@@ -71,10 +70,9 @@ public partial class Template_newtemplatemdy : adminMain
                 base.Finish();
             }
             item.iId = templateid;
-            int rtn = nthdl.MdyTemplate(base.conn, base.admin.adminInfo.vcAdminName,item);
+            int rtn = base.handlerService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName,item);
             CachingService.Remove(TemplateConstant.CACHING_AllTemplates);
             base.AjaxErch(rtn.ToString());
-            nthdl = null;
             base.Finish();
         }
     }

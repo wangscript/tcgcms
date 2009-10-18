@@ -22,8 +22,8 @@ public partial class news_NewsSpecialityInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
-            NewsClassHandlers chdl = new NewsClassHandlers();
-            DataTable dt = chdl.GetClassInfosByParentId(0, base.conn,false);
+
+            DataTable dt = base.handlerService.newsClassHandlers.GetClassInfosByParentId(0, base.conn,false);
             if (dt != null)
             {
                 this.ItemRepeater.DataSource = dt;
@@ -31,7 +31,6 @@ public partial class news_NewsSpecialityInfo : adminMain
             }
             dt.Clear();
             dt.Dispose();
-            chdl = null;
             base.Finish();
         }
     }

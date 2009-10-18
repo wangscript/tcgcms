@@ -20,7 +20,7 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string pwd = Fetch.Get("PWD", CheckGetEnum.Safety);
+            string pwd = objectHandlers.Get("PWD", CheckGetEnum.Safety);
             object TempAdmin = SessionState.Get(ManageConst.AdminSessionName);
             if (TempAdmin == null)
             {
@@ -28,7 +28,7 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
                 base.Finish();
                 return;
             }
-            pwd = Text.MD5(pwd);
+            pwd = objectHandlers.MD5(pwd);
             if (pwd.ToLower() == ((Admin)TempAdmin).vcPassword.ToLower())
             {
                 base.AjaxErch("true");

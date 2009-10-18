@@ -92,7 +92,7 @@ namespace TCG.Utils
                     {
                         if (textArray2[1].Trim() == "RefHref")
                         {
-                            textArray2[1] = Fetch.Referrer;
+                            textArray2[1] = objectHandlers.Referrer;
                         }
                         if ((textArray2[1] != string.Empty) && (textArray2[1] != null))
                         {
@@ -103,7 +103,7 @@ namespace TCG.Utils
                             }
                             if (textArray2[0].Trim() == "RefText")
                             {
-                                textArray2[0] = Text.TextEncode(Fetch.Referrer);
+                                textArray2[0] = objectHandlers.TextEncode(objectHandlers.Referrer);
                             }
                             builder1.Replace("{$Links}", (text1 + ">" + textArray2[0].Trim() + "</a></li>\r\n\t\t\t\t") + "{$Links}");
                         }

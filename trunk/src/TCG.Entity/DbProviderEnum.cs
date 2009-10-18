@@ -12,14 +12,14 @@
   *    使用中的问题，咨询作者QQ邮箱 sanyungui@vip.qq.com 
   */
 
-namespace TCG.Utils
+namespace TCG.Entity
 {
     using System;
 
-    public enum CheckGetEnum
+    public enum DbProviderEnum
     {
-        Int,
-        Safety
+        Access,
+        SqlServer
     }
 }
 

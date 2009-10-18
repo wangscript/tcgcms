@@ -35,8 +35,8 @@ namespace TCG.Controls.PageControls
 
         public void Calculate()
         {
-            string text1 = Fetch.Get("page");
-            this._currentPage = RegExp.IsNumeric(text1) ? int.Parse(text1) : 1;
+            string text1 = objectHandlers.Get("page");
+            this._currentPage = objectHandlers.IsNumeric(text1) ? int.Parse(text1) : 1;
             this._maxpage = this._total / this._per;
             if ((this._total % this._per) != 0)
             {
@@ -49,8 +49,8 @@ namespace TCG.Controls.PageControls
 
         public bool GetTotal()
         {
-            string text1 = Fetch.Get("total");
-            if (RegExp.IsNumeric(text1) && (this.Context.Request.HttpMethod == "GET"))
+            string text1 = objectHandlers.Get("total");
+            if (objectHandlers.IsNumeric(text1) && (this.Context.Request.HttpMethod == "GET"))
             {
                 this._total = int.Parse(text1);
                 return true;

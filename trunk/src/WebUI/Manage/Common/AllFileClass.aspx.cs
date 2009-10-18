@@ -20,8 +20,8 @@ public partial class Common_AllFileClass : ScriptsMain
         if (!Page.IsPostBack)
         {
             Response.Write("var AllFileClass = new Array();\r\n");
-            FileClassHandlers clhd = new FileClassHandlers();
-            DataTable dt = clhd.GetAllFileClass(base.conn, true);
+
+            DataTable dt = base.handlerService.fileService.fileClassHandlers.GetAllFileClass(true);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
@@ -34,7 +34,6 @@ public partial class Common_AllFileClass : ScriptsMain
                     }
                 }
             }
-            clhd = null;
             base.Finish();
         }
     }

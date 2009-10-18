@@ -27,10 +27,11 @@ namespace TCG.Handlers
 {
     public class TCGTagAttributeHandlers
     {
-        public TCGTagAttributeHandlers()
+        public TCGTagAttributeHandlers(HandlerService handlerservice)
         {
             this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%()$<>\/]+)""";
             this._tagstringhdl = new TCGTagStringFunHandlers();
+            this._handlerservice = handlerservice;
         }
 
         /// <summary>
@@ -137,7 +138,7 @@ namespace TCG.Handlers
             string fieldC = fields.Replace("%", ",");
 
             string orders = this.GetAttribute("orders");
-            int columns = Bases.ToInt(this.GetAttribute("columns"));
+            int columns = objectHandlers.ToInt(this.GetAttribute("columns"));
             if (columns == 0) columns = 1;
 
             string condition = this.GetAttribute("condition");
@@ -177,16 +178,14 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = Bases.ToInt(this.GetAttribute("id"));
+            int id = objectHandlers.ToInt(this.GetAttribute("id"));
             if (id == 0)
             {
                 pagerinfo.Read = false;
                 return;
             }
-            NewsInfoHandlers nifhd = new NewsInfoHandlers();
-            NewsClassHandlers chdl = new NewsClassHandlers();
-            FileInfoHandlers flfhdl = new FileInfoHandlers();
-            NewsInfo item = nifhd.GetNewsInfoById(this._conn, id);
+
+            NewsInfo item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -199,14 +198,14 @@ namespace TCG.Handlers
                 //替换正文内容，检查图片
                 try
                 {
-                    string tContent = flfhdl.ImgPatchInit(this._conn, item.vcContent, "admin",
+                    string tContent = this.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.vcContent, "admin",
                         objectHandlers.ToInt(this._config["NewsFileClass"]), this._config);
                     if (tContent != item.vcContent)
                     {
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        nifhd.UpdateNewsInfo(this._conn, this._config["FileExtension"], item, ref outid);
+                        this.handlerService.newsInfoHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item, ref outid);
                     }
                 }
                 catch { }
@@ -220,44 +219,41 @@ namespace TCG.Handlers
                     "<a href=\"" + item.FromInfo.vcUrl + "\" target=\"_blank\">" + item.FromInfo.vcTitle + "</a>");
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", Text.GetTextWithoutHtml(item.vcShortContent));
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.iId.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    chdl.GetTopicClassTitleList(this._conn, this._config, item.ClassInfo.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetTopicClassTitleList(this._conn, this._config, item.ClassInfo.iId, " > "));
 
                 
             }
             else
             {
-                nifhd = null;
+
                 item = null;
-                chdl = null;
-                flfhdl = null;
+
                 pagerinfo.Read = false;
                 return;
             }
-            nifhd = null;
-            flfhdl = null;
+
             item = null;
-            chdl = null;
+
         }
 
 
         private void TagForNewsClassInfo(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = Bases.ToInt(this.GetAttribute("id"));
+            int id = objectHandlers.ToInt(this.GetAttribute("id"));
             if (id == 0)
             {
                 pagerinfo.Read = false;
                 return;
             }
-            NewsClassHandlers chdl = new NewsClassHandlers();
-            ClassInfo item = chdl.GetClassInfoById(this._conn, id, false);
+
+            ClassInfo item = this.handlerService.newsClassHandlers.GetClassInfoById(this._conn, id, false);
             if (item == null)
             {
                 pagerinfo.Read = false;
-                chdl = null;
                 return;
             }
 
@@ -266,11 +262,10 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.iParent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    chdl.GetTopicClassTitleList(this._conn, this._config, item.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetTopicClassTitleList(this._conn, this._config, item.iId, " > "));
 
             pagerinfo.PageTitle = item.vcClassName;
 
-            chdl = null;
             item = null;
 
         }
@@ -280,14 +275,14 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTemplate(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = Bases.ToInt(this.GetAttribute("id"));
+            int id = objectHandlers.ToInt(this.GetAttribute("id"));
             if (id == 0)
             {
                 pagerinfo.Read = false;
                 return;
             }
-            TemplateHandlers ntlhdl = new TemplateHandlers();
-            TemplateInfo item = ntlhdl.GetTemplateInfoByID(this._conn, id,false);
+
+            TemplateInfo item = this.handlerService.templateHandlers.GetTemplateInfoByID(this._conn, id,false);
             if (item != null)
             {
                 this._tagtext = item.vcContent.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
@@ -298,7 +293,7 @@ namespace TCG.Handlers
                 pagerinfo.Read = false;
             }
             item = null;
-            ntlhdl = null;
+
         }
 
         /// <summary>
@@ -332,7 +327,7 @@ namespace TCG.Handlers
 
             fieldC += ",vcTitleColor,cStrong ";
             string orders = this.GetAttribute("orders");
-            int columns = Bases.ToInt( this.GetAttribute("columns"));
+            int columns = objectHandlers.ToInt( this.GetAttribute("columns"));
             if (columns == 0) columns = 1;
             string condition = this.GetAttribute("condition");
 
@@ -493,7 +488,7 @@ namespace TCG.Handlers
             sItem.arrSortField = arrsortfield;
 
             sItem.page = pagerinfo.Page;//设置当前页数
-            sItem.pageSize = Bases.ToInt(this.GetAttribute("pagesize"));
+            sItem.pageSize = objectHandlers.ToInt(this.GetAttribute("pagesize"));
             string condition = this.GetAttribute("condition");
             if (string.IsNullOrEmpty(condition)) 
             {
@@ -544,5 +539,21 @@ namespace TCG.Handlers
         private string _tag = string.Empty;
         private string _taghtml = string.Empty;         //标签的全部HTML
         private TCGTagStringFunHandlers _tagstringhdl = null;
+
+        /// <summary>
+        /// 提供对系统对象操作的服务
+        /// </summary>
+        public HandlerService handlerService
+        {
+            set
+            {
+                this._handlerservice = value;
+            }
+            get
+            {
+                return this._handlerservice;
+            }
+        }
+        private HandlerService _handlerservice;
     }
 }

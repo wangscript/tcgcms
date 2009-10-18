@@ -18,7 +18,6 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 
-using TCG.Files.Utils;
 using TCG.Entity;
 using TCG.Handlers;
 
@@ -28,9 +27,9 @@ public partial class files_ConentImgCheck : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string content = Fetch.Post("iContent$content");
-            FileInfoHandlers fihdl = new FileInfoHandlers();
-            Response.Write(fihdl.ImgPatchInit(base.conn, content, base.admin.adminInfo.vcAdminName,
+            string content = objectHandlers.Post("iContent$content");
+
+            Response.Write(base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(content, base.adminInfo.vcAdminName,
                 objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig));
             base.Finish();
         }

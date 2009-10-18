@@ -26,7 +26,7 @@ public partial class adminRecovery : adminMain
             int rolecount = 0;
 
 
-            int rtn = base.admin.AdminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
+            int rtn = base.handlerService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
                 base.Finish();
@@ -42,8 +42,8 @@ public partial class adminRecovery : adminMain
         }
         else
         {
-            string admins = Fetch.Post("admins");
-            string action = Fetch.Post("saction");
+            string admins = objectHandlers.Post("admins");
+            string action = objectHandlers.Post("saction");
 
             if (string.IsNullOrEmpty(admins) || string.IsNullOrEmpty(action))
             {
@@ -52,7 +52,7 @@ public partial class adminRecovery : adminMain
                 return;
             }
 
-            int rtn = base.admin.AdminHandlers.DelAdmins(base.admin.adminInfo.vcAdminName, admins, action);
+            int rtn = base.handlerService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }
@@ -68,11 +68,11 @@ public partial class adminRecovery : adminMain
         Span CheckID = (Span)e.Item.FindControl("CheckID");
 
         loginName.Text = Row["vcAdminName"].ToString();
-        loginName.Href = "adminmdy.aspx?adminname=" + Fetch.UrlEncode(Row["vcAdminName"].ToString());
+        loginName.Href = "adminmdy.aspx?adminname=" + objectHandlers.UrlEncode(Row["vcAdminName"].ToString());
         CheckID.Text = Row["vcAdminName"].ToString();
         nickname.Text = Row["vcNickName"].ToString();
         adminrole.Text = Row["vcRoleName"].ToString();
-        adminrole.Href = "adminrolemdy.aspx?roleid=" + Fetch.UrlEncode(Row["iID"].ToString());
+        adminrole.Href = "adminrolemdy.aspx?roleid=" + objectHandlers.UrlEncode(Row["iID"].ToString());
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy年MM月dd日");
     }
 }

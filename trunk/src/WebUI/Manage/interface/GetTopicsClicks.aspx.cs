@@ -15,7 +15,7 @@ using TCG.Handlers;
 using TCG.Pages;
 
 using TCG.Entity;
-using TCG.Handlers;
+
 
 public partial class Manage_interface_GetTopicsClicks : ScriptsMain
 {
@@ -23,7 +23,7 @@ public partial class Manage_interface_GetTopicsClicks : ScriptsMain
     {
         if (!Page.IsPostBack)
         {
-            string topics = Fetch.Get("topics");
+            string topics = objectHandlers.Get("topics");
             if (!string.IsNullOrEmpty(topics))
             {
                 string SQL = "SELECT * FROM T_News_NewsInfo (NOLOCK) WHERE iId In (" + topics + ")";

@@ -41,7 +41,7 @@ namespace TCG.Utils
 
         public static void Save(HttpCookie cookie)
         {
-            string text1 = Fetch.ServerDomain;
+            string text1 = objectHandlers.ServerDomain;
             string text2 = HttpContext.Current.Request.Url.Host.ToLower();
             if (text1 != text2)
             {

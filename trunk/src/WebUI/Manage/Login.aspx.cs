@@ -39,7 +39,7 @@ public partial class aLogin : adminMain
         else
         {
 
-            string work = Fetch.Post("Work");
+            string work = objectHandlers.Post("Work");
 
             switch (work)
             {
@@ -66,7 +66,7 @@ public partial class aLogin : adminMain
             base.AjaxErch("{state:true,message:\"·无法检测到新版本，请跳过...\"}");
             return;
         }
-        int sep = objectHandlers.ToInt(Fetch.Post("SqlSep"));
+        int sep = objectHandlers.ToInt(objectHandlers.Post("SqlSep"));
         if (sep > nver.Sqls)
         {
             bool re = false;
@@ -76,7 +76,7 @@ public partial class aLogin : adminMain
             string filepath = Server.MapPath("~/" + vers + ".zip");
             try
             {
-                Text.SaveFile(filepath, "");
+                objectHandlers.SaveFile(filepath, "");
                 wc.DownloadFile(zip, filepath);
 
                 string dir = System.IO.Path.GetDirectoryName(filepath);
@@ -118,9 +118,9 @@ public partial class aLogin : adminMain
     /// </summary>
     private void Login()
     {
-        string adminname = Fetch.Post("username");
-        string password = Fetch.Post("password");
-        string anme = Fetch.Post("rUsername");
+        string adminname = objectHandlers.Post("username");
+        string password = objectHandlers.Post("password");
+        string anme = objectHandlers.Post("rUsername");
 
         bool ranme = anme == "checkbox" ? true : false;
 
@@ -143,9 +143,9 @@ public partial class aLogin : adminMain
         {
             if (lname != null) TCG.Utils.Cookie.Remove(lname);
         }
-        string password1 = Text.MD5(password);
+        string password1 = objectHandlers.MD5(password);
         string response = "";
-        int rtn = base.admin.AdminHandlers.AdminLogin(adminname, password1);
+        int rtn = base.handlerService.adminHandlers.AdminLogin(adminname, password1);
 
         if (rtn < 0)
         {

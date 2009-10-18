@@ -25,7 +25,6 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Data;
-using TCG.Files.Utils;
 using TCG.Entity;
 
 
@@ -34,17 +33,68 @@ namespace TCG.Handlers
     public class FileInfoHandlers
     {
         /// <summary>
+        /// 获得配置信息支持
+        /// </summary>
+        public ConfigService configService
+        {
+            set
+            {
+                this._configservice = value;
+            }
+        }
+        private ConfigService _configservice;
+
+        /// <summary>
+        /// 提供文件分类操作的方法
+        /// </summary>
+        public FileClassHandlers fileClassHandlers
+        {
+            set
+            {
+                this._fileclasshandlers = value;
+            }
+        }
+        private FileClassHandlers _fileclasshandlers;
+
+        /// <summary>
+        /// 设置数据库链接
+        /// </summary>
+        /// <returns></returns>
+        private bool SetFileDatabase(long fid)
+        {
+            if (this._configservice == null) return false;
+            if (this._configservice.fileDataBaseConfig == null) return false;
+            if (this._configservice.fileDataBaseConfig.Count == 0) return false;
+            int index = objectHandlers.ToInt (fid % this._configservice.fileDataBaseConfig.Count);
+            FileDataBase filedatabase = this._configservice.fileDataBaseConfig[index];
+            this._conn.SetConnStr = filedatabase.Value;
+            return true;
+        }
+
+        /// <summary>
+        /// 获得数据库访问支持
+        /// </summary>
+        public Connection conn
+        {
+            set
+            {
+                this._conn = value;
+            }
+        }
+        private Connection _conn;
+
+        /// <summary>
         /// 添加新的分类
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        public int AddFileInfoByAdmin(Connection conn, string adminname, FileInfos fif)
+        public int AddFileInfoByAdmin(string adminname, FileInfos fif)
         {
-            conn.Dblink = FilesConst.FilesDbLinks[fif.iID % FilesConst.FilesDbLinks.Length];
+            if (!this.SetFileDatabase(fif.iID)) return -19000000;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iID", SqlDbType.BigInt, 8); sp2.Value = fif.iID;
             SqlParameter sp3 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp3.Value = fif.iClassId;
             SqlParameter sp4 = new SqlParameter("@vcFileName", SqlDbType.NVarChar, 100); sp4.Value = fif.vcFileName;
@@ -52,7 +102,7 @@ namespace TCG.Handlers
             SqlParameter sp6 = new SqlParameter("@vcType", SqlDbType.VarChar, 10); sp6.Value = fif.vcType;
             SqlParameter sp7 = new SqlParameter("@reValue", SqlDbType.Int); sp7.Direction = ParameterDirection.Output;
 
-            string[] reValues = conn.Execute("SP_Files_FileInfoManageByAdmin", new SqlParameter[] { sp0, sp1,
+            string[] reValues = this._conn.Execute("SP_Files_FileInfoManageByAdmin", new SqlParameter[] { sp0, sp1,
                 sp2, sp3, sp4, sp5, sp6, sp7 }, new int[] { 7 });
             if (reValues != null)
             {
@@ -69,12 +119,12 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public FileInfos GetFileInfosById(Connection conn, long id)
+        public FileInfos GetFileInfosById( long id)
         {
             FileInfos item = null;
-            conn.Dblink = FilesConst.FilesDbLinks[id % FilesConst.FilesDbLinks.Length];
+            if (!this.SetFileDatabase(id)) return null;
             string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM T_Files_FileInfos (NOLOCK) WHERE iId=" + id.ToString();
-            DataTable dt = conn.GetDataTable(SQL);
+            DataTable dt = this._conn.GetDataTable(SQL);
             if (dt != null)
             {
                 if (dt.Rows.Count == 1)
@@ -94,7 +144,7 @@ namespace TCG.Handlers
             return item;
         }
 
-        public string ImgPatchInit(Connection conn, string content, string adminname, int fileclassid, Dictionary<string, string> config)
+        public string ImgPatchInit(string content, string adminname, int fileclassid, Dictionary<string, string> config)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -105,9 +155,8 @@ namespace TCG.Handlers
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
-                    FileClassHandlers fchdl = new FileClassHandlers();
 
-                    imgfile.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+                    imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;
 
                     imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
@@ -116,17 +165,17 @@ namespace TCG.Handlers
                     WebClient wc = new WebClient();
                    
                     imgfile.iSize = 100;
-                    string filepath = fchdl.GetFilesPathByClassId(conn, imgfile.iClassId);
+                    string filepath = this._fileclasshandlers.GetFilesPathByClassId(imgfile.iClassId);
                     string filename = imgfile.iID + text1.Substring(text1.LastIndexOf("."), text1.Length - text1.LastIndexOf("."));
                     string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
                         + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
                     try
                     {
-                        Text.SaveFile(filepatch, "");
+                        objectHandlers.SaveFile(filepatch, "");
                         if (this.GetUrlError(text1) == 200)
                         {
                             wc.DownloadFile(text1, filepatch);
-                            int rtn = this.AddFileInfoByAdmin(conn, adminname, imgfile);
+                            int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
                             if (rtn < 0)
                             {
                                 System.IO.File.Delete(filepatch);
@@ -143,14 +192,13 @@ namespace TCG.Handlers
                     {
                     }
                     imgfile = null;
-                    fchdl = null;
                     wc = null;
                 }
             }
             return content;
         }
 
-        public string ImgPatchInit(Connection conn, string content, string url, string adminname, int fileclassid, Dictionary<string, string> config)
+        public string ImgPatchInit(string content, string url, string adminname, int fileclassid, Dictionary<string, string> config)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -161,9 +209,8 @@ namespace TCG.Handlers
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
-                    FileClassHandlers fchdl = new FileClassHandlers();
 
-                    imgfile.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+                    imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;
 
                     imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
@@ -171,19 +218,19 @@ namespace TCG.Handlers
 
                     WebClient wc = new WebClient();
                     imgfile.iSize = 100;
-                    string filepath = fchdl.GetFilesPathByClassId(conn, imgfile.iClassId);
+                    string filepath = this._fileclasshandlers.GetFilesPathByClassId(imgfile.iClassId);
                     string filename = imgfile.iID + text1.Substring(text1.LastIndexOf("."), text1.Length - text1.LastIndexOf("."));
                     string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
                         + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
                     try
                     {
-                        Text.SaveFile(filepatch, "");
+                        objectHandlers.SaveFile(filepatch, "");
                         string imgurlpath = TxtReader.GetFileWebPath(url, text1);
                         if (this.GetUrlError(imgurlpath) == 200)
                         {
                             wc.DownloadFile(imgurlpath, filepatch);
 
-                            int rtn = this.AddFileInfoByAdmin(conn, adminname, imgfile);
+                            int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
                             if (rtn < 0)
                             {
                                 System.IO.File.Delete(filepatch);
@@ -199,7 +246,7 @@ namespace TCG.Handlers
                     {
                     }
                     imgfile = null;
-                    fchdl = null;
+ 
                     wc = null;
                 }
             }

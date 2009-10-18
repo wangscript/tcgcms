@@ -24,7 +24,6 @@ namespace TCG.Pages
 
     public class adminMain : Origin
     {
-        private AdminLogin _admin;
 
         public adminMain()
         {
@@ -39,19 +38,7 @@ namespace TCG.Pages
 
         private void CheckPop(object sender, EventArgs e)
         {
-            this.admin.CheckAdminPop(base.configService.baseConfig);
-        }
-
-        protected AdminLogin admin
-        {
-            get
-             {
-                if (this._admin == null)
-                {
-                    this._admin = new AdminLogin(this.conn);
-                }
-                return this._admin;
-            }
+            base.handlerService.adminLoginHandlers.CheckAdminPop(base.configService.baseConfig);
         }
 
         protected void AjaxErch(string str)
@@ -64,9 +51,20 @@ namespace TCG.Pages
         protected void Finish()
         {
             if ((base.conn != null) && base.conn.Connected) { base.conn.Close(); }
-            if (this._admin != null) this._admin = null;
         }
 
+        protected Admin adminInfo
+        {
+            get
+            {
+                if (this._admininfo == null)
+                {
+                    this._admininfo = base.handlerService.adminLoginHandlers.adminInfo;
+                }
+                return this._admininfo;
+            }
+        }
+        private Admin _admininfo = null;
     }
 }
 

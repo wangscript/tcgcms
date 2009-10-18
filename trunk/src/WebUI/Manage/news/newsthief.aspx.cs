@@ -18,9 +18,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 using TCG.Data;
-using TCG.Handlers;
 using TCG.Entity;
-using TCG.Files.Utils;
 
 
 public partial class news_newsthief : adminMain
@@ -29,7 +27,7 @@ public partial class news_newsthief : adminMain
     {
         if (Page.IsPostBack)
         {
-            string vwork = Fetch.Post("work");
+            string vwork = objectHandlers.Post("work");
             switch (vwork)
             {
                 case "Search":
@@ -45,14 +43,14 @@ public partial class news_newsthief : adminMain
     private void Search()
     {
         string str = "";
-        string ListPage = Fetch.Post("iListPage");
-        int spage = Bases.ToInt(Fetch.Post("iListPageStart"));
-        int epage = Bases.ToInt(Fetch.Post("iListPageEnd"));
+        string ListPage = objectHandlers.Post("iListPage");
+        int spage = objectHandlers.ToInt(objectHandlers.Post("iListPageStart"));
+        int epage = objectHandlers.ToInt(objectHandlers.Post("iListPageEnd"));
 
-        string ListArea = Fetch.Post("iListArea");
-        string ListLink = Fetch.Post("iListLink");
+        string ListArea = objectHandlers.Post("iListArea");
+        string ListLink = objectHandlers.Post("iListLink");
 
-        string iCharSet = Fetch.Post("iCharSet");
+        string iCharSet = objectHandlers.Post("iCharSet");
 
         if (string.IsNullOrEmpty(iCharSet))
         {
@@ -93,48 +91,47 @@ public partial class news_newsthief : adminMain
 
     private void InsertTopic()
     {
-        string iCharSet = Fetch.Post("iCharSet");
+        string iCharSet = objectHandlers.Post("iCharSet");
 
         if (string.IsNullOrEmpty(iCharSet))
         {
             iCharSet = "gb2312";
         }
 
-        string TopicWebPath = Fetch.Post("iTopicWebPath");
-        string ListPage = Fetch.Post("iListPage");
+        string TopicWebPath = objectHandlers.Post("iTopicWebPath");
+        string ListPage = objectHandlers.Post("iListPage");
 
         TopicWebPath = TxtReader.GetFileWebPath(ListPage, TopicWebPath);
-        string TopicArea = Fetch.Post("iTopicArea");
+        string TopicArea = objectHandlers.Post("iTopicArea");
 
         string ListPageHtml = TxtReader.GetRequestText(TopicWebPath, iCharSet);
-        NewsInfoHandlers nihdl = new NewsInfoHandlers();
 
         Match item = Regex.Match(ListPageHtml, TopicArea, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         if (item.Success)
         {
             NewsInfo nif = new NewsInfo();
-            FileInfoHandlers fihdl = new FileInfoHandlers();
+
             nif.vcTitle = item.Result("$1");
-            nif.vcAuthor = base.admin.adminInfo.vcNickName;
+            nif.vcAuthor = base.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")), false);
+            nif.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")), false);
             nif.FromInfo.iId = 1;
             nif.cChecked = "Y";
             nif.cCreated = "Y";
-            nif.vcEditor = base.admin.adminInfo.vcAdminName;
+            nif.vcEditor = base.adminInfo.vcAdminName;
 
-            if (nihdl.CheckThiefTopic(base.conn, nif.ClassInfo.iId, nif.vcTitle) == 1)
+            if (base.handlerService.newsInfoHandlers.CheckThiefTopic(base.conn, nif.ClassInfo.iId, nif.vcTitle) == 1)
             {
-                nif.vcContent = fihdl.ImgPatchInit(base.conn, item.Result("$2"), TopicWebPath,
-                    base.admin.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig);
+                nif.vcContent = base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.Result("$2"), TopicWebPath,
+                    base.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig);
 
-                nif.vcShortContent = Text.Left(Text.GetTextWithoutHtml(nif.vcContent), 200, false);
+                nif.vcShortContent = objectHandlers.Left(objectHandlers.GetTextWithoutHtml(nif.vcContent), 200);
 
                 int newid = 0; string filepath = "";
                 int rtn = 0;
                 try
                 {
-                    rtn = nihdl.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif, ref newid);
+                    rtn = base.handlerService.newsInfoHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif, ref newid);
                 }
                 catch { }
             }
@@ -142,7 +139,7 @@ public partial class news_newsthief : adminMain
             nif = null;
 
         }
-        nihdl = null;
+
         item = null;
         base.AjaxErch("<a>正在抓取:" + TopicWebPath + "</a>");
         base.Finish();

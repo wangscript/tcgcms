@@ -20,15 +20,15 @@ public partial class MyAccount : adminMain
     {
         if (!Page.IsPostBack)
         {
-            this.iNickName.Value = base.admin.adminInfo.vcNickName;
-            this.adminname.Value = base.admin.adminInfo.vcAdminName;
+            this.iNickName.Value = base.adminInfo.vcNickName;
+            this.adminname.Value = base.adminInfo.vcAdminName;
         }
         else
         {
-            string adminname = Fetch.Post("adminname");
-            string nickname = Fetch.Post("iNickName");
-            string oldpwd = Fetch.Post("iOldPWD");  
-            string npwd = Fetch.Post("iNewPWD");
+            string adminname = objectHandlers.Post("adminname");
+            string nickname = objectHandlers.Post("iNickName");
+            string oldpwd = objectHandlers.Post("iOldPWD");  
+            string npwd = objectHandlers.Post("iNewPWD");
 
             if (string.IsNullOrEmpty(adminname) || string.IsNullOrEmpty(nickname))
             {
@@ -37,10 +37,10 @@ public partial class MyAccount : adminMain
                 return;
             }
 
-            oldpwd = Text.MD5(oldpwd);
-            if (!string.IsNullOrEmpty(npwd)) npwd = Text.MD5(npwd);
+            oldpwd = objectHandlers.MD5(oldpwd);
+            if (!string.IsNullOrEmpty(npwd)) npwd = objectHandlers.MD5(npwd);
 
-            int rtn = base.admin.AdminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
+            int rtn = base.handlerService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
             if (rtn == 1)
             {
                 SessionState.Remove(ManageConst.AdminSessionName);

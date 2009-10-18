@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Entity;
-using TCG.Files.Utils;
+
 using TCG.Pages;
 
 public partial class upload_uploadfile : adminMain
@@ -21,16 +21,16 @@ public partial class upload_uploadfile : adminMain
     {
         if (!Page.IsPostBack)
         {
-            int iMaxNum = Bases.ToInt(Fetch.Get("MaxNum"));
+            int iMaxNum = objectHandlers.ToInt(objectHandlers.Get("MaxNum"));
             this.sMaxNum.Text = iMaxNum.ToString();
 
-            string CallBack = Fetch.Get("CallBack");
+            string CallBack = objectHandlers.Get("CallBack");
             this.sCallBack.Text = CallBack;
 
-            int ClassId = Bases.ToInt(Fetch.Get("ClassId"));
+            int ClassId = objectHandlers.ToInt(objectHandlers.Get("ClassId"));
             this.iClassId.Value = ClassId.ToString();
 
-            this.stype.Text = FilesConst.alowFileType;
+            this.stype.Text = base.configService.baseConfig["alowFileType"];
         }
     }
 }

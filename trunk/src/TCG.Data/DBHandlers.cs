@@ -87,11 +87,11 @@ namespace TCG.Data
             if(reValues!=null)
             {
                 //总记录数
-                counts = Bases.ToInt(reValues[2]);
+                counts = objectHandlers.ToInt(reValues[2]);
                 //总页数
-                pageCount = Bases.ToInt(reValues[1]);
+                pageCount = objectHandlers.ToInt(reValues[1]);
                 //当前页数
-                curPage = Bases.ToInt(reValues[0]);
+                curPage = objectHandlers.ToInt(reValues[0]);
 
                 return (int)Convert.ChangeType(reValues[3], typeof(int));
             }

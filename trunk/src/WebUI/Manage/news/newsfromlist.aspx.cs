@@ -31,7 +31,7 @@ public partial class news_newsfromlist : adminMain
         }
         else
         {
-            string action = Fetch.Post("iAction");
+            string action = objectHandlers.Post("iAction");
             switch (action)
             {
                 case "ADD":
@@ -64,8 +64,8 @@ public partial class news_newsfromlist : adminMain
         arrsortfield.Add("iId");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
         sItem.strCondition = "iID>0";
 
         int curPage = 0;
@@ -108,8 +108,8 @@ public partial class news_newsfromlist : adminMain
     private void NewsFromADD()
     {
         NewsFromInfo item = new NewsFromInfo();
-        item.vcTitle = Fetch.Post("inTitle");
-        item.vcUrl = Fetch.Post("inUrl");
+        item.vcTitle = objectHandlers.Post("inTitle");
+        item.vcUrl = objectHandlers.Post("inUrl");
         if (string.IsNullOrEmpty(item.vcTitle))
         {
             base.AjaxErch("-1000000052");
@@ -123,17 +123,15 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        NewsFromHandlers nfhdl = new NewsFromHandlers();
-        int rtn = nfhdl.AddNewsFromInfo(base.conn, base.admin.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.newsFromHandlers.AddNewsFromInfo(base.conn, base.adminInfo.vcAdminName, item);
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        nfhdl = null;
         item = null;
     }
 
     private void NewsFromMDY()
     {
-        string KeyValue = Fetch.Post("KeyValue");
+        string KeyValue = objectHandlers.Post("KeyValue");
         if (string.IsNullOrEmpty(KeyValue))
         {
             base.AjaxErch("-1");
@@ -141,7 +139,7 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        string iFeildName = Fetch.Post("iFeildName");
+        string iFeildName = objectHandlers.Post("iFeildName");
         if (string.IsNullOrEmpty(iFeildName))
         {
             base.AjaxErch("-1");
@@ -149,7 +147,7 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        int iMdyID = Bases.ToInt(Fetch.Post("iMdyID"));
+        int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
         if (iMdyID == 0)
         {
             base.AjaxErch("-1");
@@ -157,8 +155,8 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        NewsFromHandlers nfhdl = new NewsFromHandlers();
-        NewsFromInfo item = nfhdl.GetNewsFromInfoById(base.conn, iMdyID);
+
+        NewsFromInfo item = base.handlerService.newsFromHandlers.GetNewsFromInfoById(base.conn, iMdyID);
         if (item == null)
         {
             base.AjaxErch("-1");
@@ -177,31 +175,29 @@ public partial class news_newsfromlist : adminMain
             default:
                 base.AjaxErch("-1");
                 base.Finish();
-                nfhdl = null;
                 item = null;
                 break;
         }
 
-        int rtn = nfhdl.UpdateNewsFromInfo(base.conn, base.admin.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.newsFromHandlers.UpdateNewsFromInfo(base.conn, base.adminInfo.vcAdminName, item);
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        nfhdl = null;
         item = null;
     }
 
     private void NewsFromDEL()
     {
-        string Ids = Fetch.Post("iIds");
+        string Ids = objectHandlers.Post("iIds");
         if (string.IsNullOrEmpty(Ids))
         {
             base.AjaxErch("-1000000038");
             base.Finish();
             return;
         }
-        NewsFromHandlers nshdl = new NewsFromHandlers();
-        int rtn = nshdl.DeleteNewsFromInfos(base.conn, base.admin.adminInfo.vcAdminName, Ids);
+
+        int rtn = base.handlerService.newsFromHandlers.DeleteNewsFromInfos(base.conn, base.adminInfo.vcAdminName, Ids);
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        nshdl = null;
+
     }
 }

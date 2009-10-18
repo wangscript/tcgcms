@@ -18,14 +18,14 @@ public partial class Top : adminMain
     {
         if (!Page.IsPostBack)
         {
-            this.adminName.Text = base.admin.adminInfo.vcNickName + "(" + base.admin.adminInfo.vcRoleName + ")";
+            this.adminName.Text = base.adminInfo.vcNickName + "(" + base.adminInfo.vcRoleName + ")";
             this.EmuInit();
         }
     }
 
     private void EmuInit()
     {
-        DataTable dt = base.admin.adminInfo.PopedomUrls;
+        DataTable dt = base.adminInfo.PopedomUrls;
         if (dt == null) { base.Finish(); return; }
         if (dt.Rows.Count == 0) { base.Finish(); dt.Dispose(); dt.Clear(); return; }
         DataRow[] rows = dt.Select("iParentId=0 AND cValid='Y'");

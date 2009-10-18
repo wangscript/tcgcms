@@ -36,6 +36,7 @@ namespace TCG.Utils
 
         }
 
+
         /// <summary>
         /// 管理特殊页面的配置信息
         /// </summary>
@@ -48,6 +49,37 @@ namespace TCG.Utils
                     this.ManageOutpagesInit();
                 }
                 return this._manageoutpages;
+            }
+        }
+
+        public List<FileDataBase> fileDataBaseConfig
+        {
+            get
+            {
+                if (this._filedatabaseconfig == null)
+                {
+                    this.FileDataBaseConfigInit();
+                }
+                return this._filedatabaseconfig;
+            }
+        }
+
+        private void FileDataBaseConfigInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList filedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_FileDataBaseConfigFilePath, "fileDataBase");
+            if (filedatabaseconfig != null)
+            {
+                this._filedatabaseconfig = new List<FileDataBase>();
+                foreach (XmlElement element in filedatabaseconfig)
+                {
+                    FileDataBase filedatabase = new FileDataBase();
+                    filedatabase.Text = element.SelectSingleNode("Text").InnerText;
+                    filedatabase.Value = element.SelectSingleNode("Value").InnerText;
+                    filedatabase.Service = element.SelectSingleNode("Service").InnerText;
+                    filedatabase.IsBaseDataBase = objectHandlers.ToBoolen(element.SelectSingleNode("IsBaseDataBase").InnerText, false);
+                    this._filedatabaseconfig.Add(filedatabase);
+                }
             }
         }
 
@@ -142,5 +174,8 @@ namespace TCG.Utils
 
         private Dictionary<string, string> _baseconfig = null;
         private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                            //系统基本配置
+
+        private List<FileDataBase> _filedatabaseconfig = null;
+        private string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";                            //文件数据库配置
     }
 }

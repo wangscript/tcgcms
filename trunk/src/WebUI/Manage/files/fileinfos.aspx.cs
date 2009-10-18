@@ -15,7 +15,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
 
-using TCG.Files.Utils;
+
 using TCG.Entity;
 using TCG.Handlers;
 
@@ -25,11 +25,10 @@ public partial class files_fileinfos : adminMain
     {
         if (!Page.IsPostBack)
         {
-            int ClassId = Bases.ToInt(Fetch.Get("iClassId"));
+            int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             this.iClassId.Value = ClassId.ToString();
 
-            FileClassHandlers fchdl = new FileClassHandlers();
-            DataTable dt = fchdl.GetFilesClassInfosByParendId(base.conn, ClassId);
+            DataTable dt = base.handlerService.fileService.fileClassHandlers.GetFilesClassInfosByParendId(ClassId);
             if (dt != null)
             {
                 this.ItemRepeater.DataSource = dt;
@@ -39,7 +38,7 @@ public partial class files_fileinfos : adminMain
         }
         else
         {
-            string Action = Fetch.Post("work");
+            string Action = objectHandlers.Post("work");
             switch (Action)
             {
                 case "AddClass":
@@ -54,7 +53,7 @@ public partial class files_fileinfos : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = FilesConst.FilesDbLinks[0];
+        base.conn.SetConnStr = base.handlerService.fileService.MianDatabase;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "T_Files_FileInfos";
 
@@ -70,10 +69,10 @@ public partial class files_fileinfos : adminMain
         arrsortfield.Add("iId DESC");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int tClassId = Bases.ToInt(Fetch.Get("iClassId"));
+        int tClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
         sItem.strCondition = "iClassID = " + tClassId.ToString();
 
         int curPage = 0;
@@ -146,9 +145,9 @@ public partial class files_fileinfos : adminMain
     private void AddClass()
     {
         FileClassInfo item = new FileClassInfo();
-        item.vcFileName = Fetch.Post("inTitle");
-        item.vcMeno = Fetch.Post("inInfo");
-        item.iParentId = Bases.ToInt(Fetch.Post("iClassId"));
+        item.vcFileName = objectHandlers.Post("inTitle");
+        item.vcMeno = objectHandlers.Post("inInfo");
+        item.iParentId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
         if (string.IsNullOrEmpty(item.vcFileName))
         {
             base.AjaxErch("-1000000057");
@@ -161,17 +160,16 @@ public partial class files_fileinfos : adminMain
             return;
         }
 
-        FileClassHandlers fchd = new FileClassHandlers();
-        int rtn = fchd.AddFileClass(base.conn, base.admin.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.fileService.fileClassHandlers.AddFileClass( base.adminInfo.vcAdminName, item);
         if (rtn == 1)
         {
             CachingService.Remove(CachingService.CACHING_ALL_FILECLASS);
-            string text1 = fchd.GetFilesPathByClassId(base.conn, item.iParentId);
+            string text1 = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId( item.iParentId);
             string text2 = "~" + text1 + item.vcFileName + @"/";
             text2 = Server.MapPath(text2);
-            Text.SaveFile(text2, "");
+            objectHandlers.SaveFile(text2, "");
         }
         base.AjaxErch(rtn.ToString());
-        fchd = null;
+
     }
 }

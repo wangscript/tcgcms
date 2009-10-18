@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using TCG.Utils;
 using TCG.Pages;
 using TCG.Manage.Utils;
+using TCG.Entity;
 
 public partial class AjaxMethod_Text_GetErrText : adminMain
 {
@@ -20,7 +21,7 @@ public partial class AjaxMethod_Text_GetErrText : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string ErrCode = Fetch.Get("ErrCode", CheckGetEnum.Safety);
+            string ErrCode = objectHandlers.Get("ErrCode", CheckGetEnum.Safety);
             if (string.IsNullOrEmpty(ErrCode))
             {
                 base.AjaxErch("错误代码请求错误！");

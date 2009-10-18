@@ -63,6 +63,8 @@ namespace TCG.URLRewriter
             if (!Boolean.Parse(configService.baseConfig["IsReWrite"])) return;
 
             TCGTagHandlers tcgthdl = new TCGTagHandlers();
+            HandlerService handlerservice = new HandlerService(conn, configService);
+            tcgthdl.handlerService = handlerservice;
 
             //获得页面文件名
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
@@ -126,6 +128,7 @@ namespace TCG.URLRewriter
                         TemplateInfo tlif = tlhdl.GetTemplateInfoByID(conn, objectHandlers.ToInt(Rows[0]["iListTemplate"]), false);
 
                         TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
+                        tcgthdl1.handlerService = handlerservice;
                         tcgthdl1.Template = tlif.vcContent.Replace("_$ClassId$_", Rows[0]["iId"].ToString());
                         tcgthdl1.NeedCreate = false;
                         tcgthdl1.PagerInfo.DoAllPage = false;
@@ -142,8 +145,8 @@ namespace TCG.URLRewriter
             }
 
             //检测文件名特性
-            pattern = @"(\d+)t-([\s\S]*)\" + configService.baseConfig["FileExtension"];
-            match = Regex.Match(pagepath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            pattern = @"\d{8}\/(\d{9})\" + configService.baseConfig["FileExtension"];
+            match = Regex.Match(DpagePath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
                 int topicid = objectHandlers.ToInt(match.Result("$1"));
@@ -161,6 +164,7 @@ namespace TCG.URLRewriter
                        
 
                         TCGTagHandlers tcgth = new TCGTagHandlers();
+                        tcgth.handlerService = handlerservice;
                         tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
                         titem = null;
                         tcgth.NeedCreate = false;

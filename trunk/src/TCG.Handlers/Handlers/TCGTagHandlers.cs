@@ -54,7 +54,7 @@ namespace TCG.Handlers
                 this._tagtemplates = new List<TCGTagAttributeHandlers>();
                 foreach (Match item in mc)
                 {
-                    this._tagtemplate = new TCGTagAttributeHandlers();
+                    this._tagtemplate = new TCGTagAttributeHandlers(this.handlerService);
                     this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                     this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                     this._tagtemplate.TagText = item.Result("$3");
@@ -92,7 +92,7 @@ namespace TCG.Handlers
                     Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (item.Success)
                     {
-                        this._tagtemplate = new TCGTagAttributeHandlers();
+                        this._tagtemplate = new TCGTagAttributeHandlers(this.handlerService);
                         this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                         this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                         this._tagtemplate.TagText = item.Result("$3");
@@ -234,7 +234,7 @@ namespace TCG.Handlers
 
             if (NeedCreate)
             {
-                Text.SaveFile(this.GetFilePath(), this._temphtml);
+                objectHandlers.SaveFile(this.GetFilePath(), this._temphtml);
             }
         }
 
@@ -342,5 +342,22 @@ namespace TCG.Handlers
         private TCGTagAttributeHandlers _tagtemplate = null;
         private bool _needcreate = true;
         private int _currentpage = 0;                         /// 当前页
+                                                              /// 
+
+        /// <summary>
+        /// 提供对管理员操作的方法
+        /// </summary>
+        public HandlerService handlerService
+        {
+            set
+            {
+                this._handlerservice = value;
+            }
+            get
+            {
+                return this._handlerservice;
+            }
+        }
+        private HandlerService _handlerservice;
     }
 }

@@ -14,7 +14,7 @@ using System.Threading;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.Files.Utils;
+
 using TCG.Entity;
 using TCG.Handlers;
 
@@ -24,18 +24,18 @@ public partial class upload_uploadSave : adminMain
     {
         if (!Page.IsPostBack)
         {
-            int ifid = Bases.ToInt(Fetch.Get("ifid"));
+            int ifid = objectHandlers.ToInt(objectHandlers.Get("ifid"));
             this.iId.Value = ifid.ToString();
 
-            int ClassId = Bases.ToInt(Fetch.Get("ClassId"));
+            int ClassId = objectHandlers.ToInt(objectHandlers.Get("ClassId"));
             this.iClassId.Value = ClassId.ToString();
         }
         else
         {
             Thread.Sleep(20);
             FileInfos item = new FileInfos();
-            item.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
-            item.iClassId = Bases.ToInt(Fetch.Post("iClassId"));
+            item.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+            item.iClassId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
 
             HttpFileCollection Fs = Request.Files;
 
@@ -46,7 +46,7 @@ public partial class upload_uploadSave : adminMain
                 HttpPostedFile PF = Fs[0];
                 string filename = PF.FileName;
                 item.iSize = PF.ContentLength / 1024;
-                if (item.iSize <= FilesConst.fileSize)
+                if (item.iSize <=objectHandlers.ToInt( base.configService.baseConfig["fileSize"]))
                 {
                     string ex = filename.Substring(filename.LastIndexOf("."), filename.Length - filename.LastIndexOf("."));
                     item.vcFileName = filename.Substring(filename.LastIndexOf("\\")+1, filename.Length - filename.LastIndexOf("\\")-1);
@@ -55,16 +55,15 @@ public partial class upload_uploadSave : adminMain
                     {
                         item.vcType = ex.Replace(".", "");
                         url = base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"] + "attach.aspx?attach=" + item.iID.ToString();
-                        FileClassHandlers fchdl = new FileClassHandlers();
-
-                        string filepath = fchdl.GetFilesPathByClassId(base.conn, item.iClassId);
+                       
+                        string filepath = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId(item.iClassId);
                         filepath += item.iID.ToString().Substring(0, 6) + "/"
                         + item.iID.ToString().Substring(6, 2) + "/" + item.iID.ToString() + ex;
                         bool create = false;
                         try
                         {
                             filepath = Server.MapPath("~" + filepath);
-                            Text.SaveFile(filepath, "");
+                            objectHandlers.SaveFile(filepath, "");
                             PF.SaveAs(filepath);
                             create = true;
                         }
@@ -76,8 +75,8 @@ public partial class upload_uploadSave : adminMain
 
                         if (create)
                         {
-                            FileInfoHandlers flfh = new FileInfoHandlers();
-                            int rtn = flfh.AddFileInfoByAdmin(base.conn, base.admin.adminInfo.vcAdminName, item);
+                          
+                            int rtn = base.handlerService.fileService.fileInfoHandlers.AddFileInfoByAdmin( base.adminInfo.vcAdminName, item);
                             if (rtn < 0)
                             {
                                 err = "数据库保存错误";
@@ -92,11 +91,11 @@ public partial class upload_uploadSave : adminMain
                 }
                 else
                 {
-                    err = "超过" + FilesConst.fileSize.ToString() + "K";
+                    err = "超过" + base.configService.baseConfig["fileSize"] + "bty";
                 }
             }
 
-            int ifid = Bases.ToInt(Fetch.Post("iId"));
+            int ifid = objectHandlers.ToInt(objectHandlers.Post("iId"));
             string text = "<script type=\"text/javascript\">\r\n"
                 + "window.parent.UpdateBack(" + ifid.ToString() + ",\"Url:'" + url + "',Err:'" + err + "'\");\r\n"
                 + "</script>\r\n";
@@ -107,7 +106,7 @@ public partial class upload_uploadSave : adminMain
     private bool CheckType(string str)
     {
         string t =str.Replace(".","");
-        string text = FilesConst.alowFileType.Replace("'", "");
+        string text = base.configService.baseConfig["alowFileType"].Replace("'", "");
         string[] te = text.Split(',');
         for (int i = 0; i < te.Length; i++)
         {

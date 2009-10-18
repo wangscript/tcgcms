@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 
 using TCG.Utils;
-using TCG.Files.Utils;
+
 using TCG.Entity;
 using TCG.Pages;
 using TCG.Handlers;
@@ -22,7 +22,7 @@ public partial class View : FilesMain
     {
         if (!Page.IsPostBack)
         {
-            long iId = Bases.ToLong(Fetch.Get("fileId"));
+            long iId = objectHandlers.ToLong(objectHandlers.Get("fileId"));
             this.ImageShow.Src = "attach.aspx?attach=" + iId.ToString() ;
         }
     }

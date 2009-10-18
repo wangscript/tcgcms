@@ -13,6 +13,7 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Manage.Utils;
+using TCG.Entity;
 
 public partial class adminmdy : adminMain
 {
@@ -25,13 +26,13 @@ public partial class adminmdy : adminMain
         }
         else
         {
-            string vcAdminName = Fetch.Post("vcAdminName");
-            string vcNickname = Fetch.Post("iNickName");
-            int iRole = Bases.ToInt(Fetch.Post("sRole"));
-            string cLock = Fetch.Post("iLock");
-            string popedom = Fetch.Post("popedom");
-            string classpopedom = Fetch.Post("classpopedom");
-            string pwd = Fetch.Post("iNewPWD");
+            string vcAdminName = objectHandlers.Post("vcAdminName");
+            string vcNickname = objectHandlers.Post("iNickName");
+            int iRole = objectHandlers.ToInt(objectHandlers.Post("sRole"));
+            string cLock = objectHandlers.Post("iLock");
+            string popedom = objectHandlers.Post("popedom");
+            string classpopedom = objectHandlers.Post("classpopedom");
+            string pwd = objectHandlers.Post("iNewPWD");
 
             if (string.IsNullOrEmpty(vcAdminName) || string.IsNullOrEmpty(vcNickname))
             {
@@ -39,8 +40,8 @@ public partial class adminmdy : adminMain
                 base.Finish();
                 return;
             }
-            if (!string.IsNullOrEmpty(pwd)) pwd = Text.MD5(pwd);
-            int rtn = base.admin.AdminHandlers.UpdateAdminInfo(base.admin.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
+            if (!string.IsNullOrEmpty(pwd)) pwd = objectHandlers.MD5(pwd);
+            int rtn = base.handlerService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
                 popedom, classpopedom);
             base.AjaxErch(rtn.ToString());
             base.Finish();
@@ -49,9 +50,9 @@ public partial class adminmdy : adminMain
 
     private void AdminInfoInit()
     {
-        string admin = Fetch.Get("adminname", CheckGetEnum.Safety);
+        string admin = objectHandlers.Get("adminname", CheckGetEnum.Safety);
         this.vcAdminName.Value = admin;
-        DataTable dt = base.admin.AdminHandlers.GetAdminInfoByAdminName(admin);
+        DataTable dt = base.handlerService.adminHandlers.GetAdminInfoByAdminName(admin);
         if (dt == null) {Response.End();return; }
         if (dt.Rows.Count == 0) { Response.End(); dt.Dispose(); dt.Clear(); return; }
         this.popedom.Value = dt.Rows[0]["vcPopedom"].ToString();
@@ -67,7 +68,7 @@ public partial class adminmdy : adminMain
         DataSet ds = new DataSet();
         int t = 0;
         int p = 0;
-        int rtn = base.admin.AdminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
+        int rtn = base.handlerService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
         if (rtn < 0)
         {
             ds.Dispose();

@@ -21,8 +21,8 @@ public partial class AjaxMethod_Admin_CheckAdminName : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string adminname = Fetch.Get("admin", CheckGetEnum.Safety);
-            int rtn = base.admin.AdminHandlers.CheckAdminNameForReg(adminname);
+            string adminname = objectHandlers.Get("admin", CheckGetEnum.Safety);
+            int rtn = base.handlerService.adminHandlers.CheckAdminNameForReg(adminname);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

@@ -13,7 +13,6 @@ using System.Threading;
 using System.Text;
 
 using TCG.Utils;
-using TCG.Files.Utils;
 using TCG.Entity;
 using TCG.Pages;
 using TCG.Handlers;
@@ -25,23 +24,22 @@ public partial class attach : FilesMain
         if (!Page.IsPostBack)
         {
             
-            if (Fetch.IsGetFromAnotherDomain || Fetch.IsPostFromAnotherDomain)
+            if (objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain)
             {
                 return;
             }
 
-            long iId = Bases.ToLong(Fetch.Get("attach"));
+            long iId = objectHandlers.ToLong(objectHandlers.Get("attach"));
             if (iId == 0)
             {
                 return;
             }
 
-            FileInfoHandlers flhdl = new FileInfoHandlers();
-            FileClassHandlers fcldl = new FileClassHandlers();
-            FileInfos item = flhdl.GetFileInfosById(base.conn, iId);
+            
+            FileInfos item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
 
             string filename = item.iID.ToString() + "." + item.vcType;
-            string path = fcldl.GetFilesPathByClassId(base.conn, item.iClassId) + item.iID.ToString().Substring(0, 6) + "/"
+            string path = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId( item.iClassId) + item.iID.ToString().Substring(0, 6) + "/"
                         + item.iID.ToString().Substring(6, 2) + "/" + filename;
             string str7 = "";
             switch (item.vcType)

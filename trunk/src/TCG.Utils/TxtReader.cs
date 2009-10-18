@@ -22,7 +22,7 @@ namespace TCG.Utils
     {
         public static string Read(string file)
         {
-            string text1 = Fetch.MapPath(file);
+            string text1 = objectHandlers.MapPath(file);
             if (!File.Exists(text1))
             {
                 new Terminator().Throw("\u65e0\u6cd5\u8bfb\u53d6\u5230\u6587\u4ef6 <u>" + text1 + "</u>\uff0c\u53ef\u80fd\u8fd9\u4e2a\u6587\u4ef6\u4e0d\u5b58\u5728\u6216\u65e0\u6cd5\u88ab\u8bbf\u95ee\u3002\uff08\u9700\u7ba1\u7406\u5458\u89e3\u51b3\uff09<br /><br />\u7528\u4e8eCVB\u8bba\u575b\u7684\u63d0\u793a\uff1a<a href='user_abandon.aspx?action=removeall'>\u5220\u9664Cookies\u518d\u91cd\u8bd5</a>", null, null, null, false);

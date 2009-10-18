@@ -15,6 +15,7 @@
 namespace TCG.Data
 {
     using TCG.Utils;
+    using TCG.Entity;
     using System;
     using System.Configuration;
     using System.Data;
@@ -365,6 +366,14 @@ namespace TCG.Data
                     //this.Close();
                     this.m_dbLink = ConnStr[value];
                 }
+            }
+        }
+
+        public string SetConnStr
+        {
+            set
+            {
+                if (this.m_dbLink != value) this.m_dbLink = value;
             }
         }
 
