@@ -25,14 +25,14 @@ using TCG.Entity;
 using TCG.Manage.Utils;
 using TCG.Handlers;
 
-namespace TCG.Pages
+namespace TCG.Handlers
 {
-    public class AdminLogin
+    public class AdminLoginHandlers
     {
 
-        public AdminLogin(Connection conn)
+        public AdminLoginHandlers(Connection conn,AdminHandlers adminhandlers)
         {
-            this._adminh = new AdminHandlers(conn);
+            this._adminh = adminhandlers;
             this.Initialization();
         }
 
@@ -44,10 +44,10 @@ namespace TCG.Pages
                 if (this._admincookie != null)
                 {
                     if (this._admincookie.Values.Count != 1) return;
-                    this._name = Fetch.UrlDecode(this._admincookie.Values["AdminName"].ToString());
+                    this._name = objectHandlers.UrlDecode(this._admincookie.Values["AdminName"].ToString());
                 }
             }
-            this._currenturl = this.RemoveA(Fetch.CurrentUrl);
+            this._currenturl = this.RemoveA(objectHandlers.CurrentUrl);
         }
 
         private void AdminInit()
@@ -191,7 +191,6 @@ namespace TCG.Pages
         }
 
        
-        public AdminHandlers AdminHandlers { get { return this._adminh; } }
         public Admin adminInfo 
         {
             get 
@@ -205,8 +204,8 @@ namespace TCG.Pages
         
         private HttpCookie _admincookie = null;
         private string _name = string.Empty;
-        private AdminHandlers _adminh = null;
         private Admin _admin = null;
+        private AdminHandlers _adminh = null;
         private string _currenturl = string.Empty;
     }
 }

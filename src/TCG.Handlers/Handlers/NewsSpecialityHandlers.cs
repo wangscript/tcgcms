@@ -37,7 +37,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iSiteId", SqlDbType.Int, 4); sp2.Value = nif.iSiteId;
             SqlParameter sp3 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp3.Value = nif.iParent;
             SqlParameter sp4 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 50); sp4.Value = nif.vcTitle;
@@ -63,7 +63,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iSiteId", SqlDbType.Int, 4); sp2.Value = nif.iSiteId;
             SqlParameter sp3 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp3.Value = nif.iParent;
             SqlParameter sp4 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 50); sp4.Value = nif.vcTitle;
@@ -92,7 +92,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "03";
             SqlParameter sp3 = new SqlParameter("@IDs", SqlDbType.VarChar, 200); sp3.Value = ids;
             SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int); sp4.Direction = ParameterDirection.Output;

@@ -20,11 +20,7 @@ using TCG.Data;
 using TCG.Entity;
 using TCG.Handlers;
 
-using TCG.Entity;
-using TCG.Handlers;
 using TCG.Template.Utils;
-
-using TCG.Handlers;
 
 public partial class news_newsclasslist : adminMain
 {
@@ -36,7 +32,7 @@ public partial class news_newsclasslist : adminMain
         }
         else
         {
-            string work = Fetch.Post("work");
+            string work = objectHandlers.Post("work");
             switch (work)
             {
                 case "DEL":
@@ -48,7 +44,7 @@ public partial class news_newsclasslist : adminMain
             }
 
 
-            string action = Fetch.Post("iAction");
+            string action = objectHandlers.Post("iAction");
             switch (action)
             {
                 
@@ -81,10 +77,10 @@ public partial class news_newsclasslist : adminMain
         arrsortfield.Add("iOrder");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iParent = Bases.ToInt(Fetch.Get("iParentId"));
+        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
         sItem.strCondition = "iParent=" + iParent.ToString();
         this.iClassId.Value = iParent.ToString();
 
@@ -136,7 +132,7 @@ public partial class news_newsclasslist : adminMain
 
     private void NewsClassDel()
     {
-        int tClassID = Bases.ToInt(Fetch.Post("DelClassId"));
+        int tClassID = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
         if (tClassID == 0)
         {
             base.AjaxErch("-1");
@@ -144,16 +140,15 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        NewsClassHandlers chdl = new NewsClassHandlers();
-        int rtn = chdl.DelNewsClassByClassId(base.conn, tClassID, base.admin.adminInfo.vcAdminName);
+        int rtn = base.handlerService.newsClassHandlers.DelNewsClassByClassId(base.conn, tClassID, base.adminInfo.vcAdminName);
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        chdl = null;
+
     }
 
     private void NewsClassCreate()
     {
-        int tClassID = Bases.ToInt(Fetch.Post("DelClassId"));
+        int tClassID = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
         if (tClassID == 0)
         {
             base.AjaxErch("<a>生成失败,分类ID为0!</a>");
@@ -161,9 +156,8 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        NewsClassHandlers chdl = new NewsClassHandlers();
-        ClassInfo cif = chdl.GetClassInfoById(base.conn, tClassID, false);
-        chdl = null;
+        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, tClassID, false);
+
         if (cif == null)
         {
             base.AjaxErch("<a>生成失败,分类信息不存在!</a>");
@@ -171,9 +165,8 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        TemplateHandlers tlhdl = new TemplateHandlers();
-        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, cif.iListTemplate,false);
-        tlhdl = null;
+
+        TemplateInfo tlif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iListTemplate,false);
         if (tlif == null)
         {
             base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");
@@ -200,7 +193,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        TCGTagHandlers tcgthdl = new TCGTagHandlers();
+        TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
         tcgthdl.Template = tlif.vcContent.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
@@ -233,14 +226,14 @@ public partial class news_newsclasslist : adminMain
 
     private void OrderMdy()
     {
-        string KeyValue = Fetch.Post("KeyValue");
+        string KeyValue = objectHandlers.Post("KeyValue");
         if (string.IsNullOrEmpty(KeyValue))
         {
             base.AjaxErch("-1");
             base.Finish();
             return;
         }
-        string iFeildName = Fetch.Post("iFeildName");
+        string iFeildName = objectHandlers.Post("iFeildName");
         if (string.IsNullOrEmpty(iFeildName))
         {
             base.AjaxErch("-1");
@@ -248,7 +241,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        int iMdyID = Bases.ToInt(Fetch.Post("iMdyID"));
+        int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
         if (iMdyID == 0)
         {
             base.AjaxErch("-1");
@@ -256,8 +249,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        NewsClassHandlers chl = new NewsClassHandlers();
-        ClassInfo cif = chl.GetClassInfoById(base.conn, iMdyID,false);
+        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, iMdyID,false);
         if (cif == null)
         {
             base.AjaxErch("-1");
@@ -267,7 +259,7 @@ public partial class news_newsclasslist : adminMain
 
         cif.iOrder = objectHandlers.ToInt(KeyValue);
 
-        int rtn = chl.EditNewsClass(base.conn, base.admin.adminInfo.vcAdminName, cif);
+        int rtn = base.handlerService.newsClassHandlers.EditNewsClass(base.conn, base.adminInfo.vcAdminName, cif);
         if (rtn < 0)
         {
             base.AjaxErch("-1");
@@ -277,7 +269,7 @@ public partial class news_newsclasslist : adminMain
     
         base.Finish();
         cif = null;
-        chl = null;
+
     }
 }
 

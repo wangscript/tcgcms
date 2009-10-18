@@ -128,7 +128,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
             SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
             SqlParameter sp4 = new SqlParameter("@vcKey", SqlDbType.VarChar, 30); sp4.Value = "Del";
@@ -154,7 +154,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
             SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
             SqlParameter sp4 = new SqlParameter("@vcKey", SqlDbType.VarChar, 30); sp4.Value = "Created";
@@ -176,7 +176,7 @@ namespace TCG.Handlers
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = Fetch.UserIp;
+            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "02";
             SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
             SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp4.Direction = ParameterDirection.Output;
@@ -329,7 +329,7 @@ namespace TCG.Handlers
             }
             else
             {
-                int t = Bases.ToInt(ids);
+                int t = objectHandlers.ToInt(ids);
                 if (t != 0)
                 {
                     return this.DelNewsInfoHtmlById(conn, config, t);
@@ -390,14 +390,10 @@ namespace TCG.Handlers
         public string CreateNewsInfoFilePath(string extion, NewsInfo nif)
         {
             string text = string.Empty;
-            string mtitle = Text.GetTextWithoutHtml(nif.vcTitle).Replace(" ", "").Replace("　", "");    //去掉标题里面的HTML，空格
-            //mtitle = KeyWordTree.FindKeyWord(mtitle, "-");    //暂时还不分词吧，分词系统太薄弱
-            mtitle = Text.ReplaceBD(mtitle);    //去掉标点
-            mtitle = (nif.iId == 0 ? "{0}" : nif.iId.ToString()) + "t-" + mtitle;
             text += nif.ClassInfo.vcDirectory;
-            text += nif.dAddDate.Year.ToString() + "/";
-            text += objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2) + objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += Pinyin.GetPinyinByChineses(mtitle) + extion;
+            text += nif.dAddDate.Year.ToString() + objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2);
+            text += objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
+            text += (nif.iId == 0 ? "{0}" : objectHandlers.AddZeros(nif.iId.ToString(),9)) + extion;
             return text;
         }
 

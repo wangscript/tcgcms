@@ -18,26 +18,12 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Data;
-using TCG.Files.Utils;
 
 namespace TCG.Pages
 {
     public class FilesMain : Origin
     {
-        private Connection _conn;
 
-        protected Connection conn
-        {
-            get
-            {
-                if (this._conn == null)
-                {
-                    this._conn = new Connection();
-                    this._conn.Dblink = FilesConst.FilesDbLinks[0];
-                }
-                return this._conn;
-            }
-        }
 
         protected void AjaxErch(string str)
         {
@@ -47,7 +33,7 @@ namespace TCG.Pages
 
         protected void Finish()
         {
-            if ((this._conn != null) && this._conn.Connected) { this._conn.Close(); }    
+            if ((this.conn != null) && this.conn.Connected) { this.conn.Close(); }    
         }
     }
 }

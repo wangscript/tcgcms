@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="HandlerService.cs" />
     <Compile Include="Handlers\AdminHandlers.cs" />
+    <Compile Include="Handlers\AdminLoginHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileService.cs" />
     <Compile Include="Handlers\NewsClassHandlers.cs" />
-    <Compile Include="Handlers\FileClasshandlers.cs" />
-    <Compile Include="Handlers\FileInfoHandlers.cs" />
-    <Compile Include="Handlers\FileZipHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileClassHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileInfoHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
     <Compile Include="Handlers\NewsFromHandlers.cs" />
     <Compile Include="Handlers\NewsInfoHandlers.cs" />
     <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
@@ -64,10 +66,6 @@
     <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.Files\TCG.Files.csproj">
-      <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
-      <Name>TCG.Files</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.KeyWordSplit\TCG.KeyWordSplit.csproj">
       <Project>{B151A9AB-28A9-4343-B1BA-62825DE9DDE4}</Project>

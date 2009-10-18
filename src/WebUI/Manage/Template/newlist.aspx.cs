@@ -18,8 +18,6 @@ using TCG.Handlers;
 using TCG.Template.Utils;
 using TCG.Data;
 
-using TCG.Handlers;
-
 public partial class Template_newlist : adminMain
 {
     public int iSite = 0;
@@ -31,7 +29,7 @@ public partial class Template_newlist : adminMain
         }
         else
         {
-            string work = Fetch.Post("work");
+            string work = objectHandlers.Post("work");
             switch (work)
             {
                 case "DEL":
@@ -62,23 +60,23 @@ public partial class Template_newlist : adminMain
         arrsortfield.Add("dUpdateDate DESC");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iSiteId = Bases.ToInt(Fetch.Get("iSiteId"));
+        int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
         sItem.strCondition = "iSiteId=" + iSiteId.ToString() + " AND iSystemType =" + TemplateConstant.SystemType_News;
         this.iSiteId.Value = iSiteId.ToString();
         iSite = iSiteId;
 
-        int iParentid = Bases.ToInt(Fetch.Get("iParentid"));
+        int iParentid = objectHandlers.ToInt(objectHandlers.Get("iParentid"));
         sItem.strCondition += " AND iParentid=" + iParentid.ToString();
         this.iParentid.Value = iParentid.ToString();
 
-        string tt = Fetch.Get("iType");
+        string tt = objectHandlers.Get("iType");
         int iType = -1;
         if (!string.IsNullOrEmpty(tt))
         {
-            iType = Bases.ToInt(Fetch.Get("iType"));
+            iType = objectHandlers.ToInt(objectHandlers.Get("iType"));
             sItem.strCondition += " AND iType=" + iType.ToString();
         }
 
@@ -138,31 +136,29 @@ public partial class Template_newlist : adminMain
 
     private void TemplateDel()
     {
-        string temps = Fetch.Post("temps");
+        string temps = objectHandlers.Post("temps");
         if (string.IsNullOrEmpty(temps))
         {
             base.AjaxErch("-1");
             base.Finish();
         }
-        TemplateHandlers nthdl = new TemplateHandlers();
 
-        int rtn = nthdl.DelTemplate(base.conn, base.admin.adminInfo.vcAdminName, temps);
+        int rtn = base.handlerService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
         base.AjaxErch(rtn.ToString());
-        nthdl = null;
         base.Finish();
     }
 
     private void TemplateCreate()
     {
-        int iTemplate = Bases.ToInt(Fetch.Post("iTemplateId"));
+        int iTemplate = objectHandlers.ToInt(objectHandlers.Post("iTemplateId"));
         if (iTemplate == 0)
         {
             base.AjaxErch("<a>生成失败-模版ID不能为0！</a>");
             return;
         }
-        TemplateHandlers tlhdl = new TemplateHandlers();
-        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(base.conn, iTemplate,false);
-        tlhdl = null;
+
+        TemplateInfo tlif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, iTemplate,false);
+
         if (tlif == null)
         {
             base.AjaxErch("<a>生成失败-编号：" + iTemplate.ToString() + "的模版不存在！</a>");
@@ -193,7 +189,7 @@ public partial class Template_newlist : adminMain
 
         if (needTCG)
         {
-            TCGTagHandlers tcgthdl = new TCGTagHandlers();
+            TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
             tcgthdl.Template = tlif.vcContent;
             tcgthdl.FilePath = filepath;
             if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
@@ -210,7 +206,7 @@ public partial class Template_newlist : adminMain
         {
             try
             {
-                Text.SaveFile(filepath, tlif.vcContent);
+                objectHandlers.SaveFile(filepath, tlif.vcContent);
                 base.AjaxErch("<a>生成成功:" + filepath + "...</a>");
             }
             catch

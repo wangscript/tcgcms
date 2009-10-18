@@ -32,7 +32,7 @@ public partial class news_NewsSpecialityList : adminMain
         }
         else
         {
-            string action = Fetch.Post("iAction");
+            string action = objectHandlers.Post("iAction");
             switch (action)
             {
                 case "ADD" :
@@ -67,15 +67,15 @@ public partial class news_NewsSpecialityList : adminMain
         arrsortfield.Add("iId");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iParent = Bases.ToInt(Fetch.Get("iParentID"));
+        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentID"));
         sItem.strCondition = "iParent=" + iParent.ToString();
         this.iParentID.Value = iParent.ToString();
         this.inParentId.Value = iParent.ToString();
 
-        int iSiteId = Bases.ToInt(Fetch.Get("iSiteId"));
+        int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
         sItem.strCondition += " AND iSiteId=" + iSiteId.ToString();
         this.iSiteId.Value = iSiteId.ToString();
 
@@ -126,10 +126,10 @@ public partial class news_NewsSpecialityList : adminMain
     private void SpecialityADD()
     {
         NewsSpecialityInfo  item = new NewsSpecialityInfo();
-        item.vcTitle = Fetch.Post("inTitle");
-        item.vcExplain = Fetch.Post("inExplain");
-        item.iParent = Bases.ToInt(Fetch.Post("inParentId"));
-        item.iSiteId = Bases.ToInt(Fetch.Post("iSiteId"));
+        item.vcTitle = objectHandlers.Post("inTitle");
+        item.vcExplain = objectHandlers.Post("inExplain");
+        item.iParent = objectHandlers.ToInt(objectHandlers.Post("inParentId"));
+        item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
         if (string.IsNullOrEmpty(item.vcTitle))
         {
             base.AjaxErch("-1000000035");
@@ -143,25 +143,24 @@ public partial class news_NewsSpecialityList : adminMain
         //    return;
         //}
 
-        NewsSpecialityHandlers nshdl = new NewsSpecialityHandlers();
-        int rtn = nshdl.NewsSpecialityAdd(base.conn, base.admin.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.newsSpecialityHandlers.NewsSpecialityAdd(base.conn, base.adminInfo.vcAdminName, item);
         CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        nshdl = null;
+
         item = null;
     }
 
     private void SpecialityMDY()
     {
-        string KeyValue = Fetch.Post("KeyValue");
+        string KeyValue = objectHandlers.Post("KeyValue");
         if (string.IsNullOrEmpty(KeyValue))
         {
             base.AjaxErch("-1");
             base.Finish();
             return;
         }
-        string iFeildName = Fetch.Post("iFeildName");
+        string iFeildName = objectHandlers.Post("iFeildName");
         if (string.IsNullOrEmpty(iFeildName))
         {
             base.AjaxErch("-1");
@@ -169,7 +168,7 @@ public partial class news_NewsSpecialityList : adminMain
             return;
         }
 
-        int iMdyID = Bases.ToInt(Fetch.Post("iMdyID"));
+        int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
         if (iMdyID == 0)
         {
             base.AjaxErch("-1");
@@ -177,8 +176,8 @@ public partial class news_NewsSpecialityList : adminMain
             return;
         }
          
-        NewsSpecialityHandlers nshdl = new NewsSpecialityHandlers();
-        NewsSpecialityInfo item = nshdl.GetNewsSpecialityInfoById(base.conn, iMdyID);
+
+        NewsSpecialityInfo item = base.handlerService.newsSpecialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
         bool ismdy = true;
         if (item == null)
         {
@@ -196,7 +195,7 @@ public partial class news_NewsSpecialityList : adminMain
                 item.vcExplain = KeyValue;
                 break;
             case "Parent":
-                int iKeyValue = Bases.ToInt(KeyValue);
+                int iKeyValue = objectHandlers.ToInt(KeyValue);
                 if (item.iId == iKeyValue)
                 {
                     ismdy = false;
@@ -213,30 +212,28 @@ public partial class news_NewsSpecialityList : adminMain
         }
         if (ismdy)
         {
-            int rtn = nshdl.NewsSpecialityMdy(base.conn, base.admin.adminInfo.vcAdminName, item);
+            int rtn = base.handlerService.newsSpecialityHandlers.NewsSpecialityMdy(base.conn, base.adminInfo.vcAdminName, item);
             CachingService.Remove("AllNewsSpeciality");
             base.AjaxErch(rtn.ToString());
         }
 
         base.Finish();
-        nshdl = null;
         item = null;
     }
 
     private void SpecialityDEL()
     {
-        string Ids = Fetch.Post("iIds");
+        string Ids = objectHandlers.Post("iIds");
         if (string.IsNullOrEmpty(Ids))
         {
             base.AjaxErch("-1000000038");
             base.Finish();
             return;
         }
-        NewsSpecialityHandlers nshdl = new NewsSpecialityHandlers();
-        int rtn = nshdl.NewSpecialityDel(base.conn, base.admin.adminInfo.vcAdminName, Ids);
+
+        int rtn = base.handlerService.newsSpecialityHandlers.NewSpecialityDel(base.conn, base.adminInfo.vcAdminName, Ids);
         CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        nshdl = null;
     }
 }

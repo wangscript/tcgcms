@@ -27,7 +27,7 @@ namespace TCG.Manage.Utils
 
         public static string[] SpecialPages = {
             "login.aspx",
-            "AjaxMethod/Text_GetErrText.aspx",
+            "AjaxMethod/Text_GetErrobjectHandlers.aspx",
             "files/ConentImgCheck.aspx",
             "version/ver.aspx"
         };

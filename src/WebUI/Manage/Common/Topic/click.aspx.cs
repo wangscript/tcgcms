@@ -22,8 +22,8 @@ public partial class Common_Topic_click : ScriptsMain
     {
         if (!Page.IsPostBack)
         {
-            int topicid = Bases.ToInt(Fetch.Get("topicid"));
-            bool shownum = Fetch.Get("shownum") == "true" ? true : false;
+            int topicid = objectHandlers.ToInt(objectHandlers.Get("topicid"));
+            bool shownum = objectHandlers.Get("shownum") == "true" ? true : false;
             if (topicid == 0)
             {
                 if (shownum)

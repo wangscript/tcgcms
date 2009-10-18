@@ -22,8 +22,8 @@ public partial class jsMethod_AllNewsClass : adminMain
         if (!Page.IsPostBack)
         {
             Response.Write("var NewsLis = new Array();\r\n");
-            NewsClassHandlers cldl = new NewsClassHandlers();
-            DataTable dt = cldl.GetClassInfos(base.conn);
+
+            DataTable dt = base.handlerService.newsClassHandlers.GetClassInfos(base.conn);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)

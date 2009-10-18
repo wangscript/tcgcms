@@ -24,8 +24,6 @@ using TCG.Data;
 using TCG.Utils;
 using TCG.Entity;
 
-using TCG.Files.Utils;
-
 namespace TCG.Handlers
 {
     public class TCGTagStringFunHandlers
@@ -46,7 +44,7 @@ namespace TCG.Handlers
 
                 foreach (Match item in matchs)
                 {
-                    str = str.Replace(item.Value, clhds.GetAllChildClassIdByClassId(conn, Bases.ToInt(item.Result("$1")),false));
+                    str = str.Replace(item.Value, clhds.GetAllChildClassIdByClassId(conn, objectHandlers.ToInt(item.Result("$1")),false));
                 }
                 clhds = null;
             }
@@ -56,7 +54,7 @@ namespace TCG.Handlers
 
         public string StringColoumFun(Connection conn, string str, bool findtcgstringfunByF)
         {
-            string pattern = @"\$TCG.CutStrLeft\(<TCG>([\S\s]*?)</TCG>\,([0-9]+),(false|true)\)";
+            string pattern = @"\$TCG.CutStrLeft\(<TCG>([\S\s]*?)</TCG>\,([0-9]+)\)";
             string text1 = "";
             bool findtcgstringfun = false;
             MatchCollection matchs = this.GetMatchs(pattern, str);
@@ -68,24 +66,9 @@ namespace TCG.Handlers
                     text1 = this.StringColoumFun(conn, item.Result("$1"), findtcgstringfun);
                     try
                     {
-                        str = str.Replace(item.Value, Text.Left(text1,
-                            Bases.ToInt(item.Result("$2")), bool.Parse(item.Result("$3"))));
+                        str = str.Replace(item.Value, objectHandlers.Left(text1,objectHandlers.ToInt(item.Result("$2"))));
                     }
                     catch { }
-                }
-            }
-            matchs = null;
-
-            pattern = @"\$TCG.CutStrLeft\(<TCG>([\S\s]*?)</TCG>\,([0-9]+)\)";
-            matchs = this.GetMatchs(pattern, str);
-            if (matchs.Count > 0)
-            {
-                findtcgstringfun = true;
-                foreach (Match item in matchs)
-                {
-                    text1 = this.StringColoumFun(conn, item.Result("$1"), findtcgstringfun);
-                    str = str.Replace(item.Value, Text.Left(text1,
-                        Bases.ToInt(item.Result("$2")), false));
                 }
             }
             matchs = null;
@@ -98,7 +81,7 @@ namespace TCG.Handlers
                 foreach (Match item in matchs)
                 {
                     text1 = this.StringColoumFun(conn, item.Result("$1"), findtcgstringfun);
-                    str = str.Replace(item.Value, Text.GetTextWithoutHtml(text1));
+                    str = str.Replace(item.Value, objectHandlers.GetTextWithoutHtml(text1));
                 }
             }
             matchs = null;
@@ -112,7 +95,7 @@ namespace TCG.Handlers
                 {
                     try
                     {
-                        str = str.Replace(item.Value, Bases.ToTime(item.Result("$1")).ToString(item.Result("$2")));
+                        str = str.Replace(item.Value, objectHandlers.ToTime(item.Result("$1")).ToString(item.Result("$2")));
                     }
                     catch { }
                 }

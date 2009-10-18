@@ -37,38 +37,38 @@ namespace TCG.Utils
         private void FillImageProperties()
         {
             string text1 = string.Empty;
-            text1 = Fetch.Get("width");
-            if (RegExp.IsNumeric(text1))
+            text1 = objectHandlers.Get("width");
+            if (objectHandlers.IsNumeric(text1))
             {
                 this._width = int.Parse(text1);
             }
-            text1 = Fetch.Get("height");
-            if (RegExp.IsNumeric(text1))
+            text1 = objectHandlers.Get("height");
+            if (objectHandlers.IsNumeric(text1))
             {
                 this._height = int.Parse(text1);
             }
-            text1 = Fetch.Get("fontsize");
-            if (RegExp.IsNumeric(text1))
+            text1 = objectHandlers.Get("fontsize");
+            if (objectHandlers.IsNumeric(text1))
             {
                 this._fontSize = int.Parse(text1);
             }
-            text1 = Fetch.Get("fontfamily");
+            text1 = objectHandlers.Get("fontfamily");
             if (text1.Length > 0)
             {
                 this._fontFamily = text1;
             }
-            text1 = Fetch.Get("bold").ToLower();
+            text1 = objectHandlers.Get("bold").ToLower();
             if (text1.Length > 0)
             {
                 this._bold = text1 == "true";
             }
-            text1 = Fetch.Get("italic").ToLower();
+            text1 = objectHandlers.Get("italic").ToLower();
             if (text1.Length > 0)
             {
                 this._italic = text1 == "true";
             }
-            text1 = Fetch.Get("impurity");
-            if (RegExp.IsNumeric(text1))
+            text1 = objectHandlers.Get("impurity");
+            if (objectHandlers.IsNumeric(text1))
             {
                 this._impurity = int.Parse(text1);
             }
@@ -104,7 +104,7 @@ namespace TCG.Utils
                 graphics1.DrawLine(pen1, pointArray1[num1], pointArray1[num1 + 1]);
             }
             graphics1.DrawRectangle(pen1, 0, 0, (this._width-1), (this._height-1));
-            string text1 = Text.RandomStr(4);
+            string text1 = objectHandlers.RandomStr(4);
             SessionState.Set("verification", text1.ToLower());
             string text2 = "";
             foreach(char i in text1)

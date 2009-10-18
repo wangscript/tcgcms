@@ -20,7 +20,7 @@ public partial class Admin_Top : adminMain
     {
         if (Page.IsPostBack)
         {
-            string admins = Fetch.Post("admins");
+            string admins = objectHandlers.Post("admins");
             
             if (string.IsNullOrEmpty(admins))
             {
@@ -29,7 +29,7 @@ public partial class Admin_Top : adminMain
                 return;
             }
 
-            int rtn = base.admin.AdminHandlers.DelAdmins(base.admin.adminInfo.vcAdminName, admins, "01");
+            int rtn = base.handlerService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, "01");
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

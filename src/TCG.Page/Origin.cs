@@ -24,7 +24,7 @@ using System.Web.UI.WebControls;
 using TCG.Data;
 using TCG.Utils;
 using TCG.Release;
-
+using TCG.Handlers;
 
 namespace TCG.Pages
 {
@@ -67,7 +67,23 @@ namespace TCG.Pages
             }
         }
 
+        /// <summary>
+        /// 提供系统操作方法的服务
+        /// </summary>
+        protected HandlerService handlerService
+        {
+            get
+            {
+                if (this._handlerservice == null)
+                {
+                    this._handlerservice = new HandlerService(this.conn, this.configService);
+                }
+                return this._handlerservice;
+            }
+        }
+
         private ConfigService _configservice = null;
-        private Connection _conn;
+        private HandlerService _handlerservice = null;
+        private Connection _conn = null;
     }
 }

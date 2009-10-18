@@ -22,10 +22,10 @@ public partial class adminroleadd : adminMain
         }
         else
         {
-            string vcRoleName = Fetch.Post("vcRoleName");
-            string vcContent = Fetch.Post("vcContent");
-            string popedom = Fetch.Post("popedom");
-            string classpopedom = Fetch.Post("classpopedom");
+            string vcRoleName = objectHandlers.Post("vcRoleName");
+            string vcContent = objectHandlers.Post("vcContent");
+            string popedom = objectHandlers.Post("popedom");
+            string classpopedom = objectHandlers.Post("classpopedom");
             if (string.IsNullOrEmpty(vcRoleName))
             {
                 base.AjaxErch("-1");
@@ -33,7 +33,7 @@ public partial class adminroleadd : adminMain
                 return;
             }
 
-            int rtn = base.admin.AdminHandlers.AddAdminRole(base.admin.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
+            int rtn = base.handlerService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
             base.AjaxErch(rtn.ToString());
             base.Finish();
             return;

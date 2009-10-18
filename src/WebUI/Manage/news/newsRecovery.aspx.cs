@@ -29,7 +29,7 @@ public partial class news_newsRecovery : adminMain
         }
         else
         {
-            string Action = Fetch.Post("iAction");
+            string Action = objectHandlers.Post("iAction");
             switch (Action)
             {
                 case "SAVE":
@@ -63,8 +63,8 @@ public partial class news_newsRecovery : adminMain
         arrsortfield.Add("iId DESC");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
         sItem.strCondition += " cDel ='Y'";
 
         int curPage = 0;
@@ -129,31 +129,27 @@ public partial class news_newsRecovery : adminMain
 
     private void SaveNews()
     {
-        string delids = Fetch.Post("DelClassId");
+        string delids = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(delids))
         {
             base.AjaxErch("-1000000051");
             return;
         }
 
-        NewsInfoHandlers nihdl = new NewsInfoHandlers();
-
-        int rtn = nihdl.DelNewsInfosWithLogic(base.conn, base.admin.adminInfo.vcAdminName, "N", delids);
+        int rtn = base.handlerService.newsInfoHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
         base.AjaxErch(rtn.ToString());
     }
 
     private void DelNews()
     {
-        string delids = Fetch.Post("DelClassId");
+        string delids = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(delids))
         {
             base.AjaxErch("-1000000051");
             return;
         }
 
-        NewsInfoHandlers nihdl = new NewsInfoHandlers();
-
-        int rtn = nihdl.DelNewsInfosWithPhysics(base.conn, base.admin.adminInfo.vcAdminName, delids);
+        int rtn = base.handlerService.newsInfoHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
         base.AjaxErch(rtn.ToString());
     }
 }

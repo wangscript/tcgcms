@@ -12,6 +12,7 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Pages;
 using TCG.Handlers;
+using TCG.Entity;
 
 public partial class adminrolemdy : adminMain
 {
@@ -23,11 +24,11 @@ public partial class adminrolemdy : adminMain
         }
         else
         {
-            string vcRoleName = Fetch.Post("vcRoleName");
-            string vcContent = Fetch.Post("vcContent");
-            string popedom = Fetch.Post("popedom");
-            string classpopedom = Fetch.Post("classpopedom");
-            int iRoleId = Bases.ToInt(Fetch.Get("roleid", CheckGetEnum.Int));
+            string vcRoleName = objectHandlers.Post("vcRoleName");
+            string vcContent = objectHandlers.Post("vcContent");
+            string popedom = objectHandlers.Post("popedom");
+            string classpopedom = objectHandlers.Post("classpopedom");
+            int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Int));
             if (string.IsNullOrEmpty(vcRoleName))
             {
                 base.AjaxErch("-1");
@@ -35,7 +36,7 @@ public partial class adminrolemdy : adminMain
                 return;
             }
 
-            int rtn = base.admin.AdminHandlers.MdyAdminRole(base.admin.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent,iRoleId);
+            int rtn = base.handlerService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent,iRoleId);
             base.AjaxErch(rtn.ToString());
             base.Finish();
             return;
@@ -44,9 +45,9 @@ public partial class adminrolemdy : adminMain
 
     private void Init()
     {
-        int iRoleId = Bases.ToInt(Fetch.Get("roleid", CheckGetEnum.Int));
+        int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Int));
         if (iRoleId == 0) return;
-        DataTable dt = base.admin.AdminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
+        DataTable dt = base.handlerService.adminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
         if (dt == null) { dt.Dispose(); dt.Clear(); }
         if (dt.Rows.Count == 1)
         {

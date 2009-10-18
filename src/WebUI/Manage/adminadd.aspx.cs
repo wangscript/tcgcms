@@ -24,13 +24,13 @@ public partial class adminadd : adminMain
         }
         else
         {
-            string vcAdminName = Fetch.Post("vcAdminName");
-            string vcNickname = Fetch.Post("iNickName");
-            int iRole = Bases.ToInt(Fetch.Post("sRole"));
-            string cLock = Fetch.Post("iLock");
-            string popedom = Fetch.Post("popedom");
-            string classpopedom = Fetch.Post("classpopedom");
-            string pwd = Fetch.Post("iNewPWD");
+            string vcAdminName = objectHandlers.Post("vcAdminName");
+            string vcNickname = objectHandlers.Post("iNickName");
+            int iRole = objectHandlers.ToInt(objectHandlers.Post("sRole"));
+            string cLock = objectHandlers.Post("iLock");
+            string popedom = objectHandlers.Post("popedom");
+            string classpopedom = objectHandlers.Post("classpopedom");
+            string pwd = objectHandlers.Post("iNewPWD");
 
             if (string.IsNullOrEmpty(vcAdminName) || string.IsNullOrEmpty(vcNickname))
             {
@@ -38,8 +38,8 @@ public partial class adminadd : adminMain
                 base.Finish();
                 return;
             }
-            pwd = Text.MD5(pwd);
-            int rtn = base.admin.AdminHandlers.AddAdmin(base.admin.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
+            pwd = objectHandlers.MD5(pwd);
+            int rtn = base.handlerService.adminHandlers.AddAdmin(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
                 popedom, classpopedom);
             base.AjaxErch(rtn.ToString());
             base.Finish();
@@ -51,7 +51,7 @@ public partial class adminadd : adminMain
         DataSet ds = new DataSet();
         int t = 0;
         int p = 0;
-        int rtn = base.admin.AdminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
+        int rtn = base.handlerService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
         if (rtn < 0)
         {
             base.Finish();

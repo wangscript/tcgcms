@@ -37,8 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\Admin.cs" />
+    <Compile Include="CheckGetEnum.cs" />
     <Compile Include="ConfigItem.cs" />
+    <Compile Include="DbProviderEnum.cs" />
     <Compile Include="Files\FileClassInfo.cs" />
+    <Compile Include="Files\FileDataBase.cs" />
     <Compile Include="Files\FileInfos.cs" />
     <Compile Include="News\ClassInfo.cs" />
     <Compile Include="News\NewsFromInfo.cs" />

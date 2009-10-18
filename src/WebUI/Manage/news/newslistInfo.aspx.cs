@@ -22,14 +22,13 @@ public partial class news_newslistInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
-            NewsClassHandlers chdl = new NewsClassHandlers();
-            DataTable dt = chdl.GetClassInfosByParentId(0, base.conn,false);
+            DataTable dt = base.handlerService.newsClassHandlers.GetClassInfosByParentId(0, base.conn,false);
             if (dt != null)
             {
                 this.ItemRepeater.DataSource = dt;
                 this.ItemRepeater.DataBind();
             }
-            chdl = null;
+
             base.Finish();
         }
     }

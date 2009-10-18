@@ -21,28 +21,26 @@ using TCG.Manage.Utils;
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
-using TCG.Entity;
-using TCG.Handlers;
-using TCG.Handlers;
+
 using TCG.KeyWordSplit;
 
 public partial class news_newsAdd : adminMain
 {
-    NewsInfoHandlers nihdl = new NewsInfoHandlers();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-            int newsid = Bases.ToInt(Fetch.Get("newsid"));
+            int newsid = objectHandlers.ToInt(objectHandlers.Get("newsid"));
             if (newsid == 0)
             {
-                int ClassId = Bases.ToInt(Fetch.Get("iClassId"));
+                int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
                 this.iClassId.Value = ClassId.ToString();
                 this.iSpeciality.Value = "0";
             }
             else
             {
-                NewsInfo item = nihdl.GetNewsInfoById(base.conn, newsid);
+                NewsInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
                 this.iClassId.Value = item.ClassInfo.iId.ToString();
                 this.iFrom.Value = item.FromInfo.iId.ToString();
                 this.iTitle.Value = item.vcTitle;
@@ -59,12 +57,12 @@ public partial class news_newsAdd : adminMain
                 this.iStrong.Checked = (item.cStrong == "Y") ? true : false;
                 this.isContent.Value = item.vcShortContent;
                 item = null;
-                nihdl = null;
+
             }
         }
         else
         {
-            string work = Fetch.Post("work");
+            string work = objectHandlers.Post("work");
             bool ismdy = false;
             switch (work)
             {
@@ -87,7 +85,7 @@ public partial class news_newsAdd : adminMain
     {
         if (KeyWordTree.Root.ChildList.Count == 0)
         {
-            string path = Fetch.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
+            string path = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
             if (File.Exists(path))
             {
                 StreamReader Reader = new StreamReader(path, Encoding.Default);
@@ -124,19 +122,19 @@ public partial class news_newsAdd : adminMain
 
     private void NewsManage(bool ismdy)
     {
-        NewsInfo item = nihdl.GetNewsInfoById(base.conn, Bases.ToInt(Fetch.Post("iNewsId")));
-        item.vcTitle = Fetch.Post("iTitle");
-        item.vcUrl = Fetch.Post("iUrl");
-        item.vcContent = Fetch.Post("iContent$content");
-        item.vcAuthor = Fetch.Post("iAuthor");
-        item.vcKeyWord = Fetch.Post("iKeyWords");
-        item.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
-        item.FromInfo.iId = Bases.ToInt(Fetch.Post("iFrom"));
-        item.vcSpeciality = Fetch.Post("iSpeciality");
-        item.vcBigImg = Fetch.Post("iBigImg");
-        item.vcSmallImg = Fetch.Post("iSmallImg");
-        item.vcTitleColor = Fetch.Post("sTitleColor");
-        item.cStrong = Fetch.Post("iStrong");
+        NewsInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iNewsId")));
+        item.vcTitle = objectHandlers.Post("iTitle");
+        item.vcUrl = objectHandlers.Post("iUrl");
+        item.vcContent = objectHandlers.Post("iContent$content");
+        item.vcAuthor = objectHandlers.Post("iAuthor");
+        item.vcKeyWord = objectHandlers.Post("iKeyWords");
+        item.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")),false);
+        item.FromInfo.iId = objectHandlers.ToInt(objectHandlers.Post("iFrom"));
+        item.vcSpeciality = objectHandlers.Post("iSpeciality");
+        item.vcBigImg = objectHandlers.Post("iBigImg");
+        item.vcSmallImg = objectHandlers.Post("iSmallImg");
+        item.vcTitleColor = objectHandlers.Post("sTitleColor");
+        item.cStrong = objectHandlers.Post("iStrong");
         item.vcShortContent = objectHandlers.Post("isContent");
 
         if (string.IsNullOrEmpty(item.vcTitle))
@@ -168,16 +166,16 @@ public partial class news_newsAdd : adminMain
 
         item.cChecked = "Y";
         item.cCreated = "Y";
-        item.vcEditor = base.admin.adminInfo.vcAdminName;
+        item.vcEditor = base.adminInfo.vcAdminName;
         int newid = 0; string filepath = "";
         int rtn = 0;
         if (!ismdy)
         {
-            rtn = nihdl.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
+            rtn = base.handlerService.newsInfoHandlers.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
         }
         else
         {
-            rtn = nihdl.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
+            rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
         }
 
         item.iId = newid;
@@ -186,14 +184,12 @@ public partial class news_newsAdd : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                NewsClassHandlers clhdl = new NewsClassHandlers();
-                ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
-                clhdl = null;
-                TemplateHandlers ntlhdl = new TemplateHandlers();
-                TemplateInfo titem = ntlhdl.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
+                ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
+
+                TemplateInfo titem = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
                 cif = null;
 
-                TCGTagHandlers tcgth = new TCGTagHandlers();
+                TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
                 tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
                 titem = null;
                 tcgth.FilePath = filepath;
@@ -205,6 +201,6 @@ public partial class news_newsAdd : adminMain
         base.AjaxErch(rtn.ToString());
         base.Finish();
         item = null;
-        nihdl = null;
+
     }
 }

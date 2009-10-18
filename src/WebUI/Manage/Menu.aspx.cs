@@ -29,9 +29,9 @@ public partial class aMenu : adminMain
     {
         string tempClass = this.temp1.Text;
         string tempSClass = this.temp2.Text;
-        int ParentId = Bases.ToInt(Fetch.Get("ParendId"));
+        int ParentId = objectHandlers.ToInt(objectHandlers.Get("ParendId"));
         if (ParentId == 0) ParentId = 1;
-        DataTable dt = base.admin.adminInfo.PopedomUrls;
+        DataTable dt = base.adminInfo.PopedomUrls;
         if (dt == null) { this.temp1.Text = ""; base.Finish(); return; }
         if (dt.Rows.Count == 0) { this.temp1.Text = ""; base.Finish(); dt.Dispose(); dt.Clear(); return; }
         DataRow[] Rows = dt.Select("iParentId=" + ParentId.ToString() + " AND cValid='Y'");

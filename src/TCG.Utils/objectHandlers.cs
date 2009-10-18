@@ -21,6 +21,7 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.Net;
 using System.Reflection;
+using TCG.Entity;
 
 namespace TCG.Utils
 {
@@ -394,6 +395,27 @@ namespace TCG.Utils
             if (Float < MinFloat || Float > MaxFloat) return Default;
             return Float;
         }
+
+        /// <summary>
+        /// 转换为BOOL
+        /// </summary>
+        /// <param name="Object"></param>
+        /// <param name="Default"></param>
+        /// <returns></returns>
+        public static bool ToBoolen(Object Object,bool Default)
+        {
+            bool isTrue = false;
+            try
+            {
+                isTrue = bool.Parse(Object.ToString());
+            }
+            catch
+            {
+                isTrue = Default;
+            }
+            return isTrue;
+        }
+
         #endregion
         #region 操作 decimal  数据
         /// <summary>
@@ -1074,6 +1096,36 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// 获取参数值 QueryString
+        /// </summary>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        public static string Get(string name, CheckGetEnum chkType)
+        {
+            string text1 = Get(name);
+            bool flag1 = false;
+            switch (chkType)
+            {
+                case CheckGetEnum.Int:
+                    flag1 = IsNumeric(text1);
+                    break;
+
+                case CheckGetEnum.Safety:
+                    flag1 = IsSafety(text1);
+                    break;
+
+                default:
+                    flag1 = true;
+                    break;
+            }
+            if (!flag1)
+            {
+                return string.Empty;
+            }
+            return text1;
+        }
+
+        /// <summary>
         /// 获取参数值 Form
         /// </summary>
         /// <param name="Key"></param>
@@ -1363,5 +1415,346 @@ namespace TCG.Utils
             }
         }
 
+
+        public static bool IsEmail(string s)
+        {
+            string text1 = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
+            return Regex.IsMatch(s, text1);
+        }
+
+        public static bool IsIp(string s)
+        {
+            string text1 = @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$";
+            return Regex.IsMatch(s, text1);
+        }
+
+        public static bool IsNumeric(string s)
+        {
+            string text1 = @"^\-?[0-9]+$";
+            return Regex.IsMatch(s, text1);
+        }
+
+        public static bool IsPhysicalPath(string s)
+        {
+            string text1 = @"^\s*[a-zA-Z]:.*$";
+            return Regex.IsMatch(s, text1);
+        }
+
+        public static bool IsRelativePath(string s)
+        {
+            if ((s == null) || (s == string.Empty))
+            {
+                return false;
+            }
+            if (s.StartsWith("/") || s.StartsWith("?"))
+            {
+                return false;
+            }
+            if (Regex.IsMatch(s, @"^\s*[a-zA-Z]{1,10}:.*$"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool IsSafety(string s)
+        {
+            string text1 = s.Replace("%20", " ");
+            text1 = Regex.Replace(text1, @"\s", " ");
+            string text2 = "select |insert |delete from |count\\(|drop table|update |truncate |asc\\(|mid\\(|char\\(|xp_cmdshell|exec master|net localgroup administrators|:|net user|\"|\\'| or ";
+            return !Regex.IsMatch(text1, text2, RegexOptions.IgnoreCase);
+        }
+
+        public static bool IsUnicode(string s)
+        {
+            string text1 = @"^[\u4E00-\u9FA5\uE815-\uFA29]+$";
+            return Regex.IsMatch(s, text1);
+        }
+
+        public static bool IsUrl(string s)
+        {
+            string text1 = @"^(http|https|ftp|rtsp|mms):(\/\/|\\\\)[A-Za-z0-9%\-_@]+\.[A-Za-z0-9%\-_@]+[A-Za-z0-9\.\/=\?%\-&_~`@:\+!;]*$";
+            return Regex.IsMatch(s, text1, RegexOptions.IgnoreCase);
+        }
+
+
+        public static long Ip2Int(string ip)
+        {
+            if (!IsIp(ip))
+            {
+                return (long)(-1);
+            }
+            string[] textArray1 = ip.Split(new char[] { '.' });
+            long num1 = long.Parse(textArray1[0]) * 0x1000000;
+            num1 += int.Parse(textArray1[1]) * 0x10000;
+            num1 += int.Parse(textArray1[2]) * 0x100;
+            return (num1 + int.Parse(textArray1[3]));
+        }
+
+        /// <summary>
+        /// 获得相对路径的磁盘路径
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string MapPath(string path)
+        {
+            return HttpContext.Current.Server.MapPath("~/" + path);
+        }
+
+        /// <summary>
+        /// 获得网站域名
+        /// </summary>
+        public static string ServerDomain
+        {
+            get
+            {
+                string text1 = HttpContext.Current.Request.Url.Host.ToLower();
+                string[] textArray1 = text1.Split(new char[] { '.' });
+                if ((textArray1.Length < 3) || IsIp(text1))
+                {
+                    return text1;
+                }
+                string text2 = text1.Remove(0, text1.IndexOf(".") + 1);
+                if ((text2.StartsWith("com.") || text2.StartsWith("net.")) || (text2.StartsWith("org.") || text2.StartsWith("gov.")))
+                {
+                    return text1;
+                }
+                return text2;
+            }
+        }
+
+        /// <summary>
+        /// 半角转全角
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToSBC(string input)
+        {
+            char[] c = input.ToCharArray();
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i] == 32)
+                {
+                    c[i] = (char)12288;
+                    continue;
+                }
+                if (c[i] < 127)
+                    c[i] = (char)(c[i] + 65248);
+            }
+            return new string(c);
+        }
+
+        /// <summary>
+        /// 全角转半角
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToDBC(string input)
+        {
+            char[] c = input.ToCharArray();
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i] == 12288)
+                {
+                    c[i] = (char)32;
+                    continue;
+                }
+                if (c[i] > 65280 && c[i] < 65375)
+                    c[i] = (char)(c[i] - 65248);
+            }
+            return new string(c);
+        }
+
+        /// <summary>
+        /// 生成字母和数字的随即数
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static string RandomStr(int n)
+        {
+            char[] arrChar = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+             'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+            StringBuilder num = new StringBuilder();
+
+            Random rnd = new Random(DateTime.Now.Millisecond);
+
+            for (int i = 0; i < n; i++)
+            {
+                string text1 = arrChar[rnd.Next(0, arrChar.Length)].ToString();
+                if (rnd.Next(2) == 1)
+                {
+                    text1 = text1.ToUpper();
+                }
+                else
+                {
+                    text1 = text1.ToLower();
+                }
+
+                num.Append(text1);
+
+            }
+            return num.ToString();
+        }
+
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static bool SaveFile(string filepath, string text)
+        {
+            string dir = filepath.Substring(0, filepath.LastIndexOf("\\"));
+            try
+            {
+                if (!System.IO.Directory.Exists(dir))
+                {
+                    System.IO.Directory.CreateDirectory(dir);
+                }
+                if (System.IO.File.Exists(filepath))
+                {
+                    System.IO.File.Delete(filepath);
+                }
+                using (System.IO.FileStream fs = System.IO.File.Create(filepath))
+                {
+                    byte[] info = System.Text.Encoding.GetEncoding("utf-8").GetBytes(text);   //·ÀÖ¹ÂÒÂë 
+                    fs.Write(info, 0, info.Length);
+                    fs.Close();
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 去掉HTML标签
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string GetTextFromHtml(string s)
+        {
+            if (s == null || s == "")
+            {
+                return "";
+            }
+            else
+            {
+                return Regex.Replace(s, "<.*?>", "");
+            }
+        }
+
+        /// <summary>
+        /// 去掉标点符号
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string ReplaceBD(string str)
+        {
+            str = ToDBC(str).Replace("?", "");
+            str = str.Replace(",", "");
+            str = str.Replace(".", "");
+            str = str.Replace(" ", "");
+            str = str.Replace("¡£", "");
+            str = str.Replace("`", "");
+            str = str.Replace("@", "");
+            str = str.Replace("#", "");
+            str = str.Replace("$", "");
+            str = str.Replace("%", "");
+            str = str.Replace("^", "");
+            str = str.Replace("&", "");
+            str = str.Replace("*", "");
+            str = str.Replace("(", "");
+            str = str.Replace(")", "");
+            str = str.Replace("[", "");
+            str = str.Replace("]", "");
+            str = str.Replace("{", "");
+            str = str.Replace("}", "");
+            str = str.Replace("'", "");
+            str = str.Replace("\"", "");
+            return str;
+        }
+
+        /// <summary>
+        /// 用户的IP
+        /// </summary>
+        public static string UserIp
+        {
+            get
+            {
+                string text1 = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                switch (text1)
+                {
+                    case null:
+                    case "":
+                        text1 = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        break;
+                }
+                if (!IsIp(text1))
+                {
+                    return "Unknown";
+                }
+                return text1;
+            }
+        }
+
+        public static string GetTextWithoutHtml(string str)
+        {
+            string strpatrn = "<.*?>";
+            str = Regex.Replace(str, strpatrn, "");
+            str = str.Replace("\r", "");
+            str = str.Replace("\n", "");
+            str = str.Replace("\t", "");
+            str = str.Replace("<", "");
+            str = str.Replace(">", "");
+            str = str.Replace("\"", "");
+            str = str.Replace("'", "");
+            str = str.Replace("&amp;", "");
+            str = str.Replace("&lt;", "");
+            str = str.Replace("&gt;", "");
+            str = str.Replace("&quot;", "");
+            str = str.Replace("&#39;", "");
+            str = str.Replace(" ", "");
+            str = str.Replace("¡¡", "");
+            str = str.Replace(" ", "");
+            return str;
+        }
+
+        public static string UrlEncode(string str)
+        {
+            return HttpContext.Current.Server.UrlEncode(str);
+        } 
+
+        public static string UrlDecode(string str)
+        {
+            return HttpContext.Current.Server.UrlDecode(str);
+        }
+
+        public static bool IsGetFromAnotherDomain
+        {
+            get
+            {
+                if (HttpContext.Current.Request.HttpMethod == "POST")
+                {
+                    return false;
+                }
+                return (Referrer.IndexOf(ServerDomain) == -1);
+            }
+        }
+
+        public static bool IsPostFromAnotherDomain
+        {
+            get
+            {
+                if (HttpContext.Current.Request.HttpMethod == "GET")
+                {
+                    return false;
+                }
+                return (Referrer.IndexOf(ServerDomain) == -1);
+            }
+        } 
+ 
     };
 }

@@ -15,7 +15,6 @@ using TCG.Handlers;
 using TCG.Pages;
 
 using TCG.Entity;
-using TCG.Handlers;
 
 public partial class Manage_interface_click : ScriptsMain
 {
@@ -23,13 +22,13 @@ public partial class Manage_interface_click : ScriptsMain
     {
         if (!Page.IsPostBack)
         {
-            if (Fetch.IsGetFromAnotherDomain || Fetch.IsPostFromAnotherDomain)
+            if (objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain)
             {
                 return;
             }
 
-            int topicid = Bases.ToInt(Fetch.Get("topicid"));
-            bool shownum = Fetch.Get("shownum") == "true" ? true : false;
+            int topicid = objectHandlers.ToInt(objectHandlers.Get("topicid"));
+            bool shownum = objectHandlers.Get("shownum") == "true" ? true : false;
             if (topicid == 0)
             {
                 if (shownum)
@@ -39,8 +38,8 @@ public partial class Manage_interface_click : ScriptsMain
                 }
                 return;
             }
-            NewsInfoHandlers nifh = new NewsInfoHandlers();
-            NewsInfo nif = nifh.GetNewsInfoById(base.conn, topicid);
+
+            NewsInfo nif = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
                 if (shownum)
@@ -55,7 +54,7 @@ public partial class Manage_interface_click : ScriptsMain
 
             nif.iCount = nif.iCount + 1;
             int outid = 0;
-            int rtn = nifh.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], nif, ref outid);
+            int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], nif, ref outid);
             base.conn.Close();
             Response.End();
         }

@@ -18,7 +18,7 @@ using TCG.Manage.Utils;
 
 public partial class ConfigSetting : adminMain
 {
-    private string _file = Fetch.MapPath(ConfigurationManager.ConnectionStrings["CustomConfigFile"].ToString());
+    private string _file = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CustomConfigFile"].ToString());
     private StringBuilder _sb;
 
     protected void Page_Load(object sender, EventArgs e)

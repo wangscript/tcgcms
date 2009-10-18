@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminLogin.cs" />
     <Compile Include="adminMain.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -64,10 +63,6 @@
     <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.Files\TCG.Files.csproj">
-      <Project>{FCECAB97-E391-455E-8266-85D14521CEFB}</Project>
-      <Name>TCG.Files</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
       <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>

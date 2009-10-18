@@ -22,10 +22,8 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-using TCG.Entity;
-using TCG.Handlers;
 using TCG.Template.Utils;
-using TCG.Handlers;
+
 using TCG.KeyWordSplit;
 
 
@@ -35,7 +33,7 @@ public partial class news_createhtml : adminMain
     {
         if (Page.IsPostBack)
         {
-            string vwork = Fetch.Post("work");
+            string vwork = objectHandlers.Post("work");
             switch (vwork)
             {
                 case "Search":
@@ -55,7 +53,7 @@ public partial class news_createhtml : adminMain
     {
         if (KeyWordTree.Root.ChildList.Count == 0)
         {
-            string path = Fetch.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
+            string path = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
             if (File.Exists(path))
             {
                 StreamReader Reader = new StreamReader(path, Encoding.Default);
@@ -92,24 +90,19 @@ public partial class news_createhtml : adminMain
 
     private void Create()
     {
-        int ClassId = Bases.ToInt(Fetch.Post("tClassId"));
-        int id = Bases.ToInt(Fetch.Post("iId"));
-        string filepath = Fetch.Post("iFilePath");
-        string Created = Fetch.Post("tCreated");
+        int ClassId = objectHandlers.ToInt(objectHandlers.Post("tClassId"));
+        int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
+        string filepath = objectHandlers.Post("iFilePath");
+        string Created = objectHandlers.Post("tCreated");
 
-        NewsClassHandlers chdl = new NewsClassHandlers();
-        ClassInfo cif = chdl.GetClassInfoById(base.conn, ClassId, false);
-        chdl = null;
+        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, ClassId, false);
         if (cif == null) { base.AjaxErch(""); return; }
-        TemplateHandlers tlhd = new TemplateHandlers();
-        TemplateInfo tif = tlhd.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
+
+        TemplateInfo tif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
         if (tif == null) { base.AjaxErch(""); return; }
-        tlhd = null;
 
-        NewsInfoHandlers nihdl = new NewsInfoHandlers();
         NewsInfo item = new NewsInfo();
-        item = nihdl.GetNewsInfoById(base.conn, id);
-
+        item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
 
         string text1 = "";
         if (item == null)
@@ -120,10 +113,10 @@ public partial class news_createhtml : adminMain
         }
        
         item.cCreated = "Y";
-        item.vcTitle = Text.ToDBC(Text.GetTextWithoutHtml(item.vcTitle));
+        item.vcTitle = objectHandlers.ToDBC(objectHandlers.GetTextWithoutHtml(item.vcTitle));
         if (string.IsNullOrEmpty(item.vcShortContent))
         {
-            item.vcShortContent = Text.Left(Text.JSEncode(Text.GetTextWithoutHtml(item.vcContent)), 100, false);
+            item.vcShortContent = objectHandlers.Left(objectHandlers.JSEncode(objectHandlers.GetTextWithoutHtml(item.vcContent)), 100);
         }
         //如果没有关键字，自动分词
         if (string.IsNullOrEmpty(item.vcKeyWord))
@@ -131,7 +124,7 @@ public partial class news_createhtml : adminMain
             item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
         }
 
-        int rtn = nihdl.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref id);
+        int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref id);
         if (rtn < 0)
         {
             text1 = "<a>更新文章信息失败...ID:" + id.ToString() + "</a>";
@@ -139,7 +132,7 @@ public partial class news_createhtml : adminMain
             return;
         }
 
-        TCGTagHandlers tcgthl = new TCGTagHandlers();
+        TCGTagHandlers tcgthl = base.handlerService.TCGTagHandlers;
         tcgthl.Template = tif.vcContent.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
         tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
@@ -184,23 +177,23 @@ public partial class news_createhtml : adminMain
         arrsortfield.Add("iId DESC");
         sItem.arrSortField = arrsortfield;
 
-        sItem.page = Bases.ToInt(Fetch.Post("page"));
-        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.page = objectHandlers.ToInt(objectHandlers.Post("page"));
+        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
         sItem.strCondition = "cChecked='Y'";
 
-        int create = Bases.ToInt(Fetch.Post("Creat"));
+        int create = objectHandlers.ToInt(objectHandlers.Post("Creat"));
         if (create == 2)
         {
             sItem.strCondition += " AND cCreated = 'N'";
         }
 
-        int iStypeCheck = Bases.ToInt(Fetch.Post("StypeCheck"));
+        int iStypeCheck = objectHandlers.ToInt(objectHandlers.Post("StypeCheck"));
         if (iStypeCheck == 1)
         {
-            DateTime dStartTime = Bases.ToTime(Fetch.Post("iStartTime"));
-            DateTime dEndTime = Bases.ToTime(Fetch.Post("iEndTime"));
-            int iTimeType = Bases.ToInt(Fetch.Post("iTimeFeild"));
+            DateTime dStartTime = objectHandlers.ToTime(objectHandlers.Post("iStartTime"));
+            DateTime dEndTime = objectHandlers.ToTime(objectHandlers.Post("iEndTime"));
+            int iTimeType = objectHandlers.ToInt(objectHandlers.Post("iTimeFeild"));
             if (iTimeType == 1)
             {
                 sItem.strCondition += " AND (dAddDate BETWEEN '" + dStartTime.ToString() + "' AND '" + dEndTime.ToString() + "')";
@@ -212,14 +205,14 @@ public partial class news_createhtml : adminMain
         }
         else if (iStypeCheck == 2)
         {
-            int iClassId = Bases.ToInt(Fetch.Post("iClassId"));
-            NewsClassHandlers chdl = new NewsClassHandlers();
-            string allchild = chdl.GetAllChildClassIdByClassId(base.conn, iClassId, false);
-            chdl = null;
+            int iClassId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
+
+            string allchild = base.handlerService.newsClassHandlers.GetAllChildClassIdByClassId(base.conn, iClassId, false);
+
             sItem.strCondition += " AND iClassID in (" + allchild + ")";
         }
 
-        string Condition = Fetch.Post("iCondition");
+        string Condition = objectHandlers.Post("iCondition");
         if (!string.IsNullOrEmpty(Condition))
         {
             sItem.strCondition += " AND " + Condition;

@@ -15,12 +15,11 @@ using TCG.Pages;
 using TCG.Handlers;
 using TCG.Template.Utils;
 using TCG.Manage.Utils;
-using TCG.Handlers;
+
 using TCG.Entity;
 
 public partial class news_classmdy : adminMain
 {
-    NewsClassHandlers chdl = new NewsClassHandlers();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,15 +31,15 @@ public partial class news_classmdy : adminMain
         {
            
             ClassInfo cif = new ClassInfo();
-            cif.iId = Bases.ToInt(Fetch.Get("iClassId"));
-            cif.vcClassName = Fetch.Post("iClassName");
-            cif.vcName = Fetch.Post("iName");
-            cif.vcDirectory = Fetch.Post("iDirectory");
-            cif.vcUrl = Fetch.Post("iUrl");
-            cif.iParent = Bases.ToInt(Fetch.Post("iClassId"));
-            cif.iTemplate = (int)Convert.ChangeType(Fetch.Post("sTemplate"), typeof(int));
-            cif.iListTemplate = (int)Convert.ChangeType(Fetch.Post("slTemplate"), typeof(int));
-            cif.iOrder = Bases.ToInt(Fetch.Post("iOrder"));
+            cif.iId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+            cif.vcClassName = objectHandlers.Post("iClassName");
+            cif.vcName = objectHandlers.Post("iName");
+            cif.vcDirectory = objectHandlers.Post("iDirectory");
+            cif.vcUrl = objectHandlers.Post("iUrl");
+            cif.iParent = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
+            cif.iTemplate = (int)Convert.ChangeType(objectHandlers.Post("sTemplate"), typeof(int));
+            cif.iListTemplate = (int)Convert.ChangeType(objectHandlers.Post("slTemplate"), typeof(int));
+            cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch("-1");
@@ -57,19 +56,19 @@ public partial class news_classmdy : adminMain
                     return;
                 }
             }
-            int rtn = chdl.EditNewsClass(base.conn, base.admin.adminInfo.vcAdminName,cif);
+            int rtn = base.handlerService.newsClassHandlers.EditNewsClass(base.conn, base.adminInfo.vcAdminName,cif);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
-            chdl = null;
+
             base.Finish();
         }
     }
 
     private void Init()
     {
-        int iClassId = Bases.ToInt(Fetch.Get("iClassId"));
+        int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
 
-        ClassInfo cif = chdl.GetClassInfoById(base.conn, iClassId,false);
+        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, iClassId,false);
         if (cif == null)
         {
             base.Finish();
@@ -83,8 +82,8 @@ public partial class news_classmdy : adminMain
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
         
-        TemplateHandlers nthdl = new TemplateHandlers();
-        DataSet ds = nthdl.GetTemplatesBySystemTypAndType(base.conn, TemplateConstant.InfoType, TemplateConstant.SystemType_News,false);
+        DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn, 
+            TemplateConstant.InfoType, TemplateConstant.SystemType_News,false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)
@@ -103,7 +102,7 @@ public partial class news_classmdy : adminMain
         }
 
         
-        ds = nthdl.GetTemplatesBySystemTypAndType(base.conn, TemplateConstant.ListType, TemplateConstant.SystemType_News,false);
+        ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn, TemplateConstant.ListType, TemplateConstant.SystemType_News,false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)
@@ -125,7 +124,7 @@ public partial class news_classmdy : adminMain
 
         
         cif = null;
-        chdl = null;
+
         base.Finish();
     }
 }
