@@ -15,7 +15,7 @@ public partial class Common_Topic_HotPutForTopicHead : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        fileinfoHandlers flih = new fileinfoHandlers();
+        FileInfoHandlers flih = new FileInfoHandlers();
         int i =  flih.GetUrlError("http://www1.91wang.com/images/gamelogo/tg129m.gif");
     }
 }

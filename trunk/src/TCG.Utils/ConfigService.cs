@@ -39,7 +39,7 @@ namespace TCG.Utils
         /// <summary>
         /// 管理特殊页面的配置信息
         /// </summary>
-        public Dictionary<string, List<Option>> ManageOutpages
+        public Dictionary<string, List<Option>> manageOutpages
         {
             get
             {
@@ -48,6 +48,37 @@ namespace TCG.Utils
                     this.ManageOutpagesInit();
                 }
                 return this._manageoutpages;
+            }
+        }
+
+
+        public Dictionary<string, string> baseConfig
+        {
+            get
+            {
+                if (this._baseconfig == null)
+                {
+                    this.BaseConfigInit();
+                }
+                return this._baseconfig;
+            }
+        }
+
+
+        /// <summary>
+        /// 初始化基本配置信息
+        /// </summary>
+        private void BaseConfigInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList baseconfig = this.GetXmlNotListByTagNameAndFilePath(m_BaseConfigFilePath, "Item");
+            if (baseconfig != null)
+            {
+                this._baseconfig = new Dictionary<string, string>();
+                foreach (XmlElement element in baseconfig)
+                {
+                    this._baseconfig.Add(element.SelectSingleNode("Name").InnerText, element.SelectSingleNode("Value").InnerText);
+                }
             }
         }
 
@@ -107,6 +138,9 @@ namespace TCG.Utils
         }
 
         private Dictionary<string, List<Option>> _manageoutpages = null;
-        private string m_ManageOutpagesFilePath = "~/config/manageOutpages.xml";               //管理特殊页面的配置
+        private string m_ManageOutpagesFilePath = "~/config/manageOutpages.Config";               //管理特殊页面的配置
+
+        private Dictionary<string, string> _baseconfig = null;
+        private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                            //系统基本配置
     }
 }

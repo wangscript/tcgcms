@@ -63,7 +63,7 @@ public partial class Template_newlist : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iSiteId = Bases.ToInt(Fetch.Get("iSiteId"));
         sItem.strCondition = "iSiteId=" + iSiteId.ToString() + " AND iSystemType =" + TemplateConstant.SystemType_News;
@@ -89,7 +89,7 @@ public partial class Template_newlist : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.SetItem("iSiteId", iSiteId);
@@ -182,7 +182,7 @@ public partial class Template_newlist : adminMain
             }
             else
             {
-                filepath = Server.MapPath("~" + tlif.vcUrl + base.config["FileExtension"]);
+                filepath = Server.MapPath("~" + tlif.vcUrl + base.configService.baseConfig["FileExtension"]);
             }
         }
         catch
@@ -196,7 +196,7 @@ public partial class Template_newlist : adminMain
             TCGTagHandlers tcgthdl = new TCGTagHandlers();
             tcgthdl.Template = tlif.vcContent;
             tcgthdl.FilePath = filepath;
-            if (tcgthdl.Replace(base.conn, base.config))
+            if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
             {
                 base.AjaxErch("<a>生成成功:" + filepath + "...</a>");
             }

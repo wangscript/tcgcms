@@ -25,9 +25,9 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class adminHandlers
+    public class AdminHandlers
     {
-        public adminHandlers(Connection conn)
+        public AdminHandlers(Connection conn)
         {
             this._conn = conn;
             this._conn.Dblink = DBLinkNums.Manage;

@@ -21,7 +21,7 @@ public partial class Common_AllNewsFrom : ScriptsMain
         if (!Page.IsPostBack)
         {
             Response.Write("var NewsFromItems = new Array();\r\n");
-            newsFromHandlers cldl = new newsFromHandlers();
+            NewsFromHandlers cldl = new NewsFromHandlers();
             DataTable dt = cldl.GetAllNewsFromByCach(base.conn,false);
             if (dt != null)
             {

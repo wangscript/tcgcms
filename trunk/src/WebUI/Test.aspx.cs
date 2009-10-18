@@ -55,7 +55,7 @@ public partial class Test :  Origin
 
         //压缩后的目标文件 
         FileProperties[1]= destPath +"\\"+ System.IO.Path.GetFileNameWithoutExtension(fullName) + ".zip";
-        fileZip Zc = new fileZip(); 
+        FileZipHandlers Zc = new FileZipHandlers(); 
         Zc.ZipFileMain(FileProperties); 
     }
 

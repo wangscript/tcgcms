@@ -43,7 +43,7 @@ namespace TCG.Pages
             TCGTagHandlers tcgthl = new TCGTagHandlers();
             tcgthl.Template = outhtml;
             tcgthl.NeedCreate = false;
-            tcgthl.Replace(base.conn, base.config);
+            tcgthl.Replace(base.conn, base.configService.baseConfig);
             CacheString = tcgthl.Template;
             writer.Write(CacheString);
         }

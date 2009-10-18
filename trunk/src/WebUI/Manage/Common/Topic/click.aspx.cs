@@ -33,7 +33,7 @@ public partial class Common_Topic_click : ScriptsMain
                 }
                 return;
             }
-            newsInfoHandlers nifh = new newsInfoHandlers();
+            NewsInfoHandlers nifh = new NewsInfoHandlers();
             NewsInfo nif = nifh.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
@@ -48,8 +48,8 @@ public partial class Common_Topic_click : ScriptsMain
             if (shownum) Response.Write("document.write('" + nif.iCount.ToString() + "');");
 
             nif.iCount = nif.iCount + 1;
-            int outid = 0; 
-            int rtn = nifh.UpdateNewsInfo(base.conn, config["FileExtension"], nif, ref outid);
+            int outid = 0;
+            int rtn = nifh.UpdateNewsInfo(base.conn, configService.baseConfig["FileExtension"], nif, ref outid);
             base.conn.Close();
             Response.End();
         }

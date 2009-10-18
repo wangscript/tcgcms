@@ -16,6 +16,7 @@ namespace TCG.Utils
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.IO;
     using System.Reflection;
@@ -23,32 +24,56 @@ namespace TCG.Utils
     using System.Web;
     using System.Xml;
 
-    public class Caching
+    public class CachingService
     {
         private static string Key = "TCG_System_";
 
         public static object Get(string name)
         {
-            return HttpContext.Current.Cache.Get(Caching.Key + name);
+            return HttpContext.Current.Cache.Get(CachingService.Key + name);
         }
 
         public static void Remove(string name)
         {
-            if (HttpContext.Current.Cache[Caching.Key + name] != null)
+            if (HttpContext.Current.Cache[CachingService.Key + name] != null)
             {
-                HttpContext.Current.Cache.Remove(Caching.Key + name);
+                HttpContext.Current.Cache.Remove(CachingService.Key + name);
             }
         }
 
         public static void Set(string name, object value, CacheDependency cacheDependency)
         {
-            HttpContext.Current.Cache.Insert(Caching.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
+            HttpContext.Current.Cache.Insert(CachingService.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
         }
 
         public static void SetCache(string name, object value, CacheDependency dependency, int expireTime)
         {
             //Code信息保存在缓存中
-            HttpContext.Current.Cache.Insert(Caching.Key + name, value, dependency, DateTime.Now.AddMinutes((double)expireTime), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
+            HttpContext.Current.Cache.Insert(CachingService.Key + name, value, dependency, DateTime.Now.AddMinutes((double)expireTime), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
         }
+
+        #region 系统Caching参数定义
+        /// <summary>
+        /// 所有文件分类定义
+        /// </summary>
+        public static string CACHING_ALL_FILECLASS = "allfilesclass";           
+
+        /// <summary>
+        /// 系统缓存集合
+        /// </summary>
+        public static Dictionary<string, string> SystemCachings
+        {
+            get
+            {
+                if (_systemcachings == null)
+                {
+                    _systemcachings = new Dictionary<string, string>();
+                    _systemcachings.Add("所有文件分类定义", CACHING_ALL_FILECLASS);
+                }
+                return _systemcachings;
+            }
+        }
+        private static Dictionary<string, string> _systemcachings = null;
+        #endregion
     }
 }

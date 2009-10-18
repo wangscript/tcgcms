@@ -54,9 +54,9 @@ public partial class news_classadd : adminMain
                 }
             }
 
-            classHandlers chdl = new classHandlers();
+            NewsClassHandlers chdl = new NewsClassHandlers();
             int rtn = chdl.AddNewsClass(base.conn,cif, base.admin.adminInfo.vcAdminName);
-            Caching.Remove("AllNewsClass");
+            CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
             chdl = null;
             base.Finish();

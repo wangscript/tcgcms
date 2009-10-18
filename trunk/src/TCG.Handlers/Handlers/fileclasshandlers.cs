@@ -26,7 +26,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class fileclasshandlers
+    public class FileClassHandlers
     {
 
         /// <summary>
@@ -55,11 +55,11 @@ namespace TCG.Handlers
             }
             else
             {
-                dt = (DataTable)Caching.Get(FilesConst.CACHING_ALL_FILECLASS);
+                dt = (DataTable)CachingService.Get(CachingService.CACHING_ALL_FILECLASS);
                 if (dt == null)
                 {
                     dt = this.GetAllFilesClassFromDb(conn);
-                    Caching.Set(FilesConst.CACHING_ALL_FILECLASS, dt, null);
+                    CachingService.Set(CachingService.CACHING_ALL_FILECLASS, dt, null);
                 }
             }
             return dt;

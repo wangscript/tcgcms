@@ -28,7 +28,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class classHandlers
+    public class NewsClassHandlers
     {
         /// <summary>
         /// 根据父类得到资源类别
@@ -54,7 +54,6 @@ namespace TCG.Handlers
                 if (dts.Tables.Count == 0) return null;
                 return dts.Tables[0];
             }
-            return null;
         }
 
         /// <summary>
@@ -77,11 +76,11 @@ namespace TCG.Handlers
             }
             else
             {
-                DataTable classlist = (DataTable)Caching.Get("AllNewsClass");
+                DataTable classlist = (DataTable)CachingService.Get("AllNewsClass");
                 if (classlist == null)
                 {
                     classlist = this.GetClassInfos(conn);
-                    Caching.Set("AllNewsClass", classlist, null);
+                    CachingService.Set("AllNewsClass", classlist, null);
                 }
                 return classlist;
             }
@@ -111,7 +110,7 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="sh"></param>
         /// <returns></returns>
-        public string GetTopicClassTitleList(Connection conn,Config config, int classid,string sh)
+        public string GetTopicClassTitleList(Connection conn, Dictionary<string, string> config, int classid, string sh)
         {
             if (classid == 0) return "";
             DataTable allClass = this.GetClassInfoByCach(conn, false);

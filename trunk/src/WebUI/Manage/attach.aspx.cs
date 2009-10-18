@@ -27,7 +27,7 @@ public partial class attach : FilesMain
             
             if (Fetch.IsGetFromAnotherDomain || Fetch.IsPostFromAnotherDomain)
             {
-                this.Throw("谢绝盗链。", null,"新网文件首页,default.aspx", null, false);
+                return;
             }
 
             long iId = Bases.ToLong(Fetch.Get("attach"));
@@ -36,8 +36,8 @@ public partial class attach : FilesMain
                 return;
             }
 
-            fileinfoHandlers flhdl = new fileinfoHandlers();
-            fileclasshandlers fcldl = new fileclasshandlers();
+            FileInfoHandlers flhdl = new FileInfoHandlers();
+            FileClassHandlers fcldl = new FileClassHandlers();
             FileInfos item = flhdl.GetFileInfosById(base.conn, iId);
 
             string filename = item.iID.ToString() + "." + item.vcType;

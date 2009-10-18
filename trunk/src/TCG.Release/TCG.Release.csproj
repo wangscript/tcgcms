@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization.cs" />
     <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>

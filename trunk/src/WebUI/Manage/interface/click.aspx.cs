@@ -39,7 +39,7 @@ public partial class Manage_interface_click : ScriptsMain
                 }
                 return;
             }
-            newsInfoHandlers nifh = new newsInfoHandlers();
+            NewsInfoHandlers nifh = new NewsInfoHandlers();
             NewsInfo nif = nifh.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
@@ -55,7 +55,7 @@ public partial class Manage_interface_click : ScriptsMain
 
             nif.iCount = nif.iCount + 1;
             int outid = 0;
-            int rtn = nifh.UpdateNewsInfo(base.conn, config["FileExtension"], nif, ref outid);
+            int rtn = nifh.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], nif, ref outid);
             base.conn.Close();
             Response.End();
         }

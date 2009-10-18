@@ -10,8 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/newscommon.aspx"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/newscommon.aspx"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/CreateDiv.js"></script>
 	<script type="text/javascript" src="../js/newshief.js"></script>

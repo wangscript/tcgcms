@@ -63,7 +63,7 @@ namespace TCG.Handlers
             return TempHtml.Replace(this._tag, this._tagtext);
         }
 
-        public void ReplaceTagText(Connection conn,Config config, ref TCGTagPagerInfo pagerinfo)
+        public void ReplaceTagText(Connection conn, Dictionary<string, string> config, ref TCGTagPagerInfo pagerinfo)
         {
             if (this._tagtype == string.Empty || this._attribute == string.Empty || this._tag == string.Empty) return;
             string type = this.GetAttribute("type");
@@ -183,9 +183,9 @@ namespace TCG.Handlers
                 pagerinfo.Read = false;
                 return;
             }
-            newsInfoHandlers nifhd = new newsInfoHandlers();
-            classHandlers chdl = new classHandlers();
-            fileinfoHandlers flfhdl = new fileinfoHandlers();
+            NewsInfoHandlers nifhd = new NewsInfoHandlers();
+            NewsClassHandlers chdl = new NewsClassHandlers();
+            FileInfoHandlers flfhdl = new FileInfoHandlers();
             NewsInfo item = nifhd.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
@@ -252,7 +252,7 @@ namespace TCG.Handlers
                 pagerinfo.Read = false;
                 return;
             }
-            classHandlers chdl = new classHandlers();
+            NewsClassHandlers chdl = new NewsClassHandlers();
             ClassInfo item = chdl.GetClassInfoById(this._conn, id, false);
             if (item == null)
             {
@@ -535,7 +535,7 @@ namespace TCG.Handlers
 
 
         private Connection _conn = null;
-        private Config _config = null;
+        private Dictionary<string, string> _config = null;
         private string _attpattern = string.Empty;
         private bool _pager = false;
         private string _attribute = string.Empty;

@@ -20,7 +20,7 @@ using TCG.Entity;
 
 public partial class news_classmdy : adminMain
 {
-    classHandlers chdl = new classHandlers();
+    NewsClassHandlers chdl = new NewsClassHandlers();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -58,7 +58,7 @@ public partial class news_classmdy : adminMain
                 }
             }
             int rtn = chdl.EditNewsClass(base.conn, base.admin.adminInfo.vcAdminName,cif);
-            Caching.Remove("AllNewsClass");
+            CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
             chdl = null;
             base.Finish();

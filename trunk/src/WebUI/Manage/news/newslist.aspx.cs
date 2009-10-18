@@ -70,11 +70,11 @@ public partial class news_newslist : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iClassId = Bases.ToInt(Fetch.Get("iClassId"));
         this.iClassId.Value = iClassId.ToString();
-        classHandlers chdl = new classHandlers();
+        NewsClassHandlers chdl = new NewsClassHandlers();
         string allchild = chdl.GetAllChildClassIdByClassId(base.conn, iClassId, false);
         chdl = null;
         sItem.strCondition = "iClassID in (" + allchild + ")";
@@ -108,7 +108,7 @@ public partial class news_newslist : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.SetItem("iClassId", iClassId);
@@ -176,10 +176,10 @@ public partial class news_newslist : adminMain
             return;
         }
 
-        newsInfoHandlers nihdl = new newsInfoHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
 
         int rtn = nihdl.DelNewsInfosWithLogic(base.conn, base.admin.adminInfo.vcAdminName, "Y", delids);
-        rtn = nihdl.DelNewsInfoHtmlByIds(base.conn, base.config, delids);
+        rtn = nihdl.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
         base.AjaxErch(rtn.ToString());
         nihdl = null;
     }
@@ -193,18 +193,18 @@ public partial class news_newslist : adminMain
             return;
         }
 
-        if (base.config["IsReWrite"] == "True")
+        if (base.configService.baseConfig["IsReWrite"] == "True")
         {
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        newsInfoHandlers nifhd = new newsInfoHandlers();
+        NewsInfoHandlers nifhd = new NewsInfoHandlers();
         NewsInfo item = nifhd.GetNewsInfoById(base.conn, id);
         if (item == null) return;
         nifhd = null;
 
-        newsInfoHandlers nihdl = new newsInfoHandlers();
-        classHandlers clhdl = new classHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
+        NewsClassHandlers clhdl = new NewsClassHandlers();
         ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
         clhdl = null;
         TemplateHandlers ntlhdl = new TemplateHandlers();
@@ -216,7 +216,7 @@ public partial class news_newslist : adminMain
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
         titem = null;
-        if (tcgth.Replace(base.conn, base.config))
+        if (tcgth.Replace(base.conn, base.configService.baseConfig))
         {
             nihdl.UpdateNewsInfosCreate(base.conn, base.admin.adminInfo.vcAdminName, "Y", id.ToString());
         }

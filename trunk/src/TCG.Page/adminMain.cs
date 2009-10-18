@@ -25,8 +25,6 @@ namespace TCG.Pages
     public class adminMain : Origin
     {
         private AdminLogin _admin;
-        private Connection _conn;
-
 
         public adminMain()
         {
@@ -41,7 +39,7 @@ namespace TCG.Pages
 
         private void CheckPop(object sender, EventArgs e)
         {
-            this.admin.CheckAdminPop(base.config);
+            this.admin.CheckAdminPop(base.configService.baseConfig);
         }
 
         protected AdminLogin admin
@@ -56,19 +54,6 @@ namespace TCG.Pages
             }
         }
 
-        protected Connection conn
-        {
-            get
-            {
-                if (this._conn == null)
-                {
-                    this._conn = new Connection();
-                    this._conn.Dblink = DBLinkNums.Manage;
-                }
-                return this._conn;
-            }
-        }
-
         protected void AjaxErch(string str)
         {
             Response.Write(str);
@@ -78,26 +63,10 @@ namespace TCG.Pages
 
         protected void Finish()
         {
-            if ((this._conn != null) && this._conn.Connected){this._conn.Close();}
+            if ((base.conn != null) && base.conn.Connected) { base.conn.Close(); }
             if (this._admin != null) this._admin = null;
         }
 
-
-        /// <summary>
-        /// 获得基本配置信息
-        /// </summary>
-        protected ConfigService configService
-        {
-            get
-            {
-                if (this._configservice == null)
-                {
-                    this._configservice = new ConfigService();
-                }
-                return this._configservice;
-            }
-        }
-        private ConfigService _configservice = null;
     }
 }
 

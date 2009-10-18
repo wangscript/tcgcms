@@ -26,7 +26,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class newsFromHandlers
+    public class NewsFromHandlers
     {
         /// <summary>
         ///添加新的来源 
@@ -146,11 +146,11 @@ namespace TCG.Handlers
             {
                 return this.GetAllNewsFrom(conn);
             }
-            DataTable newsfrom = (DataTable)Caching.Get("AllNewsFrom");
+            DataTable newsfrom = (DataTable)CachingService.Get("AllNewsFrom");
             if (newsfrom == null)
             {
                 newsfrom  = this.GetAllNewsFrom(conn);
-                Caching.Set("AllNewsFrom", newsfrom, null);
+                CachingService.Set("AllNewsFrom", newsfrom, null);
             }
             return newsfrom;
         }

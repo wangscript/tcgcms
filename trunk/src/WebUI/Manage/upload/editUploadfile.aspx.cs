@@ -18,7 +18,7 @@ public partial class Manage_upload_editUploadfile : adminMain
         {
             FileInfos item = new FileInfos();
             item.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
-            item.iClassId = objectHandlers.ToInt(config["NewsFileClass"]);
+            item.iClassId = objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]);
 
             HttpFileCollection Fs = Request.Files;
 
@@ -37,8 +37,8 @@ public partial class Manage_upload_editUploadfile : adminMain
                     if (CheckType(ex))
                     {
                         item.vcType = ex.Replace(".", "");
-                        url = base.config["FileSite"] + base.config["ManagePath"] + "attach.aspx?attach=" + item.iID.ToString();
-                        fileclasshandlers fchdl = new fileclasshandlers();
+                        url = base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"] + "attach.aspx?attach=" + item.iID.ToString();
+                        FileClassHandlers fchdl = new FileClassHandlers();
 
                         string filepath = fchdl.GetFilesPathByClassId(base.conn, item.iClassId);
                         filepath += item.iID.ToString().Substring(0, 6) + "/"
@@ -59,7 +59,7 @@ public partial class Manage_upload_editUploadfile : adminMain
 
                         if (create)
                         {
-                            fileinfoHandlers flfh = new fileinfoHandlers();
+                            FileInfoHandlers flfh = new FileInfoHandlers();
                             int rtn = flfh.AddFileInfoByAdmin(base.conn, base.admin.adminInfo.vcAdminName, item);
                             if (rtn < 0)
                             {

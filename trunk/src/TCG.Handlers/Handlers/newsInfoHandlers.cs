@@ -28,7 +28,7 @@ using TCG.KeyWordSplit;
 
 namespace TCG.Handlers
 {
-    public class newsInfoHandlers
+    public class NewsInfoHandlers
     {
         /// <summary>
         /// Ìí¼Ó×ÊÑ¶
@@ -291,7 +291,7 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int DelNewsInfoHtmlById(Connection conn, Config config, int id)
+        public int DelNewsInfoHtmlById(Connection conn, Dictionary<string, string> config, int id)
         {
             NewsInfo newsitem = this.GetNewsInfoById(conn, id);
             if (newsitem == null) return -19000000;  
@@ -308,7 +308,7 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public int DelNewsInfoHtmlByIds(Connection conn, Config config, string ids)
+        public int DelNewsInfoHtmlByIds(Connection conn, Dictionary<string, string> config, string ids)
         {
             if (string.IsNullOrEmpty(ids)) return -19000000;
             if (ids.IndexOf(",") != -1)

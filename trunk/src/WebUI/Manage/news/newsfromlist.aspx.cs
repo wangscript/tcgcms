@@ -65,7 +65,7 @@ public partial class news_newsfromlist : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
         sItem.strCondition = "iID>0";
 
         int curPage = 0;
@@ -75,7 +75,7 @@ public partial class news_newsfromlist : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.Total = count;
@@ -123,7 +123,7 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        newsFromHandlers nfhdl = new newsFromHandlers();
+        NewsFromHandlers nfhdl = new NewsFromHandlers();
         int rtn = nfhdl.AddNewsFromInfo(base.conn, base.admin.adminInfo.vcAdminName, item);
         base.AjaxErch(rtn.ToString());
         base.Finish();
@@ -157,7 +157,7 @@ public partial class news_newsfromlist : adminMain
             return;
         }
 
-        newsFromHandlers nfhdl = new newsFromHandlers();
+        NewsFromHandlers nfhdl = new NewsFromHandlers();
         NewsFromInfo item = nfhdl.GetNewsFromInfoById(base.conn, iMdyID);
         if (item == null)
         {
@@ -198,7 +198,7 @@ public partial class news_newsfromlist : adminMain
             base.Finish();
             return;
         }
-        newsFromHandlers nshdl = new newsFromHandlers();
+        NewsFromHandlers nshdl = new NewsFromHandlers();
         int rtn = nshdl.DeleteNewsFromInfos(base.conn, base.admin.adminInfo.vcAdminName, Ids);
         base.AjaxErch(rtn.ToString());
         base.Finish();

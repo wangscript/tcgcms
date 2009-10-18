@@ -42,7 +42,7 @@ namespace TCG.Handlers
             MatchCollection matchs = this.GetMatchs(pattern, str);
             if (matchs.Count > 0)
             {
-                classHandlers clhds = new classHandlers();
+                NewsClassHandlers clhds = new NewsClassHandlers();
 
                 foreach (Match item in matchs)
                 {

@@ -72,7 +72,7 @@ public partial class Template_newtemplatemdy : adminMain
             }
             item.iId = templateid;
             int rtn = nthdl.MdyTemplate(base.conn, base.admin.adminInfo.vcAdminName,item);
-            Caching.Remove(TemplateConstant.CACHING_AllTemplates);
+            CachingService.Remove(TemplateConstant.CACHING_AllTemplates);
             base.AjaxErch(rtn.ToString());
             nthdl = null;
             base.Finish();

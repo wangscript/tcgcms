@@ -22,7 +22,7 @@ public partial class news_newslistInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
-            classHandlers chdl = new classHandlers();
+            NewsClassHandlers chdl = new NewsClassHandlers();
             DataTable dt = chdl.GetClassInfosByParentId(0, base.conn,false);
             if (dt != null)
             {

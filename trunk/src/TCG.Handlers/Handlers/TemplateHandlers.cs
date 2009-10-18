@@ -43,11 +43,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)Caching.Get(TemplateConstant.CACHING_AllTemplates);
+                ds = (DataSet)CachingService.Get(TemplateConstant.CACHING_AllTemplates);
                 if (ds == null)
                 {
                     ds = GetAllTemplatesFromDb(conn);
-                    Caching.Set(TemplateConstant.CACHING_AllTemplates, ds, null);
+                    CachingService.Set(TemplateConstant.CACHING_AllTemplates, ds, null);
                 }
             }
             return ds;
@@ -77,11 +77,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)Caching.Get(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString());
+                ds = (DataSet)CachingService.Get(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString());
                 if (ds == null)
                 {
                     ds = GetTemplatesBySystemTypeFromDb(conn, systemtype);
-                    Caching.Set(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString(), ds, null);
+                    CachingService.Set(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString(), ds, null);
                 }
             }
             return ds;

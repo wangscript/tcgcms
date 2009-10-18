@@ -41,7 +41,7 @@ public partial class aMenu : adminMain
         script += "var btNum =" + Rows.Length.ToString() + ";\r\n";
         for (int i = 0; i < Rows.Length; i++)
         {
-            string Url = Rows[i]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"] + base.config["ManagePath"]);
+            string Url = Rows[i]["vcUrl"].ToString().Replace("$filesite$", base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"]);
             
             if (0 == i) script += "window.parent.main.location.href='" + Url + "';\r\n";
             str += string.Format(tempClass, i, Url, Rows[i]["vcPopName"].ToString());
@@ -50,7 +50,7 @@ public partial class aMenu : adminMain
             script += "stNums[" + i.ToString() + "]=" + sRows.Length.ToString() + ";\r\n";
             for (int n = 0; n < sRows.Length; n++)
             {
-                string Url1 = sRows[n]["vcUrl"].ToString().Replace("$filesite$", base.config["FileSite"] + base.config["ManagePath"]);
+                string Url1 = sRows[n]["vcUrl"].ToString().Replace("$filesite$", base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"]);
 
                 str += string.Format(tempSClass, i, n, Url1, sRows[n]["vcPopName"].ToString(), sRows[n]["iId"].ToString());
             }

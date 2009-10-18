@@ -153,11 +153,11 @@ namespace TCG.Handlers
             }
             else
             {
-                DataTable dt = (DataTable)Caching.Get("AllNewsSpeciality");
+                DataTable dt = (DataTable)CachingService.Get("AllNewsSpeciality");
                 if (dt == null)
                 {
                     dt = this.GetAllNewsSpecialityInfo(conn);
-                    Caching.Set("AllNewsSpeciality", dt, null);
+                    CachingService.Set("AllNewsSpeciality", dt, null);
                 }
                 return dt;
             }
