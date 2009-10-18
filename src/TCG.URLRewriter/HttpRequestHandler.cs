@@ -21,18 +21,18 @@ namespace TCG.URLRewriter
         /// <summary>
         /// 获得配置信息
         /// </summary>
-        public Config config
+        public ConfigService configService
         {
             get
             {
-                if (this._config == null)
+                if (this._configservice == null)
                 {
-                    this._config = new Config();
+                    this._configservice = new ConfigService();
                 }
-                return this._config;
+                return this._configservice;
             }
         }
-        private Config _config = null;
+        private ConfigService _configservice = null;
 
         /// <summary>
         /// 获得数据库链接
@@ -60,7 +60,7 @@ namespace TCG.URLRewriter
         /// <param name="Request"></param>
         public void Do(HttpApplication iHttpApplication, HttpContext iHttpContext, HttpResponse Response, HttpRequest Request)
         {
-            if (!Boolean.Parse(config["IsReWrite"])) return;
+            if (!Boolean.Parse(configService.baseConfig["IsReWrite"])) return;
 
             TCGTagHandlers tcgthdl = new TCGTagHandlers();
 
@@ -78,14 +78,14 @@ namespace TCG.URLRewriter
                     DataRow Row = ds.Tables[0].Rows[i];
                     
                     //获得数据库配置URL信息
-                    string texturl = config["WebSite"].Trim() + Row["vcUrl"].ToString().Trim();
-                    if (texturl.IndexOf(config["FileExtension"]) == -1) texturl += config["FileExtension"];
+                    string texturl = configService.baseConfig["WebSite"].Trim() + Row["vcUrl"].ToString().Trim();
+                    if (texturl.IndexOf(configService.baseConfig["FileExtension"]) == -1) texturl += configService.baseConfig["FileExtension"];
 
                     if (texturl == Request.Url.AbsoluteUri)
                     {
                         tcgthdl.Template = Row["vcContent"].ToString();
                         tcgthdl.NeedCreate = false;
-                        tcgthdl.Replace(conn, config);
+                        tcgthdl.Replace(conn, configService.baseConfig);
                         
                         Response.Write(tcgthdl.Template);
                         Response.End();
@@ -98,17 +98,17 @@ namespace TCG.URLRewriter
             string DpagePath = Request.Url.AbsolutePath;
             int DcurPage = 1;
             //检测文件名特性
-            string pattern = @"([\s\S]*)-c(\d+)\" + config["FileExtension"];
+            string pattern = @"([\s\S]*)-c(\d+)\" + configService.baseConfig["FileExtension"];
             Match match = Regex.Match(pagepath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
-                pagepath = match.Result("$1") + config["FileExtension"];
+                pagepath = match.Result("$1") + configService.baseConfig["FileExtension"];
                 DpagePath = DpagePath.Substring(0, DpagePath.LastIndexOf('/')) + "/" + pagepath;
                 DcurPage = objectHandlers.ToInt(match.Result("$2"));
             }
 
             //检测分类文件
-            classHandlers chld = new classHandlers();
+            NewsClassHandlers chld = new NewsClassHandlers();
             DataTable dt = chld.GetClassInfoByCach(conn,false);
             if (dt != null && dt.Rows.Count != 0)
             {
@@ -130,8 +130,8 @@ namespace TCG.URLRewriter
                         tcgthdl1.NeedCreate = false;
                         tcgthdl1.PagerInfo.DoAllPage = false;
                         tcgthdl1.PagerInfo.Page = DcurPage;
-                        tcgthdl1.WebPath = Rows[0]["vcUrl"].ToString() + config["FileExtension"];
-                        tcgthdl1.Replace(conn, config);
+                        tcgthdl1.WebPath = Rows[0]["vcUrl"].ToString() + configService.baseConfig["FileExtension"];
+                        tcgthdl1.Replace(conn, configService.baseConfig);
 
                         Response.Write(tcgthdl1.Template);
                         Response.End();
@@ -142,7 +142,7 @@ namespace TCG.URLRewriter
             }
 
             //检测文件名特性
-            pattern = @"(\d+)t-([\s\S]*)\" + config["FileExtension"];
+            pattern = @"(\d+)t-([\s\S]*)\" + configService.baseConfig["FileExtension"];
             match = Regex.Match(pagepath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
@@ -150,7 +150,7 @@ namespace TCG.URLRewriter
                 if (topicid != 0)
                 {
                     //获得文章对象
-                    newsInfoHandlers nifhld = new newsInfoHandlers();
+                    NewsInfoHandlers nifhld = new NewsInfoHandlers();
                     NewsInfo item = nifhld.GetNewsInfoById(conn, topicid);
                     if (item != null)
                     {
@@ -164,7 +164,7 @@ namespace TCG.URLRewriter
                         tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
                         titem = null;
                         tcgth.NeedCreate = false;
-                        tcgth.Replace(conn, config);
+                        tcgth.Replace(conn, configService.baseConfig);
                         
                         Response.Write(tcgth.Template);
                         Response.End();

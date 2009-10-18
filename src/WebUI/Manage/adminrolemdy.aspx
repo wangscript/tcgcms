@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/AJAXRequest.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/adminroleadd.js"></script>
-	<script type="text/javascript" src="<%=base.config["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
 	<script type="text/javascript" src="jsMethod/AllPop.aspx"></script>
 </head>
 <body>

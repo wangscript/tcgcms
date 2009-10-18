@@ -85,7 +85,7 @@ namespace TCG.WebService
 
                     err = "attach-" + item.iID.ToString() + ex;
 
-                    fileclasshandlers fchdl = new fileclasshandlers();
+                    FileClassHandlers fchdl = new FileClassHandlers();
 
                     string filepath = fchdl.GetFilesPathByClassId(conn, item.iClassId);
                     filepath += item.iID.ToString().Substring(0, 6) + "/"
@@ -106,7 +106,7 @@ namespace TCG.WebService
 
                     if (create)
                     {
-                        fileinfoHandlers flfh = new fileinfoHandlers();
+                        FileInfoHandlers flfh = new FileInfoHandlers();
 
                         int rtn = flfh.AddFileInfoByAdmin(conn, adminname, item);
                         if (rtn < 0)

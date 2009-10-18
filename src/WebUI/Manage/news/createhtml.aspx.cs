@@ -97,7 +97,7 @@ public partial class news_createhtml : adminMain
         string filepath = Fetch.Post("iFilePath");
         string Created = Fetch.Post("tCreated");
 
-        classHandlers chdl = new classHandlers();
+        NewsClassHandlers chdl = new NewsClassHandlers();
         ClassInfo cif = chdl.GetClassInfoById(base.conn, ClassId, false);
         chdl = null;
         if (cif == null) { base.AjaxErch(""); return; }
@@ -106,7 +106,7 @@ public partial class news_createhtml : adminMain
         if (tif == null) { base.AjaxErch(""); return; }
         tlhd = null;
 
-        newsInfoHandlers nihdl = new newsInfoHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
         NewsInfo item = new NewsInfo();
         item = nihdl.GetNewsInfoById(base.conn, id);
 
@@ -131,7 +131,7 @@ public partial class news_createhtml : adminMain
             item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
         }
 
-        int rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref id);
+        int rtn = nihdl.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref id);
         if (rtn < 0)
         {
             text1 = "<a>更新文章信息失败...ID:" + id.ToString() + "</a>";
@@ -142,8 +142,8 @@ public partial class news_createhtml : adminMain
         TCGTagHandlers tcgthl = new TCGTagHandlers();
         tcgthl.Template = tif.vcContent.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
-        tcgthl.NeedCreate = base.config["IsReWrite"] != "True" ? true : false;
-        tcgthl.Replace(base.conn, base.config);
+        tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
+        tcgthl.Replace(base.conn, base.configService.baseConfig);
 
         if (tcgthl.PagerInfo.PageCount > 1)
         {
@@ -185,7 +185,7 @@ public partial class news_createhtml : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Post("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         sItem.strCondition = "cChecked='Y'";
 
@@ -213,7 +213,7 @@ public partial class news_createhtml : adminMain
         else if (iStypeCheck == 2)
         {
             int iClassId = Bases.ToInt(Fetch.Post("iClassId"));
-            classHandlers chdl = new classHandlers();
+            NewsClassHandlers chdl = new NewsClassHandlers();
             string allchild = chdl.GetAllChildClassIdByClassId(base.conn, iClassId, false);
             chdl = null;
             sItem.strCondition += " AND iClassID in (" + allchild + ")";
@@ -232,7 +232,7 @@ public partial class news_createhtml : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
 
         if (pageCount < sItem.page)

@@ -27,7 +27,7 @@ using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 namespace TCG.Handlers
 {
-    public class fileZip
+    public class FileZipHandlers
     {
         public void ZipFile(string FileToZip, string ZipedFile, int CompressionLevel, int BlockSize, string password)
         {

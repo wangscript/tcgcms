@@ -28,7 +28,7 @@ public partial class files_fileinfos : adminMain
             int ClassId = Bases.ToInt(Fetch.Get("iClassId"));
             this.iClassId.Value = ClassId.ToString();
 
-            fileclasshandlers fchdl = new fileclasshandlers();
+            FileClassHandlers fchdl = new FileClassHandlers();
             DataTable dt = fchdl.GetFilesClassInfosByParendId(base.conn, ClassId);
             if (dt != null)
             {
@@ -71,7 +71,7 @@ public partial class files_fileinfos : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         int tClassId = Bases.ToInt(Fetch.Get("iClassId"));
         sItem.strCondition = "iClassID = " + tClassId.ToString();
@@ -83,7 +83,7 @@ public partial class files_fileinfos : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.SetItem("iClassId", tClassId);
@@ -112,7 +112,7 @@ public partial class files_fileinfos : adminMain
         FileClassID.Text = Row["iId"].ToString();
         sFileClassId.Text = Row["iId"].ToString();
         string text = "<a href=\"?iClassId=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
-           + "<img src=\"" + base.config["WebSite"] + base.config["ManagePath"] + "images/icon/12.gif\" border=\"0\"></a>";
+           + "<img src=\"" + base.configService.baseConfig["WebSite"] + base.configService.baseConfig["ManagePath"] + "images/icon/12.gif\" border=\"0\"></a>";
         sTitle.Text = text + Row["vcFileName"].ToString();
         sInfo.Text = Row["vcMeno"].ToString();
         updatedate.Text = Row["dCreateDate"].ToString();
@@ -136,7 +136,7 @@ public partial class files_fileinfos : adminMain
         //sFileClassId.Text = Row["iId"].ToString();
         sTitle.Text = Row["iId"].ToString();
 
-        sInfo.Text = "<a href='" + base.config["FileSite"] + base.config["ManagePath"] + "fileView.aspx?fileId="
+        sInfo.Text = "<a href='" + base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"] + "fileView.aspx?fileId="
             + Row["iId"].ToString() + "' target='_blank'>" + Row["vcFileName"].ToString() + "</a>";
         ssize.Text = Row["iSize"].ToString() + "K";
         updatedate.Text = Row["dCreateDate"].ToString();
@@ -161,11 +161,11 @@ public partial class files_fileinfos : adminMain
             return;
         }
 
-        fileclasshandlers fchd = new fileclasshandlers();
+        FileClassHandlers fchd = new FileClassHandlers();
         int rtn = fchd.AddFileClass(base.conn, base.admin.adminInfo.vcAdminName, item);
         if (rtn == 1)
         {
-            Caching.Remove(FilesConst.CACHING_ALL_FILECLASS);
+            CachingService.Remove(CachingService.CACHING_ALL_FILECLASS);
             string text1 = fchd.GetFilesPathByClassId(base.conn, item.iParentId);
             string text2 = "~" + text1 + item.vcFileName + @"/";
             text2 = Server.MapPath(text2);

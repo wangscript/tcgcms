@@ -5,11 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head >
     <title>无标题页</title>
-	<link href="<%=base.config["WebSite"]%>css/base.css" rel="stylesheet" type="text/css" />
+	<link href="<%=base.configService.baseConfig["WebSite"]%>css/base.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/common.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.config["WebSite"]%>js/filseclassadd.js"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["WebSite"]%>js/common.js"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["WebSite"]%>js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="<%=base.configService.baseConfig["WebSite"]%>js/filseclassadd.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">

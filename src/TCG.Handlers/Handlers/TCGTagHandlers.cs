@@ -40,7 +40,7 @@ namespace TCG.Handlers
             this._pagerinfo = new TCGTagPagerInfo();
         }
 
-        public bool Replace(Connection conn,Config config)
+        public bool Replace(Connection conn, Dictionary<string, string> config)
         {
             if (!this._start)
             {
@@ -143,7 +143,7 @@ namespace TCG.Handlers
             return str;
         }
 
-        private void SysteConfigReplace(Config config)
+        private void SysteConfigReplace(Dictionary<string, string> config)
         {
             this._temphtml = _temphtml.Replace("_$FileSite$_", config["FileSite"]);
             this._temphtml = _temphtml.Replace("_$FileExtension$_", config["FileExtension"]);

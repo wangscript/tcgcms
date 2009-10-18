@@ -107,17 +107,17 @@ public partial class news_newsthief : adminMain
         string TopicArea = Fetch.Post("iTopicArea");
 
         string ListPageHtml = TxtReader.GetRequestText(TopicWebPath, iCharSet);
-        newsInfoHandlers nihdl = new newsInfoHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
 
         Match item = Regex.Match(ListPageHtml, TopicArea, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         if (item.Success)
         {
             NewsInfo nif = new NewsInfo();
-            fileinfoHandlers fihdl = new fileinfoHandlers();
+            FileInfoHandlers fihdl = new FileInfoHandlers();
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.admin.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")), false);
+            nif.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")), false);
             nif.FromInfo.iId = 1;
             nif.cChecked = "Y";
             nif.cCreated = "Y";
@@ -126,7 +126,7 @@ public partial class news_newsthief : adminMain
             if (nihdl.CheckThiefTopic(base.conn, nif.ClassInfo.iId, nif.vcTitle) == 1)
             {
                 nif.vcContent = fihdl.ImgPatchInit(base.conn, item.Result("$2"), TopicWebPath,
-                    base.admin.adminInfo.vcAdminName, objectHandlers.ToInt(base.config["NewsFileClass"]), base.config);
+                    base.admin.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig);
 
                 nif.vcShortContent = Text.Left(Text.GetTextWithoutHtml(nif.vcContent), 200, false);
 
@@ -134,7 +134,7 @@ public partial class news_newsthief : adminMain
                 int rtn = 0;
                 try
                 {
-                    rtn = nihdl.AddNewsInfoForSheif(base.conn, base.config["FileExtension"], nif, ref newid);
+                    rtn = nihdl.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif, ref newid);
                 }
                 catch { }
             }

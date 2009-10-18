@@ -21,7 +21,7 @@ namespace TCG.Files.Utils
             DBLinkNums.Files_10,
         };
 
-        public static string CACHING_ALL_FILECLASS = "allfilesclass";
+        
 
         public static string FilePath { get { return _filepath; } }
         private static string _filepath = ConfigurationManager.ConnectionStrings["filePatch"].ToString();

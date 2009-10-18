@@ -28,7 +28,7 @@ using TCG.KeyWordSplit;
 
 public partial class news_newsAdd : adminMain
 {
-    newsInfoHandlers nihdl = new newsInfoHandlers();
+    NewsInfoHandlers nihdl = new NewsInfoHandlers();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -130,7 +130,7 @@ public partial class news_newsAdd : adminMain
         item.vcContent = Fetch.Post("iContent$content");
         item.vcAuthor = Fetch.Post("iAuthor");
         item.vcKeyWord = Fetch.Post("iKeyWords");
-        item.ClassInfo = new classHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
+        item.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, Bases.ToInt(Fetch.Post("iClassId")),false);
         item.FromInfo.iId = Bases.ToInt(Fetch.Post("iFrom"));
         item.vcSpeciality = Fetch.Post("iSpeciality");
         item.vcBigImg = Fetch.Post("iBigImg");
@@ -173,20 +173,20 @@ public partial class news_newsAdd : adminMain
         int rtn = 0;
         if (!ismdy)
         {
-            rtn = nihdl.AddNewsInfo(base.conn, base.config["FileExtension"], item, ref newid);
+            rtn = nihdl.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
         }
         else
         {
-            rtn = nihdl.UpdateNewsInfo(base.conn, base.config["FileExtension"], item, ref newid);
+            rtn = nihdl.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
         }
 
         item.iId = newid;
         filepath = Server.MapPath("~" + item.vcFilePath);
         if (rtn == 1)
         {
-            if (base.config["IsReWrite"] != "True")
+            if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                classHandlers clhdl = new classHandlers();
+                NewsClassHandlers clhdl = new NewsClassHandlers();
                 ClassInfo cif = clhdl.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
                 clhdl = null;
                 TemplateHandlers ntlhdl = new TemplateHandlers();
@@ -197,7 +197,7 @@ public partial class news_newsAdd : adminMain
                 tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
                 titem = null;
                 tcgth.FilePath = filepath;
-                tcgth.Replace(base.conn, base.config);
+                tcgth.Replace(base.conn, base.configService.baseConfig);
                 tcgth = null;
             }
 

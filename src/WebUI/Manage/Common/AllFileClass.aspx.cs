@@ -20,7 +20,7 @@ public partial class Common_AllFileClass : ScriptsMain
         if (!Page.IsPostBack)
         {
             Response.Write("var AllFileClass = new Array();\r\n");
-            fileclasshandlers clhd = new fileclasshandlers();
+            FileClassHandlers clhd = new FileClassHandlers();
             DataTable dt = clhd.GetAllFileClass(base.conn, true);
             if (dt != null)
             {

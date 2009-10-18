@@ -32,7 +32,7 @@ namespace TCG.Pages
 
         public AdminLogin(Connection conn)
         {
-            this._adminh = new adminHandlers(conn);
+            this._adminh = new AdminHandlers(conn);
             this.Initialization();
         }
 
@@ -94,7 +94,7 @@ namespace TCG.Pages
         /// 检查管理员权限
         /// </summary>
         /// <param name="popnum"></param>
-        public void CheckAdminPop(Config config)
+        public void CheckAdminPop(Dictionary<string, string> config)
         {
             this.AdminInit();
             if (!IsSpage(config,this._currenturl))
@@ -121,7 +121,7 @@ namespace TCG.Pages
             }
         }
 
-        public bool CheckAdminPop(Config config, string page)
+        public bool CheckAdminPop(Dictionary<string, string> config, string page)
         {
             if (!IsSpage(config, page)) return true;
             if (IsOnlyLoginPage(config, page)) return true;
@@ -129,7 +129,7 @@ namespace TCG.Pages
             return false;
         }
 
-        private bool IsSpage(Config config,string pages)
+        private bool IsSpage(Dictionary<string, string> config, string pages)
         {
             bool rtn = false;
             for (int i = 0; i < ManageConst.SpecialPages.Length; i++)
@@ -140,7 +140,7 @@ namespace TCG.Pages
             return rtn;
         }
 
-        private bool IsOnlyLoginPage(Config config,string pages)
+        private bool IsOnlyLoginPage(Dictionary<string, string> config, string pages)
         {
             bool rtn = false;
             for (int i = 0; i < ManageConst.OnlineLoginPages.Length; i++)
@@ -151,7 +151,7 @@ namespace TCG.Pages
             return rtn;
         }
 
-        private bool HavePower(Config config,string pages)
+        private bool HavePower(Dictionary<string, string> config, string pages)
         {
             if (this._admin.PopedomUrls.Rows.Count == 0) return false;
             string text = this._currenturl.ToLower().Trim();
@@ -191,7 +191,7 @@ namespace TCG.Pages
         }
 
        
-        public adminHandlers AdminHandlers { get { return this._adminh; } }
+        public AdminHandlers AdminHandlers { get { return this._adminh; } }
         public Admin adminInfo 
         {
             get 
@@ -205,7 +205,7 @@ namespace TCG.Pages
         
         private HttpCookie _admincookie = null;
         private string _name = string.Empty;
-        private adminHandlers _adminh = null;
+        private AdminHandlers _adminh = null;
         private Admin _admin = null;
         private string _currenturl = string.Empty;
     }

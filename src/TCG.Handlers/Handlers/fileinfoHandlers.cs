@@ -31,7 +31,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class fileinfoHandlers
+    public class FileInfoHandlers
     {
         /// <summary>
         /// 添加新的分类
@@ -94,7 +94,7 @@ namespace TCG.Handlers
             return item;
         }
 
-        public string ImgPatchInit(Connection conn, string content, string adminname, int fileclassid, Config config)
+        public string ImgPatchInit(Connection conn, string content, string adminname, int fileclassid, Dictionary<string, string> config)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -105,7 +105,7 @@ namespace TCG.Handlers
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
-                    fileclasshandlers fchdl = new fileclasshandlers();
+                    FileClassHandlers fchdl = new FileClassHandlers();
 
                     imgfile.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;
@@ -150,7 +150,7 @@ namespace TCG.Handlers
             return content;
         }
 
-        public string ImgPatchInit(Connection conn, string content,string url, string adminname, int fileclassid, Config config)
+        public string ImgPatchInit(Connection conn, string content, string url, string adminname, int fileclassid, Dictionary<string, string> config)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -161,7 +161,7 @@ namespace TCG.Handlers
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileInfos imgfile = new FileInfos();
-                    fileclasshandlers fchdl = new fileclasshandlers();
+                    FileClassHandlers fchdl = new FileClassHandlers();
 
                     imgfile.iID = Bases.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;

@@ -25,8 +25,8 @@ public partial class aLogin : adminMain
     {
         if (!Page.IsPostBack)
         {
-            this.title.Text = base.config["WebTitle"] + " " + Versions.version;
-            this.ltitle.Text = base.config["WebTitle"];
+            this.title.Text = base.configService.baseConfig["WebTitle"] + " " + Versions.version;
+            this.ltitle.Text = base.configService.baseConfig["WebTitle"];
             this.month.Text = DateTime.Now.Month.ToString();
 
             HttpCookie lname = TCG.Utils.Cookie.Get(ManageConst.AdminLoginName);
@@ -81,7 +81,7 @@ public partial class aLogin : adminMain
 
                 string dir = System.IO.Path.GetDirectoryName(filepath);
                 string fileName = System.IO.Path.GetFileName(filepath);
-                fileZip.UnZipFile(fileName, dir);
+                FileZipHandlers.UnZipFile(fileName, dir);
 
                 re = true;
             }

@@ -68,7 +68,7 @@ public partial class news_NewsSpecialityList : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iParent = Bases.ToInt(Fetch.Get("iParentID"));
         sItem.strCondition = "iParent=" + iParent.ToString();
@@ -86,7 +86,7 @@ public partial class news_NewsSpecialityList : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.SetItem("iParentId", iParent);
@@ -145,7 +145,7 @@ public partial class news_NewsSpecialityList : adminMain
 
         NewsSpecialityHandlers nshdl = new NewsSpecialityHandlers();
         int rtn = nshdl.NewsSpecialityAdd(base.conn, base.admin.adminInfo.vcAdminName, item);
-        Caching.Remove("AllNewsSpeciality");
+        CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();
         nshdl = null;
@@ -214,7 +214,7 @@ public partial class news_NewsSpecialityList : adminMain
         if (ismdy)
         {
             int rtn = nshdl.NewsSpecialityMdy(base.conn, base.admin.adminInfo.vcAdminName, item);
-            Caching.Remove("AllNewsSpeciality");
+            CachingService.Remove("AllNewsSpeciality");
             base.AjaxErch(rtn.ToString());
         }
 
@@ -234,7 +234,7 @@ public partial class news_NewsSpecialityList : adminMain
         }
         NewsSpecialityHandlers nshdl = new NewsSpecialityHandlers();
         int rtn = nshdl.NewSpecialityDel(base.conn, base.admin.adminInfo.vcAdminName, Ids);
-        Caching.Remove("AllNewsSpeciality");
+        CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();
         nshdl = null;

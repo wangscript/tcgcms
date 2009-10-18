@@ -64,7 +64,7 @@ public partial class news_newsRecovery : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
         sItem.strCondition += " cDel ='Y'";
 
         int curPage = 0;
@@ -74,7 +74,7 @@ public partial class news_newsRecovery : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.Total = count;
@@ -136,7 +136,7 @@ public partial class news_newsRecovery : adminMain
             return;
         }
 
-        newsInfoHandlers nihdl = new newsInfoHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
 
         int rtn = nihdl.DelNewsInfosWithLogic(base.conn, base.admin.adminInfo.vcAdminName, "N", delids);
         base.AjaxErch(rtn.ToString());
@@ -151,7 +151,7 @@ public partial class news_newsRecovery : adminMain
             return;
         }
 
-        newsInfoHandlers nihdl = new newsInfoHandlers();
+        NewsInfoHandlers nihdl = new NewsInfoHandlers();
 
         int rtn = nihdl.DelNewsInfosWithPhysics(base.conn, base.admin.adminInfo.vcAdminName, delids);
         base.AjaxErch(rtn.ToString());

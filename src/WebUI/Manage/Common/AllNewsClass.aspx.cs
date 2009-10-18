@@ -20,7 +20,7 @@ public partial class Common_AllNewsClass : ScriptsMain
         if (!Page.IsPostBack)
         {
             Response.Write("var NewsLis = new Array();\r\n");
-            classHandlers cldl = new classHandlers();
+            NewsClassHandlers cldl = new NewsClassHandlers();
             DataTable dt = cldl.GetClassInfoByCach(base.conn,false);
             if (dt != null)
             {

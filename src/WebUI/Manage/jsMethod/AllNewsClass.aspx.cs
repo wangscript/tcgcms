@@ -22,7 +22,7 @@ public partial class jsMethod_AllNewsClass : adminMain
         if (!Page.IsPostBack)
         {
             Response.Write("var NewsLis = new Array();\r\n");
-            classHandlers cldl = new classHandlers();
+            NewsClassHandlers cldl = new NewsClassHandlers();
             DataTable dt = cldl.GetClassInfos(base.conn);
             if (dt != null)
             {

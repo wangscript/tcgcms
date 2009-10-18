@@ -58,7 +58,6 @@
     <Compile Include="CodeImage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Config.cs" />
     <Compile Include="Cookie.cs" />
     <Compile Include="DbProviderEnum.cs" />
     <Compile Include="Fetch.cs" />

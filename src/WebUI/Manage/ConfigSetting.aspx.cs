@@ -34,7 +34,7 @@ public partial class ConfigSetting : adminMain
             foreach (XmlElement element in document.GetElementsByTagName("Item"))
             {
                 string innerText = element.SelectSingleNode("Name").InnerText;
-                string str2 = this.Post(innerText);
+                string str2 = objectHandlers.Post(innerText);
                 if (element.SelectSingleNode("Mode").InnerText.ToUpper() == "CDATA")
                 {
                     element.SelectSingleNode("Value").InnerXml = "<![CDATA[" + str2 + "]]>";
@@ -108,7 +108,7 @@ public partial class ConfigSetting : adminMain
             {
             }
             format = "<input id=\"{0}\" name=\"{0}\" type=\"text\" value=\"{1}\" class=\"itxt1 wd2\" onfocus=\"this.className=\'itxt2 wd2'\" onblur=\"this.className='itxt1 wd2'\"/>";
-            this.sb.AppendFormat(format, new object[] { item.Name, this.TextEncode(item.Value)});
+            this.sb.AppendFormat(format, new object[] { item.Name, objectHandlers.TextEncode(item.Value) });
         }
         this.sb.AppendFormat("<span class='info1' id='{0}_msg'>{1}</span>\r\n",item.Name, item.Explain);
         this.sb.Append("</div>\r\n");

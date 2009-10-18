@@ -59,7 +59,7 @@ public partial class Template_newtemplateadd : adminMain
             }
             TemplateHandlers nthdl = new TemplateHandlers();
             int rtn = nthdl.AddTemplate(base.conn, base.admin.adminInfo.vcAdminName,item);
-            Caching.Remove(TemplateConstant.CACHING_AllTemplates);
+            CachingService.Remove(TemplateConstant.CACHING_AllTemplates);
             base.AjaxErch(rtn.ToString());
             item = null;
             nthdl = null;

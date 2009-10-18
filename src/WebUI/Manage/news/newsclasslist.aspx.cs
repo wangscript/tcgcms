@@ -82,7 +82,7 @@ public partial class news_newsclasslist : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = Bases.ToInt(Fetch.Get("page"));
-        sItem.pageSize = Bases.ToInt(base.config["PageSize"]);
+        sItem.pageSize = Bases.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iParent = Bases.ToInt(Fetch.Get("iParentId"));
         sItem.strCondition = "iParent=" + iParent.ToString();
@@ -95,7 +95,7 @@ public partial class news_newsclasslist : adminMain
         int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
         if (rtn < 0)
         {
-            this.Throw(rtn, null, true);
+            return;
         }
         this.pager.Per = sItem.pageSize;
         this.pager.SetItem("iParentId", iParent);
@@ -144,7 +144,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        classHandlers chdl = new classHandlers();
+        NewsClassHandlers chdl = new NewsClassHandlers();
         int rtn = chdl.DelNewsClassByClassId(base.conn, tClassID, base.admin.adminInfo.vcAdminName);
         base.AjaxErch(rtn.ToString());
         base.Finish();
@@ -161,7 +161,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        classHandlers chdl = new classHandlers();
+        NewsClassHandlers chdl = new NewsClassHandlers();
         ClassInfo cif = chdl.GetClassInfoById(base.conn, tClassID, false);
         chdl = null;
         if (cif == null)
@@ -191,7 +191,7 @@ public partial class news_newsclasslist : adminMain
         string filepath = "";
         try
         {
-            filepath = Server.MapPath("~" + cif.vcUrl + base.config["FileExtension"]);
+            filepath = Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
         }
         catch
         {
@@ -203,8 +203,8 @@ public partial class news_newsclasslist : adminMain
         TCGTagHandlers tcgthdl = new TCGTagHandlers();
         tcgthdl.Template = tlif.vcContent.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
-        tcgthdl.WebPath = cif.vcUrl + base.config["FileExtension"];
-        if (tcgthdl.Replace(base.conn, base.config))
+        tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
+        if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
         {   
             string text1 = "";
             if (tcgthdl.PagerInfo.PageCount > 1)
@@ -213,12 +213,12 @@ public partial class news_newsclasslist : adminMain
                 for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
                     string num = (i == 1) ? "" : i.ToString();
-                    text1 += "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + "-c" + num + base.config["FileExtension"] + "...</a>";
+                    text1 += "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + "-c" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
                 }
             }
             else
             {
-                text1 = "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + base.config["FileExtension"] + "...</a>";
+                text1 = "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + base.configService.baseConfig["FileExtension"] + "...</a>";
             }
             base.AjaxErch(text1);
         }
@@ -256,7 +256,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        classHandlers chl = new classHandlers();
+        NewsClassHandlers chl = new NewsClassHandlers();
         ClassInfo cif = chl.GetClassInfoById(base.conn, iMdyID,false);
         if (cif == null)
         {

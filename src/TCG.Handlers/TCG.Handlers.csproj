@@ -41,13 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\adminHandlers.cs" />
-    <Compile Include="Handlers\classHandlers.cs" />
-    <Compile Include="Handlers\fileclasshandlers.cs" />
-    <Compile Include="Handlers\fileinfoHandlers.cs" />
-    <Compile Include="Handlers\fileZip.cs" />
-    <Compile Include="Handlers\newsFromHandlers.cs" />
-    <Compile Include="Handlers\newsInfoHandlers.cs" />
+    <Compile Include="HandlerService.cs" />
+    <Compile Include="Handlers\AdminHandlers.cs" />
+    <Compile Include="Handlers\NewsClassHandlers.cs" />
+    <Compile Include="Handlers\FileClasshandlers.cs" />
+    <Compile Include="Handlers\FileInfoHandlers.cs" />
+    <Compile Include="Handlers\FileZipHandlers.cs" />
+    <Compile Include="Handlers\NewsFromHandlers.cs" />
+    <Compile Include="Handlers\NewsInfoHandlers.cs" />
     <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
     <Compile Include="Handlers\TCGTagAttributeHandlers.cs" />
     <Compile Include="Handlers\TCGTagHandlers.cs" />
