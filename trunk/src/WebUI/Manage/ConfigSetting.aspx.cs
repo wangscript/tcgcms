@@ -18,7 +18,7 @@ using TCG.Pages;
 
 public partial class ConfigSetting : adminMain
 {
-    private string _file = objectHandlers.MapPath("config/baseConfig.Config");
+    private string _file = objectHandlers.MapPath("/config/baseConfig.Config");
     private StringBuilder _sb;
 
     protected void Page_Load(object sender, EventArgs e)

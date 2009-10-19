@@ -149,7 +149,7 @@ public partial class aLogin : adminMain
 
         if (rtn < 0)
         {
-            response = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn) + "'}";
+            response = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
         }
         else
         {
