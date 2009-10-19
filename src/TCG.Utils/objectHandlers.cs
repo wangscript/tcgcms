@@ -1754,7 +1754,46 @@ namespace TCG.Utils
                 }
                 return (Referrer.IndexOf(ServerDomain) == -1);
             }
-        } 
- 
+        }
+
+        /// <summary>
+        /// 字符串转换为ASCII
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        public static int ToAsc(string character)
+        {
+            if (character.Length == 1)
+            {
+                System.Text.ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
+                int intAsciiCode = (int)asciiEncoding.GetBytes(character)[0];
+                return (intAsciiCode);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// ASCII转化为字符串
+        /// </summary>
+        /// <param name="asciiCode"></param>
+        /// <returns></returns>
+        public static string ToChr(int asciiCode)
+        {
+            if (asciiCode >= 0 && asciiCode <= 255)
+            {
+                System.Text.ASCIIEncoding asciiEncoding = new System.Text.ASCIIEncoding();
+                byte[] byteArray = new byte[] { (byte)asciiCode };
+                string strCharacter = asciiEncoding.GetString(byteArray);
+                return (strCharacter);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
     };
 }

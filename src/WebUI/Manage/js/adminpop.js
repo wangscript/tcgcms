@@ -47,7 +47,7 @@ function AddGroup(iRole){
 }
 
 function AddGroupBack(val){
-	if(GetErrTextFrame(val))return;
+	if(GetErrTextFrameRoot(val))return;
 	window.parent.adminpop.location.href=window.parent.adminpop.location.href;
 	SetAjaxDivAdminMian("ok",false,"成功移动管理员到指定的角色组！");
 }

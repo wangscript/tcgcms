@@ -12,8 +12,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsSpeciality.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/CreateInput.js"></script>

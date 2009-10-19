@@ -9,10 +9,7 @@ using TCG.Utils;
 using TCG.Data;
 using TCG.Entity;
 using TCG.Handlers;
-using TCG.Handlers;
-using TCG.Entity;
 
-using TCG.Handlers;
 
 namespace TCG.URLRewriter
 {

@@ -3,16 +3,16 @@ var ajax = new AJAXRequest();
 
 function CheckForm(){
 	if(CheckRoleName()){
-		SetAjaxDiv("loader",false,"正在发送请求...");
+	    SetAjaxDivRoot("loader", false, "正在发送请求...");
 		ajax.postf($("form1"),function(obj) { AddRoleBack(obj.responseText);});
 	}
 	return false;
 }
 
 function AddRoleBack(val){
-	if(GetErrText(val))return;
+    if (GetErrTextRoot(val)) return;
 	window.parent.adminpop.refinsh();
-	SetAjaxDiv("ok",false,"您已经成功完成对角色组的操作！");
+	SetAjaxDivRoot("ok", false, "您已经成功完成对角色组的操作！");
 }
 
 function CheckRoleName(){

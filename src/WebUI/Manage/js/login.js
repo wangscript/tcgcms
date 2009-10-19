@@ -29,7 +29,7 @@ function FromPost() {
 function SetAjaxLoad(obj, txt) {
     obj.innerHTML = "<table width=\"98%\" height=\"16\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">"
 	  			+ "<tr>"
-	    + "<td width='1%'><img src='/manage/images/ajax-loadersmall.gif' /></td>"
+	    + "<td width='1%'><img src='images/ajax-loadersmall.gif' /></td>"
         + "<td width='99%' align=\"left\" class=\"lodertxt\">&nbsp;&nbsp;" + txt + "</tr>"
 	+ "</table>";
 }
@@ -44,10 +44,11 @@ function LoginCkBack(data) {
 	}
 
 	$.ajax({
-	    type: "GET", url: "/manage/Version/Ver.aspx?temptime=" + new Date().toString(), data: "action=IsHaveHigherVer",
+	    type: "GET", url: "Version/Ver.aspx?temptime=" + new Date().toString(), data: "action=IsHaveHigherVer",
 	    errror: function() { top.location.href = "main.aspx"; },
 	    success: function(data) {
 	        if (data.state) {
+	            alert(33);
 	            var errText = $("#errText");
 	            $("#tblogin").css({ "display": "none" });
 	            var tbupdate = $("#tbupdate");

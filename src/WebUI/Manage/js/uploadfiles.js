@@ -1,5 +1,4 @@
 
-var FileSite="http://code.tcgcms.cn/manage/";
 
 function UploadFile(){
 	this.Screen={w:window.screen.availWidth,h:window.screen.availHeight};
@@ -36,7 +35,7 @@ function UploadFile(){
 		this.uploaddiv.style.left=(this.Screen.w-this.uploaddiv.offsetWidth)/2+"px";
 		this.uploadfile.style.width="100%";
 		this.uploadfile.style.height="100%";
-		this.uploadfile.src=FileSite+"upload/uploadfile.aspx?classid="+this.ClassId+"&CallBack="+this.CallBack+"&MaxNum="+this.MaxNum;
+		this.uploadfile.src= "../upload/uploadfile.aspx?classid="+this.ClassId+"&CallBack="+this.CallBack+"&MaxNum="+this.MaxNum;
 	}
 	
 	this.Html="<div class=\"uploadfilebg\" id=\"uploadfilebg\"></div><div class=\"uploaddiv\" id=\"uploaddiv\"><iframe id=\"uploadfile\" width=\"0\" height=\"0\" frameborder=\"0\"></iframe></div>";

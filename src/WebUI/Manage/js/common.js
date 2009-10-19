@@ -12,8 +12,8 @@ function $(element) {
 	return elements; 
 }
 
-var ajaxicon = ['/manage/images/ajax-loader1.gif','/manage/images/post_err.gif','/manage/images/post_ok.gif'];
-var weisite = "/manage/";
+var ajaxiconRoot = ['images/ajax-loader1.gif', 'images/post_err.gif', 'images/post_ok.gif'];
+var ajaxicon = ['../images/ajax-loader1.gif', '../images/post_err.gif', '../images/post_ok.gif'];
 
 function GoTo(){
 	void(0);
@@ -136,6 +136,30 @@ function SetAjaxDiv(action,IsHide,txt){
 	}
 }
 
+function SetAjaxDivRoot(action, IsHide, txt) {
+    var ajaxdiv = $("ajaxdiv");
+    var ajaximg = $("ajaximg");
+    var ajaxText = $("ajaxText");
+    if (ajaxdiv == null) return;
+
+    ajaxdiv.className = IsHide ? "ajaxdiv hid" : "ajaxdiv";
+    SetInnerText(ajaxText, txt);
+    switch (action) {
+        case "loader":
+            ajaximg.src = ajaxiconRoot[0];
+            ajaxText.className = "loader";
+            break;
+        case "err":
+            ajaximg.src = ajaxiconRoot[1];
+            ajaxText.className = "err red";
+            break;
+        case "ok":
+            ajaximg.src = ajaxiconRoot[2];
+            ajaxText.className = "ok bold";
+            break;
+    }
+}
+
 function SetAjaxDivAdminMian(action,IsHide,txt){
 	var ajaxdiv = window.parent.adminmain.$("ajaxdiv");
 	var ajaximg = window.parent.adminmain.$("ajaximg");
@@ -162,7 +186,7 @@ function SetAjaxDivAdminMian(action,IsHide,txt){
 
 function GetErrText(val){
 	if(Number(val)<0){
-		ajax.get(weisite+"AjaxMethod/Text_GetErrText.aspx?ErrCode="+val,
+		ajax.get("../AjaxMethod/Text_GetErrText.aspx?ErrCode="+val,
 				function(obj) { ErrBack(obj.responseText);}
 			)
 		return true;
@@ -170,15 +194,36 @@ function GetErrText(val){
 	return false;
 }
 
-function GetErrTextFrame(val){
-	if(Number(val)<0){
-	ajax.get(weisite+"AjaxMethod/Text_GetErrText.aspx?ErrCode="+val,
-			function(obj) { ErrBackFrom(obj.responseText);}
-		)
-	return true;
-	}
-	return false;
+function GetErrTextRoot(val) {
+    if (Number(val) < 0) {
+        ajax.get("AjaxMethod/Text_GetErrText.aspx?ErrCode=" + val,
+				function(obj) { ErrBack(obj.responseText); }
+			)
+        return true;
+    }
+    return false;
 }
+
+function GetErrTextFrame(val) {
+    if (Number(val) < 0) {
+        ajax.get("../AjaxMethod/Text_GetErrText.aspx?ErrCode=" + val,
+			function(obj) { ErrBackFrom(obj.responseText); }
+		)
+        return true;
+    }
+    return false;
+}
+
+function GetErrTextFrameRoot(val) {
+    if (Number(val) < 0) {
+        ajax.get("AjaxMethod/Text_GetErrText.aspx?ErrCode=" + val,
+			function(obj) { ErrBackFrom(obj.responseText); }
+		)
+        return true;
+    }
+    return false;
+}
+
 
 function ErrBack(val){
 	SetAjaxDiv("err",false,val);
