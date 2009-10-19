@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 
 public partial class MyAccount : adminMain
 {
@@ -43,7 +43,7 @@ public partial class MyAccount : adminMain
             int rtn = base.handlerService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
             if (rtn == 1)
             {
-                SessionState.Remove(ManageConst.AdminSessionName);
+                SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
             }
             base.AjaxErch(rtn.ToString());
             base.Finish();

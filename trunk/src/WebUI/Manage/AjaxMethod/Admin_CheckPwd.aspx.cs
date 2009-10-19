@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Pages;
 using TCG.Entity;
-using TCG.Manage.Utils;
+
 
 public partial class AjaxMethod_Admin_CheckPwd : adminMain
 {
@@ -21,7 +21,7 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
         if (!Page.IsPostBack)
         {
             string pwd = objectHandlers.Get("PWD", CheckGetEnum.Safety);
-            object TempAdmin = SessionState.Get(ManageConst.AdminSessionName);
+            object TempAdmin = SessionState.Get(base.configService.baseConfig["AdminSessionName"]);
             if (TempAdmin == null)
             {
                 base.AjaxErch("false");

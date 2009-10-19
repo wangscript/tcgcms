@@ -13,8 +13,6 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Handlers;
-using TCG.Template.Utils;
-using TCG.Manage.Utils;
 using TCG.Entity;
 
 public partial class news_classadd : adminMain
@@ -67,7 +65,7 @@ public partial class news_classadd : adminMain
         this.iClassId.Value = iParent.ToString();
 
         DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            TemplateConstant.InfoType, TemplateConstant.SystemType_News,false);
+            (int)TemplateType.InfoType, 0, false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)
@@ -84,7 +82,7 @@ public partial class news_classadd : adminMain
 
         
         ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            TemplateConstant.ListType, TemplateConstant.SystemType_News,false);
+            (int)TemplateType.ListType, 0, false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)

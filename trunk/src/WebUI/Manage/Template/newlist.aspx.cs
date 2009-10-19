@@ -13,9 +13,8 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Entity;
-using TCG.Manage.Utils;
+
 using TCG.Handlers;
-using TCG.Template.Utils;
 using TCG.Data;
 
 public partial class Template_newlist : adminMain
@@ -64,7 +63,7 @@ public partial class Template_newlist : adminMain
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
-        sItem.strCondition = "iSiteId=" + iSiteId.ToString() + " AND iSystemType =" + TemplateConstant.SystemType_News;
+        sItem.strCondition = "iSiteId=" + iSiteId.ToString() + " AND iSystemType =" + 0;
         this.iSiteId.Value = iSiteId.ToString();
         iSite = iSiteId;
 
@@ -102,9 +101,10 @@ public partial class Template_newlist : adminMain
             this.ItemRepeater.DataBind();
         }
 
-        for (int i = 0; i < TemplateConstant.TypeNames().Count; i++)
+        foreach (Option option in base.configService.templateTypes.Values)
         {
-            this.sType.Items.Add(new ListItem(TemplateConstant.TypeNames()[i].ToString(), i.ToString()));
+            this.sType.Items.Add(new ListItem(option.Text, option.Value));
+            int i = objectHandlers.ToInt(option.Value);
             if (iType == i)
             {
                 this.sType.SelectedIndex = i + 1;

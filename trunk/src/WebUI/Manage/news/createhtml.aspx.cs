@@ -17,12 +17,10 @@ using System.Text.RegularExpressions;
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
-
-using TCG.Template.Utils;
 
 using TCG.KeyWordSplit;
 

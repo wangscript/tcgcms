@@ -13,8 +13,6 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Handlers;
-using TCG.Template.Utils;
-using TCG.Manage.Utils;
 
 using TCG.Entity;
 
@@ -82,8 +80,8 @@ public partial class news_classmdy : adminMain
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
         
-        DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn, 
-            TemplateConstant.InfoType, TemplateConstant.SystemType_News,false);
+        DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
+            (int)TemplateType.InfoType, 0, false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)
@@ -101,8 +99,9 @@ public partial class news_classmdy : adminMain
             ds.Clear();
         }
 
-        
-        ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn, TemplateConstant.ListType, TemplateConstant.SystemType_News,false);
+
+        ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
+            (int)TemplateType.ListType, 0, false);
         if (ds != null)
         {
             if (ds.Tables.Count != 0)

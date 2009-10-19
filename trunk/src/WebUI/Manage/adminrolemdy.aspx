@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="adminrolemdy.aspx.cs" Inherits="adminrolemdy" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -17,7 +17,7 @@
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckForm();">
-	<Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		编辑角色组<a href="javascript:fGoBack();" class="title_back bold">[返回]</a>
 	</div>

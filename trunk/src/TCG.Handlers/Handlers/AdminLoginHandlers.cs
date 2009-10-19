@@ -22,7 +22,7 @@ using System.Text;
 using TCG.Utils;
 using TCG.Data;
 using TCG.Entity;
-using TCG.Manage.Utils;
+
 using TCG.Handlers;
 
 namespace TCG.Handlers
@@ -30,9 +30,10 @@ namespace TCG.Handlers
     public class AdminLoginHandlers
     {
 
-        public AdminLoginHandlers(Connection conn,AdminHandlers adminhandlers)
+        public AdminLoginHandlers(Connection conn, AdminHandlers adminhandlers, ConfigService configservice)
         {
             this._adminh = adminhandlers;
+            this._configservice = configservice;
             this.Initialization();
         }
 
@@ -40,7 +41,7 @@ namespace TCG.Handlers
         {
             if (this._admincookie == null)
             {
-                this._admincookie = Cookie.Get(ManageConst.AdminCookieName);
+                this._admincookie = Cookie.Get(this._configservice.baseConfig["AdminCookieName"]);
                 if (this._admincookie != null)
                 {
                     if (this._admincookie.Values.Count != 1) return;
@@ -56,19 +57,19 @@ namespace TCG.Handlers
             object TempAdmin = null;
             if (string.IsNullOrEmpty(this._name))
             {
-                TempAdmin = SessionState.Get(ManageConst.AdminSessionName);
-                if (TempAdmin != null) SessionState.Remove(ManageConst.AdminSessionName);
+                TempAdmin = SessionState.Get(this._configservice.baseConfig["AdminSessionName"]);
+                if (TempAdmin != null) SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
                 this._admin = null;
                 return;
             }
-            TempAdmin =  SessionState.Get(ManageConst.AdminSessionName);
+            TempAdmin = SessionState.Get(this._configservice.baseConfig["AdminSessionName"]);
             if (TempAdmin == null)
             {
                 DataSet ds =  new DataSet();
                 int rtn = this._adminh.GetAdminInfoByName(this._name, "01", ref ds);
                 if (rtn < 0)
                 {
-                    SessionState.Remove(ManageConst.AdminSessionName);
+                    SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
                     this._admin = null;
                     return;
                 }
@@ -83,7 +84,7 @@ namespace TCG.Handlers
                     this._admin.vcRoleName = ds.Tables[1].Rows[0]["vcRoleName"].ToString();
                 }
 
-                SessionState.Set(ManageConst.AdminSessionName, this._admin);
+                SessionState.Set(this._configservice.baseConfig["AdminSessionName"], this._admin);
                 return;
             }
             this._admin = (Admin)TempAdmin;
@@ -131,10 +132,11 @@ namespace TCG.Handlers
 
         private bool IsSpage(Dictionary<string, string> config, string pages)
         {
+            List<Option> specialpages = this._configservice.manageOutpages["specialpages"];
             bool rtn = false;
-            for (int i = 0; i < ManageConst.SpecialPages.Length; i++)
+            for (int i = 0; i < specialpages.Count; i++)
             {
-                string text2 = config["WebSite"] + config["ManagePath"] + ManageConst.SpecialPages[i];
+                string text2 = config["WebSite"] + config["ManagePath"] + specialpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -142,10 +144,11 @@ namespace TCG.Handlers
 
         private bool IsOnlyLoginPage(Dictionary<string, string> config, string pages)
         {
+            List<Option> onlineloginpages = this._configservice.manageOutpages["onlineloginpages"];
             bool rtn = false;
-            for (int i = 0; i < ManageConst.OnlineLoginPages.Length; i++)
+            for (int i = 0; i < onlineloginpages.Count; i++)
             {
-                string text2 = config["WebSite"] + config["ManagePath"] + ManageConst.OnlineLoginPages[i];
+                string text2 = config["WebSite"] + config["ManagePath"] + onlineloginpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -186,7 +189,7 @@ namespace TCG.Handlers
             }
             if (this._admin != null)
             {
-                SessionState.Remove(ManageConst.AdminSessionName);
+                SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
             }
         }
 
@@ -200,6 +203,19 @@ namespace TCG.Handlers
                 return this._admin; 
             }
         }
+
+        private Connection _conn;
+        /// <summary>
+        /// 获得配置信息支持
+        /// </summary>
+        public ConfigService configService
+        {
+            set
+            {
+                this._configservice = value;
+            }
+        }
+        private ConfigService _configservice;
 
         
         private HttpCookie _admincookie = null;

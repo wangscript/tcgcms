@@ -34,6 +34,7 @@ namespace TCG.Handlers
                     this._fileclasshandlers = new FileClassHandlers();
                     this._fileclasshandlers.conn = this._conn;
                     this._fileclasshandlers.ConnStr = this.MianDatabase;
+                    this._fileclasshandlers.configService = this._configservice;
                 }
                 return this._fileclasshandlers;
             }

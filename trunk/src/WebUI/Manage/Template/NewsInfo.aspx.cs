@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Handlers;
 
 public partial class Template_NewsInfo : adminMain

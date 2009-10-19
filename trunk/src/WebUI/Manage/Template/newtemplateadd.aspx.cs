@@ -12,10 +12,9 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Entity;
 using TCG.Handlers;
-using TCG.Template.Utils;
 using TCG.Data;
 
 public partial class Template_newtemplateadd : adminMain
@@ -32,10 +31,11 @@ public partial class Template_newtemplateadd : adminMain
             this.SytemType.Value = iSytemType.ToString();
             this.iSiteId.Value = iSiteId.ToString();
 
-            for (int i = 0; i < TemplateConstant.TypeNames().Count; i++)
+            foreach (Option option in base.configService.templateTypes.Values)
             {
-                this.tType.Items.Add(new ListItem(TemplateConstant.TypeNames()[i].ToString(), i.ToString()));
+                this.tType.Items.Add(new ListItem(option.Text, option.Value));
             }
+
         }
         else
         {
@@ -59,7 +59,7 @@ public partial class Template_newtemplateadd : adminMain
             }
 
             int rtn = base.handlerService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName,item);
-            CachingService.Remove(TemplateConstant.CACHING_AllTemplates);
+            CachingService.Remove(CachingService.CACHING_AllTemplates);
             base.AjaxErch(rtn.ToString());
             item = null;
             base.Finish();

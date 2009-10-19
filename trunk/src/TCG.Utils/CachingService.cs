@@ -56,7 +56,15 @@ namespace TCG.Utils
         /// <summary>
         /// 所有文件分类定义
         /// </summary>
-        public static string CACHING_ALL_FILECLASS = "allfilesclass";           
+        public static string CACHING_ALL_FILECLASS = "allfilesclass";
+        /// <summary>
+        /// 所有模版信息缓存
+        /// </summary>
+        public static string CACHING_AllTemplates = "AllTemplates";
+        /// <summary>
+        /// 所有系统模版信息
+        /// </summary>
+        public static string CACHING_AllTemplates_System = "AllTemplates_System";  
 
         /// <summary>
         /// 系统缓存集合

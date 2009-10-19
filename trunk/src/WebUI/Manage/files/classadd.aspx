@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="classadd.aspx.cs" Inherits="files_classadd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head >
@@ -14,7 +14,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="Page_title">增加新的文件分类<span class="info1">(更改您的昵称，登陆密码)</span></div>
-	<Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_g">分类相关<span class="info2">*为必填项</span></div>
     </form>
 </body>

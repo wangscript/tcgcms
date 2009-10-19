@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Release;
 using TCG.Entity;
 
@@ -29,7 +29,7 @@ public partial class aLogin : adminMain
             this.ltitle.Text = base.configService.baseConfig["WebTitle"];
             this.month.Text = DateTime.Now.Month.ToString();
 
-            HttpCookie lname = TCG.Utils.Cookie.Get(ManageConst.AdminLoginName);
+            HttpCookie lname = TCG.Utils.Cookie.Get(base.configService.baseConfig["AdminLoginName"]);
             if (lname != null)
             {
                 this.rUsername.Checked = true;
@@ -131,10 +131,10 @@ public partial class aLogin : adminMain
             return;
         }
 
-        HttpCookie lname = TCG.Utils.Cookie.Get(ManageConst.AdminLoginName);
+        HttpCookie lname = TCG.Utils.Cookie.Get(base.configService.baseConfig["AdminLoginName"]);
         if (ranme)
         {
-            if (lname == null) lname = TCG.Utils.Cookie.Set(ManageConst.AdminLoginName);
+            if (lname == null) lname = TCG.Utils.Cookie.Set(base.configService.baseConfig["AdminLoginName"]);
             lname.Values["radminName"] = HttpContext.Current.Server.UrlEncode(adminname);
             lname.Expires = DateTime.Now.AddYears(1);
             TCG.Utils.Cookie.Save(lname);
