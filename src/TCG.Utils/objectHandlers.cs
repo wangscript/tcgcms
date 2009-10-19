@@ -1498,7 +1498,7 @@ namespace TCG.Utils
         /// <returns></returns>
         public static string MapPath(string path)
         {
-            return HttpContext.Current.Server.MapPath("~/" + path);
+            return HttpContext.Current.Server.MapPath("~" + path);
         }
 
         /// <summary>

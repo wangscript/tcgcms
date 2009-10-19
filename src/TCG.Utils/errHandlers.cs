@@ -13,6 +13,7 @@
   */
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
@@ -26,9 +27,9 @@ namespace TCG.Utils
         /// 根据错误ID获得错误信息
         /// </summary>
         /// <param name="errCode"></param>
-        public static string GetErrTextByErrCode(int errCode)
+        public static string GetErrTextByErrCode(int errCode,string managePath)
         {
-            string ErrTexts = TxtReader.Read(ConfigurationManager.ConnectionStrings["ErrTxtPath"].ToString());
+            string ErrTexts = TxtReader.Read(managePath + "ErrText.txt");
             string errText = "";
             if (!string.IsNullOrEmpty(ErrTexts))
             {

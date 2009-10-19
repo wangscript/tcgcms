@@ -148,7 +148,7 @@ function InfoHtml(Value, Types, Text) {
 //Çå³ýHTML
 function RemoveHTML(strText) {
     var regEx = /<[^>]*>/g;
-    return strobjectHandlers.replace(regEx, "");
+    return strText.replace(regEx, "");
 }
 
 

@@ -20,7 +20,7 @@ using System.Text;
 namespace TCG.Entity
 {
     /// <summary>
-    /// 用户登陆实体
+     /// 用户登陆实体
     /// </summary>
     public class User 
     {
@@ -49,6 +49,10 @@ namespace TCG.Entity
         /// </summary>
         public UserState State { get { return this._entitystate; } set { this._entitystate = value; } }
         /// <summary>
+        /// 用户资金
+        /// </summary>
+        public UserPay UserPay { get { return this._userpay; } set { this._userpay = value; } }
+        /// <summary>
         /// 创建者IP
         /// </summary>
         public string CreateIp { get { return this._createip; } set { this._createip = value; } }
@@ -60,7 +64,7 @@ namespace TCG.Entity
         private string _createip;
         private string _password;
         private string _name;
-
+        private UserPay _userpay;
 
     }
 }
