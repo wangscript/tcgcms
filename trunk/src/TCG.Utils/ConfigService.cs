@@ -168,15 +168,15 @@ namespace TCG.Utils
 
                 //获得所有需要登陆的特殊页面
                 XmlNodeList onlineLoginPages = this.GetXmlNotListByTagNameAndFilePath(m_ManageOutpagesFilePath, "OnlineLoginPage");
-                if (specialPages != null)
+                if (onlineLoginPages != null)
                 {
                     List<Option> onlineLoginPageslist = new List<Option>();
-                    foreach (XmlElement element in specialPages)
+                    foreach (XmlElement element in onlineLoginPages)
                     {
                         Option option = new Option(element.SelectSingleNode("Text").InnerText, element.SelectSingleNode("Value").InnerText);
                         onlineLoginPageslist.Add(option);
                     }
-                    this._manageoutpages.Add("onlineloginpages", specialPageslist);
+                    this._manageoutpages.Add("onlineloginpages", onlineLoginPageslist);
                 }
             }
         }

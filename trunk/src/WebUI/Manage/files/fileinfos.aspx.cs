@@ -111,7 +111,7 @@ public partial class files_fileinfos : adminMain
         FileClassID.Text = Row["iId"].ToString();
         sFileClassId.Text = Row["iId"].ToString();
         string text = "<a href=\"?iClassId=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
-           + "<img src=\"" + base.configService.baseConfig["WebSite"] + base.configService.baseConfig["ManagePath"] + "images/icon/12.gif\" border=\"0\"></a>";
+           + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
         sTitle.Text = text + Row["vcFileName"].ToString();
         sInfo.Text = Row["vcMeno"].ToString();
         updatedate.Text = Row["dCreateDate"].ToString();
@@ -135,7 +135,7 @@ public partial class files_fileinfos : adminMain
         //sFileClassId.Text = Row["iId"].ToString();
         sTitle.Text = Row["iId"].ToString();
 
-        sInfo.Text = "<a href='" + base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"] + "fileView.aspx?fileId="
+        sInfo.Text = "<a href='../fileView.aspx?fileId="
             + Row["iId"].ToString() + "' target='_blank'>" + Row["vcFileName"].ToString() + "</a>";
         ssize.Text = Row["iSize"].ToString() + "K";
         updatedate.Text = Row["dCreateDate"].ToString();

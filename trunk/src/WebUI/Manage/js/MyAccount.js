@@ -22,8 +22,8 @@ function CheckForm(){
 }
 
 function ChanagePostBack(val){
-	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"用户登陆信息更改成功！");
+	if(GetErrTextRoot(val))return;
+	SetAjaxDivRoot("ok",false,"用户登陆信息更改成功！");
 }
 
 function CheckPassword(obj){
@@ -58,7 +58,7 @@ function CheckPasswordFrom(obj){
 function CheckPwdBack1(obj){
 	var og = $("pwdmsg");
 	if(obj=="true"){
-		SetAjaxDiv("loader",false,"正在发送请求...");
+		SetAjaxDivRoot("loader",false,"正在发送请求...");
 		ajax.postf($("form1"),function(obj) { ChanagePostBack(obj.responseText);});
 	}
 	else if(obj=="false"){

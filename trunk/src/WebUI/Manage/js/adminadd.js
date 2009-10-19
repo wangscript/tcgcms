@@ -31,9 +31,9 @@ function CheckForm(num){
 }
 
 function AddadminPostBack(val){
-	if(GetErrText(val))return;
+    if (GetErrTextRoot(val)) return;
 	window.parent.adminpop.location.href=window.parent.adminpop.location.href;
-	SetAjaxDiv("ok",false,"您对管理员的操作已经成功执行！");
+	SetAjaxDivRoot("ok", false, "您对管理员的操作已经成功执行！");
 }
 
 function CheckAdminName(){

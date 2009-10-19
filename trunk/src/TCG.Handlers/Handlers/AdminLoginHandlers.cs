@@ -136,7 +136,7 @@ namespace TCG.Handlers
             bool rtn = false;
             for (int i = 0; i < specialpages.Count; i++)
             {
-                string text2 = config["WebSite"] + config["ManagePath"] + specialpages[i].Value;
+                string text2 = config["ManagePath"] + specialpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -148,25 +148,34 @@ namespace TCG.Handlers
             bool rtn = false;
             for (int i = 0; i < onlineloginpages.Count; i++)
             {
-                string text2 = config["WebSite"] + config["ManagePath"] + onlineloginpages[i].Value;
+                string text2 = config["ManagePath"] + onlineloginpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
         }
 
+        /// <summary>
+        /// 根据判断是否有该URL的访问权限
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="pages"></param>
+        /// <returns></returns>
         private bool HavePower(Dictionary<string, string> config, string pages)
         {
             if (this._admin.PopedomUrls.Rows.Count == 0) return false;
+            //获得当前URL路径
             string text = this._currenturl.ToLower().Trim();
 
-            text = text.ToLower().Replace(config["WebSite"].ToLower() + config["ManagePath"].ToLower(), "").Trim();
+            ///循环URL权限，包含的返回正确
+            for (int i = 0; i < this._admin.PopedomUrls.Rows.Count; i++)
+            {
+                if (text.IndexOf(this._admin.PopedomUrls.Rows[i]["vcUrl"].ToString()) > -1)
+                {
+                    return true;
+                }
+            }
           
-            DataRow[] rows = this._admin.PopedomUrls.Select("vcUrl='" + text + "'");
-            if (rows.Length > 0) return true;
-            rows = this._admin.PopedomUrls.Select("vcUrl='" + "$filesite$" + text + "'");
-            if (rows.Length > 0) return true;
-            rows = this._admin.PopedomUrls.Select("vcUrl='" + "$bbsSite$" + text + "'");
-            if (rows.Length > 0) return true; 
+            
             return false;
         }
 

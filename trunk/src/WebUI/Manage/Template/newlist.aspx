@@ -11,9 +11,9 @@
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllTemplate.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/newscommon.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplate.aspx"></script>
+	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/DivMove.js"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>

@@ -9,13 +9,13 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<link href="<%=base.configService.baseConfig["FileSite"]%>css/filesinfo.css" rel="stylesheet" type="text/css" />
+	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/common.js"></script>
 	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/newscommon.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsFrom.aspx"></script>
-	<script type="text/javascript" src="<%=base.configService.baseConfig["ScriptsSite"]%>Common/AllNewsSpeciality.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsFrom.aspx"></script>
+	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
 
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
