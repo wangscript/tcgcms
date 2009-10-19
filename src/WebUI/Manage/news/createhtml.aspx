@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="createhtml.aspx.cs" Inherits="news_createhtml" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -21,7 +21,7 @@
 <body>
     <form id="form1" runat="server" onsubmit="return CheckForm()">
 	<div class="Page_title">资讯生成<span class="info1">(批量生成资讯的静态文件)</span></div>
-	<Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_g"><input name="StypeCheck" type="radio" id="orderTime" value="1" checked="checked"/>
 	生成一段时间内的所有资源<span class="info2">(根据时间段来生成资源)</span></div>
 	<div class="Page_arrb">

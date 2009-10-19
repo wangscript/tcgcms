@@ -50,7 +50,7 @@
     <Compile Include="errHandlers.cs" />
     <Compile Include="objectHandlers.cs" />
     <Compile Include="socket.cs" />
-    <Compile Include="Caching.cs" />
+    <Compile Include="CachingService.cs" />
     <Compile Include="CodeImage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

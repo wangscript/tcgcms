@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="classadd.aspx.cs" Inherits="news_classadd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -18,7 +18,7 @@
 <body>
     <form id="form1" runat="server" onsubmit="return CheckAddClassForm();">
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
-    <Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+    <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		添加资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
 	</div>

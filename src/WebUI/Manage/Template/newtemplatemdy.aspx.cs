@@ -12,10 +12,9 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Handlers;
 using TCG.Entity;
-using TCG.Template.Utils;
 using TCG.Data;
 
 public partial class Template_newtemplatemdy : adminMain
@@ -40,9 +39,11 @@ public partial class Template_newtemplatemdy : adminMain
             this.iSiteId.Value = item.iSiteId.ToString();
             this.iParentid.Value = item.iParentId.ToString();
             this.SytemType.Value = item.iSystemType.ToString();
-            for (int i = 0; i < TemplateConstant.TypeNames().Count; i++)
+
+            foreach (Option option in base.configService.templateTypes.Values)            
             {
-                this.tType.Items.Add(new ListItem(TemplateConstant.TypeNames()[i].ToString(), i.ToString()));
+                this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                int i = objectHandlers.ToInt(option.Value);
                 if (i == item.iType)
                 {
                     this.tType.SelectedIndex = i;
@@ -71,7 +72,7 @@ public partial class Template_newtemplatemdy : adminMain
             }
             item.iId = templateid;
             int rtn = base.handlerService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName,item);
-            CachingService.Remove(TemplateConstant.CACHING_AllTemplates);
+            CachingService.Remove(CachingService.CACHING_AllTemplates);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

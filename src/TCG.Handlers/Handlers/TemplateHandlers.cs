@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Text;
 using TCG.Data;
 
-using TCG.Template.Utils;
 using TCG.Entity;
 using TCG.Utils;
 
@@ -43,11 +42,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)CachingService.Get(TemplateConstant.CACHING_AllTemplates);
+                ds = (DataSet)CachingService.Get(CachingService.CACHING_AllTemplates);
                 if (ds == null)
                 {
                     ds = GetAllTemplatesFromDb(conn);
-                    CachingService.Set(TemplateConstant.CACHING_AllTemplates, ds, null);
+                    CachingService.Set(CachingService.CACHING_AllTemplates, ds, null);
                 }
             }
             return ds;
@@ -77,11 +76,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)CachingService.Get(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString());
+                ds = (DataSet)CachingService.Get(CachingService.CACHING_AllTemplates_System + systemtype.ToString());
                 if (ds == null)
                 {
                     ds = GetTemplatesBySystemTypeFromDb(conn, systemtype);
-                    CachingService.Set(TemplateConstant.CACHING_AllTemplates_System + systemtype.ToString(), ds, null);
+                    CachingService.Set(CachingService.CACHING_AllTemplates_System + systemtype.ToString(), ds, null);
                 }
             }
             return ds;

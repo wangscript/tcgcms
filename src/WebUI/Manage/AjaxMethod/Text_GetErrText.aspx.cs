@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 using TCG.Entity;
 
 public partial class AjaxMethod_Text_GetErrText : adminMain

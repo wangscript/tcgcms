@@ -20,7 +20,7 @@ using System.Data;
 using System.Data.SqlClient;
 using TCG.Data;
 using TCG.Utils;
-using TCG.Manage.Utils;
+
 using TCG.Entity;
 
 namespace TCG.Handlers
@@ -52,16 +52,16 @@ namespace TCG.Handlers
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
                 if (rtn == 1)
                 {
-                    HttpCookie admincookie = Cookie.Get(ManageConst.AdminCookieName);
+                    HttpCookie admincookie = Cookie.Get(this._configservice.baseConfig["AdminCookieName"]);
                     if (admincookie == null)
                     {
-                        admincookie = Cookie.Set(ManageConst.AdminCookieName);
+                        admincookie = Cookie.Set(this._configservice.baseConfig["AdminCookieName"]);
                     }
                     admincookie.Values["AdminName"] = HttpContext.Current.Server.UrlEncode(name);
                     Cookie.Save(admincookie);
 
-                    object TempAdmin = SessionState.Get(ManageConst.AdminSessionName);
-                    if (TempAdmin != null) SessionState.Remove(ManageConst.AdminSessionName);
+                    object TempAdmin = SessionState.Get(this._configservice.baseConfig["AdminSessionName"]);
+                    if (TempAdmin != null) SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
                 }
                 return rtn;
             }
@@ -471,5 +471,16 @@ namespace TCG.Handlers
         }
 
         private Connection _conn;
+        /// <summary>
+        /// 获得配置信息支持
+        /// </summary>
+        public ConfigService configService
+        {
+            set
+            {
+                this._configservice = value;
+            }
+        }
+        private ConfigService _configservice;
     }
 }

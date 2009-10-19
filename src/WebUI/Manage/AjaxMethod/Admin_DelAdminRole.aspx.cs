@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Pages;
 using TCG.Entity;
-using TCG.Manage.Utils;
+
 
 public partial class AjaxMethod_Admin_DelAdminRole : adminMain
 {

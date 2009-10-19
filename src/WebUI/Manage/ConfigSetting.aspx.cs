@@ -14,11 +14,11 @@ using System.Text;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Pages;
-using TCG.Manage.Utils;
+
 
 public partial class ConfigSetting : adminMain
 {
-    private string _file = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CustomConfigFile"].ToString());
+    private string _file = objectHandlers.MapPath("config/baseConfig.Config");
     private StringBuilder _sb;
 
     protected void Page_Load(object sender, EventArgs e)

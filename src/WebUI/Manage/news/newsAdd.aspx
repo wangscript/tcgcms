@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="newsAdd.aspx.cs" Inherits="news_newsAdd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <%@ Register src="../Ctrl/Editor.ascx" tagname="WebUserControl" tagprefix="TCG" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -38,7 +38,7 @@
 			<img src="../images/icon/5.gif" />取消
 		</a>
 	</div>
-	<Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_arrb arb_pr1">
 		<span class="p_a_t1">资讯标题：</span><input id="iTitle" name="iTitle" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="CheckValueIsNull('iTitle','titlemsg');" runat="server"/>
 		<span class="info1" id="titlemsg">资讯标题内容，不能为空</span>

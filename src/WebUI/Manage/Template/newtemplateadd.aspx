@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="newtemplateadd.aspx.cs" Inherits="Template_newtemplateadd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="Manage" namespace="TCG.Manage.Controls" assembly="TCG.Manage"%>
+<%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -15,7 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckForm();">
-	<Manage:AjaxDiv ID="AjaxDiv1" runat="server" />
+	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="Page_title">添加资讯模版<span class="info1">(添加资讯模版文件)</span><a href="javascript:fGoBack();" class="title_back bold">[返回]</a></div>
 	<div class="Page_g">所属网站：<span class="info2" id="sSite"></span></div>
 	<div class="Page_arrb arb_pr">

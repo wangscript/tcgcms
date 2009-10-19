@@ -40,6 +40,40 @@ namespace TCG.Utils
         /// <summary>
         /// 管理特殊页面的配置信息
         /// </summary>
+        public Dictionary<string, Option> templateTypes
+        {
+            get
+            {
+                if (this._templatetypes == null)
+                {
+                    this.TemplateTypesInit();
+                }
+                return this._templatetypes;
+            }
+        }
+
+        /// <summary>
+        /// 设置模版类型
+        /// </summary>
+        private void TemplateTypesInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList templatetype = this.GetXmlNotListByTagNameAndFilePath(m_TemplateTypeFilePath, "TemplateType");
+            if (templatetype != null)
+            {
+                this._templatetypes = new Dictionary<string,Option>();
+                foreach (XmlElement element in templatetype)
+                {
+                    Option option = new Option(element.SelectSingleNode("Text").InnerText, element.SelectSingleNode("Value").InnerText);
+                    this._templatetypes.Add(element.SelectSingleNode("Name").InnerText, option);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 管理特殊页面的配置信息
+        /// </summary>
         public Dictionary<string, List<Option>> manageOutpages
         {
             get
@@ -170,12 +204,15 @@ namespace TCG.Utils
         }
 
         private Dictionary<string, List<Option>> _manageoutpages = null;
-        private string m_ManageOutpagesFilePath = "~/config/manageOutpages.Config";               //管理特殊页面的配置
+        private string m_ManageOutpagesFilePath = "~/config/manageOutpages.Config";                 //管理特殊页面的配置
 
         private Dictionary<string, string> _baseconfig = null;
-        private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                            //系统基本配置
+        private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                         //系统基本配置
 
         private List<FileDataBase> _filedatabaseconfig = null;
-        private string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";                            //文件数据库配置
+        private string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";               //文件数据库配置
+
+        private Dictionary<string, Option> _templatetypes = null;
+        private string m_TemplateTypeFilePath = "~/config/TemplateTypes.Config";                    //管理特殊页面的配置
     }
 }
