@@ -373,7 +373,11 @@ namespace TCG.Data
         {
             set
             {
-                if (this.m_dbLink != value) this.m_dbLink = value;
+                if (this.m_dbLink != value)
+                {
+                    this.Close();
+                    this.m_dbLink = value;
+                }
             }
         }
 

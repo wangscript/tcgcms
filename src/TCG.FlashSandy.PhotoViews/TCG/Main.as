@@ -158,9 +158,9 @@ package
 			var root:Group = createScene();
 			scene = new Scene3D( "scene", this, camera, root );
 			addEventListener( Event.ENTER_FRAME, enterFrameHandler );
-			stage.addEventListener(MouseEvent.MOUSE_DOWN, onmousedownHandler);
-			stage.addEventListener(MouseEvent.MOUSE_UP, onmouseupHandler);
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, onmousemoveHandler);
+			//stage.addEventListener(MouseEvent.MOUSE_DOWN, onmousedownHandler);
+			//stage.addEventListener(MouseEvent.MOUSE_UP, onmouseupHandler);
+			//stage.addEventListener(MouseEvent.MOUSE_MOVE, onmousemoveHandler);
 			
 			myText.visible = false;
 		}
@@ -191,7 +191,7 @@ package
 					if (m)
 					{
 						var x:Number = Math.atan2(stage.mouseY - this.oldXyTGroup.y , stage.mouseX - this.oldXyTGroup.x);
-						var y = x * 180 / Math.PI;	
+						var y:Number = x * 180 / Math.PI;	
 						m.rotateX += x;
 						//m.rotateY += 90 - y; 
 					}
@@ -276,16 +276,24 @@ package
 			var myScene:Scene3D = this.scene;
 			var group:Group = myScene.root;
 			
+			var myMouseXOffset:Number = mouseX - stage.stageWidth / 2;
+			var myMouseYOffset:Number = mouseY - stage.stageHeight / 2;
 			
-			/*
-			var Bbox:Box = (group.getChildByName("BigBox") as Box);
+			
+			camera.x = 200 * Math.cos(myMouseXOffset/200);
+			camera.z = -800 * Math.sin(myMouseXOffset/200);
+			camera.y = myMouseYOffset/2;
+			camera.lookAt(0, 0, 0);
+			
+			
+			
+			var Bbox:TransformGroup = (group.getChildByName("SmllTeam") as TransformGroup);
 			
 			if (Bbox) 
 			{
-				Bbox.rotateX += 1;
 				Bbox.rotateY += 1;
 			}
-			*/
+			
 			
 			/*
 			for each (var item:Object in queue.data)
