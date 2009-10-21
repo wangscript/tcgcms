@@ -43,7 +43,7 @@ namespace TCG.Entity
         /// <summary>
         /// 最后一次修改时间
         /// </summary>
-        public DateTime LastChangeTime { get { return this._lastchangetime; } set { this._lastchangetime = value; } }
+        public DateTime LastLoginTime { get { return this._lastlogintime; } set { this._lastlogintime = value; } }
         /// <summary>
         /// 用户状态
         /// </summary>
@@ -53,18 +53,34 @@ namespace TCG.Entity
         /// </summary>
         public UserPay UserPay { get { return this._userpay; } set { this._userpay = value; } }
         /// <summary>
-        /// 创建者IP
+        /// 最后一次登陆的IP
         /// </summary>
-        public string CreateIp { get { return this._createip; } set { this._createip = value; } }
+        public string LastLoginIp { get { return this._lastloginip; } set { this._lastloginip = value; } }
+        /// <summary>
+        /// 用户联系方式
+        /// </summary>
+        public UserContact UserContact { get { return this._usercontact; } set { this._usercontact = value; } }
+        /// <summary>
+        /// 用户的等级
+        /// </summary>
+        public UserLevel UserLevel { get { return this._userlevel; } set { this._userlevel = value; } }
+        /// <summary>
+        /// 用户的俱乐部等级
+        /// </summary>
+        public UserClubLevel UserClubLevel { get { return this._userclublevel; } set { this._userclublevel = value; } }
+
 
         private string _id;
         private DateTime _createtime;
-        private DateTime _lastchangetime;
-        private UserState _entitystate;
-        private string _createip;
+        private DateTime _lastlogintime;
+        private UserState _entitystate = UserState.Inactive; 
+        private string _lastloginip;
         private string _password;
         private string _name;
         private UserPay _userpay;
+        private UserContact _usercontact;
+        private UserLevel _userlevel = UserLevel.Ordinary;
+        private UserClubLevel _userclublevel = UserClubLevel.Ordinary;
 
     }
 }

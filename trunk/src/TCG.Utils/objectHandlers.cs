@@ -1795,5 +1795,20 @@ namespace TCG.Utils
             }
         }
 
+        /// <summary>
+        /// 获得字符串的ASCII码的和
+        /// </summary>
+        /// <param name="str">输入字符串</param>
+        /// <returns></returns>
+        public static int GetStringAscSum(string str)
+        {
+            int sum = 0;
+            foreach(char c in str)
+            {
+                sum += ToAsc(c.ToString());
+            }
+            return sum;
+        }
+
     };
 }

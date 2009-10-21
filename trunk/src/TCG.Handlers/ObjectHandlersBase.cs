@@ -16,24 +16,46 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TCG.Entity
+using TCG.Data;
+using TCG.Utils;
+
+namespace TCG.Handlers
 {
     /// <summary>
-    /// 用户状态
+    /// 方法基类
     /// </summary>
-    public enum UserState : int
+    public class ObjectHandlersBase
     {
         /// <summary>
-        /// 正常
+        /// 设置数据库链接
         /// </summary>
-        Default = 1,
+        public Connection conn
+        {
+            set
+            {
+                this._conn = value;
+            }
+            get
+            {
+                return this._conn;
+            }
+        }
+
+        private Connection _conn;
         /// <summary>
-        /// 未激活
+        /// 获得配置信息支持
         /// </summary>
-        Inactive = 0,
-        /// <summary>
-        /// 审核未通过
-        /// </summary>
-        Auditdidnotpass,
+        public ConfigService configService
+        {
+            set
+            {
+                this._configservice = value;
+            }
+            get
+            {
+                return this._configservice;
+            }
+        }
+        private ConfigService _configservice;
     }
 }

@@ -24,6 +24,10 @@ namespace TCG.Entity
     public class UserPay
     {
         /// <summary>
+        ///  实体 编号
+        /// </summary>
+        public string UserId { get { return this._userid; } set { this._userid = value; } } 
+        /// <summary>
         /// //可用金额
         /// </summary>
         public decimal FreeMoney { get { return this._FreeMoney; } set { this._FreeMoney = value; } }                 
@@ -36,7 +40,7 @@ namespace TCG.Entity
         /// </summary>
         public decimal SumMoney { get { return this._SumMoney; } set { this._SumMoney = value; } }                 
         /// <summary>
-        ///  //用户积分
+        ///  用户积分
         /// </summary>
         public decimal Points { get { return this._Points; } set { this._Points = value; } }                   
         /// <summary>
@@ -48,6 +52,7 @@ namespace TCG.Entity
         private decimal _FrezzMoney = 0;                    //冻结金额
         private decimal _SumMoney = 0;                      //总金额
         private decimal _Points = 0;                        //用户积分
-        private Option _PayPassWord = null;        //用户支付密码
+        private Option _PayPassWord = null;                 //用户支付密码
+        private string _userid;
     }
 }

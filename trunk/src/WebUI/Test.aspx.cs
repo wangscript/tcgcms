@@ -22,41 +22,14 @@ public partial class Test :  Origin
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        //string fullName = @"E:\TCG.V9\src\WebUI\index.zip";//C:\test\a.zip 
-        //解压文件 
-        //AttachmentUnZip.UpZip(fullName); 
-        // string[] FileProperties = new string[2]; 
-        // FileProperties[0] = fullName;//待解压的文件 
-        // FileProperties[1] = System.IO.Path.GetDirectoryName(fullName);//解压后放置的目标目录 
-        // UnZipClass UnZc=new UnZipClass(); 
-        // UnZc.UnZip(FileProperties); 
-        //string dir = System.IO.Path.GetDirectoryName(fullName);
-        //string fileName = System.IO.Path.GetFileName(fullName);
-        //fileZip.UnZipFile(fileName, dir);
-
-        //List<VersionItem> vers = Versions.WebVersionHistory;
-
-        // Response.Write(Versions.GetVerStr( Versions.HigherVersion.Ver));
-        User user = new User();
-
-        System.ComponentModel.AttributeCollection attributes = TypeDescriptor.GetAttributes(user); 
-
-
-    }
-
-    private void Zip()
-    {
-        string [] FileProperties = new string[2];
-        string fullName = @"E:\TCG.V9\src\WebUI\index.htm";
-        string destPath=System.IO.Path.GetDirectoryName(fullName);//C:\test 
-        //待压缩文件 
-        FileProperties[0]=fullName; 
-
-        //压缩后的目标文件 
-        FileProperties[1]= destPath +"\\"+ System.IO.Path.GetFileNameWithoutExtension(fullName) + ".zip";
-        FileZipHandlers Zc = new FileZipHandlers(); 
-        Zc.ZipFileMain(FileProperties); 
+        string name = "三云鬼";
+        int namevalue = 0;
+        for (int i =0;i<name.Length;i++)
+        {
+            namevalue += objectHandlers.ToAsc(name[i].ToString());
+        }
+        
+        Response.Write(Guid.NewGuid().ToString());
     }
 
     private void ReadExl()

@@ -16,24 +16,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TCG.Entity
+using TCG.Data;
+using TCG.Utils;
+
+namespace TCG.Handlers
 {
     /// <summary>
-    /// 用户状态
+    /// 用户操作服务
     /// </summary>
-    public enum UserState : int
+    public class UserService :ObjectHandlersBase
     {
         /// <summary>
-        /// 正常
+        /// 构造函数
         /// </summary>
-        Default = 1,
-        /// <summary>
-        /// 未激活
-        /// </summary>
-        Inactive = 0,
-        /// <summary>
-        /// 审核未通过
-        /// </summary>
-        Auditdidnotpass,
+        public UserService(Connection conn, ConfigService configservice)
+        {
+            base.conn = conn;
+            base.configService = configservice;
+        }
+
     }
 }

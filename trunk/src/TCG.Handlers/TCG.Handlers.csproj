@@ -52,10 +52,13 @@
     <Compile Include="Handlers\NewsFromHandlers.cs" />
     <Compile Include="Handlers\NewsInfoHandlers.cs" />
     <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
+    <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Handlers\TCGTagAttributeHandlers.cs" />
     <Compile Include="Handlers\TCGTagHandlers.cs" />
     <Compile Include="Handlers\TCGTagStringFunHandlers.cs" />
     <Compile Include="Handlers\TemplateHandlers.cs" />
+    <Compile Include="Handlers\UserHandlers\UserHandlers.cs" />
+    <Compile Include="Handlers\UserHandlers\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

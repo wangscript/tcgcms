@@ -11,13 +11,13 @@ namespace TCG.Handlers
     /// <summary>
     /// 逻辑层方法提供
     /// </summary>
-    public class HandlerService
+    public class HandlerService : ObjectHandlersBase
     {
 
         public HandlerService(Connection conn, ConfigService configservice)
         {
-            this._conn = conn;
-            this._configservice = configservice;
+            base.conn = conn;
+            base.configService = configservice;
         }
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace TCG.Handlers
             {
                 if(this._adminhandlers==null)
                 {
-                    this._adminhandlers = new AdminHandlers(this._conn);
-                    this._adminhandlers.configService = this._configservice;
+                    this._adminhandlers = new AdminHandlers(base.conn);
+                    this._adminhandlers.configService = base.configService;
                 }
                 return this._adminhandlers;
             }
@@ -47,7 +47,7 @@ namespace TCG.Handlers
             {
                 if (this._adminloginhandlers == null)
                 {
-                    this._adminloginhandlers = new AdminLoginHandlers(this._conn,this.adminHandlers,this._configservice);
+                    this._adminloginhandlers = new AdminLoginHandlers(base.conn, this.adminHandlers, base.configService);
                 }
                 return this._adminloginhandlers;
             }
@@ -63,7 +63,7 @@ namespace TCG.Handlers
             {
                 if (this._fileservice == null)
                 {
-                    this._fileservice = new FileService(this._configservice,this._conn);
+                    this._fileservice = new FileService(base.configService, base.conn);
                 }
                 return this._fileservice;
             }
@@ -172,9 +172,23 @@ namespace TCG.Handlers
             }
         }
         private TCGTagHandlers _tcgtaghandlers;
-        
 
-        private Connection _conn;
-        private ConfigService _configservice = null;
+        /// <summary>
+        /// 用户的操作的服务
+        /// </summary>
+        public UserService userService
+        {
+            get
+            {
+                if (this._userservice == null)
+                {
+                    this._userservice = new UserService(base.conn,base.configService);
+
+                }
+                return this._userservice;
+            }
+        }
+        private UserService _userservice;
+        
     }
 }
