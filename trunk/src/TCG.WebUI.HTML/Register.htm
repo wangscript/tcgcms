@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TCG CMS </title>
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<div class="logo">
+    	<div class="logoimg"><a><img src="images/logo.gif" /></a></div>
+		<div class="userlogin">
+        	您好，欢迎光临凡客诚品。<A title="" href="javascript:location.href='/login/login.aspx?'+location.href"><SPAN style="COLOR: #a10000">登录</SPAN></A> | <A title="" href="javascript:location.href='/login/Reg.aspx?'+location.href"><SPAN style="COLOR: #a10000">注册 </SPAN></A>
+        </div>
+        <div class="topr">
+        	<ul class="topemu">
+            	<li class="first"><a href="/Usercenter/OrderList.aspx" target="_blank">我的帐户</a></li>
+                <li><a href="/yhhd.htm" target="_blank">每日特惠</a></li>
+				<li><a href="/SearchList--1-20-------1-1.html" target="_blank">断码专区</a></li>
+				<li><a href="http://bbs.vancl.com/" target="_blank">凡客论坛</a></li>
+				<li><a href="http://union.vancl.com/" target="_blank">网站联盟</a></li>
+				<li><a href="/help/Help_List.htm" target="_blank">帮助中心</a></li>
+            </ul>
+        	<ul class="topcanton">
+            	<li>咨询QQ：48419248 644139466 开发群:19476331</li>
+            </ul>
+        </div>
+    </div>
+	<div class="emu">
+    	<ul>
+        	<li class="on"><a>首页</a></li>
+            <li><a>下载</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="news">
+  <div class="Register1">
+    <div class="title"><a>用户注册</a></div>
+    <div class="Registerinfo">
+    	<div class="fl text1">请填写您的Email地址：</div>
+        <div class="fl input1"><input id="Email" onblur="Check_Email()" name="Email" class="input" /></div>
+        <div class="fl info1">请填写有效的   Email地址作为用户名，我们向这个地址发送您的帐户信息、订单通知等。</div>
+        
+        <div class="fl text1">请设定密码：</div>
+        <div class="fl input1"><input id="PassWord"  class="input"  type="password" maxlength="16" onchange="ChangePassword();" value="" name="PassWord" /></div>
+        <div class="fl info1">密码请设为6-16位字母或数字。</div>
+        
+        <div class="fl text1">请再次输入设定密码：</div>
+        <div class="fl input1"><input id="PassWord"  class="input"  type="password" maxlength="16" onchange="ChangePassword();" value="" name="PassWord" /></div>
+        <div class="fl info1"><span id="ReCheckRePassWord"></span></div>
+        
+        <div class="fl text1">请输入验证码：</div>
+        <div class="fl input1"><input id="Validate_Code" class="input" style="width:80px;" onchange="CheckValidateCode()" name="Validate_Code" /></div>
+        <div class="fl info1"></div>
+        
+        <div class="fl text1"></div>
+        <div class="fl input1"><input type="submit" class="Btn" value="提 交" /></div>
+        <div class="fl info1"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="copyright">
+  <ul>
+    	<li>Copyright © 1998 - 2008 Tcg CMS system All Rights Reserved</li>
+        <li>Tcg  版权所有</li>
+    </ul>
+</div>
+</body>
+</html>
