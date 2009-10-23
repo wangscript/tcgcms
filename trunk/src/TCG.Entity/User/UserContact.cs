@@ -41,6 +41,10 @@ namespace TCG.Entity
         /// 手机
         /// </summary>
         public string Mobile { get { return this._Mobile; } set { this._Mobile = value; } }
+        /// <summary>
+        /// 用户邮箱
+        /// </summary>
+        public string Email { get { return this._email; } set { this._email = value; } }
 
         
         private string _UserRealName;
@@ -51,6 +55,7 @@ namespace TCG.Entity
         private string _Postcode;
         private string _Telephone;
         private string _Mobile;
+        private string _email;
 
     }
 }
