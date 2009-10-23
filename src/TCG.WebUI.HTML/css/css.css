@@ -132,8 +132,21 @@ li.important a{color:#ff4e00;}
 .Login{ float:left; width:460px;border:#dae9f2 solid 1px; margin-left:30px; height:300px;}
 .Register{ float:left;width:460px;border:#dae9f2 solid 1px;margin-left:10px;height:300px;}
 
-.Register1{ float:left;width:940px;border:#dae9f2 solid 1px;margin-left:25px;height:300px; margin-bottom:18px;}
+.Register1{ clear:both; float:left;width:940px;border:#dae9f2 solid 1px;margin-left:25px;height:300px; margin-bottom:18px;}
 .Register1 .Registerinfo{ margin-top:30px;}
 .Register1 .text1{ width:235px; text-align:right; line-height:40px;}
 .Register1 .input1{ line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
-.Register1 .info1{ line-height:20px; margin-left:5px; width:470px; height:40px;line-height:40px;}
+.Register1 .info1{ margin-left:5px; width:470px; height:40px;line-height:40px;}
+
+.Register{ float:left;width:480px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;}
+.Register .Registerinfo2{ margin-top:30px;}
+.Register .text2{ width:150px; text-align:right; line-height:40px;}
+.Register .input2{ line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
+.Register .info2{ width:480px; height:25px;line-height:25px; text-align:center;}
+
+.loginDiv { position:absolute;left:27px;top:434px;}
+.login {float:left;width:400px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;}
+.login .Registerinfo3{ margin-top:30px;}
+.login .text3{ width:120px; text-align:right; line-height:30px;}
+.login .input3{ line-height:30px; margin-left:5px; width:210px; height:27px; padding-top:3px; padding-bottom:3px;}
+.login .info3{  width:400px; height:25px;line-height:25px; text-align:center;}
