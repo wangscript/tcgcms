@@ -1,0 +1,41 @@
+该文档的视频教程地址~~
+http://www.tcgcms.cn/html/20091023/000000052.htm
+
+
+1.成团队成员^_^!~~~
+   a 加入团队的方法是，先加群：19476331 ，在群里面申请加入
+   b 通过以后，会在GOOGLE代码管理里面加上你的名字，http://code.google.com/p/tcgcms/
+   c 当你发现你的名字已经出现在团队里面的时候，你可以找到团队SVN地址
+     http://code.google.com/p/tcgcms/source/checkout
+   d 在上面的地址上，你可以得到一个新的SVN地址 https://tcgcms.googlecode.com/svn/trunk/
+     通过这个地址，你可以进行修改和上传代码
+
+2.下载SVN客户端
+   如果你没使用过SVN，我们来一起装一下
+   a 知道到SVN 官方地址 http://tortoisesvn.net/downloads，得到SVN的下载地址
+     http://downloads.sourceforge.net/tortoisesvn/TortoiseSVN-1.6.6.17493-win32-svn-1.6.6.msi?download
+   b，下载完成以后安装，在安装好以后，重启电脑，在任何地方点右键，会有SVN的操作菜单
+ 
+
+3.获取代码
+   a .下面获取代码,新建一个文件夹，存放代码，回到刚才的GOOGLE地址 复制
+    https://tcgcms.googlecode.com/svn/trunk/
+   b. 在刚才建的文件夹上点右键，选择check out  贴刚才复制的地址，点OK ,会提示你输入用户名密码 
+    （我这里没提示输入密码，是因为我本机记住了，获得密码的方式是http://code.google.com/p/tcgcms/source/checkout ，上点击googlecode.com password 请确保你的GOOGLE是登陆状态 ^_^）
+   c.安装VS2008 和SVN  结合工具，在刚才签下的代码库里面就有 AnkhSvn-2.1.6941.125.msi
+     安装我就不做了，装好以后，打开解决方案
+   d.如果已经安装了其他的源代码管理工具，那么这个时候要选择一下
+    工具 - 》 选项 - 》 源代码管理 
+
+4.修改代码并嵌入
+  下面我们可以进行修改了
+   我们加个注释看看^_^
+  添加完注释以后，就可以嵌入了，不过我不建议大家通过VS2008嵌入，大家最好能手动嵌入
+
+  a.嵌入前，请先退出VS2008 ，删除TCG_System.suo 来到 contrib 目录
+  b.NeedDeleteFiles.ini 文件配置你的项目路径，运行 Delete_ASP.NET_BIN.exe 删除开发
+   过程中的零时文件，节约SVN空间 ，为了项目，还是麻烦大家了。
+  c.在SRC文件夹上点右键 选择 COMMIT 写上开发日志，点OK就好了，恭喜你，为
+    TCG 贡献了一个版本，呵呵，
+
+OVER GOOD LUCK FOR EVERYONE!~~~
