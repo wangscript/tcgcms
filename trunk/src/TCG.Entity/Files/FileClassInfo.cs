@@ -18,12 +18,31 @@ using System.Text;
 
 namespace TCG.Entity
 {
+    /// <summary>
+    /// 文件分类实体 
+    /// <log>by :sanyungui@yahoo.com.cn date: 2009-10-23 info:</log>
+    /// </summary>
     public class FileClassInfo
     {
+        /// <summary>
+        /// 文件分类ID
+        /// </summary>
         public int iId { get { return this._iid; } set { this._iid = value; } }
+        /// <summary>
+        /// 文件分类父类
+        /// </summary>
         public int iParentId { get { return this._iparentid; } set { this._iparentid = value; } }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         public DateTime dCreateDate { get { return this._dcreatedate; } set { this._dcreatedate = value; } }
+        /// <summary>
+        /// 分类名称
+        /// </summary>
         public string vcFileName { get { return this._vcfilename; } set { this._vcfilename = value; } }
+        /// <summary>
+        /// 说明
+        /// </summary>
         public string vcMeno { get { return this._vcmeno; } set { this._vcmeno = value; } }
       
         private int _iid;
