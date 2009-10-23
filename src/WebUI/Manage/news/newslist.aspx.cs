@@ -163,6 +163,9 @@ public partial class news_newslist : adminMain
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
     }
 
+    /// <summary>
+    /// 删除文章
+    /// </summary>
     private void DelNews()
     {
         string delids = objectHandlers.Post("DelClassId");

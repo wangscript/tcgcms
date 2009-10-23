@@ -15,8 +15,11 @@ li.important a{color:#ff4e00;}
 .blue{ color:#4484da}
 .hid{display:none};
 .fl{ float:left;}
-.input{ border:#bad8fe solid 1px; background:url(../images/input-bg.jpg); background-repeat:repeat-x; height:23px; line-height:23px; width:200px;}
-.Btn{background:url(../images/01.jpg); width:84px; height:26px; border:none;}
+.err{ color:#ca121b;}
+.ok {color:#418e08;}
+
+.input{ border:#bad8fe solid 1px; background:url(../images/input-bg.jpg); color:#0c4775; background-repeat:repeat-x; height:23px; line-height:23px; width:200px;}
+.Btn{ background:url(../images/01.jpg); width:84px; height:26px; border:none;}
 
 .ShowText {padding:3px 3px 1px 18px;background:#ffffff url(_$WebSite$__$ManagePath$_QzoneEditor/show.gif) no-repeat;margin:2px;border:1px #FF00FF solid;color:#ff0000;height:16px;font-size:12px;text-decoration:none}
 
