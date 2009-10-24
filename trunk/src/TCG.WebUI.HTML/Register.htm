@@ -45,19 +45,19 @@
     <div class="Registerinfo">
     	<div class="fl text1">请填写您的Email地址：</div>
         <div class="fl input1"><input id="Email"  name="Email" class="input" /></div>
-        <div class="fl info1">请填写有效的   Email地址作为用户名，我们向这个地址发送您的帐户信息、订单通知等。</div>
+        <div class="fl info1" id="EmailMsg">请填写有效的   Email地址作为用户名，我们向这个地址发送您的帐户信息、订单通知等。</div>
         
         <div class="fl text1">请设定密码：</div>
         <div class="fl input1"><input id="PassWord"  class="input"  type="password" maxlength="16"  value="" name="PassWord" /></div>
-        <div class="fl info1">密码请设为6-16位字母或数字。</div>
+        <div class="fl info1" id="PassWordMsg">密码请设为6-16位字母或数字。</div>
         
         <div class="fl text1">请再次输入设定密码：</div>
         <div class="fl input1"><input id="RePassWord"  class="input"  type="password" maxlength="16"  value="" name="RePassWord" /></div>
-        <div class="fl info1"><span id="ReCheckRePassWord"></span></div>
+        <div class="fl info1" id="RePassWordMsg"></div>
         
         <div class="fl text1">请输入验证码：</div>
-        <div class="fl input1"><input id="Validate_Code" class="input" style="width:80px;" name="Validate_Code" /></div>
-        <div class="fl info1"></div>
+        <div class="fl input1"><input id="Validate_Code" name="Validate_Code" class="input fl" style="width:80px;" name="Validate_Code"  /><img src="http://code.tcgcms.cn/ValidCode.aspx?height=25&temp=" class="fl maginleft5" title="点击更换新的验证码" align="absmiddle" onclick="this.src=this.src + new Date().toString()" /></div>
+        <div class="fl info1" id="ValidateCodeMsg"></div>
         
         <div class="fl text1"></div>
         <div class="fl input1"><input type="submit" class="Btn" value="提 交" /></div>
@@ -65,6 +65,7 @@
     </div>
   </div>
 </form>
+
 </div>
 
 <div class="copyright">

@@ -41,13 +41,6 @@ namespace TCG.Pages
             base.handlerService.adminLoginHandlers.CheckAdminPop(base.configService.baseConfig);
         }
 
-        protected void AjaxErch(string str)
-        {
-            Response.Write(str);
-            this.Finish();
-            Response.End();
-        }
-
         protected void Finish()
         {
             if ((base.conn != null) && base.conn.Connected) { base.conn.Close(); }

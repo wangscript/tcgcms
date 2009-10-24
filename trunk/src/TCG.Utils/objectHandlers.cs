@@ -1209,6 +1209,18 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// SQL语句个格式化
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string SqlEndcode(string s)
+        {
+            StringBuilder builder1 = new StringBuilder(s);
+            builder1.Replace("'", "''");
+            return builder1.ToString();
+        }
+
+        /// <summary>
         /// 获得页面文件
         /// </summary>
         public static string CurrentPath

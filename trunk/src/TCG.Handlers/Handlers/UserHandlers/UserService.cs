@@ -35,5 +35,23 @@ namespace TCG.Handlers
             base.configService = configservice;
         }
 
+        /// <summary>
+        /// 提供用户操作的方法
+        /// </summary>
+        public UserHandlers userHandlers
+        {
+            get
+            {
+                if (this._userhandlers == null)
+                {
+                    this._userhandlers = new UserHandlers();
+                    this._userhandlers.conn = base.conn;
+                    this._userhandlers.configService = base.configService;
+                }
+                return this._userhandlers;
+            }
+        }
+
+        private UserHandlers _userhandlers = null;
     }
 }
