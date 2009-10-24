@@ -82,6 +82,28 @@ namespace TCG.Pages
             }
         }
 
+        protected void AjaxErch(string str)
+        {
+            Response.Write(str);
+            Response.End();
+        }
+
+        /// <summary>
+        /// AJAX输出字符串
+        /// </summary>
+        public string ajaxdata
+        {
+            get
+            {
+                return this._ajaxdata;
+            }
+            set
+            {
+                this._ajaxdata = value;
+            }
+        }
+
+        private string _ajaxdata = string.Empty;
         private ConfigService _configservice = null;
         private HandlerService _handlerservice = null;
         private Connection _conn = null;

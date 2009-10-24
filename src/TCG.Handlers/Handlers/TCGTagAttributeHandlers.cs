@@ -29,7 +29,7 @@ namespace TCG.Handlers
     {
         public TCGTagAttributeHandlers(HandlerService handlerservice)
         {
-            this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%()$<>\/]+)""";
+            this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%\|()$<>\/]+)""";
             this._tagstringhdl = new TCGTagStringFunHandlers();
             this._handlerservice = handlerservice;
         }

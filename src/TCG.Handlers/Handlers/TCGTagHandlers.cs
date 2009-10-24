@@ -192,13 +192,14 @@ namespace TCG.Handlers
                     string[] txt = this._pagerinfo.ScriptCss.Split('|');
                     for (int i = 0; i < txt.Length; i++)
                     {
+                        string text2 = (i == txt.Length - 1) ? "" : "\r\n"; 
                         if (txt[i].IndexOf(".css") > -1)
                         {
-                            text += "<link href=\"" + txt[i] + "\" rel=\"stylesheet\" type=\"text/css\" />";
+                            text += "<link href=\"" + txt[i] + "\" rel=\"stylesheet\" type=\"text/css\" />" + text2;
                         }
                         else
                         {
-                            text += "<script language=\"javascript\" src=\"" + txt[i] + "\"></script>";
+                            text += "<script language=\"javascript\" src=\"" + txt[i] + "\"></script>" + text2;
                         }
                     }
                 }
