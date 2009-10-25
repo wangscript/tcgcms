@@ -86,13 +86,14 @@
 -1000000064@@@SP_Files_FileInfoManage@@@需要删除的文件间编号不能为空
 
 -1000000065@@@SP_News_NewsInfoManage@@@抓取文章标题不能重复
-
 -1000000067@@@SP_News_CheckThiefTopic@@@没有匹配到相关文章
 -1000000068@@@SP_News_CheckThiefTopic@@@已经抓取了该文章
 
 
--1000000070@@@KeyWords@@@加载中文词库失败
-
+-1000000090@@@SP_UserManage@@@密码不能为空
+-1000000091@@@SP_UserManage@@@最后登陆IP不能为空！
+-1000000092@@@SP_UserManage@@@姓名不能为空！
+-1000000093@@@SP_UserManage@@@最后登陆IP不能为空！
 
 
 -1000000080@@@Member@@@请选择你要删除的会员
