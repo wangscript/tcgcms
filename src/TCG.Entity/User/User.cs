@@ -71,8 +71,8 @@ namespace TCG.Entity
 
 
         private string _id;
-        private DateTime _createtime;
-        private DateTime _lastlogintime;
+        private DateTime _createtime = DateTime.Now;
+        private DateTime _lastlogintime = DateTime.Now;
         private UserState _entitystate = UserState.Inactive; 
         private string _lastloginip;
         private string _password;

@@ -64,6 +64,10 @@ namespace TCG.Utils
                     return page + filepath;
                 }
             }
+            else if (filepath.Substring(0, 7) == "http://" || filepath.Substring(0, 8) == "https://")
+            {
+                return filepath;
+            }
             else
             {
                 return page.Substring(0, page.LastIndexOf("/") + 1) + filepath;

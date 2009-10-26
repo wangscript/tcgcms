@@ -58,5 +58,14 @@ namespace TCG.Handlers
             if (dt.Rows.Count == 0) return true;
             return false;
         }
+
+        /// <summary>
+        /// 创建用户ID
+        /// </summary>
+        /// <returns></returns>
+        public string CreateUserId()
+        {
+            return Guid.NewGuid().ToString().Replace("-","") + "-001";
+        }
     }
 }

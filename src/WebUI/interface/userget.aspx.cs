@@ -32,7 +32,7 @@ public partial class interface_userget : Origin
     private void CheckUserValidateCode()
     {
         string code = objectHandlers.Get("code");
-        if (SessionState.Get("verification") != null && SessionState.Get("verification").ToString() == code.ToLower())
+        if (objectHandlers.CheckValiCode(code))
         {
             base.ajaxdata = "{state:true,message:''}";
         }

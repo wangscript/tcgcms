@@ -39,8 +39,8 @@ li.important a{color:#ff4e00;}
 .header .logo .topr .topemu li.first{ border:none;}
 .header .logo .topr .topemu li a {color:#0c4775;}
 
-.header .emu { clear:right;height:45px; width:990px; margin-left:auto; margin-right:auto; background-image:url(../images/emubg.gif); background-repeat:no-repeat;}
-.header .emu ul {height:45px; width:940px; padding-left:50px; margin-left:auto; margin-right:auto; margin-top:14px; line-height:29px;}
+.header .emu { clear:both;height:45px; width:990px; margin-left:auto; margin-right:auto; background-image:url(../images/emubg.gif); background-repeat:no-repeat;}
+.header .emu ul { height:45px; width:940px; padding-left:50px; margin-left:auto; margin-right:auto; padding-top:14px; line-height:29px;}
 .header .emu ul li{ float:left; width:85px; height:29px; margin-left:4px; margin-right:4px;}
 .header .emu ul a{ color:#FFF; font-size:14px; font-weight:bold;}
 .header .emu ul li.on{ background-image:url(../images/emu_on.jpg); }
@@ -138,9 +138,9 @@ li.important a{color:#ff4e00;}
 
 .Register1{ clear:both; float:left;width:940px;border:#dae9f2 solid 1px;margin-left:25px;height:300px; margin-bottom:18px;}
 .Register1 .Registerinfo{ margin-top:30px;}
-.Register1 .text1{ width:235px; text-align:right; line-height:40px;}
-.Register1 .input1{ line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
-.Register1 .info1{ margin-left:5px; width:470px; height:40px;line-height:40px;}
+.Register1 .text1{ float:left; width:235px; text-align:right; line-height:40px;}
+.Register1 .input1{float:left; line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
+.Register1 .info1{float:left; margin-left:5px; width:470px; height:40px;line-height:40px;}
 
 .Register{ float:left;width:480px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;}
 .Register .Registerinfo2{ margin-top:30px;}
@@ -154,3 +154,5 @@ li.important a{color:#ff4e00;}
 .login .text3{ width:120px; text-align:right; line-height:30px;}
 .login .input3{ line-height:30px; margin-left:5px; width:210px; height:27px; padding-top:3px; padding-bottom:3px;}
 .login .info3{  width:400px; height:25px;line-height:25px; text-align:center;}
+
+.systemdo{position:absolute; width:460px; line-height:40px; height:40px;border:2px solid red;text-align:center; background-color:#DBDBDB; filter:Alpha(opacity=60); }
