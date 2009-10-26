@@ -1822,5 +1822,26 @@ namespace TCG.Utils
             return sum;
         }
 
+        /// <summary>
+        /// 检测验证码是否正确
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool CheckValiCode(string input)
+        {
+            return SessionState.Get("verification") != null && SessionState.Get("verification").ToString() == input.ToLower();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        public static bool IsMatch(string input, string pattern)
+        {
+            return Regex.IsMatch(input, pattern);
+        }
+
     };
 }
