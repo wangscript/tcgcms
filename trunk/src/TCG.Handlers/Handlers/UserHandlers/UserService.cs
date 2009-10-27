@@ -53,5 +53,25 @@ namespace TCG.Handlers
         }
 
         private UserHandlers _userhandlers = null;
+
+
+        /// <summary>
+        /// 前台用户登录的操作类
+        /// </summary>
+        public UserLoginHandlers userLoginHandlers
+        {
+            get
+            {
+                if (this._userloginhandlers == null)
+                {
+                    this._userloginhandlers = new UserLoginHandlers();
+                    this._userloginhandlers.conn = base.conn;
+                    this._userloginhandlers.configService = base.configService;
+                }
+                return this._userloginhandlers;
+            }
+        }
+
+        private UserLoginHandlers _userloginhandlers = null;
     }
 }
