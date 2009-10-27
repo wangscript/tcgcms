@@ -47,15 +47,15 @@ namespace TCG.Entity
         public string Email { get { return this._email; } set { this._email = value; } }
 
         
-        private string _UserRealName;
+        private string _UserRealName = string.Empty;
         private int _Province;
         private int _City;
         private int _District;
-        private string _Fulladdress;
-        private string _Postcode;
-        private string _Telephone;
-        private string _Mobile;
-        private string _email;
+        private string _Fulladdress = string.Empty;
+        private string _Postcode = string.Empty;
+        private string _Telephone = string.Empty;
+        private string _Mobile = string.Empty;
+        private string _email = string.Empty;
 
     }
 }

@@ -56,7 +56,7 @@ public partial class interface_userpost : Origin
             return;
         }
 
-        if (objectHandlers.CheckValiCode(Validate_Code))
+        if (!objectHandlers.CheckValiCode(Validate_Code))
         {
             base.ajaxdata = "{state:false,message:'验证码不正确！'}";
             base.AjaxErch(base.ajaxdata);
