@@ -20,6 +20,13 @@ namespace TCG.Utils
 
     public class Cookie
     {
+        /// <summary>
+        /// 前台用户COOKIE名称
+        /// </summary>
+        public static string USER_COOKIE = "tcgcms_user";
+        public static string USER_COOKIE_TOKEN = "tcgcms_token";
+
+
         public static HttpCookie Get(string name)
         {
             return HttpContext.Current.Request.Cookies[text1 + name];

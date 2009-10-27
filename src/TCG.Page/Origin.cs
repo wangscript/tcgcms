@@ -26,6 +26,8 @@ using TCG.Utils;
 using TCG.Release;
 using TCG.Handlers;
 
+using TCG.Entity;
+
 namespace TCG.Pages
 {
     public class Origin : Page
@@ -102,6 +104,20 @@ namespace TCG.Pages
                 this._ajaxdata = value;
             }
         }
+
+        public User User
+        {
+            get
+            {
+                if (this._user == null)
+                {
+                    this._user = this.handlerService.userService.userLoginHandlers.User;
+                }
+                return this._user;
+            }
+        }
+
+        private User _user = null;
 
         private string _ajaxdata = string.Empty;
         private ConfigService _configservice = null;

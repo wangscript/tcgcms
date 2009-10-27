@@ -36,6 +36,7 @@
       <HintPath>..\..\contrib\DLL\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -52,6 +53,8 @@
     <Compile Include="Handlers\NewsFromHandlers.cs" />
     <Compile Include="Handlers\NewsInfoHandlers.cs" />
     <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
+    <Compile Include="Handlers\UserHandlers\UserLoginHandlers.cs">
+    </Compile>
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Handlers\TCGTagAttributeHandlers.cs" />
     <Compile Include="Handlers\TCGTagHandlers.cs" />

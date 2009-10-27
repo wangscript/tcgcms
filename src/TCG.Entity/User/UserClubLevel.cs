@@ -21,5 +21,9 @@ namespace TCG.Entity
         /// 管理员
         /// </summary>
         Administrator = 3,
+        /// <summary>
+        /// 游客
+        /// </summary>
+        Guest = -1,
     }
 }

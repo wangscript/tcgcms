@@ -24,6 +24,12 @@ namespace TCG.Entity
     /// </summary>
     public class User 
     {
+        public User()
+        {
+            this._usercontact = new UserContact();
+            this._userpay = new UserPay();
+        }
+
         /// <summary>
         /// 名称
         /// </summary>

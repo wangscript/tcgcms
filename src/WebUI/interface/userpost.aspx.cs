@@ -69,16 +69,15 @@ public partial class interface_userpost : Origin
         user.PassWord = objectHandlers.MD5(PassWord);
         user.LastLoginIp = objectHandlers.UserIp;
 
-        UserContact usercontact = new UserContact();
         if (objectHandlers.IsEmail(user.Name))
         {
-            usercontact.Email = user.Name;
+            user.UserContact.Email = user.Name;
         }
 
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.userService.userHandlers.UserManage(user, usercontact, "01");
+            rtn = base.handlerService.userService.userHandlers.UserManage(user, "01");
         }
         catch (Exception ex)
         {
@@ -90,6 +89,18 @@ public partial class interface_userpost : Origin
         if (rtn < 0)
         {
             base.ajaxdata = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        //保存登陆信息
+        try
+        {
+            base.handlerService.userService.userLoginHandlers.SetUserLoginCookie(user);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }

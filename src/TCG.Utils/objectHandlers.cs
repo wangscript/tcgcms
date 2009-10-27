@@ -1843,5 +1843,35 @@ namespace TCG.Utils
             return Regex.IsMatch(input, pattern);
         }
 
+        /// <summary>
+        /// COOKIE加密
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string GenerateToken(string s)
+        {
+            return MD5(s + Cookie.USER_COOKIE_TOKEN);
+        }
+
+        /// <summary>
+        /// 得到用户的属性
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public static UserClubLevel GetUserClubLevel(int level)
+        {
+            switch (level)
+            {
+                case -1:
+                    return UserClubLevel.Guest;
+                case 0:
+                    return UserClubLevel.Limit;
+                case 1:
+                    return UserClubLevel.Ordinary;
+                case 2:
+                    return UserClubLevel.Administrator;
+            }
+            return UserClubLevel.Guest;
+        }
     };
 }

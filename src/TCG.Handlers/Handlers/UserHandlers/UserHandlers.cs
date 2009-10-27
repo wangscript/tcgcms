@@ -23,7 +23,7 @@ namespace TCG.Handlers
         /// <param name="usercontact"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public int UserManage(User user,UserContact usercontact,string action)
+        public int UserManage(User user,string action)
         {
             SqlParameter sp0 = new SqlParameter("@State", SqlDbType.Int, 4); sp0.Value = (int)user.State;
             SqlParameter sp1 = new SqlParameter("@UserLevel", SqlDbType.Int, 4); sp1.Value = (int)user.UserLevel;
@@ -33,7 +33,7 @@ namespace TCG.Handlers
             SqlParameter sp5 = new SqlParameter("@PassWord", SqlDbType.VarChar,32); sp5.Value = user.PassWord;
             SqlParameter sp6 = new SqlParameter("@LastLoginIp", SqlDbType.VarChar, 32); sp6.Value = user.LastLoginIp;
             SqlParameter sp7 = new SqlParameter("@Name", SqlDbType.NVarChar, 50); sp7.Value = user.Name;
-            SqlParameter sp8 = new SqlParameter("@Email", SqlDbType.NVarChar, 50); sp8.Value = usercontact.Email;
+            SqlParameter sp8 = new SqlParameter("@Email", SqlDbType.NVarChar, 50); sp8.Value = user.UserContact.Email;
             SqlParameter sp9 = new SqlParameter("@action", SqlDbType.Char, 2); sp9.Value = action;
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
             string[] reValues = base.conn.Execute("SP_UserManage", new SqlParameter[] { sp0, sp1, sp2, sp3 ,sp4,sp5,sp6
