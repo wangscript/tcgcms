@@ -137,13 +137,42 @@ function CheckValidateCode(){
 
 /*表单提交的处理方法*/
 function FromPost(){
-	if(!CheckEmail()&&CheckPassWord()&&CheckRePassWord()&&CheckValidateCode()){
+	var pt = /^([a-zA-Z0-9\@\.]{2,50})|[\u4e00-\u9fffa-zA-Z0-9\@\.]{2,25}$/;
+	var EmailValue = Email.val();
+	if(!utils.IsRegex(EmailValue,pt)){
+		EmailMsg.html("会员名只能由3到50个英文和数字或2到25个中文组成，不能含空格或特殊符号！");
+		EmailMsg[0].className = "fl info1 err";
 		return false;
 	}
+	
+	var ValidateCodeValue = ValidateCode.val();
+	if(!utils.IsRegex(ValidateCodeValue,/^[a-zA-Z0-9]{4}$/)){
+		ValidateCodeMsg.html('请输入4位验证码！');
+		ValidateCodeMsg[0].className = "fl info1 err";
+		return false;
+	}
+	
+	if(!(CheckPassWord()&&CheckRePassWord())){
+		return false;
+	}
+	
+	utils.SystemDo("do","正在发送注册请求...");
 	return true;
+	
 }
 
 //注册会送记录
 function RegisterBack(data){
+	utils.SystemDo("text","正在分析返回数据...");
 	
+	if(data.state){
+		utils.SystemDo("text","您已经成功注册！",function(){
+			utils.SystemDo("out","返回首页",function(){
+				window.location.href = "/index.aspx";
+			});
+		});
+		
+	}else{
+		utils.SystemDo("err",data.message);
+	}
 }
