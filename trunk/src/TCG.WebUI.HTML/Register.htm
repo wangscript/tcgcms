@@ -14,9 +14,7 @@
 <div class="header">
 	<div class="logo">
     	<div class="logoimg"><a><img src="images/logo.gif" /></a></div>
-		<div class="userlogin">
-        	您好，欢迎光临TCG CMS。<A title="" href="#"><SPAN style="COLOR: #a10000">登录</SPAN></A> | <A title="" href="#"><SPAN style="COLOR: #a10000">注册 </SPAN></A>
-        </div>
+		<div class="userlogin" id="userlogin"></div>
         <div class="topr">
         	<ul class="topemu">
             	<li class="first"><a href="#" target="_blank">我的帐户</a></li>
@@ -39,30 +37,30 @@
     </div>
 </div>
 
-<div class="news" >
-<form id="Register" method="post">
+<div class="news">
+<form id="RegisterEx" method="post">
   <div class="Register1">
     <div class="title"><a>用户注册</a></div>
-    <div class="Registerinfo" >
-    	<div class="fl text1">请填写您的Email地址：</div>
-        <div class="fl input1"><input id="Email"  name="Email" class="input" /></div>
-        <div class="fl info1" id="EmailMsg">请填写有效的   Email地址作为用户名，我们向这个地址发送您的帐户信息、订单通知等。</div>
+    <div class="Registerinfo">
+    	<div class="text1">请填写您的Email地址：</div>
+        <div class="input1"><input id="EmailEx"  name="Email" class="input" /></div>
+        <div class="info1" id="EmailMsg">请填写有效的   Email地址作为用户名，我们向这个地址发送您的帐户信息、订单通知等。</div>
         
-        <div class="fl text1">请设定密码：</div>
-        <div class="fl input1"><input id="PassWord"  class="input"  type="password" maxlength="16"  value="" name="PassWord" /></div>
-        <div class="fl info1" id="PassWordMsg">密码请设为6-16位字母或数字。</div>
+        <div class="text1">请设定密码：</div>
+        <div class="input1"><input id="PassWordEx"  class="input"  type="password" maxlength="16"  value="" name="PassWord" /></div>
+        <div class="info1" id="PassWordMsg">密码请设为6-16位字母或数字。</div>
         
-        <div class="fl text1">请再次输入设定密码：</div>
-        <div class="fl input1"><input id="RePassWord"  class="input"  type="password" maxlength="16"  value="" name="RePassWord" /></div>
-        <div class="fl info1" id="RePassWordMsg"></div>
+        <div class="text1">请再次输入设定密码：</div>
+        <div class="input1"><input id="RePassWordEx"  class="input"  type="password" maxlength="16"  value="" name="RePassWord" /></div>
+        <div class="info1" id="RePassWordMsg"></div>
         
-        <div class="fl text1">请输入验证码：</div>
-        <div class="fl input1"><input id="Validate_Code" class="input fl" style="width:80px; " name="Validate_Code" /><img src="http://code.tcgcms.cn/ValidCode.aspx?height=25&temp=" class="fl maginleft5" title="点击更换新的验证码" align="absmiddle" onclick="this.src=this.src + new Date().toString()"  /></div>
-        <div class="fl info1" id="ValidateCodeMsg"></div>
+        <div class="text1">请输入验证码：</div>
+        <div class="input1"><input id="Validate_CodeEx" class="input fl" style="width:80px; " name="Validate_Code" /><img src="http://code.tcgcms.cn/ValidCode.aspx?height=25&temp=" class="fl maginleft5" title="点击更换新的验证码" align="absmiddle" onclick="this.src=this.src + new Date().toString()"  /></div>
+        <div class="info1" id="ValidateCodeMsg"></div>
         
-        <div class="fl text1">&nbsp;</div>
-        <div class="fl input1"><input type="submit" class="Btn" value="提 交" /></div>
-        <div class="fl info1"></div>
+        <div class="text1">&nbsp;</div>
+        <div class="input1"><input type="submit" class="Btn" value="提 交" /></div>
+        <div class="info1"></div>
     </div>
   </div>
 </form>

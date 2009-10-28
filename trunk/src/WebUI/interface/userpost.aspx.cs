@@ -21,9 +21,63 @@ public partial class interface_userpost : Origin
             case "USER_REGISTER":
                 this.UserRegister();
                 break;
+            case "USER_LOGIN":
+                this.UserLogin();
+                break;
         }
 
     }
+
+
+    private void UserLogin()
+    {
+        User user = new User();
+        user.Name = objectHandlers.Post("UserName");
+        user.PassWord = objectHandlers.MD5(objectHandlers.Post("UserPassWord"));
+
+        if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.PassWord))
+        {
+            base.ajaxdata = "{state:false,message:'用户名或密码为空！'}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.userService.userLoginHandlers.UserLogin(ref user);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        if (rtn < 0)
+        {
+            base.ajaxdata = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        //保存登陆信息
+        try
+        {
+            base.handlerService.userService.userLoginHandlers.SetUserLoginCookie(user);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.ajaxdata = "{state:true,message:''}";
+        base.AjaxErch(base.ajaxdata);
+
+    }
+
 
     /// <summary>
     /// 用户注册

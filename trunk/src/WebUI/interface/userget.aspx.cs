@@ -22,8 +22,47 @@ public partial class interface_userget : Origin
                 case "CHECK_USER_VALIDATECODE":
                     this.CheckUserValidateCode();
                     break;
+                case "GET_USER_LOGININFO" :
+                    this.GetUserLoginInfo();
+                    break;
+                case "USER_LOGOUT":
+                    this.UserLogout();
+                    break;
             }
         }
+    }
+
+    /// <summary>
+    /// 用户退出
+    /// </summary>
+    private void UserLogout()
+    {
+        try
+        {
+            base.handlerService.userService.userLoginHandlers.UserLogout();
+            base.ajaxdata = "{state:true}";
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.AjaxErch(ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(ajaxdata);
+
+    }
+
+    /// <summary>
+    /// 获取用户的登陆信息
+    /// </summary>
+    private void GetUserLoginInfo()
+    {
+        string useroption = "{Name:'" + base.User.Name + "',CreateTime:'"+base.User.CreateTime.ToString()
+            + "',UserClubLevel:" + ((int)base.User.UserClubLevel).ToString() + "}";
+
+        base.ajaxdata = "{state:true,message:'',user:" + useroption + "}";
+        base.AjaxErch(ajaxdata);
     }
 
     /// <summary>
