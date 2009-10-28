@@ -34,6 +34,6 @@ namespace TCG.Entity
         /// <summary>
         /// 审核未通过
         /// </summary>
-        Auditdidnotpass,
+        Auditdidnotpass = 2,
     }
 }

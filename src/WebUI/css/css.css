@@ -1,3 +1,4 @@
+@charset "utf-8";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
 margin: 0;padding: 0;}
 table {border-collapse: collapse;border-spacing: 0;}
@@ -34,6 +35,7 @@ li.important a{color:#ff4e00;}
 
 .header .logo .logoimg{ width:217px; height:45px;float:left; margin-top:8px;}
 .header .logo .userlogin { width:350px; height:25px;float:left; margin-top:28px; margin-left:5px;line-height:25px;}
+.header .logo .userlogin span {color: #a10000;}
 .header .logo .topr{ width:400px; float:right;margin-top:8px; margin-right:10px; }
 .header .logo .topr ul li{ color:#808285; text-align:right;}
 .header .logo .topr .topcanton{ line-height:14px; margin-right:10px;}
@@ -58,7 +60,7 @@ li.important a{color:#ff4e00;}
 .Announcement ul li { padding-left:20px;}
 .Announcement ul li a{ color:#3372a2; line-height:20px;}
 
-.news{ text-align:left;  width:990px; margin-left:auto; margin-right:auto; padding-top:6px;}
+.news{ text-align:left;  width:990px; margin-left:auto; margin-right:auto; padding-top:6px; }
 .news .Cases{ float:left; width:313px;height:368px; border:#dae9f2 solid 1px;}
 .news  .title{  font-size:14px; font-weight:bold; background-image:url(../images/title.gif); height:33px; line-height:33px;}
 .news  .title a { padding-left:10px; float:left;color:#3372a2;}
@@ -135,9 +137,7 @@ li.important a{color:#ff4e00;}
 .copyright{width:990px; margin-left:auto; margin-right:auto; padding-top:6px; clear:left;}
 .copyright li { line-height:25px; height:25px; color:#808080;}
 
-/*ÓÃ»§×¢²á*/
-.Login{ float:left; width:460px;border:#dae9f2 solid 1px; margin-left:30px; height:300px;}
-.Register{ float:left;width:460px;border:#dae9f2 solid 1px;margin-left:10px;height:300px;}
+/*ç”¨æˆ·æ³¨å†Œ*/
 
 .Register1{ clear:both; float:left;width:940px;border:#dae9f2 solid 1px;margin-left:25px;height:300px; margin-bottom:18px;}
 .Register1 .Registerinfo{ margin-top:30px;}
@@ -145,17 +145,20 @@ li.important a{color:#ff4e00;}
 .Register1 .input1{float:left; line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
 .Register1 .info1{float:left; margin-left:5px; width:470px; height:40px;line-height:40px;}
 
-.Register{ float:left;width:480px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;}
+.Register{ float:left;width:480px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;margin-top:10px;}
 .Register .Registerinfo2{ margin-top:30px;}
-.Register .text2{ width:150px; text-align:right; line-height:40px;}
-.Register .input2{ line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
-.Register .info2{ width:480px; height:25px;line-height:25px; text-align:center;}
+.Register .text2{ float:left; width:150px; text-align:right; line-height:40px;}
+.Register .input2{ float:left; line-height:40px; margin-left:5px; width:210px; height:27px; padding-top:6px; padding-bottom:7px;}
+.Register .info2{float:left;  width:480px; height:25px;line-height:25px; text-align:center;}
 
-.loginDiv { position:absolute;left:27px;top:434px;}
-.login {float:left;width:400px;border:#dae9f2 solid 1px;margin-left:25px;height:390px; margin-bottom:18px;}
+.DivBg{position:absolute; left:0px; top:0px; z-index:1000; background-color:#333;}
+.loginDiv { position:absolute;background-color:#FFF; width:930px; height:420px; z-index:1001;}
+.login { float:left;width:400px;border:#dae9f2 solid 1px;margin-left:10px;_margin-left:5px;height:390px; margin-bottom:18px; margin-top:10px;}
 .login .Registerinfo3{ margin-top:30px;}
-.login .text3{ width:120px; text-align:right; line-height:30px;}
-.login .input3{ line-height:30px; margin-left:5px; width:210px; height:27px; padding-top:3px; padding-bottom:3px;}
-.login .info3{  width:400px; height:25px;line-height:25px; text-align:center;}
+.login .text3{float:left;  width:120px; text-align:right; line-height:30px;}
+.login .input3{ float:left; line-height:30px; margin-left:5px; width:210px; height:27px; padding-top:3px; padding-bottom:3px;}
+.login .info3{float:left;   width:400px; height:25px;line-height:25px; text-align:center;}
 
-.systemdo{position:absolute;width:431px; height:48px;line-height:48px;text-align:center; background-color:#DBDBDB; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.systemdo{position:absolute;width:431px; height:48px;line-height:48px;text-align:center; background-color:#DBDBDB; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; z-index:1004; }
+.Register .Registerinfo2 .close{float:left;position:relative; width:32px; height:32px; background-image:url(../images/close.png);_background-image:url("../images/close.gif"); margin-top:-32px; left:470px;top:30px;}
+.Register .Registerinfo2 .close a{ float:left; width:32px; height:32px;}
