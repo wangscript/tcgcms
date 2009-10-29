@@ -13,7 +13,6 @@ using TCG.Handlers;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Release;
-using TCG.Attribute;
 
 using System.Reflection;
 using System.ComponentModel;

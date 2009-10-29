@@ -49,14 +49,14 @@ public partial class interface_userpost : Origin
         }
         catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }
 
         if (rtn < 0)
         {
-            base.ajaxdata = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"])) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }
@@ -68,7 +68,7 @@ public partial class interface_userpost : Origin
         }
         catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }
@@ -101,7 +101,7 @@ public partial class interface_userpost : Origin
             base.ajaxdata = "{state:false,message:'会员名只能由3到50个英文和数字或2到25个中文组成，不能含空格或特殊符号！！'}";
             base.AjaxErch(base.ajaxdata);
             return;
-        }  
+        }
 
         if (string.IsNullOrEmpty(PassWord))
         {
@@ -135,14 +135,15 @@ public partial class interface_userpost : Origin
         }
         catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }
 
         if (rtn < 0)
         {
-            base.ajaxdata = "{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
+            base.ajaxdata = "{state:false,message:\""
+                + objectHandlers.JSEncode(errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"])) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }
@@ -154,7 +155,7 @@ public partial class interface_userpost : Origin
         }
         catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(base.ajaxdata);
             return;
         }

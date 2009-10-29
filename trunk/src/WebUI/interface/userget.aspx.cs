@@ -22,7 +22,7 @@ public partial class interface_userget : Origin
                 case "CHECK_USER_VALIDATECODE":
                     this.CheckUserValidateCode();
                     break;
-                case "GET_USER_LOGININFO" :
+                case "GET_USER_LOGININFO":
                     this.GetUserLoginInfo();
                     break;
                 case "USER_LOGOUT":
@@ -44,7 +44,7 @@ public partial class interface_userget : Origin
         }
         catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(ajaxdata);
             return;
         }
@@ -58,7 +58,7 @@ public partial class interface_userget : Origin
     /// </summary>
     private void GetUserLoginInfo()
     {
-        string useroption = "{Name:'" + base.User.Name + "',CreateTime:'"+base.User.CreateTime.ToString()
+        string useroption = "{Name:'" + base.User.Name + "',CreateTime:'" + base.User.CreateTime.ToString()
             + "',UserClubLevel:" + ((int)base.User.UserClubLevel).ToString() + "}";
 
         base.ajaxdata = "{state:true,message:'',user:" + useroption + "}";
@@ -106,9 +106,9 @@ public partial class interface_userget : Origin
                 base.ajaxdata = "{state:false,message:''}";
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            base.ajaxdata = "{state:false,message:\"" + ex.Message.ToString() + "\"}";
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
             base.AjaxErch(ajaxdata);
             return;
         }
