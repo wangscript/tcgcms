@@ -30,9 +30,9 @@ public partial class Common_AllTemplate : ScriptsMain
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         DataRow Row = ds.Tables[0].Rows[i];
-                        Response.Write("AllTemplates[" + i.ToString() + "]=[" + Row["iID"].ToString() + "," + Row["iSiteId"].ToString()
-                            + "," + Row["iParentId"].ToString() + "," + Row["iSystemType"].ToString() + ",\"" +
-                            Row["vcTempName"].ToString() + "\"," + Row["iType"].ToString() + "];\r\n");
+                        Response.Write("AllTemplates[" + i.ToString() + "]=[\"" + Row["ID"].ToString() + "\"," + Row["SkinId"].ToString()
+                            + ",\"" + Row["iParentId"].ToString() + "\"," + Row["iSystemType"].ToString() + ",\"" +
+                            Row["vcTempName"].ToString() + "\"," + Row["TemplateType"].ToString() + "];\r\n");
                     }
                 }
             }

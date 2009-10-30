@@ -29,7 +29,7 @@ namespace TCG.Handlers
     {
         public TCGTagAttributeHandlers(HandlerService handlerservice)
         {
-            this._attpattern = @"=""([0-9A-Za-z\s,='!_\.%\|()$<>\/]+)""";
+            this._attpattern = @"=""([0-9A-Za-z\s,='!_\-\.%\|()$<>\/]+)""";
             this._tagstringhdl = new TCGTagStringFunHandlers();
             this._handlerservice = handlerservice;
         }
@@ -144,7 +144,7 @@ namespace TCG.Handlers
             string condition = this.GetAttribute("condition");
             if (string.IsNullOrEmpty(condition)) return;
             string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM T_News_ClassInfo (NOLOCK) WHERE "
-                + " iID >0 AND " + condition;
+                + " iID !='' AND " + condition;
 
             if (!string.IsNullOrEmpty(orders))
             {
@@ -178,14 +178,14 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = objectHandlers.ToInt(this.GetAttribute("id"));
-            if (id == 0)
+            string id = this.GetAttribute("id");
+            if (string.IsNullOrEmpty(id))
             {
                 pagerinfo.Read = false;
                 return;
             }
 
-            NewsInfo item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
+            ResourcesInfo item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -205,12 +205,12 @@ namespace TCG.Handlers
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        this.handlerService.newsInfoHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item, ref outid);
+                        this.handlerService.newsInfoHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item);
                     }
                 }
                 catch { }
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcContent$", item.vcContent);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iId$", item.iId.ToString());
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iId$", item.Id.ToString());
 
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcFilePath$", item.vcFilePath);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
@@ -275,8 +275,8 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTemplate(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = objectHandlers.ToInt(this.GetAttribute("id"));
-            if (id == 0)
+            string id = this.GetAttribute("id");
+            if (string.IsNullOrEmpty(id))
             {
                 pagerinfo.Read = false;
                 return;
@@ -285,7 +285,7 @@ namespace TCG.Handlers
             TemplateInfo item = this.handlerService.templateHandlers.GetTemplateInfoByID(this._conn, id,false);
             if (item != null)
             {
-                this._tagtext = item.vcContent.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
+                this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
                 this._tagtext = this._tagtext.Replace("$item", "$itemTemp" + id.ToString());
             }
             else
@@ -319,7 +319,7 @@ namespace TCG.Handlers
 
             this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "T_News_NewsInfo";
+            sItem.tableName = "ResourcesInfo";
 
             string fields = this.GetAttribute("fields");
             if (string.IsNullOrEmpty(fields)) return;
@@ -331,8 +331,8 @@ namespace TCG.Handlers
             if (columns == 0) columns = 1;
             string condition = this.GetAttribute("condition");
 
-            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM T_News_NewsInfo (NOLOCK) WHERE "
-                + " iID >0 AND " + condition;
+            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM ResourcesInfo (NOLOCK) WHERE "
+                + " iID != '' AND " + condition;
             if (!string.IsNullOrEmpty(orders))
             {
                 SQL += " ORDER BY " + orders;
@@ -432,7 +432,7 @@ namespace TCG.Handlers
             this._pager = true;
             this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "T_News_NewsInfo";
+            sItem.tableName = "ResourcesInfo";
 
             ArrayList arrshowfied = new ArrayList();
 

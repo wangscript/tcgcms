@@ -177,10 +177,10 @@ namespace TCG.Handlers
                 ClassInfo cif = new ClassInfo();
                 DataRow Row = dt.Rows[0];
                 cif.iId = (int)Row["iId"];
-                cif.iListTemplate = (int)Row["iListTemplate"];
+                cif.iListTemplate = Row["iListTemplate"].ToString();
                 cif.iOrder = (int)Row["iOrder"];
                 cif.iParent = (int)Row["iParent"];
-                cif.iTemplate = (int)Row["iTemplate"];
+                cif.iTemplate = Row["iTemplate"].ToString();
                 cif.vcClassName = (string)Row["vcClassName"];
                 cif.vcDirectory = (string)Row["vcDirectory"];
                 cif.vcName = (string)Row["vcName"];
@@ -247,8 +247,8 @@ namespace TCG.Handlers
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
             SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = classinf.iParent;
-            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.Int, 4); sp5.Value = classinf.iTemplate;
-            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.Int, 4); sp6.Value = classinf.iListTemplate;
+            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.VarChar, 36); sp5.Value = classinf.iTemplate;
+            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = classinf.iListTemplate;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = classinf.vcDirectory;
             SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = classinf.vcUrl;
             SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = classinf.iOrder;

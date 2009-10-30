@@ -36,7 +36,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfo(Connection conn,string Extension,NewsInfo inf, ref int outid)
+        public int AddNewsInfo(Connection conn,string Extension,ResourcesInfo inf, ref int outid)
         {
             conn.Dblink = DBLinkNums.News;
 
@@ -58,17 +58,16 @@ namespace TCG.Handlers
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
             SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Value = inf.vcFilePath;
             SqlParameter sp14 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp14.Direction = ParameterDirection.Output;
-            SqlParameter sp15 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp15.Direction = ParameterDirection.Output;
+            SqlParameter sp15 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp15.Value = inf.Id;
             SqlParameter sp16 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp16.Value = Extension;
             SqlParameter sp17 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp17.Value = inf.cCreated;
             SqlParameter sp18 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp18.Value = inf.vcTitleColor;
             SqlParameter sp19 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp19.Value = inf.cStrong;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19}, new int[] { 14, 15 });
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19}, new int[] { 14 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-                outid = (int)Convert.ChangeType(reValues[1], typeof(int));
                 return rtn;
             }
             return -19000000;
@@ -80,7 +79,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfoForSheif(Connection conn, string Extension, NewsInfo inf, ref int outid)
+        public int AddNewsInfoForSheif(Connection conn, string Extension, ResourcesInfo inf)
         {
             conn.Dblink = DBLinkNums.News;
             inf.dAddDate = DateTime.Now;
@@ -101,16 +100,15 @@ namespace TCG.Handlers
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
             SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Value = inf.vcFilePath;
             SqlParameter sp14 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp14.Direction = ParameterDirection.Output;
-            SqlParameter sp15 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp15.Direction = ParameterDirection.Output;
-            SqlParameter sp16 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp16.Value = Extension;
-            SqlParameter sp17 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp17.Value = inf.cCreated;
-            SqlParameter sp18 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp18.Value = "02";
+            SqlParameter sp15 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp15.Value = Extension;
+            SqlParameter sp16 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp16.Value = inf.cCreated;
+            SqlParameter sp17 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp17.Value = "02";
+            SqlParameter sp18 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp18.Value = inf.Id;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18}, new int[] { 14, 15 });
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp16,sp17,sp18}, new int[] { 14 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-                outid = (int)Convert.ChangeType(reValues[1], typeof(int));
                 return rtn;
             }
             return -19000000;
@@ -188,7 +186,7 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int UpdateNewsInfo(Connection conn, string Extension, NewsInfo inf, ref int outid)
+        public int UpdateNewsInfo(Connection conn, string Extension, ResourcesInfo inf)
         {
             conn.Dblink = DBLinkNums.News;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
@@ -210,32 +208,30 @@ namespace TCG.Handlers
             SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = Extension;
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp16.Value = "02";
-            SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.Int, 4); sp17.Value = inf.iId;
+            SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp17.Value = inf.Id;
             SqlParameter sp18 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp18.Value = inf.vcTitleColor;
             SqlParameter sp19 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp19.Value = inf.cStrong;
             SqlParameter sp20 = new SqlParameter("@iCount", SqlDbType.Int, 4); sp20.Value = inf.iCount;
             SqlParameter sp21 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp21.Direction = ParameterDirection.Output;
-            SqlParameter sp22 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp22.Direction = ParameterDirection.Output;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21,sp22}, new int[] { 21, 22 });
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21}, new int[] { 21 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-                outid = (int)Convert.ChangeType(reValues[1], typeof(int));
 
                 return rtn;
             }
             return -19000000;
         }
 
-        public NewsInfo GetNewsInfoById(Connection conn, int id)
+        public ResourcesInfo GetNewsInfoById(Connection conn, string id)
         {
             conn.Dblink = DBLinkNums.News;
-            SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.Int, 4); sp0.Value = id;
+            SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = id;
             DataSet ds = conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
             if (ds == null) return null;
-            NewsInfo item = new NewsInfo();
-            item.iId = id;
+            ResourcesInfo item = new ResourcesInfo();
+            item.Id = id;
             if (ds.Tables[0].Rows.Count == 1)
             {
                 item.vcTitle = (string)ds.Tables[0].Rows[0]["vcTitle"];
@@ -267,8 +263,8 @@ namespace TCG.Handlers
                 item.ClassInfo.vcClassName = (string)ds.Tables[1].Rows[0]["vcClassName"];
                 item.ClassInfo.vcName = (string)ds.Tables[1].Rows[0]["vcName"];
                 item.ClassInfo.iParent = (int)ds.Tables[1].Rows[0]["iParent"];
-                item.ClassInfo.iTemplate = (int)ds.Tables[1].Rows[0]["iTemplate"];
-                item.ClassInfo.iListTemplate = (int)ds.Tables[1].Rows[0]["iListTemplate"];
+                item.ClassInfo.iTemplate = ds.Tables[1].Rows[0]["iTemplate"].ToString();
+                item.ClassInfo.iListTemplate = ds.Tables[1].Rows[0]["iListTemplate"].ToString();
                 item.ClassInfo.vcDirectory = (string)ds.Tables[1].Rows[0]["vcDirectory"];
                 item.ClassInfo.vcUrl = (string)ds.Tables[1].Rows[0]["vcUrl"];
                 item.ClassInfo.iOrder = (int)ds.Tables[1].Rows[0]["iOrder"];
@@ -281,7 +277,7 @@ namespace TCG.Handlers
                 item.FromInfo.dUpdateDate = (DateTime)ds.Tables[2].Rows[0]["dUpdateDate"];
             }
 
-            return item;
+            return string.IsNullOrEmpty(item.vcTitle) ? null : item;
         }
 
         /// <summary>
@@ -291,9 +287,9 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int DelNewsInfoHtmlById(Connection conn, Dictionary<string, string> config, int id)
+        public int DelNewsInfoHtmlById(Connection conn, Dictionary<string, string> config, string id)
         {
-            NewsInfo newsitem = this.GetNewsInfoById(conn, id);
+            ResourcesInfo newsitem = this.GetNewsInfoById(conn, id);
             if (newsitem == null) return -19000000;  
             string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
             System.IO.File.Delete(filepath);
@@ -314,7 +310,7 @@ namespace TCG.Handlers
             if (ids.IndexOf(",") != -1)
             {
                 conn.Dblink = DBLinkNums.News;
-                string SQL = "SELECT vcFilePath FROM T_News_NewsInfo (NOLOCK) WHERE iId in (" + ids + ")";
+                string SQL = "SELECT vcFilePath FROM ResourcesInfo (NOLOCK) WHERE iId in (" + ids + ")";
                 DataTable dt = conn.GetDataTable(SQL);
                 if (dt == null) return -1;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -329,8 +325,8 @@ namespace TCG.Handlers
             }
             else
             {
-                int t = objectHandlers.ToInt(ids);
-                if (t != 0)
+                string t = ids;
+                if (string.IsNullOrEmpty(t))
                 {
                     return this.DelNewsInfoHtmlById(conn, config, t);
                 }
@@ -387,13 +383,14 @@ namespace TCG.Handlers
         /// <param name="title"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public string CreateNewsInfoFilePath(string extion, NewsInfo nif)
+        public string CreateNewsInfoFilePath(string extion, ResourcesInfo nif)
         {
+            if (string.IsNullOrEmpty(nif.Id)) nif.Id = Guid.NewGuid().ToString();
             string text = string.Empty;
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2);
             text += objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += (nif.iId == 0 ? "{0}" : objectHandlers.AddZeros(nif.iId.ToString(),9)) + extion;
+            text += nif.Id + extion;
             return text;
         }
 

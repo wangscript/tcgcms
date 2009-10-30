@@ -109,7 +109,7 @@ public partial class news_newsthief : adminMain
         Match item = Regex.Match(ListPageHtml, TopicArea, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         if (item.Success)
         {
-            NewsInfo nif = new NewsInfo();
+            ResourcesInfo nif = new ResourcesInfo();
 
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.adminInfo.vcNickName;
@@ -131,7 +131,7 @@ public partial class news_newsthief : adminMain
                 int rtn = 0;
                 try
                 {
-                    rtn = base.handlerService.newsInfoHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif, ref newid);
+                    rtn = base.handlerService.newsInfoHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif);
                 }
                 catch { }
             }

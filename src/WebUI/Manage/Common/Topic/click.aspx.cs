@@ -22,9 +22,9 @@ public partial class Common_Topic_click : ScriptsMain
     {
         if (!Page.IsPostBack)
         {
-            int topicid = objectHandlers.ToInt(objectHandlers.Get("topicid"));
+            string topicid = objectHandlers.Get("topicid");
             bool shownum = objectHandlers.Get("shownum") == "true" ? true : false;
-            if (topicid == 0)
+            if (string.IsNullOrEmpty(topicid))
             {
                 if (shownum)
                 {
@@ -33,8 +33,8 @@ public partial class Common_Topic_click : ScriptsMain
                 }
                 return;
             }
-            NewsInfoHandlers nifh = new NewsInfoHandlers();
-            NewsInfo nif = nifh.GetNewsInfoById(base.conn, topicid);
+
+            ResourcesInfo nif = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
                 if (shownum)
@@ -48,8 +48,7 @@ public partial class Common_Topic_click : ScriptsMain
             if (shownum) Response.Write("document.write('" + nif.iCount.ToString() + "');");
 
             nif.iCount = nif.iCount + 1;
-            int outid = 0;
-            int rtn = nifh.UpdateNewsInfo(base.conn, configService.baseConfig["FileExtension"], nif, ref outid);
+            int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, configService.baseConfig["FileExtension"], nif);
             base.conn.Close();
             Response.End();
         }

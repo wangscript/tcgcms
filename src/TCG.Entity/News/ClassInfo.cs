@@ -29,11 +29,11 @@ namespace TCG.Entity
         /// <summary>
         /// 文章模版
         /// </summary>
-        public int iTemplate { get { return this._itemplate; } set { this._itemplate = value; } }
+        public string iTemplate { get { return this._itemplate; } set { this._itemplate = value; } }
         /// <summary>
         /// 列表模版
         /// </summary>
-        public int iListTemplate { get { return this._ilisttemplate; } set { this._ilisttemplate = value; } }
+        public string iListTemplate { get { return this._ilisttemplate; } set { this._ilisttemplate = value; } }
         /// <summary>
         /// 排序
         /// </summary>
@@ -62,8 +62,8 @@ namespace TCG.Entity
 
         private int _iid;
         private int _iparent;
-        private int _itemplate;
-        private int _ilisttemplate;
+        private string _itemplate;
+        private string _ilisttemplate;
         private int _iorder;
         private DateTime _dupdatedate;
         private string _vcclassname;

@@ -1,17 +1,32 @@
 //--------------
-var ajax = new AJAXRequest();
+
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
 
 function classTitleInit(){
-	var m=$("classTitle");
-	var classobj=$("iSiteId");
-	var SytemType=$("SytemType");
-	var iParentid=$("iParentid");
-	if(m==null||classobj==null)return;
-	if(classobj.value!="0"){
-		m.innerHTML=GetClassTitleById(classobj.value)+ GetTempTitleBy(classobj.value,SytemType.value,iParentid.value);
+	var m=$("#classTitle");
+	var classobj=$("#iSiteId");
+	var SytemType=$("#SytemType");
+	var iParentid=$("#iParentid");
+	if (m.lenght == 0 || classobj.lenght == 0) return;
+
+	if (classobj.val() == "0") {
+	    m.innerHTML = GetClassTitleById(classobj.val()) + GetTempTitleBy(classobj.val(), SytemType.val(), iParentid.val());
 	}
+}
+
+
+function DoSubmit(callback) {
+    var form1 = $("#form1");
+    if (form1.lenght == 0) return;
+    var options;
+
+    options = {
+        beforeSubmit: BeforSubmit,
+        dataType: 'json',
+        success: callback
+    };
+    form1.ajaxForm(options);
 }
 
 function GetTempTitleBy(site,systemid,parentid){
@@ -34,35 +49,37 @@ function GetClassTitleById(id){
 	return "";
 }
 
-function TempDel(){
-	var temps=GetCheckBoxValues("CheckID");
-	if(temps==""){
-		SetAjaxDiv("err",false,"您没选择需要删除的模版！");
-		return;
-	}
-	var t=CheckTempsUsed(temps);
-	if(t==""){
-		SetAjaxDiv("err",false,"您选择的模版，正在使用中，无法删除！");
-		return;
-	}
-	if(t!=temps){
-		var CheckBoxMain=$("CheckBoxMain");
-		CheckBoxMain.checked=false;
-		SetCheckBoxBg('CheckID',CheckBoxMain);
-		SetCheckBox("CheckID",GetCheckedBoxSetting(t));
-		SetAjaxDiv("err",false,"您选择的模版中含有正在使用的模版，系统已经自动选择可以删除的部分！");
-		return;
-	}
-	$("temps").value=t;
-	$("work").value="DEL";
-	SetAjaxDiv("loader",false,"正在发送请求...");
-	ajax.postf($("form1"),function(obj) { DelPostBack(obj.responseText);});
+function TempDel() {
+    DoSubmit(AjaxPostFormBack);
+    var temps = GetCheckBoxValuesForSql("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没选择需要删除的模版！");
+        return false;
+    }
+    var t = CheckTempsUsed(temps);
+    if (t == "") {
+        SetAjaxDiv("err", false, "您选择的模版，正在使用中，无法删除！");
+        return false;
+    }
+
+    if (t != temps) {
+        var CheckBoxMain = $("CheckBoxMain");
+        CheckBoxMain.checked = false;
+        SetCheckBoxBg('CheckID', CheckBoxMain);
+        SetCheckBox("CheckID", GetCheckedBoxSetting(t));
+        SetAjaxDiv("err", false, "您选择的模版中含有正在使用的模版，系统已经自动选择可以删除的部分！");
+        return false;
+    }
+    $("#temps").val(t);
+    $("#work").val("DEL");
+    SetAjaxDiv("loader", false, "正在发送请求...");
+    $('#form1').submit();
 }
 
-function DelPostBack(val){
-	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"模版已经删除成功！");
+function BeforSubmit() {
+    return true;
 }
+
 
 function CheckTempsUsed(temps){
 	if(temps=="")return false;
@@ -85,16 +102,16 @@ function CheckTempUsed(temp){
 	if(temp=="")return false;
 	if(NewsLis==null)return false;
 	for(var i=0;i<NewsLis.length;i++){
-		if(parseInt(temp)==parseInt(NewsLis[i][4]))return true;
+		if(temp==NewsLis[i][4])return true;
 	}
 	return false;
 }
 
 function AddTemplate(){
-	var iSiteId=$("iSiteId");
-	var SytemType=$("SytemType");
-	var iParentid=$("iParentid");
-	window.location.href="newtemplateadd.aspx?iSiteId="+iSiteId.value+"&SytemType="+SytemType.value+"&iParentid="+iParentid.value;
+	var iSiteId=$("#iSiteId");
+	var SytemType=$("#SytemType");
+	var iParentid=$("#iParentid");
+	window.location.href = "newtemplateadd.aspx?iSiteId=" + iSiteId.value + "&SytemType=" + SytemType.val() + "&iParentid=" + iParentid.val();
 }
 function EditTemplate(){
 	var vs=GetCheckBoxValues("CheckID")
@@ -112,24 +129,25 @@ function EditTemplate(){
 
 function sTypeChange(obj){
 	if(obj.value=="-1"){
-		var iParentid=$("iParentid");
-		var iSiteId=$("iSiteId");
-		window.location.href="?iSiteId="+iSiteId.value+"&iParentid="+iParentid.value;
+		var iParentid=$("#iParentid");
+		var iSiteId=$("#iSiteId");
+		window.location.href = "?iSiteId=" + iSiteId.val() + "&iParentid=" + iParentid.val();
 	}else{
-		var iParentid=$("iParentid");
-		var iSiteId=$("iSiteId");
-		window.location.href="?iSiteId="+iSiteId.value+"&iType="+obj.value+"&iParentid="+iParentid.value;
+		var iParentid=$("#iParentid");
+		var iSiteId=$("#iSiteId");
+		window.location.href = "?iSiteId=" + iSiteId.val() + "&iType=" + obj.val() + "&iParentid=" + iParentid.val();
 	}
 }
 
-function PageCreat(){
+function PageCreat() {
+    DoSubmit(CreateBack); 
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
 		SetAjaxDiv("err",false,"您没选择需要生成的模版！");
 		return;
 	}
-	var work=$("work");
-	var iTemplateId=$("iTemplateId");
+	var work=$("#work");
+	var iTemplateId=$("#iTemplateId");
 	if(temps.indexOf(",")>-1){
 		var o=temps.split(",");
 		CreateDiv.Start("生成单页模版文件");
@@ -138,10 +156,10 @@ function PageCreat(){
 			var t=GetTemplateInfoById(o[i]);
 			if(t==null)continue;
 			if(t[5]!=0)continue;
-			work.value="Create";
-			iTemplateId.value=o[i];
+			work.val("Create");
+			iTemplateId.val(o[i]);
 			CreateDiv.setcount++;
-			ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
+			$('#form1').submit();
 			
 		}
 	}else{
@@ -160,12 +178,12 @@ function PageCreat(){
 		CreateDiv.Start("生成单页模版文件");
 		CreateDiv.set =1;
 		CreateDiv.setcount=1;
-		work.value="Create";
+		work.val("Create");
 		iTemplateId.value=temps;
-		ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
+		$('#form1').submit();
 	}
 }
 
-function CreateBack(val){
-	CreateDiv.SetSep(val);
+function CreateBack(data) {
+	CreateDiv.SetSep(data.message);
 }

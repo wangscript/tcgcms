@@ -100,25 +100,25 @@ function SetCheckBox(BoxName,Action){
 }
 
 function SetAjaxDiv(action,IsHide,txt){
-	var ajaxdiv = $("ajaxdiv");
-	var ajaximg = $("ajaximg");
-	var ajaxText = $("ajaxText");
-	if(ajaxdiv==null)return;
+	var ajaxdiv = $("#ajaxdiv");
+	var ajaximg = $("#ajaximg");
+	var ajaxText = $("#ajaxText");
+	if(ajaxdiv.length==0)return;
 	
-	ajaxdiv.className = IsHide?"ajaxdiv hid":"ajaxdiv";
-	SetInnerText(ajaxText,txt);
+	ajaxdiv[0].className = IsHide?"ajaxdiv hid":"ajaxdiv";
+	ajaxText.text(txt);
 	switch(action){
 		case "loader" :
-			ajaximg.src = ajaxicon[0];
-			ajaxText.className = "loader";
+			ajaximg[0].src = ajaxicon[0];
+			ajaxText[0].className = "loader";
 		break;
 		case "err" :
-			ajaximg.src = ajaxicon[1];
-			ajaxText.className = "err red";
+			ajaximg[0].src = ajaxicon[1];
+			ajaxText[0].className = "err red";
 		break;
 		case "ok" :
-			ajaximg.src = ajaxicon[2];
-			ajaxText.className = "ok bold";
+			ajaximg[0].src = ajaxicon[2];
+			ajaxText[0].className = "ok bold";
 		break;
 	}
 }
@@ -349,3 +349,14 @@ function strDateTime(str){
 	var d= new Date(r[1], r[3]-1,r[4],r[5],r[6]); 
 	return (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]&&d.getHours()==r[5]&&d.getMinutes()==r[6]);
 }
+
+
+/*----------------------------*/
+function AjaxPostFormBack(data){
+	if(data.state){
+		SetAjaxDiv("ok",false,data.message);
+	}else{
+		SetAjaxDiv("err",false,data.message);
+	}
+}
+

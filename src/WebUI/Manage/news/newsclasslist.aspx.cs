@@ -109,7 +109,6 @@ public partial class news_newsclasslist : adminMain
     {
         DataRowView Row = (DataRowView)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
-        Span sId = (Span)e.Item.FindControl("sId");
         Span classname = (Span)e.Item.FindControl("classname");
         Span lname = (Span)e.Item.FindControl("lname");
         Anchor directory = (Anchor)e.Item.FindControl("directory");
@@ -117,7 +116,7 @@ public partial class news_newsclasslist : adminMain
         Span sOrder = (Span)e.Item.FindControl("sOrder");
 
         CheckID.Text = Row["iId"].ToString();
-        sId.Text = Row["iId"].ToString();
+
         sOrder.Text = Row["iOrder"].ToString();
         
         string text = "<a href=\"?iParentId=" + Row["iId"].ToString() + "\" title=\"查看子分类\">" 
@@ -193,7 +192,7 @@ public partial class news_newsclasslist : adminMain
         }
 
         TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
-        tcgthdl.Template = tlif.vcContent.Replace("_$ClassId$_", tClassID.ToString());
+        tcgthdl.Template = tlif.Content.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
         if (tcgthdl.Replace(base.conn, base.configService.baseConfig))

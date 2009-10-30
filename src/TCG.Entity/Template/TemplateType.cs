@@ -13,6 +13,6 @@ namespace TCG.Entity
         InfoType = 1,       //详细页模版
         ListType = 2,       //列表模版
         OriginalType = 3,   //原件模版
-        SystemPage = 4,
+        SystemPage = 4,     //系统必须的页面
     }
 }

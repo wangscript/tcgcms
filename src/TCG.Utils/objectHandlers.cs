@@ -1873,5 +1873,28 @@ namespace TCG.Utils
             }
             return UserClubLevel.Guest;
         }
+
+        /// <summary>
+        /// 得到模板类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static TemplateType GetTemplateType(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return TemplateType.SinglePageType;
+                case 1:
+                    return TemplateType.InfoType;
+                case 2:
+                    return TemplateType.ListType;
+                case 3:
+                    return TemplateType.OriginalType;
+                case 4:
+                    return TemplateType.SystemPage;       
+            }
+            return TemplateType.SinglePageType;
+        }
     };
 }

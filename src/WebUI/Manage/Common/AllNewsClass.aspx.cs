@@ -30,7 +30,7 @@ public partial class Common_AllNewsClass : ScriptsMain
                     {
                         DataRow Row = dt.Rows[i];
                         Response.Write("NewsLis[" + i.ToString() + "]=[" + Row["iID"].ToString() + "," + Row["iParent"].ToString() + ",\"" + Row["vcClassName"].ToString() + "\",\""+
-                            Row["vcName"].ToString() + "\"," + Row["iTemplate"].ToString() + "];\r\n");
+                            Row["vcName"].ToString() + "\",\"" + Row["iTemplate"].ToString() + "\"];\r\n");
                     }
                 }
             }

@@ -21,14 +21,23 @@ public partial class Test :  Origin
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string name = "三云鬼";
-        int namevalue = 0;
-        for (int i =0;i<name.Length;i++)
+        //DataTable dt = base.conn.GetDataTable("SELECT * FROM ResourcesInfo order by dAddDate");
+        //if (dt != null && dt.Rows.Count > 0)
+        //{
+        //    for (int i = 0; i < dt.Rows.Count; i++)
+        //    {
+        //        base.conn.Execute("UPDATE ResourcesInfo SET iid ='" + Guid.NewGuid().ToString() + "' where iid='" + dt.Rows[i]["iid"].ToString() + "'");
+        //    }
+        //}
+
+        DataTable dt = base.conn.GetDataTable("SELECT * FROM TemplateInfo order by id");
+        if (dt != null && dt.Rows.Count > 0)
         {
-            namevalue += objectHandlers.ToAsc(name[i].ToString());
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                base.conn.Execute("UPDATE TemplateInfo SET id ='" + Guid.NewGuid().ToString() + "' where id='" + dt.Rows[i]["id"].ToString() + "'");
+            }
         }
-        
-        Response.Write(Guid.NewGuid().ToString());
     }
 
     private void ReadExl()
