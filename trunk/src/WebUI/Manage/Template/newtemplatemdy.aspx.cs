@@ -22,7 +22,7 @@ public partial class Template_newtemplatemdy : adminMain
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        int templateid = objectHandlers.ToInt(objectHandlers.Get("templateid"));
+        string templateid = objectHandlers.Get("templateid");
         
         if (!Page.IsPostBack)
         {
@@ -34,9 +34,9 @@ public partial class Template_newtemplatemdy : adminMain
             }
 
             this.vcTempName.Value = item.vcTempName;
-            this.vcContent.Value = item.vcContent;
+            this.vcContent.Value = item.Content;
             this.vcUrl.Value = item.vcUrl;
-            this.iSiteId.Value = item.iSiteId.ToString();
+            this.iSiteId.Value = item.SkinId.ToString();
             this.iParentid.Value = item.iParentId.ToString();
             this.SytemType.Value = item.iSystemType.ToString();
 
@@ -44,7 +44,7 @@ public partial class Template_newtemplatemdy : adminMain
             {
                 this.tType.Items.Add(new ListItem(option.Text, option.Value));
                 int i = objectHandlers.ToInt(option.Value);
-                if (i == item.iType)
+                if (i == (int)item.TemplateType)
                 {
                     this.tType.SelectedIndex = i;
                 }
@@ -54,27 +54,48 @@ public partial class Template_newtemplatemdy : adminMain
         }
         else
         {
+
             TemplateInfo item = new TemplateInfo();
             item.vcTempName = objectHandlers.Post("vcTempName");
-            item.iType = objectHandlers.ToInt(objectHandlers.Post("tType"));
+
+            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
-            item.vcContent = objectHandlers.Post("vcContent");
-            item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
-            if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.vcContent))
+            item.Content = objectHandlers.Post("vcContent");
+            item.SkinId = objectHandlers.Post("iSiteId");
+
+            if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.Content))
             {
-                base.AjaxErch("-1");
+                base.ajaxdata = "{state:false,message:\"模板内容和名称不能为空！\"}";
+                base.AjaxErch(base.ajaxdata);
                 base.Finish();
+                return;
             }
-            if (item.iType == 0 && string.IsNullOrEmpty(item.vcUrl))
+
+            if ((int)item.TemplateType == 0 && string.IsNullOrEmpty(item.vcUrl))
             {
-                base.AjaxErch("-1000000024");
-                base.Finish();
+                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, base.configService.baseConfig["ManagePath"]) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+
             }
-            item.iId = templateid;
-            int rtn = base.handlerService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName,item);
-            CachingService.Remove(CachingService.CACHING_AllTemplates);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            item.Id = templateid;
+
+            ///执行修改操作
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName, item);
+                CachingService.Remove(CachingService.CACHING_AllTemplates);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch("{state:true,message:'模板修改成功！'}");
+
         }
     }
 }

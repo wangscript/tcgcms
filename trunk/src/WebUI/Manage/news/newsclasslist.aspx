@@ -44,7 +44,6 @@
 	<div class="newslistt" id="classTitle"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
-		<span class="l_id bold l_rg">ID</span>
 		<span class="l_classname bold l_rg">资源分类名称</span>
 		<span class="l_classname bold l_rg">分类别名</span>
 		<span class="l_classname bold l_rg">生成目录</span>
@@ -55,7 +54,6 @@
 		<ItemTemplate>
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
-		<TCG:Span class='l_id' id='sId' runat='server'/>
 		<TCG:Span class='l_classname' id='classname' runat='server' />
 		<TCG:Span class='l_classname hidover' id='lname' runat='server' />
 		<TCG:Anchor class='l_classname' id='directory' runat='server' />

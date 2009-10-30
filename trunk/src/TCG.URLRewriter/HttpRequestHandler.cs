@@ -122,11 +122,11 @@ namespace TCG.URLRewriter
                     if (Rows.Length > 0)
                     {
                         TemplateHandlers tlhdl = new TemplateHandlers();
-                        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(conn, objectHandlers.ToInt(Rows[0]["iListTemplate"]), false);
+                        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(conn, Rows[0]["iListTemplate"].ToString(), false);
 
                         TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
                         tcgthdl1.handlerService = handlerservice;
-                        tcgthdl1.Template = tlif.vcContent.Replace("_$ClassId$_", Rows[0]["iId"].ToString());
+                        tcgthdl1.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["iId"].ToString());
                         tcgthdl1.NeedCreate = false;
                         tcgthdl1.PagerInfo.DoAllPage = false;
                         tcgthdl1.PagerInfo.Page = DcurPage;
@@ -142,16 +142,16 @@ namespace TCG.URLRewriter
             }
 
             //检测文件名特性
-            pattern = @"\d{8}\/(\d{9})\" + configService.baseConfig["FileExtension"];
+            pattern = @"\d{8}\/([a-z0-9]{8}\-[a-z0-9]{4}-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12})\" + configService.baseConfig["FileExtension"];
             match = Regex.Match(DpagePath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
-                int topicid = objectHandlers.ToInt(match.Result("$1"));
-                if (topicid != 0)
+                string topicid = match.Result("$1");
+                if (!string.IsNullOrEmpty(topicid))
                 {
                     //获得文章对象
                     NewsInfoHandlers nifhld = new NewsInfoHandlers();
-                    NewsInfo item = nifhld.GetNewsInfoById(conn, topicid);
+                    ResourcesInfo item = nifhld.GetNewsInfoById(conn, topicid);
                     if (item != null)
                     {
                         //获得分类信息
@@ -162,7 +162,7 @@ namespace TCG.URLRewriter
 
                         TCGTagHandlers tcgth = new TCGTagHandlers();
                         tcgth.handlerService = handlerservice;
-                        tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
+                        tcgth.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
                         titem = null;
                         tcgth.NeedCreate = false;
                         tcgth.Replace(conn, configService.baseConfig);

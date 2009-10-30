@@ -50,7 +50,7 @@ public partial class news_newslist : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_News_NewsInfo";
+        sItem.tableName = "ResourcesInfo";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");
@@ -126,7 +126,7 @@ public partial class news_newslist : adminMain
     {
         DataRowView Row = (DataRowView)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
-        Span sId = (Span)e.Item.FindControl("sId");
+
         Span sClassName = (Span)e.Item.FindControl("sClassName");
         Span sChecked = (Span)e.Item.FindControl("sChecked");
         Span sCreated = (Span)e.Item.FindControl("sCreated");
@@ -134,7 +134,7 @@ public partial class news_newslist : adminMain
         Span sTitle = (Span)e.Item.FindControl("sTitle");
 
         CheckID.Text = Row["iId"].ToString();
-        sId.Text = Row["iId"].ToString();
+
         string check = Row["cChecked"].ToString();
         string Created = Row["cCreated"].ToString();
         if (check == "Y")
@@ -182,8 +182,8 @@ public partial class news_newslist : adminMain
 
     private void CreateNews()
     {
-        int id = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
-        if (id == 0)
+        string id = objectHandlers.Post("DelClassId");
+        if (string.IsNullOrEmpty(id))
         {
             base.AjaxErch("-1000000051");
             return;
@@ -194,7 +194,7 @@ public partial class news_newslist : adminMain
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        NewsInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
+        ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
         if (item == null) return;
 
         ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
@@ -203,7 +203,7 @@ public partial class news_newslist : adminMain
         cif = null;
 
         TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
-        tcgth.Template = titem.vcContent.Replace("_$Id$_", id.ToString());
+        tcgth.Template = titem.Content.Replace("_$Id$_", id.ToString());
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
         titem = null;

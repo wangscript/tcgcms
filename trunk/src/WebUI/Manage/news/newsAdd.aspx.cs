@@ -31,8 +31,8 @@ public partial class news_newsAdd : adminMain
     {
         if (!Page.IsPostBack)
         {
-            int newsid = objectHandlers.ToInt(objectHandlers.Get("newsid"));
-            if (newsid == 0)
+            string newsid = objectHandlers.Get("newsid");
+            if (string.IsNullOrEmpty(newsid))
             {
                 int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
                 this.iClassId.Value = ClassId.ToString();
@@ -40,7 +40,7 @@ public partial class news_newsAdd : adminMain
             }
             else
             {
-                NewsInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
+                ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
                 this.iClassId.Value = item.ClassInfo.iId.ToString();
                 this.iFrom.Value = item.FromInfo.iId.ToString();
                 this.iTitle.Value = item.vcTitle;
@@ -49,7 +49,7 @@ public partial class news_newsAdd : adminMain
                 this.iContent.Value = item.vcContent;
                 this.iAuthor.Value = item.vcAuthor;
                 this.work.Value = "MdyNews";
-                this.iNewsId.Value = item.iId.ToString();
+                this.iNewsId.Value = item.Id.ToString();
                 this.iSpeciality.Value = item.vcSpeciality;
                 this.iSmallImg.Value = item.vcSmallImg;
                 this.iBigImg.Value = item.vcBigImg;
@@ -122,7 +122,7 @@ public partial class news_newsAdd : adminMain
 
     private void NewsManage(bool ismdy)
     {
-        NewsInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iNewsId")));
+        ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.Post("iNewsId"));
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
         item.vcContent = objectHandlers.Post("iContent$content");
@@ -175,10 +175,9 @@ public partial class news_newsAdd : adminMain
         }
         else
         {
-            rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
+            rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item);
         }
 
-        item.iId = newid;
         filepath = Server.MapPath("~" + item.vcFilePath);
         if (rtn == 1)
         {
@@ -190,7 +189,7 @@ public partial class news_newsAdd : adminMain
                 cif = null;
 
                 TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
-                tcgth.Template = titem.vcContent.Replace("_$Id$_", item.iId.ToString());
+                tcgth.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
                 titem = null;
                 tcgth.FilePath = filepath;
                 tcgth.Replace(base.conn, base.configService.baseConfig);

@@ -8,13 +8,14 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
 	<script type="text/javascript" src="../js/newstempadd.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <form id="TtempLateFromAdd" runat="server">
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="Page_title">添加资讯模版<span class="info1">(添加资讯模版文件)</span><a href="javascript:fGoBack();" class="title_back bold">[返回]</a></div>
 	<div class="Page_g">所属网站：<span class="info2" id="sSite"></span></div>
@@ -44,7 +45,7 @@
 	<input type="hidden" id="iSiteId" name="iSiteId" runat="server" />
 	<input type="hidden" id="iParentid" name="iParentid" runat="server" />
 	<input type="hidden" id="SytemType" name="SytemType" value="0" runat="server"/>
-	<script type="text/javascript">classTitleInit();</script>
+	
     </form>
 </body>
 </html>

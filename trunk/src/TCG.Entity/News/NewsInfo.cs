@@ -19,9 +19,12 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class NewsInfo
+    /// <summary>
+    /// 资源信息
+    /// </summary>
+    public class ResourcesInfo
     {
-        public int iId { get { return this._iId; } set { this._iId = value; } }
+        public string Id { get { return this._iId; } set { this._iId = value; } }
         public ClassInfo ClassInfo { get { return this._iClassID; } set { this._iClassID = value; } }
         public string vcTitle { get { return this._vcTitle; } set { this._vcTitle = value; } }
         public string vcUrl { get { return this._vcUrl; } set { this._vcUrl = value; } }
@@ -46,7 +49,7 @@ namespace TCG.Entity
         public string cStrong { get { return this._cstrong; } set { this._cstrong = value; } }
           
 
-        private int _iId = 0;
+        private string _iId = string.Empty;
         private ClassInfo _iClassID = new ClassInfo();
         private string _vcTitle = string.Empty;
         private string _vcUrl = string.Empty;

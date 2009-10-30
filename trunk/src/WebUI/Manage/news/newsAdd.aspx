@@ -83,7 +83,7 @@
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="submit" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>
 	<input type="hidden" id="iFrom" name="iFrom" value="1" runat="server"/>
-	<input type="hidden" id="iNewsId" name="iNewsId" value="0" runat="server"/>
+	<input type="hidden" id="iNewsId" name="iNewsId" runat="server"/>
 	<input type="hidden" id="work" name="work" value="AddNew" runat="server"/>
 	<input type="hidden" id="iSmallImg" name="iSmallImg" value="" runat="server"/>
 	<input type="hidden" id="iBigImg" name="iBigImg" value="" runat="server"/>

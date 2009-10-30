@@ -9,15 +9,15 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
 	<script type="text/javascript" src="../Common/AllTemplate.aspx"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
+	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
-	<script type="text/javascript" src="../js/DivMove.js"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
-	<script type="text/javascript" src="../js/CreateDiv.js"></script>
+	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/tempnewslist.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
@@ -44,14 +44,14 @@
 	<div class="newslistt" id="classTitle"></div>
 	<div class="list_title">
 	  <span class="l_check l_rg"><input name="" id="CheckBoxMain" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
-		<span class="l_id bold l_rg">ID</span>
+		<span class="l_id1 bold l_rg">ID</span>
 		<span class="l_classname newstitle bold l_rg">模版名称</span><span class="l_updatedate bold">更新时间</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
-		<TCG:Span class='l_id' id='sId' runat='server'/>
+		<TCG:Span class='l_id1' id='sId' runat='server'/>
 		<TCG:Span class='l_classname newstitle' id='classname' runat='server' />
 		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
 	</div>	

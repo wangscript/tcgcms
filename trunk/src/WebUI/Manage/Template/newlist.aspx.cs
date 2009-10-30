@@ -46,11 +46,11 @@ public partial class Template_newlist : adminMain
     {
         base.conn.Dblink = DBLinkNums.Template;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_Template_TemplateInfo";
+        sItem.tableName = "TemplateInfo";
 
         ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
-        arrshowfied.Add("iType");
+        arrshowfied.Add("Id");
+        arrshowfied.Add("TemplateType");
         arrshowfied.Add("vcTempName");
         arrshowfied.Add("dUpdateDate");
         sItem.arrShowField = arrshowfied;
@@ -62,14 +62,16 @@ public partial class Template_newlist : adminMain
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
-        sItem.strCondition = "iSiteId=" + iSiteId.ToString() + " AND iSystemType =" + 0;
-        this.iSiteId.Value = iSiteId.ToString();
-        iSite = iSiteId;
+        int SkinId = objectHandlers.ToInt(objectHandlers.Get("SkinId"));
+        sItem.strCondition = "SkinId ='" + SkinId.ToString() + "' AND iSystemType =" + 0;
+        this.iSiteId.Value = SkinId.ToString();
+        iSite = SkinId;
 
-        int iParentid = objectHandlers.ToInt(objectHandlers.Get("iParentid"));
-        sItem.strCondition += " AND iParentid=" + iParentid.ToString();
+        string iParentid = objectHandlers.Get("iParentid");
+        if (iParentid.Length != 36) iParentid = "0";
+        sItem.strCondition += " AND iParentid='" + iParentid + "'";
         this.iParentid.Value = iParentid.ToString();
+
 
         string tt = objectHandlers.Get("iType");
         int iType = -1;
@@ -89,7 +91,7 @@ public partial class Template_newlist : adminMain
             return;
         }
         this.pager.Per = sItem.pageSize;
-        this.pager.SetItem("iSiteId", iSiteId);
+        this.pager.SetItem("SkinId", SkinId);
         this.pager.SetItem("iParentid", iParentid);
         this.pager.SetItem("iType", iType);
         this.pager.Total = count;
@@ -123,12 +125,12 @@ public partial class Template_newlist : adminMain
         Span classname = (Span)e.Item.FindControl("classname");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
 
-        CheckID.Text = Row["iId"].ToString();
-        sId.Text = Row["iId"].ToString();
+        CheckID.Text = Row["Id"].ToString();
+        sId.Text = Row["Id"].ToString();
 
-        string text = "<a href=\"?iParentid=" + Row["iId"].ToString() + "&iSiteId=" + iSite.ToString() + "\" title=\"查看子分类\">"
+        string text = "<a href=\"?iParentid=" + Row["Id"].ToString() + "&SkinId=" + iSite.ToString() + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        text += "<a href=\"newtemplatemdy.aspx?templateid=" + Row["iId"].ToString() + "\" title=\"修改模版\">"
+        text += "<a href=\"newtemplatemdy.aspx?templateid=" + Row["Id"].ToString() + "\" title=\"修改模版\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
         classname.Text = text + Row["vcTempName"].ToString();
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
@@ -139,21 +141,33 @@ public partial class Template_newlist : adminMain
         string temps = objectHandlers.Post("temps");
         if (string.IsNullOrEmpty(temps))
         {
-            base.AjaxErch("-1");
-            base.Finish();
+            base.ajaxdata = "{state:false,message:\"需要删除的记录编号不能为空！\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
         }
 
-        int rtn = base.handlerService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
-        base.AjaxErch(rtn.ToString());
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" +objectHandlers.JSEncode(  ex.Message.ToString() )+ "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch("{state:true,message:'模板删除成功！'}");
         base.Finish();
     }
 
     private void TemplateCreate()
     {
-        int iTemplate = objectHandlers.ToInt(objectHandlers.Post("iTemplateId"));
-        if (iTemplate == 0)
+        string iTemplate = objectHandlers.Post("iTemplateId");
+        if (string.IsNullOrEmpty(iTemplate))
         {
-            base.AjaxErch("<a>生成失败-模版ID不能为0！</a>");
+            base.AjaxErch("{state:false,message:'<a>生成失败-模版ID不能为0！</a>'}");
             return;
         }
 
@@ -161,7 +175,7 @@ public partial class Template_newlist : adminMain
 
         if (tlif == null)
         {
-            base.AjaxErch("<a>生成失败-编号：" + iTemplate.ToString() + "的模版不存在！</a>");
+            base.AjaxErch("{state:false,message:'<a>生成失败-编号：" + iTemplate.ToString() + "的模版不存在！</a>'}");
             return;
         }
         string filepath = string.Empty;
@@ -183,22 +197,22 @@ public partial class Template_newlist : adminMain
         }
         catch
         {
-            base.AjaxErch("<a>生成失败-模版生成文件路径不存在!</a>");
+            base.AjaxErch("{state:false,message:'<a>生成失败-模版生成文件路径不存在!</a>'}");
             return;
         }
 
         if (needTCG)
         {
             TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
-            tcgthdl.Template = tlif.vcContent;
+            tcgthdl.Template = tlif.Content;
             tcgthdl.FilePath = filepath;
             if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
             {
-                base.AjaxErch("<a>生成成功:" + filepath + "...</a>");
+                base.AjaxErch("{state:true,message:'<a>生成成功:" + objectHandlers.JSEncode( filepath) + "...</a>'}");
             }
             else
             {
-                base.AjaxErch("<a>生成失败-系统错误!</a>");
+                base.AjaxErch("{state:false,message:<a>生成失败-系统错误!</a>'}");
             }
             tcgthdl = null;
         }
@@ -206,12 +220,12 @@ public partial class Template_newlist : adminMain
         {
             try
             {
-                objectHandlers.SaveFile(filepath, tlif.vcContent);
-                base.AjaxErch("<a>生成成功:" + filepath + "...</a>");
+                objectHandlers.SaveFile(filepath, tlif.Content);
+                base.AjaxErch("{state:true,message:<a>生成成功:" + objectHandlers.JSEncode( filepath )+ "...</a>'}");
             }
             catch
             {
-                base.AjaxErch("<a>生成失败-系统错误!</a>");
+                base.AjaxErch("{state:false,message:<a>生成失败-系统错误!</a>'}");
 
             }
 

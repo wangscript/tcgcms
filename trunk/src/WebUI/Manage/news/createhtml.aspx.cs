@@ -89,7 +89,7 @@ public partial class news_createhtml : adminMain
     private void Create()
     {
         int ClassId = objectHandlers.ToInt(objectHandlers.Post("tClassId"));
-        int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
+        string id = objectHandlers.Post("iId");
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
 
@@ -99,7 +99,7 @@ public partial class news_createhtml : adminMain
         TemplateInfo tif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
         if (tif == null) { base.AjaxErch(""); return; }
 
-        NewsInfo item = new NewsInfo();
+        ResourcesInfo item = new ResourcesInfo();
         item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
 
         string text1 = "";
@@ -122,16 +122,16 @@ public partial class news_createhtml : adminMain
             item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
         }
 
-        int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref id);
+        int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item);
         if (rtn < 0)
         {
-            text1 = "<a>更新文章信息失败...ID:" + id.ToString() + "</a>";
+            text1 = "<a>更新文章信息失败...ID:" + item.Id + "</a>";
             base.AjaxErch(text1);
             return;
         }
 
         TCGTagHandlers tcgthl = base.handlerService.TCGTagHandlers;
-        tcgthl.Template = tif.vcContent.Replace("_$Id$_", id.ToString());
+        tcgthl.Template = tif.Content.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
         tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
         tcgthl.Replace(base.conn, base.configService.baseConfig);
@@ -162,7 +162,7 @@ public partial class news_createhtml : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_News_NewsInfo";
+        sItem.tableName = "ResourcesInfo";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");
@@ -244,7 +244,7 @@ public partial class news_createhtml : adminMain
                     {
                         DataRow Row = ds.Tables[0].Rows[i];
                         string text1 = (text == "") ? "" : ",";
-                        text += text1 + "{Id:" + Row["iID"].ToString() + ",ClassId:" + Row["iClassId"].ToString() + ",Created:\"" +
+                        text += text1 + "{Id:\"" + Row["iID"].ToString() + "\",ClassId:" + Row["iClassId"].ToString() + ",Created:\"" +
                             Row["cCreated"].ToString() + "\",FilePath:\"" + Row["vcFilePath"].ToString() + "\"}";
                     }
                     base.AjaxErch(text);

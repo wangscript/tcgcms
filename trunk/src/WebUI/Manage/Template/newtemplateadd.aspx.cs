@@ -41,26 +41,41 @@ public partial class Template_newtemplateadd : adminMain
         {
             TemplateInfo item = new TemplateInfo();
             item.vcTempName = objectHandlers.Post("vcTempName");
-            item.iType = objectHandlers.ToInt(objectHandlers.Post("tType"));
-            item.iParentId = objectHandlers.ToInt(objectHandlers.Post("iParentid"));
+            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(objectHandlers.Post("tType")));
+            item.iParentId = objectHandlers.Post("iParentid");
             item.iSystemType = objectHandlers.ToInt(objectHandlers.Post("SytemType"));
             item.vcUrl = objectHandlers.Post("vcUrl");
-            item.vcContent = objectHandlers.Post("vcContent");
-            item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
-            if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.vcContent))
+            item.Content = objectHandlers.Post("vcContent");
+            item.SkinId = objectHandlers.Post("iSiteId");
+
+            if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.Content))
             {
-                base.AjaxErch("-1");
+                base.ajaxdata = "{state:false,message:\"模板内容和名称不能为空！\"}";
+                base.AjaxErch(base.ajaxdata);
                 base.Finish();
+                return;
             }
-            if (item.iType == 0 && string.IsNullOrEmpty(item.vcUrl))
+            if ((int)item.TemplateType == 0 && string.IsNullOrEmpty(item.vcUrl))
             {
-                base.AjaxErch("-1000000024");
+                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, base.configService.baseConfig["ManagePath"]) + "\"}";
+                base.AjaxErch(base.ajaxdata);
                 base.Finish();
             }
 
-            int rtn = base.handlerService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName,item);
-            CachingService.Remove(CachingService.CACHING_AllTemplates);
-            base.AjaxErch(rtn.ToString());
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName, item);
+                CachingService.Remove(CachingService.CACHING_AllTemplates);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch("{state:true,message:'模板添加成功！'}");
             item = null;
             base.Finish();
         }
