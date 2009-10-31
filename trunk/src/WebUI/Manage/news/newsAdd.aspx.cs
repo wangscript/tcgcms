@@ -40,7 +40,7 @@ public partial class news_newsAdd : adminMain
             }
             else
             {
-                ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
+                Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
                 this.iClassId.Value = item.ClassInfo.iId.ToString();
                 this.iFrom.Value = item.FromInfo.iId.ToString();
                 this.iTitle.Value = item.vcTitle;
@@ -122,13 +122,13 @@ public partial class news_newsAdd : adminMain
 
     private void NewsManage(bool ismdy)
     {
-        ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.Post("iNewsId"));
+        Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.Post("iNewsId"));
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")),false);
+        item.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")),false);
         item.FromInfo.iId = objectHandlers.ToInt(objectHandlers.Post("iFrom"));
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
@@ -183,7 +183,7 @@ public partial class news_newsAdd : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
+                Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
 
                 TemplateInfo titem = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
                 cif = null;

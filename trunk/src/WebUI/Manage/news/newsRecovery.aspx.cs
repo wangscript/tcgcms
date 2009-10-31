@@ -48,7 +48,7 @@ public partial class news_newsRecovery : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "ResourcesInfo";
+        sItem.tableName = "Resources";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");

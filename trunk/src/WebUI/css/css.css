@@ -134,8 +134,9 @@ li.important a{color:#ff4e00;}
 .setmap { height:25px;color:#090; text-align:left; line-height:30px; width:965px; margin-left:auto; margin-right:auto; padding-left:25px;}
 .setmap  a {color:#090;}
 
-.copyright{width:990px; margin-left:auto; margin-right:auto; padding-top:6px; clear:left;}
-.copyright li { line-height:25px; height:25px; color:#808080;}
+.copyright{width:990px; margin-left:auto; margin-right:auto; padding-top:6px; clear:left;color:#9D9D9B;font-size:11px;}
+.copyright li { line-height:25px;font-size:11px; height:25px; color:#808080;}
+.copyright a{color:#3372a2; font-size:11px;}
 
 /*用户注册*/
 

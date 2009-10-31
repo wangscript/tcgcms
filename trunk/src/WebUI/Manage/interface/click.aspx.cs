@@ -39,7 +39,7 @@ public partial class Manage_interface_click : ScriptsMain
                 return;
             }
 
-            ResourcesInfo nif = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, topicid);
+            Resources nif = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
                 if (shownum)

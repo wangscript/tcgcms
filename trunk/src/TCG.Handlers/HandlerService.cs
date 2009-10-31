@@ -74,18 +74,18 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供对资讯分类操作的方法
         /// </summary>
-        public NewsClassHandlers newsClassHandlers
+        public CategoriesHandlers newsClassHandlers
         {
             get
             {
                 if (this._newsclasshandlers == null)
                 {
-                    this._newsclasshandlers = new NewsClassHandlers();
+                    this._newsclasshandlers = new CategoriesHandlers();
                 }
                 return this._newsclasshandlers;
             }
         }
-        private NewsClassHandlers _newsclasshandlers;
+        private CategoriesHandlers _newsclasshandlers;
 
 
         /// <summary>

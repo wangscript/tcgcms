@@ -49,6 +49,25 @@ namespace TCG.URLRewriter
         private Connection _conn = null;
 
         /// <summary>
+        /// 程序开始时间
+        /// </summary>
+        DateTime startTime;
+
+        /// <summary>
+        /// 替换程序运行时间
+        /// </summary>
+        /// <param name="txt"></param>
+        private void TimeReplace(ref string tag)
+        {
+            DateTime endTime = DateTime.Now;
+            System.TimeSpan mySpan = endTime - startTime;
+
+            tag = tag.Replace("_$SystemTime$_", mySpan.TotalSeconds.ToString());
+            tag = tag.Replace("_$SystemQuery$_", this._conn.Queries.ToString());
+            
+        }
+
+        /// <summary>
         /// 处理请求
         /// </summary>
         /// <param name="iHttpApplication"></param>
@@ -58,6 +77,9 @@ namespace TCG.URLRewriter
         public void Do(HttpApplication iHttpApplication, HttpContext iHttpContext, HttpResponse Response, HttpRequest Request)
         {
             if (!Boolean.Parse(configService.baseConfig["IsReWrite"])) return;
+
+            startTime = DateTime.Now;
+            string OutHtml = string.Empty;
 
             TCGTagHandlers tcgthdl = new TCGTagHandlers();
             HandlerService handlerservice = new HandlerService(conn, configService);
@@ -85,8 +107,11 @@ namespace TCG.URLRewriter
                         tcgthdl.Template = Row["vcContent"].ToString();
                         tcgthdl.NeedCreate = false;
                         tcgthdl.Replace(conn, configService.baseConfig);
-                        
-                        Response.Write(tcgthdl.Template);
+                        OutHtml = tcgthdl.Template;
+
+
+                        TimeReplace(ref OutHtml);
+                        Response.Write(OutHtml);
                         Response.End();
                         tcgthdl = null;
                         return;
@@ -107,8 +132,8 @@ namespace TCG.URLRewriter
             }
 
             //检测分类文件
-            NewsClassHandlers chld = new NewsClassHandlers();
-            DataTable dt = chld.GetClassInfoByCach(conn,false);
+            CategoriesHandlers chld = new CategoriesHandlers();
+            DataTable dt = chld.GetCategoriesByCach(conn,false);
             if (dt != null && dt.Rows.Count != 0)
             {
                 if(!string.IsNullOrEmpty(pagepath))
@@ -133,10 +158,14 @@ namespace TCG.URLRewriter
                         tcgthdl1.WebPath = Rows[0]["vcUrl"].ToString() + configService.baseConfig["FileExtension"];
                         tcgthdl1.Replace(conn, configService.baseConfig);
 
-                        Response.Write(tcgthdl1.Template);
+                        OutHtml = tcgthdl1.Template;
+
+
+                        TimeReplace(ref OutHtml);
+                        Response.Write(OutHtml);
                         Response.End();
                         tcgthdl1 = null;
-
+                        return;
                     }
                 }
             }
@@ -151,7 +180,7 @@ namespace TCG.URLRewriter
                 {
                     //获得文章对象
                     NewsInfoHandlers nifhld = new NewsInfoHandlers();
-                    ResourcesInfo item = nifhld.GetNewsInfoById(conn, topicid);
+                    Resources item = nifhld.GetNewsInfoById(conn, topicid);
                     if (item != null)
                     {
                         //获得分类信息
@@ -166,8 +195,11 @@ namespace TCG.URLRewriter
                         titem = null;
                         tcgth.NeedCreate = false;
                         tcgth.Replace(conn, configService.baseConfig);
-                        
-                        Response.Write(tcgth.Template);
+
+                        OutHtml = tcgth.Template;
+
+                        TimeReplace(ref OutHtml);
+                        Response.Write(OutHtml);
                         Response.End();
                         tcgth = null;
                         return;

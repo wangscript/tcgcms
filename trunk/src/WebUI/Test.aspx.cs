@@ -21,23 +21,23 @@ public partial class Test :  Origin
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //DataTable dt = base.conn.GetDataTable("SELECT * FROM ResourcesInfo order by dAddDate");
+        //DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources order by dAddDate");
         //if (dt != null && dt.Rows.Count > 0)
         //{
         //    for (int i = 0; i < dt.Rows.Count; i++)
         //    {
-        //        base.conn.Execute("UPDATE ResourcesInfo SET iid ='" + Guid.NewGuid().ToString() + "' where iid='" + dt.Rows[i]["iid"].ToString() + "'");
+        //        base.conn.Execute("UPDATE Resources SET iid ='" + Guid.NewGuid().ToString() + "' where iid='" + dt.Rows[i]["iid"].ToString() + "'");
         //    }
         //}
 
-        DataTable dt = base.conn.GetDataTable("SELECT * FROM TemplateInfo order by id");
-        if (dt != null && dt.Rows.Count > 0)
-        {
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                base.conn.Execute("UPDATE TemplateInfo SET id ='" + Guid.NewGuid().ToString() + "' where id='" + dt.Rows[i]["id"].ToString() + "'");
-            }
-        }
+        //DataTable dt = base.conn.GetDataTable("SELECT * FROM TemplateInfo order by id");
+        //if (dt != null && dt.Rows.Count > 0)
+        //{
+        //    for (int i = 0; i < dt.Rows.Count; i++)
+        //    {
+        //        base.conn.Execute("UPDATE TemplateInfo SET id ='" + Guid.NewGuid().ToString() + "' where id='" + dt.Rows[i]["id"].ToString() + "'");
+        //    }
+        //}
     }
 
     private void ReadExl()

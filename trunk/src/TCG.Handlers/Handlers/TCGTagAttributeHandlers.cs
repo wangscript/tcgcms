@@ -131,7 +131,7 @@ namespace TCG.Handlers
         {
             this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "T_News_ClassInfo";
+            sItem.tableName = "Categories";
 
             string fields = this.GetAttribute("fields");
             if (string.IsNullOrEmpty(fields)) return;
@@ -143,7 +143,7 @@ namespace TCG.Handlers
 
             string condition = this.GetAttribute("condition");
             if (string.IsNullOrEmpty(condition)) return;
-            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM T_News_ClassInfo (NOLOCK) WHERE "
+            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM Categories (NOLOCK) WHERE "
                 + " iID !='' AND " + condition;
 
             if (!string.IsNullOrEmpty(orders))
@@ -185,7 +185,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            ResourcesInfo item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
+            Resources item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -223,7 +223,7 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.iId.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetTopicClassTitleList(this._conn, this._config, item.ClassInfo.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.iId, " > "));
 
                 
             }
@@ -250,7 +250,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            ClassInfo item = this.handlerService.newsClassHandlers.GetClassInfoById(this._conn, id, false);
+            Categories item = this.handlerService.newsClassHandlers.GetCategoriesById(this._conn, id, false);
             if (item == null)
             {
                 pagerinfo.Read = false;
@@ -262,7 +262,7 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.iParent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetTopicClassTitleList(this._conn, this._config, item.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.iId, " > "));
 
             pagerinfo.PageTitle = item.vcClassName;
 
@@ -319,7 +319,7 @@ namespace TCG.Handlers
 
             this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "ResourcesInfo";
+            sItem.tableName = "Resources";
 
             string fields = this.GetAttribute("fields");
             if (string.IsNullOrEmpty(fields)) return;
@@ -331,7 +331,7 @@ namespace TCG.Handlers
             if (columns == 0) columns = 1;
             string condition = this.GetAttribute("condition");
 
-            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM ResourcesInfo (NOLOCK) WHERE "
+            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM Resources (NOLOCK) WHERE "
                 + " iID != '' AND " + condition;
             if (!string.IsNullOrEmpty(orders))
             {
@@ -432,7 +432,7 @@ namespace TCG.Handlers
             this._pager = true;
             this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "ResourcesInfo";
+            sItem.tableName = "Resources";
 
             ArrayList arrshowfied = new ArrayList();
 

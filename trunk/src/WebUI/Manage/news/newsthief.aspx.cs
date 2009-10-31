@@ -109,12 +109,12 @@ public partial class news_newsthief : adminMain
         Match item = Regex.Match(ListPageHtml, TopicArea, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         if (item.Success)
         {
-            ResourcesInfo nif = new ResourcesInfo();
+            Resources nif = new Resources();
 
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo = new NewsClassHandlers().GetClassInfoById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")), false);
+            nif.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")), false);
             nif.FromInfo.iId = 1;
             nif.cChecked = "Y";
             nif.cCreated = "Y";

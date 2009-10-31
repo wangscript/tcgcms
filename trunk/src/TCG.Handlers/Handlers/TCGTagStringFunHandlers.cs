@@ -40,11 +40,11 @@ namespace TCG.Handlers
             MatchCollection matchs = this.GetMatchs(pattern, str);
             if (matchs.Count > 0)
             {
-                NewsClassHandlers clhds = new NewsClassHandlers();
+                CategoriesHandlers clhds = new CategoriesHandlers();
 
                 foreach (Match item in matchs)
                 {
-                    str = str.Replace(item.Value, clhds.GetAllChildClassIdByClassId(conn, objectHandlers.ToInt(item.Result("$1")),false));
+                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(conn, objectHandlers.ToInt(item.Result("$1")),false));
                 }
                 clhds = null;
             }

@@ -93,13 +93,13 @@ public partial class news_createhtml : adminMain
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
 
-        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, ClassId, false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, ClassId, false);
         if (cif == null) { base.AjaxErch(""); return; }
 
         TemplateInfo tif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
         if (tif == null) { base.AjaxErch(""); return; }
 
-        ResourcesInfo item = new ResourcesInfo();
+        Resources item = new Resources();
         item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
 
         string text1 = "";
@@ -162,7 +162,7 @@ public partial class news_createhtml : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "ResourcesInfo";
+        sItem.tableName = "Resources";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");
@@ -205,7 +205,7 @@ public partial class news_createhtml : adminMain
         {
             int iClassId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
 
-            string allchild = base.handlerService.newsClassHandlers.GetAllChildClassIdByClassId(base.conn, iClassId, false);
+            string allchild = base.handlerService.newsClassHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
 
             sItem.strCondition += " AND iClassID in (" + allchild + ")";
         }

@@ -25,7 +25,7 @@ public partial class news_classadd : adminMain
         }
         else
         {
-            ClassInfo cif = new ClassInfo();
+            Categories cif = new Categories();
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
@@ -51,7 +51,7 @@ public partial class news_classadd : adminMain
                 }
             }
 
-            int rtn = base.handlerService.newsClassHandlers.AddNewsClass(base.conn,cif, base.adminInfo.vcAdminName);
+            int rtn = base.handlerService.newsClassHandlers.CreateCategories(base.conn,cif, base.adminInfo.vcAdminName);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
 

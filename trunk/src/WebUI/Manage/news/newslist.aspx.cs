@@ -50,7 +50,7 @@ public partial class news_newslist : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "ResourcesInfo";
+        sItem.tableName = "Resources";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");
@@ -72,7 +72,7 @@ public partial class news_newslist : adminMain
         int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
         this.iClassId.Value = iClassId.ToString();
 
-        string allchild = base.handlerService.newsClassHandlers.GetAllChildClassIdByClassId(base.conn, iClassId, false);
+        string allchild = base.handlerService.newsClassHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
         sItem.strCondition = "iClassID in (" + allchild + ")";
         //sItem.strCondition = "iClassID = " + iClassId.ToString();
 
@@ -194,10 +194,10 @@ public partial class news_newslist : adminMain
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        ResourcesInfo item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
+        Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
         if (item == null) return;
 
-        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, item.ClassInfo.iId, false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
 
         TemplateInfo titem = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
         cif = null;
