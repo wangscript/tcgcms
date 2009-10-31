@@ -36,7 +36,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfo(Connection conn,string Extension,ResourcesInfo inf, ref int outid)
+        public int AddNewsInfo(Connection conn,string Extension,Resources inf, ref int outid)
         {
             conn.Dblink = DBLinkNums.News;
 
@@ -79,7 +79,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfoForSheif(Connection conn, string Extension, ResourcesInfo inf)
+        public int AddNewsInfoForSheif(Connection conn, string Extension, Resources inf)
         {
             conn.Dblink = DBLinkNums.News;
             inf.dAddDate = DateTime.Now;
@@ -186,7 +186,7 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int UpdateNewsInfo(Connection conn, string Extension, ResourcesInfo inf)
+        public int UpdateNewsInfo(Connection conn, string Extension, Resources inf)
         {
             conn.Dblink = DBLinkNums.News;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
@@ -224,13 +224,13 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public ResourcesInfo GetNewsInfoById(Connection conn, string id)
+        public Resources GetNewsInfoById(Connection conn, string id)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = id;
             DataSet ds = conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
             if (ds == null) return null;
-            ResourcesInfo item = new ResourcesInfo();
+            Resources item = new Resources();
             item.Id = id;
             if (ds.Tables[0].Rows.Count == 1)
             {
@@ -289,7 +289,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfoHtmlById(Connection conn, Dictionary<string, string> config, string id)
         {
-            ResourcesInfo newsitem = this.GetNewsInfoById(conn, id);
+            Resources newsitem = this.GetNewsInfoById(conn, id);
             if (newsitem == null) return -19000000;  
             string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
             System.IO.File.Delete(filepath);
@@ -310,7 +310,7 @@ namespace TCG.Handlers
             if (ids.IndexOf(",") != -1)
             {
                 conn.Dblink = DBLinkNums.News;
-                string SQL = "SELECT vcFilePath FROM ResourcesInfo (NOLOCK) WHERE iId in (" + ids + ")";
+                string SQL = "SELECT vcFilePath FROM Resources (NOLOCK) WHERE iId in (" + ids + ")";
                 DataTable dt = conn.GetDataTable(SQL);
                 if (dt == null) return -1;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -383,7 +383,7 @@ namespace TCG.Handlers
         /// <param name="title"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public string CreateNewsInfoFilePath(string extion, ResourcesInfo nif)
+        public string CreateNewsInfoFilePath(string extion, Resources nif)
         {
             if (string.IsNullOrEmpty(nif.Id)) nif.Id = Guid.NewGuid().ToString();
             string text = string.Empty;

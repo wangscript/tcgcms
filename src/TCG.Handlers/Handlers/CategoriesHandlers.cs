@@ -28,7 +28,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class NewsClassHandlers
+    public class CategoriesHandlers
     {
 
         /// <summary>
@@ -49,18 +49,18 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="parentid"></param>
         /// <returns></returns>
-        public DataTable GetClassInfosByParentId(int parentid,Connection conn,bool readdb)
+        public DataTable GetCategoriesByParentId(int parentid,Connection conn,bool readdb)
         {
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)"
+                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE iParent = " + parentid.ToString();
                 return conn.GetDataTable(Sql);
             }
             else
             {
-                DataTable dt = GetClassInfoByCach(conn, false);
+                DataTable dt = GetCategoriesByCach(conn, false);
                 if (dt == null) return null;
                 DataRow[] rows = dt.Select("iParent=" + parentid.ToString());
                 DataSet dts = new DataSet();
@@ -75,42 +75,55 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="conn"></param>
         /// <returns></returns>
-        public DataTable GetClassInfos(Connection conn)
+        public DataTable GetAllCategories(Connection conn)
         {
             conn.Dblink = DBLinkNums.News;
-            string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)";
+            string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
-        public DataTable GetClassInfoByCach(Connection conn, bool readdb)
+        /// <summary>
+        /// 从cache中获得所有分类信息
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="readdb"></param>
+        /// <returns></returns>
+        public DataTable GetCategoriesByCach(Connection conn, bool readdb)
         {
             if (readdb)
             {
-                return this.GetClassInfos(conn);
+                return this.GetAllCategories(conn);
             }
             else
             {
                 DataTable classlist = (DataTable)CachingService.Get("AllNewsClass");
                 if (classlist == null)
                 {
-                    classlist = this.GetClassInfos(conn);
+                    classlist = this.GetAllCategories(conn);
                     CachingService.Set("AllNewsClass", classlist, null);
                 }
                 return classlist;
             }
         }
 
-        public string GetAllChildClassIdByClassId(Connection conn, int id, bool readdb)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="id"></param>
+        /// <param name="readdb"></param>
+        /// <returns></returns>
+        public string GetAllChildCategoriesIdByCategoriesId(Connection conn, int id, bool readdb)
         {
             //if (id == 0) return "";
-            DataTable allClass = this.GetClassInfoByCach(conn, readdb);
+            DataTable allClass = this.GetCategoriesByCach(conn, readdb);
             if (allClass == null) return "";
             DataRow[] rows = allClass.Select("iParent = " + id.ToString());
             string str = id.ToString();
             for (int i = 0; i < rows.Length; i++)
             {
                 
-                string t = GetAllChildClassIdByClassId(conn, (int)rows[i]["iId"], readdb);
+                string t = GetAllChildCategoriesIdByCategoriesId(conn, (int)rows[i]["iId"], readdb);
                 if (!string.IsNullOrEmpty(t)) str += "," + t;
             }
             return str;
@@ -124,10 +137,10 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="sh"></param>
         /// <returns></returns>
-        public string GetTopicClassTitleList(Connection conn, Dictionary<string, string> config, int classid, string sh)
+        public string GetResourcesCategoriesIndex(Connection conn, Dictionary<string, string> config, int classid, string sh)
         {
             if (classid == 0) return "";
-            DataTable allClass = this.GetClassInfoByCach(conn, false);
+            DataTable allClass = this.GetCategoriesByCach(conn, false);
             if (allClass == null) return "";
             DataRow[] rows = allClass.Select("iID = " + classid.ToString());
             string str = "";
@@ -136,7 +149,7 @@ namespace TCG.Handlers
 
                 string url = (rows[0]["vcUrl"].ToString().IndexOf(".") > -1) ? rows[0]["vcUrl"].ToString() : rows[0]["vcUrl"].ToString() + config["FileExtension"];
                 str = "<a href=\"" + url + "\" target=\"_blank\">" + rows[0]["vcName"].ToString() + "</a>";
-                string t = GetTopicClassTitleList(conn, config, (int)rows[0]["iParent"], sh);
+                string t = GetResourcesCategoriesIndex(conn, config, (int)rows[0]["iParent"], sh);
                 if (!string.IsNullOrEmpty(t)) str = t + sh + str;
             }
             return str;
@@ -148,19 +161,19 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="iClassID"></param>
         /// <returns></returns>
-        public ClassInfo GetClassInfoById(Connection conn, int iClassID, bool readdb)
+        public Categories GetCategoriesById(Connection conn, int iClassID, bool readdb)
         {
             DataTable dt = null;
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM T_News_ClassInfo WITH (NOLOCK)"
+                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE iID =" + iClassID.ToString();
                 dt = conn.GetDataTable(Sql);
             }
             else
             {
-                DataTable allclass = this.GetClassInfoByCach(conn, false);
+                DataTable allclass = this.GetCategoriesByCach(conn, false);
                 if (allclass != null)
                 {
                     DataRow[] rows = allclass.Select("iID =" + iClassID.ToString());
@@ -174,7 +187,7 @@ namespace TCG.Handlers
             }
             if (dt != null)
             {
-                ClassInfo cif = new ClassInfo();
+                Categories cif = new Categories();
                 DataRow Row = dt.Rows[0];
                 cif.iId = (int)Row["iId"];
                 cif.iListTemplate = Row["iListTemplate"].ToString();
@@ -206,7 +219,7 @@ namespace TCG.Handlers
         /// <param name="url"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public int AddNewsClass(Connection conn, ClassInfo cif, string adminname)
+        public int CreateCategories(Connection conn, Categories cif, string adminname)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -239,7 +252,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="classinf"></param>
         /// <returns></returns>
-        public int EditNewsClass(Connection conn, string adminname, ClassInfo classinf)
+        public int UpdateCategories(Connection conn, string adminname, Categories classinf)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -273,7 +286,7 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="adminname"></param>
         /// <returns></returns>
-        public int DelNewsClassByClassId(Connection conn, int classid, string adminname)
+        public int DelCategories(Connection conn, int classid, string adminname)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;

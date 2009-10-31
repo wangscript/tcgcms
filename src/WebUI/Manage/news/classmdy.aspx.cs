@@ -28,7 +28,7 @@ public partial class news_classmdy : adminMain
         else
         {
            
-            ClassInfo cif = new ClassInfo();
+            Categories cif = new Categories();
             cif.iId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
@@ -55,7 +55,7 @@ public partial class news_classmdy : adminMain
                     return;
                 }
             }
-            int rtn = base.handlerService.newsClassHandlers.EditNewsClass(base.conn, base.adminInfo.vcAdminName,cif);
+            int rtn = base.handlerService.newsClassHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName,cif);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
 
@@ -67,7 +67,7 @@ public partial class news_classmdy : adminMain
     {
         int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
 
-        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, iClassId,false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, iClassId,false);
         if (cif == null)
         {
             base.Finish();

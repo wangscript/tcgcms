@@ -22,7 +22,7 @@ public partial class news_newslistInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
-            DataTable dt = base.handlerService.newsClassHandlers.GetClassInfosByParentId(0, base.conn,false);
+            DataTable dt = base.handlerService.newsClassHandlers.GetCategoriesByParentId(0, base.conn, false);
             if (dt != null)
             {
                 this.ItemRepeater.DataSource = dt;

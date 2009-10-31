@@ -61,7 +61,7 @@ public partial class news_newsclasslist : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_News_ClassInfo";
+        sItem.tableName = "Categories";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");
@@ -138,7 +138,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsClassHandlers.DelNewsClassByClassId(base.conn, tClassID, base.adminInfo.vcAdminName);
+        int rtn = base.handlerService.newsClassHandlers.DelCategories(base.conn, tClassID, base.adminInfo.vcAdminName);
         base.AjaxErch(rtn.ToString());
         base.Finish();
 
@@ -154,7 +154,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, tClassID, false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, tClassID, false);
 
         if (cif == null)
         {
@@ -247,7 +247,7 @@ public partial class news_newsclasslist : adminMain
             return;
         }
 
-        ClassInfo cif = base.handlerService.newsClassHandlers.GetClassInfoById(base.conn, iMdyID,false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, iMdyID,false);
         if (cif == null)
         {
             base.AjaxErch("-1");
@@ -257,7 +257,7 @@ public partial class news_newsclasslist : adminMain
 
         cif.iOrder = objectHandlers.ToInt(KeyValue);
 
-        int rtn = base.handlerService.newsClassHandlers.EditNewsClass(base.conn, base.adminInfo.vcAdminName, cif);
+        int rtn = base.handlerService.newsClassHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName, cif);
         if (rtn < 0)
         {
             base.AjaxErch("-1");

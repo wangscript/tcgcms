@@ -26,7 +26,7 @@ public partial class Manage_interface_GetTopicsClicks : ScriptsMain
             string topics = objectHandlers.Get("topics");
             if (!string.IsNullOrEmpty(topics))
             {
-                string SQL = "SELECT * FROM ResourcesInfo (NOLOCK) WHERE iId In (" + topics + ")";
+                string SQL = "SELECT * FROM Resources (NOLOCK) WHERE iId In (" + topics + ")";
                 DataTable dt = base.conn.GetDataTable(SQL);
                 if (dt == null) return;
 
