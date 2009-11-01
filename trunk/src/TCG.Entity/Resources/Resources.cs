@@ -30,7 +30,6 @@ namespace TCG.Entity
         public string vcUrl { get { return this._vcUrl; } set { this._vcUrl = value; } }
         public string vcContent { get { return this._vcContent; } set { this._vcContent = value; } }
         public string vcAuthor { get { return this._vcAuthor; } set { this._vcAuthor = value; } }
-        public NewsFromInfo FromInfo { get { return this._NewsFromInfo; } set { this._NewsFromInfo = value; } }
         public int iCount { get { return this._iCount; } set { this._iCount = value; } }
         public string vcKeyWord { get { return this._vcKeyWord; } set { this._vcKeyWord = value; } }
         public string vcEditor { get { return this._vcEditor; } set { this._vcEditor = value; } }

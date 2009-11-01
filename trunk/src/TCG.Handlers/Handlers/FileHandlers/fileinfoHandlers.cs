@@ -123,7 +123,7 @@ namespace TCG.Handlers
         {
             FileInfos item = null;
             if (!this.SetFileDatabase(id)) return null;
-            string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM T_Files_FileInfos (NOLOCK) WHERE iId=" + id.ToString();
+            string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
             DataTable dt = this._conn.GetDataTable(SQL);
             if (dt != null)
             {

@@ -147,7 +147,7 @@ namespace TCG.URLRewriter
                     if (Rows.Length > 0)
                     {
                         TemplateHandlers tlhdl = new TemplateHandlers();
-                        TemplateInfo tlif = tlhdl.GetTemplateInfoByID(conn, Rows[0]["iListTemplate"].ToString(), false);
+                        Template tlif = tlhdl.GetTemplateByID(conn, Rows[0]["iListTemplate"].ToString(), false);
 
                         TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
                         tcgthdl1.handlerService = handlerservice;
@@ -186,7 +186,7 @@ namespace TCG.URLRewriter
                         //获得分类信息
                        
                         TemplateHandlers ntlhdl = new TemplateHandlers();
-                        TemplateInfo titem = ntlhdl.GetTemplateInfoByID(conn, item.ClassInfo.iTemplate,false);
+                        Template titem = ntlhdl.GetTemplateByID(conn, item.ClassInfo.iTemplate,false);
                        
 
                         TCGTagHandlers tcgth = new TCGTagHandlers();

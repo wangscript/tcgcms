@@ -164,7 +164,7 @@ public partial class news_newsclasslist : adminMain
         }
 
 
-        TemplateInfo tlif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iListTemplate,false);
+        Template tlif = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iListTemplate,false);
         if (tlif == null)
         {
             base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");

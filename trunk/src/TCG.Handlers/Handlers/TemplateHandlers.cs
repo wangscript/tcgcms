@@ -55,14 +55,14 @@ namespace TCG.Handlers
         public DataSet GetAllTemplatesFromDb(Connection conn)
         {
             conn.Dblink = DBLinkNums.Template;
-            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM TemplateInfo (NOLOCK)";
+            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK)";
             return conn.GetDataSet(Sql);
         }
 
         public DataSet GetTemplatesBySystemTypeFromDb(Connection conn, int systemtype)
         {
             conn.Dblink = DBLinkNums.Template;
-            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM TemplateInfo (NOLOCK) WHERE "
+            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
                         +" iSystemType =" + systemtype.ToString();
             return conn.GetDataSet(Sql);
         }
@@ -98,7 +98,7 @@ namespace TCG.Handlers
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.Template;
-                string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM TemplateInfo (NOLOCK) WHERE "
+                string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
                             + " iSystemType =" + systemtype.ToString() + " AND TemplateType=" + type.ToString();
                 ds = conn.GetDataSet(Sql);
             }
@@ -116,7 +116,7 @@ namespace TCG.Handlers
         }
 
 
-        public int AddTemplate(Connection conn, string adminname,TemplateInfo item)
+        public int AddTemplate(Connection conn, string adminname,Template item)
         {
             item.Id = Guid.NewGuid().ToString();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -156,7 +156,7 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int MdyTemplate(Connection conn, string adminname, TemplateInfo item)
+        public int MdyTemplate(Connection conn, string adminname, Template item)
         {
             conn.Dblink = DBLinkNums.Template;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -185,13 +185,13 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="templateid"></param>
         /// <returns></returns>
-        public DataTable GetTemplateByID(Connection conn, string templateid,bool readdb)
+        public DataTable GetTemplateTableByID(Connection conn, string templateid,bool readdb)
         {
             DataTable dt = null;
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.Template;
-                string sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM TemplateInfo (NOLOCK) WHERE Id ='" + templateid.ToString() + "'";
+                string sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE Id ='" + templateid.ToString() + "'";
                 dt = conn.GetDataTable(sql);
             }
             else
@@ -211,16 +211,16 @@ namespace TCG.Handlers
             return dt;
         }
 
-        public TemplateInfo GetTemplateInfoBySystemAndID(Connection conn, int system, string templateid)
+        public Template GetTemplateBySystemAndID(Connection conn, int system, string templateid)
         {
-            TemplateInfo item = null;
+            Template item = null;
             DataSet systetemps = this.GetTemplatesBySystemType(conn, system, false);
             if (systetemps != null)
             {
                 DataRow[] rows = systetemps.Tables[0].Select("Id=" + templateid.ToString());
                 if (rows.Length == 1)
                 {
-                    item = new TemplateInfo();
+                    item = new Template();
                     item.Id = rows[0]["Id"].ToString();
                     item.SkinId = rows[0]["SkinId"].ToString();
                     item.TemplateType = objectHandlers.GetTemplateType((int)rows[0]["TemplateType"]);
@@ -234,16 +234,16 @@ namespace TCG.Handlers
             return item;
         }
 
-        public TemplateInfo GetTemplateInfoByID(Connection conn, string templateid,bool readdb)
+        public Template GetTemplateByID(Connection conn, string templateid,bool readdb)
         {
-            TemplateInfo item = null;
+            Template item = null;
 
             if (readdb)
             {
-                DataTable dt = this.GetTemplateByID(conn, templateid, false);
+                DataTable dt = this.GetTemplateTableByID(conn, templateid, false);
                 if (dt == null) return null;
                 if (dt.Rows.Count != 1) return null;
-                item = new TemplateInfo();
+                item = new Template();
                 item.Id = dt.Rows[0]["Id"].ToString();
                 item.SkinId = dt.Rows[0]["SkinId"].ToString();
                 item.TemplateType = objectHandlers.GetTemplateType((int)dt.Rows[0]["TemplateType"]);
@@ -261,7 +261,7 @@ namespace TCG.Handlers
                     DataRow[] rows = ds.Tables[0].Select("Id = '" + templateid.ToString()+"'");
                     if (rows.Length == 1)
                     {
-                        item = new TemplateInfo();
+                        item = new Template();
                         item.Id = rows[0]["Id"].ToString();
                         item.SkinId = ds.Tables[0].Rows[0]["SkinId"].ToString();
                         item.TemplateType = objectHandlers.GetTemplateType((int)rows[0]["TemplateType"]);

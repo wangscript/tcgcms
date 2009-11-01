@@ -30,12 +30,12 @@ public partial class Test :  Origin
         //    }
         //}
 
-        //DataTable dt = base.conn.GetDataTable("SELECT * FROM TemplateInfo order by id");
+        //DataTable dt = base.conn.GetDataTable("SELECT * FROM Template order by id");
         //if (dt != null && dt.Rows.Count > 0)
         //{
         //    for (int i = 0; i < dt.Rows.Count; i++)
         //    {
-        //        base.conn.Execute("UPDATE TemplateInfo SET id ='" + Guid.NewGuid().ToString() + "' where id='" + dt.Rows[i]["id"].ToString() + "'");
+        //        base.conn.Execute("UPDATE Template SET id ='" + Guid.NewGuid().ToString() + "' where id='" + dt.Rows[i]["id"].ToString() + "'");
         //    }
         //}
     }

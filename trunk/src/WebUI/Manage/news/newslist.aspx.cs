@@ -199,7 +199,7 @@ public partial class news_newslist : adminMain
 
         Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
 
-        TemplateInfo titem = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
+        Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
         cif = null;
 
         TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;

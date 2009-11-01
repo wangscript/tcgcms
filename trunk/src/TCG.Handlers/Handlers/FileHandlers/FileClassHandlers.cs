@@ -72,7 +72,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllFilesClassFromDb()
         {
-            return this._conn.GetDataTable("SELECT iId,vcFileName,iParentId,vcMeno,dCreateDate FROM T_Files_Class (NOLOCK)");
+            return this._conn.GetDataTable("SELECT iId,vcFileName,iParentId,vcMeno,dCreateDate FROM filecategories (NOLOCK)");
         }
 
         /// <summary>

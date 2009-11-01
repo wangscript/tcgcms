@@ -46,7 +46,7 @@ public partial class Template_newlist : adminMain
     {
         base.conn.Dblink = DBLinkNums.Template;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "TemplateInfo";
+        sItem.tableName = "Template";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("Id");
@@ -171,7 +171,7 @@ public partial class Template_newlist : adminMain
             return;
         }
 
-        TemplateInfo tlif = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, iTemplate,false);
+        Template tlif = base.handlerService.templateHandlers.GetTemplateByID(base.conn, iTemplate,false);
 
         if (tlif == null)
         {
