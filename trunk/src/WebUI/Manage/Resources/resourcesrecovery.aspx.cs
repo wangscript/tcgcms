@@ -19,7 +19,7 @@ using TCG.Pages;
 using TCG.Data;
 using TCG.Handlers;
 
-public partial class news_newsRecovery : adminMain
+public partial class resources_resourcesrecovery : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

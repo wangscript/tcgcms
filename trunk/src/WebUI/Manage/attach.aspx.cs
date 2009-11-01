@@ -36,7 +36,7 @@ public partial class attach : FilesMain
             }
 
             
-            FileInfos item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
+            FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
 
             string filename = item.iID.ToString() + "." + item.vcType;
             string path = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId( item.iClassId) + item.iID.ToString().Substring(0, 6) + "/"

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NewsSpecialityList.aspx.cs" Inherits="news_NewsSpecialityList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="speciality.aspx.cs" Inherits="resources_speciality" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>

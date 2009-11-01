@@ -21,7 +21,7 @@ public partial class Common_AllNewsSpeciality : ScriptsMain
         if (!Page.IsPostBack)
         {
             Response.Write("var NewsSpeciality = new Array();\r\n");
-            NewsSpecialityHandlers cldl = new NewsSpecialityHandlers();
+            SpecialityHandlers cldl = new SpecialityHandlers();
             DataTable dt = cldl.GetAllNewsSpecialityInfoByCache(base.conn,false);
             if (dt != null)
             {

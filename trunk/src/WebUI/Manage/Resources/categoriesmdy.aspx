@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="classadd.aspx.cs" Inherits="news_classadd" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categoriesmdy.aspx.cs" Inherits="resources_categoriesmdy" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>添加资讯分类</title>
+    <title>修改资讯分类</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/common.js"></script>
@@ -16,16 +16,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckAddClassForm();">
-	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
+    <form id="form1" runat="server" onsubmit="return CheckEditClassForm();">
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
-		添加资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
+		修改资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
 	</div>
 	<div id="placemsg" class="Page_arrb arb_pr classaddline">
 		<span class="p_a_t">详 细 位 置：</span>
 	</div>
-	<script type="text/javascript">GetParentTitle();</script>
+	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">父 类 编 号：</span>
+	  <input id="iClassId" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
+	  <script type="text/javascript">GetParentTitle();</script>
+		<span id="cnamemsg" class="info1">分类名称，必须填写</span>
+	</div>
 	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 名 称：</span>
 	  <input id="iClassName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
 		<span id="cnamemsg" class="info1">分类名称，必须填写</span>

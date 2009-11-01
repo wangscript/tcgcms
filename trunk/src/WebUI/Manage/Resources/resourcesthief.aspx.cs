@@ -21,7 +21,7 @@ using TCG.Data;
 using TCG.Entity;
 
 
-public partial class news_newsthief : adminMain
+public partial class resources_resourcesthief : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

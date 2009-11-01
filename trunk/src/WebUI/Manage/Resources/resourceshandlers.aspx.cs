@@ -24,7 +24,7 @@ using TCG.Entity;
 
 using TCG.KeyWordSplit;
 
-public partial class news_newsAdd : adminMain
+public partial class resources_resourceshandlers : adminMain
 {
 
     protected void Page_Load(object sender, EventArgs e)
