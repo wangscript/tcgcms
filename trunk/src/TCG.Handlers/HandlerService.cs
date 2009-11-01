@@ -91,34 +91,34 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供对资讯操作的方法
         /// </summary>
-        public NewsInfoHandlers newsInfoHandlers
+        public ResourcesHandlers newsInfoHandlers
         {
             get
             {
                 if (this._newsinfohandlers == null)
                 {
-                    this._newsinfohandlers = new NewsInfoHandlers();
+                    this._newsinfohandlers = new ResourcesHandlers();
                 }
                 return this._newsinfohandlers;
             }
         }
-        private NewsInfoHandlers _newsinfohandlers;
+        private ResourcesHandlers _newsinfohandlers;
 
         /// <summary>
         /// 提供对资讯特性操作的方法
         /// </summary>
-        public NewsSpecialityHandlers newsSpecialityHandlers
+        public SpecialityHandlers newsSpecialityHandlers
         {
             get
             {
                 if (this._newsspecialityhandlers == null)
                 {
-                    this._newsspecialityhandlers = new NewsSpecialityHandlers();
+                    this._newsspecialityhandlers = new SpecialityHandlers();
                 }
                 return this._newsspecialityhandlers ;
             }
         }
-        private NewsSpecialityHandlers _newsspecialityhandlers;
+        private SpecialityHandlers _newsspecialityhandlers;
 
 
 

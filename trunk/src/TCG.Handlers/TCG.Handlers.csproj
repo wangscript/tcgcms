@@ -47,11 +47,11 @@
     <Compile Include="Handlers\AdminLoginHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileService.cs" />
     <Compile Include="Handlers\CategoriesHandlers.cs" />
-    <Compile Include="Handlers\FileHandlers\FileClassHandlers.cs" />
-    <Compile Include="Handlers\FileHandlers\FileInfoHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
-    <Compile Include="Handlers\NewsInfoHandlers.cs" />
-    <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
+    <Compile Include="Handlers\ResourcesHandlers.cs" />
+    <Compile Include="Handlers\SpecialityHandlers.cs" />
     <Compile Include="Handlers\UserHandlers\UserLoginHandlers.cs">
     </Compile>
     <Compile Include="ObjectHandlersBase.cs" />

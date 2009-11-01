@@ -18,7 +18,7 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class FileInfos
+    public class FileResources
     {
         public int iClassId { get { return this._iclassid; } set { this._iclassid = value; } }
         public int iSize { get { return this._isize; } set { this._isize = value; } }

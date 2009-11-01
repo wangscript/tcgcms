@@ -30,7 +30,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class FileInfoHandlers
+    public class FileResourcesHandlers
     {
         /// <summary>
         /// 获得配置信息支持
@@ -47,14 +47,14 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供文件分类操作的方法
         /// </summary>
-        public FileClassHandlers fileClassHandlers
+        public FileCategoriesHandlers fileClassHandlers
         {
             set
             {
                 this._fileclasshandlers = value;
             }
         }
-        private FileClassHandlers _fileclasshandlers;
+        private FileCategoriesHandlers _fileclasshandlers;
 
         /// <summary>
         /// 设置数据库链接
@@ -90,7 +90,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        public int AddFileInfoByAdmin(string adminname, FileInfos fif)
+        public int AddFileInfoByAdmin(string adminname, FileResources fif)
         {
             if (!this.SetFileDatabase(fif.iID)) return -19000000;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -119,9 +119,9 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public FileInfos GetFileInfosById( long id)
+        public FileResources GetFileInfosById( long id)
         {
-            FileInfos item = null;
+            FileResources item = null;
             if (!this.SetFileDatabase(id)) return null;
             string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
             DataTable dt = this._conn.GetDataTable(SQL);
@@ -129,7 +129,7 @@ namespace TCG.Handlers
             {
                 if (dt.Rows.Count == 1)
                 {
-                    item = new FileInfos();
+                    item = new FileResources();
                     item.iID = (long)dt.Rows[0]["iID"];
                     item.iClassId = (int)dt.Rows[0]["iClassId"];
                     item.iSize = (int)dt.Rows[0]["iSize"];
@@ -154,7 +154,7 @@ namespace TCG.Handlers
                 string text1 = item.Result("$2");
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
-                    FileInfos imgfile = new FileInfos();
+                    FileResources imgfile = new FileResources();
 
                     imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;
@@ -208,7 +208,7 @@ namespace TCG.Handlers
                 string text1 = item.Result("$2");
                 if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
-                    FileInfos imgfile = new FileInfos();
+                    FileResources imgfile = new FileResources();
 
                     imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
                     imgfile.iClassId = fileclassid;
