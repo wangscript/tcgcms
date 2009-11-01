@@ -25,7 +25,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class FileClassHandlers
+    public class FileCategoriesHandlers
     {
         /// <summary>
         /// 获得配置信息支持
@@ -152,7 +152,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        public int AddFileClass( string adminname, FileClassInfo fcif)
+        public int AddFileClass( string adminname, FileCategories fcif)
         {
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;

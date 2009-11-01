@@ -18,7 +18,7 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class NewsSpecialityInfo
+    public class Speciality
     {
         public int iId { get { return this._iid; } set { this._iid = value; } }
         public int iSiteId { get { return this._isiteid; } set { this._isiteid = value; } }

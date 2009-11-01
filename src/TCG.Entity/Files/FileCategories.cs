@@ -22,7 +22,7 @@ namespace TCG.Entity
     /// 文件分类实体 
     /// <log>by :sanyungui@yahoo.com.cn date: 2009-10-23 info:</log>
     /// </summary>
-    public class FileClassInfo
+    public class FileCategories
     {
         /// <summary>
         /// 文件分类ID

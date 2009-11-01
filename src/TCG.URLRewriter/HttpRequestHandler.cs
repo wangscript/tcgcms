@@ -179,7 +179,7 @@ namespace TCG.URLRewriter
                 if (!string.IsNullOrEmpty(topicid))
                 {
                     //获得文章对象
-                    NewsInfoHandlers nifhld = new NewsInfoHandlers();
+                    ResourcesHandlers nifhld = new ResourcesHandlers();
                     Resources item = nifhld.GetNewsInfoById(conn, topicid);
                     if (item != null)
                     {

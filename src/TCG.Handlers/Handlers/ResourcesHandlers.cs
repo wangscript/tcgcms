@@ -28,7 +28,7 @@ using TCG.KeyWordSplit;
 
 namespace TCG.Handlers
 {
-    public class NewsInfoHandlers
+    public class ResourcesHandlers
     {
         /// <summary>
         /// Ìí¼Ó×ÊÑ¶

@@ -24,7 +24,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class NewsSpecialityHandlers
+    public class SpecialityHandlers
     {
         /// <summary>
         /// 添加新的资讯类型
@@ -33,7 +33,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="nif"></param>
         /// <returns></returns>
-        public int NewsSpecialityAdd(Connection conn, string adminname, NewsSpecialityInfo nif)
+        public int NewsSpecialityAdd(Connection conn, string adminname, Speciality nif)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -59,7 +59,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="nif"></param>
         /// <returns></returns>
-        public int NewsSpecialityMdy(Connection conn, string adminname, NewsSpecialityInfo nif)
+        public int NewsSpecialityMdy(Connection conn, string adminname, Speciality nif)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
@@ -111,14 +111,14 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public NewsSpecialityInfo GetNewsSpecialityInfoById(Connection conn, int id)
+        public Speciality GetNewsSpecialityInfoById(Connection conn, int id)
         {
             conn.Dblink = DBLinkNums.News;
             string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM Speciality (NOLOCK) WHERE iId=" + id.ToString();
             DataTable dt = conn.GetDataTable(SQL);
             if (dt == null) return null;
             if (dt.Rows.Count != 1) return null;
-            NewsSpecialityInfo item = new NewsSpecialityInfo();
+            Speciality item = new Speciality();
             DataRow Row = dt.Rows[0];
             item.iId = (int)Row["iId"];
             item.iSiteId = (int)Row["iSiteId"];

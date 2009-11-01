@@ -54,7 +54,6 @@ namespace TCG.Entity
         private string _vcUrl = string.Empty;
         private string _vcContent = string.Empty;
         private string _vcAuthor = string.Empty;
-        private NewsFromInfo _NewsFromInfo = new NewsFromInfo();
         private int _iCount = 0;
         private string _vcKeyWord = string.Empty;
         private string _vcEditor = string.Empty;

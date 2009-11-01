@@ -23,7 +23,7 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供文件分类操作的方法
         /// </summary>
-        public FileClassHandlers fileClassHandlers
+        public FileCategoriesHandlers fileClassHandlers
         {
             get
             {
@@ -31,7 +31,7 @@ namespace TCG.Handlers
                 if (this._conn == null) return null;
                 if (this._fileclasshandlers == null)
                 {
-                    this._fileclasshandlers = new FileClassHandlers();
+                    this._fileclasshandlers = new FileCategoriesHandlers();
                     this._fileclasshandlers.conn = this._conn;
                     this._fileclasshandlers.ConnStr = this.MianDatabase;
                     this._fileclasshandlers.configService = this._configservice;
@@ -39,19 +39,19 @@ namespace TCG.Handlers
                 return this._fileclasshandlers;
             }
         }
-        private FileClassHandlers _fileclasshandlers;
+        private FileCategoriesHandlers _fileclasshandlers;
 
 
         /// <summary>
         /// 提供对文件操作的方法
         /// </summary>
-        public FileInfoHandlers fileInfoHandlers
+        public FileResourcesHandlers fileInfoHandlers
         {
             get
             {
                 if (this._fileInfohandlers == null)
                 {
-                    this._fileInfohandlers = new FileInfoHandlers();
+                    this._fileInfohandlers = new FileResourcesHandlers();
                     this._fileInfohandlers.fileClassHandlers = this.fileClassHandlers;
                     this._fileInfohandlers.configService = this._configservice;
                     this._fileInfohandlers.conn = this._conn;
@@ -59,7 +59,7 @@ namespace TCG.Handlers
                 return this._fileInfohandlers;
             }
         }
-        private FileInfoHandlers _fileInfohandlers;
+        private FileResourcesHandlers _fileInfohandlers;
 
 
         /// <summary>
