@@ -13,37 +13,52 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
-using TCG.Entity;
 using TCG.Handlers;
+using TCG.Entity;
 using TCG.Data;
 
-public partial class Template_newtemplateadd : adminMain
+public partial class Template_templatemdy : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        string templateid = objectHandlers.Get("templateid");
+        
         if (!Page.IsPostBack)
         {
-            int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
-            int Parentid = objectHandlers.ToInt(objectHandlers.Get("iParentid"));
-            int iSytemType = objectHandlers.ToInt(objectHandlers.Get("SytemType"));
-
-            this.iParentid.Value = Parentid.ToString();
-            this.SytemType.Value = iSytemType.ToString();
-            this.iSiteId.Value = iSiteId.ToString();
-
-            foreach (Option option in base.configService.templateTypes.Values)
+            Template item = base.handlerService.templateHandlers.GetTemplateByID(base.conn, templateid,false);
+            if (item == null)
             {
-                this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                base.Finish();
+                return;
             }
 
+            this.vcTempName.Value = item.vcTempName;
+            this.vcContent.Value = item.Content;
+            this.vcUrl.Value = item.vcUrl;
+            this.iSiteId.Value = item.SkinId.ToString();
+            this.iParentid.Value = item.iParentId.ToString();
+            this.SytemType.Value = item.iSystemType.ToString();
+
+            foreach (Option option in base.configService.templateTypes.Values)            
+            {
+                this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                int i = objectHandlers.ToInt(option.Value);
+                if (i == (int)item.TemplateType)
+                {
+                    this.tType.SelectedIndex = i;
+                }
+            }
+            item = null;
+            base.Finish();
         }
         else
         {
+
             Template item = new Template();
             item.vcTempName = objectHandlers.Post("vcTempName");
-            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(objectHandlers.Post("tType")));
-            item.iParentId = objectHandlers.Post("iParentid");
-            item.iSystemType = objectHandlers.ToInt(objectHandlers.Post("SytemType"));
+
+            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
             item.SkinId = objectHandlers.Post("iSiteId");
@@ -55,17 +70,21 @@ public partial class Template_newtemplateadd : adminMain
                 base.Finish();
                 return;
             }
+
             if ((int)item.TemplateType == 0 && string.IsNullOrEmpty(item.vcUrl))
             {
                 base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, base.configService.baseConfig["ManagePath"]) + "\"}";
                 base.AjaxErch(base.ajaxdata);
-                base.Finish();
-            }
+                return;
 
+            }
+            item.Id = templateid;
+
+            ///执行修改操作
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName, item);
+                rtn = base.handlerService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName, item);
                 CachingService.Remove(CachingService.CACHING_AllTemplates);
             }
             catch (Exception ex)
@@ -75,9 +94,8 @@ public partial class Template_newtemplateadd : adminMain
                 return;
             }
 
-            base.AjaxErch("{state:true,message:'模板添加成功！'}");
-            item = null;
-            base.Finish();
+            base.AjaxErch("{state:true,message:'模板修改成功！'}");
+
         }
     }
 }

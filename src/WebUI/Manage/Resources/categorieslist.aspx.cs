@@ -21,7 +21,7 @@ using TCG.Entity;
 using TCG.Handlers;
 
 
-public partial class news_newsclasslist : adminMain
+public partial class resources_categorieslist : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

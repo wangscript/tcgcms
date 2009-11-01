@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="newsAdd.aspx.cs" Inherits="news_newsAdd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceshandlers.aspx.cs" Inherits="resources_resourceshandlers" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <%@ Register src="../Ctrl/Editor.ascx" tagname="WebUserControl" tagprefix="TCG" %>
@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
 	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
 	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
-	<script type="text/javascript" src="../Common/AllNewsFrom.aspx"></script>
 	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
 
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>

@@ -144,7 +144,7 @@ public partial class files_fileinfos : adminMain
 
     private void AddClass()
     {
-        FileClassInfo item = new FileClassInfo();
+        FileCategories item = new FileCategories();
         item.vcFileName = objectHandlers.Post("inTitle");
         item.vcMeno = objectHandlers.Post("inInfo");
         item.iParentId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));

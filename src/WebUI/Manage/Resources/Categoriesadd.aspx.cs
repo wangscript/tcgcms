@@ -13,12 +13,10 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Handlers;
-
 using TCG.Entity;
 
-public partial class news_classmdy : adminMain
+public partial class resources_categoriesadd : adminMain
 {
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -27,9 +25,7 @@ public partial class news_classmdy : adminMain
         }
         else
         {
-           
             Categories cif = new Categories();
-            cif.iId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
@@ -38,7 +34,6 @@ public partial class news_classmdy : adminMain
             cif.iTemplate = objectHandlers.Post("sTemplate");
             cif.iListTemplate = objectHandlers.Post("slTemplate");
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
-
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch("-1");
@@ -48,14 +43,15 @@ public partial class news_classmdy : adminMain
 
             if (cif.iParent != 0)
             {
-                if (string.IsNullOrEmpty(cif.iTemplate) || string.IsNullOrEmpty(cif.iListTemplate ))
+                if (string.IsNullOrEmpty(cif.iTemplate) || string.IsNullOrEmpty(cif.iListTemplate))
                 {
                     base.AjaxErch("-1");
                     base.Finish();
                     return;
                 }
             }
-            int rtn = base.handlerService.newsClassHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName,cif);
+
+            int rtn = base.handlerService.newsClassHandlers.CreateCategories(base.conn,cif, base.adminInfo.vcAdminName);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
 
@@ -65,22 +61,9 @@ public partial class news_classmdy : adminMain
 
     private void Init()
     {
-        int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
+        this.iClassId.Value = iParent.ToString();
 
-        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, iClassId,false);
-        if (cif == null)
-        {
-            base.Finish();
-            return;
-        }
-
-        this.iClassId.Value = cif.iParent.ToString();
-        this.iClassName.Value = cif.vcClassName;
-        this.iName.Value = cif.vcName;
-        this.iUrl.Value = cif.vcUrl;
-        this.iDirectory.Value = cif.vcDirectory;
-        this.iOrder.Value = cif.iOrder.ToString();
-        
         DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
             (int)TemplateType.InfoType, 0, false);
         if (ds != null)
@@ -91,16 +74,13 @@ public partial class news_classmdy : adminMain
                 {
                     DataRow Row = ds.Tables[0].Rows[i];
                     this.sTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                    if (Row["Id"].ToString() == cif.iTemplate.ToString())
-                    {
-                        this.sTemplate.SelectedIndex = i+1;
-                    }
                 }
             }
+            
             ds.Clear();
         }
 
-
+        
         ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
             (int)TemplateType.ListType, 0, false);
         if (ds != null)
@@ -111,20 +91,8 @@ public partial class news_classmdy : adminMain
                 {
                     DataRow Row = ds.Tables[0].Rows[i];
                     this.slTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                    if (Row["Id"].ToString() == cif.iListTemplate.ToString())
-                    {
-                        this.slTemplate.SelectedIndex = i + 1;
-                    }
                 }
             }
-
-            ds.Clear();
-            ds.Dispose();
         }
-
-        
-        cif = null;
-
-        base.Finish();
     }
 }

@@ -22,7 +22,7 @@ using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class news_NewsSpecialityList : adminMain
+public partial class resources_speciality : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -125,7 +125,7 @@ public partial class news_NewsSpecialityList : adminMain
 
     private void SpecialityADD()
     {
-        NewsSpecialityInfo  item = new NewsSpecialityInfo();
+        Speciality  item = new Speciality();
         item.vcTitle = objectHandlers.Post("inTitle");
         item.vcExplain = objectHandlers.Post("inExplain");
         item.iParent = objectHandlers.ToInt(objectHandlers.Post("inParentId"));
@@ -177,7 +177,7 @@ public partial class news_NewsSpecialityList : adminMain
         }
          
 
-        NewsSpecialityInfo item = base.handlerService.newsSpecialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
+        Speciality item = base.handlerService.newsSpecialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
         bool ismdy = true;
         if (item == null)
         {

@@ -16,7 +16,7 @@ public partial class Manage_upload_editUploadfile : adminMain
     {
         if (Page.IsPostBack)
         {
-            FileInfos item = new FileInfos();
+            FileResources item = new FileResources();
             item.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
             item.iClassId = objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]);
 

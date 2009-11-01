@@ -33,7 +33,7 @@ public partial class upload_uploadSave : adminMain
         else
         {
             Thread.Sleep(20);
-            FileInfos item = new FileInfos();
+            FileResources item = new FileResources();
             item.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
             item.iClassId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
 
