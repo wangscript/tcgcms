@@ -26,7 +26,7 @@ public partial class Template_newtemplatemdy : adminMain
         
         if (!Page.IsPostBack)
         {
-            TemplateInfo item = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, templateid,false);
+            Template item = base.handlerService.templateHandlers.GetTemplateByID(base.conn, templateid,false);
             if (item == null)
             {
                 base.Finish();
@@ -55,7 +55,7 @@ public partial class Template_newtemplatemdy : adminMain
         else
         {
 
-            TemplateInfo item = new TemplateInfo();
+            Template item = new Template();
             item.vcTempName = objectHandlers.Post("vcTempName");
 
             item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));

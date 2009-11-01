@@ -18,7 +18,7 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class TemplateInfo
+    public class Template
     {
         /// <summary>
         /// Ä¤°å¿éÄÚÈİ

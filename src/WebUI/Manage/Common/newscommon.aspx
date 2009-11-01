@@ -20,7 +20,7 @@ function GetNewsSiteByClassId(id){
     }
 }
 
-function GetTemplateInfoById(id){
+function GetTemplateById(id){
     for(var i=0;i<AllTemplates.length;i++){
         if(id==AllTemplates[i][0])return AllTemplates[i];
     }

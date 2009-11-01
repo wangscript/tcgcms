@@ -93,7 +93,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataSet GetALLAdminRole()
         {
-            string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM dbo.T_Manage_AdminRole (NOLOCK)";
+            string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM dbo.AdminRole (NOLOCK)";
             return this._conn.GetDataSet(sql);
         }
 
@@ -105,7 +105,7 @@ namespace TCG.Handlers
         public DataTable GetAdminInfoByAdminName(string adminname)
         {
             if (string.IsNullOrEmpty(adminname)) return null;
-            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom FROM T_Manage_AdminInfo (NOLOCK) WHERE vcAdminName ='" + adminname + "'";
+            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom FROM Admin (NOLOCK) WHERE vcAdminName ='" + adminname + "'";
             return this._conn.GetDataTable(sql);
         }
 
@@ -221,7 +221,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataSet GetAllPopedom()
         {
-            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM T_Manage_Popedom WITH (NOLOCK)";
+            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM Popedom WITH (NOLOCK)";
             return this._conn.GetDataSet(sql);
         }
 
@@ -232,7 +232,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataSet GetPopedomsByID(string iIds)
         {
-            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM T_Manage_Popedom WITH (NOLOCK) WHERE iID IN (" + iIds + ")";
+            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM Popedom WITH (NOLOCK) WHERE iID IN (" + iIds + ")";
             return this._conn.GetDataSet(sql);
         }
 
@@ -402,7 +402,7 @@ namespace TCG.Handlers
 
         public DataTable GetAdminRoleInfoByRoleId(int iRoleId)
         {
-            string Sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom FROM T_Manage_AdminRole WITH (NOLOCK) WHERE iID =" + iRoleId.ToString();
+            string Sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom FROM AdminRole WITH (NOLOCK) WHERE iID =" + iRoleId.ToString();
             return this._conn.GetDataTable(Sql);
         }
 
@@ -467,7 +467,7 @@ namespace TCG.Handlers
         public int CheckAdminNameForReg(string adminname)
         {
             if (string.IsNullOrEmpty(adminname)) return -1;
-            return (int)this._conn.GetScalar("SELECT COUNT(1) FROM T_Manage_AdminInfo (NOLOCK) WHERE vcAdminName='" + adminname + "'");
+            return (int)this._conn.GetScalar("SELECT COUNT(1) FROM Admin (NOLOCK) WHERE vcAdminName='" + adminname + "'");
         }
 
         private Connection _conn;

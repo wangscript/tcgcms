@@ -215,8 +215,7 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcFilePath$", item.vcFilePath);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_dUpdateDate$", item.dUpDateDate.ToString("yyyyƒÍMM‘¬dd»’"));
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_From$",
-                    "<a href=\"" + item.FromInfo.vcUrl + "\" target=\"_blank\">" + item.FromInfo.vcTitle + "</a>");
+               
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
@@ -282,7 +281,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            TemplateInfo item = this.handlerService.templateHandlers.GetTemplateInfoByID(this._conn, id,false);
+            Template item = this.handlerService.templateHandlers.GetTemplateByID(this._conn, id,false);
             if (item != null)
             {
                 this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());

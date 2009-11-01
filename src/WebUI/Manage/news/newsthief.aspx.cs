@@ -115,7 +115,7 @@ public partial class news_newsthief : adminMain
             nif.vcAuthor = base.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
             nif.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")), false);
-            nif.FromInfo.iId = 1;
+
             nif.cChecked = "Y";
             nif.cCreated = "Y";
             nif.vcEditor = base.adminInfo.vcAdminName;

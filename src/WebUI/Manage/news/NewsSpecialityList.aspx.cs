@@ -52,7 +52,7 @@ public partial class news_NewsSpecialityList : adminMain
     {
         base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_News_Speciality";
+        sItem.tableName = "Speciality";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");

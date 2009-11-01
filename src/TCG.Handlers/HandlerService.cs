@@ -89,23 +89,6 @@ namespace TCG.Handlers
 
 
         /// <summary>
-        /// 提供对文件来源操作的方法
-        /// </summary>
-        public NewsFromHandlers newsFromHandlers
-        {
-            get
-            {
-                if (this._newsfromhandlers == null)
-                {
-                    this._newsfromhandlers = new NewsFromHandlers();
-                }
-                return this._newsfromhandlers;
-            }
-        }
-        private NewsFromHandlers _newsfromhandlers;
-
-
-        /// <summary>
         /// 提供对资讯操作的方法
         /// </summary>
         public NewsInfoHandlers newsInfoHandlers

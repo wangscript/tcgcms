@@ -114,7 +114,7 @@ namespace TCG.Handlers
         public NewsSpecialityInfo GetNewsSpecialityInfoById(Connection conn, int id)
         {
             conn.Dblink = DBLinkNums.News;
-            string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM T_News_Speciality (NOLOCK) WHERE iId=" + id.ToString();
+            string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM Speciality (NOLOCK) WHERE iId=" + id.ToString();
             DataTable dt = conn.GetDataTable(SQL);
             if (dt == null) return null;
             if (dt.Rows.Count != 1) return null;
@@ -141,7 +141,7 @@ namespace TCG.Handlers
         public DataTable GetAllNewsSpecialityInfo(Connection conn)
         {
             conn.Dblink = DBLinkNums.News;
-            string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM T_News_Speciality (NOLOCK)";
+            string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM Speciality (NOLOCK)";
             return conn.GetDataTable(SQL);
         }
 

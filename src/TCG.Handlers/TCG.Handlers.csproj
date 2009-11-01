@@ -50,7 +50,6 @@
     <Compile Include="Handlers\FileHandlers\FileClassHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileInfoHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
-    <Compile Include="Handlers\NewsFromHandlers.cs" />
     <Compile Include="Handlers\NewsInfoHandlers.cs" />
     <Compile Include="Handlers\NewsSpecialityHandlers.cs" />
     <Compile Include="Handlers\UserHandlers\UserLoginHandlers.cs">

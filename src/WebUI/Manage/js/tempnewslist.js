@@ -153,7 +153,7 @@ function PageCreat() {
 		CreateDiv.Start("生成单页模版文件");
 		CreateDiv.set =1;
 		for(var i=0;i<o.length;i++){
-			var t=GetTemplateInfoById(o[i]);
+			var t=GetTemplateById(o[i]);
 			if(t==null)continue;
 			if(t[5]!=0)continue;
 			work.val("Create");
@@ -163,7 +163,7 @@ function PageCreat() {
 			
 		}
 	}else{
-		var t2=GetTemplateInfoById(temps);
+		var t2=GetTemplateById(temps);
 		var s=true;
 		if(t2==null){
 		    s=false;

@@ -55,7 +55,7 @@ public partial class files_fileinfos : adminMain
     {
         base.conn.SetConnStr = base.handlerService.fileService.MianDatabase;
         PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "T_Files_FileInfos";
+        sItem.tableName = "fileresources";
 
         ArrayList arrshowfied = new ArrayList();
         arrshowfied.Add("iId");

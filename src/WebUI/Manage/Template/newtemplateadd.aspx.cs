@@ -39,7 +39,7 @@ public partial class Template_newtemplateadd : adminMain
         }
         else
         {
-            TemplateInfo item = new TemplateInfo();
+            Template item = new Template();
             item.vcTempName = objectHandlers.Post("vcTempName");
             item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(objectHandlers.Post("tType")));
             item.iParentId = objectHandlers.Post("iParentid");

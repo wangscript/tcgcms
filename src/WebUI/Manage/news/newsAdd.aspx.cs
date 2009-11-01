@@ -42,7 +42,7 @@ public partial class news_newsAdd : adminMain
             {
                 Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
                 this.iClassId.Value = item.ClassInfo.iId.ToString();
-                this.iFrom.Value = item.FromInfo.iId.ToString();
+              
                 this.iTitle.Value = item.vcTitle;
                 this.iUrl.Value = item.vcUrl;
                 this.iKeyWords.Value = item.vcKeyWord;
@@ -129,7 +129,7 @@ public partial class news_newsAdd : adminMain
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
         item.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")),false);
-        item.FromInfo.iId = objectHandlers.ToInt(objectHandlers.Post("iFrom"));
+      
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
         item.vcSmallImg = objectHandlers.Post("iSmallImg");
@@ -151,12 +151,7 @@ public partial class news_newsAdd : adminMain
             return;
         }
 
-        if (item.FromInfo.iId == 0)
-        {
-            base.AjaxErch("-1000000042");
-            base.Finish();
-            return;
-        }
+
         if (item.ClassInfo.iId == 0)
         {
             base.AjaxErch("-1000000056");
@@ -185,7 +180,7 @@ public partial class news_newsAdd : adminMain
             {
                 Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
 
-                TemplateInfo titem = base.handlerService.templateHandlers.GetTemplateInfoByID(base.conn, cif.iTemplate,false);
+                Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
                 cif = null;
 
                 TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
