@@ -220,9 +220,9 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.iId.ToString());
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.Id.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.Id, " > "));
 
                 
             }
@@ -242,8 +242,8 @@ namespace TCG.Handlers
 
         private void TagForNewsClassInfo(ref TCGTagPagerInfo pagerinfo)
         {
-            int id = objectHandlers.ToInt(this.GetAttribute("id"));
-            if (id == 0)
+            string id = this.GetAttribute("id");
+            if (string.IsNullOrEmpty(id))
             {
                 pagerinfo.Read = false;
                 return;
@@ -256,12 +256,12 @@ namespace TCG.Handlers
                 return;
             }
 
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iID$", item.iId.ToString());
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iID$", item.Id.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcName$", item.vcName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.iParent.ToString());
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.iId, " > "));
+                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.Id, " > "));
 
             pagerinfo.PageTitle = item.vcClassName;
 

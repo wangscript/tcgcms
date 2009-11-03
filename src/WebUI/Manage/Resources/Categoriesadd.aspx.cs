@@ -30,7 +30,7 @@ public partial class resources_categoriesadd : adminMain
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
-            cif.iParent = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
+            cif.Parent = objectHandlers.Post("iClassId");
             cif.iTemplate = objectHandlers.Post("sTemplate");
             cif.iListTemplate = objectHandlers.Post("slTemplate");
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
@@ -41,7 +41,7 @@ public partial class resources_categoriesadd : adminMain
                 return;
             }
 
-            if (cif.iParent != 0)
+            if (string.IsNullOrEmpty(cif.Parent))
             {
                 if (string.IsNullOrEmpty(cif.iTemplate) || string.IsNullOrEmpty(cif.iListTemplate))
                 {

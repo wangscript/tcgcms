@@ -43,7 +43,7 @@ namespace TCG.Handlers
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.iId;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;
@@ -84,7 +84,7 @@ namespace TCG.Handlers
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.iId;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;
@@ -189,7 +189,7 @@ namespace TCG.Handlers
             conn.Dblink = DBLinkNums.News;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.iId;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;
@@ -232,7 +232,7 @@ namespace TCG.Handlers
             if (ds.Tables[0].Rows.Count == 1)
             {
                 item.vcTitle = (string)ds.Tables[0].Rows[0]["vcTitle"];
-                item.ClassInfo.iId = (int)ds.Tables[0].Rows[0]["iClassID"];
+                item.ClassInfo.Id = ds.Tables[0].Rows[0]["iClassID"].ToString();
                 item.vcUrl = (string)ds.Tables[0].Rows[0]["vcUrl"];
                 item.vcContent = (string)ds.Tables[0].Rows[0]["vcContent"];
                 item.vcAuthor = (string)ds.Tables[0].Rows[0]["vcAuthor"];
@@ -258,7 +258,7 @@ namespace TCG.Handlers
             {
                 item.ClassInfo.vcClassName = (string)ds.Tables[1].Rows[0]["vcClassName"];
                 item.ClassInfo.vcName = (string)ds.Tables[1].Rows[0]["vcName"];
-                item.ClassInfo.iParent = (int)ds.Tables[1].Rows[0]["iParent"];
+                item.ClassInfo.Parent = ds.Tables[1].Rows[0]["iParent"].ToString();
                 item.ClassInfo.iTemplate = ds.Tables[1].Rows[0]["iTemplate"].ToString();
                 item.ClassInfo.iListTemplate = ds.Tables[1].Rows[0]["iListTemplate"].ToString();
                 item.ClassInfo.vcDirectory = (string)ds.Tables[1].Rows[0]["vcDirectory"];
@@ -351,11 +351,11 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public int CheckThiefTopic(Connection conn, int classid, string title)
+        public int CheckThiefTopic(Connection conn, string classid, string title)
         {
             conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp0.Value = title;
-            SqlParameter sp1 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp1.Value = classid;
+            SqlParameter sp1 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp1.Value = classid;
             SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
             string[] reValues = conn.Execute("SP_News_CheckThiefTopic", new SqlParameter[] { sp0, sp1, sp2}, new int[] { 2 });
             if (reValues != null)

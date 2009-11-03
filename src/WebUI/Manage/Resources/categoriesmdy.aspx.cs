@@ -29,12 +29,12 @@ public partial class resources_categoriesmdy : adminMain
         {
            
             Categories cif = new Categories();
-            cif.iId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+            cif.Id = objectHandlers.Get("iClassId");
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
-            cif.iParent = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
+            cif.Parent = objectHandlers.Post("iClassId");
             cif.iTemplate = objectHandlers.Post("sTemplate");
             cif.iListTemplate = objectHandlers.Post("slTemplate");
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
@@ -46,7 +46,7 @@ public partial class resources_categoriesmdy : adminMain
                 return;
             }
 
-            if (cif.iParent != 0)
+            if (string.IsNullOrEmpty(cif.Parent))
             {
                 if (string.IsNullOrEmpty(cif.iTemplate) || string.IsNullOrEmpty(cif.iListTemplate ))
                 {
@@ -65,7 +65,7 @@ public partial class resources_categoriesmdy : adminMain
 
     private void Init()
     {
-        int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+        string iClassId = objectHandlers.Get("iClassId");
 
         Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, iClassId,false);
         if (cif == null)
@@ -74,7 +74,7 @@ public partial class resources_categoriesmdy : adminMain
             return;
         }
 
-        this.iClassId.Value = cif.iParent.ToString();
+        this.iClassId.Value = cif.Parent.ToString();
         this.iClassName.Value = cif.vcClassName;
         this.iName.Value = cif.vcName;
         this.iUrl.Value = cif.vcUrl;

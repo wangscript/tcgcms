@@ -54,7 +54,7 @@ namespace TCG.Handlers
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
+                string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE iParent = " + parentid.ToString();
                 return conn.GetDataTable(Sql);
             }
@@ -78,7 +78,7 @@ namespace TCG.Handlers
         public DataTable GetAllCategories(Connection conn)
         {
             conn.Dblink = DBLinkNums.News;
-            string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
+            string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
@@ -113,17 +113,17 @@ namespace TCG.Handlers
         /// <param name="id"></param>
         /// <param name="readdb"></param>
         /// <returns></returns>
-        public string GetAllChildCategoriesIdByCategoriesId(Connection conn, int id, bool readdb)
+        public string GetAllChildCategoriesIdByCategoriesId(Connection conn, string id, bool readdb)
         {
             //if (id == 0) return "";
             DataTable allClass = this.GetCategoriesByCach(conn, readdb);
             if (allClass == null) return "";
-            DataRow[] rows = allClass.Select("iParent = " + id.ToString());
-            string str = id.ToString();
+            DataRow[] rows = allClass.Select("[Parent] = '" + id + "' ");
+            string str = "'" + id.ToString() + "'";
             for (int i = 0; i < rows.Length; i++)
             {
                 
-                string t = GetAllChildCategoriesIdByCategoriesId(conn, (int)rows[i]["iId"], readdb);
+                string t = GetAllChildCategoriesIdByCategoriesId(conn, rows[i]["Id"].ToString(), readdb);
                 if (!string.IsNullOrEmpty(t)) str += "," + t;
             }
             return str;
@@ -137,19 +137,19 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="sh"></param>
         /// <returns></returns>
-        public string GetResourcesCategoriesIndex(Connection conn, Dictionary<string, string> config, int classid, string sh)
+        public string GetResourcesCategoriesIndex(Connection conn, Dictionary<string, string> config, string classid, string sh)
         {
-            if (classid == 0) return "";
+            if (string.IsNullOrEmpty(classid)) return "";
             DataTable allClass = this.GetCategoriesByCach(conn, false);
             if (allClass == null) return "";
-            DataRow[] rows = allClass.Select("iID = " + classid.ToString());
+            DataRow[] rows = allClass.Select("Id = '" + classid.ToString() + "'");
             string str = "";
             if (rows.Length==1)
             {
 
                 string url = (rows[0]["vcUrl"].ToString().IndexOf(".") > -1) ? rows[0]["vcUrl"].ToString() : rows[0]["vcUrl"].ToString() + config["FileExtension"];
                 str = "<a href=\"" + url + "\" target=\"_blank\">" + rows[0]["vcName"].ToString() + "</a>";
-                string t = GetResourcesCategoriesIndex(conn, config, (int)rows[0]["iParent"], sh);
+                string t = GetResourcesCategoriesIndex(conn, config, rows[0]["Parent"].ToString(), sh);
                 if (!string.IsNullOrEmpty(t)) str = t + sh + str;
             }
             return str;
@@ -161,14 +161,14 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="iClassID"></param>
         /// <returns></returns>
-        public Categories GetCategoriesById(Connection conn, int iClassID, bool readdb)
+        public Categories GetCategoriesById(Connection conn, string iClassID, bool readdb)
         {
             DataTable dt = null;
             if (readdb)
             {
                 conn.Dblink = DBLinkNums.News;
-                string Sql = "SELECT iID,vcClassName,vcName,iParent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
-                    + " WHERE iID =" + iClassID.ToString();
+                string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
+                    + " WHERE ID = '" + iClassID.ToString() + "'";
                 dt = conn.GetDataTable(Sql);
             }
             else
@@ -176,7 +176,7 @@ namespace TCG.Handlers
                 DataTable allclass = this.GetCategoriesByCach(conn, false);
                 if (allclass != null)
                 {
-                    DataRow[] rows = allclass.Select("iID =" + iClassID.ToString());
+                    DataRow[] rows = allclass.Select("Id = '" + iClassID.ToString() + "'");
                     if (rows.Length == 1)
                     {
                         DataSet ds = new DataSet();
@@ -189,10 +189,10 @@ namespace TCG.Handlers
             {
                 Categories cif = new Categories();
                 DataRow Row = dt.Rows[0];
-                cif.iId = (int)Row["iId"];
+                cif.Id = Row["Id"].ToString();
                 cif.iListTemplate = Row["iListTemplate"].ToString();
                 cif.iOrder = (int)Row["iOrder"];
-                cif.iParent = (int)Row["iParent"];
+                cif.Parent = Row["Parent"].ToString();
                 cif.iTemplate = Row["iTemplate"].ToString();
                 cif.vcClassName = (string)Row["vcClassName"];
                 cif.vcDirectory = (string)Row["vcDirectory"];
@@ -226,7 +226,7 @@ namespace TCG.Handlers
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = cif.vcName;
-            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = cif.iParent;
+            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = cif.Parent;
             SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.Int, 4); sp5.Value = cif.iTemplate;
             SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.Int, 4); sp6.Value = cif.iListTemplate;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = cif.vcDirectory;
@@ -259,14 +259,14 @@ namespace TCG.Handlers
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
-            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = classinf.iParent;
+            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = classinf.Parent;
             SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.VarChar, 36); sp5.Value = classinf.iTemplate;
             SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = classinf.iListTemplate;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = classinf.vcDirectory;
             SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = classinf.vcUrl;
             SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = classinf.iOrder;
             SqlParameter sp10 = new SqlParameter("@action", SqlDbType.Char, 2); sp10.Value = "02";
-            SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp11.Value = classinf.iId;
+            SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp11.Value = classinf.Id;
             SqlParameter sp12 = new SqlParameter("@reValue", SqlDbType.Int); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp13.Value = classinf.cVisible;
             string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,

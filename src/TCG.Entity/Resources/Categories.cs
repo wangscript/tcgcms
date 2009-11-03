@@ -21,11 +21,11 @@ namespace TCG.Entity
 {
     public class Categories
     {
-        public int iId { get { return this._iid; } set { this._iid = value; } }
+        public string Id { get { return this._iid; } set { this._iid = value; } }
         /// <summary>
         /// ¸¸ÀàID
         /// </summary>
-        public int iParent { get { return this._iparent; } set { this._iparent = value; } }
+        public string Parent { get { return this._iparent; } set { this._iparent = value; } }
         /// <summary>
         /// ÎÄÕÂÄ£°æ
         /// </summary>
@@ -60,8 +60,8 @@ namespace TCG.Entity
         /// </summary>
         public string cVisible { get { return this._cvisible; } set { this._cvisible = value; } }
 
-        private int _iid;
-        private int _iparent;
+        private string _iid;
+        private string _iparent;
         private string _itemplate;
         private string _ilisttemplate;
         private int _iorder;

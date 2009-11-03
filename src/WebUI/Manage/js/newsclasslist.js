@@ -123,7 +123,7 @@ function SetMdyInnerHTML(){
 	var CreateClassDivClose=$("CreateClassDivClose");
 	ifCreateAdd.style.width="100%";
 	ifCreateAdd.style.height="100%";
-	ifCreateAdd.src="classmdy.aspx?iClassId="+GetCheckBoxValues("CheckID");
+	ifCreateAdd.src = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID");
 	CreateClassDivClose.className="CreateClassDivClose";
 }
 
@@ -133,7 +133,7 @@ function SetCreateInnerHTML(){
 	var par=$("iClassId");
 	ifCreateAdd.style.width="100%";
 	ifCreateAdd.style.height="100%";
-	ifCreateAdd.src="classadd.aspx?iParentId="+par.value;
+	ifCreateAdd.src = "Categoriesadd.aspx?iParentId=" + par.value;
 	CreateClassDivClose.className="CreateClassDivClose";
 }
 

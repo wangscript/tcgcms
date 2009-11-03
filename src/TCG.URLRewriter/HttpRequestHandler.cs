@@ -151,7 +151,7 @@ namespace TCG.URLRewriter
 
                         TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
                         tcgthdl1.handlerService = handlerservice;
-                        tcgthdl1.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["iId"].ToString());
+                        tcgthdl1.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["Id"].ToString());
                         tcgthdl1.NeedCreate = false;
                         tcgthdl1.PagerInfo.DoAllPage = false;
                         tcgthdl1.PagerInfo.Page = DcurPage;
