@@ -41,7 +41,7 @@ public partial class resources_resourceshandlers : adminMain
             else
             {
                 Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
-                this.iClassId.Value = item.ClassInfo.iId.ToString();
+                this.iClassId.Value = item.ClassInfo.Id.ToString();
               
                 this.iTitle.Value = item.vcTitle;
                 this.iUrl.Value = item.vcUrl;
@@ -128,7 +128,7 @@ public partial class resources_resourceshandlers : adminMain
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.ToInt(objectHandlers.Post("iClassId")),false);
+        item.ClassInfo = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, objectHandlers.Post("iClassId"),false);
       
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
@@ -152,7 +152,7 @@ public partial class resources_resourceshandlers : adminMain
         }
 
 
-        if (item.ClassInfo.iId == 0)
+        if (string.IsNullOrEmpty(item.ClassInfo.Id))
         {
             base.AjaxErch("-1000000056");
             base.Finish();
@@ -178,7 +178,7 @@ public partial class resources_resourceshandlers : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
+                Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
 
                 Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
                 cif = null;

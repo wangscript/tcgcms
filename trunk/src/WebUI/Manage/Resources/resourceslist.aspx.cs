@@ -69,7 +69,8 @@ public partial class resources_resourceslist : adminMain
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+        string iClassId = objectHandlers.Get("iClassId");
+        if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
         this.iClassId.Value = iClassId.ToString();
 
         string allchild = base.handlerService.newsClassHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
@@ -197,7 +198,7 @@ public partial class resources_resourceslist : adminMain
         Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
         if (item == null) return;
 
-        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.iId, false);
+        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
 
         Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
         cif = null;

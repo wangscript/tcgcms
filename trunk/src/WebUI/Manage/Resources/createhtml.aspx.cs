@@ -88,7 +88,7 @@ public partial class news_createhtml : adminMain
 
     private void Create()
     {
-        int ClassId = objectHandlers.ToInt(objectHandlers.Post("tClassId"));
+        string ClassId = objectHandlers.Post("tClassId");
         string id = objectHandlers.Post("iId");
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
@@ -203,7 +203,7 @@ public partial class news_createhtml : adminMain
         }
         else if (iStypeCheck == 2)
         {
-            int iClassId = objectHandlers.ToInt(objectHandlers.Post("iClassId"));
+            string iClassId = objectHandlers.Post("iClassId");
 
             string allchild = base.handlerService.newsClassHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
 

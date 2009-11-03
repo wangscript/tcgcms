@@ -64,7 +64,7 @@ public partial class resources_categorieslist : adminMain
         sItem.tableName = "Categories";
 
         ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
+        arrshowfied.Add("Id");
         arrshowfied.Add("vcClassName");
         arrshowfied.Add("vcName");
         arrshowfied.Add("vcDirectory");
@@ -80,7 +80,7 @@ public partial class resources_categorieslist : adminMain
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
         int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
-        sItem.strCondition = "iParent=" + iParent.ToString();
+        sItem.strCondition = "Parent='" + iParent.ToString() + "'";
         this.iClassId.Value = iParent.ToString();
 
         int curPage = 0;
@@ -115,14 +115,14 @@ public partial class resources_categorieslist : adminMain
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sOrder = (Span)e.Item.FindControl("sOrder");
 
-        CheckID.Text = Row["iId"].ToString();
+        CheckID.Text = Row["Id"].ToString();
 
         sOrder.Text = Row["iOrder"].ToString();
         
-        string text = "<a href=\"?iParentId=" + Row["iId"].ToString() + "\" title=\"查看子分类\">" 
+        string text = "<a href=\"?iParentId=" + Row["Id"].ToString() + "\" title=\"查看子分类\">" 
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
         classname.Text = text + Row["vcClassName"].ToString();
-        lname.Text = "<a href='newslist.aspx?iClassId=" + Row["iId"].ToString() + "' title='资讯列表'><img src='../images/icon/09.gif'></a>" 
+        lname.Text = "<a href='newslist.aspx?iClassId=" + Row["Id"].ToString() + "' title='资讯列表'><img src='../images/icon/09.gif'></a>" 
             + Row["vcName"].ToString();
         directory.Text = Row["vcDirectory"].ToString();
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
@@ -146,8 +146,8 @@ public partial class resources_categorieslist : adminMain
 
     private void NewsClassCreate()
     {
-        int tClassID = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
-        if (tClassID == 0)
+        string tClassID = objectHandlers.Post("DelClassId");
+        if (string.IsNullOrEmpty(tClassID))
         {
             base.AjaxErch("<a>生成失败,分类ID为0!</a>");
             base.Finish();
@@ -239,8 +239,8 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
-        if (iMdyID == 0)
+        string iMdyID = objectHandlers.Post("iMdyID");
+        if (string.IsNullOrEmpty(iMdyID))
         {
             base.AjaxErch("-1");
             base.Finish();
@@ -270,4 +270,3 @@ public partial class resources_categorieslist : adminMain
 
     }
 }
-

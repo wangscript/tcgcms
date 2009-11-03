@@ -36,7 +36,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public string StringConditionFun(Connection conn, string str)
         {
-            string pattern = @"\$TCG.GetAllClassID\(([0-9]+)\)";
+            string pattern = @"\$TCG.GetAllClassID\(([a-z0-9]{8}\-[a-z0-9]{4}-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12})\)";
             MatchCollection matchs = this.GetMatchs(pattern, str);
             if (matchs.Count > 0)
             {
@@ -44,7 +44,7 @@ namespace TCG.Handlers
 
                 foreach (Match item in matchs)
                 {
-                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(conn, objectHandlers.ToInt(item.Result("$1")),false));
+                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(conn, item.Result("$1"),false));
                 }
                 clhds = null;
             }
