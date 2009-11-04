@@ -179,7 +179,7 @@ function PageCreat() {
 		CreateDiv.set =1;
 		CreateDiv.setcount=1;
 		work.val("Create");
-		iTemplateId.value=temps;
+		iTemplateId.val(temps);
 		$('#form1').submit();
 	}
 }
