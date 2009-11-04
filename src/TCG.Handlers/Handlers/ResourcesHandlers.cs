@@ -43,7 +43,7 @@ namespace TCG.Handlers
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;
@@ -84,7 +84,7 @@ namespace TCG.Handlers
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;
@@ -189,7 +189,7 @@ namespace TCG.Handlers
             conn.Dblink = DBLinkNums.News;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
-            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.Int, 4); sp0.Value = inf.ClassInfo.Id;
+            SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
             SqlParameter sp2 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 200); sp2.Value = inf.vcUrl;
             SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp3.Value = inf.vcContent;

@@ -2,7 +2,7 @@ $(document).ready(function() {
     var datas = "topics=";
     for (var i = 1; i < topics.length; i++) {
         var txt = (i == topics.length - 1) ? "" : ",";
-        datas += topics[i] + txt;
+        datas += "'" + topics[i] + "'" + txt;
     }
 
     $.ajax(
