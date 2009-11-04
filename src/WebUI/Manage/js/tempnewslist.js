@@ -111,7 +111,7 @@ function AddTemplate(){
 	var iSiteId=$("#iSiteId");
 	var SytemType=$("#SytemType");
 	var iParentid=$("#iParentid");
-	window.location.href = "newtemplateadd.aspx?iSiteId=" + iSiteId.value + "&SytemType=" + SytemType.val() + "&iParentid=" + iParentid.val();
+	window.location.href = "templateadd.aspx?iSiteId=" + iSiteId.value + "&SytemType=" + SytemType.val() + "&iParentid=" + iParentid.val();
 }
 function EditTemplate(){
 	var vs=GetCheckBoxValues("CheckID")
@@ -124,7 +124,7 @@ function EditTemplate(){
 			return;
 		}
 	}
-	window.location.href="newtemplatemdy.aspx?templateid="+vs;
+	window.location.href="templatemdy.aspx?templateid="+vs;
 }
 
 function sTypeChange(obj){

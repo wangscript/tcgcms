@@ -79,9 +79,10 @@ public partial class resources_categorieslist : adminMain
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
-        sItem.strCondition = "Parent='" + iParent.ToString() + "'";
-        this.iClassId.Value = iParent.ToString();
+        string iParent = objectHandlers.Get("iParentId");
+        if (string.IsNullOrEmpty(iParent)) iParent = "0";
+        sItem.strCondition = "Parent='" + iParent + "'";
+        this.iClassId.Value = iParent;
 
         int curPage = 0;
         int pageCount = 0;
@@ -122,7 +123,7 @@ public partial class resources_categorieslist : adminMain
         string text = "<a href=\"?iParentId=" + Row["Id"].ToString() + "\" title=\"查看子分类\">" 
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
         classname.Text = text + Row["vcClassName"].ToString();
-        lname.Text = "<a href='newslist.aspx?iClassId=" + Row["Id"].ToString() + "' title='资讯列表'><img src='../images/icon/09.gif'></a>" 
+        lname.Text = "<a href='?iClassId=" + Row["Id"].ToString() + "' title='资讯列表'><img src='../images/icon/09.gif'></a>" 
             + Row["vcName"].ToString();
         directory.Text = Row["vcDirectory"].ToString();
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");

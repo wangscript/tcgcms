@@ -222,20 +222,22 @@ namespace TCG.Handlers
         public int CreateCategories(Connection conn, Categories cif, string adminname)
         {
             conn.Dblink = DBLinkNums.News;
+            cif.Id = Guid.NewGuid().ToString();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = cif.vcName;
-            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = cif.Parent;
-            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.Int, 4); sp5.Value = cif.iTemplate;
-            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.Int, 4); sp6.Value = cif.iListTemplate;
+            SqlParameter sp4 = new SqlParameter("@Parent", SqlDbType.VarChar, 36); sp4.Value = cif.Parent;
+            SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.VarChar, 36); sp5.Value = cif.iTemplate;
+            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = cif.iListTemplate;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = cif.vcDirectory;
             SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = cif.vcUrl;
             SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = cif.iOrder;
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
             SqlParameter sp11 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp11.Value = cif.cVisible;
+            SqlParameter sp12 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp12.Value = cif.Id;
             string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11}, new int[] { 10 });
+                sp7, sp8, sp9 ,sp10,sp11,sp12}, new int[] { 10 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -259,14 +261,14 @@ namespace TCG.Handlers
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
-            SqlParameter sp4 = new SqlParameter("@iParent", SqlDbType.Int, 4); sp4.Value = classinf.Parent;
+            SqlParameter sp4 = new SqlParameter("@Parent", SqlDbType.VarChar, 36); sp4.Value = classinf.Parent;
             SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.VarChar, 36); sp5.Value = classinf.iTemplate;
             SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = classinf.iListTemplate;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = classinf.vcDirectory;
             SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = classinf.vcUrl;
             SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = classinf.iOrder;
             SqlParameter sp10 = new SqlParameter("@action", SqlDbType.Char, 2); sp10.Value = "02";
-            SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp11.Value = classinf.Id;
+            SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp11.Value = classinf.Id;
             SqlParameter sp12 = new SqlParameter("@reValue", SqlDbType.Int); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp13.Value = classinf.cVisible;
             string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,

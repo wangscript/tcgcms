@@ -156,7 +156,7 @@ public partial class resources_resourceslist : adminMain
             sCreated.Text = "<img src='../images/icon/falseIcon.gif' class='imginlist' />";
         }
 
-        string text = "<a href=\"newsadd.aspx?newsid=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
+        string text = "<a href=\"resourceshandlers.aspx?newsid=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
         sTitle.Text = text + "<a href='../.." + Row["vcFilePath"].ToString() + "' target='_blank'>" + Row["vcTitle"].ToString() + "</a>";
         sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID(" + Row["iClassID"].ToString() + ");</script>";

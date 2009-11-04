@@ -15,7 +15,7 @@ function classTitleInit(){
 	    a = "";
 	   
 		GetNewsListTitleByClassId(classobj.value);
-		m.innerHTML = "<span class='txt bold lfl'><a href='newslist.aspx'>所有资讯</a>>>"+a+"</span>" + m.innerHTML;
+		m.innerHTML = "<span class='txt bold lfl'><a href='?'>所有资讯</a>>>"+a+"</span>" + m.innerHTML;
 	//}
 }
 
@@ -65,18 +65,18 @@ function EditNewsInfo(){
 		SetAjaxDiv("err",false,"请保证您只选择了一个资源！");
 		return;
 	}
-	window.location.href="newsadd.aspx?newsid="+temps;
+	window.location.href = "resourceshandlers.aspx?newsid=" + temps;
 }
 
 function ShowClassNameByClassID(id){
 	if(NewsLis==null)return;
 	var o = GetNewsItemById(id);
 	if(o==null)return;
-	document.write("<a href=\"newslist.aspx?iclassid="+o[0]+"\">" + o[2] + "</a>");	
+	document.write("<a href=\"?iclassid="+o[0]+"\">" + o[2] + "</a>");	
 }
 
 function AddNewsInfo(){
-	window.location.href="newsAdd.aspx?iClassId="+$("iClassId").value;
+    window.location.href = "resourceshandlers.aspx?iClassId=" + $("iClassId").value;
 }
 
 function CreateNews(){

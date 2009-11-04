@@ -144,7 +144,7 @@ namespace TCG.Handlers
             string condition = this.GetAttribute("condition");
             if (string.IsNullOrEmpty(condition)) return;
             string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM Categories (NOLOCK) WHERE "
-                + " iID !='' AND " + condition;
+                + " ID !='' AND " + condition;
 
             if (!string.IsNullOrEmpty(orders))
             {

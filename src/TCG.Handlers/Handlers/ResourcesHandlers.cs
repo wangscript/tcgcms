@@ -258,7 +258,7 @@ namespace TCG.Handlers
             {
                 item.ClassInfo.vcClassName = (string)ds.Tables[1].Rows[0]["vcClassName"];
                 item.ClassInfo.vcName = (string)ds.Tables[1].Rows[0]["vcName"];
-                item.ClassInfo.Parent = ds.Tables[1].Rows[0]["iParent"].ToString();
+                item.ClassInfo.Parent = ds.Tables[1].Rows[0]["Parent"].ToString();
                 item.ClassInfo.iTemplate = ds.Tables[1].Rows[0]["iTemplate"].ToString();
                 item.ClassInfo.iListTemplate = ds.Tables[1].Rows[0]["iListTemplate"].ToString();
                 item.ClassInfo.vcDirectory = (string)ds.Tables[1].Rows[0]["vcDirectory"];
