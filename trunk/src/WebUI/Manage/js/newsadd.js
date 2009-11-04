@@ -22,6 +22,7 @@ function CheckAdd(){
 }
 
 function CheckImgBack(val) {
+    alert(val);
     $("iContent_content").value = val;
     $("form1").action = "newsadd.aspx";
 	var work = $("work");
@@ -109,13 +110,13 @@ function NewsAddPostBack(val) {
 }
 
 
-function ShowNewsClassSl(){
-	var iClassName=$("iClassName");
-	var alist =GetClassItems(0);
-	if(alist.length>0){
-		GroupDiv.HidAuto = false;
-		GroupDiv.CreadDiv("ClassDiv",iClassName,alist,iClassName.offsetWidth,null,6,0);
-	}
+function ShowNewsClassSl() {
+    var iClassName = $("iClassName");
+    var alist = GetClassItems("0");
+    if (alist.length > 0) {
+        GroupDiv.HidAuto = false;
+        GroupDiv.CreadDiv("ClassDiv", iClassName, alist, iClassName.offsetWidth, null, 6, 0);
+    }
 }
 
 function SelectClassValue(val,txt){
@@ -180,7 +181,7 @@ function GetClassItems(v){
 			}else{
 				sels=false;
 			}
-			items[n]={href:"javascript:GoTo();",onclick:"SelectClassValue("+NewsLis[i][0]+",'"+NewsLis[i][2]+"');",Text:NewsLis[i][2],onmouseover:"ShowChild(this,"+NewsLis[i][0]+")",onmouseout:"HidChild("+NewsLis[i][0]+")",Sel:sels};
+			items[n]={href:"javascript:GoTo();",onclick:"SelectClassValue(\""+NewsLis[i][0]+"\",\""+NewsLis[i][2]+"\");",Text:NewsLis[i][2],onmouseover:"ShowChild(this,\""+NewsLis[i][0]+"\")",onmouseout:"HidChild(\""+NewsLis[i][0]+"\")",Sel:sels};
 			n++;
 		}
 	}

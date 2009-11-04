@@ -29,7 +29,8 @@ public partial class Common_AllNewsClass : ScriptsMain
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         DataRow Row = dt.Rows[i];
-                        Response.Write("NewsLis[" + i.ToString() + "]=[" + Row["ID"].ToString() + "," + Row["Parent"].ToString() + ",\"" + Row["vcClassName"].ToString() + "\",\""+
+                        Response.Write("NewsLis[" + i.ToString() + "]=[\"" + Row["ID"].ToString() 
+                            + "\",\"" + Row["Parent"].ToString() + "\",\"" + Row["vcClassName"].ToString() + "\",\""+
                             Row["vcName"].ToString() + "\",\"" + Row["iTemplate"].ToString() + "\"];\r\n");
                     }
                 }

@@ -17,7 +17,7 @@ using TCG.Entity;
 using TCG.Handlers;
 using TCG.Data;
 
-public partial class Template_newlist : adminMain
+public partial class Template_templatelist : adminMain
 {
     public int iSite = 0;
     protected void Page_Load(object sender, EventArgs e)
@@ -130,7 +130,7 @@ public partial class Template_newlist : adminMain
 
         string text = "<a href=\"?iParentid=" + Row["Id"].ToString() + "&SkinId=" + iSite.ToString() + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        text += "<a href=\"newtemplatemdy.aspx?templateid=" + Row["Id"].ToString() + "\" title=\"修改模版\">"
+        text += "<a href=\"templatemdy.aspx?templateid=" + Row["Id"].ToString() + "\" title=\"修改模版\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
         classname.Text = text + Row["vcTempName"].ToString();
         updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");

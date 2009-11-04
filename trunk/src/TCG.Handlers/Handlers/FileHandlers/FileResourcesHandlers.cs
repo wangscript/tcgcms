@@ -160,6 +160,9 @@ namespace TCG.Handlers
                     imgfile.iClassId = fileclassid;
 
                     imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
+
+                    
+
                     imgfile.vcType = text1.Substring(text1.LastIndexOf(".") + 1, text1.Length - text1.LastIndexOf(".") - 1);
 
                     WebClient wc = new WebClient();
@@ -167,29 +170,34 @@ namespace TCG.Handlers
                     imgfile.iSize = 100;
                     string filepath = this._fileclasshandlers.GetFilesPathByClassId(imgfile.iClassId);
                     string filename = imgfile.iID + text1.Substring(text1.LastIndexOf("."), text1.Length - text1.LastIndexOf("."));
-                    string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
-                        + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
-                    try
-                    {
-                        objectHandlers.SaveFile(filepatch, "");
-                        if (this.GetUrlError(text1) == 200)
-                        {
-                            wc.DownloadFile(text1, filepatch);
-                            int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
-                            if (rtn < 0)
-                            {
-                                System.IO.File.Delete(filepatch);
-                            }
-                            else
-                            {
-                                content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
-                                temp = text1 + "@@@" + temp;
-                            }
-                        }
 
-                    }
-                    catch
+                    if (filename.IndexOf("?") == -1)
                     {
+
+                        string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
+                            + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
+                        try
+                        {
+                            objectHandlers.SaveFile(filepatch, "");
+                            if (this.GetUrlError(text1) == 200)
+                            {
+                                wc.DownloadFile(text1, filepatch);
+                                int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
+                                if (rtn < 0)
+                                {
+                                    System.IO.File.Delete(filepatch);
+                                }
+                                else
+                                {
+                                    content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
+                                    temp = text1 + "@@@" + temp;
+                                }
+                            }
+
+                        }
+                        catch
+                        {
+                        }
                     }
                     imgfile = null;
                     wc = null;
