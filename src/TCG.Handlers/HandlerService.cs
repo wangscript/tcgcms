@@ -80,19 +80,6 @@ namespace TCG.Handlers
         }
         private ResourcsService _resourcsservice;
 
-        public TagService tagService
-        {
-            get
-            {
-                if (this._ragservice == null)
-                {
-                    this._ragservice = new TagService(base.conn, base.configService,this);
-                }
-                return this._ragservice;
-            }
-        }
-        private TagService _ragservice;
-        
 
         /// <summary>
         /// 用户的操作的服务

@@ -26,7 +26,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class TCGTagStringFunHandlers
+    public class TCGTagStringFunHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// 获得所有子类的ID
@@ -34,7 +34,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="str"></param>
         /// <returns></returns>
-        public string StringConditionFun(Connection conn, string str)
+        public string StringConditionFun(string str)
         {
             string pattern = @"\$TCG.GetAllClassID\(([a-z0-9]{8}\-[a-z0-9]{4}-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12})\)";
             MatchCollection matchs = this.GetMatchs(pattern, str);
@@ -44,7 +44,7 @@ namespace TCG.Handlers
 
                 foreach (Match item in matchs)
                 {
-                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(conn, item.Result("$1"),false));
+                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(item.Result("$1"),false));
                 }
                 clhds = null;
             }
@@ -52,7 +52,7 @@ namespace TCG.Handlers
             return str;
         }
 
-        public string StringColoumFun(Connection conn, string str, bool findtcgstringfunByF)
+        public string StringColoumFun(string str, bool findtcgstringfunByF)
         {
             string pattern = @"\$TCG.CutStrLeft\(<TCG>([\S\s]*?)</TCG>\,([0-9]+)\)";
             string text1 = "";
@@ -63,7 +63,7 @@ namespace TCG.Handlers
                 findtcgstringfun = true;
                 foreach (Match item in matchs)
                 {
-                    text1 = this.StringColoumFun(conn, item.Result("$1"), findtcgstringfun);
+                    text1 = this.StringColoumFun(item.Result("$1"), findtcgstringfun);
                     try
                     {
                         str = str.Replace(item.Value, objectHandlers.Left(text1,objectHandlers.ToInt(item.Result("$2"))));
@@ -80,7 +80,7 @@ namespace TCG.Handlers
                 findtcgstringfun = true;
                 foreach (Match item in matchs)
                 {
-                    text1 = this.StringColoumFun(conn, item.Result("$1"), findtcgstringfun);
+                    text1 = this.StringColoumFun(item.Result("$1"), findtcgstringfun);
                     str = str.Replace(item.Value, objectHandlers.GetTextWithoutHtml(text1));
                 }
             }

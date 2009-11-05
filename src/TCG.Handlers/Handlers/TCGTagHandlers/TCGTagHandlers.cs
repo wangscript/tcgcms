@@ -31,10 +31,14 @@ namespace TCG.Handlers
     /// <summary>
     /// TempLate 的摘要说明
     /// </summary>
-    public class TCGTagHandlers
+    public class TCGTagHandlers : TCGTagBase
     {
-        public TCGTagHandlers()
+        public TCGTagHandlers(Connection conn, ConfigService configservice,HandlerService handlerService)
         {
+            base.conn = conn;
+            base.handlerService = handlerService;
+            base.configService = configservice;
+
             this._pattern = @"<tcg:([^<>]+)\s([^<>]+)>([\S\s]*?)</tcg:\1>";
             this._tcgsystemtag = "<!--TCG:{0}-->";
             this._pagerinfo = new TCGTagPagerInfo();
@@ -54,7 +58,7 @@ namespace TCG.Handlers
                 this._tagtemplates = new List<TCGTagAttributeHandlers>();
                 foreach (Match item in mc)
                 {
-                    this._tagtemplate = new TCGTagAttributeHandlers(this.handlerService);
+                    this._tagtemplate = new TCGTagAttributeHandlers(base.conn,base.configService,base.handlerService);
                     this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                     this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                     this._tagtemplate.TagText = item.Result("$3");
@@ -69,7 +73,7 @@ namespace TCG.Handlers
 
                 for (int i = 0; i < this._tagtemplates.Count; i++)
                 {
-                    this._tagtemplates[i].ReplaceTagText(conn,config, ref this._pagerinfo);
+                    this._tagtemplates[i].ReplaceTagText(ref this._pagerinfo);
                     if (this._tagtemplates[i].Pager)
                     {
                         this._listtemp = null;
@@ -92,14 +96,14 @@ namespace TCG.Handlers
                     Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (item.Success)
                     {
-                        this._tagtemplate = new TCGTagAttributeHandlers(this.handlerService);
+                        this._tagtemplate = new TCGTagAttributeHandlers(base.conn, base.configService, base.handlerService);
                         this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                         this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                         this._tagtemplate.TagText = item.Result("$3");
                         this._tagtemplate.TagType = item.Result("$1");
                         this._tagtemplate.TagHtml = item.Value;
 
-                        this._tagtemplate.ReplaceTagText(conn,config, ref this._pagerinfo);
+                        this._tagtemplate.ReplaceTagText(ref this._pagerinfo);
                         this._listtemp.TagText = this._tagtemplate.TagText;
                         this._temphtml = this._template;
                         this._tagtemplate = null;
@@ -344,21 +348,5 @@ namespace TCG.Handlers
         private bool _needcreate = true;
         private int _currentpage = 0;                         /// 当前页
                                                               /// 
-
-        /// <summary>
-        /// 提供对管理员操作的方法
-        /// </summary>
-        public HandlerService handlerService
-        {
-            set
-            {
-                this._handlerservice = value;
-            }
-            get
-            {
-                return this._handlerservice;
-            }
-        }
-        private HandlerService _handlerservice;
     }
 }

@@ -53,7 +53,6 @@ public partial class files_fileinfos : adminMain
 
     private void SearchInit()
     {
-        base.conn.SetConnStr = base.handlerService.fileService.MianDatabase;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "fileresources";
 

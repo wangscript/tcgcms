@@ -24,7 +24,7 @@ using TCG.Entity;
 using TCG.Utils;
 namespace TCG.Handlers
 {
-    public class TagService : ObjectHandlersBase
+    public class TagService : TCGTagBase
     {
         /// <summary>
         /// 构造函数
@@ -33,7 +33,7 @@ namespace TCG.Handlers
         {
             base.conn = conn;
             base.configService = configservice;
-            this._handlerservice = handlerservice;
+            base.handlerService = handlerservice;
         }
 
         /// <summary>
@@ -45,8 +45,7 @@ namespace TCG.Handlers
             {
                 if (this._tcgtaghandlers == null)
                 {
-                    this._tcgtaghandlers = new TCGTagHandlers();
-                    this._tcgtaghandlers.handlerService = this._handlerservice;
+                    this._tcgtaghandlers = new TCGTagHandlers(base.conn,base.configService,base.handlerService);
                 }
                 return this._tcgtaghandlers;
             }

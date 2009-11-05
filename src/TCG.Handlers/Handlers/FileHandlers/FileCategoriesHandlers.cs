@@ -25,45 +25,14 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class FileCategoriesHandlers
+    public class FileCategoriesHandlers : FileResourcesHandlerBase
     {
-        /// <summary>
-        /// 获得配置信息支持
-        /// </summary>
-        public ConfigService configService
+
+        public FileCategoriesHandlers(Connection conn, ConfigService configservice)
         {
-            set
-            {
-                this._configservice = value;
-            }
+            base.conn = conn;
+            base.configService = configservice;
         }
-        private ConfigService _configservice;
-
-        /// <summary>
-        /// 数据库链接字符串
-        /// </summary>
-        public string ConnStr
-        {
-            set
-            {
-                this._conn.SetConnStr = value;
-            }
-        }
-        private string _connstr;
-
-
-        /// <summary>
-        /// 获得数据库访问支持
-        /// </summary>
-        public Connection conn
-        {
-            set
-            {
-                this._conn = value;
-            }
-        }
-        private Connection _conn;
-
 
         /// <summary>
         /// 从数据库获取所遇分类信息
@@ -72,7 +41,8 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllFilesClassFromDb()
         {
-            return this._conn.GetDataTable("SELECT iId,vcFileName,iParentId,vcMeno,dCreateDate FROM filecategories (NOLOCK)");
+            base.SetMainFileDataBase();
+            return base.conn.GetDataTable("SELECT iId,vcFileName,iParentId,vcMeno,dCreateDate FROM filecategories (NOLOCK)");
         }
 
         /// <summary>
@@ -126,7 +96,7 @@ namespace TCG.Handlers
         public string GetFilesPathByClassId(int classid)
         {
             string text1 = this.GetFilesPathByClassIdW(classid);
-            return this._configservice.baseConfig["filePatch"] + text1 + @"/";
+            return base.configService.baseConfig["filePatch"] + text1 + @"/";
         }
 
         private string GetFilesPathByClassIdW(int classid)
@@ -154,13 +124,14 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddFileClass( string adminname, FileCategories fcif)
         {
+            base.SetMainFileDataBase();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcFileName", SqlDbType.NVarChar, 100); sp2.Value = fcif.vcFileName;
             SqlParameter sp3 = new SqlParameter("@iParentId", SqlDbType.Int, 4); sp3.Value = fcif.iParentId;
             SqlParameter sp4 = new SqlParameter("@vcMeno", SqlDbType.NVarChar, 100); sp4.Value = fcif.vcMeno;
             SqlParameter sp5 = new SqlParameter("@reValue", SqlDbType.Int); sp5.Direction = ParameterDirection.Output;
-            string[] reValues = this._conn.Execute("SP_Files_FilesClassManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5 }, new int[] { 5 });
+            string[] reValues = base.conn.Execute("SP_Files_FilesClassManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5 }, new int[] { 5 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));

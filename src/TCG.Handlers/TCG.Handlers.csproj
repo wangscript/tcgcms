@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.81.0.1407, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\contrib\DLL\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -44,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandlerService.cs" />
+    <Compile Include="Handlers\FileHandlers\FileResourcesHandlerBase.cs" />
     <Compile Include="Handlers\manageHandlers\AdminHandlers.cs" />
     <Compile Include="Handlers\manageHandlers\AdminLoginHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileService.cs" />
@@ -53,12 +50,12 @@
     <Compile Include="Handlers\SkinHandlers\CategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
-    <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
     <Compile Include="Handlers\manageHandlers\ManageService.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
     <Compile Include="Handlers\SkinHandlers\SkinHandlerBase.cs" />
     <Compile Include="Handlers\SkinHandlers\SkinService.cs" />
     <Compile Include="Handlers\SkinHandlers\SpecialityHandlers.cs" />
+    <Compile Include="Handlers\TCGTagHandlers\TCGTagBase.cs" />
     <Compile Include="Handlers\TCGTagHandlers\TagService.cs" />
     <Compile Include="Handlers\UserHandlers\UserLoginHandlers.cs">
     </Compile>
