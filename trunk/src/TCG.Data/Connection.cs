@@ -25,17 +25,8 @@ namespace TCG.Data
 
     public class Connection
     {
-        private string[] ConnStr = new string[30];   //DB连接串数组
         public Connection()
         {
-            ConnStr[0] = "server=127.0.0.1;Database=Manage86865;User Id=sa;Password=woziji112;";
-            ConnStr[1] = ConnStr[0];
-            ConnStr[2] = ConnStr[0];
-            ConnStr[3] = ConnStr[0];
-            ConnStr[4] = ConnStr[0];
-            ConnStr[5] = ConnStr[0];
-            ConnStr[6] = ConnStr[0];
-
             this.Initialize();
         }
 
@@ -355,18 +346,6 @@ namespace TCG.Data
             
             this._queries = 0;
             this._connected = false;
-        }
-
-        public int Dblink
-        {
-            set
-            {
-                if (this.m_dbLink != ConnStr[value])
-                {
-                    //this.Close();
-                    this.m_dbLink = ConnStr[value];
-                }
-            }
         }
 
         public string SetConnStr

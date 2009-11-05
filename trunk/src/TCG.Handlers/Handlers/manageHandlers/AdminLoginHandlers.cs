@@ -27,13 +27,15 @@ using TCG.Handlers;
 
 namespace TCG.Handlers
 {
-    public class AdminLoginHandlers
+    /// <summary>
+    /// 后台管理登陆状态的操作方法
+    /// </summary>
+    public class AdminLoginHandlers : ObjectHandlersBase
     {
 
-        public AdminLoginHandlers(Connection conn, AdminHandlers adminhandlers, ConfigService configservice)
+        public AdminLoginHandlers(AdminHandlers adminhandlers)
         {
             this._adminh = adminhandlers;
-            this._configservice = configservice;
             this.Initialization();
         }
 

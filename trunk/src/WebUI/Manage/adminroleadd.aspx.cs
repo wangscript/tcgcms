@@ -33,7 +33,7 @@ public partial class adminroleadd : adminMain
                 return;
             }
 
-            int rtn = base.handlerService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
+            int rtn = base.handlerService.manageService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
             base.AjaxErch(rtn.ToString());
             base.Finish();
             return;

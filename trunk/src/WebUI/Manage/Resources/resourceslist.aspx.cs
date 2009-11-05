@@ -48,7 +48,6 @@ public partial class resources_resourceslist : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Resources";
 
@@ -73,7 +72,7 @@ public partial class resources_resourceslist : adminMain
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
         this.iClassId.Value = iClassId.ToString();
 
-        string allchild = base.handlerService.newsClassHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
+        string allchild = base.handlerService.skinService.categoriesHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
         sItem.strCondition = "iClassID in (" + allchild + ")";
         //sItem.strCondition = "iClassID = " + iClassId.ToString();
 
@@ -176,8 +175,8 @@ public partial class resources_resourceslist : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsInfoHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
-        rtn = base.handlerService.newsInfoHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
+        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
+        rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
         base.AjaxErch(rtn.ToString());
     }
 
@@ -195,22 +194,22 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, id);
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, id);
         if (item == null) return;
 
-        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
 
-        Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
+        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
         cif = null;
 
-        TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
+        TCGTagHandlers tcgth = base.handlerService.tagService.TCGTagHandlers;
         tcgth.Template = titem.Content.Replace("_$Id$_", id.ToString());
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
         titem = null;
         if (tcgth.Replace(base.conn, base.configService.baseConfig))
         {
-            base.handlerService.newsInfoHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", id.ToString());
+            base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", id.ToString());
         }
 
         string text1 = "";

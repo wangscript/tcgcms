@@ -120,7 +120,7 @@ public partial class resources_resourcesthief : adminMain
             nif.cCreated = "Y";
             nif.vcEditor = base.adminInfo.vcAdminName;
 
-            if (base.handlerService.newsInfoHandlers.CheckThiefTopic(base.conn, nif.ClassInfo.Id, nif.vcTitle) == 1)
+            if (base.handlerService.resourcsService.resourcesHandlers.CheckThiefTopic(base.conn, nif.ClassInfo.Id, nif.vcTitle) == 1)
             {
                 nif.vcContent = base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.Result("$2"), TopicWebPath,
                     base.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig);
@@ -131,7 +131,7 @@ public partial class resources_resourcesthief : adminMain
                 int rtn = 0;
                 try
                 {
-                    rtn = base.handlerService.newsInfoHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif);
+                    rtn = base.handlerService.resourcsService.resourcesHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif);
                 }
                 catch { }
             }

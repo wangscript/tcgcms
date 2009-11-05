@@ -34,7 +34,7 @@ public partial class Common_Topic_click : ScriptsMain
                 return;
             }
 
-            Resources nif = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, topicid);
+            Resources nif = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, topicid);
             if (nif == null)
             {
                 if (shownum)
@@ -48,7 +48,7 @@ public partial class Common_Topic_click : ScriptsMain
             if (shownum) Response.Write("document.write('" + nif.iCount.ToString() + "');");
 
             nif.iCount = nif.iCount + 1;
-            int rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, configService.baseConfig["FileExtension"], nif);
+            int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(base.conn, configService.baseConfig["FileExtension"], nif);
             base.conn.Close();
             Response.End();
         }

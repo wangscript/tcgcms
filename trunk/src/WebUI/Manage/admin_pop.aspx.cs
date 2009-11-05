@@ -25,7 +25,7 @@ public partial class admin_pop : adminMain
             DataSet ds = new DataSet();
             int admincount = 0;
             int delcount = 0;
-            int rtn = base.handlerService.adminHandlers.GetAdminRoleInfo(ref admincount,ref delcount, ref ds);
+            int rtn = base.handlerService.manageService.adminHandlers.GetAdminRoleInfo(ref admincount,ref delcount, ref ds);
             if (rtn < 0)
             {
                 base.Finish();
@@ -51,7 +51,7 @@ public partial class admin_pop : adminMain
                 return;
             }
 
-            int rtn = base.handlerService.adminHandlers.AdminChangeGroup(base.adminInfo.vcAdminName, admins, iRole);
+            int rtn = base.handlerService.manageService.adminHandlers.AdminChangeGroup(base.adminInfo.vcAdminName, admins, iRole);
             base.AjaxErch(rtn.ToString());
             base.Finish();
             return;

@@ -36,7 +36,7 @@ public partial class adminrolemdy : adminMain
                 return;
             }
 
-            int rtn = base.handlerService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent,iRoleId);
+            int rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent,iRoleId);
             base.AjaxErch(rtn.ToString());
             base.Finish();
             return;
@@ -47,7 +47,7 @@ public partial class adminrolemdy : adminMain
     {
         int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Int));
         if (iRoleId == 0) return;
-        DataTable dt = base.handlerService.adminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
+        DataTable dt = base.handlerService.manageService.adminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
         if (dt == null) { dt.Dispose(); dt.Clear(); }
         if (dt.Rows.Count == 1)
         {

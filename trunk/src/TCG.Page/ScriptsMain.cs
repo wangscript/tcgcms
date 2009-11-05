@@ -32,7 +32,6 @@ namespace TCG.Pages
                 if (this._conn == null)
                 {
                     this._conn = new Connection();
-                    this._conn.Dblink = DBLinkNums.News;
                 }
                 return this._conn;
             }

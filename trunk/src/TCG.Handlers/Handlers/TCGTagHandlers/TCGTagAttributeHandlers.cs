@@ -129,7 +129,7 @@ namespace TCG.Handlers
 
         private void TagForNewsClassList(ref TCGTagPagerInfo pagerinfo)
         {
-            this._conn.Dblink = DBLinkNums.News;
+
             PageSearchItem sItem = new PageSearchItem();
             sItem.tableName = "Categories";
 
@@ -185,7 +185,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Resources item = this.handlerService.newsInfoHandlers.GetNewsInfoById(this._conn, id);
+            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(this._conn, id);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -205,7 +205,7 @@ namespace TCG.Handlers
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        this.handlerService.newsInfoHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item);
+                        this.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item);
                     }
                 }
                 catch { }
@@ -222,7 +222,7 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.Id.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.Id, " > "));
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.Id, " > "));
 
                 
             }
@@ -249,7 +249,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Categories item = this.handlerService.newsClassHandlers.GetCategoriesById(this._conn, id, false);
+            Categories item = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(this._conn, id, false);
             if (item == null)
             {
                 pagerinfo.Read = false;
@@ -261,7 +261,7 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    this.handlerService.newsClassHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.Id, " > "));
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.Id, " > "));
 
             pagerinfo.PageTitle = item.vcClassName;
 
@@ -281,7 +281,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Template item = this.handlerService.templateHandlers.GetTemplateByID(this._conn, id,false);
+            Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(this._conn, id,false);
             if (item != null)
             {
                 this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
@@ -316,7 +316,6 @@ namespace TCG.Handlers
         private void TagForNewsListWithOutPager(ref TCGTagPagerInfo pagerinfo)
         {
 
-            this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
             sItem.tableName = "Resources";
 
@@ -429,7 +428,6 @@ namespace TCG.Handlers
         {
             pagerinfo.NeedPager = true;
             this._pager = true;
-            this._conn.Dblink = DBLinkNums.News;
             PageSearchItem sItem = new PageSearchItem();
             sItem.tableName = "Resources";
 

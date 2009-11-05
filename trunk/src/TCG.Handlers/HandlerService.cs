@@ -21,38 +21,20 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// 提供对管理员操作的方法
+        /// 后台框架操作方法
         /// </summary>
-        public AdminHandlers adminHandlers
+        public ManageService manageService
         {
             get
             {
-                if(this._adminhandlers==null)
+                if (this._manageservice == null)
                 {
-                    this._adminhandlers = new AdminHandlers(base.conn);
-                    this._adminhandlers.configService = base.configService;
+                    this._manageservice = new ManageService(base.conn,base.configService);
                 }
-                return this._adminhandlers;
+                return this._manageservice;
             }
         }
-        private AdminHandlers _adminhandlers;
-
-
-        /// <summary>
-        /// 提供对管理员操作的方法
-        /// </summary>
-        public AdminLoginHandlers adminLoginHandlers
-        {
-            get
-            {
-                if (this._adminloginhandlers == null)
-                {
-                    this._adminloginhandlers = new AdminLoginHandlers(base.conn, this.adminHandlers, base.configService);
-                }
-                return this._adminloginhandlers;
-            }
-        }
-        private AdminLoginHandlers _adminloginhandlers;
+        private ManageService _manageservice;
 
         /// <summary>
         /// 提供文件分类操作的方法
@@ -71,90 +53,46 @@ namespace TCG.Handlers
         private FileService _fileservice;
 
 
-        /// <summary>
-        /// 提供对资讯分类操作的方法
-        /// </summary>
-        public CategoriesHandlers newsClassHandlers
+        public SkinService skinService
         {
             get
             {
-                if (this._newsclasshandlers == null)
+                if (this._skinservice == null)
                 {
-                    this._newsclasshandlers = new CategoriesHandlers();
+                    this._skinservice = new SkinService(base.conn,base.configService);
                 }
-                return this._newsclasshandlers;
+                return this._skinservice;
             }
         }
-        private CategoriesHandlers _newsclasshandlers;
+        private SkinService _skinservice;
 
 
-        /// <summary>
-        /// 提供对资讯操作的方法
-        /// </summary>
-        public ResourcesHandlers newsInfoHandlers
+        public ResourcsService resourcsService
         {
             get
             {
-                if (this._newsinfohandlers == null)
+                if (this._resourcsservice == null)
                 {
-                    this._newsinfohandlers = new ResourcesHandlers();
+                    this._resourcsservice = new ResourcsService(base.conn, base.configService);
                 }
-                return this._newsinfohandlers;
+                return this._resourcsservice;
             }
         }
-        private ResourcesHandlers _newsinfohandlers;
+        private ResourcsService _resourcsservice;
 
-        /// <summary>
-        /// 提供对资讯特性操作的方法
-        /// </summary>
-        public SpecialityHandlers newsSpecialityHandlers
+        public TagService tagService
         {
             get
             {
-                if (this._newsspecialityhandlers == null)
+                if (this._ragservice == null)
                 {
-                    this._newsspecialityhandlers = new SpecialityHandlers();
+                    this._ragservice = new TagService(base.conn, base.configService,this);
                 }
-                return this._newsspecialityhandlers ;
+                return this._ragservice;
             }
         }
-        private SpecialityHandlers _newsspecialityhandlers;
-
-
-
-        /// <summary>
-        /// 提供对模版操作的方法
-        /// </summary>
-        public TemplateHandlers templateHandlers
-        {
-            get
-            {
-                if (this._templatehandlers == null)
-                {
-                    this._templatehandlers = new TemplateHandlers();
-                }
-                return this._templatehandlers;
-            }
-        }
-        private TemplateHandlers _templatehandlers;
-
-
-        /// <summary>
-        /// 提供对模版处理操作的方法
-        /// </summary>
-        public TCGTagHandlers TCGTagHandlers
-        {
-            get
-            {
-                if (this._tcgtaghandlers == null)
-                {
-                    this._tcgtaghandlers = new TCGTagHandlers();
-                    this._tcgtaghandlers.handlerService = this;
-                }
-                return this._tcgtaghandlers;
-            }
-        }
-        private TCGTagHandlers _tcgtaghandlers;
+        private TagService _ragservice;
+        
 
         /// <summary>
         /// 用户的操作的服务

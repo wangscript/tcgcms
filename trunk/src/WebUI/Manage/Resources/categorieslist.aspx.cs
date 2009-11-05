@@ -59,7 +59,6 @@ public partial class resources_categorieslist : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Categories";
 
@@ -139,7 +138,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsClassHandlers.DelCategories(base.conn, tClassID, base.adminInfo.vcAdminName);
+        int rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(base.conn, tClassID, base.adminInfo.vcAdminName);
         base.AjaxErch(rtn.ToString());
         base.Finish();
 
@@ -155,7 +154,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, tClassID, false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, tClassID, false);
 
         if (cif == null)
         {
@@ -165,7 +164,7 @@ public partial class resources_categorieslist : adminMain
         }
 
 
-        Template tlif = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iListTemplate,false);
+        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iListTemplate,false);
         if (tlif == null)
         {
             base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");
@@ -192,7 +191,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
+        TCGTagHandlers tcgthdl = base.handlerService.tagService.TCGTagHandlers;
         tcgthdl.Template = tlif.Content.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
@@ -248,7 +247,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, iMdyID,false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, iMdyID,false);
         if (cif == null)
         {
             base.AjaxErch("-1");
@@ -258,7 +257,7 @@ public partial class resources_categorieslist : adminMain
 
         cif.iOrder = objectHandlers.ToInt(KeyValue);
 
-        int rtn = base.handlerService.newsClassHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName, cif);
+        int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName, cif);
         if (rtn < 0)
         {
             base.AjaxErch("-1");

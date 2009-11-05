@@ -40,7 +40,7 @@ public partial class resources_resourceshandlers : adminMain
             }
             else
             {
-                Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, newsid);
+                Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, newsid);
                 this.iClassId.Value = item.ClassInfo.Id.ToString();
               
                 this.iTitle.Value = item.vcTitle;
@@ -122,13 +122,13 @@ public partial class resources_resourceshandlers : adminMain
 
     private void NewsManage(bool ismdy)
     {
-        Resources item = base.handlerService.newsInfoHandlers.GetNewsInfoById(base.conn, objectHandlers.Post("iNewsId"));
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, objectHandlers.Post("iNewsId"));
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.ClassInfo = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, objectHandlers.Post("iClassId"),false);
+        item.ClassInfo = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, objectHandlers.Post("iClassId"),false);
       
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
@@ -166,11 +166,11 @@ public partial class resources_resourceshandlers : adminMain
         int rtn = 0;
         if (!ismdy)
         {
-            rtn = base.handlerService.newsInfoHandlers.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
         }
         else
         {
-            rtn = base.handlerService.newsInfoHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item);
         }
 
         filepath = Server.MapPath("~" + item.vcFilePath);
@@ -178,12 +178,12 @@ public partial class resources_resourceshandlers : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                Categories cif = base.handlerService.newsClassHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
+                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
 
-                Template titem = base.handlerService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
+                Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
                 cif = null;
 
-                TCGTagHandlers tcgth = base.handlerService.TCGTagHandlers;
+                TCGTagHandlers tcgth = base.handlerService.tagService.TCGTagHandlers;
                 tcgth.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
                 titem = null;
                 tcgth.FilePath = filepath;

@@ -29,8 +29,14 @@ using TCG.Entity;
 
 namespace TCG.Utils
 {
+    /// <summary>
+    /// 站点配置信息服务提供者
+    /// </summary>
     public class ConfigService
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public ConfigService()
         {
 
@@ -86,6 +92,9 @@ namespace TCG.Utils
             }
         }
 
+        /// <summary>
+        /// 文件数据库连接配置
+        /// </summary>
         public List<FileDataBase> fileDataBaseConfig
         {
             get
@@ -117,7 +126,9 @@ namespace TCG.Utils
             }
         }
 
-
+        /// <summary>
+        /// 系统基本配置
+        /// </summary>
         public Dictionary<string, string> baseConfig
         {
             get

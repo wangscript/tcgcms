@@ -41,7 +41,7 @@ public partial class adminmdy : adminMain
                 return;
             }
             if (!string.IsNullOrEmpty(pwd)) pwd = objectHandlers.MD5(pwd);
-            int rtn = base.handlerService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
+            int rtn = base.handlerService.manageService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
                 popedom, classpopedom);
             base.AjaxErch(rtn.ToString());
             base.Finish();
@@ -52,7 +52,7 @@ public partial class adminmdy : adminMain
     {
         string admin = objectHandlers.Get("adminname", CheckGetEnum.Safety);
         this.vcAdminName.Value = admin;
-        DataTable dt = base.handlerService.adminHandlers.GetAdminInfoByAdminName(admin);
+        DataTable dt = base.handlerService.manageService.adminHandlers.GetAdminInfoByAdminName(admin);
         if (dt == null) {Response.End();return; }
         if (dt.Rows.Count == 0) { Response.End(); dt.Dispose(); dt.Clear(); return; }
         this.popedom.Value = dt.Rows[0]["vcPopedom"].ToString();
@@ -68,7 +68,7 @@ public partial class adminmdy : adminMain
         DataSet ds = new DataSet();
         int t = 0;
         int p = 0;
-        int rtn = base.handlerService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
+        int rtn = base.handlerService.manageService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
         if (rtn < 0)
         {
             ds.Dispose();
