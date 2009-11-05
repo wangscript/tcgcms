@@ -28,7 +28,7 @@ using TCG.KeyWordSplit;
 
 namespace TCG.Handlers
 {
-    public class ResourcesHandlers
+    public class ResourcesHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// Ìí¼Ó×ÊÑ¶
@@ -38,8 +38,6 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddNewsInfo(Connection conn,string Extension,Resources inf, ref int outid)
         {
-            conn.Dblink = DBLinkNums.News;
-
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
@@ -80,7 +78,6 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddNewsInfoForSheif(Connection conn, string Extension, Resources inf)
         {
-            conn.Dblink = DBLinkNums.News;
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
@@ -122,7 +119,6 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfosWithLogic(Connection conn, string adminname, string IsDel, string ids)
         {
-            conn.Dblink = DBLinkNums.News;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
@@ -148,7 +144,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateNewsInfosCreate(Connection conn, string adminname, string IsDel, string ids)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
@@ -170,7 +166,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfosWithPhysics(Connection conn, string adminname,string ids)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "02";
@@ -186,7 +182,7 @@ namespace TCG.Handlers
 
         public int UpdateNewsInfo(Connection conn, string Extension, Resources inf)
         {
-            conn.Dblink = DBLinkNums.News;
+
             inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
@@ -223,7 +219,7 @@ namespace TCG.Handlers
 
         public Resources GetNewsInfoById(Connection conn, string id)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = id;
             DataSet ds = conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
             if (ds == null) return null;
@@ -298,7 +294,7 @@ namespace TCG.Handlers
             if (string.IsNullOrEmpty(ids)) return -19000000;
             if (ids.IndexOf(",") != -1)
             {
-                conn.Dblink = DBLinkNums.News;
+
                 string SQL = "SELECT vcFilePath FROM Resources (NOLOCK) WHERE iId in (" + ids + ")";
                 DataTable dt = conn.GetDataTable(SQL);
                 if (dt == null) return -1;
@@ -325,7 +321,7 @@ namespace TCG.Handlers
 
         public DataSet GetNewsInfosByClass(Connection conn, string classids, int number, int create)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@vcClass", SqlDbType.VarChar, 2000); sp0.Value = classids;
             SqlParameter sp1 = new SqlParameter("@iNum", SqlDbType.Int, 4); sp1.Value = number;
             SqlParameter sp2 = new SqlParameter("@iDel", SqlDbType.Int, 4); sp2.Value = create;
@@ -334,7 +330,7 @@ namespace TCG.Handlers
 
         public DataSet GetNewsInofsByCreateDate(Connection conn, int number, int create, DateTime stime, DateTime etime, int type)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp0.Value = "02";
             SqlParameter sp1 = new SqlParameter("@ITimeType", SqlDbType.Int,4); sp1.Value = type;
             SqlParameter sp2 = new SqlParameter("@dStartTime", SqlDbType.DateTime, 8); sp2.Value = stime;
@@ -353,7 +349,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CheckThiefTopic(Connection conn, string classid, string title)
         {
-            conn.Dblink = DBLinkNums.News;
+
             SqlParameter sp0 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp0.Value = title;
             SqlParameter sp1 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp1.Value = classid;
             SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;

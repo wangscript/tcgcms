@@ -44,7 +44,6 @@ namespace TCG.Pages
                 if (this._conn == null)
                 {
                     this._conn = new Connection();
-                    this._conn.Dblink = DBLinkNums.Manage;
                 }
                 return this._conn;
             }

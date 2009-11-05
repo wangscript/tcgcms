@@ -50,7 +50,6 @@ public partial class resources_speciality : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Speciality";
 
@@ -143,7 +142,7 @@ public partial class resources_speciality : adminMain
         //    return;
         //}
 
-        int rtn = base.handlerService.newsSpecialityHandlers.NewsSpecialityAdd(base.conn, base.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityAdd(base.conn, base.adminInfo.vcAdminName, item);
         CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();
@@ -177,7 +176,7 @@ public partial class resources_speciality : adminMain
         }
          
 
-        Speciality item = base.handlerService.newsSpecialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
+        Speciality item = base.handlerService.skinService.specialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
         bool ismdy = true;
         if (item == null)
         {
@@ -212,7 +211,7 @@ public partial class resources_speciality : adminMain
         }
         if (ismdy)
         {
-            int rtn = base.handlerService.newsSpecialityHandlers.NewsSpecialityMdy(base.conn, base.adminInfo.vcAdminName, item);
+            int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityMdy(base.conn, base.adminInfo.vcAdminName, item);
             CachingService.Remove("AllNewsSpeciality");
             base.AjaxErch(rtn.ToString());
         }
@@ -231,7 +230,7 @@ public partial class resources_speciality : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsSpecialityHandlers.NewSpecialityDel(base.conn, base.adminInfo.vcAdminName, Ids);
+        int rtn = base.handlerService.skinService.specialityHandlers.NewSpecialityDel(base.conn, base.adminInfo.vcAdminName, Ids);
         CachingService.Remove("AllNewsSpeciality");
         base.AjaxErch(rtn.ToString());
         base.Finish();

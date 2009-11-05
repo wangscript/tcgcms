@@ -39,7 +39,7 @@ public partial class adminadd : adminMain
                 return;
             }
             pwd = objectHandlers.MD5(pwd);
-            int rtn = base.handlerService.adminHandlers.AddAdmin(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
+            int rtn = base.handlerService.manageService.adminHandlers.AddAdmin(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
                 popedom, classpopedom);
             base.AjaxErch(rtn.ToString());
             base.Finish();
@@ -51,7 +51,7 @@ public partial class adminadd : adminMain
         DataSet ds = new DataSet();
         int t = 0;
         int p = 0;
-        int rtn = base.handlerService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
+        int rtn = base.handlerService.manageService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
         if (rtn < 0)
         {
             base.Finish();

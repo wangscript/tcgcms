@@ -26,7 +26,7 @@ public partial class adminRecovery : adminMain
             int rolecount = 0;
 
 
-            int rtn = base.handlerService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
+            int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
                 base.Finish();
@@ -52,7 +52,7 @@ public partial class adminRecovery : adminMain
                 return;
             }
 
-            int rtn = base.handlerService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
+            int rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

@@ -41,7 +41,6 @@ namespace TCG.URLRewriter
                 if (this._conn == null)
                 {
                     this._conn = new Connection();
-                    this._conn.Dblink = (int)DBLinkNums.News;
                 }
                 return this._conn;
             }

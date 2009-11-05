@@ -42,7 +42,7 @@ public partial class adminInfo : adminMain
             int rolecount = 0;
 
 
-            int rtn = base.handlerService.adminHandlers.GetAdminList(iRoleId, ref admincount, ref rolecount, ref strRolename, ref ds);
+            int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(iRoleId, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
                 base.Finish();

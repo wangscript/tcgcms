@@ -145,7 +145,7 @@ public partial class aLogin : adminMain
         }
         string password1 = objectHandlers.MD5(password);
         string response = "";
-        int rtn = base.handlerService.adminHandlers.AdminLogin(adminname, password1);
+        int rtn = base.handlerService.manageService.adminHandlers.AdminLogin(adminname, password1);
 
         if (rtn < 0)
         {

@@ -27,7 +27,7 @@ public partial class AjaxMethod_Admin_DelAdminRole : adminMain
                 base.Finish();
                 return;
             }
-            int rtn = base.handlerService.adminHandlers.DelAdminRole(base.adminInfo.vcAdminName, iRole);
+            int rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo.vcAdminName, iRole);
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

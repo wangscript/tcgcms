@@ -40,7 +40,7 @@ public partial class MyAccount : adminMain
             oldpwd = objectHandlers.MD5(oldpwd);
             if (!string.IsNullOrEmpty(npwd)) npwd = objectHandlers.MD5(npwd);
 
-            int rtn = base.handlerService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
+            int rtn = base.handlerService.manageService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
             if (rtn == 1)
             {
                 SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);

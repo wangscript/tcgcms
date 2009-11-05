@@ -29,7 +29,7 @@ public partial class Admin_Top : adminMain
                 return;
             }
 
-            int rtn = base.handlerService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, "01");
+            int rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, "01");
             base.AjaxErch(rtn.ToString());
             base.Finish();
         }

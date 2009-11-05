@@ -51,7 +51,7 @@ public partial class resources_categoriesadd : adminMain
                 }
             }
 
-            int rtn = base.handlerService.newsClassHandlers.CreateCategories(base.conn,cif, base.adminInfo.vcAdminName);
+            int rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(base.conn,cif, base.adminInfo.vcAdminName);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
 
@@ -64,7 +64,7 @@ public partial class resources_categoriesadd : adminMain
         int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
         this.iClassId.Value = iParent.ToString();
 
-        DataSet ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
+        DataSet ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
             (int)TemplateType.InfoType, 0, false);
         if (ds != null)
         {
@@ -81,7 +81,7 @@ public partial class resources_categoriesadd : adminMain
         }
 
         
-        ds = base.handlerService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
+        ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
             (int)TemplateType.ListType, 0, false);
         if (ds != null)
         {

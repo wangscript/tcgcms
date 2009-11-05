@@ -21,7 +21,7 @@ public partial class jsMethod_AllPop : adminMain
         if (!Page.IsPostBack)
         {
             Response.Write("var PopLis = new Array();\r\n");
-            DataSet ds = base.handlerService.adminHandlers.GetAllPopedom();
+            DataSet ds = base.handlerService.manageService.adminHandlers.GetAllPopedom();
             if (ds.Tables.Count == 0)
             {
                 base.Finish();

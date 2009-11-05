@@ -44,7 +44,6 @@ public partial class Template_templatelist : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = DBLinkNums.Template;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Template";
 
@@ -149,7 +148,7 @@ public partial class Template_templatelist : adminMain
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
+            rtn = base.handlerService.skinService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
         }
         catch (Exception ex)
         {
@@ -171,7 +170,7 @@ public partial class Template_templatelist : adminMain
             return;
         }
 
-        Template tlif = base.handlerService.templateHandlers.GetTemplateByID(base.conn, iTemplate,false);
+        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, iTemplate,false);
 
         if (tlif == null)
         {
@@ -203,7 +202,7 @@ public partial class Template_templatelist : adminMain
 
         if (needTCG)
         {
-            TCGTagHandlers tcgthdl = base.handlerService.TCGTagHandlers;
+            TCGTagHandlers tcgthdl = base.handlerService.tagService.TCGTagHandlers;
             tcgthdl.Template = tlif.Content;
             tcgthdl.FilePath = filepath;
             if (tcgthdl.Replace(base.conn, base.configService.baseConfig))

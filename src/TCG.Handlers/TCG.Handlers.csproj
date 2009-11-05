@@ -44,22 +44,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandlerService.cs" />
-    <Compile Include="Handlers\AdminHandlers.cs" />
-    <Compile Include="Handlers\AdminLoginHandlers.cs" />
+    <Compile Include="Handlers\manageHandlers\AdminHandlers.cs" />
+    <Compile Include="Handlers\manageHandlers\AdminLoginHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileService.cs" />
-    <Compile Include="Handlers\CategoriesHandlers.cs" />
+    <Compile Include="Handlers\ResourceHandlers\ResourcsService.cs" />
+    <Compile Include="Handlers\SkinHandlers\CategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
-    <Compile Include="Handlers\ResourcesHandlers.cs" />
-    <Compile Include="Handlers\SpecialityHandlers.cs" />
+    <Compile Include="Handlers\manageHandlers\ManageService.cs" />
+    <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
+    <Compile Include="Handlers\SkinHandlers\SkinService.cs" />
+    <Compile Include="Handlers\SkinHandlers\SpecialityHandlers.cs" />
+    <Compile Include="Handlers\TCGTagHandlers\TagService.cs" />
     <Compile Include="Handlers\UserHandlers\UserLoginHandlers.cs">
     </Compile>
     <Compile Include="ObjectHandlersBase.cs" />
-    <Compile Include="Handlers\TCGTagAttributeHandlers.cs" />
-    <Compile Include="Handlers\TCGTagHandlers.cs" />
-    <Compile Include="Handlers\TCGTagStringFunHandlers.cs" />
-    <Compile Include="Handlers\TemplateHandlers.cs" />
+    <Compile Include="Handlers\TCGTagHandlers\TCGTagAttributeHandlers.cs" />
+    <Compile Include="Handlers\TCGTagHandlers\TCGTagHandlers.cs" />
+    <Compile Include="Handlers\TCGTagHandlers\TCGTagStringFunHandlers.cs" />
+    <Compile Include="Handlers\SkinHandlers\TemplateHandlers.cs" />
     <Compile Include="Handlers\UserHandlers\UserHandlers.cs" />
     <Compile Include="Handlers\UserHandlers\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

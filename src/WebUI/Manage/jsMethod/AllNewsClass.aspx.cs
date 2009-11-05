@@ -23,7 +23,7 @@ public partial class jsMethod_AllNewsClass : adminMain
         {
             Response.Write("var NewsLis = new Array();\r\n");
 
-            DataTable dt = base.handlerService.newsClassHandlers.GetAllCategories(base.conn);
+            DataTable dt = base.handlerService.skinService.categoriesHandlers.GetAllCategories(base.conn);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)

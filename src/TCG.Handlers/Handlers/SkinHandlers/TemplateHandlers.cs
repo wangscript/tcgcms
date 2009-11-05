@@ -25,7 +25,7 @@ using TCG.Utils;
 
 namespace TCG.Handlers
 {
-    public class TemplateHandlers
+    public class TemplateHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// 获得资讯模版
@@ -54,14 +54,14 @@ namespace TCG.Handlers
 
         public DataSet GetAllTemplatesFromDb(Connection conn)
         {
-            conn.Dblink = DBLinkNums.Template;
+
             string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK)";
             return conn.GetDataSet(Sql);
         }
 
         public DataSet GetTemplatesBySystemTypeFromDb(Connection conn, int systemtype)
         {
-            conn.Dblink = DBLinkNums.Template;
+
             string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
                         +" iSystemType =" + systemtype.ToString();
             return conn.GetDataSet(Sql);
@@ -97,7 +97,7 @@ namespace TCG.Handlers
             DataSet ds = null;
             if (readdb)
             {
-                conn.Dblink = DBLinkNums.Template;
+
                 string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
                             + " iSystemType =" + systemtype.ToString() + " AND TemplateType=" + type.ToString();
                 ds = conn.GetDataSet(Sql);
@@ -142,7 +142,7 @@ namespace TCG.Handlers
 
         public int DelTemplate(Connection conn, string adminname, string temps)
         {
-            conn.Dblink = DBLinkNums.Template;
+
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vctemps", SqlDbType.VarChar, 1000); sp2.Value = temps;
@@ -158,7 +158,7 @@ namespace TCG.Handlers
 
         public int MdyTemplate(Connection conn, string adminname, Template item)
         {
-            conn.Dblink = DBLinkNums.Template;
+
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
@@ -190,7 +190,7 @@ namespace TCG.Handlers
             DataTable dt = null;
             if (readdb)
             {
-                conn.Dblink = DBLinkNums.Template;
+
                 string sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE Id ='" + templateid.ToString() + "'";
                 dt = conn.GetDataTable(sql);
             }

@@ -46,7 +46,6 @@ public partial class resources_resourcesrecovery : adminMain
 
     private void SearchInit()
     {
-        base.conn.Dblink = DBLinkNums.News;
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Resources";
 
@@ -136,7 +135,7 @@ public partial class resources_resourcesrecovery : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsInfoHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
+        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
         base.AjaxErch(rtn.ToString());
     }
 
@@ -149,7 +148,7 @@ public partial class resources_resourcesrecovery : adminMain
             return;
         }
 
-        int rtn = base.handlerService.newsInfoHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
+        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
         base.AjaxErch(rtn.ToString());
     }
 }
