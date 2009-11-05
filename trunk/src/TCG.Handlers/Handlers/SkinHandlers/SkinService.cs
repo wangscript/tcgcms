@@ -35,7 +35,6 @@ namespace TCG.Handlers
         {
             base.conn = conn;
             base.configService = configservice;
-
         }
 
 

@@ -72,7 +72,7 @@ namespace TCG.Handlers
             if (this._configservice.fileDataBaseConfig == null) return null;
             if (this._configservice.fileDataBaseConfig.Count == 0) return null;
 
-            foreach (FileDataBase database in this._configservice.fileDataBaseConfig)
+            foreach (DataBaseConnStr database in this._configservice.fileDataBaseConfig)
             {
                 if (database.IsBaseDataBase)
                 {

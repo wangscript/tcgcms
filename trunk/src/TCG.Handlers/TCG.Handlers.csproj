@@ -47,6 +47,8 @@
     <Compile Include="Handlers\manageHandlers\AdminHandlers.cs" />
     <Compile Include="Handlers\manageHandlers\AdminLoginHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileService.cs" />
+    <Compile Include="Handlers\manageHandlers\ManageHandlerBase.cs" />
+    <Compile Include="Handlers\ResourceHandlers\ResourceHandlerBase.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcsService.cs" />
     <Compile Include="Handlers\SkinHandlers\CategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Handlers\FileHandlers\FileZipHandlers.cs" />
     <Compile Include="Handlers\manageHandlers\ManageService.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
+    <Compile Include="Handlers\SkinHandlers\SkinHandlerBase.cs" />
     <Compile Include="Handlers\SkinHandlers\SkinService.cs" />
     <Compile Include="Handlers\SkinHandlers\SpecialityHandlers.cs" />
     <Compile Include="Handlers\TCGTagHandlers\TagService.cs" />

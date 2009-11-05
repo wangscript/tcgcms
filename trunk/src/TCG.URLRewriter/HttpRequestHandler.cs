@@ -88,8 +88,8 @@ namespace TCG.URLRewriter
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
 
             //获得所有单页模版信息
-            TemplateHandlers tplh = new TemplateHandlers();
-            DataSet ds = tplh.GetTemplatesBySystemTypAndType(conn,0,0,false);
+
+            DataSet ds = handlerservice.skinService.templateHandlers.GetTemplatesBySystemTypAndType(conn, 0, 0, false);
 
             if (ds != null && ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
             {
@@ -131,8 +131,7 @@ namespace TCG.URLRewriter
             }
 
             //检测分类文件
-            CategoriesHandlers chld = new CategoriesHandlers();
-            DataTable dt = chld.GetCategoriesByCach(conn,false);
+            DataTable dt = handlerservice.skinService.categoriesHandlers.GetCategoriesByCach(conn, false);
             if (dt != null && dt.Rows.Count != 0)
             {
                 if(!string.IsNullOrEmpty(pagepath))
@@ -178,14 +177,13 @@ namespace TCG.URLRewriter
                 if (!string.IsNullOrEmpty(topicid))
                 {
                     //获得文章对象
-                    ResourcesHandlers nifhld = new ResourcesHandlers();
-                    Resources item = nifhld.GetNewsInfoById(conn, topicid);
+
+                    Resources item = handlerservice.resourcsService.resourcesHandlers.GetNewsInfoById(conn, topicid);
                     if (item != null)
                     {
                         //获得分类信息
-                       
-                        TemplateHandlers ntlhdl = new TemplateHandlers();
-                        Template titem = ntlhdl.GetTemplateByID(conn, item.ClassInfo.iTemplate,false);
+
+                        Template titem = handlerservice.skinService.templateHandlers.GetTemplateByID(conn, item.ClassInfo.iTemplate, false);
                        
 
                         TCGTagHandlers tcgth = new TCGTagHandlers();
@@ -203,12 +201,10 @@ namespace TCG.URLRewriter
                         tcgth = null;
                         return;
                     }
-                    nifhld = null;
+   
                     return;
                 }
             }
-
-            tplh = null;
 
         }
     }

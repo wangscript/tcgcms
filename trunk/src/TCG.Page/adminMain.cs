@@ -38,7 +38,7 @@ namespace TCG.Pages
 
         private void CheckPop(object sender, EventArgs e)
         {
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminPop(base.configService.baseConfig);
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminPop();
         }
 
         protected void Finish()

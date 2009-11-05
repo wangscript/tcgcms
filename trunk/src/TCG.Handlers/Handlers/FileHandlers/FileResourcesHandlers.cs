@@ -66,7 +66,7 @@ namespace TCG.Handlers
             if (this._configservice.fileDataBaseConfig == null) return false;
             if (this._configservice.fileDataBaseConfig.Count == 0) return false;
             int index = objectHandlers.ToInt (fid % this._configservice.fileDataBaseConfig.Count);
-            FileDataBase filedatabase = this._configservice.fileDataBaseConfig[index];
+            DataBaseConnStr filedatabase = this._configservice.fileDataBaseConfig[index];
             this._conn.SetConnStr = filedatabase.Value;
             return true;
         }

@@ -30,11 +30,13 @@ namespace TCG.Handlers
     /// <summary>
     /// 后台管理登陆状态的操作方法
     /// </summary>
-    public class AdminLoginHandlers : ObjectHandlersBase
+    public class AdminLoginHandlers : ManageHandlerBase
     {
 
-        public AdminLoginHandlers(AdminHandlers adminhandlers)
+        public AdminLoginHandlers(Connection conn, ConfigService configservice,AdminHandlers adminhandlers)
         {
+            base.conn = conn;
+            base.configService = configservice;
             this._adminh = adminhandlers;
             this.Initialization();
         }
@@ -43,7 +45,7 @@ namespace TCG.Handlers
         {
             if (this._admincookie == null)
             {
-                this._admincookie = Cookie.Get(this._configservice.baseConfig["AdminCookieName"]);
+                this._admincookie = Cookie.Get(base.configService.baseConfig["AdminCookieName"]);
                 if (this._admincookie != null)
                 {
                     if (this._admincookie.Values.Count != 1) return;
@@ -59,19 +61,19 @@ namespace TCG.Handlers
             object TempAdmin = null;
             if (string.IsNullOrEmpty(this._name))
             {
-                TempAdmin = SessionState.Get(this._configservice.baseConfig["AdminSessionName"]);
-                if (TempAdmin != null) SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
+                TempAdmin = SessionState.Get(base.configService.baseConfig["AdminSessionName"]);
+                if (TempAdmin != null) SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
                 this._admin = null;
                 return;
             }
-            TempAdmin = SessionState.Get(this._configservice.baseConfig["AdminSessionName"]);
+            TempAdmin = SessionState.Get(base.configService.baseConfig["AdminSessionName"]);
             if (TempAdmin == null)
             {
                 DataSet ds =  new DataSet();
                 int rtn = this._adminh.GetAdminInfoByName(this._name, "01", ref ds);
                 if (rtn < 0)
                 {
-                    SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
+                    SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
                     this._admin = null;
                     return;
                 }
@@ -86,7 +88,7 @@ namespace TCG.Handlers
                     this._admin.vcRoleName = ds.Tables[1].Rows[0]["vcRoleName"].ToString();
                 }
 
-                SessionState.Set(this._configservice.baseConfig["AdminSessionName"], this._admin);
+                SessionState.Set(base.configService.baseConfig["AdminSessionName"], this._admin);
                 return;
             }
             this._admin = (Admin)TempAdmin;
@@ -97,26 +99,30 @@ namespace TCG.Handlers
         /// 检查管理员权限
         /// </summary>
         /// <param name="popnum"></param>
-        public void CheckAdminPop(Dictionary<string, string> config)
+        public void CheckAdminPop()
         {
             this.AdminInit();
-            if (!IsSpage(config,this._currenturl))
+            if (!IsSpage(this._currenturl))
             {
                 if (this._admin == null)
                 {
-                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + config["ManagePath"]
-                        + "login.aspx", config["WebSite"] + config["ManagePath"] + "login.aspx", false);
+                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + base.configService.baseConfig["WebSite"]
+                        + base.configService.baseConfig["ManagePath"]
+                        + "login.aspx", base.configService.baseConfig["WebSite"] + 
+                        base.configService.baseConfig["ManagePath"] + "login.aspx", false);
                     return;
                 }
                 if (string.IsNullOrEmpty(this._admin.vcAdminName))
                 {
-                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台," + config["WebSite"] + config["ManagePath"]
-                        + "login.aspx", config["WebSite"] + config["ManagePath"] + "login.aspx", false);
+                    new Terminator().Throw("还未登陆后台，不能访问此页面！", "您还没登陆！", "登陆后台,"
+                        + base.configService.baseConfig["WebSite"] + base.configService.baseConfig["ManagePath"]
+                        + "login.aspx", base.configService.baseConfig["WebSite"] + base.configService.baseConfig["ManagePath"] 
+                        + "login.aspx", false);
                     return;
                 }
 
-                if (IsOnlyLoginPage(config, this._currenturl)) return;
-                if (!HavePower(config, this._currenturl))
+                if (IsOnlyLoginPage(this._currenturl)) return;
+                if (!HavePower(this._currenturl))
                 {
                     new Terminator().Throw("您已经登陆后台，但是不具备该操作的权限！", "您没有该操作权限！",null,null, false);
                     return;
@@ -124,33 +130,33 @@ namespace TCG.Handlers
             }
         }
 
-        public bool CheckAdminPop(Dictionary<string, string> config, string page)
+        public bool CheckAdminPop(string page)
         {
-            if (!IsSpage(config, page)) return true;
-            if (IsOnlyLoginPage(config, page)) return true;
-            if (HavePower(config, page)) return true;
+            if (!IsSpage(page)) return true;
+            if (IsOnlyLoginPage(page)) return true;
+            if (HavePower(page)) return true;
             return false;
         }
 
-        private bool IsSpage(Dictionary<string, string> config, string pages)
+        private bool IsSpage(string pages)
         {
-            List<Option> specialpages = this._configservice.manageOutpages["specialpages"];
+            List<Option> specialpages = base.configService.manageOutpages["specialpages"];
             bool rtn = false;
             for (int i = 0; i < specialpages.Count; i++)
             {
-                string text2 = config["ManagePath"] + specialpages[i].Value;
+                string text2 = base.configService.baseConfig["ManagePath"] + specialpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
         }
 
-        private bool IsOnlyLoginPage(Dictionary<string, string> config, string pages)
+        private bool IsOnlyLoginPage(string pages)
         {
-            List<Option> onlineloginpages = this._configservice.manageOutpages["onlineloginpages"];
+            List<Option> onlineloginpages = base.configService.manageOutpages["onlineloginpages"];
             bool rtn = false;
             for (int i = 0; i < onlineloginpages.Count; i++)
             {
-                string text2 = config["ManagePath"] + onlineloginpages[i].Value;
+                string text2 = base.configService.baseConfig["ManagePath"] + onlineloginpages[i].Value;
                 if (pages.ToLower().IndexOf(text2.ToLower()) > -1) rtn = true;
             }
             return rtn;
@@ -162,7 +168,7 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="pages"></param>
         /// <returns></returns>
-        private bool HavePower(Dictionary<string, string> config, string pages)
+        private bool HavePower(string pages)
         {
             if (this._admin.PopedomUrls.Rows.Count == 0) return false;
             //获得当前URL路径
@@ -200,7 +206,7 @@ namespace TCG.Handlers
             }
             if (this._admin != null)
             {
-                SessionState.Remove(this._configservice.baseConfig["AdminSessionName"]);
+                SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
             }
         }
 
@@ -214,19 +220,6 @@ namespace TCG.Handlers
                 return this._admin; 
             }
         }
-
-        private Connection _conn;
-        /// <summary>
-        /// 获得配置信息支持
-        /// </summary>
-        public ConfigService configService
-        {
-            set
-            {
-                this._configservice = value;
-            }
-        }
-        private ConfigService _configservice;
 
         
         private HttpCookie _admincookie = null;

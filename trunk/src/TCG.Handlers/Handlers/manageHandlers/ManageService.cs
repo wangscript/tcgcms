@@ -44,9 +44,8 @@ namespace TCG.Handlers
             {
                 if (this._adminloginhandlers == null)
                 {
-                    this._adminloginhandlers = new AdminLoginHandlers(this.adminHandlers);
-                    this._adminloginhandlers.conn = base.conn;
-                    this._adminloginhandlers.configService = base.configService;
+                    this._adminloginhandlers = new AdminLoginHandlers(base.conn,base.configService,this.adminHandlers);
+                    
                 }
                 return this._adminloginhandlers;
             }

@@ -7,7 +7,7 @@ namespace TCG.Entity
     /// <summary>
     /// 文件数据库配置
     /// </summary>
-    public class FileDataBase
+    public class DataBaseConnStr
     {
         /// <summary>
         /// 说明
