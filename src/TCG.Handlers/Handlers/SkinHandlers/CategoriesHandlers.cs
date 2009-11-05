@@ -28,21 +28,8 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class CategoriesHandlers : ObjectHandlersBase
+    public class CategoriesHandlers : SkinHandlerBase
     {
-
-        /// <summary>
-        /// 提供对管理员操作的方法
-        /// </summary>
-        public ConfigService configService
-        {
-            set
-            {
-                this._configservice = value;
-            }
-        }
-        private ConfigService _configservice;
-
 
         /// <summary>
         /// 根据父类得到资源类别
@@ -51,6 +38,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetCategoriesByParentId(int parentid,Connection conn,bool readdb)
         {
+            base.SetSkinDataBaseConnection();
             if (readdb)
             {
                 string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
@@ -76,6 +64,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllCategories(Connection conn)
         {
+            base.SetSkinDataBaseConnection();
             string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
@@ -164,6 +153,7 @@ namespace TCG.Handlers
             DataTable dt = null;
             if (readdb)
             {
+                base.SetSkinDataBaseConnection();
                 string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE ID = '" + iClassID.ToString() + "'";
                 dt = conn.GetDataTable(Sql);
@@ -218,6 +208,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateCategories(Connection conn, Categories cif, string adminname)
         {
+            base.SetSkinDataBaseConnection();
             cif.Id = Guid.NewGuid().ToString();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
@@ -252,6 +243,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateCategories(Connection conn, string adminname, Categories classinf)
         {
+            base.SetSkinDataBaseConnection();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
@@ -285,6 +277,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelCategories(Connection conn, int classid, string adminname)
         {
+            base.SetSkinDataBaseConnection();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp2.Value = classid;

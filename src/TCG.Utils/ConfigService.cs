@@ -59,12 +59,74 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// 皮肤数据库连接字符串
+        /// </summary>
+        public string SkinDataBaseStr
+        {
+            get
+            {
+                if (this._skindatabasestr == null)
+                {
+                    this.SkinDataBaseInit();
+                }
+                return this._skindatabasestr;
+            }
+        }
+
+        /// <summary>
+        /// 初始化皮肤数据库连接
+        /// </summary>
+        private void SkinDataBaseInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList skindatabase = this.GetXmlNotListByTagNameAndFilePath(m_skinConfig, "skinDataBase");
+            if (skindatabase != null)
+            {
+                foreach (XmlElement element in skindatabase)
+                {
+                    this._skindatabasestr = element.SelectSingleNode("Value").InnerText;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 皮肤数据库连接字符串
+        /// </summary>
+        public string ManageDataBaseStr
+        {
+            get
+            {
+                if (this._managedatabasestr == null)
+                {
+                    this.ManageDataBaseInit();
+                }
+                return this._managedatabasestr;
+            }
+        }
+
+        /// <summary>
+        /// 初始化皮肤数据库连接
+        /// </summary>
+        private void ManageDataBaseInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList managedatabase = this.GetXmlNotListByTagNameAndFilePath(m_ManageConfigPath, "manageDataBase");
+            if (managedatabase != null)
+            {
+                foreach (XmlElement element in managedatabase)
+                {
+                    this._managedatabasestr = element.SelectSingleNode("Value").InnerText;
+                }
+            }
+        }
+
+        /// <summary>
         /// 设置模版类型
         /// </summary>
         private void TemplateTypesInit()
         {
             //获得所有需要登陆的特殊页面
-            XmlNodeList templatetype = this.GetXmlNotListByTagNameAndFilePath(m_TemplateTypeFilePath, "TemplateType");
+            XmlNodeList templatetype = this.GetXmlNotListByTagNameAndFilePath(m_skinConfig, "TemplateType");
             if (templatetype != null)
             {
                 this._templatetypes = new Dictionary<string,Option>();
@@ -95,7 +157,7 @@ namespace TCG.Utils
         /// <summary>
         /// 文件数据库连接配置
         /// </summary>
-        public List<FileDataBase> fileDataBaseConfig
+        public List<DataBaseConnStr> fileDataBaseConfig
         {
             get
             {
@@ -113,15 +175,49 @@ namespace TCG.Utils
             XmlNodeList filedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_FileDataBaseConfigFilePath, "fileDataBase");
             if (filedatabaseconfig != null)
             {
-                this._filedatabaseconfig = new List<FileDataBase>();
+                this._filedatabaseconfig = new List<DataBaseConnStr>();
                 foreach (XmlElement element in filedatabaseconfig)
                 {
-                    FileDataBase filedatabase = new FileDataBase();
+                    DataBaseConnStr filedatabase = new DataBaseConnStr();
                     filedatabase.Text = element.SelectSingleNode("Text").InnerText;
                     filedatabase.Value = element.SelectSingleNode("Value").InnerText;
                     filedatabase.Service = element.SelectSingleNode("Service").InnerText;
                     filedatabase.IsBaseDataBase = objectHandlers.ToBoolen(element.SelectSingleNode("IsBaseDataBase").InnerText, false);
                     this._filedatabaseconfig.Add(filedatabase);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 资源数据库连接配置
+        /// </summary>
+        public List<DataBaseConnStr> ResourceDataBaseConfig
+        {
+            get
+            {
+                if (this._resourcedatabaseconfig == null)
+                {
+                    this.ResourceDataBaseConfigInit();
+                }
+                return this._resourcedatabaseconfig;
+            }
+        }
+
+        private void ResourceDataBaseConfigInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList resourcedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_ResourceDataBaseConfigFilePath, "fileDataBase");
+            if (resourcedatabaseconfig != null)
+            {
+                this._resourcedatabaseconfig = new List<DataBaseConnStr>();
+                foreach (XmlElement element in resourcedatabaseconfig)
+                {
+                    DataBaseConnStr filedatabase = new DataBaseConnStr();
+                    filedatabase.Text = element.SelectSingleNode("Text").InnerText;
+                    filedatabase.Value = element.SelectSingleNode("Value").InnerText;
+                    filedatabase.Service = element.SelectSingleNode("Service").InnerText;
+                    filedatabase.IsBaseDataBase = objectHandlers.ToBoolen(element.SelectSingleNode("IsBaseDataBase").InnerText, false);
+                    this._resourcedatabaseconfig.Add(filedatabase);
                 }
             }
         }
@@ -165,7 +261,7 @@ namespace TCG.Utils
         private void ManageOutpagesInit()
         {
             //获得所有SpecialPage节点
-            XmlNodeList specialPages = this.GetXmlNotListByTagNameAndFilePath(m_ManageOutpagesFilePath, "SpecialPage");
+            XmlNodeList specialPages = this.GetXmlNotListByTagNameAndFilePath(m_ManageConfigPath, "SpecialPage");
             if (specialPages != null)
             {
                 this._manageoutpages = new Dictionary<string, List<Option>>();
@@ -178,7 +274,7 @@ namespace TCG.Utils
                 this._manageoutpages.Add("specialpages", specialPageslist);
 
                 //获得所有需要登陆的特殊页面
-                XmlNodeList onlineLoginPages = this.GetXmlNotListByTagNameAndFilePath(m_ManageOutpagesFilePath, "OnlineLoginPage");
+                XmlNodeList onlineLoginPages = this.GetXmlNotListByTagNameAndFilePath(m_ManageConfigPath, "OnlineLoginPage");
                 if (onlineLoginPages != null)
                 {
                     List<Option> onlineLoginPageslist = new List<Option>();
@@ -215,15 +311,21 @@ namespace TCG.Utils
         }
 
         private Dictionary<string, List<Option>> _manageoutpages = null;
-        private string m_ManageOutpagesFilePath = "~/config/manageOutpages.Config";                 //管理特殊页面的配置
 
         private Dictionary<string, string> _baseconfig = null;
         private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                         //系统基本配置
 
-        private List<FileDataBase> _filedatabaseconfig = null;
+        private List<DataBaseConnStr> _filedatabaseconfig = null;
         private string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";               //文件数据库配置
 
         private Dictionary<string, Option> _templatetypes = null;
-        private string m_TemplateTypeFilePath = "~/config/TemplateTypes.Config";                    //管理特殊页面的配置
+        private string m_skinConfig = "~/config/skinConfig.Config";                     //皮肤配置
+        private string _skindatabasestr = null;                                         //皮肤数据库连接
+
+        private string m_ManageConfigPath = "~/config/manageConfig.Config";                    //管理特殊页面的配置
+        private string _managedatabasestr = null;                                 //管理员数据库连接
+
+        private List<DataBaseConnStr> _resourcedatabaseconfig = null;
+        private string m_ResourceDataBaseConfigFilePath = "~/config/resourceDataBase.Config";               //资源数据库配置
     }
 }
