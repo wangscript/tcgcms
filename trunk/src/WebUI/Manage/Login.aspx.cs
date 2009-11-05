@@ -81,7 +81,7 @@ public partial class aLogin : adminMain
 
                 string dir = System.IO.Path.GetDirectoryName(filepath);
                 string fileName = System.IO.Path.GetFileName(filepath);
-                FileZipHandlers.UnZipFile(fileName, dir);
+                objectHandlers.UnZipFile(fileName, dir);
 
                 re = true;
             }

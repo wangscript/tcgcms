@@ -59,6 +59,10 @@ namespace TCG.Entity
         /// 是否显示
         /// </summary>
         public string cVisible { get { return this._cvisible; } set { this._cvisible = value; } }
+        /// <summary>
+        /// 指定数据库连接
+        /// </summary>
+        public string DataBaseService { get { return this._dbService; } set { this._dbService = value; } }
 
         private string _iid;
         private string _iparent;
@@ -71,5 +75,6 @@ namespace TCG.Entity
         private string _vcdirectory;
         private string _vcurl;
         private string _cvisible;
+        private string _dbService = null;
     }
 }

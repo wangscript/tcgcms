@@ -100,7 +100,7 @@ namespace TCG.Handlers
         /// <param name="id"></param>
         /// <param name="readdb"></param>
         /// <returns></returns>
-        public string GetAllChildCategoriesIdByCategoriesId(Connection conn, string id, bool readdb)
+        public string GetAllChildCategoriesIdByCategoriesId(string id, bool readdb)
         {
             //if (id == 0) return "";
             DataTable allClass = this.GetCategoriesByCach(conn, readdb);
@@ -109,8 +109,8 @@ namespace TCG.Handlers
             string str = "'" + id.ToString() + "'";
             for (int i = 0; i < rows.Length; i++)
             {
-                
-                string t = GetAllChildCategoriesIdByCategoriesId(conn, rows[i]["Id"].ToString(), readdb);
+
+                string t = GetAllChildCategoriesIdByCategoriesId(rows[i]["Id"].ToString(), readdb);
                 if (!string.IsNullOrEmpty(t)) str += "," + t;
             }
             return str;
@@ -124,7 +124,7 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="sh"></param>
         /// <returns></returns>
-        public string GetResourcesCategoriesIndex(Connection conn, Dictionary<string, string> config, string classid, string sh)
+        public string GetResourcesCategoriesIndex(string classid, string sh)
         {
             if (string.IsNullOrEmpty(classid)) return "";
             DataTable allClass = this.GetCategoriesByCach(conn, false);
@@ -134,9 +134,9 @@ namespace TCG.Handlers
             if (rows.Length==1)
             {
 
-                string url = (rows[0]["vcUrl"].ToString().IndexOf(".") > -1) ? rows[0]["vcUrl"].ToString() : rows[0]["vcUrl"].ToString() + config["FileExtension"];
+                string url = (rows[0]["vcUrl"].ToString().IndexOf(".") > -1) ? rows[0]["vcUrl"].ToString() : rows[0]["vcUrl"].ToString() + base.configService.baseConfig["FileExtension"];
                 str = "<a href=\"" + url + "\" target=\"_blank\">" + rows[0]["vcName"].ToString() + "</a>";
-                string t = GetResourcesCategoriesIndex(conn, config, rows[0]["Parent"].ToString(), sh);
+                string t = GetResourcesCategoriesIndex(rows[0]["Parent"].ToString(), sh);
                 if (!string.IsNullOrEmpty(t)) str = t + sh + str;
             }
             return str;
@@ -148,7 +148,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="iClassID"></param>
         /// <returns></returns>
-        public Categories GetCategoriesById(Connection conn, string iClassID, bool readdb)
+        public Categories GetCategoriesById(string iClassID, bool readdb)
         {
             DataTable dt = null;
             if (readdb)
@@ -156,7 +156,7 @@ namespace TCG.Handlers
                 base.SetSkinDataBaseConnection();
                 string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE ID = '" + iClassID.ToString() + "'";
-                dt = conn.GetDataTable(Sql);
+                dt = base.conn.GetDataTable(Sql);
             }
             else
             {

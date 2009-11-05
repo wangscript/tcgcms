@@ -40,7 +40,7 @@ namespace TCG.Handlers
         {
             base.SetReourceHandlerDataBaseConnection();
             inf.dAddDate = DateTime.Now;
-            inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
+            inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
@@ -81,7 +81,7 @@ namespace TCG.Handlers
         {
             base.SetReourceHandlerDataBaseConnection();
             inf.dAddDate = DateTime.Now;
-            inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
+            inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
@@ -183,10 +183,10 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int UpdateNewsInfo(Connection conn, string Extension, Resources inf)
+        public int UpdateNewsInfo(Resources inf)
         {
             base.SetReourceHandlerDataBaseConnection();
-            inf.vcFilePath = this.CreateNewsInfoFilePath(Extension, inf);
+            inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.ClassInfo.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
@@ -201,7 +201,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@vcSpeciality", SqlDbType.VarChar, 100); sp11.Value = inf.vcSpeciality;
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
             SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Value = inf.vcFilePath;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = Extension;
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"];
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp17.Value = inf.Id;
@@ -220,14 +220,14 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public Resources GetNewsInfoById(Connection conn, string id)
+        public Resources GetNewsInfoById(string categoriesid, string resourceid)
         {
             base.SetReourceHandlerDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = id;
-            DataSet ds = conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
+            SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = resourceid;
+            DataSet ds = base.conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
             if (ds == null) return null;
             Resources item = new Resources();
-            item.Id = id;
+            item.Id = resourceid;
             if (ds.Tables[0].Rows.Count == 1)
             {
                 item.vcTitle = (string)ds.Tables[0].Rows[0]["vcTitle"];
@@ -275,9 +275,9 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int DelNewsInfoHtmlById(Connection conn, Dictionary<string, string> config, string id)
+        public int DelNewsInfoHtmlById(string categoriesid, string resourceid)
         {
-            Resources newsitem = this.GetNewsInfoById(conn, id);
+            Resources newsitem = this.GetNewsInfoById(categoriesid,resourceid);
             if (newsitem == null) return -19000000;  
             string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
             System.IO.File.Delete(filepath);
@@ -292,7 +292,7 @@ namespace TCG.Handlers
         /// <param name="config"></param>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public int DelNewsInfoHtmlByIds(Connection conn, Dictionary<string, string> config, string ids)
+        public int DelNewsInfoHtmlByIds(string ids)
         {
             base.SetReourceHandlerDataBaseConnection();
             if (string.IsNullOrEmpty(ids)) return -19000000;
@@ -317,7 +317,7 @@ namespace TCG.Handlers
                 string t = ids;
                 if (string.IsNullOrEmpty(t))
                 {
-                    return this.DelNewsInfoHtmlById(conn, config, t);
+                    return this.DelNewsInfoHtmlById("",t);
                 }
             }
             return 1;
@@ -372,14 +372,14 @@ namespace TCG.Handlers
         /// <param name="title"></param>
         /// <param name="date"></param>
         /// <returns></returns>
-        public string CreateNewsInfoFilePath(string extion, Resources nif)
+        public string CreateNewsInfoFilePath(Resources nif)
         {
             if (string.IsNullOrEmpty(nif.Id)) nif.Id = Guid.NewGuid().ToString();
             string text = string.Empty;
             text += nif.ClassInfo.vcDirectory;
             text += nif.dAddDate.Year.ToString() + objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2);
             text += objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += nif.Id + extion;
+            text += nif.Id + base.configService.baseConfig["FileExtension"];
             return text;
         }
 

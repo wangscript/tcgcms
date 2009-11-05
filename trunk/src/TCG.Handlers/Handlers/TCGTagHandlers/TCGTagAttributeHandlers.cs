@@ -25,13 +25,16 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class TCGTagAttributeHandlers
+    public class TCGTagAttributeHandlers : TCGTagBase
     {
-        public TCGTagAttributeHandlers(HandlerService handlerservice)
+        public TCGTagAttributeHandlers(Connection conn, ConfigService configservice,HandlerService handlerservice)
         {
+            base.conn = conn;
+            base.handlerService = handlerservice;
+            base.configService = configservice;
+
             this._attpattern = @"=""([0-9A-Za-z\s,='!_\-\.%\|()$<>\/]+)""";
-            this._tagstringhdl = new TCGTagStringFunHandlers();
-            this._handlerservice = handlerservice;
+            base.handlerService = handlerservice;
         }
 
         /// <summary>
@@ -64,13 +67,11 @@ namespace TCG.Handlers
             return TempHtml.Replace(this._tag, this._tagtext);
         }
 
-        public void ReplaceTagText(Connection conn, Dictionary<string, string> config, ref TCGTagPagerInfo pagerinfo)
+        public void ReplaceTagText(ref TCGTagPagerInfo pagerinfo)
         {
             if (this._tagtype == string.Empty || this._attribute == string.Empty || this._tag == string.Empty) return;
             string type = this.GetAttribute("type");
             if (type == "") return;
-            this._conn = conn;
-            this._config = config;
             switch (type)
             {
                 case "newstemplate":
@@ -112,7 +113,7 @@ namespace TCG.Handlers
             switch (feild)
             {
                 case "condition":
-                    value = this._tagstringhdl.StringConditionFun(this._conn, value);
+                    value = base.tcgTagStringFunHandlers.StringConditionFun(value);
                     break;
             }
             return value;
@@ -151,7 +152,7 @@ namespace TCG.Handlers
                 SQL += " ORDER BY " + orders;
             }
 
-            DataSet ds = this._conn.GetDataSet(SQL);
+            DataSet ds = base.conn.GetDataSet(SQL);
 
             if (ds == null) return;
             if (ds.Tables.Count != 0)
@@ -178,14 +179,23 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
-            string id = this.GetAttribute("id");
-            if (string.IsNullOrEmpty(id))
+            string resourceid = this.GetAttribute("id");
+            if (string.IsNullOrEmpty(resourceid))
             {
                 pagerinfo.Read = false;
                 return;
             }
 
-            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(this._conn, id);
+            string categoriesid = this.GetAttribute("cid");
+            if (string.IsNullOrEmpty(categoriesid))
+            {
+                pagerinfo.Read = false;
+                return;
+            }
+
+
+
+            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, resourceid);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -199,13 +209,13 @@ namespace TCG.Handlers
                 try
                 {
                     string tContent = this.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.vcContent, "admin",
-                        objectHandlers.ToInt(this._config["NewsFileClass"]), this._config);
+                        objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]));
                     if (tContent != item.vcContent)
                     {
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        this.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(this._conn, this._config["FileExtension"], item);
+                        this.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(item);
                     }
                 }
                 catch { }
@@ -222,7 +232,7 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.Id.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.ClassInfo.Id, " > "));
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.ClassInfo.Id, " > "));
 
                 
             }
@@ -249,7 +259,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Categories item = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(this._conn, id, false);
+            Categories item = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(id, false);
             if (item == null)
             {
                 pagerinfo.Read = false;
@@ -261,7 +271,7 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(this._conn, this._config, item.Id, " > "));
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Id, " > "));
 
             pagerinfo.PageTitle = item.vcClassName;
 
@@ -281,7 +291,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(this._conn, id,false);
+            Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(id,false);
             if (item != null)
             {
                 this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
@@ -336,7 +346,7 @@ namespace TCG.Handlers
                 SQL += " ORDER BY " + orders;
             }
 
-            DataSet ds = this._conn.GetDataSet(SQL);
+            DataSet ds = base.conn.GetDataSet(SQL);
 
             if (ds == null) return;
             if (ds.Tables.Count != 0)
@@ -418,7 +428,7 @@ namespace TCG.Handlers
                     }
                 }
             }
-            temp = this._tagstringhdl.StringColoumFun(this._conn, temp, false);
+            temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
 
         /// <summary>
@@ -498,7 +508,7 @@ namespace TCG.Handlers
             int pageCount = 0;
             int count = 0;
             DataSet ds = new DataSet();
-            int rtn = DBHandlers.GetPage(sItem,this._conn, ref curPage, ref pageCount, ref count, ref ds);
+            int rtn = DBHandlers.GetPage(sItem,base.conn, ref curPage, ref pageCount, ref count, ref ds);
 
             pagerinfo.PageCount = pageCount;
             pagerinfo.curPage = curPage;
@@ -525,9 +535,6 @@ namespace TCG.Handlers
 
         }
 
-
-        private Connection _conn = null;
-        private Dictionary<string, string> _config = null;
         private string _attpattern = string.Empty;
         private bool _pager = false;
         private string _attribute = string.Empty;
@@ -535,22 +542,6 @@ namespace TCG.Handlers
         private string _tagtext = string.Empty;
         private string _tag = string.Empty;
         private string _taghtml = string.Empty;         //标签的全部HTML
-        private TCGTagStringFunHandlers _tagstringhdl = null;
 
-        /// <summary>
-        /// 提供对系统对象操作的服务
-        /// </summary>
-        public HandlerService handlerService
-        {
-            set
-            {
-                this._handlerservice = value;
-            }
-            get
-            {
-                return this._handlerservice;
-            }
-        }
-        private HandlerService _handlerservice;
     }
 }

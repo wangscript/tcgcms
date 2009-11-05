@@ -235,7 +235,7 @@ namespace TCG.Handlers
             return item;
         }
 
-        public Template GetTemplateByID(Connection conn, string templateid,bool readdb)
+        public Template GetTemplateByID(string templateid,bool readdb)
         {
             Template item = null;
 

@@ -30,19 +30,14 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class FileResourcesHandlers
+    public class FileResourcesHandlers : FileResourcesHandlerBase
     {
-        /// <summary>
-        /// 获得配置信息支持
-        /// </summary>
-        public ConfigService configService
+
+        public FileResourcesHandlers(Connection conn, ConfigService configservice)
         {
-            set
-            {
-                this._configservice = value;
-            }
+            base.conn = conn;
+            base.configService = configservice;
         }
-        private ConfigService _configservice;
 
         /// <summary>
         /// 提供文件分类操作的方法
@@ -55,33 +50,7 @@ namespace TCG.Handlers
             }
         }
         private FileCategoriesHandlers _fileclasshandlers;
-
-        /// <summary>
-        /// 设置数据库链接
-        /// </summary>
-        /// <returns></returns>
-        private bool SetFileDatabase(long fid)
-        {
-            if (this._configservice == null) return false;
-            if (this._configservice.fileDataBaseConfig == null) return false;
-            if (this._configservice.fileDataBaseConfig.Count == 0) return false;
-            int index = objectHandlers.ToInt (fid % this._configservice.fileDataBaseConfig.Count);
-            DataBaseConnStr filedatabase = this._configservice.fileDataBaseConfig[index];
-            this._conn.SetConnStr = filedatabase.Value;
-            return true;
-        }
-
-        /// <summary>
-        /// 获得数据库访问支持
-        /// </summary>
-        public Connection conn
-        {
-            set
-            {
-                this._conn = value;
-            }
-        }
-        private Connection _conn;
+        
 
         /// <summary>
         /// 添加新的分类
@@ -92,7 +61,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddFileInfoByAdmin(string adminname, FileResources fif)
         {
-            if (!this.SetFileDatabase(fif.iID)) return -19000000;
+            if (!base.SetFileDatabase(fif.iID)) return -19000000;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iID", SqlDbType.BigInt, 8); sp2.Value = fif.iID;
@@ -102,7 +71,7 @@ namespace TCG.Handlers
             SqlParameter sp6 = new SqlParameter("@vcType", SqlDbType.VarChar, 10); sp6.Value = fif.vcType;
             SqlParameter sp7 = new SqlParameter("@reValue", SqlDbType.Int); sp7.Direction = ParameterDirection.Output;
 
-            string[] reValues = this._conn.Execute("SP_Files_FileInfoManageByAdmin", new SqlParameter[] { sp0, sp1,
+            string[] reValues = base.conn.Execute("SP_Files_FileInfoManageByAdmin", new SqlParameter[] { sp0, sp1,
                 sp2, sp3, sp4, sp5, sp6, sp7 }, new int[] { 7 });
             if (reValues != null)
             {
@@ -122,9 +91,9 @@ namespace TCG.Handlers
         public FileResources GetFileInfosById( long id)
         {
             FileResources item = null;
-            if (!this.SetFileDatabase(id)) return null;
+            if (!base.SetFileDatabase(id)) return null;
             string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
-            DataTable dt = this._conn.GetDataTable(SQL);
+            DataTable dt = base.conn.GetDataTable(SQL);
             if (dt != null)
             {
                 if (dt.Rows.Count == 1)
@@ -144,7 +113,7 @@ namespace TCG.Handlers
             return item;
         }
 
-        public string ImgPatchInit(string content, string adminname, int fileclassid, Dictionary<string, string> config)
+        public string ImgPatchInit(string content, string adminname, int fileclassid)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -152,7 +121,7 @@ namespace TCG.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
+                if (text1.IndexOf(base.configService.baseConfig["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileResources imgfile = new FileResources();
 
@@ -189,7 +158,8 @@ namespace TCG.Handlers
                                 }
                                 else
                                 {
-                                    content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
+                                    content = content.Replace(text1, base.configService.baseConfig["FileSite"] 
+                                        + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
                                     temp = text1 + "@@@" + temp;
                                 }
                             }
@@ -206,7 +176,7 @@ namespace TCG.Handlers
             return content;
         }
 
-        public string ImgPatchInit(string content, string url, string adminname, int fileclassid, Dictionary<string, string> config)
+        public string ImgPatchInit(string content, string url, string adminname, int fileclassid)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -214,7 +184,7 @@ namespace TCG.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.IndexOf(config["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
+                if (text1.IndexOf(base.configService.baseConfig["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
                 {
                     FileResources imgfile = new FileResources();
 
@@ -245,7 +215,8 @@ namespace TCG.Handlers
                             }
                             else
                             {
-                                content = content.Replace(text1, config["FileSite"] + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
+                                content = content.Replace(text1, base.configService.baseConfig["FileSite"] + "/manage/attach.aspx?attach=" 
+                                    + imgfile.iID.ToString());
                                 temp = text1 + "@@@" + temp;
                             }
                         }
