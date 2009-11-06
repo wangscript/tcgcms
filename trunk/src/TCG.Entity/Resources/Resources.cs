@@ -22,9 +22,9 @@ namespace TCG.Entity
     /// <summary>
     /// 资源信息
     /// </summary>
-    public class Resources
+    public class Resources : EntityBase
     {
-        public string Id { get { return this._iId; } set { this._iId = value; } }
+        
         public Categories ClassInfo { get { return this._iClassID; } set { this._iClassID = value; } }
         public string vcTitle { get { return this._vcTitle; } set { this._vcTitle = value; } }
         public string vcUrl { get { return this._vcUrl; } set { this._vcUrl = value; } }
@@ -48,7 +48,7 @@ namespace TCG.Entity
         public string cStrong { get { return this._cstrong; } set { this._cstrong = value; } }
           
 
-        private string _iId = string.Empty;
+
         private Categories _iClassID = new Categories();
         private string _vcTitle = string.Empty;
         private string _vcUrl = string.Empty;

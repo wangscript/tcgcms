@@ -42,11 +42,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)CachingService.Get(CachingService.CACHING_AllTemplates);
+                ds = (DataSet)CachingService.Get(CachingService.CACHING_All_TEMPLATES);
                 if (ds == null)
                 {
                     ds = GetAllTemplatesFromDb(conn);
-                    CachingService.Set(CachingService.CACHING_AllTemplates, ds, null);
+                    CachingService.Set(CachingService.CACHING_All_TEMPLATES, ds, null);
                 }
             }
             return ds;

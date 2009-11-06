@@ -113,7 +113,7 @@ namespace TCG.Handlers
             switch (feild)
             {
                 case "condition":
-                    value = base.tcgTagStringFunHandlers.StringConditionFun(value);
+                    
                     break;
             }
             return value;
@@ -259,7 +259,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Categories item = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(id, false);
+            Categories item = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(id);
             if (item == null)
             {
                 pagerinfo.Read = false;

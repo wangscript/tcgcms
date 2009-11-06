@@ -128,8 +128,8 @@ namespace TCG.URLRewriter
             }
 
             //检测分类文件
-            DataTable dt = tagservice.handlerService.skinService.categoriesHandlers.GetCategoriesByCach(false);
-            if (dt != null && dt.Rows.Count != 0)
+            Dictionary<string, EntityBase> allcategories = tagservice.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
+            if (allcategories != null && allcategories.Count != 0)
             {
                 if(!string.IsNullOrEmpty(pagepath))
                 {
@@ -137,26 +137,29 @@ namespace TCG.URLRewriter
                     string exp = p[p.Length-1];
                     int num = DpagePath.LastIndexOf("." + exp);
                     string Qp = DpagePath.Substring(0, num);
-                    string SQL = "vcUrl ='" + Qp + "'";
-                    DataRow[] Rows = dt.Select(SQL);
-                    if (Rows.Length > 0)
+
+                    foreach (KeyValuePair<string, EntityBase> entity in allcategories)
                     {
-                        Template tlif = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(Rows[0]["iListTemplate"].ToString(), false);
+                        Categories tempcategories = (Categories)entity.Value;
+                        if (tempcategories.vcUrl == Qp)
+                        {
+                            Template tlif = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(tempcategories.iListTemplate, false);
 
-                        tagservice.TCGTagHandlers.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["Id"].ToString());
-                        tagservice.TCGTagHandlers.NeedCreate = false;
-                        tagservice.TCGTagHandlers.PagerInfo.DoAllPage = false;
-                        tagservice.TCGTagHandlers.PagerInfo.Page = DcurPage;
-                        tagservice.TCGTagHandlers.WebPath = Rows[0]["vcUrl"].ToString() + configService.baseConfig["FileExtension"];
-                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
+                            tagservice.TCGTagHandlers.Template = tlif.Content.Replace("_$ClassId$_", tempcategories.Id);
+                            tagservice.TCGTagHandlers.NeedCreate = false;
+                            tagservice.TCGTagHandlers.PagerInfo.DoAllPage = false;
+                            tagservice.TCGTagHandlers.PagerInfo.Page = DcurPage;
+                            tagservice.TCGTagHandlers.WebPath = tempcategories.vcUrl + configService.baseConfig["FileExtension"];
+                            tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
 
-                        OutHtml = tagservice.TCGTagHandlers.Template;
+                            OutHtml = tagservice.TCGTagHandlers.Template;
 
 
-                        TimeReplace(ref OutHtml);
-                        Response.Write(OutHtml);
-                        Response.End();
-                        return;
+                            TimeReplace(ref OutHtml);
+                            Response.Write(OutHtml);
+                            Response.End();
+                            return;
+                        }
                     }
                 }
             }

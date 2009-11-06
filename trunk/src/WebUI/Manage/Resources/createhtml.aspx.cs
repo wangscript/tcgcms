@@ -93,14 +93,14 @@ public partial class news_createhtml : adminMain
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, ClassId, false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(ClassId);
         if (cif == null) { base.AjaxErch(""); return; }
 
-        Template tif = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
+        Template tif = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iTemplate,false);
         if (tif == null) { base.AjaxErch(""); return; }
 
         Resources item = new Resources();
-        item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, id);
+        item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(ClassId, id);
 
         string text1 = "";
         if (item == null)
@@ -122,7 +122,7 @@ public partial class news_createhtml : adminMain
             item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
         }
 
-        int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item);
+        int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(item);
         if (rtn < 0)
         {
             text1 = "<a>更新文章信息失败...ID:" + item.Id + "</a>";
@@ -130,7 +130,7 @@ public partial class news_createhtml : adminMain
             return;
         }
 
-        TCGTagHandlers tcgthl = base.handlerService.tagService.TCGTagHandlers;
+        TCGTagHandlers tcgthl = base.tagService.TCGTagHandlers;
         tcgthl.Template = tif.Content.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
         tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
@@ -205,9 +205,8 @@ public partial class news_createhtml : adminMain
         {
             string iClassId = objectHandlers.Post("iClassId");
 
-            string allchild = base.handlerService.skinService.categoriesHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
-
-            sItem.strCondition += " AND iClassID in (" + allchild + ")";
+            //待续,查询分类
+           // sItem.strCondition += " AND iClassID in (" + allchild + ")";
         }
 
         string Condition = objectHandlers.Post("iCondition");

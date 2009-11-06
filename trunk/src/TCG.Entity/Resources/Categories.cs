@@ -19,9 +19,8 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class Categories
+    public class Categories : EntityBase
     {
-        public string Id { get { return this._iid; } set { this._iid = value; } }
         /// <summary>
         /// ∏∏¿‡ID
         /// </summary>
@@ -64,7 +63,7 @@ namespace TCG.Entity
         /// </summary>
         public string DataBaseService { get { return this._dbService; } set { this._dbService = value; } }
 
-        private string _iid;
+        
         private string _iparent;
         private string _itemplate;
         private string _ilisttemplate;

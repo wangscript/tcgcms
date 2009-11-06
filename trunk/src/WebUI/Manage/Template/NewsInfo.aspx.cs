@@ -21,15 +21,7 @@ public partial class Template_NewsInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
-            DataTable dt = base.handlerService.skinService.categoriesHandlers.GetCategoriesByParentId(0, base.conn, false);
-            if (dt != null)
-            {
-                this.ItemRepeater.DataSource = dt;
-                this.ItemRepeater.DataBind();
-
-                dt.Clear();
-                dt.Dispose();
-            }
+           
            
             base.Finish();
         }

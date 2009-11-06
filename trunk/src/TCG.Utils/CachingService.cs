@@ -66,9 +66,13 @@ namespace TCG.Utils
         /// </summary>
         public static string CACHING_All_SYSTEM_TEMPLATES = "CACHING_All_SYSTEM_TEMPLATES";
         /// <summary>
-        /// 所有的资源分类信息
+        /// 所有的资源分类信息DATATABle
         /// </summary>
         public static string CACHING_ALL_CATEGORIES = "CACHING_ALL_CATEGORIES";
+        /// <summary>
+        /// 所有的资源分类信息实体
+        /// </summary>
+        public static string CACHING_ALL_CATEGORIES_ENTITY = "CACHING_ALL_CATEGORIES_ENTITY";
 
         /// <summary>
         /// 系统缓存集合

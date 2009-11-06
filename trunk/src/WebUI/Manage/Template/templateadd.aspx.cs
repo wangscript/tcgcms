@@ -66,7 +66,7 @@ public partial class Template_templateadd : adminMain
             try
             {
                 rtn = base.handlerService.skinService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName, item);
-                CachingService.Remove(CachingService.CACHING_AllTemplates);
+                CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
             }
             catch (Exception ex)
             {
