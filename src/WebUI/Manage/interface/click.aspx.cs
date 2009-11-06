@@ -27,7 +27,8 @@ public partial class Manage_interface_click : ScriptsMain
                 return;
             }
 
-            string topicid = objectHandlers.Get("topicid");
+            string topicid = objectHandlers.Get("rid");
+            string categoriesid = objectHandlers.Get("cid");
             bool shownum = objectHandlers.Get("shownum") == "true" ? true : false;
             if (string.IsNullOrEmpty(topicid))
             {
@@ -39,7 +40,17 @@ public partial class Manage_interface_click : ScriptsMain
                 return;
             }
 
-            Resources nif = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, topicid);
+            if (string.IsNullOrEmpty(categoriesid))
+            {
+                if (shownum)
+                {
+                    Response.Write("document.write('0');");
+                    Response.End();
+                }
+                return;
+            }
+
+            Resources nif = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, topicid);
             if (nif == null)
             {
                 if (shownum)
@@ -53,7 +64,7 @@ public partial class Manage_interface_click : ScriptsMain
             if (shownum) Response.Write("document.write('" + nif.iCount.ToString() + "');");
 
             nif.iCount = nif.iCount + 1;
-            int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], nif);
+            int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(nif);
             base.conn.Close();
             Response.End();
         }

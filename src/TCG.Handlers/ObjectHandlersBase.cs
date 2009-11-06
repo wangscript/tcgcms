@@ -13,11 +13,13 @@
   */
 
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Text;
 
 using TCG.Data;
 using TCG.Utils;
+using TCG.Entity;
 
 namespace TCG.Handlers
 {
@@ -57,5 +59,53 @@ namespace TCG.Handlers
             }
         }
         private ConfigService _configservice;
+
+        /// <summary>
+        /// 从记录集中返回实体
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<Object> GetEntitysObjectFromTable(DataTable dt, Type type)
+        {
+            if (dt == null) return null;
+            if (dt.Rows.Count == 0) return null;
+            List<Object> list = new List<object>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow Row = dt.Rows[i];
+                list.Add(this.GetEntityObjectFromRow(Row,type));
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 从记录行中得到实体
+        /// </summary>
+        /// <param name="?"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public Object GetEntityObjectFromRow(DataRow row, Type type)
+        {
+            if (row == null) return null;
+            switch (type.ToString())
+            {
+                case "TCG.Categories":
+                    Categories categories = new Categories();
+                    categories.Id = row["Id"].ToString();
+                    categories.iListTemplate = row["iListTemplate"].ToString();
+                    categories.iOrder = (int)row["iOrder"];
+                    categories.Parent = row["Parent"].ToString();
+                    categories.iTemplate = row["iTemplate"].ToString();
+                    categories.vcClassName = (string)row["vcClassName"];
+                    categories.vcDirectory = (string)row["vcDirectory"];
+                    categories.vcName = (string)row["vcName"];
+                    categories.vcUrl = (string)row["vcUrl"];
+                    categories.dUpdateDate = (DateTime)row["dUpdateDate"];
+                    categories.cVisible = (string)row["Visible"];
+                    return categories;
+            }
+            return null;
+        }
     }
 }

@@ -34,18 +34,19 @@ namespace TCG.Pages
 
         protected override void Render(System.Web.UI.HtmlTextWriter writer)
         {
-            StringWriter html = new StringWriter();
-            HtmlTextWriter tw = new HtmlTextWriter(html);
-            base.Render(tw);
-            string outhtml = html.ToString();
+            //待续
+            //StringWriter html = new StringWriter();
+            //HtmlTextWriter tw = new HtmlTextWriter(html);
+            //base.Render(tw);
+            //string outhtml = html.ToString();
 
-            string CacheString = string.Empty;
-            TCGTagHandlers tcgthl = new TCGTagHandlers();
-            tcgthl.Template = outhtml;
-            tcgthl.NeedCreate = false;
-            tcgthl.Replace(base.conn, base.configService.baseConfig);
-            CacheString = tcgthl.Template;
-            writer.Write(CacheString);
+            //string CacheString = string.Empty;
+            //TCGTagHandlers tcgthl = new TCGTagHandlers();
+            //tcgthl.Template = outhtml;
+            //tcgthl.NeedCreate = false;
+            //tcgthl.Replace(base.conn, base.configService.baseConfig);
+            //CacheString = tcgthl.Template;
+            //writer.Write(CacheString);
         }
     }
 }

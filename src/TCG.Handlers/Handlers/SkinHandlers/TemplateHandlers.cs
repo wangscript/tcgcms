@@ -76,11 +76,11 @@ namespace TCG.Handlers
             }
             else
             {
-                ds = (DataSet)CachingService.Get(CachingService.CACHING_AllTemplates_System + systemtype.ToString());
+                ds = (DataSet)CachingService.Get(CachingService.CACHING_All_SYSTEM_TEMPLATES + systemtype.ToString());
                 if (ds == null)
                 {
                     ds = GetTemplatesBySystemTypeFromDb(conn, systemtype);
-                    CachingService.Set(CachingService.CACHING_AllTemplates_System + systemtype.ToString(), ds, null);
+                    CachingService.Set(CachingService.CACHING_All_SYSTEM_TEMPLATES + systemtype.ToString(), ds, null);
                 }
             }
             return ds;
@@ -212,7 +212,7 @@ namespace TCG.Handlers
             return dt;
         }
 
-        public Template GetTemplateBySystemAndID(Connection conn, int system, string templateid)
+        public Template GetTemplateBySystemAndID(int system, string templateid)
         {
             Template item = null;
             DataSet systetemps = this.GetTemplatesBySystemType(conn, system, false);

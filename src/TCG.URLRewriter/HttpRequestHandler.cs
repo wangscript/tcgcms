@@ -13,7 +13,7 @@ using TCG.Handlers;
 
 namespace TCG.URLRewriter
 {
-    public class HttpRequestHandler
+    public class HttpRequestHandler 
     {
         /// <summary>
         /// 获得配置信息
@@ -80,16 +80,14 @@ namespace TCG.URLRewriter
             startTime = DateTime.Now;
             string OutHtml = string.Empty;
 
-            TCGTagHandlers tcgthdl = new TCGTagHandlers();
-            HandlerService handlerservice = new HandlerService(conn, configService);
-            tcgthdl.handlerService = handlerservice;
+            TagService tagservice = new TagService(this.conn, this.configService, new HandlerService(this.conn, this.configService));
 
             //获得页面文件名
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
 
             //获得所有单页模版信息
 
-            DataSet ds = handlerservice.skinService.templateHandlers.GetTemplatesBySystemTypAndType(conn, 0, 0, false);
+            DataSet ds = tagservice.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(conn, 0, 0, false);
 
             if (ds != null && ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
             {
@@ -103,16 +101,15 @@ namespace TCG.URLRewriter
 
                     if (texturl == Request.Url.AbsoluteUri)
                     {
-                        tcgthdl.Template = Row["vcContent"].ToString();
-                        tcgthdl.NeedCreate = false;
-                        tcgthdl.Replace(conn, configService.baseConfig);
-                        OutHtml = tcgthdl.Template;
+                        tagservice.TCGTagHandlers.Template = Row["vcContent"].ToString();
+                        tagservice.TCGTagHandlers.NeedCreate = false;
+                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
+                        OutHtml = tagservice.TCGTagHandlers.Template;
 
 
                         TimeReplace(ref OutHtml);
                         Response.Write(OutHtml);
                         Response.End();
-                        tcgthdl = null;
                         return;
                     }
                 }
@@ -131,7 +128,7 @@ namespace TCG.URLRewriter
             }
 
             //检测分类文件
-            DataTable dt = handlerservice.skinService.categoriesHandlers.GetCategoriesByCach(conn, false);
+            DataTable dt = tagservice.handlerService.skinService.categoriesHandlers.GetCategoriesByCach(false);
             if (dt != null && dt.Rows.Count != 0)
             {
                 if(!string.IsNullOrEmpty(pagepath))
@@ -144,25 +141,21 @@ namespace TCG.URLRewriter
                     DataRow[] Rows = dt.Select(SQL);
                     if (Rows.Length > 0)
                     {
-                        TemplateHandlers tlhdl = new TemplateHandlers();
-                        Template tlif = tlhdl.GetTemplateByID(conn, Rows[0]["iListTemplate"].ToString(), false);
+                        Template tlif = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(Rows[0]["iListTemplate"].ToString(), false);
 
-                        TCGTagHandlers tcgthdl1 = new TCGTagHandlers();
-                        tcgthdl1.handlerService = handlerservice;
-                        tcgthdl1.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["Id"].ToString());
-                        tcgthdl1.NeedCreate = false;
-                        tcgthdl1.PagerInfo.DoAllPage = false;
-                        tcgthdl1.PagerInfo.Page = DcurPage;
-                        tcgthdl1.WebPath = Rows[0]["vcUrl"].ToString() + configService.baseConfig["FileExtension"];
-                        tcgthdl1.Replace(conn, configService.baseConfig);
+                        tagservice.TCGTagHandlers.Template = tlif.Content.Replace("_$ClassId$_", Rows[0]["Id"].ToString());
+                        tagservice.TCGTagHandlers.NeedCreate = false;
+                        tagservice.TCGTagHandlers.PagerInfo.DoAllPage = false;
+                        tagservice.TCGTagHandlers.PagerInfo.Page = DcurPage;
+                        tagservice.TCGTagHandlers.WebPath = Rows[0]["vcUrl"].ToString() + configService.baseConfig["FileExtension"];
+                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
 
-                        OutHtml = tcgthdl1.Template;
+                        OutHtml = tagservice.TCGTagHandlers.Template;
 
 
                         TimeReplace(ref OutHtml);
                         Response.Write(OutHtml);
                         Response.End();
-                        tcgthdl1 = null;
                         return;
                     }
                 }
@@ -173,32 +166,29 @@ namespace TCG.URLRewriter
             match = Regex.Match(DpagePath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
-                string topicid = match.Result("$1");
+                string categoriesid = match.Result("$1");
+                string topicid = match.Result("$2");
                 if (!string.IsNullOrEmpty(topicid))
                 {
                     //获得文章对象
 
-                    Resources item = handlerservice.resourcsService.resourcesHandlers.GetNewsInfoById(conn, topicid);
+                    Resources item = tagservice.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, topicid);
                     if (item != null)
                     {
                         //获得分类信息
 
-                        Template titem = handlerservice.skinService.templateHandlers.GetTemplateByID(conn, item.ClassInfo.iTemplate, false);
-                       
+                        Template titem = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(item.ClassInfo.iTemplate, false);
 
-                        TCGTagHandlers tcgth = new TCGTagHandlers();
-                        tcgth.handlerService = handlerservice;
-                        tcgth.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
+                        tagservice.TCGTagHandlers.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
                         titem = null;
-                        tcgth.NeedCreate = false;
-                        tcgth.Replace(conn, configService.baseConfig);
+                        tagservice.TCGTagHandlers.NeedCreate = false;
+                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
 
-                        OutHtml = tcgth.Template;
+                        OutHtml = tagservice.TCGTagHandlers.Template;
 
                         TimeReplace(ref OutHtml);
                         Response.Write(OutHtml);
                         Response.End();
-                        tcgth = null;
                         return;
                     }
    
