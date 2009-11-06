@@ -56,15 +56,19 @@ namespace TCG.Utils
         /// <summary>
         /// 所有文件分类定义
         /// </summary>
-        public static string CACHING_ALL_FILECLASS = "allfilesclass";
+        public static string CACHING_ALL_FILECLASS = "CACHING_ALL_FILECLASS";
         /// <summary>
         /// 所有模版信息缓存
         /// </summary>
-        public static string CACHING_AllTemplates = "AllTemplates";
+        public static string CACHING_All_TEMPLATES = "CACHING_All_TEMPLATES";
         /// <summary>
         /// 所有系统模版信息
         /// </summary>
-        public static string CACHING_AllTemplates_System = "AllTemplates_System";  
+        public static string CACHING_All_SYSTEM_TEMPLATES = "CACHING_All_SYSTEM_TEMPLATES";
+        /// <summary>
+        /// 所有的资源分类信息
+        /// </summary>
+        public static string CACHING_ALL_CATEGORIES = "CACHING_ALL_CATEGORIES";
 
         /// <summary>
         /// 系统缓存集合
@@ -77,6 +81,9 @@ namespace TCG.Utils
                 {
                     _systemcachings = new Dictionary<string, string>();
                     _systemcachings.Add("所有文件分类定义", CACHING_ALL_FILECLASS);
+                    _systemcachings.Add("所有模版信息缓存", CACHING_All_TEMPLATES);
+                    _systemcachings.Add("所有系统模版信息", CACHING_All_SYSTEM_TEMPLATES);
+                    _systemcachings.Add("所有的资源分类信息", CACHING_ALL_CATEGORIES);
                 }
                 return _systemcachings;
             }

@@ -21,7 +21,7 @@ public partial class Common_AllNewsClass : ScriptsMain
         {
             Response.Write("var NewsLis = new Array();\r\n");
             CategoriesHandlers cldl = new CategoriesHandlers();
-            DataTable dt = cldl.GetCategoriesByCach(base.conn,false);
+            DataTable dt = cldl.GetCategoriesByCach(false);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)

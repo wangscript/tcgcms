@@ -152,7 +152,6 @@ namespace TCG.Handlers
             this._temphtml = _temphtml.Replace("_$FileSite$_", config["FileSite"]);
             this._temphtml = _temphtml.Replace("_$FileExtension$_", config["FileExtension"]);
             this._temphtml = _temphtml.Replace("_$WebSite$_", config["WebSite"]);
-            this._temphtml = _temphtml.Replace("_$ScriptsSite$_", config["ScriptsSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", config["PageSize"]);
             this._temphtml = _temphtml.Replace("_$WebTitle$_", config["WebTitle"]);
             this._temphtml = _temphtml.Replace("_$WebKeyWords$_", config["WebKeyWords"]);

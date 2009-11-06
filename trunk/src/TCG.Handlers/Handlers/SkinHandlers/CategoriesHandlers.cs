@@ -36,18 +36,18 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="parentid"></param>
         /// <returns></returns>
-        public DataTable GetCategoriesByParentId(int parentid,Connection conn,bool readdb)
+        public DataTable GetCategoriesByParentId(int parentid)
         {
-            base.SetSkinDataBaseConnection();
-            if (readdb)
+            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"],true))
             {
+                base.SetSkinDataBaseConnection();
                 string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
                     + " WHERE iParent = " + parentid.ToString();
                 return conn.GetDataTable(Sql);
             }
             else
             {
-                DataTable dt = GetCategoriesByCach(conn, false);
+                DataTable dt = GetAllCategories();
                 if (dt == null) return null;
                 DataRow[] rows = dt.Select("iParent=" + parentid.ToString());
                 DataSet dts = new DataSet();
@@ -57,41 +57,43 @@ namespace TCG.Handlers
             }
         }
 
+        public List<Categories> GetAllCategoriesEntity()
+        {
+            DataTable dt = GetAllCategories();
+            if (dt == null) return null;
+
+
+        }
+
         /// <summary>
         /// 获得所有分类信息
         /// </summary>
         /// <param name="conn"></param>
         /// <returns></returns>
-        public DataTable GetAllCategories(Connection conn)
+        public DataTable GetAllCategories()
+        {
+            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"], true))
+            {
+                return GetAllCategoriesWithOutCaching();
+            }
+            else
+            {
+                DataTable allcategories = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
+                if (allcategories == null)
+                {
+                    return GetAllCategoriesWithOutCaching();
+                }
+                return allcategories;
+            }
+        }
+
+        public DataTable GetAllCategoriesWithOutCaching()
         {
             base.SetSkinDataBaseConnection();
             string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
-        /// <summary>
-        /// 从cache中获得所有分类信息
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="readdb"></param>
-        /// <returns></returns>
-        public DataTable GetCategoriesByCach(Connection conn, bool readdb)
-        {
-            if (readdb)
-            {
-                return this.GetAllCategories(conn);
-            }
-            else
-            {
-                DataTable classlist = (DataTable)CachingService.Get("AllNewsClass");
-                if (classlist == null)
-                {
-                    classlist = this.GetAllCategories(conn);
-                    CachingService.Set("AllNewsClass", classlist, null);
-                }
-                return classlist;
-            }
-        }
 
         /// <summary>
         /// 
@@ -103,7 +105,7 @@ namespace TCG.Handlers
         public string GetAllChildCategoriesIdByCategoriesId(string id, bool readdb)
         {
             //if (id == 0) return "";
-            DataTable allClass = this.GetCategoriesByCach(conn, readdb);
+            DataTable allClass = this.GetAllCategories(readdb);
             if (allClass == null) return "";
             DataRow[] rows = allClass.Select("[Parent] = '" + id + "' ");
             string str = "'" + id.ToString() + "'";
@@ -127,7 +129,7 @@ namespace TCG.Handlers
         public string GetResourcesCategoriesIndex(string classid, string sh)
         {
             if (string.IsNullOrEmpty(classid)) return "";
-            DataTable allClass = this.GetCategoriesByCach(conn, false);
+            DataTable allClass = this.GetCategoriesByCach(false);
             if (allClass == null) return "";
             DataRow[] rows = allClass.Select("Id = '" + classid.ToString() + "'");
             string str = "";
@@ -160,7 +162,7 @@ namespace TCG.Handlers
             }
             else
             {
-                DataTable allclass = this.GetCategoriesByCach(conn, false);
+                DataTable allclass = this.GetCategoriesByCach(false);
                 if (allclass != null)
                 {
                     DataRow[] rows = allclass.Select("Id = '" + iClassID.ToString() + "'");
