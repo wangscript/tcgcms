@@ -15,6 +15,7 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 using TCG.Data;
@@ -66,15 +67,16 @@ namespace TCG.Handlers
         /// <param name="dt"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public List<Object> GetEntitysObjectFromTable(DataTable dt, Type type)
+        public Dictionary<string,EntityBase> GetEntitysObjectFromTable(DataTable dt, Type type)
         {
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
-            List<Object> list = new List<object>();
+            Dictionary<string ,EntityBase> list = new Dictionary<string,EntityBase>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow Row = dt.Rows[i];
-                list.Add(this.GetEntityObjectFromRow(Row,type));
+                EntityBase entity = this.GetEntityObjectFromRow(Row,type);
+                list.Add(entity.Id,entity);
             }
             return list;
         }
@@ -85,12 +87,12 @@ namespace TCG.Handlers
         /// <param name="?"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public Object GetEntityObjectFromRow(DataRow row, Type type)
+        public EntityBase GetEntityObjectFromRow(DataRow row, Type type)
         {
             if (row == null) return null;
             switch (type.ToString())
             {
-                case "TCG.Categories":
+                case "TCG.Entity.Categories":
                     Categories categories = new Categories();
                     categories.Id = row["Id"].ToString();
                     categories.iListTemplate = row["iListTemplate"].ToString();
@@ -103,7 +105,7 @@ namespace TCG.Handlers
                     categories.vcUrl = (string)row["vcUrl"];
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = (string)row["Visible"];
-                    return categories;
+                    return (EntityBase)categories;
             }
             return null;
         }

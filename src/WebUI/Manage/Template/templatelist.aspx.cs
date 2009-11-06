@@ -170,7 +170,7 @@ public partial class Template_templatelist : adminMain
             return;
         }
 
-        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, iTemplate,false);
+        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID( iTemplate,false);
 
         if (tlif == null)
         {
@@ -202,7 +202,7 @@ public partial class Template_templatelist : adminMain
 
         if (needTCG)
         {
-            TCGTagHandlers tcgthdl = base.handlerService.tagService.TCGTagHandlers;
+            TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
             tcgthdl.Template = tlif.Content;
             tcgthdl.FilePath = filepath;
             if (tcgthdl.Replace(base.conn, base.configService.baseConfig))

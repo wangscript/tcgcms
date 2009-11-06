@@ -49,6 +49,8 @@ namespace TCG.Handlers
                 if (this._tcgtagstringfunhandlers == null)
                 {
                     this._tcgtagstringfunhandlers = new TCGTagStringFunHandlers();
+                    this._tcgtagstringfunhandlers.configService = base.configService;
+                    this._tcgtagstringfunhandlers.conn = base.conn;
                 }
                 return this._tcgtagstringfunhandlers;
             }

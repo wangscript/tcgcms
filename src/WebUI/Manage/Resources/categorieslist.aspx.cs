@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -59,47 +60,13 @@ public partial class resources_categorieslist : adminMain
 
     private void SearchInit()
     {
-        PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "Categories";
-
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("Id");
-        arrshowfied.Add("vcClassName");
-        arrshowfied.Add("vcName");
-        arrshowfied.Add("vcDirectory");
-        arrshowfied.Add("dUpdateDate");
-        arrshowfied.Add("iOrder");
-        sItem.arrShowField = arrshowfied;
-
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("iOrder");
-        sItem.arrSortField = arrsortfield;
-
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
-
         string iParent = objectHandlers.Get("iParentId");
         if (string.IsNullOrEmpty(iParent)) iParent = "0";
-        sItem.strCondition = "Parent='" + iParent + "'";
-        this.iClassId.Value = iParent;
+        Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(iParent);
 
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
+        if (allcategories != null)
         {
-            return;
-        }
-        this.pager.Per = sItem.pageSize;
-        this.pager.SetItem("iParentId", iParent);
-        this.pager.Total = count;
-        this.pager.Calculate();
-
-        if (ds.Tables.Count != 0)
-        {
-            this.ItemRepeater.DataSource = ds;
+            this.ItemRepeater.DataSource = allcategories.Values;
             this.ItemRepeater.DataBind();
         }
         
@@ -107,7 +74,7 @@ public partial class resources_categorieslist : adminMain
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        Categories categorie = (Categories)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
         Span classname = (Span)e.Item.FindControl("classname");
         Span lname = (Span)e.Item.FindControl("lname");
@@ -115,30 +82,30 @@ public partial class resources_categorieslist : adminMain
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sOrder = (Span)e.Item.FindControl("sOrder");
 
-        CheckID.Text = Row["Id"].ToString();
+        CheckID.Text = categorie.Id;
 
-        sOrder.Text = Row["iOrder"].ToString();
-        
-        string text = "<a href=\"?iParentId=" + Row["Id"].ToString() + "\" title=\"查看子分类\">" 
+        sOrder.Text = categorie.iOrder.ToString();
+
+        string text = "<a href=\"?iParentId=" + categorie.Id + "\" title=\"查看子分类\">" 
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        classname.Text = text + Row["vcClassName"].ToString();
-        lname.Text = "<a href='?iClassId=" + Row["Id"].ToString() + "' title='资讯列表'><img src='../images/icon/09.gif'></a>" 
-            + Row["vcName"].ToString();
-        directory.Text = Row["vcDirectory"].ToString();
-        updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
+        classname.Text = text + categorie.vcClassName;
+        lname.Text = "<a href='?iClassId=" + categorie.Id + "' title='资讯列表'><img src='../images/icon/09.gif'></a>"
+            + categorie.vcName;
+        directory.Text = categorie.vcDirectory;
+        updatedate.Text = categorie.dUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
     }
 
     private void NewsClassDel()
     {
-        int tClassID = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
-        if (tClassID == 0)
+        string tClassID = objectHandlers.Post("DelClassId");
+        if (string.IsNullOrEmpty(tClassID ))
         {
             base.AjaxErch("-1");
             base.Finish();
             return;
         }
 
-        int rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(base.conn, tClassID, base.adminInfo.vcAdminName);
+        int rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(tClassID);
         base.AjaxErch(rtn.ToString());
         base.Finish();
 
@@ -154,7 +121,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, tClassID, false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
 
         if (cif == null)
         {
@@ -164,7 +131,7 @@ public partial class resources_categorieslist : adminMain
         }
 
 
-        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iListTemplate,false);
+        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iListTemplate,false);
         if (tlif == null)
         {
             base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");
@@ -191,7 +158,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        TCGTagHandlers tcgthdl = base.handlerService.tagService.TCGTagHandlers;
+        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
         tcgthdl.Template = tlif.Content.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
@@ -247,7 +214,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, iMdyID,false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iMdyID);
         if (cif == null)
         {
             base.AjaxErch("-1");
@@ -257,7 +224,7 @@ public partial class resources_categorieslist : adminMain
 
         cif.iOrder = objectHandlers.ToInt(KeyValue);
 
-        int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.conn, base.adminInfo.vcAdminName, cif);
+        int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
         if (rtn < 0)
         {
             base.AjaxErch("-1");

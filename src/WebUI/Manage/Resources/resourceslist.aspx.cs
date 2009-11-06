@@ -72,9 +72,7 @@ public partial class resources_resourceslist : adminMain
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
         this.iClassId.Value = iClassId.ToString();
 
-        string allchild = base.handlerService.skinService.categoriesHandlers.GetAllChildCategoriesIdByCategoriesId(base.conn, iClassId, false);
-        sItem.strCondition = "iClassID in (" + allchild + ")";
-        //sItem.strCondition = "iClassID = " + iClassId.ToString();
+        sItem.strCondition = "iClassID = '" + iClassId.ToString() + "'";
 
         string check = objectHandlers.Get("check");
         if (!string.IsNullOrEmpty(check))
@@ -174,16 +172,23 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("-1000000051");
             return;
         }
-
+        //待续
         int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
-        rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
+        //rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
         base.AjaxErch(rtn.ToString());
     }
 
     private void CreateNews()
     {
-        string id = objectHandlers.Post("DelClassId");
-        if (string.IsNullOrEmpty(id))
+        string resourceid = objectHandlers.Post("DelClassId");
+        if (string.IsNullOrEmpty(resourceid))
+        {
+            base.AjaxErch("-1000000051");
+            return;
+        }
+
+        string categorieid = objectHandlers.Post("cid");
+        if (string.IsNullOrEmpty(categorieid))
         {
             base.AjaxErch("-1000000051");
             return;
@@ -194,22 +199,22 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(base.conn, id);
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, resourceid);
         if (item == null) return;
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(base.conn, item.ClassInfo.Id, false);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.ClassInfo.Id);
 
-        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(base.conn, cif.iTemplate,false);
+        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iTemplate,false);
         cif = null;
 
-        TCGTagHandlers tcgth = base.handlerService.tagService.TCGTagHandlers;
-        tcgth.Template = titem.Content.Replace("_$Id$_", id.ToString());
+        TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
+        tcgth.Template = titem.Content.Replace("_$Id$_", resourceid);
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
         titem = null;
         if (tcgth.Replace(base.conn, base.configService.baseConfig))
         {
-            base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", id.ToString());
+            base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", resourceid);
         }
 
         string text1 = "";

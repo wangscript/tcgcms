@@ -28,29 +28,6 @@ namespace TCG.Handlers
 {
     public class TCGTagStringFunHandlers : ObjectHandlersBase
     {
-        /// <summary>
-        /// 获得所有子类的ID
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public string StringConditionFun(string str)
-        {
-            string pattern = @"\$TCG.GetAllClassID\(([a-z0-9]{8}\-[a-z0-9]{4}-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12})\)";
-            MatchCollection matchs = this.GetMatchs(pattern, str);
-            if (matchs.Count > 0)
-            {
-                CategoriesHandlers clhds = new CategoriesHandlers();
-
-                foreach (Match item in matchs)
-                {
-                    str = str.Replace(item.Value, clhds.GetAllChildCategoriesIdByCategoriesId(item.Result("$1"),false));
-                }
-                clhds = null;
-            }
-            matchs = null;
-            return str;
-        }
 
         public string StringColoumFun(string str, bool findtcgstringfunByF)
         {

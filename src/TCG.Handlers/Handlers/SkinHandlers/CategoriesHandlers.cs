@@ -22,6 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using TCG.Data;
+using System.Web.Caching;
 using TCG.Utils;
 using TCG.Entity;
 
@@ -31,38 +32,44 @@ namespace TCG.Handlers
     public class CategoriesHandlers : SkinHandlerBase
     {
 
-        /// <summary>
-        /// 根据父类得到资源类别
-        /// </summary>
-        /// <param name="parentid"></param>
-        /// <returns></returns>
-        public DataTable GetCategoriesByParentId(int parentid)
+        public Dictionary<string, EntityBase> GetCategoriesEntityByParentId(string parentid)
         {
-            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"],true))
+            Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+            if (allcategories == null) return null;
+            if (allcategories.Count == 0) return null;
+            Dictionary<string, EntityBase> childcategories = new Dictionary<string,EntityBase>();
+            foreach ( KeyValuePair<string,EntityBase> entity in allcategories)
             {
-                base.SetSkinDataBaseConnection();
-                string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
-                    + " WHERE iParent = " + parentid.ToString();
-                return conn.GetDataTable(Sql);
+                Categories tempcategories = (Categories)entity.Value;
+                if (tempcategories.Parent == parentid)
+                {
+                    childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
+                }
             }
-            else
+            return childcategories;
+        }
+
+
+        public Dictionary<string,EntityBase> GetAllCategoriesEntity()
+        {
+            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"], true))
             {
                 DataTable dt = GetAllCategories();
                 if (dt == null) return null;
-                DataRow[] rows = dt.Select("iParent=" + parentid.ToString());
-                DataSet dts = new DataSet();
-                dts.Merge(rows);
-                if (dts.Tables.Count == 0) return null;
-                return dts.Tables[0];
+                return base.GetEntitysObjectFromTable(dt, typeof(Categories));
             }
-        }
-
-        public List<Categories> GetAllCategoriesEntity()
-        {
-            DataTable dt = GetAllCategories();
-            if (dt == null) return null;
-
-
+            else
+            {
+                Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                if (allcategories == null)
+                {
+                    DataTable dt = GetAllCategories();
+                    if (dt == null) return null;
+                    allcategories = base.GetEntitysObjectFromTable(dt, typeof(Categories));
+                    CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_ENTITY, allcategories, null);
+                }
+                return allcategories;
+            }
         }
 
         /// <summary>
@@ -81,7 +88,8 @@ namespace TCG.Handlers
                 DataTable allcategories = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
                 if (allcategories == null)
                 {
-                    return GetAllCategoriesWithOutCaching();
+                    allcategories = GetAllCategoriesWithOutCaching();
+                    CachingService.Set(CachingService.CACHING_ALL_CATEGORIES, allcategories,null);
                 }
                 return allcategories;
             }
@@ -96,29 +104,6 @@ namespace TCG.Handlers
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="id"></param>
-        /// <param name="readdb"></param>
-        /// <returns></returns>
-        public string GetAllChildCategoriesIdByCategoriesId(string id, bool readdb)
-        {
-            //if (id == 0) return "";
-            DataTable allClass = this.GetAllCategories(readdb);
-            if (allClass == null) return "";
-            DataRow[] rows = allClass.Select("[Parent] = '" + id + "' ");
-            string str = "'" + id.ToString() + "'";
-            for (int i = 0; i < rows.Length; i++)
-            {
-
-                string t = GetAllChildCategoriesIdByCategoriesId(rows[i]["Id"].ToString(), readdb);
-                if (!string.IsNullOrEmpty(t)) str += "," + t;
-            }
-            return str;
-        }
-
-        /// <summary>
         /// 获得文章的导航！~
         /// </summary>
         /// <param name="conn"></param>
@@ -129,18 +114,12 @@ namespace TCG.Handlers
         public string GetResourcesCategoriesIndex(string classid, string sh)
         {
             if (string.IsNullOrEmpty(classid)) return "";
-            DataTable allClass = this.GetCategoriesByCach(false);
-            if (allClass == null) return "";
-            DataRow[] rows = allClass.Select("Id = '" + classid.ToString() + "'");
-            string str = "";
-            if (rows.Length==1)
-            {
-
-                string url = (rows[0]["vcUrl"].ToString().IndexOf(".") > -1) ? rows[0]["vcUrl"].ToString() : rows[0]["vcUrl"].ToString() + base.configService.baseConfig["FileExtension"];
-                str = "<a href=\"" + url + "\" target=\"_blank\">" + rows[0]["vcName"].ToString() + "</a>";
-                string t = GetResourcesCategoriesIndex(rows[0]["Parent"].ToString(), sh);
-                if (!string.IsNullOrEmpty(t)) str = t + sh + str;
-            }
+            Categories categorie = this.GetCategoriesById(classid);
+            if (classid == null) return "";
+            string url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"];
+            string str = "<a href=\"" + url + "\" target=\"_blank\">" + categorie.vcClassName + "</a>";
+            string t = this.GetResourcesCategoriesIndex(categorie.Parent, sh);
+            if (!string.IsNullOrEmpty(t)) str = t + sh + str;
             return str;
         }
 
@@ -150,48 +129,11 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="iClassID"></param>
         /// <returns></returns>
-        public Categories GetCategoriesById(string iClassID, bool readdb)
+        public Categories GetCategoriesById(string iClassID)
         {
-            DataTable dt = null;
-            if (readdb)
-            {
-                base.SetSkinDataBaseConnection();
-                string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)"
-                    + " WHERE ID = '" + iClassID.ToString() + "'";
-                dt = base.conn.GetDataTable(Sql);
-            }
-            else
-            {
-                DataTable allclass = this.GetCategoriesByCach(false);
-                if (allclass != null)
-                {
-                    DataRow[] rows = allclass.Select("Id = '" + iClassID.ToString() + "'");
-                    if (rows.Length == 1)
-                    {
-                        DataSet ds = new DataSet();
-                        ds.Merge(rows);
-                        dt = ds.Tables[0];
-                    }
-                }
-            }
-            if (dt != null)
-            {
-                Categories cif = new Categories();
-                DataRow Row = dt.Rows[0];
-                cif.Id = Row["Id"].ToString();
-                cif.iListTemplate = Row["iListTemplate"].ToString();
-                cif.iOrder = (int)Row["iOrder"];
-                cif.Parent = Row["Parent"].ToString();
-                cif.iTemplate = Row["iTemplate"].ToString();
-                cif.vcClassName = (string)Row["vcClassName"];
-                cif.vcDirectory = (string)Row["vcDirectory"];
-                cif.vcName = (string)Row["vcName"];
-                cif.vcUrl = (string)Row["vcUrl"];
-                cif.dUpdateDate = (DateTime)Row["dUpdateDate"];
-                cif.cVisible = (string)Row["Visible"];
-                return cif;
-            }
-            return null;
+            Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+            if (allcategories == null) return null;
+            return (Categories)allcategories[iClassID];
         }
 
         /// <summary>
@@ -208,11 +150,10 @@ namespace TCG.Handlers
         /// <param name="url"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public int CreateCategories(Connection conn, Categories cif, string adminname)
+        public int CreateCategories(Categories cif)
         {
             base.SetSkinDataBaseConnection();
             cif.Id = Guid.NewGuid().ToString();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = cif.vcName;
@@ -225,8 +166,8 @@ namespace TCG.Handlers
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
             SqlParameter sp11 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp11.Value = cif.cVisible;
             SqlParameter sp12 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp12.Value = cif.Id;
-            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11,sp12}, new int[] { 10 });
+            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp1, sp2, sp3, sp4, sp5, sp6,
+                sp7, sp8, sp9 ,sp10,sp11,sp12}, new int[] { 9 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -243,10 +184,9 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="classinf"></param>
         /// <returns></returns>
-        public int UpdateCategories(Connection conn, string adminname, Categories classinf)
+        public int UpdateCategories(Categories classinf)
         {
             base.SetSkinDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
@@ -260,8 +200,8 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp11.Value = classinf.Id;
             SqlParameter sp12 = new SqlParameter("@reValue", SqlDbType.Int); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp13.Value = classinf.cVisible;
-            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11,sp12,sp13}, new int[] { 12 });
+            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp1, sp2, sp3, sp4, sp5, sp6,
+                sp7, sp8, sp9 ,sp10,sp11,sp12,sp13}, new int[] { 11 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -277,14 +217,13 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="adminname"></param>
         /// <returns></returns>
-        public int DelCategories(Connection conn, int classid, string adminname)
+        public int DelCategories(string classid)
         {
             base.SetSkinDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp2.Value = classid;
             SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;
-            string[] reValues = conn.Execute("SP_News_DelNewsClassById", new SqlParameter[] { sp0, sp1, sp2, sp3}, new int[] { 3 });
+            string[] reValues = conn.Execute("SP_News_DelNewsClassById", new SqlParameter[] { sp1, sp2, sp3}, new int[] { 3 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));

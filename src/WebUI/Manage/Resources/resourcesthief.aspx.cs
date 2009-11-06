@@ -114,7 +114,7 @@ public partial class resources_resourcesthief : adminMain
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo = new CategoriesHandlers().GetCategoriesById(base.conn, objectHandlers.Post("iClassId"), false);
+            nif.ClassInfo = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(objectHandlers.Post("iClassId"));
 
             nif.cChecked = "Y";
             nif.cCreated = "Y";
@@ -123,7 +123,7 @@ public partial class resources_resourcesthief : adminMain
             if (base.handlerService.resourcsService.resourcesHandlers.CheckThiefTopic(base.conn, nif.ClassInfo.Id, nif.vcTitle) == 1)
             {
                 nif.vcContent = base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.Result("$2"), TopicWebPath,
-                    base.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), base.configService.baseConfig);
+                    base.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]));
 
                 nif.vcShortContent = objectHandlers.Left(objectHandlers.GetTextWithoutHtml(nif.vcContent), 200);
 

@@ -51,7 +51,7 @@ public partial class resources_categoriesadd : adminMain
                 }
             }
 
-            int rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(base.conn,cif, base.adminInfo.vcAdminName);
+            int rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(cif);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());
 

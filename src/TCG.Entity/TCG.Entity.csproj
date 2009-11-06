@@ -41,6 +41,7 @@
     <Compile Include="CheckGetEnum.cs" />
     <Compile Include="ConfigItem.cs" />
     <Compile Include="DbProviderEnum.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="Files\FileCategories.cs" />
     <Compile Include="Files\FileDataBase.cs" />
     <Compile Include="Files\FileResources.cs" />
