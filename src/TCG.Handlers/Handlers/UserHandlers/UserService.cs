@@ -29,10 +29,8 @@ namespace TCG.Handlers
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UserService(Connection conn, ConfigService configservice)
+        public UserService()
         {
-            base.conn = conn;
-            base.configService = configservice;
         }
 
         /// <summary>
@@ -44,9 +42,7 @@ namespace TCG.Handlers
             {
                 if (this._userhandlers == null)
                 {
-                    this._userhandlers = new UserHandlers();
-                    this._userhandlers.conn = base.conn;
-                    this._userhandlers.configService = base.configService;
+                    this._userhandlers = new UserHandlers(); 
                 }
                 return this._userhandlers;
             }
@@ -65,8 +61,7 @@ namespace TCG.Handlers
                 if (this._userloginhandlers == null)
                 {
                     this._userloginhandlers = new UserLoginHandlers();
-                    this._userloginhandlers.conn = base.conn;
-                    this._userloginhandlers.configService = base.configService;
+
                 }
                 return this._userloginhandlers;
             }

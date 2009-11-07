@@ -10,9 +10,11 @@ using System.Web.UI.WebControls;
 //using TCG.Pages;
 //using TCG.Handlers;
 
-//using TCG.Utils;
-//using TCG.Entity;
+using TCG.Utils;
+using TCG.Entity;
 //using TCG.Release;
+
+using TCG.Data;
 
 using System.Reflection;
 using System.ComponentModel;
@@ -21,25 +23,10 @@ public partial class Test : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        TestB b = new TestB();
-        b.Ba = "sdff";
-        TestB a = (TestB)b;
-        a.Ba = "sdfsdf";
-        TestB c = (TestB)b;
-        Response.Write(c.Ba);
+        Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
+        Response.Write(res.vcTitle);
     }
 
-    public class TestA
-    {
-        public string Aa { get { return this._aa; } set { this._aa = value; } }
-        private string _aa;
-    }
-
-    public class TestB : TestA
-    {
-        public string Ba { get { return this._aa; } set { this._aa = value; } }
-        private string _aa;
-    }
     private void ReadExl()
     {
         //string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=e:\\发黛西.xls;" + "Extended Properties=Excel 8.0;";

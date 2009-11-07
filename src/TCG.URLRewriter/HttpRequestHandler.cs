@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading;
 using System.Web;
 using System.Collections.Generic;
 using System.Text;
@@ -53,6 +54,10 @@ namespace TCG.URLRewriter
         DateTime startTime;
 
         /// <summary>
+        /// 世界创造者
+        /// </summary>
+        private Thread _worldcreater;
+        /// <summary>
         /// 替换程序运行时间
         /// </summary>
         /// <param name="txt"></param>
@@ -75,12 +80,36 @@ namespace TCG.URLRewriter
         /// <param name="Request"></param>
         public void Do(HttpApplication iHttpApplication, HttpContext iHttpContext, HttpResponse Response, HttpRequest Request)
         {
+            HandlerService handlerService = new HandlerService();
+            handlerService.configService = this.configService;
+            handlerService.conn = this.conn;
+
+            //当所有缓存没有被加载的时候，我们认为世界没有被创造出来
+            if (!World.IsWorldCreated)
+            {
+                if (!World.IsCreateWorlding)
+                {
+                    World.handlerService = handlerService;
+                    this.configService.HttpContext = iHttpContext;
+                    World.configService = this.configService;
+                    CachingService.HttpContext = iHttpContext;
+                    _worldcreater = new Thread(new ThreadStart(World.CreateWorld));
+                    _worldcreater.Start();
+                }
+                Response.Write("世界正在初始化...");
+                Response.End();
+                return;
+            }
+           
+
             if (!Boolean.Parse(configService.baseConfig["IsReWrite"])) return;
 
             startTime = DateTime.Now;
             string OutHtml = string.Empty;
 
-            TagService tagservice = new TagService(this.conn, this.configService, new HandlerService(this.conn, this.configService));
+            
+
+            TagService tagservice = new TagService(handlerService);
 
             //获得页面文件名
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
@@ -143,9 +172,7 @@ namespace TCG.URLRewriter
                         Categories tempcategories = (Categories)entity.Value;
                         if (tempcategories.vcUrl == Qp)
                         {
-                            Template tlif = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(tempcategories.iListTemplate, false);
-
-                            tagservice.TCGTagHandlers.Template = tlif.Content.Replace("_$ClassId$_", tempcategories.Id);
+                            tagservice.TCGTagHandlers.Template = tempcategories.ResourceListTemplate.Content.Replace("_$ClassId$_", tempcategories.Id);
                             tagservice.TCGTagHandlers.NeedCreate = false;
                             tagservice.TCGTagHandlers.PagerInfo.DoAllPage = false;
                             tagservice.TCGTagHandlers.PagerInfo.Page = DcurPage;
@@ -169,18 +196,17 @@ namespace TCG.URLRewriter
             match = Regex.Match(DpagePath, pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {
-                string categoriesid = match.Result("$1");
-                string topicid = match.Result("$2");
+                string topicid = match.Result("$1");
                 if (!string.IsNullOrEmpty(topicid))
                 {
                     //获得文章对象
 
-                    Resources item = tagservice.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, topicid);
+                    Resources item = (Resources)CachingService.Get(topicid);
                     if (item != null)
                     {
                         //获得分类信息
 
-                        Template titem = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(item.ClassInfo.iTemplate, false);
+                        Template titem = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(item.Categorie.ResourceTemplate.Id, false);
 
                         tagservice.TCGTagHandlers.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
                         titem = null;

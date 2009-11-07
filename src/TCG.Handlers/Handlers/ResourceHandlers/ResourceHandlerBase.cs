@@ -27,22 +27,41 @@ using TCG.KeyWordSplit;
 
 namespace TCG.Handlers
 {
+    /// <summary>
+    /// 资源操作的基本方法基类
+    /// </summary>
     public class ResourceHandlerBase : ObjectHandlersBase
     {
-        public void SetReourceHandlerDataBaseConnection(string resourceid)
+        /// <summary>
+        /// 根据分类,设置数据库连接字符串
+        /// </summary>
+        /// <param name="categories">分类实体</param>
+        public void SetReourceHandlerDataBaseConnection(Categories categories)
         {
-            if (base.configService == null) return;
-            if (base.configService.ResourceDataBaseConfig == null) return;
-            if (base.configService.ResourceDataBaseConfig.Count == 0) return;
-            //获得文章编号转ASCII码 取模的值
-            int index = objectHandlers.ToInt(objectHandlers.GetStringAscSum(resourceid) % base.configService.fileDataBaseConfig.Count);
-            DataBaseConnStr database = base.configService.ResourceDataBaseConfig[index];
+            if (base.configService == null) return;                             //如果配置信息为空返回
+            if (base.configService.ResourceDataBaseConfig == null) return;      //如果数据库配置信息为空返回
+            if (base.configService.ResourceDataBaseConfig.Count == 0) return;   //如果配置数据库为0,返回
+            if (categories == null) return;
+
+            //获得数据库配置信息
+            DataBaseConnStr database = base.configService.ResourceDataBaseConfig[categories.DataBaseService];
+            if (database == null) return;
             base.conn.SetConnStr = database.Value;
         }
 
-        public void SetReourceHandlerDataBaseConnection()
+        /// <summary>
+        /// 根据数据库编号
+        /// </summary>
+        public void SetReourceHandlerDataBaseConnection(string categorieid)
         {
-            base.conn.SetConnStr = base.configService.ManageDataBaseStr; ;
+            Categories categories = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
+            if (categories == null) return;     //如果分类信息为空,则返回
+
+            //获得数据库配置信息
+            DataBaseConnStr database = base.configService.ResourceDataBaseConfig[categories.DataBaseService];
+            if (database == null) return;
+            base.conn.SetConnStr = database.Value;
         }
+        
     }
 }

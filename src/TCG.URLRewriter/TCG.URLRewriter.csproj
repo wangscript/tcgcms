@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="HttpModule.cs" />
     <Compile Include="HttpRequestHandler.cs" />
+    <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

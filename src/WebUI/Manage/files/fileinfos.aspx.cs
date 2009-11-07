@@ -53,46 +53,47 @@ public partial class files_fileinfos : adminMain
 
     private void SearchInit()
     {
-        PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "fileresources";
+        //待续
+        //PageSearchItem sItem = new PageSearchItem();
+        //sItem.tableName = "fileresources";
 
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
-        arrshowfied.Add("vcFileName");
-        arrshowfied.Add("iSize");
-        arrshowfied.Add("vcType");
-        arrshowfied.Add("dCreateDate");
-        sItem.arrShowField = arrshowfied;
+        //ArrayList arrshowfied = new ArrayList();
+        //arrshowfied.Add("iId");
+        //arrshowfied.Add("vcFileName");
+        //arrshowfied.Add("iSize");
+        //arrshowfied.Add("vcType");
+        //arrshowfied.Add("dCreateDate");
+        //sItem.arrShowField = arrshowfied;
 
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("iId DESC");
-        sItem.arrSortField = arrsortfield;
+        //ArrayList arrsortfield = new ArrayList();
+        //arrsortfield.Add("iId DESC");
+        //sItem.arrSortField = arrsortfield;
 
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        //sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        //sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int tClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
-        sItem.strCondition = "iClassID = " + tClassId.ToString();
+        //int tClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
+        //sItem.strCondition = "iClassID = " + tClassId.ToString();
 
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
-        {
-            return;
-        }
-        this.pager.Per = sItem.pageSize;
-        this.pager.SetItem("iClassId", tClassId);
-        this.pager.Total = count;
-        this.pager.Calculate();
+        //int curPage = 0;
+        //int pageCount = 0;
+        //int count = 0;
+        //DataSet ds = new DataSet();
+        //int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
+        //if (rtn < 0)
+        //{
+        //    return;
+        //}
+        //this.pager.Per = sItem.pageSize;
+        //this.pager.SetItem("iClassId", tClassId);
+        //this.pager.Total = count;
+        //this.pager.Calculate();
 
-        if (ds.Tables.Count != 0)
-        {
-            this.ItemRepeaterFile.DataSource = ds;
-            this.ItemRepeaterFile.DataBind();
-        }
+        //if (ds.Tables.Count != 0)
+        //{
+        //    this.ItemRepeaterFile.DataSource = ds;
+        //    this.ItemRepeaterFile.DataBind();
+        //}
 
     }
 

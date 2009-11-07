@@ -37,49 +37,21 @@ namespace TCG.Pages
             
         }
 
-        protected Connection conn
-        {
-            get
-            {
-                if (this._conn == null)
-                {
-                    this._conn = new Connection();
-                }
-                return this._conn;
-            }
-            set
-            {
-                this._conn = value;
-            }
-        }
-
-        /// <summary>
-        /// 获得基本配置信息
-        /// </summary>
-        protected ConfigService configService
-        {
-            get
-            {
-                if (this._configservice == null)
-                {
-                    this._configservice = new ConfigService();
-                }
-                return this._configservice;
-            }
-        }
-
         public TagService tagService
         {
             get
             {
                 if (this._ragservice == null)
                 {
-                    this._ragservice = new TagService(this.conn, this.configService, this.handlerService);
+                    this._ragservice = new TagService(this.handlerService);
+                    this._ragservice.configService = this.configService;
+                    this._ragservice.conn = this.conn;
                 }
                 return this._ragservice;
             }
         }
         private TagService _ragservice = null;
+
 
         /// <summary>
         /// 提供系统操作方法的服务
@@ -90,11 +62,45 @@ namespace TCG.Pages
             {
                 if (this._handlerservice == null)
                 {
-                    this._handlerservice = new HandlerService(this.conn, this.configService);
+                    this._handlerservice = new HandlerService();
+                    this._handlerservice.configService = this.configService;
+                    this._handlerservice.conn = this.conn;
                 }
                 return this._handlerservice;
             }
         }
+
+        /// <summary>
+        /// 获得配置信息支持
+        /// </summary>
+        public ConfigService configService
+        {
+            get
+            {
+                if (this._configservice == null)
+                {
+                    this._configservice = new ConfigService();
+                }
+                return this._configservice;
+            }
+        }
+        private ConfigService _configservice = null;
+
+        /// <summary>
+        /// 设置数据库链接
+        /// </summary>
+        public Connection conn
+        {
+            get
+            {
+                if (this._conn == null)
+                {
+                    this._conn = new Connection();
+                }
+                return this._conn;
+            }
+        }
+        private Connection _conn = null;
 
         protected void AjaxErch(string str)
         {
@@ -132,8 +138,6 @@ namespace TCG.Pages
         private User _user = null;
 
         private string _ajaxdata = string.Empty;
-        private ConfigService _configservice = null;
         private HandlerService _handlerservice = null;
-        private Connection _conn = null;
     }
 }

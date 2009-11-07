@@ -33,10 +33,11 @@ namespace TCG.Handlers
     public class AdminLoginHandlers : ManageHandlerBase
     {
 
-        public AdminLoginHandlers(Connection conn, ConfigService configservice,AdminHandlers adminhandlers)
+        public AdminLoginHandlers(Connection conn, ConfigService configservice,HandlerService handlersevice, AdminHandlers adminhandlers)
         {
             base.conn = conn;
             base.configService = configservice;
+            base.handlerService = handlersevice;
             this._adminh = adminhandlers;
             this.Initialization();
         }

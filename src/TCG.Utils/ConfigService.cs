@@ -43,6 +43,19 @@ namespace TCG.Utils
         }
 
 
+        public HttpContext HttpContext
+        {
+            get
+            {
+                return this._ihttpcontext;
+            }
+            set
+            {
+                this._ihttpcontext = value;
+            }
+        }
+        private HttpContext _ihttpcontext;
+
         /// <summary>
         /// 管理特殊页面的配置信息
         /// </summary>
@@ -191,7 +204,7 @@ namespace TCG.Utils
         /// <summary>
         /// 资源数据库连接配置
         /// </summary>
-        public List<DataBaseConnStr> ResourceDataBaseConfig
+        public Dictionary<string,DataBaseConnStr> ResourceDataBaseConfig
         {
             get
             {
@@ -206,10 +219,10 @@ namespace TCG.Utils
         private void ResourceDataBaseConfigInit()
         {
             //获得所有需要登陆的特殊页面
-            XmlNodeList resourcedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_ResourceDataBaseConfigFilePath, "fileDataBase");
+            XmlNodeList resourcedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_ResourceDataBaseConfigFilePath, "resourceDataBase");
             if (resourcedatabaseconfig != null)
             {
-                this._resourcedatabaseconfig = new List<DataBaseConnStr>();
+                this._resourcedatabaseconfig = new Dictionary<string,DataBaseConnStr>();
                 foreach (XmlElement element in resourcedatabaseconfig)
                 {
                     DataBaseConnStr filedatabase = new DataBaseConnStr();
@@ -217,7 +230,7 @@ namespace TCG.Utils
                     filedatabase.Value = element.SelectSingleNode("Value").InnerText;
                     filedatabase.Service = element.SelectSingleNode("Service").InnerText;
                     filedatabase.IsBaseDataBase = objectHandlers.ToBoolen(element.SelectSingleNode("IsBaseDataBase").InnerText, false);
-                    this._resourcedatabaseconfig.Add(filedatabase);
+                    this._resourcedatabaseconfig.Add(filedatabase.Service,filedatabase);
                 }
             }
         }
@@ -297,10 +310,19 @@ namespace TCG.Utils
         private XmlNodeList GetXmlNotListByTagNameAndFilePath(string filepath, string tagname)
         {
             XmlNodeList mylist = null;
+
             try
             {
                 XmlDocument document1 = new XmlDocument();
-                document1.Load(HttpContext.Current.Server.MapPath(filepath));
+                if (this.HttpContext != null)
+                {
+                    document1.Load(this.HttpContext.Server.MapPath(filepath));
+                }
+                else
+                {
+                    document1.Load(HttpContext.Current.Server.MapPath(filepath));
+                }
+
                 mylist = document1.GetElementsByTagName(tagname);
             }
             catch
@@ -325,7 +347,7 @@ namespace TCG.Utils
         private string m_ManageConfigPath = "~/config/manageConfig.Config";                    //管理特殊页面的配置
         private string _managedatabasestr = null;                                 //管理员数据库连接
 
-        private List<DataBaseConnStr> _resourcedatabaseconfig = null;
+        private Dictionary<string,DataBaseConnStr> _resourcedatabaseconfig = null;
         private string m_ResourceDataBaseConfigFilePath = "~/config/resourceDataBase.Config";               //资源数据库配置
     }
 }

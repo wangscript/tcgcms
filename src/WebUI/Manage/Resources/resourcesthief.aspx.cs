@@ -114,13 +114,13 @@ public partial class resources_resourcesthief : adminMain
             nif.vcTitle = item.Result("$1");
             nif.vcAuthor = base.adminInfo.vcNickName;
             nif.vcKeyWord = nif.vcTitle;
-            nif.ClassInfo = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(objectHandlers.Post("iClassId"));
+            nif.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(objectHandlers.Post("iClassId"));
 
             nif.cChecked = "Y";
             nif.cCreated = "Y";
             nif.vcEditor = base.adminInfo.vcAdminName;
 
-            if (base.handlerService.resourcsService.resourcesHandlers.CheckThiefTopic(base.conn, nif.ClassInfo.Id, nif.vcTitle) == 1)
+            if (base.handlerService.resourcsService.resourcesHandlers.CheckThiefTopic(base.conn, nif.Categorie.Id, nif.vcTitle) == 1)
             {
                 nif.vcContent = base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.Result("$2"), TopicWebPath,
                     base.adminInfo.vcAdminName, objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]));

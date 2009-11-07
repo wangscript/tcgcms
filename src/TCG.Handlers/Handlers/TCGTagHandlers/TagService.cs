@@ -29,10 +29,8 @@ namespace TCG.Handlers
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TagService(Connection conn, ConfigService configservice, HandlerService handlerservice)
+        public TagService(HandlerService handlerservice)
         {
-            base.conn = conn;
-            base.configService = configservice;
             base.handlerService = handlerservice;
         }
 
@@ -45,7 +43,9 @@ namespace TCG.Handlers
             {
                 if (this._tcgtaghandlers == null)
                 {
-                    this._tcgtaghandlers = new TCGTagHandlers(base.conn,base.configService,base.handlerService);
+                    this._tcgtaghandlers = new TCGTagHandlers(base.handlerService);
+                    this._tcgtaghandlers.configService = base.configService;
+                    this._tcgtaghandlers.conn = base.conn;
                 }
                 return this._tcgtaghandlers;
             }

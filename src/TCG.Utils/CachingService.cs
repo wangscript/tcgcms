@@ -26,30 +26,75 @@ namespace TCG.Utils
 
     public class CachingService
     {
-        private static string Key = "TCG_System_";
+        public static string Key = "TCG_System_";
+
+        public static HttpContext HttpContext
+        {
+            get
+            {
+                return CachingService._ihttpcontext;
+            }
+            set
+            {
+                CachingService._ihttpcontext = value;
+            }
+        }
+        private static HttpContext _ihttpcontext = null;
 
         public static object Get(string name)
         {
-            return HttpContext.Current.Cache.Get(CachingService.Key + name);
+            if (CachingService.HttpContext != null)
+            {
+                return CachingService.HttpContext.Cache.Get(CachingService.Key + name);
+            }
+            else
+            {
+                return HttpContext.Current.Cache.Get(CachingService.Key + name);
+            }
         }
 
         public static void Remove(string name)
         {
-            if (HttpContext.Current.Cache[CachingService.Key + name] != null)
+            if (CachingService.HttpContext != null)
             {
-                HttpContext.Current.Cache.Remove(CachingService.Key + name);
+                if (CachingService.HttpContext.Cache[CachingService.Key + name] != null)
+                {
+                    CachingService.HttpContext.Cache.Remove(CachingService.Key + name);
+                }
+            }
+            else
+            {
+                if (HttpContext.Current.Cache[CachingService.Key + name] != null)
+                {
+                    HttpContext.Current.Cache.Remove(CachingService.Key + name);
+                }
             }
         }
 
         public static void Set(string name, object value, CacheDependency cacheDependency)
         {
-            HttpContext.Current.Cache.Insert(CachingService.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
+            if (CachingService.HttpContext != null)
+            {
+                CachingService.HttpContext.Cache.Insert(CachingService.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
+            }
+            else
+            {
+                HttpContext.Current.Cache.Insert(CachingService.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
+            }    
         }
 
         public static void SetCache(string name, object value, CacheDependency dependency, int expireTime)
         {
-            //Code信息保存在缓存中
-            HttpContext.Current.Cache.Insert(CachingService.Key + name, value, dependency, DateTime.Now.AddMinutes((double)expireTime), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
+            if (CachingService.HttpContext != null)
+            {
+                CachingService.HttpContext.Cache.Insert(CachingService.Key + name, value, dependency, DateTime.Now.AddMinutes((double)expireTime), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
+            }
+            else
+            {
+                HttpContext.Current.Cache.Insert(CachingService.Key + name, value, dependency, DateTime.Now.AddMinutes((double)expireTime), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
+            }    
+
+           
         }
 
         #region 系统Caching参数定义

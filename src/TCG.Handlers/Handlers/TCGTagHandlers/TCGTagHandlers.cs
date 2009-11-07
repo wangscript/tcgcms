@@ -33,12 +33,10 @@ namespace TCG.Handlers
     /// </summary>
     public class TCGTagHandlers : TCGTagBase
     {
-        public TCGTagHandlers(Connection conn, ConfigService configservice,HandlerService handlerService)
+        public TCGTagHandlers(HandlerService handlerService)
         {
-            base.conn = conn;
-            base.handlerService = handlerService;
-            base.configService = configservice;
 
+            base.handlerService = handlerService;
             this._pattern = @"<tcg:([^<>]+)\s([^<>]+)>([\S\s]*?)</tcg:\1>";
             this._tcgsystemtag = "<!--TCG:{0}-->";
             this._pagerinfo = new TCGTagPagerInfo();
@@ -58,7 +56,10 @@ namespace TCG.Handlers
                 this._tagtemplates = new List<TCGTagAttributeHandlers>();
                 foreach (Match item in mc)
                 {
-                    this._tagtemplate = new TCGTagAttributeHandlers(base.conn,base.configService,base.handlerService);
+                    this._tagtemplate = new TCGTagAttributeHandlers(base.handlerService);
+                    this._tagtemplate.configService = base.configService;
+                    this._tagtemplate.conn = base.conn;
+
                     this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                     this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                     this._tagtemplate.TagText = item.Result("$3");
@@ -96,7 +97,10 @@ namespace TCG.Handlers
                     Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (item.Success)
                     {
-                        this._tagtemplate = new TCGTagAttributeHandlers(base.conn, base.configService, base.handlerService);
+                        this._tagtemplate = new TCGTagAttributeHandlers(base.handlerService);
+                        this._tagtemplate.configService = base.configService;
+                        this._tagtemplate.conn = base.conn;
+
                         this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
                         this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                         this._tagtemplate.TagText = item.Result("$3");

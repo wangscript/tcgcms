@@ -44,7 +44,7 @@ namespace TCG.Handlers
             }
         }
 
-        private Connection _conn;
+        private Connection _conn = null;
         /// <summary>
         /// 获得配置信息支持
         /// </summary>
@@ -59,7 +59,23 @@ namespace TCG.Handlers
                 return this._configservice;
             }
         }
-        private ConfigService _configservice;
+        private ConfigService _configservice = null;
+
+        /// <summary>
+        /// 提供系统操作方法的服务
+        /// </summary>
+        public HandlerService handlerService
+        {
+            set
+            {
+                this._handlerservice = value;
+            }
+            get
+            {
+                return this._handlerservice;
+            }
+        }
+        private HandlerService _handlerservice = null;
 
         /// <summary>
         /// 从记录集中返回实体
@@ -95,10 +111,10 @@ namespace TCG.Handlers
                 case "TCG.Entity.Categories":
                     Categories categories = new Categories();
                     categories.Id = row["Id"].ToString();
-                    categories.iListTemplate = row["iListTemplate"].ToString();
+                    categories.ResourceListTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iListTemplate"].ToString(), false);
                     categories.iOrder = (int)row["iOrder"];
                     categories.Parent = row["Parent"].ToString();
-                    categories.iTemplate = row["iTemplate"].ToString();
+                    categories.ResourceTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iTemplate"].ToString(), false);
                     categories.vcClassName = (string)row["vcClassName"];
                     categories.vcDirectory = (string)row["vcDirectory"];
                     categories.vcName = (string)row["vcName"];
@@ -106,6 +122,32 @@ namespace TCG.Handlers
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = (string)row["Visible"];
                     return (EntityBase)categories;
+                case "TCG.Entity.Resources":
+                    Resources resources = new Resources();
+                    resources.Id = row["iId"].ToString();
+                    resources.vcTitle = (string)row["vcTitle"];
+                    resources.Categorie = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(row["iClassID"].ToString());
+                    resources.vcUrl = (string)row["vcUrl"];
+                    resources.vcContent = (string)row["vcContent"];
+                    resources.vcAuthor = (string)row["vcAuthor"];
+                    resources.iCount = (int)row["iCount"];
+                    resources.vcKeyWord = (string)row["vcKeyWord"];
+                    resources.vcEditor = (string)row["vcEditor"];
+                    resources.cCreated = (string)row["cCreated"];
+                    resources.vcSmallImg = (string)row["vcSmallImg"];
+                    resources.vcBigImg = (string)row["vcBigImg"];
+                    resources.vcShortContent = (string)row["vcShortContent"];
+                    resources.vcSpeciality = (string)row["vcSpeciality"];
+                    resources.cChecked = (string)row["cChecked"];
+                    resources.cDel = (string)row["cDel"];
+                    resources.cPostByUser = (string)row["cPostByUser"];
+                    resources.vcFilePath = (string)row["vcFilePath"];
+                    resources.dAddDate = (DateTime)row["dAddDate"];
+                    resources.dUpDateDate = (DateTime)row["dUpDateDate"];
+                    resources.vcTitleColor = (string)row["vcTitleColor"];
+                    resources.cStrong = (string)row["cStrong"];
+                    CachingService.Set(resources.Id, resources, null);
+                    return (EntityBase)resources;
             }
             return null;
         }

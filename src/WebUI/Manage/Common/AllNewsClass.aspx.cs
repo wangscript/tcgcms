@@ -32,7 +32,7 @@ public partial class Common_AllNewsClass : ScriptsMain
                     Categories tempcategories = (Categories)entity.Value;
                     Response.Write("NewsLis[" + i.ToString() + "]=[\"" + tempcategories.Id
                             + "\",\"" + tempcategories.Parent + "\",\"" + tempcategories.vcClassName + "\",\"" +
-                            tempcategories.vcName + "\",\"" + tempcategories.iTemplate + "\"];\r\n");
+                            tempcategories.vcName + "\",\"" + tempcategories.ResourceTemplate.Id + "\"];\r\n");
                     i++;
 
                 }

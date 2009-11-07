@@ -27,14 +27,10 @@ namespace TCG.Handlers
 {
     public class TCGTagAttributeHandlers : TCGTagBase
     {
-        public TCGTagAttributeHandlers(Connection conn, ConfigService configservice,HandlerService handlerservice)
+        public TCGTagAttributeHandlers(HandlerService handlerservice)
         {
-            base.conn = conn;
             base.handlerService = handlerservice;
-            base.configService = configservice;
-
             this._attpattern = @"=""([0-9A-Za-z\s,='!_\-\.%\|()$<>\/]+)""";
-            base.handlerService = handlerservice;
         }
 
         /// <summary>
@@ -229,10 +225,10 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.ClassInfo.vcClassName);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.ClassInfo.Id.ToString());
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.Categorie.vcClassName);
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.Categorie.Id.ToString());
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.ClassInfo.Id, " > "));
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));
 
                 
             }

@@ -31,8 +31,8 @@ public partial class resources_categoriesadd : adminMain
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
-            cif.iTemplate = objectHandlers.Post("sTemplate");
-            cif.iListTemplate = objectHandlers.Post("slTemplate");
+            cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"), false);
+            cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"),false);
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -43,7 +43,7 @@ public partial class resources_categoriesadd : adminMain
 
             if (string.IsNullOrEmpty(cif.Parent))
             {
-                if (string.IsNullOrEmpty(cif.iTemplate) || string.IsNullOrEmpty(cif.iListTemplate))
+                if (cif.ResourceTemplate == null || cif.ResourceListTemplate==null)
                 {
                     base.AjaxErch("-1");
                     base.Finish();
