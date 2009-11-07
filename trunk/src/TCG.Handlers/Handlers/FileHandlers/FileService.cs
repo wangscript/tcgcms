@@ -14,10 +14,8 @@ namespace TCG.Handlers
     public class FileService : ObjectHandlersBase
     {
 
-        public FileService(ConfigService configservice, Connection conn)
+        public FileService()
         {
-            base.configService = configservice;
-            base.conn = conn;
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace TCG.Handlers
             {
                 if (this._fileclasshandlers == null)
                 {
-                    this._fileclasshandlers = new FileCategoriesHandlers(base.conn,base.configService);
+                    this._fileclasshandlers = new FileCategoriesHandlers();
                 }
                 return this._fileclasshandlers;
             }
@@ -46,7 +44,7 @@ namespace TCG.Handlers
             {
                 if (this._fileInfohandlers == null)
                 {
-                    this._fileInfohandlers = new FileResourcesHandlers(base.conn, base.configService);
+                    this._fileInfohandlers = new FileResourcesHandlers();
                     this._fileInfohandlers.fileClassHandlers = this.fileClassHandlers;
                 }
                 return this._fileInfohandlers;

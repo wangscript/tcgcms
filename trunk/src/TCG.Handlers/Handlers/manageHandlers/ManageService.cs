@@ -12,11 +12,8 @@ namespace TCG.Handlers
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ManageService(Connection conn, ConfigService configservice)
+        public ManageService()
         {
-            base.conn = conn;
-            base.configService = configservice;
-
         }
 
         /// <summary>
@@ -29,8 +26,9 @@ namespace TCG.Handlers
                 if (this._adminhandlers == null)
                 {
                     this._adminhandlers = new AdminHandlers();
-                    this._adminhandlers.conn = base.conn;
                     this._adminhandlers.configService = base.configService;
+                    this._adminhandlers.conn = base.conn;
+                    this._adminhandlers.handlerService = base.handlerService;
                 }
                 return this._adminhandlers;
             }
@@ -44,8 +42,7 @@ namespace TCG.Handlers
             {
                 if (this._adminloginhandlers == null)
                 {
-                    this._adminloginhandlers = new AdminLoginHandlers(base.conn,base.configService,this.adminHandlers);
-                    
+                    this._adminloginhandlers = new AdminLoginHandlers(base.conn,base.configService,base.handlerService, this.adminHandlers);       
                 }
                 return this._adminloginhandlers;
             }

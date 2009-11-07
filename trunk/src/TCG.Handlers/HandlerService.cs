@@ -14,11 +14,28 @@ namespace TCG.Handlers
     public class HandlerService : ObjectHandlersBase
     {
 
-        public HandlerService(Connection conn, ConfigService configservice)
+        public HandlerService()
         {
-            base.conn = conn;
-            base.configService = configservice;
         }
+
+        /// <summary>
+        /// 后台框架操作方法
+        /// </summary>
+        public SkinService skinService
+        {
+            get
+            {
+                if (this._skinservice == null)
+                {
+                    this._skinservice = new SkinService();
+                    this._skinservice.configService = base.configService;
+                    this._skinservice.conn = base.conn;
+                    this._skinservice.handlerService = this; 
+                }
+                return this._skinservice;
+            }
+        }
+        private SkinService _skinservice;
 
         /// <summary>
         /// 后台框架操作方法
@@ -29,7 +46,10 @@ namespace TCG.Handlers
             {
                 if (this._manageservice == null)
                 {
-                    this._manageservice = new ManageService(base.conn,base.configService);
+                    this._manageservice = new ManageService();
+                    this._manageservice.configService = base.configService;
+                    this._manageservice.conn = base.conn;
+                    this._manageservice.handlerService = this;
                 }
                 return this._manageservice;
             }
@@ -45,26 +65,15 @@ namespace TCG.Handlers
             {
                 if (this._fileservice == null)
                 {
-                    this._fileservice = new FileService(base.configService, base.conn);
+                    this._fileservice = new FileService();
+                    this._fileservice.configService = base.configService;
+                    this._fileservice.conn = base.conn;
+                    this._fileservice.handlerService = this;
                 }
                 return this._fileservice;
             }
         }
         private FileService _fileservice;
-
-
-        public SkinService skinService
-        {
-            get
-            {
-                if (this._skinservice == null)
-                {
-                    this._skinservice = new SkinService(base.conn,base.configService);
-                }
-                return this._skinservice;
-            }
-        }
-        private SkinService _skinservice;
 
 
         public ResourcsService resourcsService
@@ -73,7 +82,10 @@ namespace TCG.Handlers
             {
                 if (this._resourcsservice == null)
                 {
-                    this._resourcsservice = new ResourcsService(base.conn, base.configService);
+                    this._resourcsservice = new ResourcsService();
+                    this._resourcsservice.configService = base.configService;
+                    this._resourcsservice.conn = base.conn;
+                    this._resourcsservice.handlerService = this;
                 }
                 return this._resourcsservice;
             }
@@ -90,8 +102,10 @@ namespace TCG.Handlers
             {
                 if (this._userservice == null)
                 {
-                    this._userservice = new UserService(base.conn,base.configService);
-
+                    this._userservice = new UserService();
+                    this._userservice.configService = base.configService;
+                    this._userservice.conn = base.conn;
+                    this._userservice.handlerService = this;
                 }
                 return this._userservice;
             }

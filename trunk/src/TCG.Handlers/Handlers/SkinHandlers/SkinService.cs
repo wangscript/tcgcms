@@ -31,10 +31,9 @@ namespace TCG.Handlers
         /// <summary>
         /// 构造函数
         /// </summary>
-        public SkinService(Connection conn, ConfigService configservice)
+        public SkinService()
         {
-            base.conn = conn;
-            base.configService = configservice;
+
         }
 
 
@@ -45,8 +44,9 @@ namespace TCG.Handlers
                 if (this._categorieshandlers == null)
                 {
                     this._categorieshandlers = new CategoriesHandlers();
-                    this._categorieshandlers.conn = base.conn;
                     this._categorieshandlers.configService = base.configService;
+                    this._categorieshandlers.conn = base.conn;
+                    this._categorieshandlers.handlerService = base.handlerService;
                 }
                 return this._categorieshandlers;
             }
@@ -61,8 +61,9 @@ namespace TCG.Handlers
                 if (this._specialityhandlers == null)
                 {
                     this._specialityhandlers = new SpecialityHandlers();
-                    this._specialityhandlers.conn = base.conn;
                     this._specialityhandlers.configService = base.configService;
+                    this._specialityhandlers.conn = base.conn;
+                    this._specialityhandlers.handlerService = base.handlerService;
                 }
                 return this._specialityhandlers;
             }
@@ -77,8 +78,9 @@ namespace TCG.Handlers
                 if (this._templateHandlers == null)
                 {
                     this._templateHandlers = new TemplateHandlers();
-                    this._templateHandlers.conn = base.conn;
                     this._templateHandlers.configService = base.configService;
+                    this._templateHandlers.conn = base.conn;
+                    this._templateHandlers.handlerService = base.handlerService;
                 }
                 return this._templateHandlers;
             }

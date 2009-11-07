@@ -33,7 +33,7 @@ namespace TCG.Pages
 
         protected void Finish()
         {
-            if ((this.conn != null) && this.conn.Connected) { this.conn.Close(); }    
+            //if ((this.conn != null) && this.conn.Connected) { this.conn.Close(); }    
         }
     }
 }

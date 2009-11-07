@@ -24,8 +24,10 @@ namespace TCG.Entity
     /// </summary>
     public class Resources : EntityBase
     {
-        
-        public Categories ClassInfo { get { return this._iClassID; } set { this._iClassID = value; } }
+        /// <summary>
+        /// 资源分类信息
+        /// </summary>
+        public Categories Categorie { get { return this._iClassID; } set { this._iClassID = value; } }
         public string vcTitle { get { return this._vcTitle; } set { this._vcTitle = value; } }
         public string vcUrl { get { return this._vcUrl; } set { this._vcUrl = value; } }
         public string vcContent { get { return this._vcContent; } set { this._vcContent = value; } }

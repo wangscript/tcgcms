@@ -130,9 +130,7 @@ public partial class resources_categorieslist : adminMain
             return;
         }
 
-
-        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iListTemplate,false);
-        if (tlif == null)
+        if (cif.ResourceListTemplate == null)
         {
             base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");
             base.Finish();
@@ -159,7 +157,7 @@ public partial class resources_categorieslist : adminMain
         }
 
         TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-        tcgthdl.Template = tlif.Content.Replace("_$ClassId$_", tClassID.ToString());
+        tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
         if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
@@ -185,7 +183,6 @@ public partial class resources_categorieslist : adminMain
             base.AjaxErch("<a>生成失败-系统错误!</a>");
         }
         tcgthdl = null;
-        tlif = null;
 
     }
 

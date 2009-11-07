@@ -28,10 +28,8 @@ namespace TCG.Handlers
     public class FileCategoriesHandlers : FileResourcesHandlerBase
     {
 
-        public FileCategoriesHandlers(Connection conn, ConfigService configservice)
+        public FileCategoriesHandlers()
         {
-            base.conn = conn;
-            base.configService = configservice;
         }
 
         /// <summary>

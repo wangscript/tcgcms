@@ -202,9 +202,9 @@ public partial class resources_resourceslist : adminMain
         Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, resourceid);
         if (item == null) return;
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.ClassInfo.Id);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.Categorie.Id);
 
-        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iTemplate,false);
+        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.ResourceTemplate.Id,false);
         cif = null;
 
         TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;

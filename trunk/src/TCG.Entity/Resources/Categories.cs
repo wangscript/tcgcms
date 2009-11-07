@@ -19,6 +19,9 @@ using System.Text;
 
 namespace TCG.Entity
 {
+    /// <summary>
+    /// 资源分类
+    /// </summary>
     public class Categories : EntityBase
     {
         /// <summary>
@@ -28,11 +31,11 @@ namespace TCG.Entity
         /// <summary>
         /// 文章模版
         /// </summary>
-        public string iTemplate { get { return this._itemplate; } set { this._itemplate = value; } }
+        public Template ResourceTemplate { get { return this._itemplate; } set { this._itemplate = value; } }
         /// <summary>
         /// 列表模版
         /// </summary>
-        public string iListTemplate { get { return this._ilisttemplate; } set { this._ilisttemplate = value; } }
+        public Template ResourceListTemplate { get { return this._ilisttemplate; } set { this._ilisttemplate = value; } }
         /// <summary>
         /// 排序
         /// </summary>
@@ -65,8 +68,8 @@ namespace TCG.Entity
 
         
         private string _iparent;
-        private string _itemplate;
-        private string _ilisttemplate;
+        private Template _itemplate;
+        private Template _ilisttemplate;
         private int _iorder;
         private DateTime _dupdatedate;
         private string _vcclassname;

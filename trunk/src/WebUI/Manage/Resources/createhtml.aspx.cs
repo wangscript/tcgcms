@@ -96,7 +96,7 @@ public partial class news_createhtml : adminMain
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(ClassId);
         if (cif == null) { base.AjaxErch(""); return; }
 
-        Template tif = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iTemplate,false);
+        Template tif = cif.ResourceTemplate;
         if (tif == null) { base.AjaxErch(""); return; }
 
         Resources item = new Resources();

@@ -42,7 +42,7 @@ public partial class resources_resourceshandlers : adminMain
             }
 
             Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, newsid);
-            this.iClassId.Value = item.ClassInfo.Id.ToString();
+            this.iClassId.Value = item.Categorie.Id.ToString();
 
             this.iTitle.Value = item.vcTitle;
             this.iUrl.Value = item.vcUrl;
@@ -130,7 +130,7 @@ public partial class resources_resourceshandlers : adminMain
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.ClassInfo = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
+        item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
       
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
@@ -154,7 +154,7 @@ public partial class resources_resourceshandlers : adminMain
         }
 
 
-        if (string.IsNullOrEmpty(item.ClassInfo.Id))
+        if (string.IsNullOrEmpty(item.Categorie.Id))
         {
             base.AjaxErch("-1000000056");
             base.Finish();
@@ -180,9 +180,9 @@ public partial class resources_resourceshandlers : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.ClassInfo.Id);
+                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.Categorie.Id);
 
-                Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.iTemplate,false);
+                Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.ResourceTemplate.Id,false);
                 cif = null;
 
                 TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;

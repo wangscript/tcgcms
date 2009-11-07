@@ -30,10 +30,8 @@ namespace TCG.Handlers
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ResourcsService(Connection conn, ConfigService configservice)
+        public ResourcsService()
         {
-            base.conn = conn;
-            base.configService = configservice;
         }
 
         /// <summary>
@@ -46,8 +44,9 @@ namespace TCG.Handlers
                 if (this._resourceshandlers == null)
                 {
                     this._resourceshandlers = new ResourcesHandlers();
-                    this._resourceshandlers.conn = base.conn;
                     this._resourceshandlers.configService = base.configService;
+                    this._resourceshandlers.conn = base.conn;
+                    this._resourceshandlers.handlerService = base.handlerService;
                 }
                 return this._resourceshandlers;
             }
