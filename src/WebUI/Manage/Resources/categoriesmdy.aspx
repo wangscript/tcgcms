@@ -7,16 +7,16 @@
     <title>修改资讯分类</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../js/CreateDiv.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
+	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckEditClassForm();">
+    <form id="form1" runat="server">
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		修改资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
@@ -62,6 +62,7 @@
 		<span id="urlmsg" class="info1">在列表中的显示顺序</span>
 	</div>
 	<div class="dobtn arb_pr">
+	    <input type="hidden" id="Work" value="Mdy" />
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />
 	</div>
     </form>

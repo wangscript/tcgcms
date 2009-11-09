@@ -15,9 +15,29 @@ function CheckAddClassForm(){
 		}
 	}
 	SetAjaxDiv("loader",false,"正在发送请求...");
-	ajax.postf($("form1"),function(obj) { AddClassPostBack(obj.responseText);});
 	return false;
 }
+
+$(document).ready(function() {
+    var options;
+    if ($("#Work").length != 0) {
+        options = {
+            beforeSubmit: CheckEditClassForm,
+            dataType: 'json',
+            success: EditClassPostBack
+        };
+
+    } else {
+        options = {
+            beforeSubmit: CheckAddClassForm,
+            dataType: 'json',
+            success: AddClassPostBack
+        };
+    }
+    $("#form1").ajaxForm(options);
+});
+
+
 function CheckEditClassForm(){
 	var iClassId=$("iClassId");
 	if(iClassId.value=="0"){
@@ -31,8 +51,7 @@ function CheckEditClassForm(){
 			return false;
 		}
 	}
-	SetAjaxDiv("loader",false,"正在发送请求...");
-	ajax.postf($("form1"),function(obj) { EditClassPostBack(obj.responseText);});
+	SetAjaxDiv("loader", false, "正在发送请求...");
 	return false;
 }
 
