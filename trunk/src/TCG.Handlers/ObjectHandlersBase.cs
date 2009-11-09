@@ -121,6 +121,7 @@ namespace TCG.Handlers
                     categories.vcUrl = (string)row["vcUrl"];
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = (string)row["Visible"];
+                    categories.DataBaseService = (string)row["DataBaseService"];
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();

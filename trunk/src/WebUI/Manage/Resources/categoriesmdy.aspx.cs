@@ -46,15 +46,14 @@ public partial class resources_categoriesmdy : adminMain
                 return;
             }
 
-            if (string.IsNullOrEmpty(cif.Parent))
+
+            if (cif.ResourceTemplate == null || cif.ResourceListTemplate == null)
             {
-                if (cif.ResourceTemplate == null || cif.ResourceListTemplate == null)
-                {
-                    base.AjaxErch("-1");
-                    base.Finish();
-                    return;
-                }
+                base.AjaxErch("-1");
+                base.Finish();
+                return;
             }
+           
             int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
             CachingService.Remove("AllNewsClass");
             base.AjaxErch(rtn.ToString());

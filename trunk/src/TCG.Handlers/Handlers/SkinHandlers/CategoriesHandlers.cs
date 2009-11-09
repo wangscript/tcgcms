@@ -98,7 +98,7 @@ namespace TCG.Handlers
         public DataTable GetAllCategoriesWithOutCaching()
         {
             base.SetSkinDataBaseConnection();
-            string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible FROM Categories WITH (NOLOCK)";
+            string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
@@ -187,12 +187,12 @@ namespace TCG.Handlers
         public int UpdateCategories(Categories classinf)
         {
             base.SetSkinDataBaseConnection();
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = classinf.vcClassName;
+            SqlParameter sp1 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp1.Value = classinf.vcClassName;
+            SqlParameter sp2 = new SqlParameter("@DataBaseService", SqlDbType.VarChar, 50); sp2.Value = classinf.DataBaseService;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
             SqlParameter sp4 = new SqlParameter("@Parent", SqlDbType.VarChar, 36); sp4.Value = classinf.Parent;
             SqlParameter sp5 = new SqlParameter("@iTemplate", SqlDbType.VarChar, 36); sp5.Value = classinf.ResourceTemplate.Id;
-            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = classinf.ResourceListTemplate;
+            SqlParameter sp6 = new SqlParameter("@iListTemplate", SqlDbType.VarChar, 36); sp6.Value = classinf.ResourceListTemplate.Id;
             SqlParameter sp7 = new SqlParameter("@vcDirectory", SqlDbType.VarChar, 200); sp7.Value = classinf.vcDirectory;
             SqlParameter sp8 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp8.Value = classinf.vcUrl;
             SqlParameter sp9 = new SqlParameter("@iOrder", SqlDbType.Int, 4); sp9.Value = classinf.iOrder;
@@ -200,7 +200,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp11.Value = classinf.Id;
             SqlParameter sp12 = new SqlParameter("@reValue", SqlDbType.Int); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp13.Value = classinf.cVisible;
-            string[] reValues = conn.Execute("SP_News_ClassInfoManage", new SqlParameter[] { sp1, sp2, sp3, sp4, sp5, sp6,
+            string[] reValues = conn.Execute("SP_categories_Manage", new SqlParameter[] {sp1,sp2, sp3, sp4, sp5, sp6,
                 sp7, sp8, sp9 ,sp10,sp11,sp12,sp13}, new int[] { 11 });
             if (reValues != null)
             {
