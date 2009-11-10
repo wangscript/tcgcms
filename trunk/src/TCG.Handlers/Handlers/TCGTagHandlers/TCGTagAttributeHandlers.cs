@@ -191,7 +191,7 @@ namespace TCG.Handlers
 
 
 
-            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, resourceid);
+            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesByIdAndCategorieId(categoriesid, resourceid);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;
@@ -211,7 +211,7 @@ namespace TCG.Handlers
                         item.vcContent = tContent;
                         int outid = 0;
                         string filepatch = string.Empty;
-                        this.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(item);
+                        this.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
                     }
                 }
                 catch { }
@@ -287,7 +287,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(id,false);
+            Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(id);
             if (item != null)
             {
                 this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());

@@ -27,100 +27,65 @@ namespace TCG.Handlers
 {
     public class TemplateHandlers : SkinHandlerBase
     {
-        /// <summary>
-        /// 获得资讯模版
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="ds"></param>
-        /// <returns></returns>
-        public DataSet GetAllTemplates(Connection conn, bool readdb)
+
+        public DataTable GetAllTemplates()
         {
-            DataSet ds = null;
-            if (readdb)
+            DataTable dt = (DataTable)CachingService.Get(CachingService.CACHING_All_TEMPLATES);
+            if (dt == null)
             {
-                ds = GetAllTemplatesFromDb(conn);
+                dt = GetAllTemplatesWithOutCaching();
+                CachingService.Set(CachingService.CACHING_All_TEMPLATES, dt, null);
             }
-            else
-            {
-                ds = (DataSet)CachingService.Get(CachingService.CACHING_All_TEMPLATES);
-                if (ds == null)
-                {
-                    ds = GetAllTemplatesFromDb(conn);
-                    CachingService.Set(CachingService.CACHING_All_TEMPLATES, ds, null);
-                }
-            }
-            return ds;
+            return dt;
         }
 
-        public DataSet GetAllTemplatesFromDb(Connection conn)
+        public Dictionary<string, EntityBase> GetAllTemplatesEntity()
+        {
+            Dictionary<string, EntityBase> templates = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_All_TEMPLATES_ENTITY);
+            if (templates == null)
+            {
+                templates = base.GetEntitysObjectFromTable(this.GetAllTemplates(), typeof(Template));
+                CachingService.Set(CachingService.CACHING_All_TEMPLATES_ENTITY, templates, null);
+            }
+            return templates;
+        }
+
+        public Template GetTemplateByID(string templateid)
+        {
+            Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
+            if (templates == null) return null;
+            return (Template)templates[templateid];
+        }
+
+        public DataTable GetAllTemplatesWithOutCaching()
         {
             base.SetSkinDataBaseConnection();
             string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK)";
-            return conn.GetDataSet(Sql);
+            return conn.GetDataTable(Sql);
         }
 
-        public DataSet GetTemplatesBySystemTypeFromDb(Connection conn, int systemtype)
+        public Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype)
         {
-            base.SetSkinDataBaseConnection();
-            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
-                        +" iSystemType =" + systemtype.ToString();
-            return conn.GetDataSet(Sql);
-        }
-
-        public DataSet GetTemplatesBySystemType(Connection conn, int systemtype, bool readdb)
-        {
-            DataSet ds = null;
-            if (readdb)
+            Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
+            if (templates == null) return null;
+            if (templates.Count == 0) return null;
+            Dictionary<string, EntityBase> childtemplates = new Dictionary<string, EntityBase>();
+            foreach (KeyValuePair<string, EntityBase> entity in templates)
             {
-                ds = GetTemplatesBySystemTypeFromDb(conn, systemtype);
-            }
-            else
-            {
-                ds = (DataSet)CachingService.Get(CachingService.CACHING_All_SYSTEM_TEMPLATES + systemtype.ToString());
-                if (ds == null)
+                Template temp = (Template)entity.Value;
+                if (temp.TemplateType == templatetype)
                 {
-                    ds = GetTemplatesBySystemTypeFromDb(conn, systemtype);
-                    CachingService.Set(CachingService.CACHING_All_SYSTEM_TEMPLATES + systemtype.ToString(), ds, null);
+                    childtemplates.Add(temp.Id, (EntityBase)temp);
                 }
             }
-            return ds;
+            return childtemplates;
         }
 
-        /// <summary>
-        /// 根据模版类型获得模版
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public DataSet GetTemplatesBySystemTypAndType(Connection conn,int type,int systemtype,bool readdb)
-        {
-            DataSet ds = null;
-            if (readdb)
-            {
-                base.SetSkinDataBaseConnection();
-                string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE "
-                            + " iSystemType =" + systemtype.ToString() + " AND TemplateType=" + type.ToString();
-                ds = conn.GetDataSet(Sql);
-            }
-            else
-            {
-                DataSet systtemps = this.GetTemplatesBySystemType(conn, systemtype, false);
-                DataRow[] rows = systtemps.Tables[0].Select("TemplateType=" + type.ToString());
-                if (rows.Length != 0)
-                {
-                    ds = new DataSet();
-                    ds.Merge(rows);
-                }
-            }
-            return ds;
-        }
-
-
-        public int AddTemplate(Connection conn, string adminname,Template item)
+        public int AddTemplate(Template item)
         {
             base.SetSkinDataBaseConnection();
             item.Id = Guid.NewGuid().ToString();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;
@@ -141,10 +106,10 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int DelTemplate(Connection conn, string adminname, string temps)
+        public int DelTemplate(string temps)
         {
             base.SetSkinDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vctemps", SqlDbType.VarChar, 1000); sp2.Value = temps;
             SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;
@@ -157,10 +122,10 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int MdyTemplate(Connection conn, string adminname, Template item)
+        public int MdyTemplate(Template item)
         {
             base.SetSkinDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;
@@ -180,102 +145,5 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        /// <summary>
-        /// 根据ID获得模版内容
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="templateid"></param>
-        /// <returns></returns>
-        public DataTable GetTemplateTableByID(Connection conn, string templateid,bool readdb)
-        {
-            DataTable dt = null;
-            if (readdb)
-            {
-                base.SetSkinDataBaseConnection();
-                string sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK) WHERE Id ='" + templateid.ToString() + "'";
-                dt = conn.GetDataTable(sql);
-            }
-            else
-            {
-                DataSet ds = this.GetAllTemplates(conn, false);
-                if (ds != null)
-                {
-                    DataRow[] rows = ds.Tables[0].Select("Id=" + templateid.ToString());
-                    if (rows.Length == 1)
-                    {
-                        DataSet temp = new DataSet();
-                        temp.Merge(rows);
-                        dt = temp.Tables[0];
-                    }
-                }
-            }
-            return dt;
-        }
-
-        public Template GetTemplateBySystemAndID(int system, string templateid)
-        {
-            Template item = null;
-            DataSet systetemps = this.GetTemplatesBySystemType(conn, system, false);
-            if (systetemps != null)
-            {
-                DataRow[] rows = systetemps.Tables[0].Select("Id=" + templateid.ToString());
-                if (rows.Length == 1)
-                {
-                    item = new Template();
-                    item.Id = rows[0]["Id"].ToString();
-                    item.SkinId = rows[0]["SkinId"].ToString();
-                    item.TemplateType = objectHandlers.GetTemplateType((int)rows[0]["TemplateType"]);
-                    item.iParentId = rows[0]["iParentId"].ToString();
-                    item.iSystemType = (int)rows[0]["iSystemType"];
-                    item.vcTempName = (string)rows[0]["vcTempName"];
-                    item.Content = (string)rows[0]["vcContent"];
-                    item.vcUrl = (string)rows[0]["vcUrl"];
-                }
-            }
-            return item;
-        }
-
-        public Template GetTemplateByID(string templateid,bool readdb)
-        {
-            Template item = null;
-
-            if (readdb)
-            {
-                DataTable dt = this.GetTemplateTableByID(conn, templateid, false);
-                if (dt == null) return null;
-                if (dt.Rows.Count != 1) return null;
-                item = new Template();
-                item.Id = dt.Rows[0]["Id"].ToString();
-                item.SkinId = dt.Rows[0]["SkinId"].ToString();
-                item.TemplateType = objectHandlers.GetTemplateType((int)dt.Rows[0]["TemplateType"]);
-                item.iParentId = dt.Rows[0]["iParentId"].ToString();
-                item.iSystemType = (int)dt.Rows[0]["iSystemType"];
-                item.vcTempName = (string)dt.Rows[0]["vcTempName"];
-                item.Content = (string)dt.Rows[0]["vcContent"];
-                item.vcUrl = (string)dt.Rows[0]["vcUrl"];
-            }
-            else
-            {
-                DataSet ds = GetAllTemplates(conn, false);
-                if (ds != null && ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
-                {
-                    DataRow[] rows = ds.Tables[0].Select("Id = '" + templateid.ToString()+"'");
-                    if (rows.Length == 1)
-                    {
-                        item = new Template();
-                        item.Id = rows[0]["Id"].ToString();
-                        item.SkinId = ds.Tables[0].Rows[0]["SkinId"].ToString();
-                        item.TemplateType = objectHandlers.GetTemplateType((int)rows[0]["TemplateType"]);
-                        item.iParentId = rows[0]["iParentId"].ToString();
-                        item.iSystemType = (int)rows[0]["iSystemType"];
-                        item.vcTempName = (string)rows[0]["vcTempName"];
-                        item.Content = (string)rows[0]["vcContent"];
-                        item.vcUrl = (string)rows[0]["vcUrl"];
-                    }
-                }
-            }
-
-            return item;
-        }
     }
 }

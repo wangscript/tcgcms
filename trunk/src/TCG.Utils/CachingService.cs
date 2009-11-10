@@ -107,6 +107,10 @@ namespace TCG.Utils
         /// </summary>
         public static string CACHING_All_TEMPLATES = "CACHING_All_TEMPLATES";
         /// <summary>
+        /// 所有模板实体
+        /// </summary>
+        public static string CACHING_All_TEMPLATES_ENTITY = "CACHING_All_TEMPLATES_ENTITY";
+        /// <summary>
         /// 所有系统模版信息
         /// </summary>
         public static string CACHING_All_SYSTEM_TEMPLATES = "CACHING_All_SYSTEM_TEMPLATES";
@@ -133,6 +137,8 @@ namespace TCG.Utils
                     _systemcachings.Add("所有模版信息缓存", CACHING_All_TEMPLATES);
                     _systemcachings.Add("所有系统模版信息", CACHING_All_SYSTEM_TEMPLATES);
                     _systemcachings.Add("所有的资源分类信息", CACHING_ALL_CATEGORIES);
+                    _systemcachings.Add("所有的资源分类信息实体", CACHING_ALL_CATEGORIES_ENTITY);
+                    _systemcachings.Add("所有模板实体", CACHING_All_TEMPLATES_ENTITY);
                 }
                 return _systemcachings;
             }

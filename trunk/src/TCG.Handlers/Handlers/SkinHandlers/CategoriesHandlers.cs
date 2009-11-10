@@ -50,26 +50,17 @@ namespace TCG.Handlers
         }
 
 
-        public Dictionary<string,EntityBase> GetAllCategoriesEntity()
+        public Dictionary<string, EntityBase> GetAllCategoriesEntity()
         {
-            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"], true))
+            Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            if (allcategories == null)
             {
                 DataTable dt = GetAllCategories();
                 if (dt == null) return null;
-                return base.GetEntitysObjectFromTable(dt, typeof(Categories));
+                allcategories = base.GetEntitysObjectFromTable(dt, typeof(Categories));
+                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_ENTITY, allcategories, null);
             }
-            else
-            {
-                Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
-                if (allcategories == null)
-                {
-                    DataTable dt = GetAllCategories();
-                    if (dt == null) return null;
-                    allcategories = base.GetEntitysObjectFromTable(dt, typeof(Categories));
-                    CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_ENTITY, allcategories, null);
-                }
-                return allcategories;
-            }
+            return allcategories;
         }
 
         /// <summary>
@@ -79,20 +70,14 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllCategories()
         {
-            if (!objectHandlers.ToBoolen(base.configService.baseConfig["IsUsedCaching"], true))
+
+            DataTable allcategories = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
+            if (allcategories == null)
             {
-                return GetAllCategoriesWithOutCaching();
+                allcategories = GetAllCategoriesWithOutCaching();
+                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES, allcategories, null);
             }
-            else
-            {
-                DataTable allcategories = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
-                if (allcategories == null)
-                {
-                    allcategories = GetAllCategoriesWithOutCaching();
-                    CachingService.Set(CachingService.CACHING_ALL_CATEGORIES, allcategories,null);
-                }
-                return allcategories;
-            }
+            return allcategories;
         }
 
         public DataTable GetAllCategoriesWithOutCaching()

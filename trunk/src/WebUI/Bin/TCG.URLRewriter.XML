@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.URLRewriter</name>
+    </assembly>
+    <members>
+        <member name="T:TCG.URLRewriter.HttpModule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TCG.URLRewriter.World">
+            <summary>
+            网站世界状态类，监控网站生命体运行是否正常
+            </summary>
+        </member>
+        <member name="M:TCG.URLRewriter.World.CreateWorld">
+            <summary>
+            创造世界
+            </summary>
+        </member>
+        <member name="P:TCG.URLRewriter.World.IsWorldCreated">
+            <summary>
+            世界是否被创造
+            </summary>
+        </member>
+        <member name="P:TCG.URLRewriter.World.IsCreateWorlding">
+            <summary>
+            是否正在创造世界
+            </summary>
+        </member>
+        <member name="F:TCG.URLRewriter.HttpRequestHandler.startTime">
+            <summary>
+            程序开始时间
+            </summary>
+        </member>
+        <member name="F:TCG.URLRewriter.HttpRequestHandler._worldcreater">
+            <summary>
+            世界创造者
+            </summary>
+        </member>
+        <member name="M:TCG.URLRewriter.HttpRequestHandler.TimeReplace(System.String@)">
+            <summary>
+            替换程序运行时间
+            </summary>
+            <param name="txt"></param>
+        </member>
+        <member name="M:TCG.URLRewriter.HttpRequestHandler.Do(System.Web.HttpApplication,System.Web.HttpContext,System.Web.HttpResponse,System.Web.HttpRequest)">
+            <summary>
+            处理请求
+            </summary>
+            <param name="iHttpApplication"></param>
+            <param name="iHttpContext"></param>
+            <param name="Response"></param>
+            <param name="Request"></param>
+        </member>
+        <member name="P:TCG.URLRewriter.HttpRequestHandler.configService">
+            <summary>
+            获得配置信息
+            </summary>
+        </member>
+        <member name="P:TCG.URLRewriter.HttpRequestHandler.conn">
+            <summary>
+            获得数据库链接
+            </summary>
+        </member>
+    </members>
+</doc>

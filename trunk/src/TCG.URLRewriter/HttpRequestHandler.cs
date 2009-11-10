@@ -115,22 +115,19 @@ namespace TCG.URLRewriter
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
 
             //获得所有单页模版信息
+            Dictionary<string, EntityBase> slpages = tagservice.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.SinglePageType);
 
-            DataSet ds = tagservice.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(conn, 0, 0, false);
-
-            if (ds != null && ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
+            if (slpages != null && slpages.Count != 0)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                foreach (KeyValuePair<string, EntityBase> entity in slpages)
                 {
-                    DataRow Row = ds.Tables[0].Rows[i];
-                    
-                    //获得数据库配置URL信息
-                    string texturl = configService.baseConfig["WebSite"].Trim() + Row["vcUrl"].ToString().Trim();
+                    Template template = (Template)entity.Value;
+                    string texturl = configService.baseConfig["WebSite"].Trim() + template.vcUrl;
                     if (texturl.IndexOf(configService.baseConfig["FileExtension"]) == -1) texturl += configService.baseConfig["FileExtension"];
 
                     if (texturl == Request.Url.AbsoluteUri)
                     {
-                        tagservice.TCGTagHandlers.Template = Row["vcContent"].ToString();
+                        tagservice.TCGTagHandlers.Template = template.Content;
                         tagservice.TCGTagHandlers.NeedCreate = false;
                         tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
                         OutHtml = tagservice.TCGTagHandlers.Template;
@@ -201,15 +198,11 @@ namespace TCG.URLRewriter
                 {
                     //获得文章对象
 
-                    Resources item = (Resources)CachingService.Get(topicid);
+                    Resources item = tagservice.handlerService.resourcsService.resourcesHandlers.GetResourcesById(topicid);
                     if (item != null)
                     {
                         //获得分类信息
-
-                        Template titem = tagservice.handlerService.skinService.templateHandlers.GetTemplateByID(item.Categorie.ResourceTemplate.Id, false);
-
-                        tagservice.TCGTagHandlers.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
-                        titem = null;
+                        tagservice.TCGTagHandlers.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
                         tagservice.TCGTagHandlers.NeedCreate = false;
                         tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
 

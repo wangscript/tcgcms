@@ -26,7 +26,7 @@ public partial class Template_templatemdy : adminMain
         
         if (!Page.IsPostBack)
         {
-            Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid,false);
+            Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
             if (item == null)
             {
                 base.Finish();
@@ -84,7 +84,7 @@ public partial class Template_templatemdy : adminMain
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.templateHandlers.MdyTemplate(base.conn, base.adminInfo.vcAdminName, item);
+                rtn = base.handlerService.skinService.templateHandlers.MdyTemplate(item);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
             }
             catch (Exception ex)

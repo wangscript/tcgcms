@@ -36,7 +36,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfo(Connection conn,string Extension,Resources inf, ref int outid)
+        public int CreateResources(Resources inf)
         {
             base.SetReourceHandlerDataBaseConnection(inf.Categorie);
             inf.dAddDate = DateTime.Now;
@@ -57,7 +57,7 @@ namespace TCG.Handlers
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Value = inf.vcFilePath;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
             SqlParameter sp14 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp14.Value = inf.Id;
-            SqlParameter sp15 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp15.Value = Extension;
+            SqlParameter sp15 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp15.Value = "";
             SqlParameter sp16 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp16.Value = inf.cCreated;
             SqlParameter sp17 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp17.Value = inf.vcTitleColor;
             SqlParameter sp18 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp18.Value = inf.cStrong;
@@ -77,7 +77,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="inf"></param>
         /// <returns></returns>
-        public int AddNewsInfoForSheif(Connection conn, string Extension, Resources inf)
+        public int CreateResourcesForSheif(Resources inf)
         {
             base.SetReourceHandlerDataBaseConnection(inf.Categorie);
             inf.dAddDate = DateTime.Now;
@@ -97,7 +97,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp11.Value = inf.cChecked;
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Value = inf.vcFilePath;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = Extension;
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = "";
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp17.Value = inf.Id;
@@ -111,82 +111,7 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        /// <summary>
-        /// 更改资源的保存状态
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="adminname"></param>
-        /// <param name="IsDel"></param>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        public int DelNewsInfosWithLogic(Connection conn, string adminname, string IsDel, string ids)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            //SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
-            //SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
-            //SqlParameter sp4 = new SqlParameter("@vcKey", SqlDbType.VarChar, 30); sp4.Value = "Del";
-            //SqlParameter sp5 = new SqlParameter("@vcKeValue", SqlDbType.Char, 1); sp5.Value = IsDel;
-            //SqlParameter sp6 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp6.Direction = ParameterDirection.Output;
-            //string[] reValues = conn.Execute("SP_News_NewsInfoStatManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6 }, new int[] { 6 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int)); ;
-            //}
-            return -19000000;
-        }
-
-        /// <summary>
-        /// 更改资源的保存状态
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="adminname"></param>
-        /// <param name="IsDel"></param>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        public int UpdateNewsInfosCreate(Connection conn, string adminname, string IsDel, string ids)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            //SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "01";
-            //SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
-            //SqlParameter sp4 = new SqlParameter("@vcKey", SqlDbType.VarChar, 30); sp4.Value = "Created";
-            //SqlParameter sp5 = new SqlParameter("@vcKeValue", SqlDbType.Char, 1); sp5.Value = IsDel;
-            //SqlParameter sp6 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp6.Direction = ParameterDirection.Output;
-            //string[] reValues = conn.Execute("SP_News_NewsInfoStatManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6 }, new int[] { 6 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int)); ;
-            //}
-            return -19000000;
-        }
-
-        /// <summary>
-        /// 彻底删除资源
-        /// </summary>
-        /// <returns></returns>
-        public int DelNewsInfosWithPhysics(Connection conn, string adminname,string ids)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            //SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "02";
-            //SqlParameter sp3 = new SqlParameter("@ids", SqlDbType.VarChar, 1000); sp3.Value = ids;
-            //SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp4.Direction = ParameterDirection.Output;
-            //string[] reValues = conn.Execute("SP_News_NewsInfoStatManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4}, new int[] { 4 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int)); ;
-            //}
-            return -19000000;
-        }
-
-        public int UpdateNewsInfo(Resources inf)
+        public int UpdateResources(Resources inf)
         {
             base.SetReourceHandlerDataBaseConnection(inf.Categorie);
             inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
@@ -223,53 +148,21 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public Resources GetNewsInfoById(string categoriesid, string resourceid)
+        public Resources GetResourcesByIdAndCategorieId(string categoriesid, string resourceid)
         {
             base.SetReourceHandlerDataBaseConnection(categoriesid);
-            SqlParameter sp0 = new SqlParameter("@iID", SqlDbType.VarChar, 36); sp0.Value = resourceid;
-            DataSet ds = base.conn.GetDataSet("SP_News_GetNewsInfoById", new SqlParameter[] { sp0 });
-            if (ds == null) return null;
-            Resources item = new Resources();
-            item.Id = resourceid;
-            if (ds.Tables[0].Rows.Count == 1)
-            {
-                item.vcTitle = (string)ds.Tables[0].Rows[0]["vcTitle"];
-                item.Categorie.Id = ds.Tables[0].Rows[0]["iClassID"].ToString();
-                item.vcUrl = (string)ds.Tables[0].Rows[0]["vcUrl"];
-                item.vcContent = (string)ds.Tables[0].Rows[0]["vcContent"];
-                item.vcAuthor = (string)ds.Tables[0].Rows[0]["vcAuthor"];
-                item.iCount = (int)ds.Tables[0].Rows[0]["iCount"];
-                item.vcKeyWord = (string)ds.Tables[0].Rows[0]["vcKeyWord"];
-                item.vcEditor = (string)ds.Tables[0].Rows[0]["vcEditor"];
-                item.cCreated = (string)ds.Tables[0].Rows[0]["cCreated"];
-                item.vcSmallImg = (string)ds.Tables[0].Rows[0]["vcSmallImg"];
-                item.vcBigImg = (string)ds.Tables[0].Rows[0]["vcBigImg"];
-                item.vcShortContent = (string)ds.Tables[0].Rows[0]["vcShortContent"];
-                item.vcSpeciality = (string)ds.Tables[0].Rows[0]["vcSpeciality"];
-                item.cChecked = (string)ds.Tables[0].Rows[0]["cChecked"];
-                item.cDel = (string)ds.Tables[0].Rows[0]["cDel"];
-                item.cPostByUser = (string)ds.Tables[0].Rows[0]["cPostByUser"];
-                item.vcFilePath = (string)ds.Tables[0].Rows[0]["vcFilePath"];
-                item.dAddDate = (DateTime)ds.Tables[0].Rows[0]["dAddDate"];
-                item.dUpDateDate = (DateTime)ds.Tables[0].Rows[0]["dUpDateDate"];
-                item.vcTitleColor = (string)ds.Tables[0].Rows[0]["vcTitleColor"];
-                item.cStrong = (string)ds.Tables[0].Rows[0]["cStrong"];
-            }
+            DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE ID = '" + resourceid + "'");
+            if (dt == null) return null;
+            if (dt.Rows.Count == 0) return null;
 
-            if (ds.Tables[1].Rows.Count == 1)
-            {
-                item.Categorie.vcClassName = (string)ds.Tables[1].Rows[0]["vcClassName"];
-                item.Categorie.vcName = (string)ds.Tables[1].Rows[0]["vcName"];
-                item.Categorie.Parent = ds.Tables[1].Rows[0]["Parent"].ToString();
-                item.Categorie.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(ds.Tables[1].Rows[0]["iTemplate"].ToString(),false);
-                item.Categorie.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(ds.Tables[1].Rows[0]["iListTemplate"].ToString(),false);
-                item.Categorie.vcDirectory = (string)ds.Tables[1].Rows[0]["vcDirectory"];
-                item.Categorie.vcUrl = (string)ds.Tables[1].Rows[0]["vcUrl"];
-                item.Categorie.iOrder = (int)ds.Tables[1].Rows[0]["iOrder"];
-            }
-
-            return string.IsNullOrEmpty(item.vcTitle) ? null : item;
+            return (Resources)base.GetEntityObjectFromRow(dt.Rows[0], typeof(Resources));
         }
+
+        public Resources GetResourcesById(string resourceid)
+        {
+            return (Resources)CachingService.Get(resourceid);
+        }
+
          
         /// <summary>
         /// 删除资源文件
@@ -280,10 +173,10 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfoHtmlById(string categoriesid, string resourceid)
         {
-            Resources newsitem = this.GetNewsInfoById(categoriesid,resourceid);
-            if (newsitem == null) return -19000000;  
-            string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
-            System.IO.File.Delete(filepath);
+            //Resources newsitem = this.GetNewsInfoById(categoriesid,resourceid);
+            //if (newsitem == null) return -19000000;  
+            //string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
+            //System.IO.File.Delete(filepath);
             return 1;
         }
 

@@ -41,7 +41,7 @@ public partial class resources_resourceshandlers : adminMain
                 return;
             }
 
-            Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, newsid);
+            Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(newsid);
             this.iClassId.Value = item.Categorie.Id.ToString();
 
             this.iTitle.Value = item.vcTitle;
@@ -124,7 +124,7 @@ public partial class resources_resourceshandlers : adminMain
     private void NewsManage(bool ismdy)
     {
         string categorieid = objectHandlers.Post("iClassId");
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, objectHandlers.Post("iNewsId"));
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.Post("iNewsId"));
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
         item.vcContent = objectHandlers.Post("iContent$content");
@@ -168,11 +168,11 @@ public partial class resources_resourceshandlers : adminMain
         int rtn = 0;
         if (!ismdy)
         {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.AddNewsInfo(base.conn, base.configService.baseConfig["FileExtension"], item, ref newid);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
         }
         else
         {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(item);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
         }
 
         filepath = Server.MapPath("~" + item.vcFilePath);
@@ -180,23 +180,14 @@ public partial class resources_resourceshandlers : adminMain
         {
             if (base.configService.baseConfig["IsReWrite"] != "True")
             {
-                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.Categorie.Id);
-
-                Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.ResourceTemplate.Id,false);
-                cif = null;
-
                 TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-                tcgth.Template = titem.Content.Replace("_$Id$_", item.Id.ToString());
-                titem = null;
+                tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
                 tcgth.FilePath = filepath;
                 tcgth.Replace(base.conn, base.configService.baseConfig);
-                tcgth = null;
             }
 
         }
         base.AjaxErch(rtn.ToString());
         base.Finish();
-        item = null;
-
     }
 }

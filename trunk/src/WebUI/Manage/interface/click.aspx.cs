@@ -28,7 +28,6 @@ public partial class Manage_interface_click : ScriptsMain
             }
 
             string topicid = objectHandlers.Get("rid");
-            string categoriesid = objectHandlers.Get("cid");
             bool shownum = objectHandlers.Get("shownum") == "true" ? true : false;
             if (string.IsNullOrEmpty(topicid))
             {
@@ -40,17 +39,8 @@ public partial class Manage_interface_click : ScriptsMain
                 return;
             }
 
-            if (string.IsNullOrEmpty(categoriesid))
-            {
-                if (shownum)
-                {
-                    Response.Write("document.write('0');");
-                    Response.End();
-                }
-                return;
-            }
 
-            Resources nif = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categoriesid, topicid);
+            Resources nif = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(topicid);
             if (nif == null)
             {
                 if (shownum)
@@ -64,7 +54,7 @@ public partial class Manage_interface_click : ScriptsMain
             if (shownum) Response.Write("document.write('" + nif.iCount.ToString() + "');");
 
             nif.iCount = nif.iCount + 1;
-            int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(nif);
+            int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(nif);
             base.conn.Close();
             Response.End();
         }

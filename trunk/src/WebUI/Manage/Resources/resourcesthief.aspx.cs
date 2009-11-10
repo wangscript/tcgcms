@@ -131,7 +131,8 @@ public partial class resources_resourcesthief : adminMain
                 int rtn = 0;
                 try
                 {
-                    rtn = base.handlerService.resourcsService.resourcesHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif);
+                    //待续
+                    //rtn = base.handlerService.resourcsService.resourcesHandlers.AddNewsInfoForSheif(base.conn, base.configService.baseConfig["FileExtension"], nif);
                 }
                 catch { }
             }

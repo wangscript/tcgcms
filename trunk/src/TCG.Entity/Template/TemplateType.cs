@@ -9,10 +9,25 @@ namespace TCG.Entity
     /// </summary>
     public enum TemplateType : int
     {
-        SinglePageType = 0, //单页模版
-        InfoType = 1,       //详细页模版
-        ListType = 2,       //列表模版
-        OriginalType = 3,   //原件模版
-        SystemPage = 4,     //系统必须的页面
+        /// <summary>
+        /// //单页模版
+        /// </summary>
+        SinglePageType = 0, 
+        /// <summary>
+        /// //详细页模版
+        /// </summary>
+        InfoType = 1,       
+        /// <summary>
+        /// //列表模版
+        /// </summary>
+        ListType = 2,  
+        /// <summary>
+        /// //原件模版
+        /// </summary>
+        OriginalType = 3,   
+        /// <summary>
+        /// //系统必须的页面
+        /// </summary>
+        SystemPage = 4,     
     }
 }

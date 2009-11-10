@@ -1,0 +1,745 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.Handlers</name>
+    </assembly>
+    <members>
+        <member name="T:TCG.Handlers.UserService">
+            <summary>
+            用户操作服务
+            </summary>
+        </member>
+        <member name="T:TCG.Handlers.ObjectHandlersBase">
+            <summary>
+            方法基类
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.ObjectHandlersBase.GetEntitysObjectFromTable(System.Data.DataTable,System.Type)">
+            <summary>
+            从记录集中返回实体
+            </summary>
+            <param name="dt"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ObjectHandlersBase.GetEntityObjectFromRow(System.Data.DataRow,System.Type)">
+            <summary>
+            从记录行中得到实体
+            </summary>
+            <param name="?"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TCG.Handlers.ObjectHandlersBase.conn">
+            <summary>
+            设置数据库链接
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.ObjectHandlersBase.configService">
+            <summary>
+            获得配置信息支持
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.ObjectHandlersBase.handlerService">
+            <summary>
+            提供系统操作方法的服务
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.UserService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.UserService.userHandlers">
+            <summary>
+            提供用户操作的方法
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.UserService.userLoginHandlers">
+            <summary>
+            前台用户登录的操作类
+            </summary>
+        </member>
+        <member name="T:TCG.Handlers.AdminHandlers">
+            <summary>
+            后台管理员的操作方法
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.AdminLogin(System.String,System.String)">
+            <summary>
+            管理员登陆函数
+            </summary>
+            <param name="name"></param>
+            <param name="pwd"></param>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetAdminInfoByName(System.String,System.String,System.Data.DataSet@)">
+            <summary>
+            根据管理员名获得管理员信息
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetALLAdminRole">
+            <summary>
+            获得所有管理角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetAdminInfoByAdminName(System.String)">
+             <summary>
+            获得指定管理员的信息
+             </summary>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.AddAdmin(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            添加新的管理员
+            </summary>
+            <param name="vcAdminName"></param>
+            <param name="nickname"></param>
+            <param name="vPassWord"></param>
+            <param name="iRole"></param>
+            <param name="slock"></param>
+            <param name="filesysroot"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.UpdateAdminInfo(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            更新管理员信息
+            </summary>
+            <param name="admin"></param>
+            <param name="vcAdminName"></param>
+            <param name="nickname"></param>
+            <param name="vPassWord"></param>
+            <param name="iRole"></param>
+            <param name="clock"></param>
+            <param name="vcPopedom"></param>
+            <param name="classpop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.UpdateAdminInfo(System.Int32,System.String,System.Int32,System.String,System.Int32)">
+             <summary>
+            更新管理员信息
+             </summary>
+             <param name="AdminID"></param>
+             <param name="nickname"></param>
+             <param name="iRole"></param>
+             <param name="filesysroot"></param>
+             <param name="slock"></param>
+             <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.DeleteAdminById(System.Int32)">
+            <summary>
+            删除管理员(wait for mdy)
+            </summary>
+            <param name="AdminID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetAllPopedom">
+            <summary>
+            获得所有权限选项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetPopedomsByID(System.String)">
+            <summary>
+            获得部分权限选项目
+            </summary>
+            <param name="iIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.ChanageAdminLoginInfo(System.String,System.String,System.String,System.String)">
+            <summary>
+            更改自己的登陆信息
+            </summary>
+            <param name="adminname"></param>
+            <param name="oldpwd"></param>
+            <param name="npwd"></param>
+            <param name="nickname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetAdminRoleInfo(System.Int32@,System.Int32@,System.Data.DataSet@)">
+            <summary>
+            获得角色组基本信息
+            </summary>
+            <param name="admincount"></param>
+            <param name="ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.GetAdminList(System.Int32,System.Int32@,System.Int32@,System.String@,System.Data.DataSet@)">
+            <summary>
+            获取角色下的管理员列表信息
+            </summary>
+            <param name="iRoleID"></param>
+            <param name="admincount"></param>
+            <param name="rolecount"></param>
+            <param name="rolename"></param>
+            <param name="ds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.AdminChangeGroup(System.String,System.String,System.Int32)">
+            <summary>
+            移动管理员到管理组
+            </summary>
+            <param name="vcAdminname"></param>
+            <param name="admins"></param>
+            <param name="irole"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.AddAdminRole(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加新的角色组
+            </summary>
+            <param name="vcAdminname"></param>
+            <param name="vcRoleName"></param>
+            <param name="pop"></param>
+            <param name="classpop"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.MdyAdminRole(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            修改角色组
+            </summary>
+            <param name="vcAdminname"></param>
+            <param name="vcRoleName"></param>
+            <param name="pop"></param>
+            <param name="classpop"></param>
+            <param name="content"></param>
+            <param name="roleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.DelAdminRole(System.String,System.Int32)">
+            <summary>
+            删除角色组
+            </summary>
+            <param name="vcAdminname"></param>
+            <param name="roleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.DelAdmins(System.String,System.String,System.String)">
+            <summary>
+            删除管理员
+            </summary>
+            <param name="vcAdminname"></param>
+            <param name="admins"></param>
+            <param name="action">01，逻辑删除 02物理删除 03救回管理员</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.AdminHandlers.CheckAdminNameForReg(System.String)">
+            <summary>
+            检测用户名是否存在
+            </summary>
+            <param name="adminname"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TCG.Handlers.ResourceHandlerBase">
+            <summary>
+            资源操作的基本方法基类
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.ResourceHandlerBase.SetReourceHandlerDataBaseConnection(TCG.Entity.Categories)">
+            <summary>
+            根据分类,设置数据库连接字符串
+            </summary>
+            <param name="categories">分类实体</param>
+        </member>
+        <member name="M:TCG.Handlers.ResourceHandlerBase.SetReourceHandlerDataBaseConnection(System.String)">
+            <summary>
+            根据数据库编号
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.CreateResources(TCG.Entity.Resources)">
+            <summary>
+            添加资讯
+            </summary>
+            <param name="conn"></param>
+            <param name="inf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.CreateResourcesForSheif(TCG.Entity.Resources)">
+            <summary>
+            添加资讯
+            </summary>
+            <param name="conn"></param>
+            <param name="inf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.DelNewsInfoHtmlById(System.String,System.String)">
+            <summary>
+            删除资源文件
+            </summary>
+            <param name="conn"></param>
+            <param name="config"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.DelNewsInfoHtmlByIds(System.String)">
+            <summary>
+            批量删除资源文件
+            </summary>
+            <param name="conn"></param>
+            <param name="config"></param>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.GetAllResurces">
+            <summary>
+            获取所有的文章咨询,并放入内存中,不要轻易调用,将消耗大量的时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.CheckThiefTopic(TCG.Data.Connection,System.String,System.String)">
+            <summary>
+            检测文章是否已经抓取过
+            </summary>
+            <param name="conn"></param>
+            <param name="classid"></param>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcesHandlers.CreateNewsInfoFilePath(TCG.Entity.Resources)">
+            <summary>
+            生成文章路径
+            </summary>
+            <param name="extion"></param>
+            <param name="title"></param>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ResourcsService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.ResourcsService.resourcesHandlers">
+            <summary>
+            提供对资讯操作的方法
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.GetAttribute(System.String)">
+            <summary>
+            跟标签名获得标志属性
+            </summary>
+            <param name="feild"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.TagForScriptCss(TCG.Entity.TCGTagPagerInfo@)">
+            <summary>
+            获得标签
+            </summary>
+            <param name="pagerinfo"></param>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.TagForNewsTopic(TCG.Entity.TCGTagPagerInfo@)">
+            <summary>
+            处理单篇资讯的标签
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.TagForNewsTemplate(TCG.Entity.TCGTagPagerInfo@)">
+            <summary>
+            处理内签模版的标签
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.TagForNewsList(TCG.Entity.TCGTagPagerInfo@)">
+            <summary>
+            处理资讯列表
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagAttributeHandlers.TagForNewsListWithPager(TCG.Entity.TCGTagPagerInfo@)">
+            <summary>
+            处理资讯列表，带分页
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.Tag">
+            <summary>
+            标签替换后HTML 的暂存标签 避免二次匹配
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.TagText">
+            <summary>
+            标签包含的HTML
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.TagType">
+            <summary>
+            标签ITEM 数字
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.Attribute">
+            <summary>
+            标签属性字符串
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.TagHtml">
+            <summary>
+            标签的全部HTML
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagAttributeHandlers.Pager">
+            <summary>
+            是否为列表属性
+            </summary>
+        </member>
+        <member name="T:TCG.Handlers.FileService">
+            <summary>
+            文件处理服务
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.FileService.fileClassHandlers">
+            <summary>
+            提供文件分类操作的方法
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.FileService.fileInfoHandlers">
+            <summary>
+            提供对文件操作的方法
+            </summary>
+        </member>
+        <member name="T:TCG.Handlers.UserHandlers">
+            <summary>
+            用户登陆相关操作类
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.UserHandlers.UserManage(TCG.Entity.User,System.String)">
+            <summary>
+            用修改，增加操作
+            </summary>
+            <param name="user"></param>
+            <param name="usercontact"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.UserHandlers.CheckUserName(System.String)">
+            <summary>
+            检测用户名是否存在
+            </summary>
+            <param name="UserName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.UserHandlers.CreateUserId">
+            <summary>
+            创建用户ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TCG.Handlers.AdminLoginHandlers">
+            <summary>
+            后台管理登陆状态的操作方法
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.AdminLoginHandlers.CheckAdminPop">
+            <summary>
+            检查管理员权限
+            </summary>
+            <param name="popnum"></param>
+        </member>
+        <member name="M:TCG.Handlers.AdminLoginHandlers.HavePower(System.String)">
+            <summary>
+            根据判断是否有该URL的访问权限
+            </summary>
+            <param name="config"></param>
+            <param name="pages"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TCG.Handlers.TCGTagHandlers">
+            <summary>
+            TempLate 的摘要说明
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagHandlers.UpdateTopicsTitle">
+            <summary>
+            更新文章标题
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TCGTagHandlers.UpdateScriptCss">
+            <summary>
+            更新CSS和脚本链接
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.CurrentPage">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.Template">
+             <summary>
+            设置获得模板
+             </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.Pattern">
+            <summary>
+            标签规则
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.SystemTag">
+            <summary>
+            系统标签
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.FilePath">
+            <summary>
+            文件保存路径
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TCGTagHandlers.NeedCreate">
+            <summary>
+            需要生成文件
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.FileResourcesHandlerBase.SetFileDatabase(System.Int64)">
+            <summary>
+            设置数据库链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileResourcesHandlerBase.GetMainFileDatabaseStr">
+            <summary>
+            获得主文件库
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileResourcesHandlers.AddFileInfoByAdmin(System.String,TCG.Entity.FileResources)">
+            <summary>
+            添加新的分类
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="fcif"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileResourcesHandlers.GetFileInfosById(System.Int64)">
+             <summary>
+            根据ID获得文件信息
+             </summary>
+             <param name="conn"></param>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileResourcesHandlers.GetUrlError(System.String)">
+            <summary>
+            判断远程文件是否存在
+            </summary>
+            <param name="curl"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TCG.Handlers.FileResourcesHandlers.fileClassHandlers">
+            <summary>
+            提供文件分类操作的方法
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.SpecialityHandlers.NewsSpecialityAdd(TCG.Data.Connection,System.String,TCG.Entity.Speciality)">
+            <summary>
+            添加新的资讯类型
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="nif"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.SpecialityHandlers.NewsSpecialityMdy(TCG.Data.Connection,System.String,TCG.Entity.Speciality)">
+            <summary>
+            修改资讯类型
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="nif"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.SpecialityHandlers.NewSpecialityDel(TCG.Data.Connection,System.String,System.String)">
+            <summary>
+            删除特性
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.SpecialityHandlers.GetNewsSpecialityInfoById(TCG.Data.Connection,System.Int32)">
+            <summary>
+            根据ID获得资源特性
+            </summary>
+            <param name="conn"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.SpecialityHandlers.GetAllNewsSpecialityInfo(TCG.Data.Connection)">
+            <summary>
+            获得所有资源特性
+            </summary>
+            <param name="conn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.GetAllCategories">
+            <summary>
+            获得所有分类信息
+            </summary>
+            <param name="conn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.GetResourcesCategoriesIndex(System.String,System.String)">
+            <summary>
+            获得文章的导航！~
+            </summary>
+            <param name="conn"></param>
+            <param name="config"></param>
+            <param name="classid"></param>
+            <param name="sh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.GetCategoriesById(System.String)">
+            <summary>
+            根据ID获得分类信息
+            </summary>
+            <param name="conn"></param>
+            <param name="iClassID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.CreateCategories(TCG.Entity.Categories)">
+            <summary>
+            添加新闻分类
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="classname"></param>
+            <param name="lname"></param>
+            <param name="parentid"></param>
+            <param name="templateid"></param>
+            <param name="ltemplateid"></param>
+            <param name="dir"></param>
+            <param name="url"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.UpdateCategories(TCG.Entity.Categories)">
+            <summary>
+            修改分类
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="classinf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.CategoriesHandlers.DelCategories(System.String)">
+            <summary>
+            删除资讯分类
+            </summary>
+            <param name="conn"></param>
+            <param name="classid"></param>
+            <param name="adminname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.UserLoginHandlers.UserLogin(TCG.Entity.User@)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.UserLoginHandlers.UserLogout">
+            <summary>
+            用户退出
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.UserLoginHandlers.SetUserLoginCookie(TCG.Entity.User)">
+            <summary>
+            保存登陆信息
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:TCG.Handlers.UserLoginHandlers.GuestInit">
+            <summary>
+            初始化游客信息
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.UserLoginHandlers.User">
+            <summary>
+            用户实体
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.TagService.#ctor(TCG.Handlers.HandlerService)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.TagService.TCGTagHandlers">
+            <summary>
+            提供对模版处理操作的方法
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.FileCategoriesHandlers.GetAllFilesClassFromDb">
+            <summary>
+            从数据库获取所遇分类信息
+            </summary>
+            <param name="conn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileCategoriesHandlers.GetAllFileClass(System.Boolean)">
+            <summary>
+            获取所有分类信息
+            </summary>
+            <param name="conn"></param>
+            <param name="readdb"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileCategoriesHandlers.GetFilesClassInfosByParendId(System.Int32)">
+            <summary>
+            根据父亲获得文件夹
+            </summary>
+            <param name="conn"></param>
+            <param name="prarentid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.FileCategoriesHandlers.AddFileClass(System.String,TCG.Entity.FileCategories)">
+            <summary>
+            添加新的分类
+            </summary>
+            <param name="conn"></param>
+            <param name="adminname"></param>
+            <param name="fcif"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.SkinService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.ManageService.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.ManageService.adminHandlers">
+            <summary>
+            管理员的操作方法
+            </summary>
+        </member>
+        <member name="T:TCG.Handlers.HandlerService">
+            <summary>
+            逻辑层方法提供
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.HandlerService.skinService">
+            <summary>
+            后台框架操作方法
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.HandlerService.manageService">
+            <summary>
+            后台框架操作方法
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.HandlerService.fileService">
+            <summary>
+            提供文件分类操作的方法
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.HandlerService.userService">
+            <summary>
+            用户的操作的服务
+            </summary>
+        </member>
+    </members>
+</doc>
