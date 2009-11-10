@@ -122,6 +122,14 @@ namespace TCG.Utils
         /// 所有的资源分类信息实体
         /// </summary>
         public static string CACHING_ALL_CATEGORIES_ENTITY = "CACHING_ALL_CATEGORIES_ENTITY";
+        /// <summary>
+        /// 所有皮肤记录集缓存
+        /// </summary>
+        public static string CACHING_ALL_SKIN = "CACHING_ALL_SKIN";
+        /// <summary>
+        /// 所有皮肤实体
+        /// </summary>
+        public static string CACHING_ALL_SKIN_ENTITY = "CACHING_ALL_SKIN_ENTITY";
 
         /// <summary>
         /// 系统缓存集合

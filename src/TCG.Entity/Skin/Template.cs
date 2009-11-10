@@ -29,12 +29,30 @@ namespace TCG.Entity
         /// 皮肤ID
         /// </summary>
         public string SkinId { get { return this._isiteid; } set { this._isiteid = value; } }
+        /// <summary>
+        /// 模板类型
+        /// </summary>
         public TemplateType TemplateType { get { return this._itype; } set { this._itype = value; } }
+        /// <summary>
+        /// 模板父亲ID
+        /// </summary>
         public string iParentId { get { return this._iparentid; } set { this._iparentid = value; } }
         public int iSystemType { get { return this._isystemtype; } set { this._isystemtype = value; } }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
         public DateTime dUpdateDate { get { return this._dupdatedate; } set { this._dupdatedate = value; } }
+        /// <summary>
+        /// 添加时间
+        /// </summary>
         public DateTime dAddDate { get { return this._dadddate; } set { this._dadddate = value; } }
+        /// <summary>
+        /// 模板名称
+        /// </summary>
         public string vcTempName { get { return this._vctempname; } set { this._vctempname = value; } }
+        /// <summary>
+        /// 单页URL地址
+        /// </summary>
         public string vcUrl { get { return this._vcurl; } set { this._vcurl = value; } }
 
         private string _vccontent;

@@ -216,6 +216,12 @@ namespace TCG.Handlers
                     template.Content = (string)row["vcContent"];
                     template.vcUrl = (string)row["vcUrl"];
                     return (EntityBase)template;
+                case "TCG.Entity.Skin":
+                    Skin skin = new Skin();
+                    skin.Id = row["Id"].ToString();
+                    skin.Name = row["Name"].ToString();
+                    skin.Pic = row["Pic"].ToString();           
+                    return (EntityBase)skin;
             }
             return null;
         }
