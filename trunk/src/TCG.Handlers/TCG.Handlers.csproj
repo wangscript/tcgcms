@@ -53,6 +53,7 @@
     <Compile Include="Handlers\manageHandlers\ManageService.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
     <Compile Include="Handlers\SkinHandlers\SkinHandlerBase.cs" />
+    <Compile Include="Handlers\SkinHandlers\SkinHandlers.cs" />
     <Compile Include="Handlers\SkinHandlers\SkinService.cs" />
     <Compile Include="Handlers\SkinHandlers\SpecialityHandlers.cs" />
     <Compile Include="Handlers\TCGTagHandlers\TCGTagBase.cs" />
