@@ -18,16 +18,13 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class Template
+    public class Template : EntityBase
     {
         /// <summary>
         /// Ä¤°å¿éÄÚÈİ
         /// </summary>
         public string Content { get { return this._vccontent; } set { this._vccontent = value; } }
-        /// <summary>
-        /// Ä£°å±àºÅ
-        /// </summary>
-        public string Id { get { return this._iid; } set { this._iid = value; } }
+        
         /// <summary>
         /// Æ¤·ôID
         /// </summary>

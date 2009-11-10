@@ -86,10 +86,6 @@ namespace TCG.URLRewriter
             World.IsCreateWorlding = true;
 
             Dictionary<string, EntityBase> res = World.handlerService.resourcsService.resourcesHandlers.GetAllResurces();
-            foreach (KeyValuePair<string, EntityBase> rescone in res)
-            {
-                World.configService.HttpContext.Cache.Insert(CachingService.Key + rescone.Key, rescone.Value);
-            }
 
             //完成世界创造
             World.IsWorldCreated = true;

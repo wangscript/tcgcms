@@ -135,7 +135,8 @@ public partial class resources_resourcesrecovery : adminMain
             return;
         }
 
-        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
+        //待续
+        int rtn = 0;// base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
         base.AjaxErch(rtn.ToString());
     }
 
@@ -147,8 +148,8 @@ public partial class resources_resourcesrecovery : adminMain
             base.AjaxErch("-1000000051");
             return;
         }
-
-        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
+        //待续
+        int rtn = 0;// base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
         base.AjaxErch(rtn.ToString());
     }
 }

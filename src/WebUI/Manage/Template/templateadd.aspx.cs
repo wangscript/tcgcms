@@ -65,7 +65,7 @@ public partial class Template_templateadd : adminMain
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.templateHandlers.AddTemplate(base.conn, base.adminInfo.vcAdminName, item);
+                rtn = base.handlerService.skinService.templateHandlers.AddTemplate(item);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
             }
             catch (Exception ex)

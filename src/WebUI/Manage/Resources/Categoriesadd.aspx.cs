@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -31,8 +32,8 @@ public partial class resources_categoriesadd : adminMain
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
-            cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"), false);
-            cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"),false);
+            cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"));
+            cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -64,34 +65,24 @@ public partial class resources_categoriesadd : adminMain
         int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
         this.iClassId.Value = iParent.ToString();
 
-        DataSet ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            (int)TemplateType.InfoType, 0, false);
-        if (ds != null)
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType);
+        if (templates != null && templates.Count != 0)
         {
-            if (ds.Tables.Count != 0)
+            foreach (KeyValuePair<string, EntityBase> keyvalue in templates)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    DataRow Row = ds.Tables[0].Rows[i];
-                    this.sTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                }
+                Template template = (Template)keyvalue.Value;
+                this.sTemplate.Items.Add(new ListItem(template.vcTempName, template.Id));
             }
-            
-            ds.Clear();
         }
 
-        
-        ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            (int)TemplateType.ListType, 0, false);
-        if (ds != null)
+
+        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType);
+        if (templates != null && templates.Count != 0)
         {
-            if (ds.Tables.Count != 0)
+            foreach (KeyValuePair<string, EntityBase> keyvalue in templates)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    DataRow Row = ds.Tables[0].Rows[i];
-                    this.slTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                }
+                Template template = (Template)keyvalue.Value;
+                this.slTemplate.Items.Add(new ListItem(template.vcTempName, template.Id));
             }
         }
     }

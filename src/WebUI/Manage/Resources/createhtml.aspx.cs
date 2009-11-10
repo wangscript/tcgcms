@@ -93,14 +93,8 @@ public partial class news_createhtml : adminMain
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(ClassId);
-        if (cif == null) { base.AjaxErch(""); return; }
-
-        Template tif = cif.ResourceTemplate;
-        if (tif == null) { base.AjaxErch(""); return; }
-
         Resources item = new Resources();
-        item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(ClassId, id);
+        item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(id);
 
         string text1 = "";
         if (item == null)
@@ -122,7 +116,7 @@ public partial class news_createhtml : adminMain
             item.vcKeyWord = KeyWordTree.FindKeyWord(item.vcTitle, ",");
         }
 
-        int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfo(item);
+        int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
         if (rtn < 0)
         {
             text1 = "<a>更新文章信息失败...ID:" + item.Id + "</a>";
@@ -131,7 +125,7 @@ public partial class news_createhtml : adminMain
         }
 
         TCGTagHandlers tcgthl = base.tagService.TCGTagHandlers;
-        tcgthl.Template = tif.Content.Replace("_$Id$_", id.ToString());
+        tcgthl.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
         tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
         tcgthl.Replace(base.conn, base.configService.baseConfig);
@@ -153,9 +147,7 @@ public partial class news_createhtml : adminMain
 
         base.Finish();
         base.AjaxErch(text1);
-        tcgthl = null;
-        cif = null;
-        tif = null;
+
     }
 
     private void Search()

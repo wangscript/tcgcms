@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -35,8 +36,8 @@ public partial class resources_categoriesmdy : adminMain
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
-            cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"),false);
-            cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"),false);
+            cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"));
+            cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
 
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
@@ -66,7 +67,7 @@ public partial class resources_categoriesmdy : adminMain
     {
         string iClassId = objectHandlers.Get("iClassId");
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById( iClassId);
+        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iClassId);
         if (cif == null)
         {
             base.Finish();
@@ -79,50 +80,40 @@ public partial class resources_categoriesmdy : adminMain
         this.iUrl.Value = cif.vcUrl;
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
-        
-        DataSet ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            (int)TemplateType.InfoType, 0, false);
-        if (ds != null)
+
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType);
+        int i = 0;
+        if (templates != null && templates.Count!=0)
         {
-            if (ds.Tables.Count != 0)
+            i = 0;
+            foreach(KeyValuePair<string,EntityBase> keyvalue in templates)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                Template template = (Template)keyvalue.Value;
+                this.sTemplate.Items.Add(new ListItem(template.vcTempName, template.Id));
+                if (template.Id == cif.ResourceTemplate.Id)
                 {
-                    DataRow Row = ds.Tables[0].Rows[i];
-                    this.sTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                    if (Row["Id"].ToString() == cif.ResourceTemplate.Id)
-                    {
-                        this.sTemplate.SelectedIndex = i+1;
-                    }
+                    this.sTemplate.SelectedIndex = i+1;
                 }
+                i++;
             }
-            ds.Clear();
         }
 
 
-        ds = base.handlerService.skinService.templateHandlers.GetTemplatesBySystemTypAndType(base.conn,
-            (int)TemplateType.ListType, 0, false);
-        if (ds != null)
+        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType);
+        if (templates != null && templates.Count != 0)
         {
-            if (ds.Tables.Count != 0)
+            i = 0;
+            foreach (KeyValuePair<string, EntityBase> keyvalue in templates)
             {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                Template template = (Template)keyvalue.Value;
+                this.slTemplate.Items.Add(new ListItem(template.vcTempName, template.Id));
+                if (template.Id == cif.ResourceTemplate.Id)
                 {
-                    DataRow Row = ds.Tables[0].Rows[i];
-                    this.slTemplate.Items.Add(new ListItem(Row["vcTempName"].ToString(), Row["Id"].ToString()));
-                    if (Row["Id"].ToString() == cif.ResourceListTemplate.ToString())
-                    {
-                        this.slTemplate.SelectedIndex = i + 1;
-                    }
+                    this.slTemplate.SelectedIndex = i + 1;
                 }
+                i++;
             }
-
-            ds.Clear();
-            ds.Dispose();
         }
-
-        
-        cif = null;
 
         base.Finish();
     }

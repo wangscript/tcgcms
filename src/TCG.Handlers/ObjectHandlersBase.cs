@@ -97,6 +97,62 @@ namespace TCG.Handlers
             return list;
         }
 
+        public string GetJsEntitys(Dictionary<string, EntityBase> entitys, Type type)
+        {
+            if (entitys == null) return null;
+            if (type == null) return null;
+            if (entitys.Count == 0) return null;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("var _" + type.ToString().Split('.')[2] + "=[");
+            int i = 0;
+            foreach (KeyValuePair<string, EntityBase> keyvalue in entitys)
+            {
+                sb.Append(this.GetJsEntity(keyvalue.Value,type));
+                i++;
+                if (i != entitys.Count) sb.Append(",");
+            }
+            sb.Append("];");
+            return sb.ToString();
+        }
+
+        public string GetJsEntity(EntityBase entity, Type type)
+        {
+            if (entity == null) return null;
+            if(type==null)return null;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            switch (type.ToString())
+            {
+                case "TCG.Entity.Categories":
+                    Categories categories = (Categories)entity;
+                    sb.Append("Id:\"" + categories.Id + "\",");
+                    sb.Append("ResourceListTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceListTemplate, typeof(Template)) + ",");
+                    sb.Append("iOrder:" + categories.iOrder.ToString() + ",");
+                    sb.Append("Parent:\"" + categories.Parent + "\",");
+                    sb.Append("ResourceTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceTemplate, typeof(Template)) + ",");
+                    sb.Append("Directory:\"" + categories.vcDirectory + "\","); 
+                    sb.Append("Url:\"" + categories.vcUrl + "\",");
+                    sb.Append("UpdateDate:\"" + categories.dUpdateDate.ToString() + "\",");
+                    sb.Append("Visible:\"" + categories.cVisible + "\",");
+                    sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
+                    sb.Append("Name:\"" + categories.vcName + "\",");
+                    sb.Append("ClassName:\"" + categories.vcClassName + "\"");
+                    break;
+                case "TCG.Entity.Template":
+                    Template template = (Template)entity;
+                    sb.Append("Id:\"" + template.Id + "\",");
+                    sb.Append("SkinId:\"" + template.SkinId + "\",");
+                    sb.Append("TemplateType:" + ((int)template.TemplateType).ToString() + ",");
+                    sb.Append("ParentId:\"" + template.iParentId + "\",");
+                    sb.Append("SystemType:" + template.iSystemType.ToString() + ",");
+                    sb.Append("TempName:\"" + template.vcTempName + "\",");
+                    sb.Append("Url:\"" + template.vcUrl + "\"");
+                    break;
+            }
+            sb.Append("}");
+            return sb.ToString();
+        }
+
         /// <summary>
         /// 从记录行中得到实体
         /// </summary>
@@ -111,17 +167,17 @@ namespace TCG.Handlers
                 case "TCG.Entity.Categories":
                     Categories categories = new Categories();
                     categories.Id = row["Id"].ToString();
-                    categories.ResourceListTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iListTemplate"].ToString(), false);
+                    categories.ResourceListTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iListTemplate"].ToString());
                     categories.iOrder = (int)row["iOrder"];
                     categories.Parent = row["Parent"].ToString();
-                    categories.ResourceTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iTemplate"].ToString(), false);
-                    categories.vcClassName = (string)row["vcClassName"];
-                    categories.vcDirectory = (string)row["vcDirectory"];
-                    categories.vcName = (string)row["vcName"];
-                    categories.vcUrl = (string)row["vcUrl"];
+                    categories.ResourceTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iTemplate"].ToString());
+                    categories.vcClassName = row["vcClassName"].ToString();
+                    categories.vcDirectory = row["vcDirectory"].ToString();
+                    categories.vcName = row["vcName"].ToString();
+                    categories.vcUrl = row["vcUrl"].ToString();
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
-                    categories.cVisible = (string)row["Visible"];
-                    categories.DataBaseService = (string)row["DataBaseService"];
+                    categories.cVisible = row["Visible"].ToString();
+                    categories.DataBaseService = row["DataBaseService"].ToString();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();
@@ -149,6 +205,17 @@ namespace TCG.Handlers
                     resources.cStrong = (string)row["cStrong"];
                     CachingService.Set(resources.Id, resources, null);
                     return (EntityBase)resources;
+                case "TCG.Entity.Template":
+                    Template template = new Template();
+                    template.Id = row["Id"].ToString();
+                    template.SkinId = row["SkinId"].ToString();
+                    template.TemplateType = objectHandlers.GetTemplateType((int)row["TemplateType"]);
+                    template.iParentId = row["iParentId"].ToString();
+                    template.iSystemType = (int)row["iSystemType"];
+                    template.vcTempName = (string)row["vcTempName"];
+                    template.Content = (string)row["vcContent"];
+                    template.vcUrl = (string)row["vcUrl"];
+                    return (EntityBase)template;
             }
             return null;
         }

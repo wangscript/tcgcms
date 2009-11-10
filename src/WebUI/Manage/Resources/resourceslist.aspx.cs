@@ -173,9 +173,9 @@ public partial class resources_resourceslist : adminMain
             return;
         }
         //待续
-        int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
+        //int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
         //rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
-        base.AjaxErch(rtn.ToString());
+        //base.AjaxErch(rtn.ToString());
     }
 
     private void CreateNews()
@@ -199,22 +199,20 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetNewsInfoById(categorieid, resourceid);
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesByIdAndCategorieId(categorieid, resourceid);
         if (item == null) return;
+  
 
-        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(item.Categorie.Id);
-
-        Template titem = base.handlerService.skinService.templateHandlers.GetTemplateByID(cif.ResourceTemplate.Id,false);
-        cif = null;
 
         TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-        tcgth.Template = titem.Content.Replace("_$Id$_", resourceid);
+        tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid);
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
-        titem = null;
+
         if (tcgth.Replace(base.conn, base.configService.baseConfig))
         {
-            base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", resourceid);
+            //待续
+            //base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", resourceid);
         }
 
         string text1 = "";

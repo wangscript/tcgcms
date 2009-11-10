@@ -148,7 +148,7 @@ public partial class Template_templatelist : adminMain
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.skinService.templateHandlers.DelTemplate(base.conn, base.adminInfo.vcAdminName, temps);
+            rtn = base.handlerService.skinService.templateHandlers.DelTemplate(temps);
         }
         catch (Exception ex)
         {
@@ -170,7 +170,7 @@ public partial class Template_templatelist : adminMain
             return;
         }
 
-        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID( iTemplate,false);
+        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(iTemplate);
 
         if (tlif == null)
         {

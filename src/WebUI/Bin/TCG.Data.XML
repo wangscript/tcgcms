@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.Data</name>
+    </assembly>
+    <members>
+        <member name="M:TCG.Data.Connection.Execute(System.String,System.Data.SqlClient.SqlParameter[],System.Int32[])">
+            <summary>
+            执行带返回参数的过程
+            </summary>
+            <param name="procName"></param>
+            <param name="parameters"></param>
+            <param name="parInt"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.tableName">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.arrShowField">
+            <summary>
+            需要返回显示的字段集
+            </summary>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.strCondition">
+            <summary>
+            查询条件字段集
+            </summary>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.arrSortField">
+            <summary>
+            排序字段集
+            </summary>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.pageSize">
+            <summary>
+            每页显示的记录个数
+            </summary>
+        </member>
+        <member name="P:TCG.Data.PageSearchItem.page">
+            <summary>
+            要显示的页面编号
+            </summary>
+        </member>
+        <member name="M:TCG.Data.DBHandlers.GetPage(TCG.Data.PageSearchItem,TCG.Data.Connection,System.Int32@,System.Int32@,System.Int32@,System.Data.DataSet@)">
+            <summary>
+            根据设定条件查找查询结果，并分页
+            </summary>
+            <param name="errText">错误信息</param>
+            <param name="tableName">表名</param>
+            <param name="arrShowField">需要返回显示的字段集</param>
+            <param name="strConditionField">查询条件字段集(为满足in的查询，有hashtable改称string)</param>
+            <param name="arrSortField">排序字段集</param>
+            <param name="pageSize">每页显示的记录个数</param>
+            <param name="page">要显示的页面编号</param>
+            <param name="ads_out_Data">返回的结果数据集</param>
+            <returns>成功返回1 失败小于0</returns>
+        </member>
+    </members>
+</doc>
