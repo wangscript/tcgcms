@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -14,6 +15,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
 using TCG.Handlers;
+using TCG.Entity;
 
 public partial class Skin_skins : adminMain
 {
@@ -21,19 +23,37 @@ public partial class Skin_skins : adminMain
     {
         if (!Page.IsPostBack)
         {
-            base.Finish();
+            Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
+            if (skins != null && skins.Count != 0)
+            {
+                this.ItemRepeater.DataSource = skins.Values;
+                this.ItemRepeater.DataBind();
+            }
         }
     }
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        Skin skininfo = (Skin)e.Item.DataItem;
         Anchor sitename = (Anchor)e.Item.FindControl("sitename");
         Span info = (Span)e.Item.FindControl("info");
+        Img pic = (Img)e.Item.FindControl("pic");
+        HtmlGenericControl IsDefault = (HtmlGenericControl)e.Item.FindControl("IsDefault");
+        Span sid = (Span)e.Item.FindControl("sid");
 
-        info.Text = Row["vcName"].ToString();
-        sitename.Text = Row["vcClassName"].ToString();
-        sitename.Href = "newlist.aspx?iSiteId=" + Row["iId"].ToString();
+        info.Text = skininfo.Info;
+        sitename.Text = skininfo.Name;
+        pic.Src = skininfo.Pic;
+        sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;
+        if (skininfo.Id == base.configService.DefaultSkinId)
+        {
+            IsDefault.Visible = true;
+        }
+        else
+        {
+            IsDefault.Visible = false;
+        }
+        sid.Text = skininfo.Id;
     }
 }
 
