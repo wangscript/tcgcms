@@ -7,14 +7,31 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/template.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/commonV2.js"></script>
-	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
-	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <script type="text/javascript">
     function SetDefaultSkin(skinid) {
-        alert(2);
+        $("#Work").val("SetDefalutSkinId");
+        $("#SkinId").val(skinid);
+
+        //添加提交方法
+        var options = {
+            beforeSubmit: FromPost,
+            dataType: 'json',
+            success: LoginCkBack
+        };
+        $("#form1").ajaxForm(options).submit(); 
+    }
+
+    function LoginCkBack(data) {
+        refinsh();
+    }
+    
+    function FromPost() {
+        return true;
     }
 </script>
 <body>
@@ -32,6 +49,8 @@
 	</div>
 	</ItemTemplate>
 	</asp:Repeater>
+	<input type="hidden" id="Work" name="Work" value="SetDefalutSkinId" />
+	<input type="hidden" id="SkinId" name="SkinId" value="" />
 	<div class="Page_arrb arb_pr">
 		<span class="green bold">小提示：</span>
 		<span class="info1">各站点内的单篇文章管理，在模板里面！</span>

@@ -257,8 +257,8 @@ function SetPopValue(objname,obj){
 	o.value = GetMSelectValue(obj);
 }
 
-function refinsh(){
-	window.location.reload();
+function refinsh() {
+    window.location.reload();
 }
 
 function getAbsolutePositionXY(obj){

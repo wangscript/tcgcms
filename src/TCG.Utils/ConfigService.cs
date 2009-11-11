@@ -363,22 +363,30 @@ namespace TCG.Utils
             return mylist;
         }
 
+        /// <summary>
+        /// 更新配置文件
+        /// </summary>
+        public void UpdateConfig()
+        {
+
+        }
+
         private Dictionary<string, List<Option>> _manageoutpages = null;
 
         private Dictionary<string, string> _baseconfig = null;
-        private string m_BaseConfigFilePath = "~/config/baseConfig.Config";                         //系统基本配置
+        public string m_BaseConfigFilePath = "~/config/baseConfig.Config";                         //系统基本配置
 
         private List<DataBaseConnStr> _filedatabaseconfig = null;
-        private string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";               //文件数据库配置
+        public string m_FileDataBaseConfigFilePath = "~/config/fileDataBase.Config";               //文件数据库配置
 
         private Dictionary<string, Option> _templatetypes = null;
-        private string m_skinConfig = "~/config/skinConfig.Config";                     //皮肤配置
+        public string m_skinConfig = "~/config/skinConfig.Config";                     //皮肤配置
         private string _skindatabasestr = null;                                         //皮肤数据库连接
 
-        private string m_ManageConfigPath = "~/config/manageConfig.Config";                    //管理特殊页面的配置
+        public string m_ManageConfigPath = "~/config/manageConfig.Config";                    //管理特殊页面的配置
         private string _managedatabasestr = null;                                 //管理员数据库连接
 
         private Dictionary<string,DataBaseConnStr> _resourcedatabaseconfig = null;
-        private string m_ResourceDataBaseConfigFilePath = "~/config/resourceDataBase.Config";               //资源数据库配置
+        public string m_ResourceDataBaseConfigFilePath = "~/config/resourceDataBase.Config";               //资源数据库配置
     }
 }

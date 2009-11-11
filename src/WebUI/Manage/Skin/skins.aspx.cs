@@ -30,6 +30,21 @@ public partial class Skin_skins : adminMain
                 this.ItemRepeater.DataBind();
             }
         }
+        else
+        {
+            string work = objectHandlers.Post("work");
+            switch (work)
+            {
+                case "SetDefalutSkinId":
+                    this.SetDefalutSkinId();
+                    break;
+            }
+        }
+    }
+
+    private void SetDefalutSkinId()
+    {
+        string SkinId = objectHandlers.Post("SkinId");
     }
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
