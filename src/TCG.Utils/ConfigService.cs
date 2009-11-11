@@ -72,6 +72,37 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// 网站启用皮肤的ID
+        /// </summary>
+        public string DefaultSkinId
+        {
+            get
+            {
+                if (this._defaultskinid == null)
+                {
+                    this.DefalutSkinIdInit();
+                }
+                return this._defaultskinid;
+            }
+        }
+
+
+        private void DefalutSkinIdInit()
+        {
+            //获得所有需要登陆的特殊页面
+            XmlNodeList skindatabase = this.GetXmlNotListByTagNameAndFilePath(m_skinConfig, "DefaultSkinId");
+            if (skindatabase != null)
+            {
+                foreach (XmlElement element in skindatabase)
+                {
+                    this._defaultskinid = element.SelectSingleNode("Value").InnerText;
+                }
+            }
+        }
+
+        private string _defaultskinid = null;
+
+        /// <summary>
         /// 皮肤数据库连接字符串
         /// </summary>
         public string SkinDataBaseStr

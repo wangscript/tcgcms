@@ -29,8 +29,13 @@ namespace TCG.Entity
         /// 缩略图
         /// </summary>
         public string Pic { get { return this._pic; } set { this._pic = value; } }
+        /// <summary>
+        /// 皮肤说明
+        /// </summary>
+        public string Info { get { return this._info; } set { this._info = value; } }
 
         private string _name = string.Empty;
         private string _pic = string.Empty;
+        private string _info = string.Empty;
     }
 }

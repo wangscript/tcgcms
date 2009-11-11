@@ -18,13 +18,34 @@ using System.Text;
 
 namespace TCG.Entity
 {
+    /// <summary>
+    /// 资源特性的实体
+    /// </summary>
     public class Speciality
     {
+        /// <summary>
+        /// 特性编号
+        /// </summary>
         public int iId { get { return this._iid; } set { this._iid = value; } }
+        /// <summary>
+        /// 皮肤ID
+        /// </summary>
         public int iSiteId { get { return this._isiteid; } set { this._isiteid = value; } }
+        /// <summary>
+        /// 父亲的编号
+        /// </summary>
         public int iParent { get { return this._iparent; } set { this._iparent = value; } }
+        /// <summary>
+        /// 更新的时间
+        /// </summary>
         public DateTime dUpDateDate { get { return this._dupdatedate; } set { this._dupdatedate = value; } }
+        /// <summary>
+        /// 特性标题
+        /// </summary>
         public string vcTitle { get { return this._vctitle; } set { this._vctitle = value; } }
+        /// <summary>
+        /// 特性说明
+        /// </summary>
         public string vcExplain { get { return this._vcexplain; } set { this._vcexplain = value; } }
 
         private int _iid;

@@ -7,18 +7,28 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/template.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/commonV2.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
+<script type="text/javascript">
+    function SetDefaultSkin(skinid) {
+        alert(2);
+    }
+</script>
 <body>
     <form id="form1" runat="server">
-	<div class="Page_title">资讯模版管理<span class="info1">(资讯模版管理里导航页面)</span></div>
-	
+	<div class="Page_title">站点皮肤管理<span class="info1">(设置,修改站点皮肤的导航页)</span></div>
+
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
     <div class="TempItem" onmouseover="this.className='TempItem tempitembg';" onmouseout="this.className='TempItem';">
-		<img src="../images/icon/1.gif" />
+		<TCG:Img ID="pic" src="../images/icon/1.gif" runat='server' />
 		<TCG:Anchor id='sitename' runat='server' />
 		<TCG:Span id='info' class="info2" runat='server' />
+		<span class="info2"><a>导出</a><a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a><a>删除</a></span>
+		<div class="used" id="IsDefault" runat='server'><img src="../images/icon/used_skin.png" /></div>
 	</div>
 	</ItemTemplate>
 	</asp:Repeater>

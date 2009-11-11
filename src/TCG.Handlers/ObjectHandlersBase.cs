@@ -220,7 +220,8 @@ namespace TCG.Handlers
                     Skin skin = new Skin();
                     skin.Id = row["Id"].ToString();
                     skin.Name = row["Name"].ToString();
-                    skin.Pic = row["Pic"].ToString();           
+                    skin.Pic = row["Pic"].ToString();
+                    skin.Info = row["info"].ToString();
                     return (EntityBase)skin;
             }
             return null;

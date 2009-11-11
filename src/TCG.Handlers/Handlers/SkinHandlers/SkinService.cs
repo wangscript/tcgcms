@@ -26,6 +26,9 @@ using TCG.Utils;
 
 namespace TCG.Handlers
 {
+    /// <summary>
+    /// 提供皮肤操作的一系列方法，模板操作，分类操作，特性操作，皮肤分类操作等
+    /// </summary>
     public class SkinService : ObjectHandlersBase
     {
         /// <summary>
@@ -36,7 +39,9 @@ namespace TCG.Handlers
 
         }
 
-
+        /// <summary>
+        /// 提供系统的分类操作
+        /// </summary>
         public CategoriesHandlers categoriesHandlers
         {
             get
@@ -53,7 +58,9 @@ namespace TCG.Handlers
         }
         private CategoriesHandlers _categorieshandlers = null;
 
-
+        /// <summary>
+        /// 提供系统资源特性的操作
+        /// </summary>
         public SpecialityHandlers specialityHandlers
         {
             get
@@ -70,7 +77,9 @@ namespace TCG.Handlers
         }
         private SpecialityHandlers _specialityhandlers = null;
 
-
+        /// <summary>
+        /// 提供皮肤的操作
+        /// </summary>
         public TemplateHandlers templateHandlers
         {
             get
@@ -86,6 +95,26 @@ namespace TCG.Handlers
             }
         }
         private TemplateHandlers _templateHandlers = null;
+
+        /// <summary>
+        /// 提供皮肤类别的操作
+        /// </summary>
+        public SkinHandlers skinHandlers
+        {
+            get
+            {
+                if (this._skinhandlers == null)
+                {
+                    this._skinhandlers = new SkinHandlers();
+                    this._skinhandlers.configService = base.configService;
+                    this._skinhandlers.conn = base.conn;
+                    this._skinhandlers.handlerService = base.handlerService;
+                }
+                return this._skinhandlers;
+            }
+        }
+        private SkinHandlers _skinhandlers = null;
+
 
     }
 }
