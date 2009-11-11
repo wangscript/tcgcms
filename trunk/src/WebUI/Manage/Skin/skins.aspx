@@ -27,7 +27,11 @@
     }
 
     function LoginCkBack(data) {
-        refinsh();
+        if (data.state) {
+            refinsh();
+        } else {
+            
+        }
     }
     
     function FromPost() {

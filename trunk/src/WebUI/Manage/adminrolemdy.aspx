@@ -8,11 +8,12 @@
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="js/commonV2.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/adminroleadd.js"></script>
-	<script type="text/javascript" src="Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="jsMethod/AllPop.aspx"></script>
 </head>
 <body>
@@ -33,7 +34,7 @@
 			<select size="12" multiple="true" id="vcPopedom" runat="server" class="popselect" onchange="SetPopValue('popedom',this);">
 			</select>
 			<input type="hidden" id="popedom" name="popedom" runat="server" />
-			<script type="text/javascript">PopSelectInit();</script>
+			<script type="text/javascript">//PopSelectInit();</script>
 		</span>
 		<span class="p_a_t lfl popml"><p class="green bold">可分配的文章分类权限</p>
 			<select size="12" multiple="true" id="vcClassPopedom" runat="server" class="popselect" onchange="SetPopValue('classpopedom',this);">

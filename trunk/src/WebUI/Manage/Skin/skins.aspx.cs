@@ -45,6 +45,17 @@ public partial class Skin_skins : adminMain
     private void SetDefalutSkinId()
     {
         string SkinId = objectHandlers.Post("SkinId");
+        try
+        {
+            base.configService.UpdateConfig(base.configService.m_skinConfig, "DefaultSkinId", "Value", SkinId);
+        }
+        catch {
+            base.AjaxErch("{state:false}");
+            return;
+        }
+
+        base.AjaxErch("{state:true}");
+        return;
     }
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)

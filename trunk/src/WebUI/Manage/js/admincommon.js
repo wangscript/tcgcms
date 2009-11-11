@@ -4,9 +4,9 @@ var Pico = "└ ";
 var level =0;
 function PopSelectInit(){
 	if(PopLis.length==0)return;
-	var vcPopedom = $("vcPopedom");
-	if(vcPopedom==null)return;
-	var popedom = $("popedom"); 
+	var vcPopedom = $("#vcPopedom");
+	if(vcPopedom.length==0)return;
+	var popedom = $("#popedom"); 
 	var r=110,g=187,b=88;
 	var oOption = document.createElement("OPTION");
 	oOption.text = "不选择任何权限...";
@@ -46,6 +46,7 @@ function GerPsrt(num){
 	}
 	return str;
 }
+
 function NewsSelectInit(){
 	if(NewsLis.length==0)return;
 	var vcClassPopedom = $("vcClassPopedom");
