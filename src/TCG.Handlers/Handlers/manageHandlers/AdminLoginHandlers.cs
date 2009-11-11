@@ -32,7 +32,13 @@ namespace TCG.Handlers
     /// </summary>
     public class AdminLoginHandlers : ManageHandlerBase
     {
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="conn">数据库连接</param>
+        /// <param name="configservice">基本配置信息</param>
+        /// <param name="handlersevice">所有操作方法句柄</param>
+        /// <param name="adminhandlers">管理员操作方法</param>
         public AdminLoginHandlers(Connection conn, ConfigService configservice,HandlerService handlersevice, AdminHandlers adminhandlers)
         {
             base.conn = conn;
@@ -131,6 +137,11 @@ namespace TCG.Handlers
             }
         }
 
+        /// <summary>
+        /// 检测管理员访问权限
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public bool CheckAdminPop(string page)
         {
             if (!IsSpage(page)) return true;
@@ -178,12 +189,15 @@ namespace TCG.Handlers
             ///循环URL权限，包含的返回正确
             for (int i = 0; i < this._admin.PopedomUrls.Rows.Count; i++)
             {
-                if (text.IndexOf(this._admin.PopedomUrls.Rows[i]["vcUrl"].ToString()) > -1)
+                string text2 = this._admin.PopedomUrls.Rows[i]["vcUrl"].ToString().ToLower();
+                if (!string.IsNullOrEmpty(text2))
                 {
-                    return true;
+                    if (text.IndexOf(text2) > -1)
+                    {
+                        return true;
+                    }
                 }
             }
-          
             
             return false;
         }

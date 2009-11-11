@@ -132,6 +132,11 @@ namespace TCG.Utils
         public static string CACHING_ALL_SKIN_ENTITY = "CACHING_ALL_SKIN_ENTITY";
 
         /// <summary>
+        /// 所有权限项实体
+        /// </summary>
+        public static string CACHING_ALL_POPDOM = "CACHING_ALL_POPDOM";
+
+        /// <summary>
         /// 系统缓存集合
         /// </summary>
         public static Dictionary<string, string> SystemCachings
@@ -147,6 +152,7 @@ namespace TCG.Utils
                     _systemcachings.Add("所有的资源分类信息", CACHING_ALL_CATEGORIES);
                     _systemcachings.Add("所有的资源分类信息实体", CACHING_ALL_CATEGORIES_ENTITY);
                     _systemcachings.Add("所有模板实体", CACHING_All_TEMPLATES_ENTITY);
+                    _systemcachings.Add("CACHING_ALL_POPDOM", CACHING_ALL_POPDOM);
                 }
                 return _systemcachings;
             }

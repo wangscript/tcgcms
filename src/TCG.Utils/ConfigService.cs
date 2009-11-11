@@ -366,9 +366,33 @@ namespace TCG.Utils
         /// <summary>
         /// 更新配置文件
         /// </summary>
-        public void UpdateConfig()
+        /// <param name="filepath"></param>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public void UpdateConfig(string filepath, string element,string nodename,string nodevalue)
         {
 
+            try
+            {
+                XmlDocument document1 = new XmlDocument();
+                string _filepath = string.Empty;
+                if (this.HttpContext != null)
+                {
+                    _filepath = this.HttpContext.Server.MapPath(filepath);
+                }
+                else
+                {
+                    _filepath = HttpContext.Current.Server.MapPath(filepath); 
+                }
+                document1.Load(_filepath);
+                document1.GetElementsByTagName(element)[0].SelectSingleNode(nodename).InnerText = nodevalue;
+                document1.Save(_filepath);
+
+            }
+            catch
+            {
+
+            }
         }
 
         private Dictionary<string, List<Option>> _manageoutpages = null;

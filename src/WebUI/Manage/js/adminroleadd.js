@@ -1,5 +1,4 @@
 //--------------
-var ajax = new AJAXRequest();
 
 function CheckForm(){
 	if(CheckRoleName()){
