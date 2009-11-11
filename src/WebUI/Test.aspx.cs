@@ -23,8 +23,8 @@ public partial class Test : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
-        Response.Write(res.vcTitle);
+        //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
+        Response.Write(Guid.NewGuid().ToString());
     }
 
     private void ReadExl()

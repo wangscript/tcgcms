@@ -15,14 +15,12 @@ using TCG.Pages;
 
 using TCG.Handlers;
 
-public partial class Template_NewsInfo : adminMain
+public partial class Skin_skins : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-           
-           
             base.Finish();
         }
     }
