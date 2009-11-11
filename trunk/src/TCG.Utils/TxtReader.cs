@@ -18,8 +18,16 @@ namespace TCG.Utils
     using System.IO;
     using System.Text;
 
+    /// <summary>
+    /// 文件的操作方法
+    /// </summary>
     public class TxtReader
     {
+        /// <summary>
+        /// 判断页面是否存在
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string Read(string file)
         {
             string text1 = objectHandlers.MapPath(file);
@@ -34,7 +42,12 @@ namespace TCG.Utils
             }
         }
 
-        //得到连接或图片中的文件的网页地址
+        /// <summary>
+        /// 得到连接或图片中的文件的网页地址
+        /// </summary>
+        /// <param name="page">页面地址</param>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         public static string GetFileWebPath(string page, string filepath)
         {
             if (filepath.Substring(0, 1) == "/")
@@ -76,6 +89,12 @@ namespace TCG.Utils
             return "";
         }
 
+        /// <summary>
+        /// 获取远程页面的HTML代码！
+        /// </summary>
+        /// <param name="ls_Url"></param>
+        /// <param name="charset"></param>
+        /// <returns></returns>
         public static string GetRequestText(string ls_Url, string charset)
         {
             MSXML2.XMLHTTP lcom_xmlhttp = new MSXML2.XMLHTTP();
@@ -88,7 +107,14 @@ namespace TCG.Utils
             return System.Text.Encoding.GetEncoding(charset).GetString(lb_res).Trim();
         }
 
-        public static string GetRequestTextByPost(string ls_Url,string sData, string charset)
+        /// <summary>
+        /// 获取远程HTML代码
+        /// </summary>
+        /// <param name="ls_Url"></param>
+        /// <param name="sData"></param>
+        /// <param name="charset"></param>
+        /// <returns></returns>
+        public static string GetRequestTextByPost(string ls_Url, string sData, string charset)
         {
             MSXML2.XMLHTTP lcom_xmlhttp = new MSXML2.XMLHTTP();
             lcom_xmlhttp.open("GET", ls_Url, false, null, null);
@@ -98,7 +124,7 @@ namespace TCG.Utils
             Byte[] lb_res = (Byte[])lcom_xmlhttp.responseBody;
 
             return System.Text.Encoding.GetEncoding(charset).GetString(lb_res).Trim();
-        } 
+        }
 
     }
 }
