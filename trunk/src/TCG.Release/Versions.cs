@@ -24,10 +24,19 @@ using TCG.Data;
 
 namespace TCG.Release
 {
+    /// <summary>
+    /// TCG CMS 系统版本控制
+    /// </summary>
     public class Versions
     {
-        public static int Ver = 103;                         //系统版本号
-        public static string SystemName = "TCG CMS"; //系统名称
+        /// <summary>
+        /// 系统版本号
+        /// </summary>
+        public static int Ver = 129;
+        /// <summary>
+        /// 系统名称
+        /// </summary>      
+        public static string SystemName = "TCG CMS";
 
         /// <summary>
         /// 获得版本好的文字内容
@@ -54,7 +63,6 @@ namespace TCG.Release
             v2 = ver / 100;
             v3 = ver / 10;
             v4 = ver / 1;
-
 
             return Math.Floor(v1).ToString() + "." + Math.Floor(v2).ToString() + "."
                 + Math.Floor(v3).ToString() + "." + Math.Floor(v4).ToString();
@@ -142,6 +150,13 @@ namespace TCG.Release
             }
         }
 
+        /// <summary>
+        /// 执行SQL更新语句
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="num"></param>
+        /// <param name="SqlText"></param>
+        /// <returns></returns>
         public static bool RunSqlSep(Connection conn, int num,ref string SqlText)
         {
             string sqltxtPath = WebSite + "/update/" + GetVerStr(HigherVersion.Ver) + "/sql/" + num.ToString() + ".sql";
