@@ -22,6 +22,9 @@ public partial class View : FilesMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             long iId = objectHandlers.ToLong(objectHandlers.Get("fileId"));
             this.ImageShow.Src = "attach.aspx?attach=" + iId.ToString() ;
         }

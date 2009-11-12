@@ -26,6 +26,9 @@ public partial class files_ConentImgCheck : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             string content = objectHandlers.Post("iContent$content");
 
             Response.Write(base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(content, base.adminInfo.vcAdminName,

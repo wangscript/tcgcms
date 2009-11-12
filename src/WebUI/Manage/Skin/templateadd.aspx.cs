@@ -23,6 +23,9 @@ public partial class Template_templateadd : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
             int Parentid = objectHandlers.ToInt(objectHandlers.Get("iParentid"));
             int iSytemType = objectHandlers.ToInt(objectHandlers.Get("SytemType"));

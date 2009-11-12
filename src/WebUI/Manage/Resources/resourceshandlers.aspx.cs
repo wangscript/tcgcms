@@ -31,6 +31,9 @@ public partial class resources_resourceshandlers : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             string newsid = objectHandlers.Get("newsid");
             string categorieid = objectHandlers.Get("iClassId");
 

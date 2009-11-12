@@ -23,6 +23,9 @@ public partial class Skin_skins : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
             if (skins != null && skins.Count != 0)
             {

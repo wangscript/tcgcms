@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\Admin.cs" />
+    <Compile Include="Admin\AdminRole.cs" />
     <Compile Include="Admin\Popedom.cs" />
     <Compile Include="CheckGetEnum.cs" />
     <Compile Include="ConfigItem.cs" />

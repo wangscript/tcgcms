@@ -30,17 +30,6 @@ namespace TCG.Pages
            
         }
 
-        protected override void OnInit(EventArgs e)
-        {
-            base.Load += new EventHandler(this.CheckPop);
-            base.OnInit(e);
-        }
-
-        private void CheckPop(object sender, EventArgs e)
-        {
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminPop();
-        }
-
         protected void Finish()
         {
             //if ((base.conn != null) && base.conn.Connected) { base.conn.Close(); }

@@ -39,11 +39,11 @@ namespace TCG.Entity
         /// <summary>
         /// 管理员分组
         /// </summary>
-        public int iRole { set { this._irole = value; } get { return this._irole; } }
+        public AdminRole iRole { set { this._irole = value; } get { return this._irole; } }
         /// <summary>
         /// 管理员特定权限
         /// </summary>
-        public string vcPopedom { set { this._vcpopedom = value; } get { return this._vcpopedom; } }
+        public Dictionary<int, Popedom> vcPopedom { set { this._vcpopedom = value; } get { return this._vcpopedom; } }
         /// <summary>
         /// 管理员分类权限
         /// </summary>
@@ -80,14 +80,15 @@ namespace TCG.Entity
         /// 是否在线
         /// </summary>
         public string cIsOnline { set { this._cisonline = value; } get { return this._cisonline; } }
+        
         /// <summary>
-        /// 权限的记录集
+        /// 是否被删除
         /// </summary>
-        public DataTable PopedomUrls { set { this._popedomurls = value; } get { return this._popedomurls; } }
+        public string cIsDel { set { this._isdel = value; } get { return this._isdel; } }
         /// <summary>
-        /// 权限分组名
+        /// 权限ID字符串
         /// </summary>
-        public string vcRoleName { set { this._rolename = value; } get { return this._rolename; } }
+        public string PopedomStr { get { return this._popedomstr; } set { this._popedomstr = value; } }
 
         private string _cisonline = "";
         private string _vclastloginip = "";
@@ -98,12 +99,13 @@ namespace TCG.Entity
         private DateTime _dadddate;
         private string _clock = "Y";
         private string _vcclasspopedom = "";
-        private string _vcpopedom = "";
-        private int _irole = 0;
+        private Dictionary<int, Popedom> _vcpopedom = null;
+
+        private AdminRole _irole = null;
         private string _vcpassword = "";
         private string _vcnickname = "";
         private string _vcadminname = "";
-        private DataTable _popedomurls = null;
-        private string _rolename = "";
+        private string _isdel = "N";
+        private string _popedomstr;
     }
 }

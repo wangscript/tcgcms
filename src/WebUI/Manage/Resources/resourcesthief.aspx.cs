@@ -27,6 +27,9 @@ public partial class resources_resourcesthief : adminMain
     {
         if (Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             string vwork = objectHandlers.Post("work");
             switch (vwork)
             {

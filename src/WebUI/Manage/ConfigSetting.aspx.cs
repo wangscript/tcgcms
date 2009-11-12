@@ -25,6 +25,9 @@ public partial class ConfigSetting : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.GetData();
         }
         else

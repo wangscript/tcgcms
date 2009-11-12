@@ -14,10 +14,11 @@
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/adminroleadd.js"></script>
 	<script type="text/javascript" src="Common/AllCategories.aspx"></script>
-	<script type="text/javascript" src="jsMethod/AllPop.aspx"></script>
+	<script type="text/javascript" src="Common/AllPop.aspx"></script>
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <input type="hidden" id="DefaultSkinId" name="DefaultSkinId" runat="server" />
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		编辑角色组<a href="javascript:fGoBack();" class="title_back bold">[返回]</a>
@@ -34,7 +35,7 @@
 			<select size="12" multiple="true" id="vcPopedom" runat="server" class="popselect" onchange="SetPopValue('popedom',this);">
 			</select>
 			<input type="hidden" id="popedom" name="popedom" runat="server" />
-			<script type="text/javascript">//PopSelectInit();</script>
+			<script type="text/javascript">PopSelectInit();</script>
 		</span>
 		<span class="p_a_t lfl popml"><p class="green bold">可分配的文章分类权限</p>
 			<select size="12" multiple="true" id="vcClassPopedom" runat="server" class="popselect" onchange="SetPopValue('classpopedom',this);">
@@ -48,6 +49,7 @@
 		<span class="info1">按住SHIFT键可以多选</span>
 	</div>
 	<div class="dobtn arb_pr">
+	    
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />
 	</div>
     </form>

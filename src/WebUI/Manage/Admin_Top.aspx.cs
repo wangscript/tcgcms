@@ -20,6 +20,9 @@ public partial class Admin_Top : adminMain
     {
         if (Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             string admins = objectHandlers.Post("admins");
             
             if (string.IsNullOrEmpty(admins))

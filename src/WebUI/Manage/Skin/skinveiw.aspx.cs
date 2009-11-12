@@ -15,6 +15,10 @@ public partial class Manage_Skin_skinveiw : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!Page.IsPostBack)
+        {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+        }
     }
 }

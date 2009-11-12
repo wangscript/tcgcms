@@ -19,6 +19,9 @@ public partial class Main : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.title.Text = base.configService.baseConfig["WebTitle"];
         }
     }

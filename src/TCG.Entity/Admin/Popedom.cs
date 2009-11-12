@@ -21,9 +21,24 @@ namespace TCG.Entity
         /// 权限名称
         /// </summary>
         public string vcPopName { get { return this._vcpopname; } set { this._vcpopname = value; } }
+        /// <summary>
+        /// 连接地址
+        /// </summary>
+        public string vcUrl { get { return this._vcurl; } set { this._vcurl = value; } }
+        /// <summary>
+        /// 父级ID
+        /// </summary>
+        public int iParentId { get { return this._iParentId; } set { this._iParentId = value; } }
+        /// <summary>
+        /// 是否为后台链接项
+        /// </summary>
+        public string cValid { get { return this._cValid; } set { this._cValid = value; } }
 
         private int _iid;
         private DateTime _daddtime = DateTime.Now;
         private string _vcpopname;
+        private string _vcurl;
+        private int _iParentId;
+        private string _cValid;
     }
 }

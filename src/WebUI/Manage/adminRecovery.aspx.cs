@@ -20,6 +20,9 @@ public partial class adminRecovery : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             DataSet ds = new DataSet();
             string strRolename = string.Empty;
             int admincount = 0;
