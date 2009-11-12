@@ -1,9 +1,10 @@
 var Pstr = "";
 var Plever = 0;
 var Pico = "└ ";
-var level =0;
+var level = 0;
+
 function PopSelectInit(){
-	if(PopLis.length==0)return;
+    if (_Popedom.length == 0) return;
 	var vcPopedom = $("#vcPopedom");
 	if(vcPopedom.length==0)return;
 	var popedom = $("#popedom"); 
@@ -12,31 +13,36 @@ function PopSelectInit(){
 	oOption.text = "不选择任何权限...";
 	oOption.value = 0;
 	oOption.style.cssText="background-color:"+GetColor(r,g,b)+";"
-	vcPopedom.options.add(oOption);
+	vcPopedom[0].options.add(oOption);
 	oOption=null;
-	PopLisFind(0,vcPopedom,PopLis,popedom.value,0,110,180,50);
+	PopLisFind(0, vcPopedom, _Popedom, popedom.val(), 0, 110, 180, 50);
 }
 
-function PopLisFind(iParentId,obj,Lis,sList,level,r,g,b){
-	var olevel=1;
-	var lastParentId=-1;
-	for(var i =0;i<Lis.length;i++){
-		if(Lis[i][1]==iParentId){
-			if(lastParentId!=iParentId){
-				level++;lastParentId=iParentId;
-				r+=12;g+=12;b+=12;
-			}
-			var oOption = document.createElement("OPTION");
-			oOption.text = GerPsrt(level) + ((level!=1)?Pico:"") + Lis[i][2];
-			oOption.value = Lis[i][0];
-			if(IntInList(Lis[i][0],sList,","))oOption.selected=true;
-			oOption.style.cssText="background-color:"+GetColor(r,g,b)+";"
-			obj.options.add(oOption);
-			oOption=null;
-			PopLisFind(Lis[i][0],obj,Lis,sList,level,r,g,b);
-		}
-	}
-	
+function PopLisFind(iParentId, obj, Lis, sList, level, r, g, b) {
+    var olevel = 1;
+    var lastParentId = -1;
+
+    for (var i = 0; i < Lis.length; i++) {
+    
+        if (Lis[i].ParentId == iParentId) {
+            
+            if (lastParentId != iParentId) {
+                level++; lastParentId = iParentId;
+                r += 12; g += 12; b += 12;
+            }
+            var oOption = document.createElement("OPTION");
+        
+            oOption.text = GerPsrt(level) + ((level != 1) ? Pico : "") + Lis[i].Name;
+
+            oOption.value = Lis[i].Id;
+            if (IntInList(Lis[i].ParentId, sList, ",")) oOption.selected = true;
+            oOption.style.cssText = "background-color:" + GetColor(r, g, b) + ";"
+            obj[0].options.add(oOption);
+            oOption = null;
+            PopLisFind(Lis[i].Id, obj, Lis, sList, level, r, g, b);
+        }
+    }
+
 }
 
 function GerPsrt(num){
@@ -48,18 +54,19 @@ function GerPsrt(num){
 }
 
 function NewsSelectInit(){
-	if(NewsLis.length==0)return;
-	var vcClassPopedom = $("vcClassPopedom");
-	if(vcClassPopedom==null)return;
-	var classpopedom = $("classpopedom"); 
+    if (_Categories.length == 0) return;
+	var vcClassPopedom = $("#vcClassPopedom");
+	if(vcClassPopedom.length==0)return;
+	var classpopedom = $("#classpopedom"); 
 	var r=110,g=187,b=88;
 	var oOption = document.createElement("OPTION");
 	oOption.text = "不选择任何权限...";
 	oOption.value = 0;
 	oOption.style.cssText="background-color:"+GetColor(r,g,b)+";"
-	vcClassPopedom.options.add(oOption);
-	oOption=null;
-	PopLisFind(0,vcClassPopedom,NewsLis,classpopedom.value,0,110,187,88);
+	vcClassPopedom[0].options.add(oOption);
+	oOption = null;
+	
+	PopLisFind($("#DefaultSkinId").val(), vcClassPopedom, _Categories, classpopedom.val(), 0, 110, 187, 88);
 }
 
 function CheckNewPassword(obj){

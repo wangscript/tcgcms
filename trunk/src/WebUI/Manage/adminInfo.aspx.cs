@@ -22,6 +22,9 @@ public partial class adminInfo : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Safety));
 
             if (iRoleId == 0)

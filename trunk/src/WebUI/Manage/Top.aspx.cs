@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -9,45 +10,49 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
+using System.Text;
+
 using TCG.Utils;
 using TCG.Pages;
+using TCG.Entity;
 
 public partial class Top : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            this.adminName.Text = base.adminInfo.vcNickName + "(" + base.adminInfo.vcRoleName + ")";
+            this.adminName.Text = base.adminInfo.vcNickName + "(" + base.adminInfo.iRole.vcRoleName + ")";
             this.EmuInit();
         }
     }
 
     private void EmuInit()
     {
-        DataTable dt = base.adminInfo.PopedomUrls;
-        if (dt == null) { base.Finish(); return; }
-        if (dt.Rows.Count == 0) { base.Finish(); dt.Dispose(); dt.Clear(); return; }
-        DataRow[] rows = dt.Select("iParentId=0 AND cValid='Y'");
-        if (rows.Length == 0) { base.Finish(); rows = null; dt.Dispose(); dt.Clear(); return; }
+        Dictionary<int, Popedom> managepop = base.handlerService.manageService.adminHandlers.GetChildManagePopedomEntity(0);
 
-        string str = "";
-        for (int i = 0; i < rows.Length; i++)
+        StringBuilder sb = new StringBuilder();
+        if (managepop != null)
         {
-            string text = "top_title1";
-            if (i == 0) text = "top_title";
-
-            string text2 = "";
-            if (i != (rows.Length - 1))
+            int i = 0;
+            foreach (KeyValuePair<int, Popedom> keyvalue in managepop)
             {
-                text2 = "<a id=\"mm_" + i.ToString() + "\" class=\"top_title_m ttmbg\"></a>\r\n";
+
+                string text = "top_title1";
+                if (i == 0) text = "top_title";
+                sb.Append("<a id=\"m_" + i.ToString() + "\" href=\"Menu.aspx?ParendId=" + keyvalue.Value.iID.ToString()
+                        + "\" target=\"menu\" onclick=\"SelEmu(" + i.ToString() + ")\" class=\""
+                        + text + " bold\">" + keyvalue.Value.vcPopName + "</a>\r\n");
+                i++;
+                if (i != managepop.Count) sb.Append("<a id=\"mm_" + i.ToString() + "\" class=\"top_title_m ttmbg\"></a>\r\n");
             }
-            str += "<a id=\"m_" + i.ToString() + "\" href=\"Menu.aspx?ParendId=" + rows[i]["iId"].ToString()
-                + "\" target=\"menu\" onclick=\"SelEmu(" + i.ToString() + ")\" class=\""
-                + text + " bold\">" + rows[i]["vcPopName"].ToString() + "</a>\r\n" + text2;
         }
-        str += "<script type=\"text/javascript\">var Mnum=" + rows.Length.ToString()+";var SelecM=0;</script>";
-        this.emu.Text = str;
-        base.Finish();
+        sb.Append("<script type=\"text/javascript\">var Mnum=" + managepop.Count.ToString() + ";var SelecM=0;</script>");
+
+        this.emu.Text = sb.ToString();
+
     }
 }

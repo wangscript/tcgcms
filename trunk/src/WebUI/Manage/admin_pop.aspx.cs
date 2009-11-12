@@ -22,6 +22,9 @@ public partial class admin_pop : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             DataSet ds = new DataSet();
             int admincount = 0;
             int delcount = 0;

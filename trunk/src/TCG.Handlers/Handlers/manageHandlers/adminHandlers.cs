@@ -91,14 +91,62 @@ namespace TCG.Handlers
         }
 
         /// <summary>
+        /// 获得所有管理组实体
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, AdminRole> GetAllAdminRoleEntity()
+        {
+            Dictionary<int, AdminRole> alladminrole = (Dictionary<int, AdminRole>)CachingService.Get(CachingService.CACHING_ALL_ADMINROLE_ENTITY);
+            if (alladminrole == null)
+            {
+                DataTable dt = GetALLAdminRole();
+                if (dt == null) return null;
+                if (dt.Rows.Count == 0) return null;
+                alladminrole = new Dictionary<int, AdminRole>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DataRow Row = dt.Rows[i];
+                    AdminRole role = new AdminRole();
+
+                    role.iID = (int)Row["iId"];
+                    role.vcRoleName = Row["vcRoleName"].ToString();
+                    role.vcContent = Row["vcContent"].ToString();
+                    role.vcPopedom =  this.GetPopedomsByIDs( Row["vcPopedom"].ToString());
+                    role.PopedomStr = Row["vcPopedom"].ToString();
+                    role.vcClassPopedom = Row["vcClassPopedom"].ToString();
+                    role.dUpdateDate = objectHandlers.ToTime(Row["dUpdateDate"].ToString());
+
+                    alladminrole.Add(role.iID, role);
+                }
+
+                CachingService.Set(CachingService.CACHING_ALL_ADMINROLE_ENTITY, alladminrole, null);
+            }
+            return alladminrole;
+        }
+
+        /// <summary>
+        /// 根据权限组ID获取权限组信息
+        /// </summary>
+        /// <param name="iRoleId"></param>
+        /// <returns></returns>
+        public AdminRole GetAdminRoleInfoByRoleId(int iRoleId)
+        {
+            Dictionary<int, AdminRole> allRole = this.GetAllAdminRoleEntity();
+            if (allRole == null) return null;
+            if (allRole.Count == 0) return null;
+            if (!allRole.ContainsKey(iRoleId)) return null;
+            return allRole[iRoleId];
+        }
+
+        /// <summary>
         /// 获得所有管理角色
         /// </summary>
         /// <returns></returns>
-        public DataSet GetALLAdminRole()
+        public DataTable GetALLAdminRole()
         {
             base.SetManageDataBaseConnection();
             string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM dbo.AdminRole (NOLOCK)";
-            return base.conn.GetDataSet(sql);
+            return base.conn.GetDataTable(sql);
         }
 
         /// <summary>
@@ -119,6 +167,9 @@ namespace TCG.Handlers
                 pop.iID = (int)Row["iId"];
                 pop.dAddtime = (DateTime)Row["dAddtime"];
                 pop.vcPopName = Row["vcPopName"].ToString();
+                pop.cValid = Row["cValid"].ToString();
+                pop.iParentId = (int)Row["iParentId"];
+                pop.vcUrl = Row["vcUrl"].ToString();
 
                 allpopedom.Add(pop.iID, pop);
             }
@@ -132,10 +183,13 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Admin GetAdminEntityByAdminName(string adminname)
         {
-            DataTable dt = this.GetAdminTableByAdminName(adminname);
-            if (dt == null) return null;
-            if (dt.Rows.Count == 0) return null;
-            return this.GetAdminEntityFromDataRow(dt.Rows[0]);  
+            Dictionary<string, Admin> allamdin=this.GetAllAdminEntity();
+            if (allamdin == null) return null;
+            if(allamdin.ContainsKey(adminname))
+            {
+                return allamdin[adminname];
+            }
+            return null;
         }
 
         /// <summary>
@@ -150,11 +204,36 @@ namespace TCG.Handlers
             admininfo.vcAdminName = Row["vcAdminName"].ToString();
             admininfo.vcNickName = Row["vcNickName"].ToString();
             admininfo.vcPassword = Row["vcPassword"].ToString();
-            admininfo.iRole = (int)Row["iRole"];
-            admininfo.vcPopedom = Row["vcPopedom"].ToString();
+            admininfo.iRole = this.GetAdminRoleInfoByRoleId((int)Row["iRole"]);
+            admininfo.vcPopedom = this.GetAdminPopedomsByID(admininfo.iRole, Row["vcPopedom"].ToString());
+            admininfo.PopedomStr = Row["vcPopedom"].ToString();
             admininfo.cLock = Row["clock"].ToString();
             admininfo.vcClassPopedom = Row["vcClassPopedom"].ToString();
+            admininfo.cIsDel = Row["cIsDel"].ToString();
             return admininfo;
+        }
+
+        /// <summary>
+        /// 获得所有管理员实体
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, Admin> GetAllAdminEntity()
+        {
+            Dictionary<string, Admin> alladmin = (Dictionary<string, Admin>)CachingService.Get(CachingService.CACHING_ALL_ADMIN_ENTITY);
+            if (alladmin == null)
+            {
+                DataTable dt = this.GetAllAdmin();
+                if (dt == null) return null;
+                if (dt.Rows.Count == 0) return null;
+                alladmin = new Dictionary<string, Admin>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Admin admin = this.GetAdminEntityFromDataRow(dt.Rows[i]);
+                    alladmin.Add(admin.vcAdminName, admin);
+                }
+                CachingService.Set(CachingService.CACHING_ALL_ADMIN_ENTITY, alladmin, null);
+            }
+            return alladmin;
         }
 
         /// <summary>
@@ -162,11 +241,10 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public DataTable GetAdminTableByAdminName(string adminname)
+        public DataTable GetAllAdmin()
         {
             base.SetManageDataBaseConnection();
-            if (string.IsNullOrEmpty(adminname)) return null;
-            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom FROM Admin (NOLOCK) WHERE vcAdminName ='" + adminname + "'";
+            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel FROM Admin (NOLOCK)";
             return base.conn.GetDataTable(sql);
         }
 
@@ -298,13 +376,53 @@ namespace TCG.Handlers
         }
 
         /// <summary>
+        /// 获得后台管理的菜单项目
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Popedom> GetManagePopedomEntity()
+        {
+            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
+            if (allpop == null) return null;
+            if (allpop.Count == 0) return null;
+            Dictionary<int, Popedom> managepop = new Dictionary<int, Popedom>();
+            foreach (KeyValuePair<int, Popedom> keyvalue in allpop)
+            {
+                if (keyvalue.Value.cValid == "Y")
+                {
+                    managepop.Add(keyvalue.Key, keyvalue.Value);
+                }
+            }
+            return managepop;
+        }
+
+        /// <summary>
+        /// 获得子权限
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public Dictionary<int, Popedom> GetChildManagePopedomEntity(int pid)
+        {
+            Dictionary<int, Popedom> managepop = this.GetManagePopedomEntity();
+            if (managepop == null) return null;
+            Dictionary<int, Popedom> cmpop = new Dictionary<int, Popedom>();
+            foreach (KeyValuePair<int, Popedom> keyvalue in managepop)
+            {
+                if (keyvalue.Value.iParentId == pid)
+                {
+                    cmpop.Add(keyvalue.Key, keyvalue.Value);
+                }
+            }
+            return cmpop;
+        }
+
+        /// <summary>
         /// 获得所有权限选项目
         /// </summary>
         /// <returns></returns>
         public DataTable GetAllPopedom()
         {
             base.SetManageDataBaseConnection();
-            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM Popedom WITH (NOLOCK)";
+            string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom WITH (NOLOCK)";
             return base.conn.GetDataTable(sql);
         }
 
@@ -313,11 +431,81 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="iIds"></param>
         /// <returns></returns>
-        public DataSet GetPopedomsByID(string iIds)
+        public Dictionary<int, Popedom> GetPopedomsByIDs(string iIds)
         {
-            base.SetManageDataBaseConnection();
-            string sql = "SELECT iID,vcPopName,vcUrl,iParentId,dAddTime FROM Popedom WITH (NOLOCK) WHERE iID IN (" + iIds + ")";
-            return base.conn.GetDataSet(sql);
+            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
+            if (allpop == null) return null;
+            if (allpop.Count == 0) return null;
+            Dictionary<int, Popedom> pops = new Dictionary<int, Popedom>();
+            if (iIds.IndexOf(",") > -1)
+            {
+                string[] ids = iIds.Split(',');
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    int tid = objectHandlers.ToInt(ids[i]);
+                    if (allpop.ContainsKey(tid))
+                    {
+                        pops.Add(tid, allpop[tid]);
+                    }
+                }
+            }
+            else
+            {
+                int id = objectHandlers.ToInt(iIds);
+                if (allpop.ContainsKey(id))
+                {
+                    pops.Add(id, allpop[id]);
+                }
+            }
+
+            return (pops.Count == 0) ? null : pops;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rid"></param>
+        /// <param name="iIds"></param>
+        /// <returns></returns>
+        public Dictionary<int, Popedom> GetAdminPopedomsByID(AdminRole adminrole, string iIds)
+        {
+            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
+            if (allpop == null) return null;
+            if (allpop.Count == 0) return null;
+            Dictionary<int, Popedom> pops = new Dictionary<int, Popedom>();
+            if (iIds.IndexOf(",") > -1)
+            {
+                string[] ids = iIds.Split(',');
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    int tid = objectHandlers.ToInt(ids[i]);
+                    if (allpop.ContainsKey(tid))
+                    {
+                        pops.Add(tid, allpop[tid]);
+                    }
+                }
+            }
+            else
+            {
+                int id = objectHandlers.ToInt(iIds);
+                if (allpop.ContainsKey(id))
+                {
+                    pops.Add(id, allpop[id]);
+                }
+            }
+
+            if (adminrole.vcPopedom != null && adminrole.vcPopedom.Count != 0)
+            {
+                foreach (KeyValuePair<int, Popedom> keyvalue in adminrole.vcPopedom)
+                {
+                    if (!pops.ContainsKey(keyvalue.Key))
+                    {
+                        pops.Add(keyvalue.Key, keyvalue.Value);
+                    }
+                }
+            }
+
+            return (pops.Count == 0) ? null : pops;
         }
 
 
@@ -490,13 +678,6 @@ namespace TCG.Handlers
             return -19000000; 
         }
 
-        public DataTable GetAdminRoleInfoByRoleId(int iRoleId)
-        {
-            base.SetManageDataBaseConnection();
-            string Sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom FROM AdminRole WITH (NOLOCK) WHERE iID =" + iRoleId.ToString();
-            return base.conn.GetDataTable(Sql);
-        }
-
         /// <summary>
         /// 删除角色组
         /// </summary>
@@ -546,6 +727,10 @@ namespace TCG.Handlers
             return -19000000; 
         }
 
+        /// <summary>
+        /// 用户退出
+        /// </summary>
+        /// <param name="vcAdminname"></param>
         public void AdminLoginOut(string vcAdminname)
         {
             base.SetManageDataBaseConnection();

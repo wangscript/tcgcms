@@ -18,8 +18,12 @@ public partial class MyAccount : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.iNickName.Value = base.adminInfo.vcNickName;
             this.adminname.Value = base.adminInfo.vcAdminName;
         }

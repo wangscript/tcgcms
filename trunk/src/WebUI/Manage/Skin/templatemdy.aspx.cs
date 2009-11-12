@@ -26,6 +26,9 @@ public partial class Template_templatemdy : adminMain
         
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
             if (item == null)
             {

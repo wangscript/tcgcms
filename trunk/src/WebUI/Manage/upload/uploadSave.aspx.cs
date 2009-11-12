@@ -24,6 +24,9 @@ public partial class upload_uploadSave : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             int ifid = objectHandlers.ToInt(objectHandlers.Get("ifid"));
             this.iId.Value = ifid.ToString();
 

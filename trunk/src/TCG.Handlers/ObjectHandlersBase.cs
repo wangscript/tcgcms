@@ -128,7 +128,7 @@ namespace TCG.Handlers
                     sb.Append("Id:\"" + categories.Id + "\",");
                     sb.Append("ResourceListTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceListTemplate, typeof(Template)) + ",");
                     sb.Append("iOrder:" + categories.iOrder.ToString() + ",");
-                    sb.Append("Parent:\"" + categories.Parent + "\",");
+                    sb.Append("ParentId:\"" + categories.Parent + "\",");
                     sb.Append("ResourceTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceTemplate, typeof(Template)) + ",");
                     sb.Append("Directory:\"" + categories.vcDirectory + "\","); 
                     sb.Append("Url:\"" + categories.vcUrl + "\",");

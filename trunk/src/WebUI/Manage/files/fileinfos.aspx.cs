@@ -25,6 +25,9 @@ public partial class files_fileinfos : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             this.iClassId.Value = ClassId.ToString();
 

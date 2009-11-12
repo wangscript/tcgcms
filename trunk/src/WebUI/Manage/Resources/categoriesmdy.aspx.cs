@@ -24,6 +24,9 @@ public partial class resources_categoriesmdy : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.Init();
         }
         else

@@ -15,6 +15,7 @@ public partial class AdminList : System.Web.UI.Page
     {
         if (Page.IsPostBack)
         {
+
             Response.Write(Request.Form["gg"]);
             Response.End();
         }

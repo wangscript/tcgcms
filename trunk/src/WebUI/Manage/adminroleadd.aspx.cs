@@ -19,6 +19,8 @@ public partial class adminroleadd : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
         }
         else
         {

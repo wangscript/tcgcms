@@ -20,6 +20,9 @@ public partial class adminrolemdy : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.Init();
         }
         else
@@ -47,14 +50,14 @@ public partial class adminrolemdy : adminMain
     {
         int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Int));
         if (iRoleId == 0) return;
-        DataTable dt = base.handlerService.manageService.adminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
-        if (dt == null) { dt.Dispose(); dt.Clear(); }
-        if (dt.Rows.Count == 1)
+        AdminRole role = base.handlerService.manageService.adminHandlers.GetAdminRoleInfoByRoleId(iRoleId);
+        if (role != null)
         {
-            this.vcRoleName.Value = dt.Rows[0]["vcRoleName"].ToString();
-            this.vcContent.Value = dt.Rows[0]["vcContent"].ToString();
-            this.popedom.Value = dt.Rows[0]["vcPopedom"].ToString();
-            this.classpopedom.Value = dt.Rows[0]["vcClassPopedom"].ToString();
+            this.vcRoleName.Value = role.vcRoleName;
+            this.vcContent.Value = role.vcContent;
+            this.popedom.Value = role.PopedomStr;
+            this.classpopedom.Value = role.vcClassPopedom;
         }
+        this.DefaultSkinId.Value = base.configService.DefaultSkinId;
     }
 }

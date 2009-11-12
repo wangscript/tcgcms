@@ -21,6 +21,9 @@ public partial class adminmdy : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.AdminInfoInit();
             base.Finish();
         }
@@ -50,16 +53,16 @@ public partial class adminmdy : adminMain
 
     private void AdminInfoInit()
     {
-        string admin = objectHandlers.Get("adminname", CheckGetEnum.Safety);
-        this.vcAdminName.Value = admin;
-        DataTable dt = base.handlerService.manageService.adminHandlers.GetAdminInfoByAdminName(admin);
-        if (dt == null) {Response.End();return; }
-        if (dt.Rows.Count == 0) { Response.End(); dt.Dispose(); dt.Clear(); return; }
-        this.popedom.Value = dt.Rows[0]["vcPopedom"].ToString();
-        this.classpopedom.Value = dt.Rows[0]["vcClassPopedom"].ToString();
-        this.iNickName.Value = dt.Rows[0]["vcNickName"].ToString();
-        this.iRoleInit(dt.Rows[0]["iRole"].ToString());
-        if (dt.Rows[0]["cLock"].ToString() == "Y") { this.iLockY.Checked = true; } else { this.iLockN.Checked = true; }
+        string adminname = objectHandlers.Get("adminname", CheckGetEnum.Safety);
+        this.vcAdminName.Value = adminname;
+        Admin admin = base.handlerService.manageService.adminHandlers.GetAdminEntityByAdminName(adminname);
+        if (admin == null) { Response.End(); return; }
+
+        this.popedom.Value = admin.vcPopedom.ToString();
+        this.classpopedom.Value = admin.vcClassPopedom.ToString();
+        this.iNickName.Value = admin.vcNickName.ToString();
+        this.iRoleInit(admin.iRole.ToString());
+        if (admin.cLock.ToString() == "Y") { this.iLockY.Checked = true; } else { this.iLockN.Checked = true; }
 
     }
 

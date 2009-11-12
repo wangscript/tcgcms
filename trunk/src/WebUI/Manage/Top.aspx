@@ -7,8 +7,7 @@
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/top.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/top.js"></script>
 </head>
 <body>

@@ -20,6 +20,9 @@ public partial class adminadd : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             this.iRoleInit();
         }
         else

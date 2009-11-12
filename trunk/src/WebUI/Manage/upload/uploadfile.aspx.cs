@@ -21,6 +21,9 @@ public partial class upload_uploadfile : adminMain
     {
         if (!Page.IsPostBack)
         {
+            //检测管理员登录
+            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
             int iMaxNum = objectHandlers.ToInt(objectHandlers.Get("MaxNum"));
             this.sMaxNum.Text = iMaxNum.ToString();
 

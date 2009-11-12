@@ -135,6 +135,14 @@ namespace TCG.Utils
         /// 所有权限项实体
         /// </summary>
         public static string CACHING_ALL_POPDOM = "CACHING_ALL_POPDOM";
+        /// <summary>
+        /// 所有的管理员实体
+        /// </summary>
+        public static string CACHING_ALL_ADMIN_ENTITY = "CACHING_ALL_ADMIN_ENTITY";
+        /// <summary>
+        /// 所有权限组实体
+        /// </summary>
+        public static string CACHING_ALL_ADMINROLE_ENTITY = "CACHING_ALL_ADMINROLE_ENTITY";
 
         /// <summary>
         /// 系统缓存集合
@@ -148,11 +156,15 @@ namespace TCG.Utils
                     _systemcachings = new Dictionary<string, string>();
                     _systemcachings.Add("所有文件分类定义", CACHING_ALL_FILECLASS);
                     _systemcachings.Add("所有模版信息缓存", CACHING_All_TEMPLATES);
+                    _systemcachings.Add("所有模板实体", CACHING_All_TEMPLATES_ENTITY);
                     _systemcachings.Add("所有系统模版信息", CACHING_All_SYSTEM_TEMPLATES);
                     _systemcachings.Add("所有的资源分类信息", CACHING_ALL_CATEGORIES);
                     _systemcachings.Add("所有的资源分类信息实体", CACHING_ALL_CATEGORIES_ENTITY);
                     _systemcachings.Add("所有模板实体", CACHING_All_TEMPLATES_ENTITY);
-                    _systemcachings.Add("CACHING_ALL_POPDOM", CACHING_ALL_POPDOM);
+                    _systemcachings.Add("所有权限项实体", CACHING_ALL_POPDOM);
+                    _systemcachings.Add("所有的管理员实体", CACHING_ALL_ADMIN_ENTITY);
+                    _systemcachings.Add("所有权限组实体", CACHING_ALL_ADMINROLE_ENTITY);
+                    _systemcachings.Add("所有皮肤记录集缓存", CACHING_ALL_SKIN);
                 }
                 return _systemcachings;
             }
