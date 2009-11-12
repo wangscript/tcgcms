@@ -34,14 +34,29 @@ public partial class adminrolemdy : adminMain
             int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Int));
             if (string.IsNullOrEmpty(vcRoleName))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch("{state:false,message:'权限组名称不能为空！'}");
+                
+                return;
+            }
+            int rtn;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent, iRoleId);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
                 return;
             }
 
-            int rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent,iRoleId);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            if (rtn < 0)
+            {
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+            }
+            else
+            {
+                base.AjaxErch( "{state:true}");
+            }
             return;
         }
     }

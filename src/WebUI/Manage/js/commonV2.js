@@ -124,25 +124,25 @@ function SetAjaxDiv(action,IsHide,txt){
 }
 
 function SetAjaxDivRoot(action, IsHide, txt) {
-    var ajaxdiv = $("ajaxdiv");
-    var ajaximg = $("ajaximg");
-    var ajaxText = $("ajaxText");
-    if (ajaxdiv == null) return;
+    var ajaxdiv = $("#ajaxdiv");
+    var ajaximg = $("#ajaximg");
+    var ajaxText = $("#ajaxText");
+    if (ajaxdiv.length == 0) return;
 
-    ajaxdiv.className = IsHide ? "ajaxdiv hid" : "ajaxdiv";
-    SetInnerText(ajaxText, txt);
+    ajaxdiv[0].className = IsHide ? "ajaxdiv hid" : "ajaxdiv";
+    ajaxText.text(txt);
     switch (action) {
         case "loader":
-            ajaximg.src = ajaxiconRoot[0];
-            ajaxText.className = "loader";
+            ajaximg[0].src = ajaxiconRoot[0];
+            ajaxText[0].className = "loader";
             break;
         case "err":
-            ajaximg.src = ajaxiconRoot[1];
-            ajaxText.className = "err red";
+            ajaximg[0].src = ajaxiconRoot[1];
+            ajaxText[0].className = "err red";
             break;
         case "ok":
-            ajaximg.src = ajaxiconRoot[2];
-            ajaxText.className = "ok bold";
+            ajaximg[0].src = ajaxiconRoot[2];
+            ajaxText[0].className = "ok bold";
             break;
     }
 }

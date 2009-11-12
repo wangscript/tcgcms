@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="Common/AllPop.aspx"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <form id="form1" runat="server">
     <input type="hidden" id="DefaultSkinId" name="DefaultSkinId" runat="server" />
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
