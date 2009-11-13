@@ -54,10 +54,6 @@ namespace TCG.URLRewriter
         DateTime startTime;
 
         /// <summary>
-        /// 世界创造者
-        /// </summary>
-        private Thread _worldcreater;
-        /// <summary>
         /// 替换程序运行时间
         /// </summary>
         /// <param name="txt"></param>
@@ -83,23 +79,6 @@ namespace TCG.URLRewriter
             HandlerService handlerService = new HandlerService();
             handlerService.configService = this.configService;
             handlerService.conn = this.conn;
-
-            //当所有缓存没有被加载的时候，我们认为世界没有被创造出来
-            if (!World.IsWorldCreated)
-            {
-                if (!World.IsCreateWorlding)
-                {
-                    World.handlerService = handlerService;
-                    this.configService.HttpContext = iHttpContext;
-                    World.configService = this.configService;
-                    CachingService.HttpContext = iHttpContext;
-                    _worldcreater = new Thread(new ThreadStart(World.CreateWorld));
-                    _worldcreater.Start();
-                }
-                Response.Write("世界正在初始化...");
-                Response.End();
-                return;
-            }
            
 
             if (!Boolean.Parse(configService.baseConfig["IsReWrite"])) return;

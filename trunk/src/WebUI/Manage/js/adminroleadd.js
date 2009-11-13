@@ -1,6 +1,6 @@
 //--------------
 
-function CheckForm(){
+function CheckForm() { 
 	if(CheckRoleName()){
 	    SetAjaxDivRoot("loader", false, "正在发送请求...");
 	    return true;
@@ -14,7 +14,7 @@ function AddRoleBack(data) {
         SetAjaxDivRoot("err", false, data.message);
     } else {
         window.parent.adminpop.refinsh();
-        SetAjaxDivRoot("ok", false, "您已经成功完成对角色组的操作！");
+        SetAjaxDivRoot("ok", false, data.message);
     }
 	
 }
@@ -29,12 +29,12 @@ $(document).ready(function() {
     $("#form1").ajaxForm(options);
 });
 
-function CheckRoleName(){
+function CheckRoleName() {
 	var vcRoleName = $("#vcRoleName");
 	var rnmsg = $("#rnmsg");
 	vcRoleName[0].className='itxt1';
 	if(vcRoleName.val().length==0){
-		rnmsg[9].className="info_err";
+		rnmsg[0].className="info_err";
 		rnmsg.text("角色名不能为空！");
 		return false;
 	}

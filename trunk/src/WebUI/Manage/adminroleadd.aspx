@@ -8,15 +8,18 @@
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+	
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/commonV2.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/adminroleadd.js"></script>
-	<script type="text/javascript" src="Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="jsMethod/AllPop.aspx"></script>
+	<script type="text/javascript" src="Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="Common/AllPop.aspx"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <form id="form1" runat="server">
+    <input type="hidden" id="DefaultSkinId" name="DefaultSkinId" runat="server" />
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		<a class="title_back bold" href="adminadd.aspx">新建管理员</a> | 新建角色组<a href="javascript:fGoBack();" class="title_back bold">[返回]</a>

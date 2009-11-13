@@ -21,6 +21,8 @@ public partial class adminroleadd : adminMain
         {
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
+            this.DefaultSkinId.Value = base.configService.DefaultSkinId;
         }
         else
         {
@@ -30,15 +32,28 @@ public partial class adminroleadd : adminMain
             string classpopedom = objectHandlers.Post("classpopedom");
             if (string.IsNullOrEmpty(vcRoleName))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch("{state:false,message:'权限组名称不能为空！'}");
+                return;
+            }
+            int rtn;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
                 return;
             }
 
-            int rtn = base.handlerService.manageService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
-            return;
+            if (rtn < 0)
+            {
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+            }
+            else
+            {
+                base.AjaxErch("{state:true,message:'成功添加新的角色组！'}");
+            }
         }
     }
 }

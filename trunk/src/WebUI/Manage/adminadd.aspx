@@ -8,22 +8,25 @@
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+
+	<script type="text/javascript" src="js/commonV2.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/adminadd.js"></script>
-	<script type="text/javascript" src="Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="jsMethod/AllPop.aspx"></script>
+	<script type="text/javascript" src="Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="Common/AllPop.aspx"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <form id="form1" runat="server">
+    <input type="hidden" id="DefaultSkinId" name="DefaultSkinId" runat="server" />
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
 		新建管理员 | <a class="title_back bold" href="adminroleadd.aspx">新建角色组</a><a href="javascript:fGoBack();" class="title_back bold">[返回]</a>
 	</div>
 	<div class="Page_arrb arb_pr">
 		<span class="p_a_t">登&nbsp;&nbsp;陆&nbsp;&nbsp;名：</span>
-		<input id="vcAdminName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2';SetInnerText($('adminmsg'),'登陆名称');"  onblur="CheckAdminName();"/>
+		<input id="vcAdminName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2';$('#adminmsg').text('登陆名称');"  onblur="CheckAdminName();"/>
 		<span class="info1" id="adminmsg">登陆名称</span>
 	</div>
 	<div class="Page_arrb arb_pr">

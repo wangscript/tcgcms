@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -24,12 +25,14 @@ public partial class adminmdy : adminMain
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
+            this.DefaultSkinId.Value = base.configService.DefaultSkinId;
+
             this.AdminInfoInit();
             base.Finish();
         }
         else
         {
-            string vcAdminName = objectHandlers.Post("vcAdminName");
+            string vcAdminName = objectHandlers.Post("adminname");
             string vcNickname = objectHandlers.Post("iNickName");
             int iRole = objectHandlers.ToInt(objectHandlers.Post("sRole"));
             string cLock = objectHandlers.Post("iLock");
@@ -39,15 +42,30 @@ public partial class adminmdy : adminMain
 
             if (string.IsNullOrEmpty(vcAdminName) || string.IsNullOrEmpty(vcNickname))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch("{state:false,message:'用户名和昵称不能为空!'}");
                 return;
             }
             if (!string.IsNullOrEmpty(pwd)) pwd = objectHandlers.MD5(pwd);
-            int rtn = base.handlerService.manageService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
-                popedom, classpopedom);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
+                    popedom, classpopedom);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
+            }
+
+            try
+            {
+                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            base.AjaxErch("{state:true,message:\"管理员信息修改成功!\"}");
         }
     }
 
@@ -55,43 +73,27 @@ public partial class adminmdy : adminMain
     {
         string adminname = objectHandlers.Get("adminname", CheckGetEnum.Safety);
         this.vcAdminName.Value = adminname;
+        this.adminname.Value = adminname;
         Admin admin = base.handlerService.manageService.adminHandlers.GetAdminEntityByAdminName(adminname);
-        if (admin == null) { Response.End(); return; }
+        if (admin == null) return;
 
-        this.popedom.Value = admin.vcPopedom.ToString();
+        this.popedom.Value = admin.PopedomStr;
         this.classpopedom.Value = admin.vcClassPopedom.ToString();
         this.iNickName.Value = admin.vcNickName.ToString();
-        this.iRoleInit(admin.iRole.ToString());
+        this.iRoleInit(admin.iRole.iID.ToString());
         if (admin.cLock.ToString() == "Y") { this.iLockY.Checked = true; } else { this.iLockN.Checked = true; }
 
     }
 
     private void iRoleInit(string s)
     {
-        DataSet ds = new DataSet();
-        int t = 0;
-        int p = 0;
-        int rtn = base.handlerService.manageService.adminHandlers.GetAdminRoleInfo(ref t,ref p, ref ds);
-        if (rtn < 0)
-        {
-            ds.Dispose();
-            ds.Clear();
-            return;
-        }
 
-        if (ds.Tables.Count == 0)
-        {
-            ds.Dispose();
-            ds.Clear();
-        }
-        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-        {
-            DataRow Row = ds.Tables[0].Rows[i];
-            this.sRole.Items.Add(new ListItem(Row["vcRoleName"].ToString(), Row["iID"].ToString()));
-            if (s == Row["iID"].ToString()) this.sRole.SelectedIndex = i+1;
-        }
+        Dictionary<int, AdminRole> allrole = base.handlerService.manageService.adminHandlers.GetAllAdminRoleEntity();
 
-        ds.Dispose();
-        ds.Clear();
+        foreach (KeyValuePair<int, AdminRole> keyvalue in allrole)
+        {
+            this.sRole.Items.Add(new ListItem(keyvalue.Value.vcRoleName, keyvalue.Value.iID.ToString()));
+        }
+        this.sRole.Value = s;
     }
 }

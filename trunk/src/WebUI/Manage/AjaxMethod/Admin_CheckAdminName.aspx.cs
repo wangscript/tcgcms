@@ -22,9 +22,25 @@ public partial class AjaxMethod_Admin_CheckAdminName : adminMain
         if (!Page.IsPostBack)
         {
             string adminname = objectHandlers.Get("admin", CheckGetEnum.Safety);
-            int rtn = base.handlerService.manageService.adminHandlers.CheckAdminNameForReg(adminname);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.CheckAdminNameForReg(adminname);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch("{state:false,message:'" + objectHandlers.JSEncode(ex.Message.ToString()) + "'}");
+                return;
+            }
+
+            if (rtn == 0)
+            {
+                base.AjaxErch("{state:true,message:'该用户名可以使用!'}");
+            }
+            else
+            {
+                base.AjaxErch("{state:false,message:'该用户名已经被其他人使用!'}");
+            }
         }
     }
 }
