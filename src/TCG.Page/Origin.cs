@@ -109,6 +109,28 @@ namespace TCG.Pages
         }
 
         /// <summary>
+        /// 判断数据库执行参数
+        /// </summary>
+        /// <param name="rtn"></param>
+        /// <param name="okmessage"></param>
+        protected void AjaxErch(int rtn,string okmessage)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{state:");
+            if (rtn < 0)
+            {
+                sb.Append("false,message:\"" + errHandlers.GetErrTextByErrCode(rtn, this.configService.baseConfig["ManagePath"]) + "\"");
+            }
+            else
+            {
+                sb.Append("true,message:'" + okmessage + "'");
+            }
+            sb.Append("}");
+            Response.Write(sb.ToString());
+            Response.End();
+        }
+
+        /// <summary>
         /// AJAX输出字符串
         /// </summary>
         public string ajaxdata

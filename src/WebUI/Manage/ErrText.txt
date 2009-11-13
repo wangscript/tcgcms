@@ -12,6 +12,8 @@
 -1000000004@@@SP_Manage_AdminLogin@@@用户已经被锁定
 -1000000018@@@SP_Manage_AdminLogin|SP_Manage_GetAdminInfoByName@@@您的帐号已经被删除，请联系管理员！
 
+-1000000201@@@SP_Manage_AddAdmin@@@管理员帐号已经存在
+
 -1000000007@@@SP_Manage_GetAdminInfoByName@@@该管理员还没有登陆
 -1000000008@@@SP_Manage_GetAdminInfoByName@@@该管理员用其他的IP登陆了
 -1000000006@@@SP_Manage_GetAdminInfoByName@@@用户名不能为空

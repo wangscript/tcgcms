@@ -55,7 +55,7 @@ public partial class adminrolemdy : adminMain
             }
             else
             {
-                base.AjaxErch( "{state:true}");
+                base.AjaxErch("{state:true,message:'您已经成功完成对角色组的操作！'}");
             }
             return;
         }

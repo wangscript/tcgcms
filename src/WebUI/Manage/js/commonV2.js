@@ -239,22 +239,22 @@ function IntInList(int,intlist,sp){
 	return false;
 }
 
-function GetMSelectValue(obj){
-	var Value = "";
-	for(var i=0;i<obj.length;i++){
-		if(obj.options[i].selected==true){
-			Value+=((Value=="")?"":",")+ obj.options[i].value;
-		}
-	}
-	return Value;
+function GetMSelectValue(obj) {
+    var Value = "";
+    for (var i = 0; i < obj.length; i++) {
+        if (obj.options[i].selected == true) {
+            Value += ((Value == "") ? "" : ",") + obj.options[i].value;
+        }
+    }
+    return Value;
 }
 
 function SetPopValue(objname,obj){
 	if(objname==null)return;
 	if(obj==null)return;
-	var o = $(objname);
-	if(o==null)return;
-	o.value = GetMSelectValue(obj);
+	var o = $("#"+objname);
+	if (o.length == 0) return;
+	o.val(GetMSelectValue(obj));
 }
 
 function refinsh() {
@@ -359,4 +359,3 @@ function AjaxPostFormBack(data){
 		SetAjaxDiv("err",false,data.message);
 	}
 }
-
