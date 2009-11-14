@@ -35,7 +35,7 @@ function PopLisFind(iParentId, obj, Lis, sList, level, r, g, b) {
             oOption.text = GerPsrt(level) + ((level != 1) ? Pico : "") + Lis[i].Name;
 
             oOption.value = Lis[i].Id;
-            if (IntInList(Lis[i].ParentId, sList, ",")) oOption.selected = true;
+            if (IntInList(Lis[i].Id, sList, ",")) oOption.selected = true;
             oOption.style.cssText = "background-color:" + GetColor(r, g, b) + ";"
             obj[0].options.add(oOption);
             oOption = null;
