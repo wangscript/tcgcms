@@ -42,14 +42,14 @@ namespace TCG.Handlers
             this._pagerinfo = new TCGTagPagerInfo();
         }
 
-        public bool Replace(Connection conn, Dictionary<string, string> config)
+        public bool Replace()
         {
             if (!this._start)
             {
                 this._temphtml = this._template;
                 this._start = true;
             }
-            this.SysteConfigReplace(config);
+            this.SysteConfigReplace();
             MatchCollection mc = Regex.Matches(this._temphtml, this._pattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (mc.Count > 0)
             {
@@ -133,7 +133,7 @@ namespace TCG.Handlers
                     this._pagerinfo.Page++;
                     if (this._pagerinfo.Page <= this._pagerinfo.PageCount && this._pagerinfo.PageCount != 0)
                     {
-                        this.Replace(conn, config);
+                        this.Replace();
                     }
                 }
                 return this._pagerinfo.Read;
@@ -141,7 +141,7 @@ namespace TCG.Handlers
 
             if (!this._pagerinfo.Read) return this._pagerinfo.Read;
             mc = null;
-            return this.Replace(conn,config);
+            return this.Replace();
         }
 
         private string ReplaceAttribute(string str)
@@ -151,20 +151,20 @@ namespace TCG.Handlers
             return str;
         }
 
-        private void SysteConfigReplace(Dictionary<string, string> config)
+        private void SysteConfigReplace()
         {
-            this._temphtml = _temphtml.Replace("_$FileSite$_", config["FileSite"]);
-            this._temphtml = _temphtml.Replace("_$FileExtension$_", config["FileExtension"]);
-            this._temphtml = _temphtml.Replace("_$WebSite$_", config["WebSite"]);
-            this._temphtml = _temphtml.Replace("_$PageSize$_", config["PageSize"]);
-            this._temphtml = _temphtml.Replace("_$WebTitle$_", config["WebTitle"]);
-            this._temphtml = _temphtml.Replace("_$WebKeyWords$_", config["WebKeyWords"]);
-            this._temphtml = _temphtml.Replace("_$WebDescription$_", config["WebDescription"]);
+            this._temphtml = _temphtml.Replace("_$FileSite$_", base.configService.baseConfig["FileSite"]);
+            this._temphtml = _temphtml.Replace("_$FileExtension$_", base.configService.baseConfig["FileExtension"]);
+            this._temphtml = _temphtml.Replace("_$WebSite$_", base.configService.baseConfig["WebSite"]);
+            this._temphtml = _temphtml.Replace("_$PageSize$_", base.configService.baseConfig["PageSize"]);
+            this._temphtml = _temphtml.Replace("_$WebTitle$_", base.configService.baseConfig["WebTitle"]);
+            this._temphtml = _temphtml.Replace("_$WebKeyWords$_", base.configService.baseConfig["WebKeyWords"]);
+            this._temphtml = _temphtml.Replace("_$WebDescription$_", base.configService.baseConfig["WebDescription"]);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$SystemName$_", Versions.SystemName);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
-            this._temphtml = _temphtml.Replace("_$ManagePath$_", config["ManagePath"]);
+            this._temphtml = _temphtml.Replace("_$ManagePath$_", base.configService.baseConfig["ManagePath"]);
         }
 
         /// <summary>

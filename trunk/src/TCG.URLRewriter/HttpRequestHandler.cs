@@ -89,6 +89,8 @@ namespace TCG.URLRewriter
             
 
             TagService tagservice = new TagService(handlerService);
+            tagservice.TCGTagHandlers.configService = this.configService;
+            tagservice.TCGTagHandlers.conn = this.conn;
 
             //获得页面文件名
             string pagepath = Request.Url.Segments[Request.Url.Segments.Length - 1];
@@ -108,7 +110,7 @@ namespace TCG.URLRewriter
                     {
                         tagservice.TCGTagHandlers.Template = template.Content;
                         tagservice.TCGTagHandlers.NeedCreate = false;
-                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
+                        tagservice.TCGTagHandlers.Replace();
                         OutHtml = tagservice.TCGTagHandlers.Template;
 
 
@@ -153,7 +155,7 @@ namespace TCG.URLRewriter
                             tagservice.TCGTagHandlers.PagerInfo.DoAllPage = false;
                             tagservice.TCGTagHandlers.PagerInfo.Page = DcurPage;
                             tagservice.TCGTagHandlers.WebPath = tempcategories.vcUrl + configService.baseConfig["FileExtension"];
-                            tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
+                            tagservice.TCGTagHandlers.Replace();
 
                             OutHtml = tagservice.TCGTagHandlers.Template;
 
@@ -183,7 +185,7 @@ namespace TCG.URLRewriter
                         //获得分类信息
                         tagservice.TCGTagHandlers.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
                         tagservice.TCGTagHandlers.NeedCreate = false;
-                        tagservice.TCGTagHandlers.Replace(conn, configService.baseConfig);
+                        tagservice.TCGTagHandlers.Replace();
 
                         OutHtml = tagservice.TCGTagHandlers.Template;
 

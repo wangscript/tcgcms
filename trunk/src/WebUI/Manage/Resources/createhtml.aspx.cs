@@ -131,7 +131,9 @@ public partial class news_createhtml : adminMain
         tcgthl.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
         tcgthl.FilePath = Server.MapPath("~" + filepath);
         tcgthl.NeedCreate = base.configService.baseConfig["IsReWrite"] != "True" ? true : false;
-        tcgthl.Replace(base.conn, base.configService.baseConfig);
+        tcgthl.configService = base.configService;
+        tcgthl.conn = base.conn;
+        tcgthl.Replace();
 
         if (tcgthl.PagerInfo.PageCount > 1)
         {

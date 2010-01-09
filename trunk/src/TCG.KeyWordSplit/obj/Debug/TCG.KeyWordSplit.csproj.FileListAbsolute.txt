@@ -1,0 +1,9 @@
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.KeyWordSplit.XML
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.KeyWordSplit.dll
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.KeyWordSplit.pdb
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.Entity.dll
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.KeyWordSplit\bin\Debug\TCG.Entity.xml
+E:\TCGCMS\src\TCG.KeyWordSplit\obj\Debug\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.KeyWordSplit\obj\Debug\TCG.KeyWordSplit.dll
+E:\TCGCMS\src\TCG.KeyWordSplit\obj\Debug\TCG.KeyWordSplit.pdb

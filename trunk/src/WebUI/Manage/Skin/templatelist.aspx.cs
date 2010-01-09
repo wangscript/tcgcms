@@ -208,7 +208,10 @@ public partial class Template_templatelist : adminMain
             TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
             tcgthdl.Template = tlif.Content;
             tcgthdl.FilePath = filepath;
-            if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
+            tcgthdl.configService = base.configService;
+            tcgthdl.conn = base.conn;
+
+            if (tcgthdl.Replace())
             {
                 base.AjaxErch("{state:true,message:'<a>生成成功:" + objectHandlers.JSEncode( filepath) + "...</a>'}");
             }

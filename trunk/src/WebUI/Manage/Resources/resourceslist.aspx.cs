@@ -211,8 +211,10 @@ public partial class resources_resourceslist : adminMain
         tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid);
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
+        tcgth.configService = base.configService;
+        tcgth.conn = base.conn;
 
-        if (tcgth.Replace(base.conn, base.configService.baseConfig))
+        if (tcgth.Replace())
         {
             //待续
             //base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", resourceid);

@@ -163,7 +163,9 @@ public partial class resources_categorieslist : adminMain
         tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
         tcgthdl.FilePath = filepath;
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
-        if (tcgthdl.Replace(base.conn, base.configService.baseConfig))
+        tcgthdl.configService = base.configService;
+        tcgthdl.conn = base.conn;
+        if (tcgthdl.Replace())
         {   
             string text1 = "";
             if (tcgthdl.PagerInfo.PageCount > 1)
