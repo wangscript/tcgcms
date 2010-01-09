@@ -186,7 +186,9 @@ public partial class resources_resourceshandlers : adminMain
                 TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
                 tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
                 tcgth.FilePath = filepath;
-                tcgth.Replace(base.conn, base.configService.baseConfig);
+                tcgth.configService = base.configService;
+                tcgth.conn = base.conn;
+                tcgth.Replace();
             }
 
         }

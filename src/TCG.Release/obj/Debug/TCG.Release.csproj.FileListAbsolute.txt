@@ -1,0 +1,17 @@
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Release.XML
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Release.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Release.pdb
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Data.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Utils.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\Interop.MSXML2.dll
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Utils.pdb
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Utils.xml
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Entity.xml
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Data.pdb
+E:\TCGCMS\src\TCG.Release\bin\Debug\TCG.Data.xml
+E:\TCGCMS\src\TCG.Release\obj\Debug\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.Release\obj\Debug\TCG.Release.dll
+E:\TCGCMS\src\TCG.Release\obj\Debug\TCG.Release.pdb
