@@ -1,6 +1,0 @@
-E:\TCGCMS\src\TCG.Entity\bin\Debug\TCG.Entity.XML
-E:\TCGCMS\src\TCG.Entity\bin\Debug\TCG.Entity.dll
-E:\TCGCMS\src\TCG.Entity\bin\Debug\TCG.Entity.pdb
-E:\TCGCMS\src\TCG.Entity\obj\Debug\ResolveAssemblyReference.cache
-E:\TCGCMS\src\TCG.Entity\obj\Debug\TCG.Entity.dll
-E:\TCGCMS\src\TCG.Entity\obj\Debug\TCG.Entity.pdb
