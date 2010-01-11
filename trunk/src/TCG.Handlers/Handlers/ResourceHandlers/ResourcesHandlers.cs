@@ -164,7 +164,16 @@ namespace TCG.Handlers
         }
 
 
-        public int GetResourcsByTemplateTag(ref string errText, ref Dictionary<string, Resources> resources, string CategorieId, string condition) 
+        /// <summary>
+        /// 搜索咨询所在的分类，支持多个分类，请谨慎使用
+        /// </summary>
+        /// <param name="errText"></param>
+        /// <param name="resources"></param>
+        /// <param name="CategorieId"></param>
+        /// <param name="condition"></param>
+        /// <param name="orderby"></param>
+        /// <returns></returns>
+        public int GetResourcsByTemplateTag(ref string errText, ref Dictionary<string, Resources> resources, string CategorieId, string condition,string orderby) 
         {
             return 1;
         }
