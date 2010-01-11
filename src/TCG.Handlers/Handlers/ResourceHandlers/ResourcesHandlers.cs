@@ -163,6 +163,11 @@ namespace TCG.Handlers
             return (Resources)CachingService.Get(resourceid);
         }
 
+
+        public int GetResourcsByTemplateTag(ref string errText, ref Dictionary<string, Resources> resources, string CategorieId, string condition) 
+        {
+            return 1;
+        }
          
         /// <summary>
         /// 删除资源文件
