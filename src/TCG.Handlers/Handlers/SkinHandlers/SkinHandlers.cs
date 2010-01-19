@@ -32,7 +32,7 @@ namespace TCG.Handlers
     /// <summary>
     /// 皮肤操作方法
     /// </summary>
-    public class SkinHandlers : SkinHandlerBase
+    public class SkinHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// 获得所有皮肤实体
@@ -72,7 +72,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllSkinWithOutCaching()
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             string Sql = "SELECT * FROM Skin WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }

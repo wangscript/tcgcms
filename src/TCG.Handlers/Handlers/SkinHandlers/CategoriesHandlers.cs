@@ -29,7 +29,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class CategoriesHandlers : SkinHandlerBase
+    public class CategoriesHandlers :ObjectHandlersBase
     {
 
         public Dictionary<string, EntityBase> GetCategoriesEntityByParentId(string parentid)
@@ -82,7 +82,7 @@ namespace TCG.Handlers
 
         public DataTable GetAllCategoriesWithOutCaching()
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             string Sql = "SELECT Id,vcClassName,vcName,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService FROM Categories WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
@@ -137,7 +137,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateCategories(Categories cif)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             cif.Id = Guid.NewGuid().ToString();
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
@@ -171,7 +171,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateCategories(Categories classinf)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             SqlParameter sp1 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp1.Value = classinf.vcClassName;
             SqlParameter sp2 = new SqlParameter("@DataBaseService", SqlDbType.VarChar, 50); sp2.Value = classinf.DataBaseService;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = classinf.vcName;
@@ -204,7 +204,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelCategories(string classid)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp2.Value = classid;
             SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;

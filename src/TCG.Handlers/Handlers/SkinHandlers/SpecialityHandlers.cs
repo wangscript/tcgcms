@@ -24,7 +24,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class SpecialityHandlers : SkinHandlerBase
+    public class SpecialityHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// 添加新的资讯类型
@@ -35,7 +35,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int NewsSpecialityAdd(Connection conn, string adminname, Speciality nif)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iSiteId", SqlDbType.Int, 4); sp2.Value = nif.iSiteId;
@@ -61,7 +61,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int NewsSpecialityMdy(Connection conn, string adminname, Speciality nif)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iSiteId", SqlDbType.Int, 4); sp2.Value = nif.iSiteId;
@@ -90,7 +90,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int NewSpecialityDel(Connection conn, string adminname, string ids)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp2.Value = "03";
@@ -113,7 +113,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Speciality GetNewsSpecialityInfoById(Connection conn, int id)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM Speciality (NOLOCK) WHERE iId=" + id.ToString();
             DataTable dt = conn.GetDataTable(SQL);
             if (dt == null) return null;
@@ -140,7 +140,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllNewsSpecialityInfo(Connection conn)
         {
-            base.SetSkinDataBaseConnection();
+            base.SetDataBaseConnection();
             string SQL = "SELECT iId,iSiteId,iParent,vcTitle,vcExplain,dUpDateDate FROM Speciality (NOLOCK)";
             return conn.GetDataTable(SQL);
         }

@@ -28,7 +28,7 @@ using TCG.KeyWordSplit;
 
 namespace TCG.Handlers
 {
-    public class ResourcesHandlers : ResourceHandlerBase
+    public class ResourcesHandlers : ObjectHandlersBase
     {
         /// <summary>
         /// Ìí¼Ó×ÊÑ¶
@@ -38,7 +38,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateResources(Resources inf)
         {
-            base.SetReourceHandlerDataBaseConnection(inf.Categorie);
+            base.SetDataBaseConnection();
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
@@ -79,7 +79,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateResourcesForSheif(Resources inf)
         {
-            base.SetReourceHandlerDataBaseConnection(inf.Categorie);
+            base.SetDataBaseConnection();
             inf.dAddDate = DateTime.Now;
             inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
@@ -113,7 +113,7 @@ namespace TCG.Handlers
 
         public int UpdateResources(Resources inf)
         {
-            base.SetReourceHandlerDataBaseConnection(inf.Categorie);
+            base.SetDataBaseConnection();
             inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.Categorie.Id;
@@ -150,7 +150,7 @@ namespace TCG.Handlers
 
         public Resources GetResourcesByIdAndCategorieId(string categoriesid, string resourceid)
         {
-            base.SetReourceHandlerDataBaseConnection(categoriesid);
+            base.SetDataBaseConnection();
             DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE ID = '" + resourceid + "'");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
@@ -265,23 +265,13 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Dictionary<string, EntityBase> GetAllResurces()
         {
-            if (base.handlerService == null) return null;
-            Dictionary<string,DataBaseConnStr> databasees =  base.handlerService.configService.ResourceDataBaseConfig;
-            Dictionary<string, EntityBase> resurceses = new Dictionary<string, EntityBase>();
-            foreach (KeyValuePair<string, DataBaseConnStr> database in databasees)
-            {
-                Dictionary<string, EntityBase> resurcese = GetAllResuresFromDataBase(((DataBaseConnStr)database.Value).Value);
-                foreach (KeyValuePair<string, EntityBase> res in resurcese)
-                {
-                    resurceses.Add(res.Key, res.Value);
-                }
-            }
+            base.SetDataBaseConnection();
+            Dictionary<string, EntityBase> resurceses = GetAllResuresFromDataBase();         
             return resurceses;
         }
 
-        public Dictionary<string, EntityBase> GetAllResuresFromDataBase(string databaseconnstr)
+        public Dictionary<string, EntityBase> GetAllResuresFromDataBase()
         {
-            base.conn.SetConnStr = databaseconnstr;
             DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) ");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
