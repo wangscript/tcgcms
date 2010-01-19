@@ -102,36 +102,6 @@ namespace TCG.Utils
 
         private string _defaultskinid = null;
 
-        /// <summary>
-        /// 皮肤数据库连接字符串
-        /// </summary>
-        public string SkinDataBaseStr
-        {
-            get
-            {
-                if (this._skindatabasestr == null)
-                {
-                    this.SkinDataBaseInit();
-                }
-                return this._skindatabasestr;
-            }
-        }
-
-        /// <summary>
-        /// 初始化皮肤数据库连接
-        /// </summary>
-        private void SkinDataBaseInit()
-        {
-            //获得所有需要登陆的特殊页面
-            XmlNodeList skindatabase = this.GetXmlNotListByTagNameAndFilePath(m_skinConfig, "skinDataBase");
-            if (skindatabase != null)
-            {
-                foreach (XmlElement element in skindatabase)
-                {
-                    this._skindatabasestr = element.SelectSingleNode("Value").InnerText;
-                }
-            }
-        }
 
         /// <summary>
         /// 皮肤数据库连接字符串
@@ -232,39 +202,6 @@ namespace TCG.Utils
             }
         }
 
-        /// <summary>
-        /// 资源数据库连接配置
-        /// </summary>
-        public Dictionary<string,DataBaseConnStr> ResourceDataBaseConfig
-        {
-            get
-            {
-                if (this._resourcedatabaseconfig == null)
-                {
-                    this.ResourceDataBaseConfigInit();
-                }
-                return this._resourcedatabaseconfig;
-            }
-        }
-
-        private void ResourceDataBaseConfigInit()
-        {
-            //获得所有需要登陆的特殊页面
-            XmlNodeList resourcedatabaseconfig = this.GetXmlNotListByTagNameAndFilePath(m_ResourceDataBaseConfigFilePath, "resourceDataBase");
-            if (resourcedatabaseconfig != null)
-            {
-                this._resourcedatabaseconfig = new Dictionary<string,DataBaseConnStr>();
-                foreach (XmlElement element in resourcedatabaseconfig)
-                {
-                    DataBaseConnStr filedatabase = new DataBaseConnStr();
-                    filedatabase.Text = element.SelectSingleNode("Text").InnerText;
-                    filedatabase.Value = element.SelectSingleNode("Value").InnerText;
-                    filedatabase.Service = element.SelectSingleNode("Service").InnerText;
-                    filedatabase.IsBaseDataBase = objectHandlers.ToBoolen(element.SelectSingleNode("IsBaseDataBase").InnerText, false);
-                    this._resourcedatabaseconfig.Add(filedatabase.Service,filedatabase);
-                }
-            }
-        }
 
         /// <summary>
         /// 系统基本配置
