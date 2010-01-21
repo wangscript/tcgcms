@@ -52,6 +52,8 @@ public partial class news_createhtml : adminMain
 
     private void KeyWordLoad()
     {
+        #region 分词系统 暂时还未完成
+        /*
         if (KeyWordTree.Root.ChildList.Count == 0)
         {
             string path = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
@@ -84,6 +86,8 @@ public partial class news_createhtml : adminMain
                 return;
             }
         }
+         */
+        #endregion
 
         base.Finish();
         base.AjaxErch("加载关键词成功！");
