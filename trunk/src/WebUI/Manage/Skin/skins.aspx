@@ -48,7 +48,12 @@
 		<TCG:Img ID="pic" src="../images/icon/1.gif" runat='server' />
 		<TCG:Anchor id='sitename' runat='server' />
 		<TCG:Span id='info' class="info2" runat='server' />
-		<span class="info2"><a>导出</a><a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a><a>删除</a></span>
+		<span class="info2">
+		    <a>导出</a>
+		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a>
+		    <a href="skinveiw.aspx?skinid=<TCG:Span id='vsid' runat='server' />">编辑</a>
+		    <a>删除</a>
+		</span>
 		<div class="used" id="IsDefault" runat='server'><img src="../images/icon/used_skin.png" /></div>
 	</div>
 	</ItemTemplate>
