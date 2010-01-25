@@ -73,6 +73,7 @@ namespace TCG.Utils
 
         public static void Set(string name, object value, CacheDependency cacheDependency)
         {
+            if (value == null) return;
             if (CachingService.HttpContext != null)
             {
                 CachingService.HttpContext.Cache.Insert(CachingService.Key + name, value, cacheDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
