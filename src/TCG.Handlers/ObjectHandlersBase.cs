@@ -189,6 +189,7 @@ namespace TCG.Handlers
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = row["Visible"].ToString();
                     categories.DataBaseService = row["DataBaseService"].ToString();
+                    categories.SkinId = row["SkinId"].ToString();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();
