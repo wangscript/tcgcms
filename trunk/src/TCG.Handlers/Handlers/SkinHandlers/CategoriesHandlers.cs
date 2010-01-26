@@ -31,8 +31,13 @@ namespace TCG.Handlers
 {
     public class CategoriesHandlers :ObjectHandlersBase
     {
-
-        public Dictionary<string, EntityBase> GetCategoriesEntityByParentId(string parentid)
+        /// <summary>
+        /// 根据皮肤编号和分类父亲ID获得分类信息
+        /// </summary>
+        /// <param name="parentid"></param>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetCategoriesEntityByParentId(string parentid,string skinid)
         {
             Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
             if (allcategories == null) return null;
@@ -41,7 +46,7 @@ namespace TCG.Handlers
             foreach ( KeyValuePair<string,EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.Parent == parentid)
+                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinId)
                 {
                     childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
                 }
@@ -49,7 +54,10 @@ namespace TCG.Handlers
             return childcategories;
         }
 
-
+        /// <summary>
+        /// 获得所有皮肤的实体
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, EntityBase> GetAllCategoriesEntity()
         {
             Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);

@@ -65,6 +65,10 @@ namespace TCG.Entity
         /// 指定数据库连接
         /// </summary>
         public string DataBaseService { get { return this._dbService; } set { this._dbService = value; } }
+        /// <summary>
+        ///  所属皮肤的ID
+        /// </summary>
+        public string SkinId { get { return this._skinid; } set { this._skinid = value; } }
 
         
         private string _iparent;
@@ -78,5 +82,6 @@ namespace TCG.Entity
         private string _vcurl;
         private string _cvisible;
         private string _dbService = null;
+        private string _skinid;
     }
 }

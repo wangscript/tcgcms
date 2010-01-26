@@ -21,20 +21,23 @@ public partial class Manage_Skin_skinveiw : adminMain
         if (!Page.IsPostBack)
         {
 
+
+            string skinid = objectHandlers.Get("skinid");
+
             CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
             StringBuilder tempashtml = new StringBuilder();
 
-            Dictionary<string, EntityBase> cages = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId("0");
+            Dictionary<string, EntityBase> cages = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId("0", skinid);
 
             if (cages != null)
             {
                 tempashtml.Append(cages.Count.ToString());
             }
 
-            this.ltTemplates.Text = tempashtml.ToString();
+            this.ltCategories.Text = tempashtml.ToString();
         }
     }
 }
