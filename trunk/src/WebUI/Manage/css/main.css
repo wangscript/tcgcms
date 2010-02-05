@@ -1,20 +1,7 @@
-html
-{
-    margin:0px;
-    padding:0px;
- }
-body
-{
-	margin: 0;
-	background-color: #fff;
-	font-size: 12px;
-	font-family: "Î¢ÈíÑÅºÚ" , "ËÎÌå" ,Verdana;
-	padding: 0;
-	height: 100%;
-	width:100%;
-}
+
 div, span
 {
+	text-align:left;
   font-family: "Î¢ÈíÑÅºÚ", "ËÎÌå" ,Verdana;
 }
 

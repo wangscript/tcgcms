@@ -235,6 +235,20 @@ namespace TCG.Handlers
                     skin.Pic = row["Pic"].ToString();
                     skin.Info = row["info"].ToString();
                     return (EntityBase)skin;
+                case "TCG.Entity.SheifSourceInfo":
+                    SheifSourceInfo sourceinfo = new SheifSourceInfo();
+                    sourceinfo.Id = row["ID"].ToString();
+                    sourceinfo.SourceName = row["SourceName"].ToString();
+                    sourceinfo.SourceUrl = row["SourceUrl"].ToString();
+                    sourceinfo.CharSet = row["CharSet"].ToString();
+                    sourceinfo.ListAreaRole = row["ListAreaRole"].ToString();
+                    sourceinfo.TopicListRole = row["TopicListRole"].ToString();
+                    sourceinfo.TopicListDataRole = row["TopicListDataRole"].ToString();
+                    sourceinfo.TopicRole = row["TopicRole"].ToString();
+                    sourceinfo.TopicDataRole = row["TopicDataRole"].ToString();
+                    sourceinfo.TopicPagerOld = row["TopicPagerOld"].ToString();
+                    sourceinfo.TopicPagerTemp = row["TopicPagerTemp"].ToString();
+                    return (EntityBase)sourceinfo;
             }
             return null;
         }
