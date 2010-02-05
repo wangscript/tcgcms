@@ -1,4 +1,6 @@
-.b-m-mpanel {
+.b-m-mpanel 
+{
+	text-align:left;
 	background: #F0F0F0 url(../images/menu_bg.gif) left repeat-y;
 	border: 1px solid #718BB7;
 	padding: 2px 0;
@@ -7,7 +9,9 @@
 	left:0px;
 	top:0px;
 }
-.b-m-split {
+.b-m-split 
+{
+	text-align:left;
 	height: 6px;
 	background: url(../images/m_splitLine.gif) center repeat-x;
 	font-size: 0px;
@@ -15,6 +19,7 @@
 }
 .b-m-item, .b-m-idisable
 {
+	text-align:left;
     padding: 4px 2px;
     margin: 0 2px 0 3px;
     cursor: normal;
@@ -22,24 +27,34 @@
 }
 .b-m-idisable
 {
+	text-align:left;
     color:#808080;
 }
-.b-m-ibody, .b-m-arrow {
+.b-m-ibody, .b-m-arrow 
+{
+	text-align:left;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	
 }
-.b-m-arrow {
+.b-m-arrow 
+{
+	text-align:left;
 	background: url(../images/m_arrow.gif) right  no-repeat;	
 }
 .b-m-idisable .b-m-arrow
 {
+	text-align:left;
     background:none;
 }
-.b-m-item img, .b-m-ifocus img, .b-m-idisable img {
+.b-m-item img, .b-m-ifocus img, .b-m-idisable img 
+{
+	text-align:left;
 	margin-right: 8px;
 }
-.b-m-ifocus {
+.b-m-ifocus 
+{
+	text-align:left;
 	background: url(../images/m_item.gif) repeat-x bottom;
 	border: 1px solid #AACCF6;
 	padding: 3px 1px ;
@@ -47,6 +62,8 @@
     cursor: normal;
     line-height:100%;
 }
-.b-m-idisable img {
+.b-m-idisable img 
+{
+	text-align:left;
 	visibility:hidden;
 }

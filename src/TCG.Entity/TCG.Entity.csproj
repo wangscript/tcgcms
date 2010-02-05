@@ -48,6 +48,7 @@
     <Compile Include="Files\FileCategories.cs" />
     <Compile Include="Files\FileDataBase.cs" />
     <Compile Include="Files\FileResources.cs" />
+    <Compile Include="Sheif\SheifSourceInfo.cs" />
     <Compile Include="Skin\Categories.cs" />
     <Compile Include="Resources\Resources.cs" />
     <Compile Include="Skin\Skin.cs" />

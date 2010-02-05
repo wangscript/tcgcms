@@ -45,6 +45,7 @@
     <Compile Include="Handlers\manageHandlers\AdminLoginHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileService.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcsService.cs" />
+    <Compile Include="Handlers\SheifHandlers\SheifHandlers.cs" />
     <Compile Include="Handlers\SkinHandlers\CategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
