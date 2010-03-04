@@ -64,8 +64,9 @@ public partial class resources_categorieslist : adminMain
     private void SearchInit()
     {
         string iParent = objectHandlers.Get("iParentId");
+        string skinid =    objectHandlers.Get("iParentId");
         if (string.IsNullOrEmpty(iParent)) iParent = "0";
-        Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(iParent);
+        Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(iParent, skinid);
 
         if (allcategories != null)
         {
