@@ -51,8 +51,11 @@
 		<span class="info2">
 		    <a>导出</a>
 		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a>
-		    <a href="skinveiw.aspx?skinid=<TCG:Span id='vsid' runat='server' />">编辑</a>
-		    <a>删除</a>
+		</span>
+		<span class="info3">
+		    <a href="templatelist.aspx?skinid=<TCG:Span id='vsid' runat='server' />">模板</a>
+		    <a href="categorieslist.aspx?skinid=<TCG:Span id='vsid1' runat='server' />">分类</a>
+		    <a href="speciality.aspx?skinid=<TCG:Span id='vsid2' runat='server' />">特性</a>
 		</span>
 		<div class="used" id="IsDefault" runat='server'><img src="../images/icon/used_skin.png" /></div>
 	</div>

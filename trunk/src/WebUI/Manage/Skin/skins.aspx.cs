@@ -70,6 +70,8 @@ public partial class Skin_skins : adminMain
         HtmlGenericControl IsDefault = (HtmlGenericControl)e.Item.FindControl("IsDefault");
         Span sid = (Span)e.Item.FindControl("sid");
         Span vsid = (Span)e.Item.FindControl("vsid");
+        Span vsid1 = (Span)e.Item.FindControl("vsid1");
+        Span vsid2 = (Span)e.Item.FindControl("vsid2");
 
         info.Text = skininfo.Info;
         sitename.Text = skininfo.Name;
@@ -85,6 +87,8 @@ public partial class Skin_skins : adminMain
         }
         sid.Text = skininfo.Id;
         vsid.Text = skininfo.Id;
+        vsid1.Text = skininfo.Id;
+        vsid2.Text = skininfo.Id;
     }
 }
 

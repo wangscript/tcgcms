@@ -1,8 +1,10 @@
 .TempItem{ position:relative; width:230px; height:85px;text-align:left; padding-top:15px; padding-left:20px; float:left; margin-top:8px; margin-left:8px; margin-right:8px;}
 .TempItem img { float: left; margin-right:8px; width:80px; height:65px; border:#4274ba solid 1px;}
 .TempItem a{ float:left;width:120px; line-height:18px; color:#2864a6; font-weight:bold;}
-.TempItem span a{float:left;width:30px; color:#e29905;}
+.TempItem span { float:left;width:120px;}
+.TempItem span a {float:left;width:30px; color:#e29905;}
 .TempItem a:hover{ text-decoration:none;color:#2864a6;}
 .tempitembg { background-image:url(../images/tempinfo_bg.jpg)}
 .TempItem .used{ position:absolute; left:70px; top:50px;}
 .TempItem .used img { width:32px; height:32px; border:none;}
+.TempItem .info3 a { padding-left:3px;float:left;width:30px; color:#236DA0; font-weight:normal; text-decoration:underline;}

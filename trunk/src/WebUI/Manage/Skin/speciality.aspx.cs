@@ -22,7 +22,7 @@ using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class resources_speciality : adminMain
+public partial class skin_speciality : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
