@@ -47,6 +47,7 @@ public partial class Template_templatelist : adminMain
 
     private void SearchInit()
     {
+        base.handlerService.skinService.templateHandlers.SetDataBaseConnection();
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Template";
 
