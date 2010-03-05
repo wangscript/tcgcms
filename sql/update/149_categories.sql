@@ -1,0 +1,1 @@
+ALTER TABLE dbo.categories ADD SkinId VARCHAR(36) NOT NULL
