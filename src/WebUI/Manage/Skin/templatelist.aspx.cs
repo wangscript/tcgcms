@@ -19,7 +19,7 @@ using TCG.Data;
 
 public partial class Template_templatelist : adminMain
 {
-    public int iSite = 0;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -65,10 +65,10 @@ public partial class Template_templatelist : adminMain
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        int SkinId = objectHandlers.ToInt(objectHandlers.Get("SkinId"));
-        sItem.strCondition = "SkinId ='" + SkinId.ToString() + "' AND iSystemType =" + 0;
-        this.iSiteId.Value = SkinId.ToString();
-        iSite = SkinId;
+        string SkinId = objectHandlers.Get("SkinId");
+        sItem.strCondition = "SkinId ='" + SkinId + "' AND iSystemType =" + 0;
+        this.iSkinId.Value = SkinId.ToString();
+     
 
         string iParentid = objectHandlers.Get("iParentid");
         if (iParentid.Length != 36) iParentid = "0";
@@ -128,10 +128,13 @@ public partial class Template_templatelist : adminMain
         Span classname = (Span)e.Item.FindControl("classname");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
 
+
+        string SkinId = objectHandlers.Get("SkinId");
+
         CheckID.Text = Row["Id"].ToString();
         sId.Text = Row["Id"].ToString();
 
-        string text = "<a href=\"?iParentid=" + Row["Id"].ToString() + "&SkinId=" + iSite.ToString() + "\" title=\"查看子分类\">"
+        string text = "<a href=\"?iParentid=" + Row["Id"].ToString() + "&SkinId=" + SkinId + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
         text += "<a href=\"templatemdy.aspx?templateid=" + Row["Id"].ToString() + "\" title=\"修改模版\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
