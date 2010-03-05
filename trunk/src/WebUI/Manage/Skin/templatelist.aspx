@@ -64,7 +64,7 @@
 		</select></span>
 		<TCG:Pager Id='pager' runat='server'/>
 	</div>
-	<input type="hidden" id="iSiteId" name="iSiteId" runat="server" />
+	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
 	<input type="hidden" id="iParentid" name="iParentid" runat="server" />
 	<input type="hidden" id="temps" name="temps"/>
 	<input type="hidden" id="work" name="work"/>
