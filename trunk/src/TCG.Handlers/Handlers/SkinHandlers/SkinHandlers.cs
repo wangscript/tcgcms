@@ -35,6 +35,18 @@ namespace TCG.Handlers
     public class SkinHandlers : ObjectHandlersBase
     {
         /// <summary>
+        /// 根据皮肤ID得到皮肤信息
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public Skin GetSkinEntityBySkinId(string skinid)
+        {
+            Dictionary<string, EntityBase> skins = this.GetAllSkinEntity();
+            if (skins == null) return null;
+            return  (Skin)skins[skinid];
+        }
+
+        /// <summary>
         /// 获得所有皮肤实体
         /// </summary>
         /// <returns></returns>

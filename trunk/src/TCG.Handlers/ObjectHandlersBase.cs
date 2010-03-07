@@ -99,22 +99,31 @@ namespace TCG.Handlers
 
         public string GetJsEntitys(Dictionary<string, EntityBase> entitys, Type type)
         {
-            if (entitys == null) return null;
+
             if (type == null) return null;
-            if (entitys.Count == 0) return null;
             StringBuilder sb = new StringBuilder();
             sb.Append("var _" + type.ToString().Split('.')[2] + "=[");
-            int i = 0;
-            foreach (KeyValuePair<string, EntityBase> keyvalue in entitys)
+
+            if (entitys != null)
             {
-                sb.Append(this.GetJsEntity(keyvalue.Value,type));
-                i++;
-                if (i != entitys.Count) sb.Append(",");
+                int i = 0;
+                foreach (KeyValuePair<string, EntityBase> keyvalue in entitys)
+                {
+                    sb.Append(this.GetJsEntity(keyvalue.Value, type));
+                    i++;
+                    if (i != entitys.Count) sb.Append(",");
+                }
             }
             sb.Append("];");
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 得到实体的JSON对象
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public string GetJsEntity(EntityBase entity, Type type)
         {
             if (entity == null) return null;
@@ -147,6 +156,13 @@ namespace TCG.Handlers
                     sb.Append("SystemType:" + template.iSystemType.ToString() + ",");
                     sb.Append("TempName:\"" + template.vcTempName + "\",");
                     sb.Append("Url:\"" + template.vcUrl + "\"");
+                    break;
+                case "TCG.Entity.Skin":
+                    Skin skin = (Skin)entity;
+                    sb.Append("Id:\"" + skin.Id + "\",");
+                    sb.Append("Name:\"" + skin.Name + "\",");
+                    sb.Append("Pic:\"" + skin.Pic + "\",");
+                    sb.Append("Info:\"" + skin.Info + "\"");
                     break;
             }
             sb.Append("}");

@@ -38,6 +38,7 @@ public partial class skin_categoriesadd : adminMain
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"));
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
+            cif.SkinId = objectHandlers.Post("iSkinId");
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch("-1");
@@ -55,18 +56,30 @@ public partial class skin_categoriesadd : adminMain
                 }
             }
 
-            int rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(cif);
-            CachingService.Remove("AllNewsClass");
-            base.AjaxErch(rtn.ToString());
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(cif);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
 
+            base.AjaxErch(rtn, "分类添加成功！");
             base.Finish();
         }
     }
 
     private void Init()
     {
-        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentId"));
+        string iParent = string.IsNullOrEmpty(objectHandlers.Get("iParentId")) ? "0" : objectHandlers.Get("iParentId");
         this.iClassId.Value = iParent.ToString();
+        this.iSkinId.Value = objectHandlers.Get("SkinId");
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType);
         if (templates != null && templates.Count != 0)

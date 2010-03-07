@@ -10,8 +10,8 @@
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
-	<script type="text/javascript" src="../js/newsclasslist.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
-		修改资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
+		修改资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.refinsh();">[关闭]</a>
 	</div>
 	<div id="placemsg" class="Page_arrb arb_pr classaddline">
 		<span class="p_a_t">详 细 位 置：</span>

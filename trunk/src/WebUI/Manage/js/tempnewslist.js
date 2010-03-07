@@ -3,16 +3,15 @@
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
 
-function classTitleInit(){
-	var m=$("#classTitle");
-	var classobj=$("#iSiteId");
-	var SytemType=$("#SytemType");
-	var iParentid=$("#iParentid");
-	if (m.lenght == 0 || classobj.lenght == 0) return;
+function classTitleInit() {
+    var m = $("#classTitle");
+    var classobj = $("#iSkinId");
+    var SytemType = $("#SytemType");
+    var iParentid = $("#iParentid");
+    if (m.lenght == 0 || classobj.lenght == 0) return;
+    if (iParentid == "0") return;
 
-	if (classobj.val() == "0") {
-	    m.innerHTML = GetClassTitleById(classobj.val()) + GetTempTitleBy(classobj.val(), SytemType.val(), iParentid.val());
-	}
+    m.html(m.html() + GetTempTitleBy(classobj.val(), iParentid.val()));
 }
 
 
@@ -29,21 +28,11 @@ function DoSubmit(callback) {
     form1.ajaxForm(options);
 }
 
-function GetTempTitleBy(site,systemid,parentid){
-	for(var i=0;i<AllTemplates.length;i++){
-		if(AllTemplates[i][1]==site&&AllTemplates[i][3]==systemid&&AllTemplates[i][0]==parentid){
-			return  GetTempTitleBy(site,systemid,AllTemplates[i][2])+">><a href='?iParentid="+
-			parentid+"&iSiteId="+site+"'>"+ AllTemplates[i][4]+"</a>";
-		}
-	}
-	return "";
-}
-
-function GetClassTitleById(id){
-	if(NewsLis==null)return;
-	for(var i=0;i<NewsLis.length;i++){
-		if(id==NewsLis[i][0]){
-			return "<span class='txt bold'><a href='?iSiteId="+id+"'>"+NewsLis[i][2]+"</a></span><span class='info1'>("+NewsLis[i][3]+")</span>";
+function GetTempTitleBy(site, parentid) {
+    for (var i = 0; i < _Template.length; i++) {
+        if (_Template[i].SkinId == site && _Template[i].Id == parentid) {
+            return GetTempTitleBy(site, _Template[i].ParentId) + " >> <a href='?iParentid=" +
+			parentid + "&SkinId=" + site + "'>" + _Template[i].TempName + "</a>";
 		}
 	}
 	return "";
@@ -81,7 +70,8 @@ function BeforSubmit() {
 }
 
 
-function CheckTempsUsed(temps){
+function CheckTempsUsed(temps) {
+    debugger;
 	if(temps=="")return false;
 	var str="";
 	if(temps.indexOf(",")>-1){
@@ -100,18 +90,18 @@ function CheckTempsUsed(temps){
 
 function CheckTempUsed(temp){
 	if(temp=="")return false;
-	if(NewsLis==null)return false;
-	for(var i=0;i<NewsLis.length;i++){
-		if(temp==NewsLis[i][4])return true;
+	if (_Categories == null) return false;
+	for (var i = 0; i < _Categories.length; i++) {
+	    if (temp == _Categories[i].ResourceListTemplate) return true;
 	}
 	return false;
 }
 
 function AddTemplate(){
-	var iSiteId=$("#iSiteId");
+    var iSiteId = $("#iSkinId");
 	var SytemType=$("#SytemType");
 	var iParentid=$("#iParentid");
-	window.location.href = "templateadd.aspx?iSiteId=" + iSiteId.value + "&SytemType=" + SytemType.val() + "&iParentid=" + iParentid.val();
+	window.location.href = "templateadd.aspx?iSkinId=" + iSiteId.val() + "&SytemType=" + SytemType.val() + "&iParentid=" + iParentid.val();
 }
 function EditTemplate(){
 	var vs=GetCheckBoxValues("CheckID")
@@ -127,61 +117,62 @@ function EditTemplate(){
 	window.location.href="templatemdy.aspx?templateid="+vs;
 }
 
-function sTypeChange(obj){
-	if(obj.value=="-1"){
-		var iParentid=$("#iParentid");
-		var iSiteId=$("#iSiteId");
-		window.location.href = "?iSiteId=" + iSiteId.val() + "&iParentid=" + iParentid.val();
-	}else{
-		var iParentid=$("#iParentid");
-		var iSiteId=$("#iSiteId");
-		window.location.href = "?iSiteId=" + iSiteId.val() + "&iType=" + obj.val() + "&iParentid=" + iParentid.val();
-	}
+function sTypeChange(obj) {
+    var obj = $(obj);
+    if (obj.val() == "-1") {
+        var iParentid = $("#iParentid");
+        var iSkinId = $("#iSkinId");
+        window.location.href = "?SkinId=" + iSkinId.val() + "&iParentid=" + iParentid.val();
+    } else {
+        var iParentid = $("#iParentid");
+        var iSkinId = $("#iSkinId");
+        window.location.href = "?SkinId=" + iSkinId.val() + "&iType=" + obj.val() + "&iParentid=" + iParentid.val();
+    }
 }
 
 function PageCreat() {
-    DoSubmit(CreateBack); 
-	var temps=GetCheckBoxValues("CheckID");
-	if(temps==""){
-		SetAjaxDiv("err",false,"您没选择需要生成的模版！");
-		return;
-	}
-	var work=$("#work");
-	var iTemplateId=$("#iTemplateId");
-	if(temps.indexOf(",")>-1){
-		var o=temps.split(",");
-		CreateDiv.Start("生成单页模版文件");
-		CreateDiv.set =1;
-		for(var i=0;i<o.length;i++){
-			var t=GetTemplateById(o[i]);
-			if(t==null)continue;
-			if(t[5]!=0)continue;
-			work.val("Create");
-			iTemplateId.val(o[i]);
-			CreateDiv.setcount++;
-			$('#form1').submit();
-			
-		}
-	}else{
-		var t2=GetTemplateById(temps);
-		var s=true;
-		if(t2==null){
-		    s=false;
-		}else{
-		    if(t2[5]!=0)s=false;
-		}
-		
-		if(!s){
-			SetAjaxDiv("err",false,"您选择的模版不是单页模版！");
-			return;
-		}
-		CreateDiv.Start("生成单页模版文件");
-		CreateDiv.set =1;
-		CreateDiv.setcount=1;
-		work.val("Create");
-		iTemplateId.val(temps);
-		$('#form1').submit();
-	}
+    DoSubmit(CreateBack);
+    var temps = GetCheckBoxValues("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没选择需要生成的模版！");
+        return;
+    }
+    var work = $("#work");
+    var iTemplateId = $("#iTemplateId");
+    if (temps.indexOf(",") > -1) {
+        var o = temps.split(",");
+        CreateDiv.Start("生成单页模版文件");
+        CreateDiv.set = 1;
+        for (var i = 0; i < o.length; i++) {
+            var t = GetTemplateById(o[i]);
+            if (t == null) continue;
+            if (t.SystemType != 0) continue;
+            work.val("Create");
+            iTemplateId.val(o[i]);
+            CreateDiv.setcount++;
+            $('#form1').submit();
+
+        }
+    } else {
+        var t2 = GetTemplateById(temps);
+        var s = true;
+        if (t2 == null) {
+            s = false;
+        } else {
+            if (t2.SystemType != 0) s = false;
+        }
+
+        if (!s) {
+            SetAjaxDiv("err", false, "您选择的模版不是单页模版！");
+            return;
+        }
+        CreateDiv.Start("生成单页模版文件");
+        CreateDiv.set = 1;
+        CreateDiv.setcount = 1;
+        work.val("Create");
+        iTemplateId.val(temps);
+        $('#form1').submit();
+    }
 }
 
 function CreateBack(data) {

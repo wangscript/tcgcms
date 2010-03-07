@@ -81,11 +81,17 @@ namespace TCG.Handlers
             return childtemplates;
         }
 
-        public int AddTemplate(Template item)
+        /// <summary>
+        /// 添加模板
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int AddTemplate(Template item,Admin admin)
         {
             base.SetDataBaseConnection();
             item.Id = Guid.NewGuid().ToString();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;
@@ -106,10 +112,16 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int DelTemplate(string temps)
+        /// <summary>
+        /// 删除模板
+        /// </summary>
+        /// <param name="temps"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int DelTemplate(string temps,Admin admin)
         {
             base.SetDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vctemps", SqlDbType.VarChar, 1000); sp2.Value = temps;
             SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;
@@ -122,10 +134,16 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int MdyTemplate(Template item)
+        /// <summary>
+        /// 修改模板信息
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int MdyTemplate(Template item,Admin admin)
         {
             base.SetDataBaseConnection();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = "";
+            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;

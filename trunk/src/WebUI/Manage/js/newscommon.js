@@ -20,8 +20,8 @@ function GetNewsSiteByClassId(id) {
 }
 
 function GetTemplateById(id) {
-    for (var i = 0; i < AllTemplates.length; i++) {
-        if (id == AllTemplates[i][0]) return AllTemplates[i];
+    for (var i = 0; i < _Template.length; i++) {
+        if (id == _Template[i].Id) return _Template[i];
     }
     return null;
 }

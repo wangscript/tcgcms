@@ -272,27 +272,27 @@ function getAbsolutePositionXY(obj){
 	return position;
 }
 
-function CheckValueIsNull(obj,msgobj){
-	var iClassName=$(obj);
-	var cnamemsg=$(msgobj);
-	if(iClassName.tagName=="INPUT"){
-		iClassName.className="itxt1";
-		if(iClassName.value==""){
-			cnamemsg.className="info_err";
-			return false;
-		}else{
-			cnamemsg.className="info_ok";
-			return true;
-		}
-	}else if(iClassName.tagName=="SELECT"){
-		if(iClassName.value=="-1"){
-			cnamemsg.className="info_err";
-			return false;
-		}else{
-			cnamemsg.className="info_ok";
-			return true;
-		}
-	}
+function CheckValueIsNull(obj, msgobj) {
+    var iClassName = $("#" + obj);
+    var cnamemsg = $("#" + msgobj);
+    if (iClassName.attr("tagName") == "INPUT") {
+        iClassName.addClass("itxt1").removeClass('info_err').removeClass('info_ok');
+        if (iClassName.val() == "") {
+            cnamemsg.addClass("info_err").removeClass('itxt1').removeClass('info_ok');
+            return false;
+        } else {
+            cnamemsg.addClass("info_ok").removeClass('itxt1').removeClass('info_err');
+            return true;
+        }
+    } else if (iClassName.attr("tagName") == "SELECT") {
+        if (iClassName.val() == "-1") {
+            cnamemsg.addClass("info_err").removeClass('itxt1').removeClass('info_ok');
+            return false;
+        } else {
+            cnamemsg.addClass("info_ok").removeClass('itxt1').removeClass('info_err');
+            return true;
+        }
+    }
 }
 
 function CharInStr(str,chr){

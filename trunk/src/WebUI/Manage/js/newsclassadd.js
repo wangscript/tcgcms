@@ -1,21 +1,31 @@
 //--------------
 
 
-function CheckAddClassForm(){
-	var iClassId=$("iClassId");
-	if(iClassId.value=="0"){
-		if(!(CheckValueIsNull('iClassName','cnamemsg')&&CheckValueIsNull('iName','inamemsg'))){
-			return false;
-		}
-	}else{
-		if(!(CheckValueIsNull('iClassName','cnamemsg')&&CheckValueIsNull('iName','inamemsg')
-			&&CheckValueIsNull('iDirectory','dirmsg')&&CheckValueIsNull('iUrl','urlmsg')&&
-			CheckTemplate('sTemplate','stdmsg')&&CheckTemplate('slTemplate','stsdmsg'))){
-			return false;
-		}
-	}
-	SetAjaxDiv("loader",false,"正在发送请求...");
-	return false;
+function CheckAddClassForm() {
+    var iClassId = $("#iClassId");
+
+    if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
+			&& CheckValueIsNull('iDirectory', 'dirmsg') && CheckValueIsNull('iUrl', 'urlmsg') &&
+			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
+        return false;
+    }
+    
+    SetAjaxDiv("loader", false, "正在发送请求...");
+    return true;
+}
+
+function GetParentTitle() {
+    var o = $("#iClassId");
+    if (o == null) return;
+    var placemsg = $("#placemsg");
+    if (o.val() == "0") {
+        placemsg.html(placemsg.html() + "作为网站分类");
+    } else {
+        a = "";
+        GetNewsListTitleByClassIdW(o.val());
+        a = "根类别>>" + a;
+        placemsg.html(placemsg.html() + a);
+    }
 }
 
 $(document).ready(function() {
@@ -24,35 +34,30 @@ $(document).ready(function() {
         options = {
             beforeSubmit: CheckEditClassForm,
             dataType: 'json',
-            success: EditClassPostBack
+            success: AjaxPostFormBack
         };
 
     } else {
         options = {
             beforeSubmit: CheckAddClassForm,
             dataType: 'json',
-            success: AddClassPostBack
+            success: AjaxPostFormBack
         };
     }
     $("#form1").ajaxForm(options);
 });
 
 
-function CheckEditClassForm(){
-	var iClassId=$("iClassId");
-	if(iClassId.value=="0"){
-		if(!(CheckValueIsNull('iClassName','cnamemsg')&&CheckValueIsNull('iName','inamemsg'))){
-			return false;
-		}
-	}else{
-		if(!(CheckValueIsNull('iClassName','cnamemsg')&&CheckValueIsNull('iName','inamemsg')
-			&&CheckValueIsNull('iDirectory','dirmsg')&&CheckValueIsNull('iUrl','urlmsg')&&
-			CheckTemplate('sTemplate','stdmsg')&&CheckTemplate('slTemplate','stsdmsg'))){
-			return false;
-		}
-	}
-	SetAjaxDiv("loader", false, "正在发送请求...");
-	return false;
+function CheckEditClassForm() {
+    var iClassId = $("#iClassId");
+
+    if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
+			&& CheckValueIsNull('iDirectory', 'dirmsg') && CheckValueIsNull('iUrl', 'urlmsg') &&
+			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
+        return false;
+    }
+    SetAjaxDiv("loader", false, "正在发送请求...");
+    return true;
 }
 
 function EditClassPostBack(val){
@@ -65,14 +70,14 @@ function AddClassPostBack(val){
 	SetAjaxDiv("ok",false,"资讯分类添加成功！");
 }
 
-function CheckTemplate(on,jn){
-	var o=$(on);
-	var j=$(jn);
-	if(o.value=="-1"){
-		j.className="info_err";
-		return false;
-	}else{
-		j.className="info_ok";
-		return true;
-	}
+function CheckTemplate(on, jn) {
+    var o = $("#" + on);
+    var j = $("#" + jn);
+    if (o.val() == "-1") {
+        j.addClass("info_err").removeClass('info_ok');
+        return false;
+    } else {
+        j.addClass("info_ok").removeClass('info_err');
+        return true;
+    }
 }

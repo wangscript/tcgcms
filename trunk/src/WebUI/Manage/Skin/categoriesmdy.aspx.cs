@@ -57,10 +57,22 @@ public partial class skin_categoriesmdy : adminMain
                 base.Finish();
                 return;
             }
-           
-            int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
-            CachingService.Remove("AllNewsClass");
-            base.AjaxErch(rtn.ToString());
+
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch(rtn, "分类添加成功！");
 
             base.Finish();
         }
@@ -110,7 +122,7 @@ public partial class skin_categoriesmdy : adminMain
             {
                 Template template = (Template)keyvalue.Value;
                 this.slTemplate.Items.Add(new ListItem(template.vcTempName, template.Id));
-                if (template.Id == cif.ResourceTemplate.Id)
+                if (template.Id == cif.ResourceListTemplate.Id)
                 {
                     this.slTemplate.SelectedIndex = i + 1;
                 }

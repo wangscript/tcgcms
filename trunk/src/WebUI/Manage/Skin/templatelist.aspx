@@ -12,8 +12,9 @@
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../Common/AllTemplate.aspx"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
+	<script type="text/javascript" src="../Common/AllSkin.aspx"></script>
 	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
@@ -41,7 +42,7 @@
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="newslistt" id="classTitle"></div>
+	<div class="newslistt" id="classTitle" runat="server"></div>
 	<div class="list_title">
 	  <span class="l_check l_rg"><input name="" id="CheckBoxMain" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id1 bold l_rg">ID</span>

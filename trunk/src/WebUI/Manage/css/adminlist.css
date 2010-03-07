@@ -30,7 +30,7 @@
 .lb_2{background-color:#fffdd7;}
 .list_bottom{ padding-left:10px;height:30px; line-height:30px;border-top:#f7f7f7 solid 4px;}
 
-.CreateClassDiv{position:absolute; z-index:100;width:1px; height:1px; background-color:#999999; top:0px; left:0px; }
+.CreateClassDiv{ position:absolute; width:600px; height:369px; background-color:#999999; border:1px solid #55b5f8; }
 .CreateClassDivClose{ text-align:right; position:relative; top:-17px; left:-3px;}
 .CBackg{ z-index:99; position:absolute; top:0px; left:0px; background-color:#CCCCCC; filter:Alpha(Opacity=30);-moz-opacity:0.3}
 

@@ -26,13 +26,13 @@ public partial class Template_templateadd : adminMain
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
-            int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
-            int Parentid = objectHandlers.ToInt(objectHandlers.Get("iParentid"));
+            string SkinId = objectHandlers.Get("iSkinId");
+            string Parentid = objectHandlers.Get("iParentid");
             int iSytemType = objectHandlers.ToInt(objectHandlers.Get("SytemType"));
 
-            this.iParentid.Value = Parentid.ToString();
+            this.iParentid.Value = Parentid;
             this.SytemType.Value = iSytemType.ToString();
-            this.iSiteId.Value = iSiteId.ToString();
+            this.iSiteId.Value = SkinId;
 
             foreach (Option option in base.configService.templateTypes.Values)
             {
@@ -68,8 +68,9 @@ public partial class Template_templateadd : adminMain
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.templateHandlers.AddTemplate(item);
+                rtn = base.handlerService.skinService.templateHandlers.AddTemplate(item,base.adminInfo);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
+                CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
             }
             catch (Exception ex)
             {
@@ -78,7 +79,7 @@ public partial class Template_templateadd : adminMain
                 return;
             }
 
-            base.AjaxErch("{state:true,message:'模板添加成功！'}");
+            base.AjaxErch(rtn,"模板添加成功！");
             item = null;
             base.Finish();
         }

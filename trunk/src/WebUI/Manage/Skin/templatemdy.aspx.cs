@@ -87,8 +87,9 @@ public partial class Template_templatemdy : adminMain
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.templateHandlers.MdyTemplate(item);
+                rtn = base.handlerService.skinService.templateHandlers.MdyTemplate(item,base.adminInfo);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
+                CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
             }
             catch (Exception ex)
             {
@@ -96,8 +97,15 @@ public partial class Template_templatemdy : adminMain
                 base.AjaxErch(base.ajaxdata);
                 return;
             }
-
-            base.AjaxErch("{state:true,message:'模板修改成功！'}");
+            if (rtn < 0)
+            {
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+            }
+            else
+            {
+                base.AjaxErch("{state:true,message:'模板修改成功！'}");
+            }
+            
 
         }
     }
