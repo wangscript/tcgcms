@@ -7,8 +7,8 @@ using System.Data;
 using System.Data.OleDb;
 using System.Web.UI.WebControls;
 
-//using TCG.Pages;
-//using TCG.Handlers;
+using TCG.Pages;
+using TCG.Handlers;
 
 using TCG.Utils;
 using TCG.Entity;
@@ -19,10 +19,11 @@ using TCG.Data;
 using System.Reflection;
 using System.ComponentModel;
 
-public partial class Test : System.Web.UI.Page
+public partial class Test : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        base.Finish();
         //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
         //Response.Write(Guid.NewGuid().ToString());
     }

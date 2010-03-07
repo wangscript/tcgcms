@@ -7,20 +7,23 @@
     <title>添加资讯分类</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../js/CreateDiv.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
+	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckAddClassForm();">
+    <form id="form1" runat="server">
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
+	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_title bold">
-		添加资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.CreatClassClose();">[关闭]</a>
+		添加资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.refinsh();">[关闭]</a>
 	</div>
 	<div id="placemsg" class="Page_arrb arb_pr classaddline">
 		<span class="p_a_t">详 细 位 置：</span>
@@ -38,7 +41,7 @@
 	  <input id="iDirectory" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iDirectory','dirmsg');"/>
 		<span id="dirmsg" class="info1">相对管理网站的的目录，存放生成的静态文件</span>
 	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分类 首地址：</span>
+	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 地 址：</span>
 	  <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iUrl','urlmsg');"/>
 		<span id="urlmsg" class="info1">分类在网站前台的首页地址，用于生成导航</span>
 	</div>

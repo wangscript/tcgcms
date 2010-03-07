@@ -65,23 +65,23 @@ public partial class Template_templatelist : adminMain
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
         sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
-        string SkinId = objectHandlers.Get("SkinId");
-        sItem.strCondition = "SkinId ='" + SkinId + "' AND iSystemType =" + 0;
-        this.iSkinId.Value = SkinId.ToString();
-     
-
         string iParentid = objectHandlers.Get("iParentid");
         if (iParentid.Length != 36) iParentid = "0";
-        sItem.strCondition += " AND iParentid='" + iParentid + "'";
+        sItem.strCondition = "iParentid='" + iParentid + "'";
         this.iParentid.Value = iParentid.ToString();
 
+        string SkinId = objectHandlers.Get("SkinId");
+        sItem.strCondition += " AND SkinId ='" + SkinId + "' AND iSystemType =" + 0;
+        this.iSkinId.Value = SkinId.ToString();
+        Skin skinentity = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
+        this.classTitle.InnerHtml = "<a href='?SkinId=" + SkinId + "&iParentid=0'>" + skinentity.Name + "</a>";
 
         string tt = objectHandlers.Get("iType");
         int iType = -1;
         if (!string.IsNullOrEmpty(tt))
         {
             iType = objectHandlers.ToInt(objectHandlers.Get("iType"));
-            sItem.strCondition += " AND iType=" + iType.ToString();
+            sItem.strCondition += " AND iSystemType=" + iType.ToString();
         }
 
         int curPage = 0;
@@ -155,7 +155,9 @@ public partial class Template_templatelist : adminMain
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.skinService.templateHandlers.DelTemplate(temps);
+            rtn = base.handlerService.skinService.templateHandlers.DelTemplate(temps,base.adminInfo);
+            CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
+            CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
         }
         catch (Exception ex)
         {

@@ -64,7 +64,9 @@ public partial class skin_categorieslist : adminMain
     private void SearchInit()
     {
         string iParent = objectHandlers.Get("iParentId");
-        string skinid =    objectHandlers.Get("iParentId");
+        this.iClassId.Value = iParent;
+        string skinid = objectHandlers.Get("skinid");
+        this.iSkinId.Value = skinid;
         if (string.IsNullOrEmpty(iParent)) iParent = "0";
         Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(iParent, skinid);
 
@@ -90,10 +92,10 @@ public partial class skin_categorieslist : adminMain
 
         sOrder.Text = categorie.iOrder.ToString();
 
-        string text = "<a href=\"?iParentId=" + categorie.Id + "\" title=\"查看子分类\">" 
+        string text = "<a href=\"?iParentId=" + categorie.Id + "&skinid=" + objectHandlers.Get("skinid") + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
         classname.Text = text + categorie.vcClassName;
-        lname.Text = "<a href='?iClassId=" + categorie.Id + "' title='资讯列表'><img src='../images/icon/09.gif'></a>"
+        lname.Text = "<a href='?iClassId=" + categorie.Id + "&skinid=" + objectHandlers.Get("skinid") + "' title='资讯列表'><img src='../images/icon/09.gif'></a>"
             + categorie.vcName;
         directory.Text = categorie.vcDirectory;
         updatedate.Text = categorie.dUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");

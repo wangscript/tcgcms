@@ -33,13 +33,14 @@
 
 -1000000019@@@configsetting_aspx@@@系统设置保存失败，请检查服务器文件夹权限！
 
--1000000020@@@SP_News_AddClassInfo@@@分类名或别名不能为空
--1000000021@@@SP_News_AddClassInfo@@@模版编号不能为空
--1000000022@@@SP_News_AddClassInfo@@@生成路径不能为空
--1000000023@@@SP_News_AddClassInfo@@@前台分类首页不能为空
--1000000029@@@SP_News_AddClassInfo@@@列表模版编号不能为空
--1000000030@@@SP_News_AddClassInfo@@@父类ID不能为自己的ID
--1000000056@@@SP_News_AddClassInfo@@@父分类不能变成孩子的孩子
+-1000000020@@@SP_Skin_categories_Manage@@@分类名或别名不能为空
+-1000000021@@@SP_Skin_categories_Manage@@@模版编号不能为空
+-1000000022@@@SP_Skin_categories_Manage@@@生成路径不能为空
+-1000000023@@@SP_Skin_categories_Manage@@@前台分类首页不能为空
+-1000000029@@@SP_Skin_categories_Manage@@@列表模版编号不能为空
+-1000000030@@@SP_Skin_categories_Manage@@@父类ID不能为自己的ID
+-1000000056@@@SP_Skin_categories_Manage@@@父分类不能变成孩子的孩子
+-1000000100@@@SP_Skin_categories_Manage@@@分类所属模板不能为空
 
 -1000000024@@@SP_Template_AddNewsTemplate@@@单页时地址不能为空
 -1000000025@@@SP_Template_AddNewsTemplate@@@站点ID不能为空

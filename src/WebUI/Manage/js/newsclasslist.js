@@ -1,140 +1,76 @@
 //--------------
-var ajax = new AJAXRequest();
+
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
 
 
 var a="";
-function classTitleInit(){
-	var m=$("classTitle");
-	var classobj=$("iClassId");
-	if(m==null||classobj==null)return;
-	if(classobj.value=="0"){
-		m.innerHTML="<span class='txt bold'>网站名称</span><span class='info1'>(资讯站点根目录)</span>";
-	}else{
-		a="";
-		GetNewsListTitleByClassId(classobj.value);
-		a="<a href='?'>站点根目录</a>>>"+a;
-		m.innerHTML="<span class='txt bold'>"+a+"</span>";
-	}
+function classTitleInit() {
+    var m = $("#classTitle");
+    var classobj = $("#iClassId");
+    if (m == null || classobj == null) return;
+   
+        a = "";
+        GetNewsListTitleByClassId(classobj.val());
+        a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>站点根目录</a>>>" + a;
+        m.html("<span class='txt bold'>" + a + "</span>");
+   
 }
 
-function GetParentTitle(){
-	var o=$("iClassId");
-	if(o==null)return;
-	var placemsg=$("placemsg");
-	if(o.value=="0"){
-		placemsg.innerHTML += "作为网站分类";
-	}else{
-		a="";
-		GetNewsListTitleByClassIdW(o.value);
-		a="根类别>>"+a;
-		placemsg.innerHTML += a;
-	}
-}
 
-function GetNewsListTitleByClassId(classid){
-	if(NewsLis==null)return;
-	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][0]==classid){
-			var t=(NewsLis[i][1]==0)?"":">>";
-			a =t+"<a href='?iParentId="+NewsLis[i][0]+"'>"+NewsLis[i][2]+"</a>"
-				+"<span class='info2'>("+NewsLis[i][3]+")</span>"+a;
-			GetNewsListTitleByClassId(NewsLis[i][1]);
+
+function GetNewsListTitleByClassId(classid) {
+    if (_Categories == null) return;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].Id == classid) {
+            var t = (_Categories[i].ParentId == "0") ? "" : ">>";
+            a = t + "<a href='?iParentId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>"
+				+ "<span class='info2'>(" + _Categories[i].Name + ")</span>" + a;
+            GetNewsListTitleByClassId(_Categories[i].ParentId);
 		}
 	}
 }
 
 function GetNewsListTitleByClassIdW(classid){
-	if(NewsLis==null)return;
-	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][0]==classid){
-			var t=(NewsLis[i][1]==0)?"":">>";
-			a =t+NewsLis[i][2]+a;
-			GetNewsListTitleByClassIdW(NewsLis[i][1]);
+    if (_Categories == null) return;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories.ParentId == classid) {
+            var t = (_Categories.ParentId == 0) ? "" : ">>";
+            a = t + _Categories.ClassName + a;
+            GetNewsListTitleByClassIdW(_Categories.Name);
 		}
 	}
 }
 
 
 function CreatClass(obj){
-	var co=$("CreateClassDiv");
-	if(co==null)return;
-	var movediv=null;
-	var CBackg=$("CBackg");
-	if(DivMoves.length==0){
-		movediv = new DivMove();
-		movediv.obj=obj;
-		movediv.Mobj=co;
-		movediv.DefaultPos={w:186,h:88};
-		movediv.newwid={w:600,h:369};
-		movediv.times=20;
-		movediv.a=3;
-		movediv.bAction=true;
-		var w=(document.all==null)?(movediv.Screen.w-189):(movediv.Screen.w-193);
-		var h=(document.all==null)?(movediv.Screen.h-197):(movediv.Screen.h-194);
-		CBackg.style.width=w+"px";
-		CBackg.style.height=h+"px";
-		CBackg.className="CBackg";
-		DivMoves[DivMoves.length]=movediv;
-		movediv.MoveToSrceenM("SetCreateInnerHTML()");
-	}else{
-		movediv=DivMoves[0];
-	}
+    layer.openLayer({ id: 'layerbox', width: 600, height: 369, callBack: operback });
+    SetCreateInnerHTML();
 }
 
-function EditClass(obj){
-	var co=$("CreateClassDiv");
-	if(co==null)return;
-	var movediv=null;
-	var CBackg=$("CBackg");
-	var temps=GetCheckBoxValues("CheckID");
-	if(temps==""){
-		SetAjaxDiv("err",false,"您没选择需要编辑的分类！");
-		return;
-	}
-	if(temps.indexOf(",")>-1){
-		SetAjaxDiv("err",false,"您选择了多个资讯类别！");
-		return;
-	}
-	if(DivMoves.length==0){
-		movediv = new DivMove();
-		movediv.obj=obj;
-		movediv.Mobj=co;
-		movediv.DefaultPos={w:186,h:88};
-		movediv.newwid={w:600,h:369};
-		movediv.times=20;
-		movediv.a=3;
-		movediv.bAction=true;
-		var w=(document.all==null)?(movediv.Screen.w-189):(movediv.Screen.w-193);
-		var h=(document.all==null)?(movediv.Screen.h-197):(movediv.Screen.h-194);
-		CBackg.style.width=w+"px";
-		CBackg.style.height=h+"px";
-		CBackg.className="CBackg";
-		DivMoves[DivMoves.length]=movediv;
-		movediv.MoveToSrceenM("SetMdyInnerHTML()");
-	}else{
-		movediv=DivMoves[0];
-	}
+function operback() { 
+    
+}
+
+function EditClass(obj) {
+    layer.openLayer({ id: 'layerbox', width: 600, height: 369, callBack: operback });
+    SetMdyInnerHTML();
 }
 
 function SetMdyInnerHTML(){
-	var ifCreateAdd=$("ifCreateAdd");
-	var CreateClassDivClose=$("CreateClassDivClose");
-	ifCreateAdd.style.width="100%";
-	ifCreateAdd.style.height="100%";
-	ifCreateAdd.src = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID");
-	CreateClassDivClose.className="CreateClassDivClose";
+	var ifCreateAdd=$("#ifCreateAdd");
+	ifCreateAdd.css({ "width": "100%" });
+	ifCreateAdd.css({ "height": "100%" });
+	ifCreateAdd.get(0).src = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID");
 }
 
-function SetCreateInnerHTML(){
-	var ifCreateAdd=$("ifCreateAdd");
-	var CreateClassDivClose=$("CreateClassDivClose");
-	var par=$("iClassId");
-	ifCreateAdd.style.width="100%";
-	ifCreateAdd.style.height="100%";
-	ifCreateAdd.src = "Categoriesadd.aspx?iParentId=" + par.value;
-	CreateClassDivClose.className="CreateClassDivClose";
+function SetCreateInnerHTML() {
+	var ifCreateAdd=$("#ifCreateAdd");
+	var CreateClassDivClose=$("#CreateClassDivClose");
+	var par=$("#iClassId");
+	ifCreateAdd.css({"width":"100%"});
+	ifCreateAdd.css({ "height": "100%" });
+	ifCreateAdd.get(0).src = "Categoriesadd.aspx?iParentId=" + par.val() + "&skinid=" + $("#iSkinId").val();
 }
 
 function CreatClassClose(){

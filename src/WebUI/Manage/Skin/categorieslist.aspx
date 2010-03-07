@@ -9,13 +9,14 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
+	<link href="../css/layer.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
-	<script type="text/javascript" src="../js/pager.js"></script>
-	<script type="text/javascript" src="../js/DivMove.js"></script>
+	<script type="text/javascript" src="../js/layer.js"></script>
 	<script type="text/javascript" src="../js/CreateDiv.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
 	<script type="text/javascript" src="../js/CreateInput.js"></script>
@@ -63,8 +64,6 @@
 		</ItemTemplate>
 	</asp:Repeater>
 	<div class="list_bottom">
-		
-		<TCG:Pager Id='pager' runat='server'/>
 	</div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
 	<input type="hidden" id="DelClassId" name="DelClassId" runat="server" />
@@ -72,12 +71,13 @@
 	<input type="hidden" id="iFeildName" name="iFeildName" runat="server" />
 	<input type="hidden" id="iAction" name="iAction"/>
 	<input type="hidden" id="iMdyID" name="iMdyID"/>
-	<div id="CreateClassDiv" class="CreateClassDiv">
-		
-		<iframe id="ifCreateAdd" width="0" height="0" frameborder="0"></iframe>
-		<div class="CreateClassDivClose hid" id="CreateClassDivClose"><a href="javascript:GoTo();" onclick="CreatClassClose();"><img src="../images/icon/10.gif"  /></a></div>
+	<input type="hidden" id="iSkinId" name="iSkinId"  runat="server"/>
+	<!-- class="layerbox"-->
+	<div id="layerbox" class="layerbox">
+	    <div class="CreateClassDiv">
+		    <iframe id="ifCreateAdd" width="600" height="369" frameborder="0"></iframe>
+	    </div>
 	</div>
-	<div id="CBackg" class="CBackg"></div>
 	<script type="text/javascript">classTitleInit();</script>
     </form>
 </body>
