@@ -9,11 +9,11 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
-	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
@@ -77,6 +77,7 @@
 	</div>
 	<input type="hidden" id="iAction" name="iAction"/>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
+	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
 	<input type="hidden" id="iSpeciality" name="iSpeciality" runat="server" />
 	<input type="hidden" id="DelClassId" name="DelClassId"/>
 	<script type="text/javascript">classTitleInit();childClassTitleInit();</script>
