@@ -125,6 +125,53 @@ namespace TCG.Handlers
         }
 
         /// <summary>
+        /// 获得皮肤下的所有分类id，提供给查询
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public string GetAllCategoriesIndexBySkinId(string skinid)
+        {
+            Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+            if (allcategories == null) return "";
+
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, EntityBase> entity in allcategories)
+            {
+                Categories tempcategories = (Categories)entity.Value;
+                if (tempcategories.SkinId == skinid && tempcategories.Parent == "0")
+                {
+                    if (sb.Length > 0) sb.Append(",");
+                    sb.Append(this.GetCategoriesChild(tempcategories.Id));
+                }
+            }
+            return sb.ToString();
+        }
+
+        public string GetCategoriesChild(string categoriesid)
+        {
+            Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+            if (allcategories == null) return "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("'");
+            sb.Append(categoriesid);
+            sb.Append("'");
+
+            foreach (KeyValuePair<string, EntityBase> entity in allcategories)
+            {
+                Categories tempcategories = (Categories)entity.Value;
+                if (tempcategories.Parent == categoriesid)
+                {
+                    if (sb.Length > 0) sb.Append(",");
+                    sb.Append("'");
+                    sb.Append(tempcategories.Id);
+                    sb.Append("'");
+                    sb.Append(this.GetCategoriesChild(tempcategories.Id));
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// 根据ID获得分类信息
         /// </summary>
         /// <param name="conn"></param>

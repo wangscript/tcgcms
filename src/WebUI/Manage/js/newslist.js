@@ -1,56 +1,52 @@
 //--------------
-var ajax = new AJAXRequest();
-var GroupDiv = new MenuDiv();
+
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
 
 var a="";
-function classTitleInit(){
-	var m=$("classTitle");
-	var classobj=$("iClassId");
-	if(m==null||classobj==null)return;
-	//if(classobj.value=="0"){
-		//m.innerHTML="<span class='txt bold lfl'>网站名称</span><span class='info1'>(资讯站点根目录)</span>";
-	//}else{
-	    a = "";
-	   
-		GetNewsListTitleByClassId(classobj.value);
-		m.innerHTML = "<span class='txt bold lfl'><a href='?'>所有资讯</a>>>"+a+"</span>" + m.innerHTML;
-	//}
+function classTitleInit() {
+    var m = $("#classTitle");
+    var classobj = $("#iClassId");
+    if (m == null || classobj == null) return;
+    a = "";
+
+    GetNewsListTitleByClassId(classobj.val());
+    m.html("<span class='txt bold lfl'><a href='?'>所有资讯</a>>>" + a + "</span>" + m.html());
+
 }
 
-function ShowClassTitle(obj){
-	var m=$("ChildclassTitle");
+function ShowClassTitle(obj) {
+	var m=$("#ChildclassTitle");
 	var pos = getAbsolutePositionXY(obj);
-	m.style.top = (pos.y) + "px";
-	m.style.left = (pos.x+22) + "px";
-	m.className="ChildclassTitle";
+	m.css({"top":(pos.y) + "px"});
+	m.css({ "left": (pos.x + 22) + "px" });
+	m.addClass("ChildclassTitle").removeClass("hid");
 }
 
-function HidClassTitle(){
-	var m=$("ChildclassTitle");
-	m.className="ChildclassTitle hid";
+function HidClassTitle() {
+    var m = $("#ChildclassTitle");
+    m.addClass("hid");
 }
 
-function childClassTitleInit(){
-	var m=$("ChildclassTitle");
-	var classobj=$("iClassId");
-	a="";
-	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][1]==classobj.value){
-			a+=" <a href='?iClassId="+NewsLis[i][0]+"' class='childnewstitle bold'>"+NewsLis[i][2]+"</a>";
-		}
-	}
-	m.innerHTML=a;
+function childClassTitleInit() {
+    var m = $("#ChildclassTitle");
+    var classobj = $("#iClassId");
+    a = "";
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].ParentId == classobj.val()) {
+            a += " <a href='?iClassId=" + _Categories[i].Id + "' class='childnewstitle bold'>" + _Categories[i].ClassName + "</a>";
+        }
+    }
+    m.html(a);
 }
 
 function GetNewsListTitleByClassId(classid){
-	if(NewsLis==null)return;
-	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][0]==classid){
-			var t=(NewsLis[i][1]==0)?"":" >>";
-			a =t+" <a href='?iClassId="+NewsLis[i][0]+"'>"+NewsLis[i][2]+"</a>"+a;
-			GetNewsListTitleByClassId(NewsLis[i][1]);
+    if (_Categories == null) return;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories.Parent == classid) {
+            var t = (_Categories.Parent == 0) ? "" : " >>";
+            a = t + " <a href='?iClassId=" + _Categories.Id + "'>" + _Categories.ClassName + "</a>" + a;
+            GetNewsListTitleByClassId(_Categories.Id);
 		}
 	}
 }

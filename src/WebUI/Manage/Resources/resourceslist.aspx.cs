@@ -51,6 +51,8 @@ public partial class resources_resourceslist : adminMain
 
     private void SearchInit()
     {
+        base.handlerService.resourcsService.resourcesHandlers.SetDataBaseConnection();
+
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Resources";
 
@@ -75,7 +77,31 @@ public partial class resources_resourceslist : adminMain
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
         this.iClassId.Value = iClassId.ToString();
 
-        sItem.strCondition = "iClassID = '" + iClassId.ToString() + "'";
+        string skinId = objectHandlers.Get("SkinId");
+        if (string.IsNullOrEmpty(skinId))
+        {
+            skinId = base.configService.DefaultSkinId;
+        }
+
+        this.iSkinId.Value = skinId;
+
+        string allchild = string.Empty;
+
+        if (iClassId == "0")
+        {
+            allchild = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesIndexBySkinId(skinId);
+        }
+        else
+        {
+            allchild = base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(iClassId);
+        }
+        
+        sItem.strCondition = "iClassID in (" + allchild + ")";
+
+      
+
+
+        
 
         string check = objectHandlers.Get("check");
         if (!string.IsNullOrEmpty(check))
