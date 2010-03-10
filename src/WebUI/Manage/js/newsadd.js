@@ -1,9 +1,7 @@
-//--------------
-var ajax = new AJAXRequest();
-var GroupDiv = new MenuDiv();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function SaveNewsInfo(){
-	$("btnok").click();
+	$("#btnok").click();
 }
 
 function CheckAdd(){
@@ -15,8 +13,8 @@ function CheckAdd(){
 	
     //输入框数据赋值
 	setContent();
-	$("form1").action = "../files/ConentImgCheck.aspx";
-	ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
+	//$("form1").action = "../files/ConentImgCheck.aspx";
+	//ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
 
 	return false;
 }
@@ -193,17 +191,17 @@ var tempWork;
 function ClassInit() {
 
     ColorInit(); //初始化颜色选择
-    var iClassName = $("iClassName");
-    var iClassId = $("iClassId");
-    var SelectDivW = $("SelectDivW");
-    var pos = getAbsolutePositionXY(iClassName);
-    SelectDivW.style.top = (pos.y + 1) + "px";
-    SelectDivW.style.left = (pos.x + iClassName.offsetWidth - 20) + "px";
-    var o = GetNewsItemById(iClassId.value);
+    var iClassName = $("#iClassName");
+    var iClassId = $("#iClassId");
+    var SelectDivW = $("#SelectDivW");
+    var pos = getAbsolutePositionXY(iClassName.get(0));
+    SelectDivW.css({ "top": (pos.y + 1) + "px" });
+    SelectDivW.css({"left" :(pos.x + iClassName.get(0).offsetWidth - 20) + "px"});
+    var o = GetCategorieById(iClassId.val());
     if (o == null) {
-        iClassName.value = "请选择资讯分类...";
+        iClassName.val("请选择资讯分类...");
     } else {
-        iClassName.value = o[2];
+        iClassName.val(o.ClassName);
     }
 
 }
@@ -294,23 +292,22 @@ function GetSpecialItems(id,b){
 
 //颜色选择初始化
 function ColorInit() {
-    var sTitleColor = $("sTitleColor");
-    var iTitleColor = $("iTitleColor");
+    var sTitleColor = $("#sTitleColor");
+    var iTitleColor = $("#iTitleColor");
 
-    var oOption = document.createElement("OPTION");
-    oOption.text = "请选择颜色";
-    oOption.value = "";
-    sTitleColor.options.add(oOption);
+    sTitleColor.append("<option value=''>请选择颜色</option>");
 
     var o = { "White": "#FFFFFF", "Green": "#008000", "Silver": "#C0C0C0", "Lime": "#00FF00", "Gray": "#808080", "Olive": "#808000", "Black": "#000000", "Yellow": "#FFFF00", "Maroon": "#800000", "Navy": "#000080", "Red": "#FF0000", "Blue": "#0000FF", "Purple": "#800080", "Teal": "#008080", "Fuchsia": "#FF00FF", "Aqua": "#00FFFF" };
     for (key in o) {
-        var oOption = document.createElement("OPTION");
-        oOption.text = key;
-        oOption.value = o[key];
-        oOption.style.cssText = "background-color:" + o[key] + ";"
-        sTitleColor.options.add(oOption);
-        if (o[key] == iTitleColor.value) {
-            sTitleColor.value = o[key];
+
+        sTitleColor.append("<option value='" + key + "' style='background-color:" + o[key] + ";'>" + key + "</option>");
+        
+        if (o[key] == iTitleColor.val()) {
+            sTitleColor.val(o[key]);
         }
     }
 }
+
+$(document).ready(function() {
+    Menu.init("gamelist");
+});

@@ -5,21 +5,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>添加资讯</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
+	<link href="../css/enmu.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
+	<script type="text/javascript" src="../js/enmu.js"></script>
 
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
 	<script type="text/javascript">var fileclassid = <%=base.configService.baseConfig["NewsFileClass"] %> ;</script>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckAdd()">
@@ -37,6 +40,139 @@
 			<img src="../images/icon/5.gif" />取消
 		</a>
 	</div>
+		<div class="enmu">
+
+	    <div  class="c_box" id="gamelist">
+		    <ul class="one">
+		    	<li><a href="javascript:void 0"><span><em>C</em>超级舞者</span></a>
+				<ul>
+					<li><a href="javascript:void 0"><span>装备</span></a>
+					<ul>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>BBB区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>BB1服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB2服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB3服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB4服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>CCC区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>CC1服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC2服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC3服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC4服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC5服</span></a></li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+					<li><a href="javascript:void 0"><span>游戏币</span></a>
+					<ul>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>BBB区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>BB1服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB2服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB3服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB4服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>CCC区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>CC1服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC2服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC3服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC4服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC5服</span></a></li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+					<li><a href="javascript:void 0"><span>点卡</span></a>
+					<ul>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>AAA区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>AA1服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA2服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA3服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA4服</span></a></li>
+							<li><a href="javascript:void 0"><span>AA5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>BBB区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>BB1服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB2服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB3服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB4服</span></a></li>
+							<li><a href="javascript:void 0"><span>BB5服</span></a></li>
+						</ul>
+						</li>
+						<li><a href="javascript:void 0"><span>CCC区</span></a>
+						<ul>
+							<li><a href="javascript:void 0"><span>CC1服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC2服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC3服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC4服</span></a></li>
+							<li><a href="javascript:void 0"><span>CC5服</span></a></li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+				</ul>
+				</li>
+				
+			</ul>
+    </div>
+  </div>
+
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_arrb arb_pr1">
 		<span class="p_a_t1">资讯标题：</span><input id="iTitle" name="iTitle" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="CheckValueIsNull('iTitle','titlemsg');" runat="server"/>

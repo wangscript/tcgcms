@@ -1,4 +1,7 @@
-﻿function GetNewsItemById(id) {
+﻿/// <reference path="jquery-1.3.1-vsdoc.js" />
+/// <reference path="../Common/AllCategories.aspx" />
+
+function GetNewsItemById(id) {
     for (var i = 0; i < NewsLis.length; i++) {
         if (id == NewsLis[i][0]) {
             return NewsLis[i];
@@ -36,4 +39,12 @@ function GetAllChildClassIdByClassId(id) {
         }
     }
     return st;
+}
+
+
+function GetCategorieById(Id) {
+    if (_Categories == null) return null;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].Id == Id) return _Categories[i];
+    }
 }
