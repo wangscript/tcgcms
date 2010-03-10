@@ -72,7 +72,7 @@ function ShowClassNameByClassID(id){
 }
 
 function AddNewsInfo(){
-    window.location.href = "resourceshandlers.aspx?iClassId=" + $("iClassId").value;
+    window.location.href = "resourceshandlers.aspx?iClassId=" + $("#iClassId").val();
 }
 
 function CreateNews(){
