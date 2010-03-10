@@ -11,7 +11,7 @@ function classTitleInit() {
     a = "";
 
     GetNewsListTitleByClassId(classobj.val());
-    m.html("<span class='txt bold lfl'><a href='?'>所有资讯</a>>>" + a + "</span>" + m.html());
+    m.html("<span class='txt bold lfl'><a href='?iClassId=" + $("#iClassId").val() + "&skinid=" + $("#iSkinId").val() + "'>所有资讯</a>>>" + a + "</span>" + m.html());
 
 }
 
@@ -34,19 +34,19 @@ function childClassTitleInit() {
     a = "";
     for (var i = 0; i < _Categories.length; i++) {
         if (_Categories[i].ParentId == classobj.val()) {
-            a += " <a href='?iClassId=" + _Categories[i].Id + "' class='childnewstitle bold'>" + _Categories[i].ClassName + "</a>";
+            a += " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "' class='childnewstitle bold'>" + _Categories[i].ClassName + "</a>";
         }
     }
     m.html(a);
 }
 
-function GetNewsListTitleByClassId(classid){
+function GetNewsListTitleByClassId(classid) {
     if (_Categories == null) return;
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories.Parent == classid) {
-            var t = (_Categories.Parent == 0) ? "" : " >>";
-            a = t + " <a href='?iClassId=" + _Categories.Id + "'>" + _Categories.ClassName + "</a>" + a;
-            GetNewsListTitleByClassId(_Categories.Id);
+        if (_Categories[i].Id == classid) {
+            var t = (_Categories[i].ParentId == 0) ? "" : " >>";
+            a += t + " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>" + a;
+            GetNewsListTitleByClassId(_Categories[i].Parent);
 		}
 	}
 }

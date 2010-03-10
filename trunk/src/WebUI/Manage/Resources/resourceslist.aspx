@@ -42,7 +42,7 @@
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="newslistt" id="classTitle"> <a href="javascript:GoTo();" onmousemove="ShowClassTitle(this);" onmouseout="HidClassTitle()" class="ClassTitleA" id="ClassTitleA" title="显示子分类"><img src="../images/icon/2.gif" /></a></div>
-	<div class="ChildclassTitle hid" id="ChildclassTitle" onmouseout="HidClassTitle()" onmousemove="ShowClassTitle($('ClassTitleA'));"></div>
+	<div class="ChildclassTitle hid" id="ChildclassTitle" onmouseout="HidClassTitle()" onmousemove="ShowClassTitle($('#ClassTitleA').get(0));"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_classname bold l_rg newstitle hidover">资讯标题</span>
