@@ -187,19 +187,10 @@ function GetClassItems(v){
 	}
 	return items
 }
+
+
 var tempWork;
 function ClassInit() {
-    SetAjaxDiv("loader", false, "正在加载关键字词库...");
-    tempWork = $("work").value;
-    var work = $("work");
-    work.value = "KeyWordLoad";
-    ajax.postf($("form1"), function(obj) { KeyWordLoadBack(obj.responseText); });
-
-}
-
-function KeyWordLoadBack(val) {
-    if (GetErrText(val)) return;
-    SetAjaxDiv("ok", false, "词库加载成功！");
 
     ColorInit(); //初始化颜色选择
     var iClassName = $("iClassName");
@@ -214,7 +205,7 @@ function KeyWordLoadBack(val) {
     } else {
         iClassName.value = o[2];
     }
-    $("work").value = tempWork;
+
 }
 
 function selebg1(){
