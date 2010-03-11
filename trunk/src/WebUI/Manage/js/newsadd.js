@@ -16,7 +16,7 @@ function CheckAdd(){
 	//$("form1").action = "../files/ConentImgCheck.aspx";
 	//ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
 
-	return false;
+	return true;
 }
 
 function CheckImgBack(val) {
@@ -107,75 +107,12 @@ function NewsAddPostBack(val) {
 	iKeyWords.value="";
 }
 
-
 function SelectClassValue(val, txt) {
 	var iClassName=$("#iClassName");
 	var iClassId=$("#iClassId");
 	iClassName.val(txt);
 	iClassId.val(val);
 }
-
-function ShowFromDiv(obj){
-	var froms=$("froms");
-	var iFrom=$("iFrom");
-	var ot =[];
-	var vals=iFrom.value;
-	var sels=false;
-	for(var i=0;i<NewsFromItems.length;i++){
-		if(NewsFromItems[i][0]==vals){
-			sels=true;
-		}else{
-			sels=false;
-		}
-		ot[i]={href:"javascript:GoTo();",onclick:"SelectFromValue("+NewsFromItems[i][0]+");",Text:NewsFromItems[i][1],Sel:sels};
-	}
-	GroupDiv.HidAuto = true;
-	GroupDiv.CreadDiv("froms",obj,ot,200,null,0,0);
-}
-
-function SelectFromValue(val){
-	var iFrom=$("iFrom");
-	iFrom.value=val;
-	GroupDiv.HidMenuItem("froms");
-}
-
-
-function ShowChild(obj,classid){
-	var id="ClassDiv_"+classid;
-	var o=obj.parentNode;
-	o.className="topmenu";
-	GroupDiv.DefZIndex++;
-	var al = GetClassItems(classid);
-	if(al.length>0){
-		GroupDiv.HidAuto = false;
-		GroupDiv.CreadDiv(id,obj,al,obj.offsetWidth,null,0,0,"right");
-	}
-}
-
-function HidChild(classid){
-	var id="ClassDiv_"+classid;
-	GroupDiv.HidMenuItem(id);
-}
-
-function GetClassItems(v){
-	var items =[];
-	var n=0;
-	var val=$("iClassId").value;
-	var sels=false;
-	for(var i=0;i<NewsLis.length;i++){
-		if(v==NewsLis[i][1]){
-			if(NewsLis[i][0]==val){
-				sels=true;
-			}else{
-				sels=false;
-			}
-			items[n]={href:"javascript:GoTo();",onclick:"SelectClassValue(\""+NewsLis[i][0]+"\",\""+NewsLis[i][2]+"\");",Text:NewsLis[i][2],onmouseover:"ShowChild(this,\""+NewsLis[i][0]+"\")",onmouseout:"HidChild(\""+NewsLis[i][0]+"\")",Sel:sels};
-			n++;
-		}
-	}
-	return items
-}
-
 
 var tempWork;
 function ClassInit() {
@@ -194,89 +131,6 @@ function ClassInit() {
 
 }
 
-function selebg1(){
-	var iClassName=$("iClassName");
-	var SelectDivW=$("SelectDivW");
-	SelectDivW.className="selectDiv sl_bg2";
-	iClassName.className="itxt2";
-}
-
-function selebg2(){
-	var iClassName=$("iClassName");
-	var SelectDivW=$("SelectDivW");
-	SelectDivW.className="selectDiv sl_bg1";
-	iClassName.className="itxt1";
-}
-
-function SpecialitySel(obj){
-	var iClassId=$("iClassId");
-	//var op =GetNewsSiteByClassId(iClassId.value);
-	//if (op == null) return;
-	var o = GetSpecialItems(0, true);
-	o[o.length] = { href: "javascript:GoTo();", onclick: "GroupDiv.HidMenuDiv()",
-	 Text: "<img src='../images/close.gif' style='float:left;'><span style='float:left;'><b>关闭</b></span>", onmouseover: "void 0;", onmouseout: "void 0", Sel: false };
-	GroupDiv.HidAuto = false;
-	GroupDiv.IsMut=true;
-	GroupDiv.CreadDiv("Speciality",obj,o,150,null,0,0);
-	GroupDiv.IsMut=false;
-}
-function ShowSChild(obj,id){
-	var sid="Speciality_"+id;
-	var o=obj.parentNode;
-	o.className="topmenu";
-	GroupDiv.DefZIndex++;
-	var al = GetSpecialItems(id,false);
-	if(al.length>0){
-		GroupDiv.HidAuto = false;
-		GroupDiv.IsMut=true;
-		GroupDiv.CreadDiv(sid,obj,al,150,null,0,0,"right");
-		GroupDiv.IsMut=false;
-	}
-}
-
-function HidSChild(classid){
-	var id="Speciality_"+classid;
-	GroupDiv.HidMenuItem(id);
-}
-
-function SelSpeciality(obj,id){
-	var iSpeciality=$("iSpeciality");
-	GroupDiv.MutClick(obj);
-	if(!CharInStr(iSpeciality.value,id)){
-		iSpeciality.value = SetCharInStr(iSpeciality.value,id)
-	}else{
-		iSpeciality.value = MoveCharOutStr(iSpeciality.value,id)
-	}
-}
-
-function GetSpecialItems(id,b){
-	var iSpeciality=$("iSpeciality");
-	var sels=false;
-	var isdo =false;
-	var o =[];
-	var n=0;
-	for(var i=0;i<NewsSpeciality.length;i++){
-		if(b){
-			if(id==NewsSpeciality[i][1]&&NewsSpeciality[i][2]==0){
-				isdo=true;
-			}else{
-				isdo=false;
-			}
-		}else{
-			if(id==NewsSpeciality[i][2]){
-				isdo=true;
-			}else{
-				isdo=false;
-			}
-		}
-		sels=CharInStr(iSpeciality.value,NewsSpeciality[i][0])?true:false;
-		if(isdo){
-			o[n]={href:"javascript:GoTo();",onclick:"SelSpeciality(this,"+NewsSpeciality[i][0]+")",Text:NewsSpeciality[i][3],onmouseover:"ShowSChild(this,"+NewsSpeciality[i][0]+")",onmouseout:"HidSChild("+NewsSpeciality[i][0]+")",Sel:sels};
-			n++;
-		}
-	}
-	return o
-}
 
 //颜色选择初始化
 function ColorInit() {
@@ -302,7 +156,7 @@ $(document).ready(function() {
 
     //初始化分类选择控件
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
-
+    
     Menu.init("gamelist");
 
     $("#SelectDivW").bind('click', function(e) {
@@ -321,6 +175,14 @@ $(document).ready(function() {
         }
     });
 
+    var form1 = $("#form1");
+    var options;
+    options = {
+        beforeSubmit: CheckAdd,
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
 
 });
 
