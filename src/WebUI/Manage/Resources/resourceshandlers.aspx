@@ -40,9 +40,8 @@
 			<img src="../images/icon/5.gif" />取消
 		</a>
 	</div>
-		<div class="enmu">
-
-	    <div  class="c_box" id="gamelist">
+		<div class="enmu addselect">
+        <div  class="c_box" id="gamelist">
 		    <ul class="one">
 		    	<li><a href="javascript:void 0"><span><em>C</em>超级舞者</span></a>
 				<ul>
@@ -192,7 +191,11 @@
 		<span class="info1" id="urlmsg">点击标题转向该地址，没有可为空</span>
 	</div>
 	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">资讯类别：</span><input id="iClassName" name="iClassName" type="text"  class="itxt1" onmouseover="selebg1();" onmouseout="selebg2();" onblur="CheckValueIsNull('iClassName','classmsg');" /><a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1" onmouseover="selebg1();" onmouseout="selebg2();" onclick="ShowNewsClassSl();"></a>
+		<span class="p_a_t1">资讯类别：</span>
+		<span class="cagegoriesSelect">
+		    <input id="iClassName" name="iClassName" type="text"  class="itxt1" onmouseover="selebg1();" onmouseout="selebg2();" onblur="CheckValueIsNull('iClassName','classmsg');" />
+		    <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1" onmouseover="selebg1();" onmouseout="selebg2();" onclick="ShowNewsClassSl();"></a>
+		</span>
 		<span class="info1" id="classmsg">资讯所属的分类，不能为空</span>
 	</div>
 	<div class="Page_arrb arb_pr1">
