@@ -4,7 +4,8 @@
  .enmu .c_box ul.one ul{position:absolute;width:170px;top:0;font-weight:normal;border:1px #C4D5E0 solid;display:none;background-color:#fff;z-index:10;}
  .enmu .c_box ul li{position:relative;_zoom:1;_float:left;}
  .enmu .c_box em{color:#2082C3;font-family:"Microsoft Yahei";font-weight:bold;width:30px;font-size:12px;font-style:normal;display:inline-block;}
- .enmu .c_box a,  .enmu .c_box a span,  .enmu .c_box a.noNext,  .enmu .c_box a.noNext span,  .enmu .c_box a.noNextS,  .enmu .c_box a.noNextS span{background:transparent url(http://images001.5173cdn.com/images/self_trading/v3/1m/index_menu_bg.gif) no-repeat;}
+ .enmu .c_box a,  .enmu .c_box a span,  .enmu .c_box a.noNext,  .enmu .c_box a.noNext span,  .enmu .c_box a.noNextS, 
+ .enmu .c_box a.noNextS span{background:transparent url(../images/index_menu_bg.gif) no-repeat;}
  .enmu .c_box a{display:block;text-decoration:none;background-position:left -31px;line-height:26px;padding-left:5px;color:#666;height:26px;}
  .enmu .c_box a span{background-position:right -31px;display:block;}
  .enmu .c_box a.selected{background-position:left 0;}

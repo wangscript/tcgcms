@@ -145,6 +145,7 @@ namespace TCG.Handlers
                     sb.Append("Visible:\"" + categories.cVisible + "\",");
                     sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
                     sb.Append("Name:\"" + categories.vcName + "\",");
+                    sb.Append("SkinId:\"" + categories.SkinId + "\",");
                     sb.Append("ClassName:\"" + categories.vcClassName + "\"");
                     break;
                 case "TCG.Entity.Template":

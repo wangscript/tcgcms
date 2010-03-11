@@ -108,21 +108,11 @@ function NewsAddPostBack(val) {
 }
 
 
-function ShowNewsClassSl() {
-    var iClassName = $("iClassName");
-    var alist = GetClassItems("0");
-    if (alist.length > 0) {
-        GroupDiv.HidAuto = false;
-        GroupDiv.CreadDiv("ClassDiv", iClassName, alist, iClassName.offsetWidth, null, 6, 0);
-    }
-}
-
-function SelectClassValue(val,txt){
-	var iClassName=$("iClassName");
-	var iClassId=$("iClassId");
-	iClassName.value=txt;
-	iClassId.value=val;
-	GroupDiv.HidMenuDiv();
+function SelectClassValue(val, txt) {
+	var iClassName=$("#iClassName");
+	var iClassId=$("#iClassId");
+	iClassName.val(txt);
+	iClassId.val(val);
 }
 
 function ShowFromDiv(obj){
@@ -194,9 +184,7 @@ function ClassInit() {
     var iClassName = $("#iClassName");
     var iClassId = $("#iClassId");
     var SelectDivW = $("#SelectDivW");
-    var pos = getAbsolutePositionXY(iClassName.get(0));
-    SelectDivW.css({ "top": (pos.y + 1) + "px" });
-    SelectDivW.css({"left" :(pos.x + iClassName.get(0).offsetWidth - 20) + "px"});
+
     var o = GetCategorieById(iClassId.val());
     if (o == null) {
         iClassName.val("请选择资讯分类...");
@@ -311,5 +299,28 @@ function ColorInit() {
 }
 
 $(document).ready(function() {
+
+    //初始化分类选择控件
+    GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
+
     Menu.init("gamelist");
+
+    $("#SelectDivW").bind('click', function(e) {
+        if ($("#gamelist_c").css('display') == 'block') {
+            $("#gamelist_c").hide();
+        } else {
+            $("#gamelist_c").show();
+        }
+        e.stopPropagation();
+
+    });
+
+    $(document).bind('click', function(e) {
+        if ($("#gamelist_c").css('display') == 'block') {
+            $("#gamelist_c").hide();
+        }
+    });
+
+
 });
+

@@ -48,3 +48,30 @@ function GetCategorieById(Id) {
         if (_Categories[i].Id == Id) return _Categories[i];
     }
 }
+
+
+function GetCagetegoriesEnmu(obj, Skinid, CagetegorId) {
+    if (_Categories == null) return null;
+
+    var o = obj;
+    if ($(obj).html() != "") {
+        o = $("<ul></ul>")
+        $(obj).append(o);
+    }
+
+    var find = false;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].ParentId == CagetegorId && _Categories[i].SkinId == Skinid) {
+            var li = $("<li><a href=\"javascript:SelectClassValue('" + _Categories[i].Id
+                + "','" + _Categories[i].ClassName + "');\" ><span>" + _Categories[i].ClassName + "</span></a></li>");
+            $(o).append(li);
+            find = true;
+            GetCagetegoriesEnmu(li, _Categories[i].SkinId, _Categories[i].Id);
+        }
+    }
+
+    if (!find) {
+        $(o).remove();
+    }
+
+}
