@@ -306,6 +306,8 @@ function ColorInit() {
             sTitleColor.val(o[key]);
         }
     }
+
+    SetAjaxDiv("ok", false, "小提示：发布完以后可以当页接着发布！");
 }
 
 $(document).ready(function() {

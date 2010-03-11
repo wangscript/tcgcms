@@ -37,3 +37,6 @@
 .selectDiv{position:absolute; width:18px; height:19px; float:left; background-position:1px 1px; background-color:#FFFFFF;}
 .sl_bg1{background-image:url(../images/icon/sl_one.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
 .sl_bg2{background-image:url(../images/icon/sl_sc.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
+
+.cagegoriesSelect{}
+.addselect{}
