@@ -36,6 +36,7 @@ public partial class resources_resourceshandlers : adminMain
 
             string newsid = objectHandlers.Get("newsid");
             string categorieid = objectHandlers.Get("iClassId");
+            this.iSkinId.Value = base.configService.DefaultSkinId;
 
             if (string.IsNullOrEmpty(newsid) || string.IsNullOrEmpty(categorieid))
             {
