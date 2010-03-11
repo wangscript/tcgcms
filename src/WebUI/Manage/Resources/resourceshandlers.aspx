@@ -25,7 +25,7 @@
 	<script type="text/javascript">var fileclassid = <%=base.configService.baseConfig["NewsFileClass"] %> ;</script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckAdd()">
+    <form id="form1" runat="server">
     <div class="page_title" style="margin-bottom:5px;">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="SaveNewsInfo();">
 			<img src="../images/icon/save.gif" /> 保存
@@ -62,16 +62,17 @@
 	</div>
 	<div class="Page_arrb arb_pr1">
 		<span class="p_a_t1 lfl">资讯类别： </span>
-		<span class="p_a_t1 lfl"><div class="cagegoriesSelect">
-		    <input id="iClassName" name="iClassName" type="text"  class="itxt1" onmouseover="selebg1();" onmouseout="selebg2();" onblur="CheckValueIsNull('iClassName','classmsg');" />
-		    <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1" onmouseover="selebg1();" onmouseout="selebg2();" ></a>
+		<span class="p_a_t1 lfl">
+		<div class="cagegoriesSelect">
+		    <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
+		    <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
 		
 		    <div id="gamelist_c" class="enmu addselect">
                 <div  class="c_box" id="gamelist">
 		            <ul id="Cagetorie_c" class="one">	
 			        </ul>
+                </div>
             </div>
-          </div>
 		</div>
 		</span>
 		<span class="info1" id="classmsg" style=" margin-left:210px;">资讯所属的分类，不能为空</span>

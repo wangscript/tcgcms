@@ -52,7 +52,6 @@ function GetCategorieById(Id) {
 
 function GetCagetegoriesEnmu(obj, Skinid, CagetegorId) {
     if (_Categories == null) return null;
-
     var o = obj;
     if ($(obj).html() != "") {
         o = $("<ul></ul>")
