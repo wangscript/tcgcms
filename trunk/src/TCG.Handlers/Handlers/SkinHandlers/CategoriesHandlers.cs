@@ -164,7 +164,7 @@ namespace TCG.Handlers
                     if (sb.Length > 0) sb.Append(",");
                     sb.Append("'");
                     sb.Append(tempcategories.Id);
-                    sb.Append("'");
+                    sb.Append("',");
                     sb.Append(this.GetCategoriesChild(tempcategories.Id));
                 }
             }

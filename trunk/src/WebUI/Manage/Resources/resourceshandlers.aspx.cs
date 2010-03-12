@@ -128,7 +128,12 @@ public partial class resources_resourceshandlers : adminMain
     private void NewsManage(bool ismdy)
     {
         string categorieid = objectHandlers.Post("iClassId");
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.Post("iNewsId"));
+        Resources item = new Resources();
+        if (ismdy)
+        {
+            item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.Post("iNewsId"));
+        }
+
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
         item.vcContent = objectHandlers.Post("iContent$content");
@@ -168,32 +173,45 @@ public partial class resources_resourceshandlers : adminMain
         item.cChecked = "Y";
         item.cCreated = "Y";
         item.vcEditor = base.adminInfo.vcAdminName;
-        int newid = 0; string filepath = "";
-        int rtn = 0;
-        if (!ismdy)
-        {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
-        }
-        else
-        {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-        }
 
-        filepath = Server.MapPath("~" + item.vcFilePath);
-        if (rtn == 1)
+        string filepath = "";
+        int rtn = 0;
+
+        try
         {
-            if (base.configService.baseConfig["IsReWrite"] != "True")
+            if (!ismdy)
             {
-                TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-                tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
-                tcgth.FilePath = filepath;
-                tcgth.configService = base.configService;
-                tcgth.conn = base.conn;
-                tcgth.Replace();
+                rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
+            }
+            else
+            {
+                rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
 
+            filepath = Server.MapPath("~" + item.vcFilePath);
+            if (rtn == 1)
+            {
+                if (base.configService.baseConfig["IsReWrite"] != "True")
+                {
+                    TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
+                    tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
+                    tcgth.FilePath = filepath;
+                    tcgth.configService = base.configService;
+                    tcgth.conn = base.conn;
+                    tcgth.Replace();
+                }
+
+            }
         }
-        base.AjaxErch(rtn.ToString());
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+
+        base.AjaxErch(rtn, "文章添加成功，请继续添加！", "NewsAddPostBack()");
         base.Finish();
     }
 }

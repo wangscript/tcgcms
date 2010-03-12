@@ -95,16 +95,15 @@ function NewsMdyPostBack(val){
 	SetAjaxDiv("ok",false,"资讯成功修改并生成文件！");
 }
 
-function NewsAddPostBack(val) {
-	if(GetErrText(val))return;
-	var iTitle=$("iTitle");
-	var iAuthor=$("iAuthor");
-	var iKeyWords=$("iKeyWords");
-	var msg = "资讯["+iTitle.value+"]已经成功添加，不继续添加请点取消！";
+function NewsAddPostBack() {
+	var iTitle=$("#iTitle");
+	var iAuthor=$("#iAuthor");
+	var iKeyWords=$("#iKeyWords");
+	var msg = "资讯["+iTitle.val()+"]已经成功添加，不继续添加请点取消！";
 	SetAjaxDiv("ok",false,msg);
-	iTitle.value="";
-	iAuthor.value="";
-	iKeyWords.value="";
+	iTitle.val("");
+	iAuthor.val("");
+	iKeyWords.val("");
 }
 
 function SelectClassValue(val, txt) {

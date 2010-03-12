@@ -352,9 +352,12 @@ function strDateTime(str){
 
 
 /*----------------------------*/
-function AjaxPostFormBack(data){
+function AjaxPostFormBack(data) {
 	if(data.state){
-		SetAjaxDiv("ok",false,data.message);
+	    SetAjaxDiv("ok", false, data.message);
+	    if (data.callback != null) {
+	        eval(data.callback);
+	    }
 	}else{
 		SetAjaxDiv("err",false,data.message);
 	}
