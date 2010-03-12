@@ -11,6 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Pages;
+using TCG.Release;
 
 
 public partial class Main : adminMain
@@ -22,7 +23,7 @@ public partial class Main : adminMain
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
-            this.title.Text = base.configService.baseConfig["WebTitle"];
+            this.title.Text = base.configService.baseConfig["WebTitle"] + " - " + Versions.version;
         }
     }
 }
