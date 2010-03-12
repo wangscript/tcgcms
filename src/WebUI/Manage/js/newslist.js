@@ -11,7 +11,7 @@ function classTitleInit() {
     a = "";
 
     GetNewsListTitleByClassId(classobj.val());
-    m.html("<span class='txt bold lfl'><a href='?iClassId=" + $("#iClassId").val() + "&skinid=" + $("#iSkinId").val() + "'>所有资讯</a>>>" + a + "</span>" + m.html());
+    m.html("<span class='txt bold lfl'><a href='?iClassId=0&skinid=" + $("#iSkinId").val() + "'>所有资讯</a>>>" + a + "</span>" + m.html());
 
 }
 
@@ -65,10 +65,9 @@ function EditNewsInfo(){
 }
 
 function ShowClassNameByClassID(id){
-	if(NewsLis==null)return;
-	var o = GetNewsItemById(id);
+	var o = GetCategorieById(id);
 	if(o==null)return;
-	document.write("<a href=\"?iclassid="+o[0]+"\">" + o[2] + "</a>");	
+	document.write("<a href=\"?iclassid="+o.Id+"\">" + o.ClassName + "</a>");	
 }
 
 function AddNewsInfo(){

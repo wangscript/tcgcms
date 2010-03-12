@@ -130,6 +130,23 @@ namespace TCG.Pages
             Response.End();
         }
 
+        protected void AjaxErch(int rtn, string okmessage, string callback)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{state:");
+            if (rtn < 0)
+            {
+                sb.Append("false,message:\"" + errHandlers.GetErrTextByErrCode(rtn, this.configService.baseConfig["ManagePath"]) + "\"");
+            }
+            else
+            {
+                sb.Append("true,message:'" + okmessage + "',callback:\"" + callback + "\"");
+            }
+            sb.Append("}");
+            Response.Write(sb.ToString());
+            Response.End();
+        }
+
         /// <summary>
         /// AJAX输出字符串
         /// </summary>

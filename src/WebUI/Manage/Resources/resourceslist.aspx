@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
+	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/CreateDiv.js"></script>
