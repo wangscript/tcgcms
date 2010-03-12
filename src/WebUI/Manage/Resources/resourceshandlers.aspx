@@ -108,7 +108,6 @@
 	<input type="hidden" id="iSpeciality" name="iSpeciality" value="" runat="server"/>
 	<input type="hidden" id="iTitleColor" name="iTitleColor" value="" runat="server"/>
     </form>
-	<script type="text/javascript">ClassInit();</script>
 	
 </body>
 </html>
