@@ -184,5 +184,7 @@ $(document).ready(function() {
     };
     form1.ajaxForm(options);
 
+    ClassInit();
+
 });
 
