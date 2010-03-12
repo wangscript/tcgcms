@@ -32,7 +32,7 @@ namespace TCG.Release
         /// <summary>
         /// 系统版本号
         /// </summary>
-        public static int Ver = 129;
+        public static int Ver = 168;
         /// <summary>
         /// 系统名称
         /// </summary>      
