@@ -182,16 +182,9 @@ namespace TCG.Handlers
                 return;
             }
 
-            string categoriesid = this.GetAttribute("cid");
-            if (string.IsNullOrEmpty(categoriesid))
-            {
-                pagerinfo.Read = false;
-                return;
-            }
 
 
-
-            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesByIdAndCategorieId(categoriesid, resourceid);
+            Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)
             {
                 pagerinfo.PageTitle = item.vcTitle;

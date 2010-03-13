@@ -98,11 +98,6 @@ public partial class resources_resourceslist : adminMain
         
         sItem.strCondition = "iClassID in (" + allchild + ")";
 
-      
-
-
-        
-
         string check = objectHandlers.Get("check");
         if (!string.IsNullOrEmpty(check))
         {
@@ -216,19 +211,13 @@ public partial class resources_resourceslist : adminMain
             return;
         }
 
-        string categorieid = objectHandlers.Post("cid");
-        if (string.IsNullOrEmpty(categorieid))
-        {
-            base.AjaxErch("-1000000051");
-            return;
-        }
 
         if (base.configService.baseConfig["IsReWrite"] == "True")
         {
             base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
         }
 
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesByIdAndCategorieId(categorieid, resourceid);
+        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
         if (item == null) return;
   
 

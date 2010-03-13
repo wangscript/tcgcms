@@ -114,7 +114,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public string GetResourcesCategoriesIndex(string classid, string sh)
         {
-            if (string.IsNullOrEmpty(classid)) return "";
+            if (string.IsNullOrEmpty(classid) || classid == "0") return "";
             Categories categorie = this.GetCategoriesById(classid);
             if (classid == null) return "";
             string url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"];
