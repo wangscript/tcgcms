@@ -38,7 +38,7 @@ public partial class resources_resourceshandlers : adminMain
             string categorieid = objectHandlers.Get("iClassId");
             this.iSkinId.Value = base.configService.DefaultSkinId;
 
-            if (string.IsNullOrEmpty(newsid) || string.IsNullOrEmpty(categorieid))
+            if (string.IsNullOrEmpty(newsid))
             {
                 this.iClassId.Value = categorieid;
                 this.iSpeciality.Value = "0";
@@ -139,8 +139,8 @@ public partial class resources_resourceshandlers : adminMain
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
-      
+        item.Categorie.Id = categorieid;
+
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
         item.vcSmallImg = objectHandlers.Post("iSmallImg");
@@ -191,16 +191,12 @@ public partial class resources_resourceshandlers : adminMain
             filepath = Server.MapPath("~" + item.vcFilePath);
             if (rtn == 1)
             {
-                if (base.configService.baseConfig["IsReWrite"] != "True")
-                {
-                    TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-                    tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
-                    tcgth.FilePath = filepath;
-                    tcgth.configService = base.configService;
-                    tcgth.conn = base.conn;
-                    tcgth.Replace();
-                }
-
+                TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
+                tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
+                tcgth.FilePath = filepath;
+                tcgth.configService = base.configService;
+                tcgth.conn = base.conn;
+                tcgth.Replace();
             }
         }
         catch (Exception ex)
@@ -210,8 +206,15 @@ public partial class resources_resourceshandlers : adminMain
             return;
         }
 
+        if (ismdy)
+        {
+            base.AjaxErch(rtn, "文章修改成功！");
+        }
+        else
+        {
+            base.AjaxErch(rtn, "文章添加成功，请继续添加！", "NewsAddPostBack()");
+        }
 
-        base.AjaxErch(rtn, "文章添加成功，请继续添加！", "NewsAddPostBack()");
         base.Finish();
     }
 }

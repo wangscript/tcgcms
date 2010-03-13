@@ -97,7 +97,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp11.Value = inf.cChecked;
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = "";
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"]; ;
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp17.Direction = ParameterDirection.Output;
@@ -113,10 +113,14 @@ namespace TCG.Handlers
             return -19000000;
         }
 
+        /// <summary>
+        /// 更新资源
+        /// </summary>
+        /// <param name="inf"></param>
+        /// <returns></returns>
         public int UpdateResources(Resources inf)
         {
             base.SetDataBaseConnection();
-            inf.vcFilePath = this.CreateNewsInfoFilePath(inf);
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.Categorie.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
@@ -130,7 +134,7 @@ namespace TCG.Handlers
             SqlParameter sp10 = new SqlParameter("@vcShortContent", SqlDbType.VarChar, 500); sp10.Value = inf.vcShortContent;
             SqlParameter sp11 = new SqlParameter("@vcSpeciality", SqlDbType.VarChar, 100); sp11.Value = inf.vcSpeciality;
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
-            SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Value = inf.vcFilePath;
+            SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Direction = ParameterDirection.Output;
             SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"];
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp16.Value = "02";
@@ -139,8 +143,9 @@ namespace TCG.Handlers
             SqlParameter sp19 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp19.Value = inf.cStrong;
             SqlParameter sp20 = new SqlParameter("@iCount", SqlDbType.Int, 4); sp20.Value = inf.iCount;
             SqlParameter sp21 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp21.Direction = ParameterDirection.Output;
+            SqlParameter sp22 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp22.Direction = ParameterDirection.Output;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21}, new int[] { 20 });
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp15,sp16,sp17,sp18,sp19,sp20,sp21,sp22}, new int[] { 20 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
@@ -150,19 +155,19 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public Resources GetResourcesByIdAndCategorieId(string categoriesid, string resourceid)
+        /// <summary>
+        /// 获取资源
+        /// </summary>
+        /// <param name="resourceid"></param>
+        /// <returns></returns>
+        public Resources GetResourcesById(string resourceid)
         {
             base.SetDataBaseConnection();
-            DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE ID = '" + resourceid + "'");
+            DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE iID = " + resourceid.Trim() + "");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
 
             return (Resources)base.GetEntityObjectFromRow(dt.Rows[0], typeof(Resources));
-        }
-
-        public Resources GetResourcesById(string resourceid)
-        {
-            return (Resources)CachingService.Get(resourceid);
         }
 
 
