@@ -77,52 +77,10 @@ public partial class resources_resourceshandlers : adminMain
                 case "MdyNews":
                     ismdy = true;
                     break;
-                case "KeyWordLoad":
-                    this.KeyWordLoad();
-                    break;
             }
 
             this.NewsManage(ismdy);
         }
-    }
-
-    private void KeyWordLoad()
-    {
-        if (KeyWordTree.Root.ChildList.Count == 0)
-        {
-            string path = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
-            if (File.Exists(path))
-            {
-                StreamReader Reader = new StreamReader(path, Encoding.Default);
-                List<KeyWordTreeNode> tmpRoot = KeyWordTree.Root.ChildList;
-
-                while (Reader.Peek() != -1)
-                {
-                    string[] tmp = Reader.ReadLine().ToLower().Split('|');
-                    KeyWordTree.AddKeyWord(tmp[0]);
-
-                }
-
-                Reader.Close();
-                Reader.Dispose();
-
-                if (KeyWordTree.Root.ChildList.Count == 0)
-                {
-                    base.Finish();
-                    base.AjaxErch("-1000000070");
-                    return;
-                }
-            }
-            else
-            {
-                base.Finish();
-                base.AjaxErch("-1000000070");
-                return;
-            }
-        }
-
-        base.Finish();
-        base.AjaxErch("加载关键词成功！");
     }
 
     private void NewsManage(bool ismdy)

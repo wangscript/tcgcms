@@ -175,7 +175,7 @@ public partial class Template_templatelist : adminMain
         string iTemplate = objectHandlers.Post("iTemplateId");
         if (string.IsNullOrEmpty(iTemplate))
         {
-            base.AjaxErch("{state:false,message:'<a>生成失败-模版ID不能为0！</a>'}");
+            base.AjaxErch(1, "<a>生成失败-模版ID不能为0！</a>", "CreateBack");
             return;
         }
 
@@ -187,21 +187,10 @@ public partial class Template_templatelist : adminMain
             return;
         }
         string filepath = string.Empty;
-        bool needTCG = true;
+
         try
         {
-            if (tlif.vcUrl.IndexOf(".") > -1)
-            {
-                filepath = Server.MapPath("~" + tlif.vcUrl);
-                if (tlif.vcUrl.Substring(tlif.vcUrl.LastIndexOf(".") + 1, tlif.vcUrl.Length - tlif.vcUrl.LastIndexOf(".") - 1) == "aspx")
-                {
-                    needTCG = false;
-                }
-            }
-            else
-            {
-                filepath = Server.MapPath("~" + tlif.vcUrl + base.configService.baseConfig["FileExtension"]);
-            }
+            filepath = Server.MapPath("~" + tlif.vcUrl + base.configService.baseConfig["FileExtension"]);
         }
         catch
         {
@@ -209,38 +198,24 @@ public partial class Template_templatelist : adminMain
             return;
         }
 
-        if (needTCG)
+
+        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
+        tcgthdl.Template = tlif.Content;
+        tcgthdl.FilePath = filepath;
+        tcgthdl.configService = base.configService;
+        tcgthdl.conn = base.conn;
+
+        try
         {
-            TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-            tcgthdl.Template = tlif.Content;
-            tcgthdl.FilePath = filepath;
-            tcgthdl.configService = base.configService;
-            tcgthdl.conn = base.conn;
-
-            if (tcgthdl.Replace())
-            {
-                base.AjaxErch("{state:true,message:'<a>生成成功:" + objectHandlers.JSEncode( filepath) + "...</a>'}");
-            }
-            else
-            {
-                base.AjaxErch("{state:false,message:<a>生成失败-系统错误!</a>'}");
-            }
-            tcgthdl = null;
+           // tcgthdl.Replace();
+           
         }
-        else
+        catch (Exception ex)
         {
-            try
-            {
-                objectHandlers.SaveFile(filepath, tlif.Content);
-                base.AjaxErch("{state:true,message:<a>生成成功:" + objectHandlers.JSEncode( filepath )+ "...</a>'}");
-            }
-            catch
-            {
-                base.AjaxErch("{state:false,message:<a>生成失败-系统错误!</a>'}");
-
-            }
-
+            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
         }
+
+        base.AjaxErch("{state:true,message:'<a>生成成功:" + objectHandlers.JSEncode(filepath) + "...</a>'}");
 
         tlif = null;
     }

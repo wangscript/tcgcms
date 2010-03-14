@@ -353,10 +353,12 @@ function strDateTime(str){
 
 /*----------------------------*/
 function AjaxPostFormBack(data) {
+    debugger;
 	if(data.state){
 	    SetAjaxDiv("ok", false, data.message);
 	    if (data.callback != null) {
-	        eval(data.callback);
+	        try { eval(data.callback); } catch (err) { }
+	        try { eval(data.callback + "(" + data + ")"); } catch (err) { }
 	    }
 	}else{
 		SetAjaxDiv("err",false,data.message);

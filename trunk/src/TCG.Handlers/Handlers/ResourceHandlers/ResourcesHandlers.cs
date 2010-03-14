@@ -308,6 +308,73 @@ namespace TCG.Handlers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="categories"></param>
+        /// <param name="Speciality"></param>
+        /// <param name="orders"></param>
+        /// <param name="check"></param>
+        /// <param name="del"></param>
+        /// <param name="create"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetResourcesList(int nums, string categories, string Speciality, string orders, bool check, bool del, bool create)
+        {
+            Dictionary<string, EntityBase> res = null;
+            base.SetDataBaseConnection();
+            StringBuilder sqlsb = new StringBuilder();
+            sqlsb.Append("SELECT ");
+
+            if (nums > 0) sqlsb.Append(" TOP " + nums.ToString() + " ");
+
+            sqlsb.Append(" * FROM Resources (NOLOCK) WHERE iID>0 ");
+
+            if (check) { sqlsb.Append(" AND cChecked='Y' "); } else { sqlsb.Append(" AND cChecked='N'"); }
+
+            if (del) { sqlsb.Append(" AND cDel='Y' "); } else { sqlsb.Append(" AND cDel='N' "); }
+
+            if (create) { sqlsb.Append(" AND cCreated='Y' "); } else { sqlsb.Append(" AND cCreated='N' "); }
+
+            if (!string.IsNullOrEmpty(categories))
+            {
+                if (categories.IndexOf(',') > -1)
+                {
+                    string[] cates = categories.Split(',');
+                   
+                    string text1 = string.Empty;
+                    for (int i = 0; i < cates.Length; i++)
+                    {
+                        if (cates[i].Trim().Length == 36)
+                        {
+                            string text3 = text1.Length == 0 ? "" : ",";
+                            text1 += text3 + "'" + cates[i] + "'";
+                        }
+                    }
+
+                    if (text1.Length >= 36)
+                    {
+                        sqlsb.Append(" AND iClassID in (" + text1 + ") ");
+                    }
+                }
+                else
+                {
+                    sqlsb.Append(" AND iClassID = '" + categories + "' ");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(orders)) sqlsb.Append(" ORDER BY " + orders);
+
+            DataTable  dt = base.conn.GetDataTable(sqlsb.ToString());
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                res = base.GetEntitysObjectFromTable(dt, typeof(Resources));
+            }
+
+            return res;
+        }
+
+        /// <summary>
         /// 生成文章路径
         /// </summary>
         /// <param name="extion"></param>

@@ -1,4 +1,4 @@
-//--------------
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -15,7 +15,7 @@ function classTitleInit() {
 }
 
 
-function DoSubmit(callback) {
+$(document).ready(function() {
     var form1 = $("#form1");
     if (form1.lenght == 0) return;
     var options;
@@ -23,10 +23,10 @@ function DoSubmit(callback) {
     options = {
         beforeSubmit: BeforSubmit,
         dataType: 'json',
-        success: callback
+        success: AjaxPostFormBack
     };
     form1.ajaxForm(options);
-}
+});
 
 function GetTempTitleBy(site, parentid) {
     for (var i = 0; i < _Template.length; i++) {
@@ -130,8 +130,8 @@ function sTypeChange(obj) {
     }
 }
 
+//生成模板
 function PageCreat() {
-    DoSubmit(CreateBack);
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
         SetAjaxDiv("err", false, "您没选择需要生成的模版！");
@@ -176,5 +176,6 @@ function PageCreat() {
 }
 
 function CreateBack(data) {
-	CreateDiv.SetSep(data.message);
+    debugger;
+	CreateDiv.SetSep(message);
 }

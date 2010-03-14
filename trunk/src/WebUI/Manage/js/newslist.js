@@ -45,8 +45,8 @@ function GetNewsListTitleByClassId(classid) {
     for (var i = 0; i < _Categories.length; i++) {
         if (_Categories[i].Id == classid) {
             var t = (_Categories[i].ParentId == 0) ? "" : " >>";
-            a += t + " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>" + a;
-            GetNewsListTitleByClassId(_Categories[i].Parent);
+            a = t + " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>" + a;
+            GetNewsListTitleByClassId(_Categories[i].ParentId);
 		}
 	}
 }

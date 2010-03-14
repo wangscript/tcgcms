@@ -283,8 +283,8 @@ namespace TCG.Handlers
             Template item = this.handlerService.skinService.templateHandlers.GetTemplateByID(id);
             if (item != null)
             {
-                this._tagtext = item.Content.Replace("tcg:item", "tcg:itemTemp" + id.ToString());
-                this._tagtext = this._tagtext.Replace("$item", "$itemTemp" + id.ToString());
+                this._tagtext = item.Content.Replace("tcg:" + this.TagType, "tcg:" + this.TagType + "Temp" + id.ToString());
+                this._tagtext = this._tagtext.Replace("$" + this.TagType, "$" + this.TagType + "Temp" + id.ToString());
             }
             else
             {
@@ -315,47 +315,56 @@ namespace TCG.Handlers
         private void TagForNewsListWithOutPager(ref TCGTagPagerInfo pagerinfo)
         {
 
-            PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "Resources";
 
-            string fields = this.GetAttribute("fields");
-            if (string.IsNullOrEmpty(fields)) return;
-            string fieldC = fields.Replace("%", ",");
-
-            fieldC += ",vcTitleColor,cStrong ";
+            int nums = objectHandlers.ToInt(this.GetAttribute("num"));
+            string categories = this.GetAttribute("categories");
+            string Speciality = this.GetAttribute("speciality");
             string orders = this.GetAttribute("orders");
-            int columns = objectHandlers.ToInt( this.GetAttribute("columns"));
-            if (columns == 0) columns = 1;
-            string condition = this.GetAttribute("condition");
+            bool check = this.GetAttribute("check") != "Y" ? false : true;
+            bool del = this.GetAttribute("del") != "Y" ? false : true;
+            bool create = this.GetAttribute("create") != "Y" ? false : true;
 
-            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM Resources (NOLOCK) WHERE "
-                + " iID != '' AND " + condition;
-            if (!string.IsNullOrEmpty(orders))
-            {
-                SQL += " ORDER BY " + orders;
-            }
+            Dictionary<string, EntityBase> res = this.handlerService.resourcsService.resourcesHandlers.GetResourcesList(
+                nums, categories, Speciality, orders, check, del, create);
 
-            DataSet ds = base.conn.GetDataSet(SQL);
 
-            if (ds == null) return;
-            if (ds.Tables.Count != 0)
+            if (res == null) return;
+            if (res.Count != 0)
             {
                 string tempOld = this._tagtext;
                 string tempNew = string.Empty;
-                for (int n = 0; n < ds.Tables[0].Rows.Count; n++)
+
+                int n = 0;
+                foreach (KeyValuePair<string, EntityBase> entity in res)
                 {
+                    Resources tempres = (Resources)entity.Value;
                     string temp = tempOld;
-                    DataRow Row = ds.Tables[0].Rows[n];
                     temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
-                    this.NewslistTagFieldsReplace(ref temp, fields, Row);
+                    this.NewslistTagFieldsReplace(ref temp, tempres);
                     tempNew += temp;
+                    n++;
                 }
+
                 this._tagtext = tempNew;
             }
+        }
 
-            ds.Clear();
-            ds.Dispose();
+        private void NewslistTagFieldsReplace(ref string temp, Resources res)
+        {
+            string Title = res.vcTitle;
+            if (!string.IsNullOrEmpty(res.vcTitleColor)) Title = "<font color='" + res.vcTitleColor + "'>" + Title + "</font>";
+            if (res.cStrong == "Y") Title = "<strong>" + Title + "</strong>";
 
+            temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + Title + "</TCG>");
+
+            string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
+            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
+
+            temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
+
+            temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
 
         private void NewslistTagFieldsReplace(ref string temp, string fields, DataRow Row)
