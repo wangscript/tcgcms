@@ -28,6 +28,18 @@ function GetParentTitle() {
     }
 }
 
+
+function GetNewsListTitleByClassIdW(classid) {
+    if (_Categories == null) return;
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories.ParentId == classid) {
+            var t = (_Categories.ParentId == 0) ? "" : ">>";
+            a = t + _Categories.ClassName + a;
+            GetNewsListTitleByClassIdW(_Categories.Name);
+        }
+    }
+}
+
 $(document).ready(function() {
     var options;
     if ($("#Work").length != 0) {

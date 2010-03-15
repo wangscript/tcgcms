@@ -69,7 +69,7 @@ li{ text-align:left}
 
 .inputcloseimg{position:absolute; border:0px; z-index:89;}
 
-.MsgDiv{ text-align:left;position:absolute; z-index:1002; width:400px; height:100px; top:200px; left:480px;}
+.MsgDiv{ }
 .createtitle{text-align:left; padding-left:30px;width:392px; height:27px; line-height:27px; color:#FFFFFF; font-weight:bold; background-image:url(../images/create_title.gif);}
 .createMsgbg{width:420px; background-color:#FFFFFF;height:300px; border-left:#7998b7 solid 1px; border-right:#7998b7 solid 1px;border-bottom:#7998b7 solid 1px;}
 .createjdt{height:52px; margin-bottom:2px; text-align:left; padding-top:8px;}
