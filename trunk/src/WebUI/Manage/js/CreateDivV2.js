@@ -6,6 +6,7 @@ function CreateDiv() {
     this.Screen = { w: window.screen.availWidth, h: window.screen.availHeight };
     this.Default = { w: 0, h: 0 };
     this.o = null;
+    this.bg = null;
 
     this.Start = function() {
         var val, ac = arguments.length, av = arguments;
@@ -47,7 +48,9 @@ function CreateDiv() {
 
     this.CreateDivIntoPage = function() {
         this.o = $("<div id='CreateMsgPlace' class='MsgDiv'></div>");
-        this.o.append("<div class=\"createclose\"><a onclick=\"$('#CreateMsgPlace')[0].className='MsgDiv hid';\"  href='javascript:GoTo();'></a></div><div class=\"createtitle\"><span id=\"createtitle\">操作正在进行中...</span></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">完成度:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>");
-        $('body').append(this.o);
+        this.o.append("<div class=\"createclose\"><a onclick=\"javascript:layer.closeLayer();\"  href='javascript:GoTo();'></a></div><div class=\"createtitle\"><span id=\"createtitle\">操作正在进行中...</span></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">完成度:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>");
+        this.bg = $("<div id=\"layerbox\" class=\"layerbox\"></div>");
+        this.bg.append(this.o);
+        $('body').append(this.bg);
     }
 }

@@ -97,7 +97,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp11.Value = inf.cChecked;
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"]; ;
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"];
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp17.Direction = ParameterDirection.Output;

@@ -137,11 +137,15 @@ function PageCreat() {
         SetAjaxDiv("err", false, "您没选择需要生成的模版！");
         return;
     }
+    
+    CreateDiv.Start("生成单页模版文件");
+    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
+    
     var work = $("#work");
     var iTemplateId = $("#iTemplateId");
     if (temps.indexOf(",") > -1) {
         var o = temps.split(",");
-        CreateDiv.Start("生成单页模版文件");
+        
         CreateDiv.set = 1;
         for (var i = 0; i < o.length; i++) {
             var t = GetTemplateById(o[i]);
@@ -166,7 +170,7 @@ function PageCreat() {
             SetAjaxDiv("err", false, "您选择的模版不是单页模版！");
             return;
         }
-        CreateDiv.Start("生成单页模版文件");
+     
         CreateDiv.set = 1;
         CreateDiv.setcount = 1;
         work.val("Create");
@@ -176,6 +180,8 @@ function PageCreat() {
 }
 
 function CreateBack(data) {
-    debugger;
-	CreateDiv.SetSep(message);
+    CreateDiv.SetSep(data);
+}
+
+function operback() {
 }
