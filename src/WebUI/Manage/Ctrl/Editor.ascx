@@ -15,7 +15,6 @@ function setContent(){
     var f = window.frames["EditerFrame"];
     var ff = f.document.frames["HtmlEditor"];
     var body = ff.document.getElementsByTagName("BODY")[0];
-    alert(body.innerHTML);
 	document.getElementById("<%=content.ClientID %>").value = body.innerHTML;
 }
 </script>
