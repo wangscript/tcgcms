@@ -1,21 +1,18 @@
 /// <reference path="jquery-1.3.1-vsdoc.js" />
 
-function SaveNewsInfo(){
-	$("#btnok").click();
+function SaveNewsInfo() {
+    setContent();
+    //输入框数据赋值
+    //$("form1").action = "../files/ConentImgCheck.aspx";
+    //ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
+    $("#form1").submit();
 }
 
 function CheckAdd(){
 	if(!(CheckValueIsNull('iTitle','titlemsg')&&CheckValueIsNull('iClassName','classmsg')&&CheckValueIsNull('iAuthor','autmsg')&&CheckValueIsNull('iKeyWords','keymsg'))){
 		return false;
 	}
-
 	SetAjaxDiv("loader", false, "正在发送请求...");
-	
-    //输入框数据赋值
-	setContent();
-	//$("form1").action = "../files/ConentImgCheck.aspx";
-	//ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
-
 	return true;
 }
 

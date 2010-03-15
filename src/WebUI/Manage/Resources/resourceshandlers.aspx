@@ -97,7 +97,7 @@
 		<textarea id="isContent" name="isContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:470px; height:260px;" runat="server"/>
 	</div>
 	<div class="imgPace hid" id="imgPace"></div>
-	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="submit" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
+	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>
 	<input type="hidden" id="iSkinId" name="iSkinId" runat="server"/>
 	<input type="hidden" id="iFrom" name="iFrom" value="1" runat="server"/>
