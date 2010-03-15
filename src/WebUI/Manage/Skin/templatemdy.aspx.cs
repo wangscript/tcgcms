@@ -65,6 +65,9 @@ public partial class Template_templatemdy : adminMain
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
             item.SkinId = objectHandlers.Post("iSiteId");
+            item.iParentId = objectHandlers.Post("iParentId");
+
+            if (string.IsNullOrEmpty(item.iParentId)) item.iParentId = "0";
 
             if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.Content))
             {

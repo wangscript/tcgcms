@@ -135,7 +135,7 @@ namespace TCG.Handlers
             SqlParameter sp4 = new SqlParameter("@vcTempName", SqlDbType.VarChar, 50); sp4.Value = item.vcTempName;
             SqlParameter sp5 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp5.Value = item.Content;
             SqlParameter sp6 = new SqlParameter("@vcUrl", SqlDbType.VarChar, 255); sp6.Value = item.vcUrl;
-            SqlParameter sp7 = new SqlParameter("@iParentId", SqlDbType.Int, 4); sp7.Value = item.iParentId;
+            SqlParameter sp7 = new SqlParameter("@iParentId", SqlDbType.VarChar, 36); sp7.Value = item.iParentId;
             SqlParameter sp8 = new SqlParameter("@iSystemType", SqlDbType.Int, 4); sp8.Value = item.iSystemType;
             SqlParameter sp9 = new SqlParameter("@Id", SqlDbType.VarChar, 36); sp9.Value = item.Id;
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
@@ -190,8 +190,9 @@ namespace TCG.Handlers
             SqlParameter sp7 = new SqlParameter("@action", SqlDbType.Char, 2); sp7.Value = "02";
             SqlParameter sp8 = new SqlParameter("@Id", SqlDbType.VarChar, 36); sp8.Value = item.Id;
             SqlParameter sp9 = new SqlParameter("@reValue", SqlDbType.Int); sp9.Direction = ParameterDirection.Output;
+            SqlParameter sp10 = new SqlParameter("@iParentId", SqlDbType.VarChar, 36); sp10.Value = item.iParentId;
             string[] reValues = conn.Execute("SP_Template_ManageTemplate", new SqlParameter[] { sp0, sp1, sp2, sp3,
-                sp4, sp5, sp6, sp7, sp8, sp9 }, new int[] { 9 });
+                sp4, sp5, sp6, sp7, sp8, sp9 ,sp10}, new int[] { 9 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
