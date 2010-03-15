@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -47,62 +48,29 @@ public partial class Template_templatelist : adminMain
 
     private void SearchInit()
     {
-        base.handlerService.skinService.templateHandlers.SetDataBaseConnection();
-        PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "Template";
-
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("Id");
-        arrshowfied.Add("TemplateType");
-        arrshowfied.Add("vcTempName");
-        arrshowfied.Add("dUpdateDate");
-        sItem.arrShowField = arrshowfied;
-
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("dUpdateDate DESC");
-        sItem.arrSortField = arrsortfield;
-
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
-
+        
         string iParentid = objectHandlers.Get("iParentid");
-        if (iParentid.Length != 36) iParentid = "0";
-        sItem.strCondition = "iParentid='" + iParentid + "'";
-        this.iParentid.Value = iParentid.ToString();
+        iParentid = iParentid.Trim().Length == 0 ? "0" : iParentid;
+
+        this.iParentid.Value = iParentid;
 
         string SkinId = objectHandlers.Get("SkinId");
-        sItem.strCondition += " AND SkinId ='" + SkinId + "' AND iSystemType =" + 0;
-        this.iSkinId.Value = SkinId.ToString();
+        SkinId = SkinId.Trim().Length == 0 ? "0" : SkinId;
+
+        this.iSkinId.Value = SkinId;
         Skin skinentity = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
         this.classTitle.InnerHtml = "<a href='?SkinId=" + SkinId + "&iParentid=0'>" + skinentity.Name + "</a>";
 
-        string tt = objectHandlers.Get("iType");
-        int iType = -1;
-        if (!string.IsNullOrEmpty(tt))
-        {
-            iType = objectHandlers.ToInt(objectHandlers.Get("iType"));
-            sItem.strCondition += " AND iSystemType=" + iType.ToString();
-        }
 
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
-        {
-            return;
-        }
-        this.pager.Per = sItem.pageSize;
-        this.pager.SetItem("SkinId", SkinId);
-        this.pager.SetItem("iParentid", iParentid);
-        this.pager.SetItem("iType", iType);
-        this.pager.Total = count;
-        this.pager.Calculate();
+        string type = objectHandlers.Get("iType");
+        int iType = objectHandlers.ToInt(objectHandlers.Get("iType"));
+        if (type.Trim().Length == 0) iType = -1;
 
-        if (ds.Tables.Count != 0)
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplates(SkinId, iParentid, iType);
+
+        if (templates.Count != 0)
         {
-            this.ItemRepeater.DataSource = ds;
+            this.ItemRepeater.DataSource = templates.Values;
             this.ItemRepeater.DataBind();
         }
 
@@ -122,7 +90,7 @@ public partial class Template_templatelist : adminMain
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        Template template = (Template)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
         Span sId = (Span)e.Item.FindControl("sId");
         Span classname = (Span)e.Item.FindControl("classname");
@@ -131,15 +99,15 @@ public partial class Template_templatelist : adminMain
 
         string SkinId = objectHandlers.Get("SkinId");
 
-        CheckID.Text = Row["Id"].ToString();
-        sId.Text = Row["Id"].ToString();
+        CheckID.Text = template.Id;
+        sId.Text = template.Id;
 
-        string text = "<a href=\"?iParentid=" + Row["Id"].ToString() + "&SkinId=" + SkinId + "\" title=\"查看子分类\">"
+        string text = "<a href=\"?iParentid=" + template.Id + "&SkinId=" + SkinId + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        text += "<a href=\"templatemdy.aspx?templateid=" + Row["Id"].ToString() + "\" title=\"修改模版\">"
+        text += "<a href=\"templatemdy.aspx?templateid=" + template.Id + "\" title=\"修改模版\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
-        classname.Text = text + Row["vcTempName"].ToString();
-        updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
+        classname.Text = text + template.vcTempName;
+        updatedate.Text = (template.dUpdateDate).ToString("yyyy-MM-dd HH:mm:ss");
     }
 
     private void TemplateDel()
@@ -207,15 +175,14 @@ public partial class Template_templatelist : adminMain
 
         try
         {
-           // tcgthdl.Replace();
-           
+           tcgthdl.Replace();
         }
         catch (Exception ex)
         {
             base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
         }
 
-        base.AjaxErch("{state:true,message:'<a>生成成功:" + objectHandlers.JSEncode(filepath) + "...</a>'}");
+        base.AjaxErch(1, "<a>生成成功:" + objectHandlers.JSEncode(filepath) + "...</a>", "CreateBack");
 
         tlif = null;
     }

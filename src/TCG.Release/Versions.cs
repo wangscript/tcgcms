@@ -32,7 +32,7 @@ namespace TCG.Release
         /// <summary>
         /// 系统版本号
         /// </summary>
-        public static int Ver = 168;
+        public static int Ver = 171;
         /// <summary>
         /// 系统名称
         /// </summary>      
@@ -65,7 +65,7 @@ namespace TCG.Release
             v4 = ver / 1;
 
             return Math.Floor(v1).ToString() + "." + Math.Floor(v2).ToString() + "."
-                + Math.Floor(v3).ToString() + "." + Math.Floor(v4).ToString();
+                + Math.Floor(v3).ToString() + "(" + Math.Floor(v4).ToString() + ")";
         }
 
         /// <summary>

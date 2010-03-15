@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="templatelist.aspx.cs" Inherits="Template_templatelist" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
-<%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -9,6 +8,7 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
+	<link href="../css/layer.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/tempnewslist.js"></script>
+	<script type="text/javascript" src="../js/layer.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
@@ -63,7 +64,6 @@
 		<span class="bold lfl"><select id="sType" name="sType" runat="server" onchange="sTypeChange(this);">
 			<option value="-1">全部类型</option>
 		</select></span>
-		<TCG:Pager Id='pager' runat='server'/>
 	</div>
 	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
 	<input type="hidden" id="iParentid" name="iParentid" runat="server" />

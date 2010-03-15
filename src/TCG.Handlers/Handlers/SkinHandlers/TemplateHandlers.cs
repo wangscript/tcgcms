@@ -64,6 +64,11 @@ namespace TCG.Handlers
             return conn.GetDataTable(Sql);
         }
 
+        /// <summary>
+        /// 根据模板类型获取模板
+        /// </summary>
+        /// <param name="templatetype"></param>
+        /// <returns></returns>
         public Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype)
         {
             Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
@@ -76,6 +81,38 @@ namespace TCG.Handlers
                 if (temp.TemplateType == templatetype)
                 {
                     childtemplates.Add(temp.Id, (EntityBase)temp);
+                }
+            }
+            return childtemplates;
+        }
+
+        /// <summary>
+        /// 根据模板类型获取模板
+        /// </summary>
+        /// <param name="templatetype"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetTemplates(string skinid, string parentid, int templatetype)
+        {
+            Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
+            if (templates == null) return null;
+            if (templates.Count == 0) return null;
+            Dictionary<string, EntityBase> childtemplates = new Dictionary<string, EntityBase>();
+            foreach (KeyValuePair<string, EntityBase> entity in templates)
+            {
+                Template temp = (Template)entity.Value;
+                if (templatetype == -1)
+                {
+                    if (skinid == temp.SkinId && parentid == temp.iParentId)
+                    {
+                        childtemplates.Add(temp.Id, (EntityBase)temp);
+                    }
+                }
+                else
+                {
+                    if ((int)temp.TemplateType == templatetype && skinid == temp.SkinId && parentid == temp.iParentId)
+                    {
+                        childtemplates.Add(temp.Id, (EntityBase)temp);
+                    }
                 }
             }
             return childtemplates;

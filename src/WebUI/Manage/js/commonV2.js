@@ -353,13 +353,16 @@ function strDateTime(str){
 
 /*----------------------------*/
 function AjaxPostFormBack(data) {
-    debugger;
 	if(data.state){
-	    SetAjaxDiv("ok", false, data.message);
 	    if (data.callback != null) {
-	        try { eval(data.callback); } catch (err) { }
-	        try { eval(data.callback + "(" + data + ")"); } catch (err) { }
+	        if (data.callback.indexOf("(") > -1) {
+	            try { eval(data.callback); } catch (err) { }
+	        } else {
+	            try { eval(data.callback + "('" + data.message + "')"); } catch (err) { }
+	        }
+	        return;
 	    }
+	    SetAjaxDiv("ok", false, data.message);
 	}else{
 		SetAjaxDiv("err",false,data.message);
 	}

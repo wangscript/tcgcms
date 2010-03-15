@@ -127,47 +127,31 @@ namespace TCG.Handlers
         private void TagForNewsClassList(ref TCGTagPagerInfo pagerinfo)
         {
 
-            PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "Categories";
 
-            string fields = this.GetAttribute("fields");
-            if (string.IsNullOrEmpty(fields)) return;
-            string fieldC = fields.Replace("%", ",");
+            string parentid = this.GetAttribute("parent");
+            string skinid = this.GetAttribute("skin");
 
-            string orders = this.GetAttribute("orders");
-            int columns = objectHandlers.ToInt(this.GetAttribute("columns"));
-            if (columns == 0) columns = 1;
+            Dictionary<string, EntityBase> categories =  this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(parentid, skinid);
 
-            string condition = this.GetAttribute("condition");
-            if (string.IsNullOrEmpty(condition)) return;
-            string SQL = "SELECT TOP " + columns + " " + fieldC + " FROM Categories (NOLOCK) WHERE "
-                + " ID !='' AND " + condition;
-
-            if (!string.IsNullOrEmpty(orders))
-            {
-                SQL += " ORDER BY " + orders;
-            }
-
-            DataSet ds = base.conn.GetDataSet(SQL);
-
-            if (ds == null) return;
-            if (ds.Tables.Count != 0)
+            if (categories == null) return;
+            if (categories.Count != 0)
             {
                 string tempOld = this._tagtext;
                 string tempNew = string.Empty;
-                for (int n = 0; n < ds.Tables[0].Rows.Count; n++)
+                int n = 0;
+                foreach (KeyValuePair<string, EntityBase> entity in categories)
                 {
+                    Categories tempres = (Categories)entity.Value;
                     string temp = tempOld;
-                    DataRow Row = ds.Tables[0].Rows[n];
                     temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
-                    this.NewslistTagFieldsReplace(ref temp, fields, Row);
+                    this.CategorieslistTagFieldsRelace(ref temp, tempres);
                     tempNew += temp;
+                    n++;
                 }
+
                 this._tagtext = tempNew;
             }
 
-            ds.Clear();
-            ds.Dispose();
         }
 
         /// <summary>
@@ -358,11 +342,23 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + Title + "</TCG>");
 
             string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
-            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcFilePath$", "<TCG>" + url + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
+
+            temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
+        }
+
+        private void CategorieslistTagFieldsRelace(ref string temp, Categories categorie)
+        {
+
+            temp = temp.Replace("$" + this._tagtype + "_Id$", "<TCG>" + categorie.Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" 
+                + (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"])+ "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
