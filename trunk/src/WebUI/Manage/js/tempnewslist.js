@@ -39,7 +39,6 @@ function GetTempTitleBy(site, parentid) {
 }
 
 function TempDel() {
-
     var temps = GetCheckBoxValuesForSql("CheckID");
     if (temps == "") {
         SetAjaxDiv("err", false, "您没选择需要删除的模版！");
@@ -87,11 +86,16 @@ function CheckTempsUsed(temps) {
 	return str;
 }
 
-function CheckTempUsed(temp){
-	if(temp=="")return false;
+function CheckTempUsed(temp) {
+    if (temp == "") return false;
+    temp = temp.replace("'", "").replace("'", "");
 	if (_Categories == null) return false;
 	for (var i = 0; i < _Categories.length; i++) {
 	    if (temp == _Categories[i].ResourceListTemplate || temp == _Categories[i].ResourceTemplate) return true;
+	}
+	if (_Template == null) return false;
+	for (var i = 0; i < _Template.length; i++) {
+	    if (temp == _Template[i].ParentId) return true;
 	}
 	return false;
 }
