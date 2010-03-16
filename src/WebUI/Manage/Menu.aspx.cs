@@ -50,7 +50,7 @@ public partial class aMenu : adminMain
         int i = 0;
         foreach (KeyValuePair<int, Popedom> keyvalue in cpop)
         {
-            string Url = keyvalue.Value.vcUrl.Replace("$filesite$", base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"]);
+            string Url = keyvalue.Value.vcUrl;
 
             if (0 == i) script.Append("window.parent.main.location.href='" + Url + "';\r\n");
             sb.Append( string.Format(tempClass, i, Url, keyvalue.Value.vcPopName));
@@ -63,7 +63,7 @@ public partial class aMenu : adminMain
             int n = 0;
             foreach (KeyValuePair<int, Popedom> keyvalue1 in tpop)
             {
-                string Url1 = keyvalue1.Value.vcUrl.Replace("$filesite$", base.configService.baseConfig["FileSite"] + base.configService.baseConfig["ManagePath"]);
+                string Url1 = keyvalue1.Value.vcUrl;
                 sb.Append(string.Format(tempSClass, i, n, Url1, keyvalue1.Value.vcPopName, keyvalue1.Value.iID.ToString()));
                 n++;
             }

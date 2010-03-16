@@ -31,7 +31,7 @@ public partial class files_ConentImgCheck : adminMain
 
             string content = objectHandlers.Post("iContent$content");
 
-            Response.Write(base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(content, base.adminInfo.vcAdminName,
+            Response.Write(base.handlerService.fileService.fileInfoHandlers.ImgPatchInit(content,"", base.adminInfo.vcAdminName,
                 objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"])));
             base.Finish();
         }
