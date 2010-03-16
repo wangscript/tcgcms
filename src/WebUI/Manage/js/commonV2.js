@@ -367,3 +367,7 @@ function AjaxPostFormBack(data) {
 		SetAjaxDiv("err",false,data.message);
 	}
 }
+
+function BeforSubmit() {
+    return true;
+}

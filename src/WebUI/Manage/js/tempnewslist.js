@@ -64,9 +64,6 @@ function TempDel() {
     $('#form1').submit();
 }
 
-function BeforSubmit() {
-    return true;
-}
 
 
 function CheckTempsUsed(temps) {

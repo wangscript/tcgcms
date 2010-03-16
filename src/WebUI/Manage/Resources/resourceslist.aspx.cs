@@ -95,7 +95,7 @@ public partial class resources_resourceslist : adminMain
         {
             allchild = base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(iClassId);
         }
-        
+
         sItem.strCondition = "iClassID in (" + allchild + ")";
 
         string check = objectHandlers.Get("check");
@@ -196,10 +196,21 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("-1000000051");
             return;
         }
-        //待续
-        //int rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "Y", delids);
-        //rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(base.conn, base.configService.baseConfig, delids);
-        //base.AjaxErch(rtn.ToString());
+
+        int rtn = 0;
+
+        try
+        {
+            rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(delids);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(rtn, "文章修改成功！", "refinsh()");
     }
 
     private void CreateNews()
@@ -212,15 +223,8 @@ public partial class resources_resourceslist : adminMain
         }
 
 
-        if (base.configService.baseConfig["IsReWrite"] == "True")
-        {
-            base.AjaxErch("<a>系统启用URL重写，无须生成</a>");
-        }
-
         Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
         if (item == null) return;
-  
-
 
         TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
         tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid);
@@ -229,29 +233,23 @@ public partial class resources_resourceslist : adminMain
         tcgth.configService = base.configService;
         tcgth.conn = base.conn;
 
-        if (tcgth.Replace())
+        string text1 = string.Empty;
+        try
         {
-            //待续
-            //base.handlerService.resourcsService.resourcesHandlers.UpdateNewsInfosCreate(base.conn, base.adminInfo.vcAdminName, "Y", resourceid);
-        }
-
-        string text1 = "";
-        if (tcgth.PagerInfo.PageCount > 1)
-        {
-
-            for (int i = 1; i <= tcgth.PagerInfo.PageCount; i++)
+            tcgth.Replace();
+            if (item.cChecked != "Y")
             {
-                string num = (i == 1) ? "" : i.ToString();
-                text1 += "<a href='.." + item.vcFilePath + "' target='_blank'>生成成功:" + item.vcFilePath.Substring(0, item.vcFilePath.LastIndexOf(".")) + num +
-                    item.vcFilePath.Substring(item.vcFilePath.LastIndexOf("."), item.vcFilePath.Length - item.vcFilePath.LastIndexOf(",")) + "...</a>";
+                item.cChecked = "Y";
+                base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
         }
-        else
+        catch (Exception ex)
         {
-            text1 = "<a href='.." + item.vcFilePath + "' target='_blank'>生成成功:" + item.vcFilePath + "...</a>";
+            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
+            return;
         }
 
-        base.AjaxErch(text1);
-        tcgth = null;
+        text1 = "<a href='.." + item.vcFilePath + "' target='_blank'>生成成功:" + item.vcFilePath + "...</a>";
+        base.AjaxErch(1, text1, "CreateBack");
     }
 }

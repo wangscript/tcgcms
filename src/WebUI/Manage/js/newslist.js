@@ -1,4 +1,4 @@
-//--------------
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -81,30 +81,28 @@ function CreateNews(){
 		return;
 	}
 	CreateDiv.Start("批量生成文件");
+	layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function() { } });
+	
 	if(temps.indexOf(",")>-1){
 		var ts = temps.split(",");
 		CreateDiv.set =1;
 		CreateDiv.setcount=ts.length;
 		for(var i=0;i<ts.length;i++){
 			if(ts[i]=="")continue;
-			$("iAction").value="CREATE";
-			$("DelClassId").value=ts[i];
-			SetAjaxDiv("loader",false,"正在发送删除请求...");
-			ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
+			$("#iAction").val("CREATE");
+			$("#DelClassId").val(ts[i]);
+			$('#form1').submit();
 		}
 	}else{
 		CreateDiv.set =1;
 		CreateDiv.setcount=1;
-		$("iAction").value="CREATE";
-		$("DelClassId").value=temps;
-		SetAjaxDiv("loader",false,"正在发送删除请求...");
-		ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
+		$("#iAction").val("CREATE");
+		$("#DelClassId").val(temps);
+		$('#form1').submit();
 	}
-	SetAjaxDiv("ok",true,"请求发送成功");
 }
 
-function CreateBack(val){
-	if(GetErrText(val))return;
+function CreateBack(val) {
 	CreateDiv.SetSep(val);
 }
 
@@ -194,11 +192,11 @@ function NewsDel(){
 		SetAjaxDiv("err",false,"您没选择需要删除的资讯！");
 		return;
 	}
-	$("iAction").value="DEL";
-	$("DelClassId").value=temps;
+	$("#iAction").val("DEL");
+	$("#DelClassId").val(temps);
 	if(confirm("您确定删除资讯["+temps+"]")){
-		SetAjaxDiv("loader",false,"正在发送删除请求...");
-		ajax.postf($("form1"),function(obj) { FalsDelBack(obj.responseText);});
+	    SetAjaxDiv("loader", false, "正在发送删除请求...");
+	    $("#form1").submit();
 	}
 }
 
@@ -229,3 +227,17 @@ function FalsDelBack(val){
 	if(GetErrText(val))return;
 	refinsh();
 }
+
+
+$(document).ready(function() {
+    var form1 = $("#form1");
+    if (form1.lenght == 0) return;
+    var options;
+
+    options = {
+        beforeSubmit: BeforSubmit,
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
+});
