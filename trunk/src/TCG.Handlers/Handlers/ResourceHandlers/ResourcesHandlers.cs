@@ -201,7 +201,25 @@ namespace TCG.Handlers
             return 1;
         }
 
+        public Dictionary<string, EntityBase> GetDelNewsInfoList(string ids)
+        {
+            SqlParameter sp1 = new SqlParameter("@ids", SqlDbType.NVarChar, 100); sp1.Value = ids;
+            SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
 
+            DataSet ds = base.conn.GetDataSet("SP_News_DelResourcesByIdS", new SqlParameter[] { sp1, sp2 });
+            Dictionary<string, EntityBase> res = null;
+            if (ds != null && ds.Tables.Count == 1)
+            {
+                res = new Dictionary<string, EntityBase>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    EntityBase resource = base.GetEntityObjectFromRow(ds.Tables[0].Rows[i], typeof(Resources));
+                    res.Add(resource.Id, resource);
+                }
+            }
+            return res;
+        }
         /// <summary>
         /// 批量删除资源文件
         /// </summary>
@@ -211,33 +229,22 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfoHtmlByIds(string ids)
         {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //if (string.IsNullOrEmpty(ids)) return -19000000;
-            //if (ids.IndexOf(",") != -1)
-            //{
+            base.SetDataBaseConnection();
+            if (string.IsNullOrEmpty(ids)) return -19000000;
 
-            //    string SQL = "SELECT vcFilePath FROM Resources (NOLOCK) WHERE iId in (" + ids + ")";
-            //    DataTable dt = conn.GetDataTable(SQL);
-            //    if (dt == null) return -1;
-            //    for (int i = 0; i < dt.Rows.Count; i++)
-            //    {
-            //        string filepath = HttpContext.Current.Server.MapPath("~" + dt.Rows[i]["vcFilePath"].ToString());
-            //        try
-            //        {
-            //            System.IO.File.Delete(filepath);
-            //        }
-            //        catch { }
-            //    }
-            //}
-            //else
-            //{
-            //    string t = ids;
-            //    if (string.IsNullOrEmpty(t))
-            //    {
-            //        return this.DelNewsInfoHtmlById("",t);
-            //    }
-            //}
+            Dictionary<string, EntityBase> res = GetDelNewsInfoList(ids);
+
+            if (res == null) return -19000000;
+            foreach (KeyValuePair<string, EntityBase> entity in res)
+            {
+                Resources restemp = (Resources)entity.Value;
+                string filepath = HttpContext.Current.Server.MapPath("~" + restemp.vcFilePath);
+                try
+                {
+                    System.IO.File.Delete(filepath);
+                }
+                catch { }
+            }
             return 1;
         }
 
