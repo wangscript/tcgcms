@@ -152,7 +152,7 @@ $(document).ready(function() {
 
     //初始化分类选择控件
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
-    
+
     Menu.init("gamelist");
 
     $("#SelectDivW").bind('click', function(e) {
@@ -166,6 +166,7 @@ $(document).ready(function() {
     });
 
     $(document).bind('click', function(e) {
+
         if ($("#gamelist_c").css('display') == 'block') {
             $("#gamelist_c").hide();
         }
@@ -184,3 +185,6 @@ $(document).ready(function() {
 
 });
 
+function UpLodatFileBack() {
+    
+}
