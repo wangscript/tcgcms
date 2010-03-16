@@ -104,7 +104,6 @@ namespace TCG.Pages
 
         protected void AjaxErch(string str)
         {
-            Response.ContentType = "application/x-javascript";
             Response.Write(str);
             Response.End();
         }
@@ -142,10 +141,9 @@ namespace TCG.Pages
             }
             else
             {
-                sb.Append("true,message:'" + okmessage + "',callback:\"" + callback + "\"");
+                sb.Append("true,message:\"" + okmessage + "\",callback:\"" + callback + "\"");
             }
             sb.Append("}");
-            Response.ContentType = "application/x-javascript";
             Response.Write(sb.ToString());
             Response.End();
         }

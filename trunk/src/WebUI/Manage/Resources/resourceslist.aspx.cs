@@ -249,7 +249,7 @@ public partial class resources_resourceslist : adminMain
             return;
         }
 
-        text1 = "<a href='.." + item.vcFilePath + "' target='_blank'>生成成功:" + item.vcFilePath + "...</a>";
+        text1 = "<a href=\"" + item.vcFilePath + "\" target=\"_blank\">生成成功:" + item.vcFilePath + "</a>";
         base.AjaxErch(1, text1, "CreateBack");
     }
 }
