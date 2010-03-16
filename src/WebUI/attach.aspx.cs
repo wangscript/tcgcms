@@ -40,30 +40,34 @@ public partial class attach : FilesMain
             
             FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
 
-            string filename = item.iID.ToString() + "." + item.vcType;
+            string filename = item.iID.ToString() + item.vcType;
             string path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(item.vcFileName,item.iClassId);
             string str7 = "";
             switch (item.vcType)
             {
-                case "gif":
+                case ".gif":
                     str7 = "image/gif";
                     break;
 
-                case "png":
+                case ".png":
                     str7 = "image/png";
                     break;
 
-                case "bmp":
+                case ".bmp":
                     str7 = "image/bmp";
                     break;
 
-                case "jpg":
-                case "jpe":
-                case "jpeg":
+                case ".jpg":
+                    str7 = "image/jpeg";
+                    break;
+                case ".jpe":
+                    str7 = "image/jpeg";
+                    break;
+                case ".jpeg":
                     str7 = "image/jpeg";
                     break;
 
-                case "swf":
+                case ".swf":
                     str7 = "application/x-shockwave-flash";
                     break;
 
@@ -77,7 +81,7 @@ public partial class attach : FilesMain
             {
                 base.Response.AddHeader("Content-Disposition", "attachment; filename=" + HttpUtility.UrlEncode(filename, Encoding.UTF8));
             }
-            base.Response.WriteFile(Server.MapPath("~" + path));
+            base.Response.WriteFile(path);
         }
     }
 }

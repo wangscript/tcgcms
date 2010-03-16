@@ -10,7 +10,7 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
+	<link href="../css/layer.css" rel="stylesheet" type="text/css" />
 	<link href="../css/enmu.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
 	<script type="text/javascript" src="../js/enmu.js"></script>
-
+    <script type="text/javascript" src="../js/layer.js"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
 	<script type="text/javascript">var fileclassid = <%=base.configService.baseConfig["NewsFileClass"] %> ;</script>

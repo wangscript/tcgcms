@@ -152,22 +152,6 @@ function RemoveHTML(strText) {
 }
 
 
-function UpLodatFileBack(url) {
-    var Value = url;
-    HtmlEditor.focus();
-    var R = self['HtmlEditor'].document.selection.createRange();
-    var _Content;
-
-    _Content = "<img src='" + Value + "'>";
-    if (FileAlign == "center") { _Content = "<p align='" + FileAlign + "'><img src='" + Value + "'></p>" } else if (FileAlign != null) { _Content = "<img src='" + Value + "' align='" + FileAlign + "'>" }
-
-    R.pasteHTML(_Content);
-    $("#DivNone").html("");
-    $("#DivNone").css({display:"none"});
-    MenuType(0);
-    return
-}
-
 var FileName,FileAlign=null;
 function InfoFile(TypeName) {
     if (TypeName == 0) {
@@ -188,6 +172,18 @@ function InfoFile(TypeName) {
         MenuType(0);
         return
     }
+
+    if (typeof (TypeName) == "object") {
+        
+        var _Content = "<img src='" + TypeName.Url + "'>";
+        HtmlEditor.focus();
+        var R = self['HtmlEditor'].document.selection.createRange();
+        if (FileAlign == "center") { _Content = "<p align='" + FileAlign + "'><img src='" + TypeName.Url + "'></p>" } else if (FileAlign != null) { _Content = "<img src='" + TypeName.Url + "' align='" + FileAlign + "'>" }
+        R.pasteHTML(_Content);
+        $("#FileView").html("");
+        MenuType(-1);
+    }
+    
     if (TypeName == 1) {
         var Value = $("#FileUrl").val();
         if (Value == "" || Value == "http://") { $("#FileText").html("<font color=red>请输入文件路径!</font>"); return; }
@@ -345,6 +341,16 @@ function MenuType(DivId, Num, _W, _H) {
         OnSMenu = null;
         return;
     }
+    if (DivId == -1) {
+        var DivNone = $("#DivNone");
+        $("#DivNone").html("");
+        $("#DivNone").css({ display: "none" });
+        if (!$("#" + OnMenu) && !$("#" + OnMenu)[0]) { $("#" + OnMenu)[0].className = 'M4' }
+        OnMenu = null;
+        OnSMenu = null;
+        return;
+    }
+    
     switch (Num) {
         case 0: $("#" + DivId)[0].className = 'M4on'; break;
         case 1: if (OnMenu != DivId) { $("#" + DivId)[0].className = 'M4' }
@@ -489,6 +495,8 @@ function AttachSubmit() {
 function AttachReset() {
     E.document.getElementsByTagName("BODY")[0].innerHTML = ContentId.value;
 }
+
+
 </script>
 </head>
 <body scroll=no>
@@ -532,7 +540,7 @@ function AttachReset() {
 </td></tr><tr><td id='BodyFoot'>
 <div id="BodyContent"><IFRAME class="HtmlEditor" ID="HtmlEditor" name="HtmlEditor" style="height:100%;width:100%" frameBorder="0" marginHeight=0 marginWidth=0 src="about:blank"></IFRAME></div>
 </td></tr></table>
-<div id="DivNone" style="display:none" onMouseLeave="MenuType(0)"></div>
+<div id="DivNone" style="display:none"></div>
 
 </body>
 </html>

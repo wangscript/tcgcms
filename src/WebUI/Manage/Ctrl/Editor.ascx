@@ -18,23 +18,3 @@ function setContent(){
 	document.getElementById("<%=content.ClientID %>").value = body.innerHTML;
 }
 </script>
-<div id="layerbox6" class="layerbox">
-    <div class="layer6">
-        <div class="layer-c">
-            <h3 class="title">
-                <a href="javascript:CloseImageDive()"></a>上传身份证扫描件或者照片</h3>
-            <div class="l-c">
-                <p id="uploadimgErrmsg" class="tips_false" style="display: none">
-                    <span></span>
-                </p>
-                <p class="p1">
-                    请上传身份证正面扫描件照片</p>
-                <p class="p2">
-                    图片应小于120k jpg格式，建议为500x500像素 <a href="javascript:void 0">上传帮助</a></p>
-                <p class="p3">
-                    <input type="file" id="fileUpload" name="fileUpload" class="input1" /><input type="button"
-                        value="上传" onclick="UploadImg()" class="input2" /></p>
-            </div>
-        </div>
-    </div>
-</div>
