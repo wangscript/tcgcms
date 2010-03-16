@@ -211,6 +211,7 @@ function SaveNews(){
 	SetAjaxDiv("loader",false,"正在发送删除请求...");
 	ajax.postf($("form1"),function(obj) { FalsDelBack(obj.responseText);});
 }
+
 function realdel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
