@@ -358,7 +358,7 @@ function AjaxPostFormBack(data) {
 	        if (data.callback.indexOf("(") > -1) {
 	            try { eval(data.callback); } catch (err) { }
 	        } else {
-	            try { eval(data.callback + "('" + data.message + "')"); } catch (err) { }
+	            try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { }
 	        }
 	        return;
 	    }
