@@ -181,7 +181,7 @@ namespace TCG.Handlers
                 //替换正文内容，检查图片
                 try
                 {
-                    string tContent = this.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.vcContent, "admin",
+                    string tContent = this.handlerService.fileService.fileInfoHandlers.ImgPatchInit(item.vcContent,"", "admin",
                         objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]));
                     if (tContent != item.vcContent)
                     {

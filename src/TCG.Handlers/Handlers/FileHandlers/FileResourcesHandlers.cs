@@ -22,6 +22,9 @@ using System.Text;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 using TCG.Utils;
 using TCG.Data;
@@ -111,69 +114,15 @@ namespace TCG.Handlers
             return item;
         }
 
-        public string ImgPatchInit(string content, string adminname, int fileclassid)
-        {
-            string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
-            MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-            string temp = "";
-            foreach (Match item in matchs)
-            {
-                string text1 = item.Result("$2");
-                if (text1.IndexOf(base.configService.baseConfig["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
-                {
-                    FileResources imgfile = new FileResources();
 
-                    imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
-                    imgfile.iClassId = fileclassid;
-
-                    imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
-
-                    
-
-                    imgfile.vcType = text1.Substring(text1.LastIndexOf(".") + 1, text1.Length - text1.LastIndexOf(".") - 1);
-
-                    WebClient wc = new WebClient();
-                   
-                    imgfile.iSize = 100;
-                    string filepath = this._fileclasshandlers.GetFilesPathByClassId(imgfile.iClassId);
-                    string filename = imgfile.iID + text1.Substring(text1.LastIndexOf("."), text1.Length - text1.LastIndexOf("."));
-
-                    if (filename.IndexOf("?") == -1)
-                    {
-
-                        string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
-                            + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
-                        try
-                        {
-                            objectHandlers.SaveFile(filepatch, "");
-                            if (this.GetUrlError(text1) == 200)
-                            {
-                                wc.DownloadFile(text1, filepatch);
-                                int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
-                                if (rtn < 0)
-                                {
-                                    System.IO.File.Delete(filepatch);
-                                }
-                                else
-                                {
-                                    content = content.Replace(text1, base.configService.baseConfig["FileSite"] 
-                                        + "/manage/attach.aspx?attach=" + imgfile.iID.ToString());
-                                    temp = text1 + "@@@" + temp;
-                                }
-                            }
-
-                        }
-                        catch
-                        {
-                        }
-                    }
-                    imgfile = null;
-                    wc = null;
-                }
-            }
-            return content;
-        }
-
+        /// <summary>
+        /// 获取文章中间外部网站的图片
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="url"></param>
+        /// <param name="adminname"></param>
+        /// <param name="fileclassid"></param>
+        /// <returns></returns>
         public string ImgPatchInit(string content, string url, string adminname, int fileclassid)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
@@ -186,44 +135,46 @@ namespace TCG.Handlers
                 {
                     FileResources imgfile = new FileResources();
 
-                    imgfile.iID = objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+                    imgfile.iID = this.GetFlieName();
                     imgfile.iClassId = fileclassid;
 
                     imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
                     imgfile.vcType = text1.Substring(text1.LastIndexOf(".") + 1, text1.Length - text1.LastIndexOf(".") - 1);
 
                     WebClient wc = new WebClient();
+                   
                     imgfile.iSize = 100;
-                    string filepath = this._fileclasshandlers.GetFilesPathByClassId(imgfile.iClassId);
-                    string filename = imgfile.iID + text1.Substring(text1.LastIndexOf("."), text1.Length - text1.LastIndexOf("."));
-                    string filepatch = HttpContext.Current.Server.MapPath("~" + filepath + imgfile.iID.ToString().Substring(0, 6) + "/"
-                        + imgfile.iID.ToString().Substring(6, 2) + "/" + filename);
-                    try
-                    {
-                        objectHandlers.SaveFile(filepatch, "");
-                        string imgurlpath = TxtReader.GetFileWebPath(url, text1);
-                        if (this.GetUrlError(imgurlpath) == 200)
-                        {
-                            wc.DownloadFile(imgurlpath, filepatch);
+                    string filename = imgfile.iID + Path.GetExtension(text1);
 
-                            int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
-                            if (rtn < 0)
+                    if (filename.IndexOf("?") == -1)
+                    {
+
+                        string filepatch = this.GetFilePath(filename, fileclassid);
+                        try
+                        {
+                            objectHandlers.SaveFile(filepatch, "");
+                            if (!string.IsNullOrEmpty(url))text1 = TxtReader.GetFileWebPath(url, text1);
+                            if (this.GetUrlError(text1) == 200)
                             {
-                                System.IO.File.Delete(filepatch);
+                                wc.DownloadFile(text1, filepatch);
+                                int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
+                                if (rtn < 0)
+                                {
+                                    System.IO.File.Delete(filepatch);
+                                }
+                                else
+                                {
+                                    content = "/attach.aspx?attach=" + imgfile.iID.ToString();
+                                    temp = text1 + "@@@" + temp;
+                                }
                             }
-                            else
-                            {
-                                content = content.Replace(text1, base.configService.baseConfig["FileSite"] + "/manage/attach.aspx?attach=" 
-                                    + imgfile.iID.ToString());
-                                temp = text1 + "@@@" + temp;
-                            }
+
+                        }
+                        catch
+                        {
                         }
                     }
-                    catch
-                    {
-                    }
                     imgfile = null;
- 
                     wc = null;
                 }
             }
@@ -265,5 +216,170 @@ namespace TCG.Handlers
             }
             return num;
         }
+
+        /// <summary>
+        /// 检测是否为允许的图片后缀
+        /// </summary>
+        /// <param name="filePath">图片路径</param>
+        private bool IsAllowImgExtension(string filePath)
+        {
+            if (base.configService.baseConfig["alowFileType"].IndexOf("'" + Path.GetExtension(filePath).ToLower() + "'") == -1)
+                return false;
+            return true;
+        }
+
+        public string GetFilePath(string filename, int fileclassid)
+        {
+            return HttpContext.Current.Server.MapPath("~" + this._fileclasshandlers.GetFilesPathByClassId(fileclassid)
+                + filename.Substring(0, 6) + "/" + filename.Substring(6, 2) + "/" + filename);
+        }
+
+        private long GetFlieName()
+        {
+            return objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+        }
+
+        public int UploadFile(byte[] _bytes, string adminname, string imagetype, int fileclassid, ref string imagepath)
+        {
+            if (!IsAllowImgExtension(imagetype))
+            {
+                return -1000000401;
+            }
+
+            MemoryStream ms = new MemoryStream(_bytes);
+
+            Image image = Image.FromStream(ms);
+
+            FileResources imgfile = new FileResources();
+
+            imgfile.iID = this.GetFlieName();
+            imgfile.iClassId = fileclassid;
+
+            imgfile.vcFileName = imgfile.iID + imagetype;
+            imgfile.vcType = imagetype;
+
+            imgfile.iSize = 100;
+
+            string filepatch = this.GetFilePath(imgfile.vcFileName, fileclassid);
+            FileStream fs = null;
+            try
+            {
+                objectHandlers.SaveFile(filepatch, "");
+                fs = new FileStream(filepatch, FileMode.Create);
+                ms.WriteTo(fs);
+
+
+                int rtn = 0;
+                if (!string.IsNullOrEmpty(adminname))
+                {
+                    rtn = this.AddFileInfoByAdmin(adminname, imgfile);
+                }
+
+                if (rtn < 0)
+                {
+                    System.IO.File.Delete(filepatch);
+                }
+                else
+                {
+                    imagepath = "/attach.aspx?attach=" + imgfile.iID.ToString();
+                }
+
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return -1000000402;
+            }
+            finally
+            {
+                ms.Close();
+                if (fs != null)
+                {
+                    fs.Close();
+                }
+                image.Dispose();
+            }
+
+        }
+
+        /// <summary>
+        /// 生成缩略图算法
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="maxWidth"></param>
+        /// <param name="maxHeight"></param>
+        /// <returns></returns>
+        private Size ResizeImage(int width, int height, int maxWidth, int maxHeight)
+        {
+            decimal MAX_WIDTH = (decimal)maxWidth;
+            decimal MAX_HEIGHT = (decimal)maxHeight;
+            decimal ASPECT_RATIO = MAX_WIDTH / MAX_HEIGHT;
+
+            int newWidth, newHeight;
+            decimal originalWidth = (decimal)width;
+            decimal originalHeight = (decimal)height;
+
+            if (originalWidth > MAX_WIDTH || originalHeight > MAX_HEIGHT)
+            {
+                decimal factor;
+                // determine the largest factor 
+                if (originalWidth / originalHeight > ASPECT_RATIO)
+                {
+                    factor = originalWidth / MAX_WIDTH;
+                    newWidth = Convert.ToInt32(originalWidth / factor);
+                    newHeight = Convert.ToInt32(originalHeight / factor);
+                }
+                else
+                {
+                    factor = originalHeight / MAX_HEIGHT;
+                    newWidth = Convert.ToInt32(originalWidth / factor);
+                    newHeight = Convert.ToInt32(originalHeight / factor);
+                }
+            }
+            else
+            {
+                newWidth = width;
+                newHeight = height;
+            }
+            return new Size(newWidth, newHeight);
+        }
+
+
+        /// <summary>
+        /// 根据后缀获取图片格式
+        /// </summary>
+        /// <param name="filePath">图片路径</param>
+        public static ImageFormat GetImgFormat(string filePath)
+        {
+            ImageFormat format;
+            switch (Path.GetExtension(filePath).ToLower())
+            {
+                case ".jpe":
+                case ".jpeg":
+                case ".jpg":
+                    format = ImageFormat.Jpeg;
+                    break;
+                case ".png":
+                    format = ImageFormat.Png;
+                    break;
+                case ".tif":
+                case ".tiff":
+                    format = ImageFormat.Tiff;
+                    break;
+                case ".bmp":
+                    format = ImageFormat.Bmp;
+                    break;
+                case ".gif":
+                    format = ImageFormat.Gif;
+                    break;
+                default:
+                    format = ImageFormat.Jpeg;
+                    break;
+            }
+            return format;
+        }
+
+        
     }
 }
