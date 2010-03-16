@@ -153,7 +153,6 @@ namespace TCG.Handlers
 
         private void SysteConfigReplace()
         {
-            this._temphtml = _temphtml.Replace("_$FileSite$_", base.configService.baseConfig["FileSite"]);
             this._temphtml = _temphtml.Replace("_$FileExtension$_", base.configService.baseConfig["FileExtension"]);
             this._temphtml = _temphtml.Replace("_$WebSite$_", base.configService.baseConfig["WebSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", base.configService.baseConfig["PageSize"]);
