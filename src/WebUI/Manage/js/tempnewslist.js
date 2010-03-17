@@ -140,20 +140,20 @@ function PageCreat() {
     
     CreateDiv.Start("生成单页模版文件");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
-    
     var work = $("#work");
     var iTemplateId = $("#iTemplateId");
     if (temps.indexOf(",") > -1) {
         var o = temps.split(",");
+
+        o = CheckCreateTemplate(o);
         
         CreateDiv.set = 1;
+        CreateDiv.setcount = o.length;
         for (var i = 0; i < o.length; i++) {
             var t = GetTemplateById(o[i]);
-            if (t == null) continue;
-            if (t.SystemType != 0) continue;
+
             work.val("Create");
             iTemplateId.val(o[i]);
-            CreateDiv.setcount++;
             $('#form1').submit();
 
         }
@@ -177,6 +177,19 @@ function PageCreat() {
         iTemplateId.val(temps);
         $('#form1').submit();
     }
+}
+
+
+function CheckCreateTemplate(temps) {
+    var tempstr = "";
+    for (var i = 0; i < temps.length; i++) {
+        var t = GetTemplateById(temps[i]);
+        if (t != null && t.TemplateType == 0) {
+            tempstr += (tempstr == "" ? "" : ",") + temps[i];
+        }
+    }
+
+    return tempstr.split(",");
 }
 
 function CreateBack(data) {

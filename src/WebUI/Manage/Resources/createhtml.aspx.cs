@@ -29,6 +29,8 @@ public partial class news_createhtml : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.iSkinId.Value = base.configService.DefaultSkinId;
+
         if (Page.IsPostBack)
         {
             //检测管理员登录
@@ -43,54 +45,8 @@ public partial class news_createhtml : adminMain
                 case "Create":
                     this.Create();
                     break;
-                case "KeyWordLoad":
-                    this.KeyWordLoad();
-                    break;
             }
         }
-    }
-
-    private void KeyWordLoad()
-    {
-        #region 分词系统 暂时还未完成
-        /*
-        if (KeyWordTree.Root.ChildList.Count == 0)
-        {
-            string path = objectHandlers.MapPath(ConfigurationManager.ConnectionStrings["CKeyWordsFile"].ToString());
-            if (File.Exists(path))
-            {
-                StreamReader Reader = new StreamReader(path, Encoding.Default);
-                List<KeyWordTreeNode> tmpRoot = KeyWordTree.Root.ChildList;
-
-                while (Reader.Peek() != -1)
-                {
-                    string[] tmp = Reader.ReadLine().ToLower().Split('|');
-                    KeyWordTree.AddKeyWord(tmp[0]);
-
-                }
-
-                Reader.Close();
-                Reader.Dispose();
-
-                if (KeyWordTree.Root.ChildList.Count == 0)
-                {
-                    base.Finish();
-                    base.AjaxErch("-1000000070");
-                    return;
-                }
-            }
-            else
-            {
-                base.Finish();
-                base.AjaxErch("-1000000070");
-                return;
-            }
-        }
-         */
-        #endregion
-
-        base.Finish();
-        base.AjaxErch("加载关键词成功！");
     }
 
     private void Create()

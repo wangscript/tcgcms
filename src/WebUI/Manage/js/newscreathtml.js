@@ -1,26 +1,60 @@
-var ajax = new AJAXRequest();
-var GroupDiv = new MenuDiv();
-var CreateDiv=new CreateDiv();
-CreateDiv.Default={w:-230,h:-455};
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
-function ClassInit(){
-    SetAjaxDiv("loader",false,"正在加载关键字词库...");
-	var iClassName=$("iClassName");
-	var iClassId=$("iClassId");
-	var SelectDivW=$("SelectDivW");
-	var pos = getAbsolutePositionXY(iClassName);
-	SelectDivW.style.top=(pos.y+1)+"px";
-	SelectDivW.style.left=(pos.x+iClassName.offsetWidth-20)+"px";
-	var o=GetNewsItemById(iClassId.value);
-	if(o==null){
-		iClassName.value="请选择资讯分类...";
-	}else{
-		iClassName.value=o[2];
-	}
-	var work=$("work");
-	work.value="KeyWordLoad";
-	ajax.postf($("form1"),function(obj) { KeyWordLoadBack(obj.responseText);});
-}
+var CreateDiv=new CreateDiv();
+
+
+var iId ;
+var work;
+var tClassId ;
+var iFilePath ;
+var tCreated ;
+
+
+$(document).ready(function() {
+
+    iId = $("iId");
+    work = $("work");
+    tClassId = $("tClassId");
+    iFilePath = $("iFilePath");
+    tCreated = $("tCreated");
+
+    GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
+
+    Menu.init("gamelist");
+
+    $("#SelectDivW").bind('click', function(e) {
+        if ($("#gamelist_c").css('display') == 'block') {
+            $("#gamelist_c").hide();
+        } else {
+            $("#gamelist_c").show();
+        }
+        e.stopPropagation();
+
+    });
+
+    $(document).bind('click', function(e) {
+
+        if ($("#gamelist_c").css('display') == 'block') {
+            $("#gamelist_c").hide();
+        }
+    });
+
+//    var iClassName = $("iClassName");
+//    var iClassId = $("iClassId");
+//    var SelectDivW = $("SelectDivW");
+//    var pos = getAbsolutePositionXY(iClassName);
+//    SelectDivW.style.top = (pos.y + 1) + "px";
+//    SelectDivW.style.left = (pos.x + iClassName.offsetWidth - 20) + "px";
+//    var o = GetNewsItemById(iClassId.value);
+//    if (o == null) {
+//        iClassName.value = "请选择资讯分类...";
+//    } else {
+//        iClassName.value = o[2];
+//    }
+//    var work = $("work");
+//    work.value = "KeyWordLoad";
+
+});
 
 function KeyWordLoadBack(val){
     if(GetErrText(val))return;
@@ -70,11 +104,11 @@ function GetClassItems(v){
 }
 
 function SelectClassValue(val,txt){
-	var iClassName=$("iClassName");
-	var iClassId=$("iClassId");
-	iClassName.value=txt;
-	iClassId.value=val;
-	GroupDiv.HidMenuDiv();
+    var iClassName = $("#iClassName");
+    var iClassId = $("#iClassId");
+    iClassName.val(txt);
+    iClassId.val(val);
+
 }
 
 function ShowChild(obj,classid){
