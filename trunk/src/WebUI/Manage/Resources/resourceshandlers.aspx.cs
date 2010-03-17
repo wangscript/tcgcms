@@ -97,7 +97,7 @@ public partial class resources_resourceshandlers : adminMain
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.Categorie.Id = categorieid;
+        item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
 
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");

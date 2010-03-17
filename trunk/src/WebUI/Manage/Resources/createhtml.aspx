@@ -8,14 +8,18 @@
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
+	<link href="../css/layer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/enmu.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
-	<script type="text/javascript" src="../js/MenuDiv.js"></script>
-	<script type="text/javascript" src="../js/CreateDiv.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+    <script type="text/javascript" src="../js/newscommon.js"></script>
+    <script type="text/javascript" src="../js/enmu.js"></script>
+	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/calendar.js"></script>
+	<script type="text/javascript" src="../js/layer.js"></script>
 	<script type="text/javascript" src="../js/newscreathtml.js"></script>
 </head>
 <body>
@@ -41,8 +45,21 @@
 		<span class="info1" id="endtimemsg">时间段的结束时间！</span>
 	</div>
 	<div class="Page_g"><input id="orderClass" name="StypeCheck" type="radio" value="2" />生成一段时间内的所有资源<span class="info2">(根据资讯的类别来生成,含子类别！)</span></div>
-	<div class="Page_arrb">
-		<span class="p_a_t1">资讯类别：</span><input id="iClassName" name="iClassName" type="text"  class="itxt1" onmouseover="selebg1();" onmouseout="selebg2();" onblur="CheckValueIsNull('iClassName','classmsg');" /><a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1" onmouseover="selebg1();" onmouseout="selebg2();" onclick="ShowNewsClassSl();"></a>
+	<div class="Page_arrb ">
+		<span class="p_a_t1 lfl">资讯类别：</span>
+		<span class="p_a_t1 lfl">
+		    <div class="cagegoriesSelect">
+		        <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
+		        <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
+    		
+		        <div id="gamelist_c" class="enmu addselect">
+                    <div  class="c_box" id="gamelist">
+		                <ul id="Cagetorie_c" class="one">	
+			            </ul>
+                    </div>
+                </div>
+		    </div>
+		</span>
 		<span class="info1" id="classmsg">资讯所属的分类，不能为空</span>
 	</div>
 	<div class="Page_g">公共选项<span class="info2">(对生成类型，数目进行限制)</span></div>
@@ -64,14 +81,7 @@
 	<input type="hidden" id="iFilePath" name="iFilePath"/>
 	<input type="hidden" id="page" name="page" value="1"/>
 	<input type="hidden" id="iTopicWebPath" name="iTopicWebPath" value=""/>
-	<script type="text/javascript">
-		ClassInit();
-		var iId=$("iId");
-		var work=$("work");
-		var tClassId=$("tClassId");
-		var iFilePath=$("iFilePath");
-		var tCreated=$("tCreated");
-	</script>
+	<input type="hidden" id="iSkinId" name="iSkinId" runat="server"/>
     </form>
 </body>
 </html>
