@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="../js/newscreathtml.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm()">
+    <form id="form1" runat="server">
 	<div class="Page_title">资讯生成<span class="info1">(批量生成资讯的静态文件)</span></div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="Page_g"><input name="StypeCheck" type="radio" id="orderTime" value="1" checked="checked"/>
@@ -48,7 +48,7 @@
 	<div class="Page_arrb ">
 		<span class="p_a_t1 lfl">资讯类别：</span>
 		<span class="p_a_t1 lfl">
-		    <div class="cagegoriesSelect">
+		    <div class="cagegoriesSelect" style=" margin-top:8px;">
 		        <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
 		        <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
     		
@@ -60,7 +60,7 @@
                 </div>
 		    </div>
 		</span>
-		<span class="info1" id="classmsg">资讯所属的分类，不能为空</span>
+		<span class="info1" id="classmsg" style=" margin-left:210px;">资讯所属的分类，不能为空</span>
 	</div>
 	<div class="Page_g">公共选项<span class="info2">(对生成类型，数目进行限制)</span></div>
 	<div class="Page_arrb">
@@ -72,7 +72,7 @@
 		<span class="p_a_t1">附加条件：</span><input id="iCondition"  name="iCondition" type="text"  class="itxt1" onfocus="this.className='itxt2';"  onblur="" style="width:280px;"/>
 		<span class="info1" id="numsmsg"> </span>
 	</div>
-	<div class="dobtn" style="margin-top:5px;"><input type="submit" id="btnok" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" /></div>
+	<div class="dobtn" style="margin-top:5px;"><input type="button"  onclick="StartCreate();" id="btnok" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" value="-1"/>
 	<input type="hidden" id="tClassId" name="tClassId" />
 	<input type="hidden" id="iId" name="iId" />

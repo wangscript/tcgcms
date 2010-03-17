@@ -18,7 +18,11 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Collections;
+
 using System.Text;
+using System.Text.RegularExpressions;
+
 
 using TCG.Data;
 using TCG.Utils;
@@ -220,6 +224,8 @@ namespace TCG.Handlers
             }
             return res;
         }
+
+
         /// <summary>
         /// 批量删除资源文件
         /// </summary>
@@ -376,6 +382,50 @@ namespace TCG.Handlers
             if (dt != null && dt.Rows.Count > 0)
             {
                 res = base.GetEntitysObjectFromTable(dt, typeof(Resources));
+            }
+
+            return res;
+        }
+
+
+        /// <summary>
+        /// 获取指定页数
+        /// </summary>
+        /// <param name="curPage"></param>
+        /// <param name="pageCount"></param>
+        /// <param name="count"></param>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="order"></param>
+        /// <param name="strCondition"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetResourcesListPager(ref int curPage, ref int pageCount,ref int count, int page, int pagesize, string order, string strCondition)
+        {
+            Dictionary<string, EntityBase> res = null;
+            base.SetDataBaseConnection();
+
+            PageSearchItem sItem = new PageSearchItem();
+            sItem.tableName = "Resources";
+
+            ArrayList arrshowfied = new ArrayList();
+            arrshowfied.Add("*");
+            sItem.arrShowField = arrshowfied;
+
+            ArrayList arrsortfield = new ArrayList();
+            arrsortfield.Add(order);
+            sItem.arrSortField = arrsortfield;
+
+            sItem.page = page;
+            sItem.pageSize = pagesize;
+
+            sItem.strCondition = strCondition;
+
+            DataSet ds = new DataSet();
+            int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
+
+            if (rtn == 1 && ds != null && ds.Tables.Count == 1)
+            {
+                res = base.GetEntitysObjectFromTable(ds.Tables[0], typeof(Resources));
             }
 
             return res;

@@ -473,7 +473,7 @@ hideElementsById(new Array("tiannetYearHead","tiannetMonthHead","tiannetHourHead
 tiannetSetDay(tiannetYear,tiannetMonth);
 tiannetWriteHead();
 showTime();
-var dads = $("divTiannetDate").style;
+var dads = $("#divTiannetDate").get(0).style;
 var iX, iY;
 var pos = getAbsolutePositionXY(obj);
 dads.left = pos.x + "px";
