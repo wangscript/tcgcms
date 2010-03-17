@@ -28,6 +28,9 @@ namespace TCG.Handlers
                 if (this._fileclasshandlers == null)
                 {
                     this._fileclasshandlers = new FileCategoriesHandlers();
+                    this._fileclasshandlers.configService = base.configService;
+                    this._fileclasshandlers.conn = base.conn;
+                    this._fileclasshandlers.handlerService = base.handlerService;
                 }
                 return this._fileclasshandlers;
             }
@@ -46,6 +49,9 @@ namespace TCG.Handlers
                 {
                     this._fileInfohandlers = new FileResourcesHandlers();
                     this._fileInfohandlers.fileClassHandlers = this.fileClassHandlers;
+                    this._fileInfohandlers.configService = base.configService;
+                    this._fileInfohandlers.conn = base.conn;
+                    this._fileInfohandlers.handlerService = base.handlerService;
                 }
                 return this._fileInfohandlers;
             }
