@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="jquery-1.3.1-vsdoc.js" />
+
 var ajaxiconRoot = ['images/ajax-loader1.gif', 'images/post_err.gif', 'images/post_ok.gif'];
 var ajaxicon = ['../images/ajax-loader1.gif', '../images/post_err.gif', '../images/post_ok.gif'];
 
@@ -329,17 +330,17 @@ function MoveCharOutStr(str,chr){
 	return str;
 }
 
-function CheckValueIsDateTime(obj,msgobj){
-	var iClassName=$(obj);
-	var cnamemsg=$(msgobj);
-	iClassName.className="itxt1";
-	if(strDateTime(iClassName.value)){
-		cnamemsg.className="info_ok";
-		return true;
-	}else{
-		cnamemsg.className="info_err";
-		return false;
-	}
+function CheckValueIsDateTime(obj, msgobj) {
+    var iClassName = $("#" + obj);
+    var cnamemsg = $("#" + msgobj);
+    iClassName.addClass("itxt1");
+    if (strDateTime(iClassName.val())) {
+        cnamemsg.addClass("info_ok").removeClass("info_err");
+        return true;
+    } else {
+        cnamemsg.addClass("info_err").removeClass("info_ok");
+        return false;
+    }
 }
 
 function strDateTime(str){

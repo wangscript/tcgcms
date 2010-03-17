@@ -97,7 +97,11 @@ public partial class resources_resourceshandlers : adminMain
         item.vcContent = objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
-        item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
+
+        if (item.Categorie.Id != categorieid)
+        {
+            item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
+        }
 
         item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
@@ -147,7 +151,7 @@ public partial class resources_resourceshandlers : adminMain
             }
 
             filepath = Server.MapPath("~" + item.vcFilePath);
-            if (rtn == 1)
+            if (rtn == 1 && string.IsNullOrEmpty(item.vcUrl))
             {
                 TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
                 tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
