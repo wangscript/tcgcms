@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -13,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using TCG.Utils;
+using TCG.Entity;
 using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
@@ -52,39 +54,34 @@ public partial class resources_resourcesrecovery : adminMain
         PageSearchItem sItem = new PageSearchItem();
         sItem.tableName = "Resources";
 
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
-        arrshowfied.Add("vcTitle");
-        arrshowfied.Add("iClassID");
-        arrshowfied.Add("cChecked");
-        arrshowfied.Add("cCreated");
-        arrshowfied.Add("dUpDateDate");
-        sItem.arrShowField = arrshowfied;
 
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("iId DESC");
-        sItem.arrSortField = arrsortfield;
-
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
-        sItem.strCondition += " cDel ='Y'";
+        int page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        int pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        string strCondition = " cDel ='Y'";
 
         int curPage = 0;
         int pageCount = 0;
         int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
+
+        Dictionary<string, EntityBase> res = null;
+        try
         {
-            return;
+            res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
+                   page, pageSize, "iId DESC", strCondition);
         }
+        catch (Exception ex)
+        {
+
+        }
+
+
         this.pager.Per = sItem.pageSize;
         this.pager.Total = count;
         this.pager.Calculate();
 
-        if (ds.Tables.Count != 0)
+        if (res != null && res.Count != 0)
         {
-            this.ItemRepeater.DataSource = ds;
+            this.ItemRepeater.DataSource = res.Values;
             this.ItemRepeater.DataBind();
         }
 
@@ -92,7 +89,7 @@ public partial class resources_resourcesrecovery : adminMain
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        Resources res = (Resources)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
         Span sId = (Span)e.Item.FindControl("sId");
         Span sTitle = (Span)e.Item.FindControl("sTitle");
@@ -101,10 +98,10 @@ public partial class resources_resourcesrecovery : adminMain
         Span sCreated = (Span)e.Item.FindControl("sCreated");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
 
-        CheckID.Text = Row["iId"].ToString();
-        sId.Text = Row["iId"].ToString();
-        string check = Row["cChecked"].ToString();
-        string Created = Row["cCreated"].ToString();
+        CheckID.Text = res.Id;
+        sId.Text = res.Id;
+        string check = res.cChecked;
+        string Created = res.cCreated;
         if (check == "Y")
         {
             sChecked.Text = "<img src='../images/icon/checked.gif' class='imginlist' />";
@@ -123,10 +120,10 @@ public partial class resources_resourcesrecovery : adminMain
             sCreated.Text = "<img src='../images/icon/falseIcon.gif' class='imginlist' />";
         }
 
-        sTitle.Text = Row["vcTitle"].ToString();
-        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID(" + Row["iClassID"].ToString() + ");</script>";
+        sTitle.Text = res.vcTitle;
+        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID(" + res.Categorie.Id + ");</script>";
 
-        updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
+        updatedate.Text = res.dUpDateDate.ToString("yyyy-MM-dd HH:mm:ss");
     }
 
     private void SaveNews()
