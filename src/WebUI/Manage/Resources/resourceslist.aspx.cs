@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -51,27 +52,10 @@ public partial class resources_resourceslist : adminMain
 
     private void SearchInit()
     {
-        base.handlerService.resourcsService.resourcesHandlers.SetDataBaseConnection();
+       
 
-        PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "Resources";
-
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
-        arrshowfied.Add("vcTitle");
-        arrshowfied.Add("iClassID");
-        arrshowfied.Add("cChecked");
-        arrshowfied.Add("cCreated");
-        arrshowfied.Add("dUpDateDate");
-        arrshowfied.Add("vcFilePath");
-        sItem.arrShowField = arrshowfied;
-
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("iId DESC");
-        sItem.arrSortField = arrsortfield;
-
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        int page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        int pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
 
         string iClassId = objectHandlers.Get("iClassId");
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
@@ -96,39 +80,47 @@ public partial class resources_resourceslist : adminMain
             allchild = base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(iClassId);
         }
 
-        sItem.strCondition = "iClassID in (" + allchild + ")";
+        string strCondition = "iClassID in (" + allchild + ")";
 
         string check = objectHandlers.Get("check");
         if (!string.IsNullOrEmpty(check))
         {
-            sItem.strCondition += " AND cChecked ='" + check + "'";
+            strCondition += " AND cChecked ='" + check + "'";
         }
 
         string create = objectHandlers.Get("create");
         if (!string.IsNullOrEmpty(create))
         {
-            sItem.strCondition += " AND cCreated ='" + create + "'";
+            strCondition += " AND cCreated ='" + create + "'";
         }
 
         int Speciality = objectHandlers.ToInt(objectHandlers.Get("Speciality"));
         this.iSpeciality.Value = Speciality.ToString();
         if (Speciality != 0)
         {
-            sItem.strCondition += " AND dbo.IsSpeciality(vcSpeciality,'" + Speciality.ToString() + "') >0 ";
+            strCondition += " AND dbo.IsSpeciality(vcSpeciality,'" + Speciality.ToString() + "') >0 ";
         }
 
-        sItem.strCondition += " AND cDel ='N'";
+        strCondition += " AND cDel ='N'";
 
         int curPage = 0;
         int pageCount = 0;
         int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
+
+        
+        Dictionary<string, EntityBase> res = null;
+        try
         {
-            return;
+            res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
+                   page, pageSize, "iId DESC", strCondition);
         }
-        this.pager.Per = sItem.pageSize;
+        catch (Exception ex)
+        {
+
+        }
+
+
+        this.pager.Per = pageSize;
         this.pager.SetItem("iClassId", iClassId);
         this.pager.SetItem("check", check);
         this.pager.SetItem("create", create);
@@ -136,9 +128,9 @@ public partial class resources_resourceslist : adminMain
         this.pager.Total = count;
         this.pager.Calculate();
 
-        if (ds.Tables.Count != 0)
+        if (res!=null&&res.Count != 0)
         {
-            this.ItemRepeater.DataSource = ds;
+            this.ItemRepeater.DataSource = res.Values;
             this.ItemRepeater.DataBind();
         }
 
@@ -146,7 +138,7 @@ public partial class resources_resourceslist : adminMain
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        Resources res = (Resources)e.Item.DataItem;
         Span CheckID = (Span)e.Item.FindControl("CheckID");
 
         Span sClassName = (Span)e.Item.FindControl("sClassName");
@@ -155,10 +147,10 @@ public partial class resources_resourceslist : adminMain
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sTitle = (Span)e.Item.FindControl("sTitle");
 
-        CheckID.Text = Row["iId"].ToString();
+        CheckID.Text = res.Id;
 
-        string check = Row["cChecked"].ToString();
-        string Created = Row["cCreated"].ToString();
+        string check = res.cChecked;
+        string Created = res.cCreated;
         if (check == "Y")
         {
             sChecked.Text = "<img src='../images/icon/checked.gif' class='imginlist' />";
@@ -177,12 +169,13 @@ public partial class resources_resourceslist : adminMain
             sCreated.Text = "<img src='../images/icon/falseIcon.gif' class='imginlist' />";
         }
 
-        string text = "<a href=\"resourceshandlers.aspx?newsid=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
+        string text = "<a href=\"resourceshandlers.aspx?newsid=" + res.Id + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
-        sTitle.Text = text + "<a href='../.." + Row["vcFilePath"].ToString() + "' target='_blank'>" + Row["vcTitle"].ToString() + "</a>";
-        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + Row["iClassID"].ToString() + "');</script>";
+        string url = string.IsNullOrEmpty(res.vcUrl) ? res.vcFilePath : res.vcUrl;
+        sTitle.Text = text + "<a href='../.." + url + "' target='_blank'>" + res.vcTitle + "</a>";
+        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + res.Categorie.Id + "');</script>";
 
-        updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy-MM-dd HH:mm:ss");
+        updatedate.Text = res.dUpDateDate.ToString("yyyy-MM-dd HH:mm:ss");
     }
 
     /// <summary>
