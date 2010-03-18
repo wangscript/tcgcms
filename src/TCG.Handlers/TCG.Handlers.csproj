@@ -77,10 +77,6 @@
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.KeyWordSplit\TCG.KeyWordSplit.csproj">
-      <Project>{B151A9AB-28A9-4343-B1BA-62825DE9DDE4}</Project>
-      <Name>TCG.KeyWordSplit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCG.Release\TCG.Release.csproj">
       <Project>{7B10337D-32C6-48BE-8C7D-68B7D9D95B91}</Project>
       <Name>TCG.Release</Name>

@@ -22,7 +22,6 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-using TCG.KeyWordSplit;
 
 public partial class resources_resourceshandlers : adminMain
 {

@@ -22,8 +22,6 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-using TCG.KeyWordSplit;
-
 
 public partial class news_createhtml : adminMain
 {
