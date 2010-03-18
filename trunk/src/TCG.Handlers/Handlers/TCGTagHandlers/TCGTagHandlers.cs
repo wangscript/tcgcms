@@ -60,7 +60,7 @@ namespace TCG.Handlers
                     this._tagtemplate.configService = base.configService;
                     this._tagtemplate.conn = base.conn;
 
-                    this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
+                    this._tagtemplate.Attribute = item.Result("$2");
                     this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                     this._tagtemplate.TagText = item.Result("$3");
                     this._tagtemplate.TagType = item.Result("$1");
@@ -101,7 +101,7 @@ namespace TCG.Handlers
                         this._tagtemplate.configService = base.configService;
                         this._tagtemplate.conn = base.conn;
 
-                        this._tagtemplate.Attribute = this.ReplaceAttribute(item.Result("$2"));
+                        this._tagtemplate.Attribute = item.Result("$2");
                         this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
                         this._tagtemplate.TagText = item.Result("$3");
                         this._tagtemplate.TagType = item.Result("$1");
@@ -124,7 +124,7 @@ namespace TCG.Handlers
                         }
                     }
                     this._temphtml = this._listtemp.Replace(this._temphtml);
-                    this._temphtml = this._temphtml.Replace("__$pager$__", this.GetPager());
+                    this.GetPager();
                 }
                 this._start = false;
                 this.Save();
@@ -144,12 +144,6 @@ namespace TCG.Handlers
             return this.Replace();
         }
 
-        private string ReplaceAttribute(string str)
-        {
-            str = str.Replace("_@", "<");
-            str = str.Replace("@_", ">");
-            return str;
-        }
 
         private void SysteConfigReplace()
         {
@@ -259,49 +253,140 @@ namespace TCG.Handlers
             }
         }
 
-        private string GetPager()
+        public void GetPager()
         {
-            if (this._pagerinfo.NeedPager)
+            Match mh = Regex.Match(this._temphtml, @"(<TcgPager>)(.+?)(</TcgPager>)", RegexOptions.Singleline | RegexOptions.Multiline);
+            string pagerhtml = string.Empty;
+            if (mh.Success)
             {
-                string text1 = this._webpath.Substring(0, this._webpath.LastIndexOf("."));
-                string text2 = this._webpath.Substring(this._webpath.LastIndexOf("."), this._webpath.Length - this._webpath.LastIndexOf("."));
-                return pager(text1 + "-c{0}" + text2, this._pagerinfo.Page, this._pagerinfo.PageCount, this._pagerinfo.TopicCount, this._pagerinfo.curPage, true);
+                pagerhtml = mh.Result("$2");
+                string pageurlt = GetPagerWebPathTemplate();
+
+                //替换上一页
+                string pevtemplate = this.GetPagerNode("Pev", pagerhtml);
+                pagerhtml = Regex.Replace(pagerhtml, @"<Pev>(.+?)</Pev>", GetPevHtml(pageurlt, pevtemplate, this._pagerinfo.Page), RegexOptions.Singleline | RegexOptions.Multiline);
+
+                string nexttemplate = this.GetPagerNode("Next", pagerhtml);  //Cur Page
+                pagerhtml = Regex.Replace(pagerhtml, @"<Next>(.+?)</Next>", GetNextHtml(pageurlt, nexttemplate, this._pagerinfo.Page, this._pagerinfo.PageCount), RegexOptions.Singleline | RegexOptions.Multiline);
+
+                string pagetemplate = this.GetPagerNode("Page", pagerhtml);
+                string Curpagetemplate = this.GetPagerNode("Cur", pagerhtml);
+
+                string pagestemplate = this.GetPagerNode("Pages", pagerhtml);
+                pagerhtml = Regex.Replace(pagerhtml, @"<Pages>(.+?)</Pages>", GetPagesUrlHtml(pageurlt, pagetemplate, Curpagetemplate,
+                    this._pagerinfo.curPage, this._pagerinfo.PageCount), RegexOptions.Singleline | RegexOptions.Multiline);
             }
-            return "";
+
+            this._temphtml = Regex.Replace(this._temphtml, @"(<TcgPager>)(.+?)(</TcgPager>)", pagerhtml, RegexOptions.Singleline | RegexOptions.Multiline);
         }
 
-
-        private string setPage(string s, int i)
+        private string GetPagesUrlHtml(string pageurl, string page, string cur, int curpage, int pagecount)
         {
-            if (i == 1)
+            if (pagecount == 0) return "";
+            if (pagecount == 1) return string.Format(cur, string.Format(pageurl, ""), curpage);
+
+            string str = string.Empty;
+            for (int i = 1; i < pagecount + 1; i++)
             {
-                return s.Replace("-c{0}", "").Replace("{p}", "");
-            }
-            else
-            {
-                return s.Replace("{0}", i.ToString()).Replace("{p}", i.ToString());
-            }
-        }
 
-
-        private string pager(string url, int page, int maxPage, int total, int per, bool countsIsVisible)
-        {
-
-            string s = string.Empty;
-
-            for (int i = 1; i <= maxPage; i++)
-            {
-                if (page == i)
+                if (i == curpage)
                 {
-                    s += ("<a href='" + setPage(url,i) + "' style='color:red'>" + i.ToString() + "</a> ");
+                    if (i == 1)
+                    {
+                        str += string.Format(cur, string.Format(pageurl, ""), i);
+                    }
+                    else
+                    {
+                        str += string.Format(cur, string.Format(pageurl, i), i);
+                    }
                 }
                 else
                 {
-                    s += ("<a href='" + setPage(url, i) + "' >" + i.ToString() + "</a> ");
+                    if (i == 1)
+                    {
+                        str += string.Format(page, string.Format(pageurl, ""), i);
+                    }
+                    else
+                    {
+                        str += string.Format(page, string.Format(pageurl, i), i);
+                    }
+
                 }
+
             }
 
-            return s;
+            return str;
+        }
+
+        /// <summary>
+        /// 获取上一页HTML
+        /// </summary>
+        /// <param name="pageurl"></param>
+        /// <param name="curpage"></param>
+        /// <returns></returns>
+        private string GetPevHtml(string pageurl, string pevhtml, int curpage)
+        {
+            if (curpage == 1)
+            {
+                return "";
+            }
+            else
+            {
+                if (curpage == 2)
+                {
+                    return string.Format(pevhtml, string.Format(pageurl, ""));
+                }
+                else
+                {
+                    return string.Format(pevhtml, string.Format(pageurl, curpage - 1));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获得下一页地址
+        /// </summary>
+        /// <param name="pageurl"></param>
+        /// <param name="curpage"></param>
+        /// <param name="pagecount"></param>
+        /// <returns></returns>
+        private string GetNextHtml(string pageurl, string nexthtml, int curpage, int pagecount)
+        {
+            if (curpage == pagecount)
+            {
+                return "";
+            }
+            else
+            {
+                return string.Format(nexthtml, string.Format(pageurl, curpage + 1));
+            }
+        }
+
+        /// <summary>
+        /// 获得分页路径模板
+        /// </summary>
+        /// <returns></returns>
+        private string GetPagerWebPathTemplate()
+        {
+            if (this._webpath.IndexOf("{0}") > -1) return this._webpath;
+            string text1 = this._webpath.Substring(0, this._webpath.LastIndexOf("."));
+            string text2 = this._webpath.Substring(this._webpath.LastIndexOf("."), this._webpath.Length - this._webpath.LastIndexOf("."));
+            return text1 + "{0}" + text2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageshtml"></param>
+        /// <returns></returns>
+        private string GetPagerNode(string NodeName, string pageshtml)
+        {
+            Match mh = Regex.Match(pageshtml, @"(<" + NodeName + ">)(.+?)(</" + NodeName + ">)", RegexOptions.Singleline | RegexOptions.Multiline);
+            if (mh.Success)
+            {
+                return mh.Result("$2");
+            }
+            return "";
         }
 
         /// <summary>

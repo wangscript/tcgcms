@@ -267,6 +267,33 @@ namespace TCG.Handlers
 
             sqlsb.Append(" * FROM Resources (NOLOCK) WHERE iID>0 ");
 
+            sqlsb.Append(this.GetTagResourceCondition(categories, Speciality, check, del, create));
+
+            if (!string.IsNullOrEmpty(orders)) sqlsb.Append(" ORDER BY " + orders);
+
+            DataTable  dt = base.conn.GetDataTable(sqlsb.ToString());
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                res = base.GetEntitysObjectFromTable(dt, typeof(Resources));
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// 获得标签中文章的搜索条件
+        /// </summary>
+        /// <param name="categories"></param>
+        /// <param name="Speciality"></param>
+        /// <param name="check"></param>
+        /// <param name="del"></param>
+        /// <param name="create"></param>
+        /// <returns></returns>
+        public string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create)
+        {
+            StringBuilder sqlsb = new StringBuilder();
+
             if (check) { sqlsb.Append(" AND cChecked='Y' "); } else { sqlsb.Append(" AND cChecked='N'"); }
 
             if (del) { sqlsb.Append(" AND cDel='Y' "); } else { sqlsb.Append(" AND cDel='N' "); }
@@ -278,7 +305,7 @@ namespace TCG.Handlers
                 if (categories.IndexOf(',') > -1)
                 {
                     string[] cates = categories.Split(',');
-                   
+
                     string text1 = string.Empty;
                     for (int i = 0; i < cates.Length; i++)
                     {
@@ -300,16 +327,7 @@ namespace TCG.Handlers
                 }
             }
 
-            if (!string.IsNullOrEmpty(orders)) sqlsb.Append(" ORDER BY " + orders);
-
-            DataTable  dt = base.conn.GetDataTable(sqlsb.ToString());
-
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                res = base.GetEntitysObjectFromTable(dt, typeof(Resources));
-            }
-
-            return res;
+            return sqlsb.ToString();
         }
 
 

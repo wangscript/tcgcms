@@ -361,67 +361,6 @@ namespace TCG.Handlers
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
 
-        private void NewslistTagFieldsReplace(ref string temp, string fields, DataRow Row)
-        {
-            string fieldv = string.Empty;
-            if (fields.IndexOf(",") == -1)
-            {
-                fields = fields.Replace("%", ",");
-                if (fields.IndexOf(" as") == -1)
-                {
-                    fieldv = Row[fields].ToString();
-                    if (fields == "vcTitle")
-                    {
-                        if (!string.IsNullOrEmpty(Row["vcTitleColor"].ToString())) fieldv = "<font color='" + Row["vcTitleColor"].ToString() + "'>" + fieldv + "</font>";
-                        if (Row["cStrong"].ToString() == "Y") fieldv = "<strong>" + fieldv + "</strong>";
-                    }
-                    temp = temp.Replace("$" + this._tagtype + "_" + fields + "$", "<TCG>" + fieldv + "</TCG>");
-                }
-                else
-                {
-
-                    string field1 = fields.Split(new string[] { " as" }, StringSplitOptions.None)[1].Trim();
-                    fieldv = Row[field1].ToString();
-                    if (field1 == "vcTitle")
-                    {
-                        if (!string.IsNullOrEmpty(Row["vcTitleColor"].ToString())) fieldv = "<font color='" + Row["vcTitleColor"].ToString() + "'>" + fieldv + "</font>";
-                        if (Row["cStrong"].ToString() == "Y") fieldv = "<strong>" + fieldv + "</strong>";
-                    }
-
-                    temp = temp.Replace("$" + this._tagtype + "_" + field1 + "$", "<TCG>" + fieldv + "</TCG>");
-                }
-            }
-            else
-            {
-                string[] fi = fields.Split(',');
-                for (int i = 0; i < fi.Length; i++)
-                {
-                    fields = fields.Replace("%", ",");
-                    if (fi[i].IndexOf(" as") == -1)
-                    {
-                        fieldv = Row[fi[i]].ToString();
-                        if (fi[i] == "vcTitle")
-                        {
-                            if (!string.IsNullOrEmpty(Row["vcTitleColor"].ToString())) fieldv = "<font color='" + Row["vcTitleColor"].ToString() + "'>" + fieldv + "</font>";
-                            if (Row["cStrong"].ToString() == "Y") fieldv = "<strong>" + fieldv + "</strong>";
-                        }
-                        temp = temp.Replace("$" + this._tagtype + "_" + fi[i] + "$", "<TCG>" + fieldv + "</TCG>");
-                    }
-                    else
-                    {
-                        string field2 = fi[i].Split(new string[] { " as" }, StringSplitOptions.None)[1].Trim();
-                        fieldv = Row[field2].ToString();
-                        if (field2 == "vcTitle")
-                        {
-                            if (!string.IsNullOrEmpty(Row["vcTitleColor"].ToString())) fieldv = "<font color='" + Row["vcTitleColor"].ToString() + "'>" + fieldv + "</font>";
-                            if (Row["cStrong"].ToString() == "Y") fieldv = "<strong>" + fieldv + "</strong>";
-                        }
-                        temp = temp.Replace("$" + this._tagtype + "_" + field2 + "$", "<TCG>" + fieldv + "</TCG>");
-                    }
-                }
-            }
-            temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
-        }
 
         /// <summary>
         /// 处理资讯列表，带分页
@@ -430,100 +369,55 @@ namespace TCG.Handlers
         {
             pagerinfo.NeedPager = true;
             this._pager = true;
-            PageSearchItem sItem = new PageSearchItem();
-            sItem.tableName = "Resources";
 
-            ArrayList arrshowfied = new ArrayList();
 
-            //读取返回字段
-            string fields = this.GetAttribute("fields");
-            string fieldC = "";
-            if (string.IsNullOrEmpty(fields))
-            {
-                pagerinfo.Read = false;
-                return;
-            }
-            if (fields.IndexOf(",") != -1)
-            {
-                string[] afields = fields.Split(',');
-                for (int i = 0; i < afields.Length; i++)
-                {
-                    if (!string.IsNullOrEmpty(afields[i]))
-                    {
-                        fieldC = afields[i].Replace("%", ",");
-                        arrshowfied.Add(fieldC);
-                    }
-                }
-            }
-            else
-            {
-                fieldC = fields.Replace("%", ",");
-                arrshowfied.Add(fieldC);
-            }
-            arrshowfied.Add("vcTitleColor");
-            arrshowfied.Add("cStrong");
-            sItem.arrShowField = arrshowfied;
-
-            //读取排序
-            ArrayList arrsortfield = new ArrayList();
+            int nums = objectHandlers.ToInt(this.GetAttribute("num"));
+            string categories = this.GetAttribute("categories");
+            string Speciality = this.GetAttribute("speciality");
             string orders = this.GetAttribute("orders");
-            if (string.IsNullOrEmpty(orders)) 
-            {
-                pagerinfo.Read = false;
-                return;
-            }
-            if (orders.IndexOf(",") != -1)
-            {
-                string[] aorders = orders.Split(',');
-                for (int i = 0; i < aorders.Length; i++)
-                {
-                    if (!string.IsNullOrEmpty(aorders[i])) arrsortfield.Add(aorders[i]);
-                }
-            }
-            else
-            {
-                arrsortfield.Add(orders);
-            }
-            sItem.arrSortField = arrsortfield;
+            bool check = this.GetAttribute("check") != "Y" ? false : true;
+            bool del = this.GetAttribute("del") != "Y" ? false : true;
+            bool create = this.GetAttribute("create") != "Y" ? false : true;
 
-            sItem.page = pagerinfo.Page;//设置当前页数
-            sItem.pageSize = objectHandlers.ToInt(this.GetAttribute("pagesize"));
-            string condition = this.GetAttribute("condition");
-            if (string.IsNullOrEmpty(condition)) 
-            {
-                pagerinfo.Read = false;
-                return;
-            }
-            sItem.strCondition = condition;
 
             int curPage = 0;
             int pageCount = 0;
             int count = 0;
-            DataSet ds = new DataSet();
-            int rtn = DBHandlers.GetPage(sItem,base.conn, ref curPage, ref pageCount, ref count, ref ds);
+
+            string strCondition = base.handlerService.resourcsService.resourcesHandlers.GetTagResourceCondition(categories, Speciality, check, del, create);
+            Dictionary<string, EntityBase> res = null;
+            try
+            {
+                res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
+                       pagerinfo.Page, nums, "iId DESC", strCondition);
+            }
+            catch (Exception ex)
+            {
+                pagerinfo.Read = false;
+
+            }
 
             pagerinfo.PageCount = pageCount;
             pagerinfo.curPage = curPage;
             pagerinfo.TopicCount = count;
 
-
-            if (ds.Tables.Count != 0)
+            if (res != null && res.Count != 0)
             {
                 string tempOld = this._tagtext;
                 string tempNew = string.Empty;
-                for (int n = 0; n < ds.Tables[0].Rows.Count; n++)
+                int n = 0;
+                foreach (KeyValuePair<string, EntityBase> entity in res)
                 {
+                    Resources tempres = (Resources)entity.Value;
                     string temp = tempOld;
-                    DataRow Row = ds.Tables[0].Rows[n];
-                    temp = temp.Replace("$" + this._tagtype + "_Index$", (n+1).ToString());
-                    this.NewslistTagFieldsReplace(ref temp, fields, Row);
+                    temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
+                    this.NewslistTagFieldsReplace(ref temp, tempres);
                     tempNew += temp;
+                    n++;
                 }
+
                 this._tagtext = tempNew;
             }
-
-            ds.Clear();
-            ds.Dispose();
 
         }
 
