@@ -146,9 +146,11 @@ public partial class resources_resourceslist : adminMain
         Span sCreated = (Span)e.Item.FindControl("sCreated");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sTitle = (Span)e.Item.FindControl("sTitle");
+        Span sId = (Span)e.Item.FindControl("sId");
+        
 
         CheckID.Text = res.Id;
-
+        sId.Text = res.Id;
         string check = res.cChecked;
         string Created = res.cCreated;
         if (check == "Y")

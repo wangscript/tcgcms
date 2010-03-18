@@ -75,7 +75,7 @@ public partial class resources_resourcesrecovery : adminMain
         }
 
 
-        this.pager.Per = sItem.pageSize;
+        this.pager.Per = pageSize;
         this.pager.Total = count;
         this.pager.Calculate();
 
@@ -121,7 +121,7 @@ public partial class resources_resourcesrecovery : adminMain
         }
 
         sTitle.Text = res.vcTitle;
-        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID(" + res.Categorie.Id + ");</script>";
+        sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + res.Categorie.Id + "');</script>";
 
         updatedate.Text = res.dUpDateDate.ToString("yyyy-MM-dd HH:mm:ss");
     }
@@ -131,13 +131,25 @@ public partial class resources_resourcesrecovery : adminMain
         string delids = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(delids))
         {
-            base.AjaxErch("-1000000051");
+            base.AjaxErch(-1000000051,"");
             return;
         }
 
-        //待续
-        int rtn = 0;// base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithLogic(base.conn, base.adminInfo.vcAdminName, "N", delids);
-        base.AjaxErch(rtn.ToString());
+        int rtn = 0;
+
+        try
+        {
+            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids,"SAVE",base.adminInfo.vcAdminName);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(rtn, "", "refinsh()");
+
     }
 
     private void DelNews()
@@ -145,11 +157,23 @@ public partial class resources_resourcesrecovery : adminMain
         string delids = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(delids))
         {
-            base.AjaxErch("-1000000051");
+            base.AjaxErch(-1000000051, "");
             return;
         }
-        //待续
-        int rtn = 0;// base.handlerService.resourcsService.resourcesHandlers.DelNewsInfosWithPhysics(base.conn, base.adminInfo.vcAdminName, delids);
-        base.AjaxErch(rtn.ToString());
+
+        int rtn = 0;
+
+        try
+        {
+            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids, "DEL", base.adminInfo.vcAdminName);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(rtn, "", "refinsh()");
     }
 }

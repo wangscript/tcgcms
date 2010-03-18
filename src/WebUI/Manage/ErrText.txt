@@ -113,3 +113,7 @@
 
 -1000000401@@@fileupload@@@文件格式不正确
 -1000000402@@@fileupload@@@系统错误
+
+
+-1000000501@@@SP_News_SaveOrDelResource@@@尚未选择资源
+-1000000502@@@SP_News_SaveOrDelResource@@@操作员为空，您是否尚未登陆？
