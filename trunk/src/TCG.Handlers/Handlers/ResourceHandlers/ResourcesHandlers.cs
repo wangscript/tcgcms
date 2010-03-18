@@ -174,36 +174,7 @@ namespace TCG.Handlers
             return (Resources)base.GetEntityObjectFromRow(dt.Rows[0], typeof(Resources));
         }
 
-
-        /// <summary>
-        /// 搜索咨询所在的分类，支持多个分类，请谨慎使用
-        /// </summary>
-        /// <param name="errText"></param>
-        /// <param name="resources"></param>
-        /// <param name="CategorieId"></param>
-        /// <param name="condition"></param>
-        /// <param name="orderby"></param>
-        /// <returns></returns>
-        public int GetResourcsByTemplateTag(ref string errText, ref Dictionary<string, Resources> resources, string CategorieId, string condition,string orderby) 
-        {
-            return 1;
-        }
          
-        /// <summary>
-        /// 删除资源文件
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="config"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int DelNewsInfoHtmlById(string categoriesid, string resourceid)
-        {
-            //Resources newsitem = this.GetNewsInfoById(categoriesid,resourceid);
-            //if (newsitem == null) return -19000000;  
-            //string filepath = HttpContext.Current.Server.MapPath("~" + newsitem.vcFilePath);
-            //System.IO.File.Delete(filepath);
-            return 1;
-        }
 
         public Dictionary<string, EntityBase> GetDelNewsInfoList(string ids)
         {
@@ -254,30 +225,6 @@ namespace TCG.Handlers
             return 1;
         }
 
-        public DataSet GetNewsInfosByClass(Connection conn, string classids, int number, int create)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@vcClass", SqlDbType.VarChar, 2000); sp0.Value = classids;
-            //SqlParameter sp1 = new SqlParameter("@iNum", SqlDbType.Int, 4); sp1.Value = number;
-            //SqlParameter sp2 = new SqlParameter("@iDel", SqlDbType.Int, 4); sp2.Value = create;
-            //return conn.GetDataSet("SP_News_GetNewsInfosForCreatHTML", new SqlParameter[] { sp0, sp1, sp2 });
-            return null;
-        }
-
-        public DataSet GetNewsInofsByCreateDate(Connection conn, int number, int create, DateTime stime, DateTime etime, int type)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp0.Value = "02";
-            //SqlParameter sp1 = new SqlParameter("@ITimeType", SqlDbType.Int,4); sp1.Value = type;
-            //SqlParameter sp2 = new SqlParameter("@dStartTime", SqlDbType.DateTime, 8); sp2.Value = stime;
-            //SqlParameter sp3 = new SqlParameter("@dEndTime", SqlDbType.DateTime, 8); sp3.Value = etime;
-            //SqlParameter sp4 = new SqlParameter("@iNum", SqlDbType.Int, 4); sp4.Value = number;
-            //SqlParameter sp5 = new SqlParameter("@iDel", SqlDbType.Int, 4); sp5.Value = create;
-            //return conn.GetDataSet("SP_News_GetNewsInfosForCreatHTML", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5 });
-            return null;
-        }
 
         /// <summary>
         /// 获取所有的文章咨询,并放入内存中,不要轻易调用,将消耗大量的时间
@@ -292,32 +239,11 @@ namespace TCG.Handlers
 
         public Dictionary<string, EntityBase> GetAllResuresFromDataBase()
         {
+            base.SetDataBaseConnection();
             DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) ");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
             return base.GetEntitysObjectFromTable(dt, typeof(Resources));
-        }
-
-        /// <summary>
-        /// 检测文章是否已经抓取过
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="classid"></param>
-        /// <param name="title"></param>
-        /// <returns></returns>
-        public int CheckThiefTopic(Connection conn, string classid, string title)
-        {
-            //待续
-            //base.SetReourceHandlerDataBaseConnection();
-            //SqlParameter sp0 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp0.Value = title;
-            //SqlParameter sp1 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp1.Value = classid;
-            //SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
-            //string[] reValues = conn.Execute("SP_News_CheckThiefTopic", new SqlParameter[] { sp0, sp1, sp2}, new int[] { 2 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int)); ;
-            //}
-            return -19000000;
         }
 
         /// <summary>
@@ -449,5 +375,32 @@ namespace TCG.Handlers
             return text;
         }
 
+
+        /// <summary>
+        /// 就会或删除资源
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public int SaveOrDelResource(string ids,string action,string adminname)
+        {
+            base.SetDataBaseConnection();
+            SqlParameter sp1 = new SqlParameter("@ids", SqlDbType.NVarChar, 100); sp1.Value = ids;
+            SqlParameter sp2 = new SqlParameter("@Action", SqlDbType.NVarChar, 10); sp2.Value = action;
+            SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp3.Direction = ParameterDirection.Output;
+
+            SqlParameter sp4 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp4.Value = adminname;
+            SqlParameter sp5 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp5.Value = objectHandlers.GetIP();
+
+            string[] reValues = conn.Execute("SP_News_SaveOrDelResource", new SqlParameter[] { sp1, sp2, sp3 , sp4 , sp5}, new int[] { 2 });
+            if (reValues != null)
+            {
+                int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
+
+                return rtn;
+            }
+
+            return -19000000;
+        }
     }
 }

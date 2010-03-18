@@ -206,10 +206,10 @@ function SaveNews(){
 		SetAjaxDiv("err",false,"您没选择需要救回的资讯！");
 		return;
 	}
-	$("iAction").value="SAVE";
-	$("DelClassId").value=temps;
-	SetAjaxDiv("loader",false,"正在发送删除请求...");
-	ajax.postf($("form1"),function(obj) { FalsDelBack(obj.responseText);});
+	$("#iAction").val("SAVE");
+	$("#DelClassId").val(temps);
+	SetAjaxDiv("loader", false, "正在发送删除请求...");
+	$("#form1").submit();
 }
 
 function realdel(){
@@ -218,10 +218,10 @@ function realdel(){
 		SetAjaxDiv("err",false,"您没选择需要彻底删除的资讯！");
 		return;
 	}
-	$("iAction").value="DEL";
-	$("DelClassId").value=temps;
+	$("#iAction").val("DEL");
+	$("#DelClassId").val(temps);
 	SetAjaxDiv("loader",false,"正在发送删除请求...");
-	ajax.postf($("form1"),function(obj) { FalsDelBack(obj.responseText);});
+	$("#form1").submit();
 }
 
 function FalsDelBack(val){

@@ -18,7 +18,6 @@
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
-	<script type="text/javascript" src="../js/MenuDiv.js"></script>
     <script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/newslist.js"></script>
 	<script type="text/javascript" src="../js/layer.js"></script>
@@ -48,6 +47,7 @@
 	<div class="ChildclassTitle hid" id="ChildclassTitle" onmouseout="HidClassTitle()" onmousemove="ShowClassTitle($('#ClassTitleA').get(0));"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
+		<span class="l_id bold l_rg">ID</span>
 		<span class="l_classname bold l_rg newstitle hidover">资讯标题</span>
 		<span class="l_classname bold l_rg newsclass">所属主类别</span>
 		<span class="l_id bold l_rg">审核</span>
@@ -58,6 +58,7 @@
 		<ItemTemplate>
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
+		<TCG:Span class='l_id' id='sId' runat='server'/>
 		<TCG:Span class='l_classname newstitle hidover' id='sTitle' runat='server' />
 		<TCG:Span class='l_classname newsclass' id='sClassName' runat='server' />
 		<TCG:Span class='l_id' id='sChecked' runat='server' />
