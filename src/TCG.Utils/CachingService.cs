@@ -144,6 +144,10 @@ namespace TCG.Utils
         /// 所有权限组实体
         /// </summary>
         public static string CACHING_ALL_ADMINROLE_ENTITY = "CACHING_ALL_ADMINROLE_ENTITY";
+        /// <summary>
+        /// 所有图片分类实体
+        /// </summary>
+        public static string CACHING_ALL_FILECATEGORIES_ENTITY = "CACHING_ALL_FILECATEGORIES_ENTITY";
 
         /// <summary>
         /// 系统缓存集合
@@ -166,6 +170,7 @@ namespace TCG.Utils
                     _systemcachings.Add("所有的管理员实体", CACHING_ALL_ADMIN_ENTITY);
                     _systemcachings.Add("所有权限组实体", CACHING_ALL_ADMINROLE_ENTITY);
                     _systemcachings.Add("所有皮肤记录集缓存", CACHING_ALL_SKIN);
+                    _systemcachings.Add("所有图片分类实体", CACHING_ALL_FILECATEGORIES_ENTITY);
                 }
                 return _systemcachings;
             }

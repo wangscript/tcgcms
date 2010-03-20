@@ -181,7 +181,7 @@ namespace TCG.Handlers
         {
             Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
             if (allcategories == null) return null;
-            return (Categories)allcategories[iClassID];
+            return allcategories.ContainsKey(iClassID) ? (Categories)allcategories[iClassID] : null;
         }
 
         /// <summary>

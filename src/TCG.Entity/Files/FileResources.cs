@@ -21,7 +21,7 @@ namespace TCG.Entity
     /// <summary>
     /// 文件资源实体
     /// </summary>
-    public class FileResources
+    public class FileResources :EntityBase
     {
         /// <summary>
         /// 文件分类ID
@@ -43,10 +43,6 @@ namespace TCG.Entity
         /// 创建时间
         /// </summary>
         public DateTime dCreateDate { get { return this._dcreatedate; } set { this._dcreatedate = value; } }
-        /// <summary>
-        /// 文件的记录编号
-        /// </summary>
-        public long iID { get { return this._iid; } set { this._iid = value; } }
         /// <summary>
         /// 文件类型
         /// </summary>

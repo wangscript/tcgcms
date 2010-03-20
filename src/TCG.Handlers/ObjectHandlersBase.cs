@@ -266,6 +266,30 @@ namespace TCG.Handlers
                     sourceinfo.TopicPagerOld = row["TopicPagerOld"].ToString();
                     sourceinfo.TopicPagerTemp = row["TopicPagerTemp"].ToString();
                     return (EntityBase)sourceinfo;
+                case "TCG.Entity.FileCategories":
+                    FileCategories filecagegories = new FileCategories();
+                    filecagegories.Id = row["iId"].ToString();
+                    filecagegories.iParentId = objectHandlers.ToInt(row["iParentId"]);
+                    filecagegories.dCreateDate = objectHandlers.ToTime(row["dCreateDate"].ToString());
+                    filecagegories.vcFileName = row["vcFileName"].ToString();
+                    filecagegories.vcMeno = row["vcMeno"].ToString();
+                    filecagegories.Key = row["Key"].ToString();
+                    filecagegories.MaxSpace = objectHandlers.ToLong(row["MaxSpace"]);
+                    filecagegories.Space = objectHandlers.ToLong(row["Space"]);
+                    return (EntityBase)filecagegories;
+                case "TCG.Entity.FileResources":
+                    FileResources fileresource = new FileResources();
+                    fileresource.Id = row["iID"].ToString();
+                    fileresource.iClassId = (int)row["iClassId"];
+                    fileresource.iSize = (int)row["iSize"];
+                    fileresource.vcFileName = row["vcFileName"].ToString();
+                    fileresource.vcIP = row["vcIP"].ToString();
+                    fileresource.vcType = row["vcType"].ToString();
+                    fileresource.iRequest = (int)row["iRequest"];
+                    fileresource.iDowns = (int)row["iDowns"];
+                    fileresource.dCreateDate = (DateTime)row["dCreateDate"];
+                    return (EntityBase)fileresource;
+
             }
             return null;
         }
