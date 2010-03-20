@@ -22,12 +22,8 @@ namespace TCG.Entity
     /// 文件分类实体 
     /// <log>by :sanyungui@yahoo.com.cn date: 2009-10-23 info:</log>
     /// </summary>
-    public class FileCategories
+    public class FileCategories : EntityBase
     {
-        /// <summary>
-        /// 文件分类ID
-        /// </summary>
-        public int iId { get { return this._iid; } set { this._iid = value; } }
         /// <summary>
         /// 文件分类父类
         /// </summary>

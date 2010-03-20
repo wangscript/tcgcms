@@ -62,10 +62,10 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddFileInfoByAdmin(string adminname, FileResources fif)
         {
-            if (!base.SetFileDatabase(fif.iID)) return -19000000;
+            if (!base.SetFileDatabase(fif.Id)) return -19000000;
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@iID", SqlDbType.BigInt, 8); sp2.Value = fif.iID;
+            SqlParameter sp2 = new SqlParameter("@iID", SqlDbType.BigInt, 8); sp2.Value = fif.Id;
             SqlParameter sp3 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp3.Value = fif.iClassId;
             SqlParameter sp4 = new SqlParameter("@vcFileName", SqlDbType.NVarChar, 100); sp4.Value = fif.vcFileName;
             SqlParameter sp5 = new SqlParameter("@iSize", SqlDbType.Int, 4); sp5.Value = fif.iSize;
@@ -89,7 +89,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public FileResources GetFileInfosById( long id)
+        public FileResources GetFileInfosById(string id)
         {
             FileResources item = null;
             if (!base.SetFileDatabase(id)) return null;
@@ -100,7 +100,7 @@ namespace TCG.Handlers
                 if (dt.Rows.Count == 1)
                 {
                     item = new FileResources();
-                    item.iID = (long)dt.Rows[0]["iID"];
+                    item.Id = dt.Rows[0]["iID"].ToString();
                     item.iClassId = (int)dt.Rows[0]["iClassId"];
                     item.iSize = (int)dt.Rows[0]["iSize"];
                     item.vcFileName = dt.Rows[0]["vcFileName"].ToString();
@@ -135,7 +135,7 @@ namespace TCG.Handlers
                 {
                     FileResources imgfile = new FileResources();
 
-                    imgfile.iID = this.GetFlieName();
+                    imgfile.Id = this.GetFlieName();
                     imgfile.iClassId = fileclassid;
 
                     imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
@@ -144,7 +144,7 @@ namespace TCG.Handlers
                     WebClient wc = new WebClient();
                    
                     imgfile.iSize = 100;
-                    string filename = imgfile.iID + Path.GetExtension(text1);
+                    string filename = imgfile.Id + Path.GetExtension(text1);
 
                     if (filename.IndexOf("?") == -1)
                     {
@@ -164,7 +164,7 @@ namespace TCG.Handlers
                                 }
                                 else
                                 {
-                                    content = "/attach.aspx?attach=" + imgfile.iID.ToString();
+                                    content = "/attach.aspx?attach=" + imgfile.Id;
                                     temp = text1 + "@@@" + temp;
                                 }
                             }
@@ -234,9 +234,9 @@ namespace TCG.Handlers
                 + filename.Substring(0, 6) + "/" + filename.Substring(6, 2) + "/" + filename);
         }
 
-        private long GetFlieName()
+        private string GetFlieName()
         {
-            return objectHandlers.ToLong(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", ""));
+            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", "");
         }
 
         public int UploadFile(byte[] _bytes, string adminname, string imagetype, int fileclassid, ref string imagepath)
@@ -252,10 +252,10 @@ namespace TCG.Handlers
 
             FileResources imgfile = new FileResources();
 
-            imgfile.iID = this.GetFlieName();
+            imgfile.Id = this.GetFlieName();
             imgfile.iClassId = fileclassid;
 
-            imgfile.vcFileName = imgfile.iID + imagetype;
+            imgfile.vcFileName = imgfile.Id + imagetype;
             imgfile.vcType = imagetype;
 
             imgfile.iSize = 100;
@@ -281,7 +281,7 @@ namespace TCG.Handlers
                 }
                 else
                 {
-                    imagepath = "/attach.aspx?attach=" + imgfile.iID.ToString();
+                    imagepath = "/attach.aspx?attach=" + imgfile.Id;
                 }
 
                 return 1;

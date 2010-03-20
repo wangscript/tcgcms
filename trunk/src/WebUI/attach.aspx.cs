@@ -31,8 +31,8 @@ public partial class attach : FilesMain
                 return;
             }
 
-            long iId = objectHandlers.ToLong(objectHandlers.Get("attach"));
-            if (iId == 0)
+            string iId = objectHandlers.Get("attach");
+            if (!string.IsNullOrEmpty(iId))
             {
                 return;
             }
@@ -40,7 +40,7 @@ public partial class attach : FilesMain
             
             FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
 
-            string filename = item.iID.ToString() + item.vcType;
+            string filename = item.Id + item.vcType;
             string path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(item.vcFileName,item.iClassId);
             string str7 = "";
             switch (item.vcType)

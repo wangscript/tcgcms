@@ -16,6 +16,7 @@ using System;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -41,6 +42,35 @@ namespace TCG.Handlers
         {
             base.SetMainFileDataBase();
             return base.conn.GetDataTable("SELECT * FROM filecategories (NOLOCK)");
+        }
+
+        /// <summary>
+        /// 获得所有文章分类实体
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetAllFileCategoriesEntity()
+        {
+            Dictionary<string, EntityBase> allfilecategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_FILECATEGORIES_ENTITY);
+            if (allfilecategories == null)
+            {
+                DataTable dt = GetAllFilesClassFromDb();
+                if (dt == null) return null;
+                allfilecategories = base.GetEntitysObjectFromTable(dt, typeof(FileCategories));
+                CachingService.Set(CachingService.CACHING_ALL_FILECATEGORIES_ENTITY, allfilecategories, null);
+            }
+            return allfilecategories;
+        }
+
+        /// <summary>
+        /// 根据ID获得文章分类信息
+        /// </summary>
+        /// <param name="filecateorieid"></param>
+        /// <returns></returns>
+        public FileCategories GetFileCategories(string filecateorieid)
+        {
+            Dictionary<string, EntityBase> allfilecategories = this.GetAllFileCategoriesEntity();
+            if (allfilecategories == null) return null;
+            return allfilecategories.ContainsKey(filecateorieid) ? (FileCategories)allfilecategories[filecateorieid] : null;
         }
 
         /// <summary>

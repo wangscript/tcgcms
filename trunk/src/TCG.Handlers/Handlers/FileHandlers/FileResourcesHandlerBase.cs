@@ -35,12 +35,12 @@ namespace TCG.Handlers
         /// 设置数据库链接
         /// </summary>
         /// <returns></returns>
-        protected bool SetFileDatabase(long fid)
+        protected bool SetFileDatabase(string fid)
         {
             if (base.configService == null) return false;
             if (base.configService.fileDataBaseConfig == null) return false;
             if (base.configService.fileDataBaseConfig.Count == 0) return false;
-            int index = objectHandlers.ToInt(fid % base.configService.fileDataBaseConfig.Count);
+            int index = objectHandlers.ToInt(objectHandlers.ToLong(fid) % base.configService.fileDataBaseConfig.Count);
             DataBaseConnStr filedatabase = base.configService.fileDataBaseConfig[index];
             base.conn.SetConnStr = filedatabase.Value;
             return true;
