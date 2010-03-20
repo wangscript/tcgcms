@@ -40,7 +40,7 @@ namespace TCG.Handlers
         public DataTable GetAllFilesClassFromDb()
         {
             base.SetMainFileDataBase();
-            return base.conn.GetDataTable("SELECT iId,vcFileName,iParentId,vcMeno,dCreateDate FROM filecategories (NOLOCK)");
+            return base.conn.GetDataTable("SELECT * FROM filecategories (NOLOCK)");
         }
 
         /// <summary>
