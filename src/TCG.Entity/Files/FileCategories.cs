@@ -44,11 +44,27 @@ namespace TCG.Entity
         /// 说明
         /// </summary>
         public string vcMeno { get { return this._vcmeno; } set { this._vcmeno = value; } }
+        /// <summary>
+        /// 密钥
+        /// </summary>
+        public string Key { get { return this._key; } set { this._key = value; } }
+        /// <summary>
+        /// 允许使用的最大空间
+        /// </summary>
+        public long MaxSpace { get { return this._maxspace; } set { this._maxspace = value; } }
+        /// <summary>
+        /// 剩余空间
+        /// </summary>
+        public long Space { get { return this._space; } set { this._space = value; } }
+        
       
         private int _iid;
         private int _iparentid;
         private DateTime _dcreatedate;
         private string _vcfilename;
         private string _vcmeno;
+        private string _key;
+        private long _maxspace;
+        private long _space;
     }
 }
