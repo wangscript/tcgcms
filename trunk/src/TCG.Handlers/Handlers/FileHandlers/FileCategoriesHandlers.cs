@@ -104,21 +104,23 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="prarentid"></param>
         /// <returns></returns>
-        public DataTable GetFilesClassInfosByParendId(int prarentid)
+        public Dictionary<string, EntityBase> GetFileCategories(int prarentid)
         {
-            DataTable dt = this.GetAllFileClass(false);
-            if (dt != null)
+            Dictionary<string, EntityBase> allfilecategories = this.GetAllFileCategoriesEntity();
+            if (allfilecategories == null || allfilecategories.Count == 0) return null;
+
+            Dictionary<string, EntityBase> categories = new Dictionary<string, EntityBase>();
+
+            foreach (KeyValuePair<string, EntityBase> entity in allfilecategories)
             {
-                DataRow[] rows = dt.Select("iParentId=" + prarentid.ToString());
-                if (rows.Length != 0)
+                FileCategories tempfilecategories = (FileCategories)entity.Value;
+                if (tempfilecategories.iParentId == prarentid)
                 {
-                    DataSet ds = new DataSet();
-                    ds.Merge(rows);
-                    return ds.Tables[0];
+                    categories.Add(tempfilecategories.Id, tempfilecategories);
                 }
-                return null;
             }
-            return dt;
+
+            return categories.Count == 0 ? null : categories;
         }
 
         public string GetFilesPathByClassId(int classid)

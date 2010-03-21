@@ -1,7 +1,4 @@
-//--------------
-var ajax = new AJAXRequest();
-var GroupDiv = new MenuDiv();
-var UploadFile = new UploadFile();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function CAdd(){
 	var AddFileClass=$("AddFileClass");
@@ -17,33 +14,24 @@ function fileclassTitleInit(){
 	}
 }
 
-function GetTitleListByID(ID){
-	for(var i=0;i<AllFileClass.length;i++){
-		if(AllFileClass[i][0]==ID){
-			var t = GetTitleListByID(AllFileClass[i][1]);
+function GetTitleListByID(ID) {
+    if (_FileCategories == null) return;
+    for (var i = 0; i < _FileCategories.length; i++) {
+        if (_FileCategories[i].Id == ID) {
+            var t = GetTitleListByID(_FileCategories[i].iParentId);
 			var tt =(t=="")?"":" >> ";
-			return t + tt + "<span><a href='?iClassId="+AllFileClass[i][0]+"' >"+AllFileClass[i][2]+"</a></span>";
+			return t + tt + "<span><a href='?iClassId=" + _FileCategories[i].Id + "' >" + _FileCategories[i].vcFileName + "</a></span>";
 		}
 	}
 	return "";
 }
 
-function AddClassS(){
-	var AddFileClass=$("AddFileClass");
-	$("inTitle").value="";
-	$("inInfo").value="";
-	$("work").value="AddClass"
-	AddFileClass.className="list_title_c";
-	GroupDiv.HidMenuDiv();
-}
-
-function CheckFrom(){
-	if($("inTitle").value==''||$("inInfo").value==''){
-		alert("请输入完整信息！");
-		return false;
-	}
-	ajax.postf($("form1"),function(obj) { AddClassBack(obj.responseText);});
-	return false;
+function CreateCatge() {
+    if ($("#inTitle").val() == '' || $("#inInfo").val() == '' || $("#iSize").val() == "") {
+        alert("请输入完整信息！");
+        return false;
+    }
+    $("#form1").submit();
 }
 
 function AddClassBack(val){
@@ -65,8 +53,11 @@ function AddFiles() {
 }
 
 function ShowFilesCreate(obj){
-	var addlist = [{href:"javascript:GoTo();",onclick:"AddClassS();",Text:"增加新文件夹"},{href:"javascript:GoTo();",onclick:"AddFiles();",Text:"增加文件"}];
-	GroupDiv.CreadDiv("AddS",obj,addlist,100,null,0,0);
+    var AddFileClass = $("#AddFileClass");
+    $("#inTitle").val("");
+    $("#inInfo").val("");
+    $("#work").val("AddClass");
+    AddFileClass.addClass("list_title_c").show();
 }
 
 function MoveFiles(obj){
@@ -77,3 +68,17 @@ function MoveFiles(obj){
 function UpdateBack(obj){
 	refinsh();
 }
+
+
+$(document).ready(function() {
+    var form1 = $("#form1");
+    if (form1.lenght == 0) return;
+    var options;
+
+    options = {
+        beforeSubmit: function() { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
+});

@@ -43,7 +43,7 @@ namespace TCG.Entity
         /// <summary>
         /// 密钥
         /// </summary>
-        public string Key { get { return this._key; } set { this._key = value; } }
+        public string vcKey { get { return this._key; } set { this._key = value; } }
         /// <summary>
         /// 允许使用的最大空间
         /// </summary>

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -31,10 +32,10 @@ public partial class files_fileinfos : adminMain
             int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             this.iClassId.Value = ClassId.ToString();
 
-            DataTable dt = base.handlerService.fileService.fileClassHandlers.GetFilesClassInfosByParendId(ClassId);
-            if (dt != null)
+            Dictionary<string, EntityBase> filecategories = base.handlerService.fileService.fileClassHandlers.GetFileCategories(ClassId);
+            if (filecategories != null)
             {
-                this.ItemRepeater.DataSource = dt;
+                this.ItemRepeater.DataSource = filecategories.Values;
                 this.ItemRepeater.DataBind();
             }
             this.SearchInit();
@@ -102,7 +103,7 @@ public partial class files_fileinfos : adminMain
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
+        FileCategories filecateories = (FileCategories)e.Item.DataItem;
         Span FileClassID = (Span)e.Item.FindControl("FileClassID");
         Span sId = (Span)e.Item.FindControl("sId");
         Span sFileClassId = (Span)e.Item.FindControl("sFileClassId");
@@ -110,14 +111,20 @@ public partial class files_fileinfos : adminMain
         Span sTitle = (Span)e.Item.FindControl("sTitle");
         Span sInfo = (Span)e.Item.FindControl("sInfo");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
+        Span sSize = (Span)e.Item.FindControl("sSize");
+        Span sKey = (Span)e.Item.FindControl("sKey");
+        
+        
 
-        FileClassID.Text = Row["iId"].ToString();
-        sFileClassId.Text = Row["iId"].ToString();
-        string text = "<a href=\"?iClassId=" + Row["iId"].ToString() + "\" title=\"查看子分类\">"
+        FileClassID.Text = filecateories.Id;
+        sFileClassId.Text = filecateories.Id;
+        string text = "<a href=\"?iClassId=" + filecateories.Id + "\" title=\"查看子分类\">"
            + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        sTitle.Text = text + Row["vcFileName"].ToString();
-        sInfo.Text = Row["vcMeno"].ToString();
-        updatedate.Text = Row["dCreateDate"].ToString();
+        sTitle.Text = text + filecateories.vcFileName;
+        sInfo.Text = filecateories.vcMeno;
+        updatedate.Text = filecateories.dCreateDate.ToString("yyyy-MM-dd");
+        sSize.Text = filecateories.MaxSpace.ToString();
+        sKey.Text = filecateories.vcKey;
     }
 
     protected void ItemRepeaterFile_ItemDataBound(object sender, RepeaterItemEventArgs e)
