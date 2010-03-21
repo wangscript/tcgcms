@@ -30,10 +30,7 @@ namespace TCG.Pages
            
         }
 
-        protected void Finish()
-        {
-            //if ((base.conn != null) && base.conn.Connected) { base.conn.Close(); }
-        }
+        
 
         protected Admin adminInfo
         {

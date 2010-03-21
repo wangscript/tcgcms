@@ -165,6 +165,12 @@ namespace TCG.Handlers
                     sb.Append("Pic:\"" + skin.Pic + "\",");
                     sb.Append("Info:\"" + skin.Info + "\"");
                     break;
+                case "TCG.Entity.FileCategories":
+                    FileCategories filecategories = (FileCategories)entity;
+                    sb.Append("Id:" + filecategories.Id + ",");
+                    sb.Append("iParentId:" + filecategories.iParentId.ToString() + ",");
+                    sb.Append("vcFileName:\"" + filecategories.vcFileName + "\"");
+                    break;
             }
             sb.Append("}");
             return sb.ToString();
@@ -273,7 +279,7 @@ namespace TCG.Handlers
                     filecagegories.dCreateDate = objectHandlers.ToTime(row["dCreateDate"].ToString());
                     filecagegories.vcFileName = row["vcFileName"].ToString();
                     filecagegories.vcMeno = row["vcMeno"].ToString();
-                    filecagegories.Key = row["Key"].ToString();
+                    filecagegories.vcKey = row["vcKey"].ToString();
                     filecagegories.MaxSpace = objectHandlers.ToLong(row["MaxSpace"]);
                     filecagegories.Space = objectHandlers.ToLong(row["Space"]);
                     return (EntityBase)filecagegories;

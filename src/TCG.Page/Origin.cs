@@ -175,6 +175,11 @@ namespace TCG.Pages
             }
         }
 
+        protected void Finish()
+        {
+            if ((this._conn != null) && this._conn.Connected) { this._conn.Close(); }
+        }
+
         private User _user = null;
 
         private string _ajaxdata = string.Empty;

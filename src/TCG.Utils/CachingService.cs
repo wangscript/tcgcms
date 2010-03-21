@@ -150,6 +150,11 @@ namespace TCG.Utils
         public static string CACHING_ALL_FILECATEGORIES_ENTITY = "CACHING_ALL_FILECATEGORIES_ENTITY";
 
         /// <summary>
+        /// 图片实体单个缓存
+        /// </summary>
+        public static string CACHING_FILECATEGORIES_ENTITY = "CACHING_FILECATEGORIES_ENTITY_";
+
+        /// <summary>
         /// 系统缓存集合
         /// </summary>
         public static Dictionary<string, string> SystemCachings

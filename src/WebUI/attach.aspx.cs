@@ -17,14 +17,12 @@ using TCG.Entity;
 using TCG.Pages;
 using TCG.Handlers;
 
-public partial class attach : FilesMain
+public partial class attach : NewsMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
             
             if (objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain)
             {
@@ -32,7 +30,7 @@ public partial class attach : FilesMain
             }
 
             string iId = objectHandlers.Get("attach");
-            if (!string.IsNullOrEmpty(iId))
+            if (string.IsNullOrEmpty(iId))
             {
                 return;
             }

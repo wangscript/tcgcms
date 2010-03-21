@@ -11,18 +11,16 @@
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="../js/common.js"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
-	<script type="text/javascript" src="../js/MenuDiv.js"></script>
-	<script type="text/javascript" src="../Common/newscommon.aspx"></script>
-	<script type="text/javascript" src="../Common/AllFileClass.aspx"></script>
+	<script type="text/javascript" src="../Common/AllFileCategories.aspx"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
-	<script type="text/javascript" src="../js/uploadfiles.js"></script>
 	<script type="text/javascript" src="../js/filesinfo.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckFrom();">
+    <form id="form1" runat="server">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="ShowFilesCreate(this);">
 			<img src="../images/icon/24.gif" />新建
@@ -43,18 +41,20 @@
 		<span class="l_id bold l_rg">ID</span>
 		<span class="l_id bold l_rg"><img src="../images/icon/9.gif"  class="fileico"/></span>
 		<span class="l_classname bold l_rg ">标题</span>
-		<span class="l_classname bold l_rg ">备注</span>
-		<span class="l_classname bold l_rg newsclass">大小</span>
+		<span class="l_classname bold l_rg newsclass">备注</span>
+		<span class="l_classname bold l_rg newsclass">大小(bit)</span>
+		<span class="l_classname bold l_rg">Key</span>
 		<span class="l_updatedate bold">创建时间</span>
 	</div>
 	<div class="list_title_c hid" id="AddFileClass" style="height:25px; line-height:25px;" >
-		<span class="l_check "></span>
-		<span class="l_id bold "></span>
+		<span class="l_check "> - </span>
+		<span class="l_id bold "> - </span>
 		<span class="l_id bold  green">新建:</span>
-		<span class="l_classname"><input type="text" id="inTitle" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/></span>
-		<span class="l_classname"><input type="text" id="inInfo" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/> </span>
+		<span class="l_classname"><input type="text" id="inTitle" style=" margin-top:2px;" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/></span>
+		<span class="l_classname newsclass"> <input type="text" style=" width:110px;margin-left:5px; margin-top:2px;" id="inInfo" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/> </span>
+		<span class="l_classname newsclass"> <input type="text" style=" width:110px; margin-left:10px; margin-top:2px;" id="iSize" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/> </span>
 		<span class="l_classname bold  newsclass"></span>
-		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" class="btn2 bold addbtn" value="确定" /><input type="reset" class="btn2 addbtn" value="取消" onclick="CAdd();"/></span>
+		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" onclick=" CreateCatge();" class="btn2 bold addbtn" value="确定" /><input type="reset" class="btn2 addbtn" value="取消" onclick="CAdd();"/></span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
@@ -63,7 +63,9 @@
 		<TCG:Span class="l_id" id='sFileClassId' runat='server' />
 		<span class="l_id"><img src="../images/icon/24.gif" class="fileico"/></span>
 		<TCG:Span class='l_classname  hidover' id='sTitle' runat='server' />
-		<TCG:Span class="l_classname " id='sInfo' runat='server'  />
+		<TCG:Span class="l_classname newsclass" id='sInfo' runat='server'  />
+		<TCG:Span class="l_classname newsclass" id='sSize' runat='server'  />
+		<TCG:Span class="l_classname" id='sKey' runat='server'  />
 		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
 	</div>	
 		</ItemTemplate>

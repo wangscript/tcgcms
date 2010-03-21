@@ -91,27 +91,23 @@ namespace TCG.Handlers
         /// <returns></returns>
         public FileResources GetFileInfosById(string id)
         {
-            FileResources item = null;
-            if (!base.SetFileDatabase(id)) return null;
-            string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
-            DataTable dt = base.conn.GetDataTable(SQL);
-            if (dt != null)
+            FileResources fileresource = (FileResources)CachingService.Get(CachingService.CACHING_FILECATEGORIES_ENTITY + id);
+
+            if (fileresource == null)
             {
-                if (dt.Rows.Count == 1)
+                if (!base.SetFileDatabase(id)) return null;
+                string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
+                DataTable dt = base.conn.GetDataTable(SQL);
+                if (dt != null)
                 {
-                    item = new FileResources();
-                    item.Id = dt.Rows[0]["iID"].ToString();
-                    item.iClassId = (int)dt.Rows[0]["iClassId"];
-                    item.iSize = (int)dt.Rows[0]["iSize"];
-                    item.vcFileName = dt.Rows[0]["vcFileName"].ToString();
-                    item.vcIP = dt.Rows[0]["vcIP"].ToString();
-                    item.vcType = dt.Rows[0]["vcType"].ToString();
-                    item.iRequest = (int)dt.Rows[0]["iRequest"];
-                    item.iDowns = (int)dt.Rows[0]["iDowns"];
-                    item.dCreateDate = (DateTime)dt.Rows[0]["dCreateDate"];
+                    if (dt.Rows.Count == 1)
+                    {
+                        fileresource = (FileResources)base.GetEntityObjectFromRow(dt.Rows[0], typeof(FileResources));
+                        CachingService.Set(CachingService.CACHING_FILECATEGORIES_ENTITY + id, fileresource, null);
+                    }
                 }
             }
-            return item;
+            return fileresource;
         }
 
 
