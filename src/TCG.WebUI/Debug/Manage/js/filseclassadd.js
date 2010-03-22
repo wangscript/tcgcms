@@ -1,0 +1,2 @@
+//--------------
+var ajax = new AJAXRequest();

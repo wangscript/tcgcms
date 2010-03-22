@@ -1,0 +1,10 @@
+.poptitle{height:25px; color:#333333; font-size:14px; font-weight:bold; background-color:#f7f7f7; border-bottom:#ebebeb solid 1px; line-height:25px; text-align:left; padding-left:6px;border-right:#ebebeb solid 1px;}
+body{background-image: url(../images/adminpop_bg.jpg);background-repeat: repeat-y;background-position: right;}
+
+a:hover{ text-decoration:none; color:#333333;}
+.pop1{ font-size:12px; float:left;width:153px; height:24px; text-align:left; padding-left:6px; line-height:24px; font-weight:bold;color:#000000;}
+.pop2{ font-size:12px; float:left;width:153px;height:24px; text-align:left; padding-left:6px; line-height:24px; color:#333333;}
+.pop3{font-size:12px;  float:left;width:153px;height:24px; text-align:left; padding-left:6px; line-height:24px; color:#bbbbbb;}
+.popbg {background-image:url(../images/poptitle_bg.gif); background-repeat:repeat-x;}
+
+.pop3:hover{ text-decoration:underline; color:#bbbbbb;}
