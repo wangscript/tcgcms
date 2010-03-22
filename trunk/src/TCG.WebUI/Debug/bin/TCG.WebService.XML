@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.WebService</name>
+    </assembly>
+    <members>
+        <member name="T:TCG.WebService.ImageUploadService">
+             <summary>
+            ImageUploadService 的摘要说明
+             </summary>
+        </member>
+        <member name="M:TCG.WebService.ImageUploadService.UploadFile(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            图片上传
+            </summary>
+            <param name="key">密钥</param>
+            <param name="_bytes">二进数据</param>
+            <param name="filePath">上传路径</param>
+            <param name="fileName">文件名称</param>
+        </member>
+        <member name="T:TCG.WebService.SheifSourceService">
+             <summary>
+            SheifSource 的摘要说明
+             </summary>
+        </member>
+    </members>
+</doc>
