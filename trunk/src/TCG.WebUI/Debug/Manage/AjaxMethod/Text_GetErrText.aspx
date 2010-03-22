@@ -1,1 +1,0 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="AjaxMethod_Text_GetErrText, TCG.WebUI" enableviewstatemac="false" enableEventValidation="false" viewStateEncryptionMode="Never" %>
