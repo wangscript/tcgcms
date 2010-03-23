@@ -1,0 +1,83 @@
+body { background:#FFF; text-align:center; border:0px; padding:0px; margin:0px;}
+table{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+div{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+input{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+select{ font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+textarea { font-size:12px; color:#424242; font-family:Arial, Helvetica, sans-serif;}
+img { border:0px;}
+form{margin:0px;padding:0px;}
+h1{font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h2{font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h3{font-weight:normal;font-size:14px; margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h4{font-size:12px;margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h5{font-weight:normal; font-size:12px;margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+h6{ margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+ul{ margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+p { margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+li{font-family:Arial, Helvetica, sans-serif;padding: 0px;list-style-image: none;list-style-type: none;margin: 0px;}
+a { color:#424242; text-decoration:none; list-style-type:none; list-style:none;}
+a:link { color:#424242; text-decoration:none; }
+a:hover { color:#FF6600; text-decoration:underline;}
+li{ text-align:left}
+
+
+.Page_title{ text-align:left; height:34px;line-height:34px; color:#113753; font-size:14px; font-weight:bold; padding-left:20px; border-bottom:#dddddd solid 1px;}
+.info1 { font-size:12px; color:#777777; font-weight:100; margin-left:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.info_err{ background-image:url(../images/warri.gif); background-repeat:no-repeat;font-size:12px; color:red; font-weight:100; margin-left:20px; padding-left:20px;}
+.info_ok{ background-image:url(../images/post_ok.gif); background-repeat:no-repeat;font-size:12px; color:#68d36d; font-weight:100; margin-left:20px; padding-left:20px;}
+
+.Page_g{ border-top:#98b1c8 solid 1px;text-align:left; line-height:30px; color:#666666;font-size:12px; font-weight:bold; padding-left:20px; border-bottom:#98b1c8 solid 1px; background-color:#f2f6fb;}
+.info2 { font-size:12px; color:#777777; font-weight:100; margin-left:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.Page_arrb{line-height:40px; height:40px;  font-size:12px; padding-left:150px; text-align:left; clear:both;}
+.itxt1{ border:#8aa3be solid 1px; height:17px; font-family: Verdana, Arial, Helvetica, sans-serif; width:180px;}
+.itxt3{ position:absolute;border:#617993 solid 1px; background-image:url(../images/input_bg1.gif);height:14px; font-family: Verdana, Arial, Helvetica, sans-serif; z-index:88;}
+.itxt2{ border:#afafaf solid 1px; height:17px; background-color:#ffffdb; width:180px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.Page_arrb .p_a_t{ margin-right:4px; color:#000000;}
+.Page_arrb .p_a_t1{ margin-right:4px; color:#154568;}
+.lfl{ float:left;}
+.nfl{float:none;}
+.rfl{float:right}
+
+.dobtn { border-bottom:#ececec solid 1px; border-top:#ececec solid 1px; background-color:#fafafa; height:32px; line-height:32px; text-align:left; padding-left:214px;}
+.btn2{ background-image:url(../images/btn_bg.jpg); width:60px; height:20px; border:0px; margin:0px; padding:0px; margin-top:6px; color:#174b73;}
+
+.bold{ font-weight:bold;}
+.red{ color:#FF0000;}
+.hid{display:none;}
+.gray{color:#999999;}
+
+
+.page_title { background-image:url(../images/page_title_bg.jpg); background-repeat:repeat-x; height:32px; line-height:32px; text-align:left; padding-left:10px;padding-top:5px;}
+.page_title a:hover { text-decoration:none; color:#000000;}
+
+.ajaxdiv{background-color:#fffdd7; height:25px; line-height:25px; text-align:left; padding-left:10px; border-bottom:#CCCCCC solid 1px;}
+.ajaxdiv img { float:left; margin-top:5px;}
+.ajaxdiv #ajaxText{ float:left;padding-left:10px;}
+.ajaxdiv .ajaxclose{ background-image:url(../images/ajaxclose.gif); float:right; width:8px; height:8px; margin-top:8px; margin-right:10px;}
+.ajaxdiv .loader{}
+.ajaxdiv .err{}
+.ajaxdiv .ok{}
+
+.topmenu{ float:left}
+.menua:hover{text-decoration:none; background-color:#2682c6; color:#FFFFFF}
+.pagesl{ float:right; margin-left:12px; margin-right:8px; margin-top:5px;}
+.msl{ background-image:url(../images/selected.gif); background-repeat:no-repeat; background-position:2px 4px;}
+.mut{background-image:url(../images/icon/7.gif); background-repeat:no-repeat; background-position:2px 4px;}
+
+.hidover{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.inputcloseimg{position:absolute; border:0px; z-index:89;}
+
+.MsgDiv{ }
+.createtitle{text-align:left; padding-left:30px;width:392px; height:27px; line-height:27px; color:#FFFFFF; font-weight:bold; background-image:url(../images/create_title.gif);}
+.createMsgbg{width:420px; background-color:#FFFFFF;height:300px; border-left:#7998b7 solid 1px; border-right:#7998b7 solid 1px;border-bottom:#7998b7 solid 1px;}
+.createjdt{height:52px; margin-bottom:2px; text-align:left; padding-top:8px;}
+.createMsg{ margin-left:4px;width:400px; height:160px;overflow-X:auto;overflow:scroll; border:#dee1e4 solid 1px; background-color:#e5e7e9;text-align:left; padding:4px;scrollbar-shadow-color: #ffffff; scrollbar-highlight-color: #ffffff; scrollbar-face-color: #d9d9d9; scrollbar-3dlight-color: #d9d9d9; scrollbar-darkshadow-color: #d9d9d9; scrollbar-track-color: #ffffff; scrollbar-arrow-color: #ffffff; font-size:9px;font-family:Geneva, Arial, Helvetica, sans-serif;}
+.createMsg a{float:left; width:390px;}
+.createbottom{width:418px; background-color:#eef5fc; height:58px;border:#d7e0e7 solid 1px; margin-top:8px;}
+.createjdtPlace{ margin-top:4px;margin-left:5px;width:407px; height:28px; border:#7998b7 solid 1px;}
+.createjdtPlacebg{ height:28px;width:0px;background-image:url(../images/create_jdbg.jpg);}
+.rbfcreate{ border-right:#88a5c1 solid 1px;}
+.createclose{ width:20px; height:20px; position:relative; left:400px; top:20px;}
+.createclose a{ float:left; width:20px; height:20px;}
