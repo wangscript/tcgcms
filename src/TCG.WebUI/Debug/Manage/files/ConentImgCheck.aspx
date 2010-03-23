@@ -1,1 +1,0 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="files_ConentImgCheck, TCG.WebUI" enableviewstatemac="false" enableEventValidation="false" viewStateEncryptionMode="Never" %>
