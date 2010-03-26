@@ -265,7 +265,7 @@ namespace TCG.Handlers
 
             if (nums > 0) sqlsb.Append(" TOP " + nums.ToString() + " ");
 
-            sqlsb.Append(" * FROM Resources (NOLOCK) WHERE iID>0 ");
+            sqlsb.Append(" * FROM Resources (NOLOCK) WHERE ");
 
             sqlsb.Append(this.GetTagResourceCondition(categories, Speciality, check, del, create));
 
@@ -293,7 +293,7 @@ namespace TCG.Handlers
         public string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create)
         {
             StringBuilder sqlsb = new StringBuilder();
-
+            sqlsb.Append("iID>0 ");
             if (check) { sqlsb.Append(" AND cChecked='Y' "); } else { sqlsb.Append(" AND cChecked='N'"); }
 
             if (del) { sqlsb.Append(" AND cDel='Y' "); } else { sqlsb.Append(" AND cDel='N' "); }

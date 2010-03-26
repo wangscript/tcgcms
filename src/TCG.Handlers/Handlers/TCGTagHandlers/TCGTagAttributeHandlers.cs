@@ -70,19 +70,19 @@ namespace TCG.Handlers
             if (type == "") return;
             switch (type)
             {
-                case "newstemplate":
+                case "Template":
                     this.TagForNewsTemplate(ref pagerinfo);
                     break;
-                case "newstopic":
+                case "Resource":
                     this.TagForNewsTopic(ref pagerinfo);
                     break;
-                case "newsclassinfo":
+                case "Categories":
                     this.TagForNewsClassInfo(ref pagerinfo);
                     break;
-                case "newslist":
+                case "Resourcelist":
                     this.TagForNewsList(ref pagerinfo);
                     break;
-                case "newsclasslist":
+                case "CategoriesList":
                     this.TagForNewsClassList(ref pagerinfo);
                     break;
                 case "scriptcss":
@@ -198,12 +198,14 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcFilePath$", item.vcFilePath);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_dUpdateDate$", item.dUpDateDate.ToString("yyyy年MM月dd日"));
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_dAddDate$", item.dAddDate.ToString("yyyy年MM月dd日"));
                
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.Categorie.vcClassName);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.Categorie.Id.ToString());
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.Categorie.Id);
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId$", item.Categorie.Parent);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
                     this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));        
             }
@@ -345,6 +347,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + res.dAddDate.ToString("yyyy-mm-dd") + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }

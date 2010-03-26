@@ -106,13 +106,26 @@ public partial class skin_categorieslist : adminMain
         string tClassID = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(tClassID ))
         {
-            base.AjaxErch("-1");
+            base.AjaxErch(-1,"");
             base.Finish();
             return;
         }
 
-        int rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(tClassID);
-        base.AjaxErch(rtn.ToString());
+        int rtn = 0; 
+        try
+        {
+            rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(tClassID,base.adminInfo.vcAdminName);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(rtn, "分类删除成功", "refinsh()");
         base.Finish();
 
     }
@@ -122,7 +135,7 @@ public partial class skin_categorieslist : adminMain
         string tClassID = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(tClassID))
         {
-            base.AjaxErch("<a>生成失败,分类ID为0!</a>");
+            base.AjaxErch(1, "<a>生成失败,分类ID为0!</a>", "CreateBack");
             base.Finish();
             return;
         }
@@ -131,21 +144,21 @@ public partial class skin_categorieslist : adminMain
 
         if (cif == null)
         {
-            base.AjaxErch("<a>生成失败,分类信息不存在!</a>");
+            base.AjaxErch(1, "<a>生成失败,分类信息不存在!</a>", "CreateBack");
             base.Finish();
             return;
         }
 
         if (cif.ResourceListTemplate == null)
         {
-            base.AjaxErch("<a>生成失败,分类模版信息读取失败!</a>");
+            base.AjaxErch(1, "<a>生成失败,分类模版信息读取失败!</a>", "CreateBack");
             base.Finish();
             return;
         }
 
         if (cif.vcUrl.IndexOf(".") > -1)
         {
-            base.AjaxErch("<a>生成失败,为跳转地址，无需生成！</a>");
+            base.AjaxErch(1, "<a>生成失败,为跳转地址，无需生成！</a>", "CreateBack");
             base.Finish();
             return;
         }
@@ -157,7 +170,7 @@ public partial class skin_categorieslist : adminMain
         }
         catch
         {
-            base.AjaxErch("<a>生成失败,分类保存路径读取失败!</a>");
+            base.AjaxErch(1, "<a>生成失败,分类保存路径读取失败!</a>", "CreateBack");
             base.Finish();
             return;
         }
@@ -168,30 +181,32 @@ public partial class skin_categorieslist : adminMain
         tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
         tcgthdl.configService = base.configService;
         tcgthdl.conn = base.conn;
-        if (tcgthdl.Replace())
-        {   
-            string text1 = "";
+
+
+        string text1 = "";
+        try
+        {
+            tcgthdl.Replace();
             if (tcgthdl.PagerInfo.PageCount > 1)
             {
-                
+
                 for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
                     string num = (i == 1) ? "" : i.ToString();
-                    text1 += "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + "-c" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
+                    text1 += "<a>生成成功:" + cif.vcUrl + "-c" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
                 }
             }
             else
             {
-                text1 = "<a href='.." + cif.vcUrl + "' target='_blank'>生成成功:" + cif.vcUrl + base.configService.baseConfig["FileExtension"] + "...</a>";
+                text1 = "<a>生成成功:" + cif.vcUrl + base.configService.baseConfig["FileExtension"] + "...</a>";
             }
-            base.AjaxErch(text1);
         }
-        else
+        catch (Exception ex)
         {
-            base.AjaxErch("<a>生成失败-系统错误!</a>");
+            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
         }
-        tcgthdl = null;
 
+        base.AjaxErch(1, text1, "CreateBack");
     }
 
     private void OrderMdy()

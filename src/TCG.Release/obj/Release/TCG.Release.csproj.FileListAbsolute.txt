@@ -1,0 +1,13 @@
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Release.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Release.pdb
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Data.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Utils.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\Interop.MSXML2.dll
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Utils.pdb
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.Release\bin\Release\TCG.Data.pdb
+E:\TCGCMS\src\TCG.Release\obj\Release\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.Release\obj\Release\TCG.Release.dll
+E:\TCGCMS\src\TCG.Release\obj\Release\TCG.Release.pdb
