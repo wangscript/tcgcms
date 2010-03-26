@@ -130,10 +130,6 @@ img.right {
 	padding: 30px 0 0 0;
 }
 
-#ad {
-float:right;
-}
-
 #logo h1, #logo p {
 	margin: 0;
 	float: left;
@@ -184,7 +180,6 @@ float:right;
 	text-decoration: none;
 	font-size: 1.8em;
 	color: #5B6371;
-	font-family:"ºÚÌå";
 }
 
 #menu a:hover {
@@ -328,4 +323,8 @@ float:right;
 
 #footer a {
 	color: #444444;
+}
+.tcg_ad{
+	float:right;
+	_margin-top:-63px;
 }

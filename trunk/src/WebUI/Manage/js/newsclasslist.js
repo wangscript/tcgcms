@@ -17,8 +17,6 @@ function classTitleInit() {
    
 }
 
-
-
 function GetNewsListTitleByClassId(classid) {
     if (_Categories == null) return;
     for (var i = 0; i < _Categories.length; i++) {
@@ -44,7 +42,7 @@ function GetNewsListTitleByClassIdW(classid){
 
 
 function CreatClass(obj){
-    layer.openLayer({ id: 'layerbox', width: 600, height: 369, callBack: operback });
+    layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
     SetCreateInnerHTML();
 }
 
@@ -53,7 +51,7 @@ function operback() {
 }
 
 function EditClass(obj) {
-    layer.openLayer({ id: 'layerbox', width: 600, height: 369, callBack: operback });
+    layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
     SetMdyInnerHTML();
 }
 
@@ -106,10 +104,10 @@ function NewsClassDel(){
 		SetAjaxDiv("err",false,"一次只能删除一个模版！");
 		return;
 	}
-	$("DelClassId").value=temps;
-	$("work").value="DEL";
+	$("#DelClassId").val(temps);
+	$("#work").val("DEL");
 	SetAjaxDiv("loader",false,"正在发送请求...");
-	ajax.postf($("form1"),function(obj) { DelPostBack(obj.responseText);});
+	$("#form1").submit();
 }
 
 function DelPostBack(val){
@@ -117,43 +115,47 @@ function DelPostBack(val){
 	SetAjaxDiv("ok",false,"分类已经删除成功！");
 }
 
-function NewsClassCreateHtml(){
-	var temps=GetCheckBoxValues("CheckID");
-	if(temps==""){
-		SetAjaxDiv("err",false,"您没有选择需要生成的分类！");
-		return;
-	}
-	if(temps.indexOf(",")>-1){
-		var ts=temps.split(",");
-		var ss="";
-		for(var i=0;i<ts.length;i++){
-			var tt=GetPostClassChild(ts[i]);
-			ss +=(ss=="")?tt:","+tt;
-		}
-		PostClasses(ss);
-	}else{
-		var t =GetPostClassChild(temps);
-		if(t.indexOf(",")>-1){
-			PostClasses(t);
-		}else{
-			CreateDiv.Start("批量生成分类列表");
-			CreateDiv.set =1;
-			CreateDiv.setcount=1;
-			$("work").value="Create";
-			$("DelClassId").value=t;
-			ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
-		}
-	}
+function NewsClassCreateHtml() {
+    var temps = GetCheckBoxValues("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没有选择需要生成的分类！");
+        return;
+    }
+
+    CreateDiv.Start("批量生成分类列表");
+    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
+    
+    if (temps.indexOf(",") > -1) {
+        var ts = temps.split(",");
+        var ss = "";
+        for (var i = 0; i < ts.length; i++) {
+            var tt = GetPostClassChild(ts[i]);
+            ss += (ss == "") ? tt : "," + tt;
+        }
+        PostClasses(ss);
+    } else {
+        var t = GetPostClassChild(temps);
+        if (t.indexOf(",") > -1) {
+            PostClasses(t);
+        } else {
+
+            CreateDiv.set = 1;
+            CreateDiv.setcount = 1;
+            $("#work").val("Create");
+            $("#DelClassId").val(t);
+            $("#form1").submit();
+        }
+    }
 }
+
 function PostClasses(ids){
 	var o=ids.split(",");
-	CreateDiv.Start("批量生成分类列表");
 	CreateDiv.set =1;
 	CreateDiv.setcount=o.length;
 	for(var i=0;i<o.length;i++){
-		$("work").value="Create";
-		$("DelClassId").value=o[i];
-		ajax.postf($("form1"),function(obj) { CreateBack(obj.responseText);});
+		$("#work").val("Create");
+		$("#DelClassId").val(o[i]);
+		$("#form1").submit();
 	}
 }
 
@@ -238,3 +240,16 @@ function NewsSMDYPostBack(val) {
     if (GetErrText(val)) return;
     SetInnerText(CreateInputobj, aValue);
 }
+
+$(document).ready(function() {
+    var form1 = $("#form1");
+    if (form1.lenght == 0) return;
+    var options;
+
+    options = {
+        beforeSubmit: function() { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
+});

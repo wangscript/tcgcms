@@ -31,11 +31,11 @@ function GetTemplateById(id) {
 
 function GetAllChildClassIdByClassId(id) {
     var st = "";
-    for (var i = 0; i < NewsLis.length; i++) {
-        if (NewsLis[i][1] == id) {
-            var t = GetAllChildClassIdByClassId(NewsLis[i][0]);
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].ParentId == id) {
+            var t = GetAllChildClassIdByClassId(_Categories[i].Id);
             var s = (t == "") ? "" : ",";
-            st += (st == "") ? NewsLis[i][0] + s + t : "," + NewsLis[i][0] + s + t;
+            st += (st == "") ? _Categories[i].Id + s + t : "," + _Categories[i].Id + s + t;
         }
     }
     return st;

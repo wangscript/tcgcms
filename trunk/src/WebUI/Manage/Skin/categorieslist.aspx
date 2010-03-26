@@ -17,7 +17,8 @@
 	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/layer.js"></script>
-	<script type="text/javascript" src="../js/CreateDiv.js"></script>
+	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
+	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
 	<script type="text/javascript" src="../js/CreateInput.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -73,7 +74,7 @@
 	<input type="hidden" id="iMdyID" name="iMdyID"/>
 	<input type="hidden" id="iSkinId" name="iSkinId"  runat="server"/>
 	<!-- class="layerbox"-->
-	<div id="layerbox" class="layerbox">
+	<div id="layerbox1" class="layerbox">
 	    <div class="CreateClassDiv">
 		    <iframe id="ifCreateAdd" width="600" height="369" frameborder="0"></iframe>
 	    </div>

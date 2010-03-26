@@ -1,0 +1,11 @@
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Controls.dll
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Controls.pdb
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Utils.dll
+E:\TCGCMS\src\TCG.Controls\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\TCGCMS\src\TCG.Controls\bin\Release\Interop.MSXML2.dll
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Utils.pdb
+E:\TCGCMS\src\TCG.Controls\bin\Release\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.Controls\obj\Release\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.Controls\obj\Release\TCG.Controls.dll
+E:\TCGCMS\src\TCG.Controls\obj\Release\TCG.Controls.pdb

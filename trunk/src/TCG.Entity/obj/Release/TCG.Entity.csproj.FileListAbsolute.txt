@@ -1,0 +1,5 @@
+E:\TCGCMS\src\TCG.Entity\bin\Release\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Entity\bin\Release\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.Entity\obj\Release\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.Entity\obj\Release\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Entity\obj\Release\TCG.Entity.pdb
