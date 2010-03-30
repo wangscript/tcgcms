@@ -28,16 +28,16 @@ function CheckImgBack(val) {
 	}
 }
 
-function SelectSmallImg(obj){
-	var imgPace=$("imgPace");
-	var iSmallImg=$("iSmallImg");
+function SelectSmallImg(obj) {
+    var imgPace = $("#imgPace").get(0);
+    var iSmallImg = $("#iSmallImg").get(0);
 	var pos = getAbsolutePositionXY(obj);
 	imgPace.className="imgPace";
 	imgPace.style.top=(pos.y+obj.offsetHeight)+"px";
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("iContent_content").value;
+	var iContent = $("#iContent_content").val();
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
 	if (result != null) {
@@ -50,16 +50,16 @@ function SelectSmallImg(obj){
 	}
 }
 
-function SelectBigImg(obj){
-	var imgPace=$("imgPace");
-	var iBigImg=$("iBigImg");
+function SelectBigImg(obj) {
+	var imgPace=$("#imgPace").get(0);
+	var iBigImg = $("#iBigImg").get(0);
 	var pos = getAbsolutePositionXY(obj);
 	imgPace.className="imgPace";
 	imgPace.style.top=(pos.y+obj.offsetHeight)+"px";
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("iContent_content").value;
+	var iContent = $("#iContent_content").val();
 	
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
@@ -74,17 +74,19 @@ function SelectBigImg(obj){
 }
 
 function SetSmallImge(src){
-	var imgPace=$("imgPace");
-	var iSmallImg=$("iSmallImg");
-	imgPace.className="imgPace hid";
-	iSmallImg.value=src;
+	var imgPace=$("#imgPace");
+	var iSmallImg=$("#iSmallImg");
+	imgPace.get(0).className = "#imgPace hid";
+	iSmallImg.val(src);
+	$("#imgPace").get(0).className = "imgPace hid";
 }
 
 function SetBigImge(src){
-	var imgPace=$("imgPace");
-	var iBigImg=$("iBigImg");
-	imgPace.className="imgPace hid";
-	iBigImg.value=src;
+	var imgPace=$("#imgPace");
+	var iBigImg = $("#iBigImg");
+	imgPace.addClass("imgPace hid");
+	iBigImg.val(src);
+	$("#imgPace").get(0).className = "imgPace hid";
 }
 
 function NewsMdyPostBack(val){

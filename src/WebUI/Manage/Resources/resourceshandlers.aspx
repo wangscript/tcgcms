@@ -86,9 +86,10 @@
 		<span class="info1" id="keymsg">生成相关资源的标记</span>
 	</div>
 	<div class="Page_arrb arb_pr1">
-		<img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectBigImg(this)">设置大图片</a>
-		<img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
-	    <img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SetShortContent(this)">设置简介</a>
+		<input id="iBigImg" name="iBigImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectBigImg(this)">设置大图片</a>
+	</div>
+	<div class="Page_arrb arb_pr1">
+	    <input id="iSmallImg" name="iSmallImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
 	</div>
 	<div class="Page_arrb arb_pr1 templateaddnew1">
 		<TCG:WebUserControl ID="iContent" runat="server" />
@@ -103,8 +104,6 @@
 	<input type="hidden" id="iFrom" name="iFrom" value="1" runat="server"/>
 	<input type="hidden" id="iNewsId" name="iNewsId" runat="server"/>
 	<input type="hidden" id="work" name="work" value="AddNew" runat="server"/>
-	<input type="hidden" id="iSmallImg" name="iSmallImg" value="" runat="server"/>
-	<input type="hidden" id="iBigImg" name="iBigImg" value="" runat="server"/>
 	<input type="hidden" id="iSpeciality" name="iSpeciality" value="" runat="server"/>
 	<input type="hidden" id="iTitleColor" name="iTitleColor" value="" runat="server"/>
     </form>
