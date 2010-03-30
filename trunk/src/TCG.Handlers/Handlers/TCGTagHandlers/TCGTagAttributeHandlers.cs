@@ -127,17 +127,18 @@ namespace TCG.Handlers
         private void TagForNewsClassList(ref TCGTagPagerInfo pagerinfo)
         {
 
-
+            string tempNew = string.Empty;
             string parentid = this.GetAttribute("parent");
             string skinid = this.GetAttribute("skin");
 
             Dictionary<string, EntityBase> categories =  this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(parentid, skinid);
 
-            if (categories == null) return;
+            if (categories == null)return;
+    
             if (categories.Count != 0)
             {
                 string tempOld = this._tagtext;
-                string tempNew = string.Empty;
+                
                 int n = 0;
                 foreach (KeyValuePair<string, EntityBase> entity in categories)
                 {
@@ -151,6 +152,8 @@ namespace TCG.Handlers
 
                 this._tagtext = tempNew;
             }
+
+            this._tagtext = tempNew;
 
         }
 
@@ -206,6 +209,7 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.Categorie.vcClassName);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.Categorie.Id);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId$", item.Categorie.Parent);
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId2$", this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id).Id);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
                     this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));        
             }
@@ -243,6 +247,7 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcName$", item.vcName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent2$",this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Id).Id);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
                     this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Id, " > "));
 
@@ -347,7 +352,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + res.dAddDate.ToString("yyyy-mm-dd") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + res.dAddDate.ToString("yyyy-MM-dd") + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }

@@ -156,9 +156,10 @@ public partial class Template_templatelist : adminMain
         }
         string filepath = string.Empty;
 
+        tlif.vcUrl = tlif.vcUrl.IndexOf(".")>-1?tlif.vcUrl: tlif.vcUrl + base.configService.baseConfig["FileExtension"];
         try
         {
-            filepath = Server.MapPath("~" + tlif.vcUrl + base.configService.baseConfig["FileExtension"]);
+            filepath = Server.MapPath("~" + tlif.vcUrl);
         }
         catch
         {
