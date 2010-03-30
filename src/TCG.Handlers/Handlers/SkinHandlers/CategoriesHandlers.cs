@@ -58,6 +58,24 @@ namespace TCG.Handlers
             return childcategories;
         }
 
+
+        /// <summary>
+        /// 获得某分类的顶级分类
+        /// </summary>
+        /// <param name="categoriesid"></param>
+        /// <returns></returns>
+        public Categories GetCategoriesParent2(string categoriesid)
+        {
+            Dictionary<string, EntityBase> categories = GetAllCategoriesEntity();
+            if (categories == null || categories.Count == 0) return null;
+            Categories cat = this.GetCategoriesById(categoriesid);
+            if (cat == null) return null;
+
+            if (cat.Parent == "0") return cat;
+
+            return GetCategoriesParent2(cat.Parent);
+        }
+
         /// <summary>
         /// 获得所有皮肤的实体
         /// </summary>
