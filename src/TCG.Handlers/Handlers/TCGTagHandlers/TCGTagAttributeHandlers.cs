@@ -316,12 +316,17 @@ namespace TCG.Handlers
             Dictionary<string, EntityBase> res = this.handlerService.resourcsService.resourcesHandlers.GetResourcesList(
                 nums, categories, Speciality, orders, check, del, create);
 
+            string tempNew = string.Empty;
+            if (res == null)
+            {
+                this._tagtext = tempNew;
+                return;
+            }
 
-            if (res == null) return;
             if (res.Count != 0)
             {
                 string tempOld = this._tagtext;
-                string tempNew = string.Empty;
+                
 
                 int n = 0;
                 foreach (KeyValuePair<string, EntityBase> entity in res)
@@ -334,8 +339,8 @@ namespace TCG.Handlers
                     n++;
                 }
 
-                this._tagtext = tempNew;
             }
+            this._tagtext = tempNew;
         }
 
         private void NewslistTagFieldsReplace(ref string temp, Resources res)
@@ -348,6 +353,7 @@ namespace TCG.Handlers
 
             string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
             temp = temp.Replace("$" + this._tagtype + "_vcFilePath$", "<TCG>" + url + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
