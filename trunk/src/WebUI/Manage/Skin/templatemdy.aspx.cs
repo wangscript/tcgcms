@@ -106,6 +106,26 @@ public partial class Template_templatemdy : adminMain
             }
             else
             {
+
+                string filepath = string.Empty;
+                filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + base.configService.baseConfig["FileExtension"];
+                try
+                {
+                    filepath = Server.MapPath("~" + filepath);
+                    TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
+                    tcgthdl.Template = item.Content;
+                    tcgthdl.FilePath = filepath;
+                    tcgthdl.configService = base.configService;
+                    tcgthdl.conn = base.conn;
+                    tcgthdl.Replace();
+                }
+                catch (Exception ex)
+                {
+                    base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                    base.AjaxErch(base.ajaxdata);
+                    return;
+                }
+
                 base.AjaxErch("{state:true,message:'模板修改成功！'}");
             }
             
