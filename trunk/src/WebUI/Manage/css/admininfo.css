@@ -29,7 +29,8 @@
 .popml{ margin-left:15px;}
 
 .classaddline{line-height:30px; height:30px; }
-.templateaddnew1{ height:400px; width:730px; float:left; }
+.templateaddnew1{ height:200px; width:730px; float:left; }
+.templateaddnew2{ height:100px; width:730px; float:left; }
 
 /*资讯特性*/
 .list_info_w{ width:350px;}
@@ -38,7 +39,7 @@
 
 /*资讯内容*/
 .newstitle{ width:400px;}
-.newsclass{width:120px;}
+.newsclass{width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ChildclassTitle{ position:absolute; width:420px;padding-left:10px;line-height:25px; border:#81a4c2 solid 1px; background-color:#f3f8fc;}
 .childnewstitle{ float:left; width:118px; height:25px; color:#006633; text-align:left; line-height:25px; background-image:url(../images/icon/09.gif); background-repeat:no-repeat; background-position:0px 6px; padding-left:15px; text-decoration:none;}
 .childnewstitle:hover{text-decoration:none;color:#006633;}

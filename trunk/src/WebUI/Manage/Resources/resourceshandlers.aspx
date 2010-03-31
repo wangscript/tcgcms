@@ -94,8 +94,8 @@
 	<div class="Page_arrb arb_pr1 templateaddnew1">
 		<TCG:WebUserControl ID="iContent" runat="server" />
 	</div>
-	<div class="Page_arrb arb_pr1" style=" height:60px; display:none;" id="shorconent">
-		<textarea id="isContent" name="isContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:470px; height:260px;" runat="server"/>
+	<div class="Page_arrb arb_pr1 templateaddnew2">
+		<textarea id="iShortContent" name="iShortContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
 	</div>
 	<div class="imgPace hid" id="imgPace"></div>
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
