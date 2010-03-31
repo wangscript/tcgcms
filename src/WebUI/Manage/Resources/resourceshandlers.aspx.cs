@@ -59,7 +59,7 @@ public partial class resources_resourceshandlers : adminMain
             this.iBigImg.Value = item.vcBigImg;
             this.iTitleColor.Value = item.vcTitleColor;
             this.iStrong.Checked = (item.cStrong == "Y") ? true : false;
-            this.isContent.Value = item.vcShortContent;
+            this.iShortContent.Value = item.vcShortContent;
             item = null;
 
 
@@ -93,7 +93,7 @@ public partial class resources_resourceshandlers : adminMain
 
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
-        item.vcContent = objectHandlers.Post("iContent$content");
+        item.vcContent = objectHandlers.Post("iContent:content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
 
@@ -107,7 +107,7 @@ public partial class resources_resourceshandlers : adminMain
         item.vcSmallImg = objectHandlers.Post("iSmallImg");
         item.vcTitleColor = objectHandlers.Post("sTitleColor");
         item.cStrong = objectHandlers.Post("iStrong");
-        item.vcShortContent = objectHandlers.Post("isContent");
+        item.vcShortContent = objectHandlers.Post("iShortContent");
 
         if (string.IsNullOrEmpty(item.vcTitle))
         {
