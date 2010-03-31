@@ -312,18 +312,18 @@ namespace TCG.Handlers
                         if (cates[i].Trim().Length == 36)
                         {
                             string text3 = text1.Length == 0 ? "" : ",";
-                            text1 += text3 + "'" + cates[i] + "'";
+                            text1 += text3 + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(cates[i]);
                         }
                     }
 
                     if (text1.Length >= 36)
                     {
-                        sqlsb.Append(" AND iClassID in (" + text1 + ") ");
+                        sqlsb.Append(" AND iClassID in (" +  text1 + ") ");
                     }
                 }
                 else
                 {
-                    sqlsb.Append(" AND iClassID = '" + categories + "' ");
+                    sqlsb.Append(" AND iClassID in (" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categories) + ") ");
                 }
             }
 
