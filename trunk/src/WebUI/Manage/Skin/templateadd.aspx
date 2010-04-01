@@ -34,7 +34,7 @@
 		<span class="info1" id="conmsg"></span>
 	</div>
 	<div class="Page_arrb arb_pr templateaddnew1">
-		<textarea cols="140" rows="22" id="vcContent" name="vcContent" onblur="CheckContent()"></textarea>
+		<textarea cols="140" rows="13" id="vcContent" name="vcContent" onblur="CheckContent()"></textarea>
 	</div>
 	<div class="Page_arrb arb_pr">
 		<span class="green bold">小提示：</span>
