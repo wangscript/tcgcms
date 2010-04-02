@@ -42,51 +42,7 @@ function LoginCkBack(data) {
         errText.html(data.message);
 	    return;
 	}
-
-	$.ajax({
-	    type: "GET", url: "Version/Ver.aspx?temptime=" + new Date().toString(), data: "action=IsHaveHigherVer",
-	    errror: function() { top.location.href = "main.aspx"; },
-	    success: function(data) {
-	        if (data.state) {
-	            alert(33);
-	            var errText = $("#errText");
-	            $("#tblogin").css({ "display": "none" });
-	            var tbupdate = $("#tbupdate");
-	            var btn_ok = $("#btn_ok");
-	            var btn_ret = $("#btn_ret");
-
-	            errText.html("检测到新的版本 TCG CMS System Version " + data.version + "<br/> <span class='STYLE1'><a class='STYLE1 bold' href='"
-	                            + data.logurl + "' target='_blank'>查看详细信息</a></span>");
-	            errText[0].className = "errTextW";
-	            btn_ret.val("跳过");
-	            btn_ok.val("升级");
-	            tbupdate.css({ "display": "block" });
-
-	            //设置表单提交
-	            var options = {
-	                beforeSubmit: updatePost,
-	                dataType: 'json',
-	                success: updateback
-	            };
-	            $("#form1").ajaxForm(options);
-
-	            btn_ok.click(function() {
-	                var SqlSep = $("#SqlSep");
-	                if (confirm("更新所造成的数据丢失，概不负责，继续更新，请确认！")) {
-	                    $("#tbupdate").html("");
-	                    $("#Work").val("UPDATE");
-	                    SqlSep.val("1");
-	                    return true;
-	                }
-	                return false;
-	            });
-	            btn_ret.click(function() { top.location.href = "main.aspx"; });
-	            return;
-	        }
-	        top.location.href = "main.aspx";
-	    },
-	    dataType: "json"
-	});
+	top.location.href = "main.aspx";
 }
 
 $(document).ready(function() {
