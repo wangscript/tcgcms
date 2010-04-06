@@ -21,21 +21,21 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
         if (!Page.IsPostBack)
         {
             string pwd = objectHandlers.Get("PWD", CheckGetEnum.Safety);
-            object TempAdmin = SessionState.Get(base.configService.baseConfig["AdminSessionName"]);
-            if (TempAdmin == null)
+
+            if (base.adminInfo == null)
             {
-                base.AjaxErch("false");
+                base.AjaxErch(-1000000601,"");
                 base.Finish();
                 return;
             }
             pwd = objectHandlers.MD5(pwd);
-            if (pwd.ToLower() == ((Admin)TempAdmin).vcPassword.ToLower())
+            if (pwd.ToLower() == base.adminInfo.vcPassword.ToLower())
             {
-                base.AjaxErch("true");
+                base.AjaxErch(1,"true");
                 base.Finish();
                 return;
             }
-            base.AjaxErch("false");
+            base.AjaxErch(-1000000602,"");
             base.Finish();
         }
     }

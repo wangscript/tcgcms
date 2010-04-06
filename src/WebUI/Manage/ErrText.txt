@@ -117,3 +117,6 @@
 
 -1000000501@@@SP_News_SaveOrDelResource@@@尚未选择资源
 -1000000502@@@SP_News_SaveOrDelResource@@@操作员为空，您是否尚未登陆？
+
+-1000000601@@@myaccount_aspx@@@操作员为空，您是否尚未登陆？
+-1000000602@@@myaccount_aspx@@@请正确输入原始密码!

@@ -19,12 +19,9 @@ function ajaxClose(){
 
 
 function SetInnerText(obj,value){
-	if(obj==null)return;
-	if(document.all){
-		obj.innerText = value;
-	}else{
-		obj.textContent = value;
-	}
+    if (obj == null) return;
+    obj = $(obj);
+    obj.text(value);
 }
 
 //获得Ceckbox选中的值

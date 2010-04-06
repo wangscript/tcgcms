@@ -7,13 +7,14 @@
     <title>个人帐户</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/AJAXRequest.js"></script>
+	<script type="text/javascript" src="js/commonV2.js"></script>
+	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
 	<script type="text/javascript" src="js/MyAccount.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return CheckForm();">
+    <form id="form1" runat="server">
 	<input type="hidden" id="adminname" runat="server" />
     <div class="Page_title">个人帐户<span class="info1">(更改您的昵称，登陆密码)</span></div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
@@ -31,7 +32,7 @@
 	<div class="Page_arrb"><span class="p_a_t">确认密码：</span><input id="iCPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckCPWD(this);"/>
 		<span id="cpwdmsg" class="info1">确认您的新密码！</span>
 	</div>
-	<div class="dobtn"><input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" /></div>
+	<div class="dobtn"><input type="button" onclick="return CheckForm();" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" /></div>
     </form>
 </body>
 </html>
