@@ -1,16 +1,16 @@
-//--------------
-var ajax = new AJAXRequest();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
+
 
 function CheckForm(){
-	var iOldPWD = $("iOldPWD");
-	var iNewPWD = $("iNewPWD")
-	var iCPWD = $("iCPWD");
-	var iNickName = $("iNickName");
-	var nnmsg = $("nnmsg");
-	var post = $("post");
+	var iOldPWD = $("#iOldPWD");
+	var iNewPWD = $("#iNewPWD")
+	var iCPWD = $("#iCPWD");
+	var iNickName = $("#iNickName");
+	var nnmsg = $("#nnmsg");
+	var post = $("#post");
 	
-	if(iNickName.value==""){
-		nnmsg.className = "info_err";
+	if(iNickName.val()==""){
+		nnmsg.get(0).className = "info_err";
 		SetInnerText(nnmsg,"昵称不能为空!");
 	}
 	
@@ -18,7 +18,7 @@ function CheckForm(){
 		return false;
 	}
 	CheckPasswordFrom(iOldPWD);
-	return false;
+	
 }
 
 function ChanagePostBack(val){
@@ -26,46 +26,65 @@ function ChanagePostBack(val){
 	SetAjaxDivRoot("ok",false,"用户登陆信息更改成功！");
 }
 
-function CheckPassword(obj){
-	obj.className='itxt1';
-	var og = $("pwdmsg");
+function CheckPassword(obj) {
+    obj = $(obj);
+    if (obj == null && obj.length == 0) return false;
+    
+	obj.get(0).className='itxt1';
+	var og = $("#pwdmsg");
 	if(og==null)return false;
-	if(obj.value == ""){
-		og.className = "info_err";
+	if(obj.val()== ""){
+	    og.get(0).className = "info_err";
 		SetInnerText(og,"原始密码不能为空!");
 		return false;
 	}
-	ajax.get("AjaxMethod/Admin_CheckPwd.aspx?PWD="+obj.value,
-			function(obj) { CheckPwdBack(obj.responseText);}
-		);
+	$.ajax({
+	    type: "GET", url: "AjaxMethod/Admin_CheckPwd.aspx?temptime=" + new Date().toString(), data: "PWD=" + obj.val(),
+	    errror: function() { alert("err"); },
+	    success: function(data) {
+	        //debugger;
+	        if (!data.state) {
+	            og.get(0).className = "info_err";
+	            SetInnerText(og, data.message);
+	            return false;
+	        } else {
+	            
+	        }
+	    },
+	    dataType: "json"
+	});
+
+	return true;
 }
 
-function CheckPasswordFrom(obj){
-	obj.className='itxt1';
-	var og = $("pwdmsg");
-	if(og==null)return false;
-	if(obj.value == ""){
-		og.className = "info_err";
-		SetInnerText(og,"原始密码不能为空!");
-		return false;
-	}
-	ajax.get("AjaxMethod/Admin_CheckPwd.aspx?PWD="+obj.value,
-			function(obj) { CheckPwdBack1(obj.responseText);}
-		);
+function CheckPasswordFrom(obj) {
+    obj = $(obj);
+    if (obj == null && obj.length == 0) return false;
+
+    obj.get(0).className = 'itxt1';
+    var og = $("#pwdmsg");
+    if (og == null) return false;
+    if (obj.val() == "") {
+        og.get(0).className = "info_err";
+        SetInnerText(og, "原始密码不能为空!");
+        return false;
+    }
+
+    $.ajax({
+        type: "GET", url: "AjaxMethod/Admin_CheckPwd.aspx?temptime=" + new Date().toString(), data: "PWD=" + obj.val(),
+        errror: function() { alert("err"); },
+        success: function(data) {
+            if (data.state) {
+                $("#form1").submit();
+            } else {
+                og.get(0).className = "info_err";
+                SetInnerText(og, data.message);
+            }
+        },
+        dataType: "json"
+    });
 }
 
-
-function CheckPwdBack1(obj){
-	var og = $("pwdmsg");
-	if(obj=="true"){
-		SetAjaxDivRoot("loader",false,"正在发送请求...");
-		ajax.postf($("form1"),function(obj) { ChanagePostBack(obj.responseText);});
-	}
-	else if(obj=="false"){
-		og.className = "info_err";
-		SetInnerText(og,"请正确输入原始密码!");
-	}
-}
 
 
 function CheckPwdBack(obj){
@@ -81,3 +100,17 @@ function CheckPwdBack(obj){
 		return false;
 	}
 }
+
+
+$(document).ready(function() {
+
+    var form1 = $("#form1");
+    var options;
+    options = {
+        beforeSubmit: function() { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
+
+});

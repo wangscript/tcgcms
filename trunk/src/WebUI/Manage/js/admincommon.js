@@ -91,17 +91,19 @@ function CheckNewPassword(obj){
 	}
 }
 
-function CheckCPWD(obj){
-	obj.className="itxt1";
-	var cp = $("iNewPWD");
-	var og = $("cpwdmsg");
+function CheckCPWD(obj) {
+    obj = $(obj);
+    if (obj == null && obj.length == 0) return false;
+	obj.get(0).className="itxt1";
+	var cp = $("#iNewPWD");
+	var og = $("#cpwdmsg");
 	if(og==null)return false;
-	if(cp.value!=obj.value){
-		og.className = "info_err";
+	if(cp.val()!=obj.val()){
+		og.get(0).className = "info_err";
 		SetInnerText(og,"请保证确认密码和新密码一样!");
 		return false;
 	}else{
-		og.className = "info_ok";
+		og.get(0).className = "info_ok";
 		SetInnerText(og,"输入正确!");
 		return true;
 	}
