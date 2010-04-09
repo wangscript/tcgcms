@@ -134,16 +134,16 @@ public partial class Skin_skins : adminMain
                 if (temp.SkinId == SkinId)
                 {
                     sbtemplate.Append("<Template>\r\n");
-                    sbtemplate.Append("\t<ID>" + temp.Id + "<ID>\r\n");
-                    sbtemplate.Append("\t<Content>" + temp.Content + "<Content>\r\n");
-                    sbtemplate.Append("\t<SkinId>" + temp.SkinId + "<SkinId>\r\n");
-                    sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "<TemplateType>\r\n");
-                    sbtemplate.Append("\t<iParentId>" + temp.iParentId + "<iParentId>\r\n");
-                    sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "<iSystemType>\r\n");
-                    sbtemplate.Append("\t<dUpdateDate>" + temp.dUpdateDate + "<dUpdateDate>\r\n");
-                    sbtemplate.Append("\t<dAddDate>" + temp.dAddDate + "<dAddDate>\r\n");
-                    sbtemplate.Append("\t<vcTempName>" + temp.vcTempName + "<vcTempName>\r\n");
-                    sbtemplate.Append("\t<vcUrl>" + temp.vcUrl + "<vcUrl>\r\n");
+                    sbtemplate.Append("\t<ID>" + temp.Id + "</ID>\r\n");
+                    sbtemplate.Append("\t<Content>" + temp.Content + "</Content>\r\n");
+                    sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                    sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
+                    sbtemplate.Append("\t<iParentId>" + temp.iParentId + "</iParentId>\r\n");
+                    sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "</iSystemType>\r\n");
+                    sbtemplate.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                    sbtemplate.Append("\t<dAddDate>" + temp.dAddDate + "</dAddDate>\r\n");
+                    sbtemplate.Append("\t<vcTempName>" + temp.vcTempName + "</vcTempName>\r\n");
+                    sbtemplate.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
                     sbtemplate.Append("</Template>\r\n");
                 }
             }
@@ -161,16 +161,20 @@ public partial class Skin_skins : adminMain
                 if (temp.SkinId == SkinId)
                 {
                     sbcategories.Append("<Categorie>\r\n");
-                    sbcategories.Append("\t<ID>" + temp.Id + "<ID>\r\n");
-                    sbcategories.Append("\t<Content>" + temp.Content + "<Content>\r\n");
-                    sbcategories.Append("\t<SkinId>" + temp.SkinId + "<SkinId>\r\n");
-                    sbcategories.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "<TemplateType>\r\n");
-                    sbcategories.Append("\t<iParentId>" + temp.iParentId + "<iParentId>\r\n");
-                    sbcategories.Append("\t<iSystemType>" + temp.iSystemType + "<iSystemType>\r\n");
-                    sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "<dUpdateDate>\r\n");
-                    sbcategories.Append("\t<dAddDate>" + temp.dAddDate + "<dAddDate>\r\n");
-                    sbcategories.Append("\t<vcTempName>" + temp.vcTempName + "<vcTempName>\r\n");
-                    sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "<vcUrl>\r\n");
+                    sbcategories.Append("\t<ID>" + temp.Id + "</ID>\r\n");
+                    sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
+                    sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
+                    sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
+                    sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
+                    sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
+                    sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                    sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
+                    sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
+                    sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
+                    sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
+                    sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
+                    sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
+                    sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
                     sbcategories.Append("</Categorie>\r\n");
                 }
             }
@@ -179,6 +183,7 @@ public partial class Skin_skins : adminMain
         try
         {
             objectHandlers.SaveFile(Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"), sbtemplate.ToString());
+            objectHandlers.SaveFile(Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"), sbcategories.ToString());
         }
         catch (Exception ex)
         {
