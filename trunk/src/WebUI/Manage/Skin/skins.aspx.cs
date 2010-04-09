@@ -299,6 +299,8 @@ public partial class Skin_skins : adminMain
         Span vsid1 = (Span)e.Item.FindControl("vsid1");
         Span vsid2 = (Span)e.Item.FindControl("vsid2");
         Span sid1 = (Span)e.Item.FindControl("sid1");
+        Span sid2 = (Span)e.Item.FindControl("sid2");
+        
 
         info.Text = skininfo.Info;
         sitename.Text = skininfo.Name;
@@ -317,6 +319,7 @@ public partial class Skin_skins : adminMain
         vsid1.Text = skininfo.Id;
         vsid2.Text = skininfo.Id;
         sid1.Text = skininfo.Id;
+        sid2.Text = skininfo.Id;
     }
 }
 
