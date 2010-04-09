@@ -54,6 +54,7 @@ namespace TCG.Handlers
         {
             Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
             if (templates == null) return null;
+            if (!templates.ContainsKey(templateid)) return null;
             return (Template)templates[templateid];
         }
 
