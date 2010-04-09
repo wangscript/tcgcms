@@ -153,7 +153,7 @@ public partial class Skin_skins : adminMain
         StringBuilder sbcategories = new StringBuilder();
         sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
         Dictionary<string, EntityBase> categories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
-        if (templates != null && templates.Count > 0)
+        if (categories != null && categories.Count > 0)
         {
             foreach (KeyValuePair<string, EntityBase> entity in categories)
             {
