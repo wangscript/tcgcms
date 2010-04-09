@@ -72,8 +72,6 @@ public partial class Skin_skins : adminMain
                 string filename = file.Name;
                 if (filename == "skin.config")
                 {
-                    string skintext = TCG.Utils.TxtReader.ReadW(path);
-
                     XmlDocument document = new XmlDocument();
                     document.Load(path);
                     XmlNodeList nodelist = document.GetElementsByTagName("Skin");
