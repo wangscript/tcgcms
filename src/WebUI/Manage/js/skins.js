@@ -25,3 +25,10 @@ function CreateSql(skinid) {
     SetAjaxDiv("loader", false, "正在生成模板脚本...");
     $("#form1").submit();
 }
+
+function UpdateSkin(skinid) {
+    $("#Work").val("UpdateSkin");
+    $("#SkinId").val(skinid);
+    SetAjaxDiv("loader", false, "正在更新模板信息...");
+    $("#form1").submit();
+}

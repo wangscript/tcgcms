@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Xml;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
@@ -47,6 +48,9 @@ public partial class Skin_skins : adminMain
                     break;
                 case "CreateSkinSql" :
                     this.CreateSkinSql();
+                    break;
+                case "UpdateSkin" :
+                    this.UpdateSkin();
                     break;
             }
         }
@@ -107,6 +111,93 @@ public partial class Skin_skins : adminMain
         }
 
         base.AjaxErch(1, "启用模板成功", "LoginCkBack");
+        return;
+    }
+
+    private void UpdateSkin()
+    {
+        string SkinId = objectHandlers.Post("SkinId");
+        Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
+
+        if (skininfo == null)
+        {
+            base.AjaxErch(-1000000701, "");
+            return;
+        }
+
+        try
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"));
+            foreach (XmlElement element in document.GetElementsByTagName("Template"))
+            {
+                Template template = new Template();
+                template.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                template.Content = element.SelectSingleNode("Content").InnerText.ToString();
+                template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
+                template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
+                template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
+                template.iSystemType = objectHandlers.ToInt( element.SelectSingleNode("iSystemType").InnerText.ToString());
+                template.dUpdateDate =objectHandlers.ToTime( element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                template.dAddDate = objectHandlers.ToTime(element.SelectSingleNode("dAddDate").InnerText.ToString());
+                template.vcTempName = element.SelectSingleNode("vcTempName").InnerText.ToString();
+                template.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+
+                Template t_template = base.handlerService.skinService.templateHandlers.GetTemplateByID(template.Id);
+                if (t_template == null)
+                {
+                    base.handlerService.skinService.templateHandlers.AddTemplate(template, base.adminInfo);
+                }
+                else
+                {
+                    base.handlerService.skinService.templateHandlers.MdyTemplate(template, base.adminInfo);
+                }
+            }
+
+            document.Load(Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"));
+
+            foreach (XmlElement element in document.GetElementsByTagName("Categorie"))
+            {
+                Categories categories = new Categories();
+                categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
+                categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
+                categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
+                categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
+                categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
+                categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
+                categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
+                categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+                categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
+                categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
+                Categories t_categories = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categories.Id);
+                if (t_categories == null)
+                {
+                    base.handlerService.skinService.categoriesHandlers.CreateCategories(categories);
+                }
+                else
+                {
+                    base.handlerService.skinService.categoriesHandlers.UpdateCategories(categories);
+                }
+            }
+
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+
+            CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
+            CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
+
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(1, "皮肤导入成功！");
         return;
     }
 
