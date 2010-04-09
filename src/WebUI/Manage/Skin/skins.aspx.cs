@@ -10,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
+using System.Text;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
@@ -78,6 +80,7 @@ public partial class Skin_skins : adminMain
                             skin.Info = skininfo[3];
                             skin.Name = skininfo[1];
                             skin.Pic = skininfo[2];
+                            skin.Filename = finfo.Name;
                             int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
                         }
                     }
@@ -110,6 +113,82 @@ public partial class Skin_skins : adminMain
     private void CreateSkinSql()
     {
         string SkinId = objectHandlers.Post("SkinId");
+
+        Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
+
+        if (skininfo == null)
+        {
+            base.AjaxErch(-1000000701, "");
+            return;
+        }
+
+        //得到所有模板
+        StringBuilder sbtemplate = new StringBuilder();
+        sbtemplate.Append("<?xml version=\"1.0\"?>\r\n");
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetAllTemplatesEntity();
+        if (templates != null && templates.Count > 0)
+        {
+            foreach (KeyValuePair<string, EntityBase> entity in templates)
+            {
+                Template temp = (Template)entity.Value;
+                if (temp.SkinId == SkinId)
+                {
+                    sbtemplate.Append("<Template>\r\n");
+                    sbtemplate.Append("\t<ID>" + temp.Id + "<ID>\r\n");
+                    sbtemplate.Append("\t<Content>" + temp.Content + "<Content>\r\n");
+                    sbtemplate.Append("\t<SkinId>" + temp.SkinId + "<SkinId>\r\n");
+                    sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "<TemplateType>\r\n");
+                    sbtemplate.Append("\t<iParentId>" + temp.iParentId + "<iParentId>\r\n");
+                    sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "<iSystemType>\r\n");
+                    sbtemplate.Append("\t<dUpdateDate>" + temp.dUpdateDate + "<dUpdateDate>\r\n");
+                    sbtemplate.Append("\t<dAddDate>" + temp.dAddDate + "<dAddDate>\r\n");
+                    sbtemplate.Append("\t<vcTempName>" + temp.vcTempName + "<vcTempName>\r\n");
+                    sbtemplate.Append("\t<vcUrl>" + temp.vcUrl + "<vcUrl>\r\n");
+                    sbtemplate.Append("</Template>\r\n");
+                }
+            }
+        }
+
+        //得到所有模板
+        StringBuilder sbcategories = new StringBuilder();
+        sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
+        Dictionary<string, EntityBase> categories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
+        if (templates != null && templates.Count > 0)
+        {
+            foreach (KeyValuePair<string, EntityBase> entity in categories)
+            {
+                Categories temp = (Categories)entity.Value;
+                if (temp.SkinId == SkinId)
+                {
+                    sbcategories.Append("<Categorie>\r\n");
+                    sbcategories.Append("\t<ID>" + temp.Id + "<ID>\r\n");
+                    sbcategories.Append("\t<Content>" + temp.Content + "<Content>\r\n");
+                    sbcategories.Append("\t<SkinId>" + temp.SkinId + "<SkinId>\r\n");
+                    sbcategories.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "<TemplateType>\r\n");
+                    sbcategories.Append("\t<iParentId>" + temp.iParentId + "<iParentId>\r\n");
+                    sbcategories.Append("\t<iSystemType>" + temp.iSystemType + "<iSystemType>\r\n");
+                    sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "<dUpdateDate>\r\n");
+                    sbcategories.Append("\t<dAddDate>" + temp.dAddDate + "<dAddDate>\r\n");
+                    sbcategories.Append("\t<vcTempName>" + temp.vcTempName + "<vcTempName>\r\n");
+                    sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "<vcUrl>\r\n");
+                    sbcategories.Append("</Categorie>\r\n");
+                }
+            }
+        }
+
+        try
+        {
+            objectHandlers.SaveFile(Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"), sbtemplate.ToString());
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(1, "模板导出成功！");
+        return;
     }
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -123,6 +202,7 @@ public partial class Skin_skins : adminMain
         Span vsid = (Span)e.Item.FindControl("vsid");
         Span vsid1 = (Span)e.Item.FindControl("vsid1");
         Span vsid2 = (Span)e.Item.FindControl("vsid2");
+        Span sid1 = (Span)e.Item.FindControl("sid1");
 
         info.Text = skininfo.Info;
         sitename.Text = skininfo.Name;
@@ -140,6 +220,7 @@ public partial class Skin_skins : adminMain
         vsid.Text = skininfo.Id;
         vsid1.Text = skininfo.Id;
         vsid2.Text = skininfo.Id;
+        sid1.Text = skininfo.Id;
     }
 }
 
