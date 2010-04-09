@@ -225,7 +225,7 @@ public partial class Skin_skins : adminMain
                 if (temp.SkinId == SkinId)
                 {
                     sbtemplate.Append("<Template>\r\n");
-                    sbtemplate.Append("\t<ID>" + temp.Id + "</ID>\r\n");
+                    sbtemplate.Append("\t<Id>" + temp.Id + "</Id>\r\n");
                     sbtemplate.Append("\t<Content>" + temp.Content + "</Content>\r\n");
                     sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
                     sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
@@ -252,7 +252,7 @@ public partial class Skin_skins : adminMain
                 if (temp.SkinId == SkinId)
                 {
                     sbcategories.Append("<Categorie>\r\n");
-                    sbcategories.Append("\t<ID>" + temp.Id + "</ID>\r\n");
+                    sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
                     sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
                     sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
                     sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
