@@ -223,6 +223,7 @@ public partial class Skin_skins : adminMain
         //得到所有模板
         StringBuilder sbtemplate = new StringBuilder();
         sbtemplate.Append("<?xml version=\"1.0\"?>\r\n");
+        sbtemplate.Append("<Templates>\r\n");
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetAllTemplatesEntity();
         if (templates != null && templates.Count > 0)
         {
@@ -246,10 +247,12 @@ public partial class Skin_skins : adminMain
                 }
             }
         }
+        sbtemplate.Append("</Templates>");
 
         //得到所有模板
         StringBuilder sbcategories = new StringBuilder();
         sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
+        sbcategories.Append("<Categories>\r\n");
         Dictionary<string, EntityBase> categories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
         if (categories != null && categories.Count > 0)
         {
@@ -277,6 +280,7 @@ public partial class Skin_skins : adminMain
                 }
             }
         }
+        sbcategories.Append("</Categories>");
 
         try
         {
