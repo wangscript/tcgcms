@@ -64,31 +64,29 @@ public partial class Skin_skins : adminMain
 
         foreach (FileSystemInfo fsinfo in fsinfos)
         {
-
             FileInfo finfo = new FileInfo(fsinfo.FullName);
             FileSystemInfo[] files = new DirectoryInfo(finfo.FullName).GetFileSystemInfos();
             foreach (FileSystemInfo file in files)
             {
                 string path = file.FullName;
                 string filename = file.Name;
-                if (filename == "skin.txt")
+                if (filename == "skin.config")
                 {
                     string skintext = TCG.Utils.TxtReader.ReadW(path);
-                    if (!string.IsNullOrEmpty(skintext))
+
+                    XmlDocument document = new XmlDocument();
+                    document.Load(path);
+                    XmlNodeList nodelist = document.GetElementsByTagName("Skin");
+                    if (nodelist != null && nodelist.Count == 1)
                     {
-                        string[] skininfo = skintext.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                        if (skininfo.Length >= 4)
-                        {
-                            Skin skin = new Skin();
-                            skin.Id = skininfo[0];
-                            skin.Info = skininfo[3];
-                            skin.Name = skininfo[1];
-                            skin.Pic = skininfo[2];
-                            skin.Filename = finfo.Name;
-                            int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
-                        }
+                        Skin skin = new Skin();
+                        skin.Id =  nodelist[0].SelectSingleNode("Id").InnerText.ToString();
+                        skin.Info = nodelist[0].SelectSingleNode("Info").InnerText.ToString();
+                        skin.Name = nodelist[0].SelectSingleNode("Name").InnerText.ToString();
+                        skin.Pic = nodelist[0].SelectSingleNode("Pic").InnerText.ToString();
+                        skin.Filename = finfo.Name;
+                        int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
                     }
-                    
                 }
             }
         }
