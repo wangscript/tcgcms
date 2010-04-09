@@ -31,7 +31,7 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
             pwd = objectHandlers.MD5(pwd);
             if (pwd.ToLower() == base.adminInfo.vcPassword.ToLower())
             {
-                base.AjaxErch(1,"true");
+                base.AjaxErch(1,"原始密码输入正确！");
                 base.Finish();
                 return;
             }

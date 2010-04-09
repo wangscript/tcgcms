@@ -12,6 +12,7 @@
 	<link href="../css/enmu.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
+	<script type="text/javascript" src="Common/common.aspx"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>

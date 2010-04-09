@@ -45,11 +45,11 @@ function CheckPassword(obj) {
 	        //debugger;
 	        if (!data.state) {
 	            og.get(0).className = "info_err";
-	            SetInnerText(og, data.message);
 	            return false;
 	        } else {
-	            
+	            og.get(0).className = "info_ok";
 	        }
+	        SetInnerText(og, data.message);
 	    },
 	    dataType: "json"
 	});
@@ -74,31 +74,21 @@ function CheckPasswordFrom(obj) {
         type: "GET", url: "AjaxMethod/Admin_CheckPwd.aspx?temptime=" + new Date().toString(), data: "PWD=" + obj.val(),
         errror: function() { alert("err"); },
         success: function(data) {
-            if (data.state) {
-                $("#form1").submit();
-            } else {
+            //debugger;
+            if (!data.state) {
                 og.get(0).className = "info_err";
-                SetInnerText(og, data.message);
+                return false;
+            } else {
+                og.get(0).className = "info_ok";
+
+                if (CheckNewPassword($("#iNewPWD")) && CheckCPWD($("#iCPWD"))) {
+                    $("#form1").submit();
+                }
             }
+            SetInnerText(og, data.message);
         },
         dataType: "json"
     });
-}
-
-
-
-function CheckPwdBack(obj){
-	var og = $("pwdmsg");
-	if(obj=="true"){
-		og.className = "info_ok";
-		SetInnerText(og,"原始密码输入正确!");
-		return true;
-	}
-	else if(obj=="false"){
-		og.className = "info_err";
-		SetInnerText(og,"请正确输入原始密码!");
-		return false;
-	}
 }
 
 

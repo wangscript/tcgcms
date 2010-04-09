@@ -8,6 +8,7 @@
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="Common/common.aspx"></script>
 	<script type="text/javascript" src="js/AJAXRequest.js"></script>
 	<script type="text/javascript" src="js/admininfo.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

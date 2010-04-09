@@ -43,6 +43,24 @@ namespace TCG.Utils
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        public static string ReadW(string filepath)
+        {
+            if (!File.Exists(filepath))
+            {
+                return "";
+            }
+            string text2 = string.Empty;
+            using (StreamReader reader1 = new StreamReader(filepath, Encoding.Default))
+            {
+                return reader1.ReadToEnd();
+            }
+        }
+
+        /// <summary>
         /// 得到连接或图片中的文件的网页地址
         /// </summary>
         /// <param name="page">页面地址</param>

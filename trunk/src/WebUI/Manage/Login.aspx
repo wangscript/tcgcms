@@ -9,6 +9,7 @@
 	<link href="css/login.css" rel="stylesheet" type="text/css" />
 	<link href="css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="Common/common.aspx"></script>
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
