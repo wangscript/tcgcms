@@ -28,6 +28,7 @@
 		<TCG:Span id='info' class="info2" runat='server' />
 		<span class="info2">
 		    <a href="javascript:void 0;" onclick="CreateSql('<TCG:Span id='sid1' runat='server' />')">导出</a>
+		    <a href="javascript:void 0;" onclick="UpdateSkin('<TCG:Span id='sid2' runat='server' />')">导入</a>
 		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a>
 		</span>
 		<span class="info3">
