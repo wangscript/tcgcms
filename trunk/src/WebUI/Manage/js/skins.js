@@ -22,5 +22,6 @@ $(document).ready(function() {
 function CreateSql(skinid) {
     $("#Work").val("CreateSkinSql");
     $("#SkinId").val(skinid);
+    SetAjaxDiv("loader", false, "正在生成模板脚本...");
     $("#form1").submit();
 }

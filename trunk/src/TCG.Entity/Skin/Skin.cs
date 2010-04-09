@@ -33,9 +33,14 @@ namespace TCG.Entity
         /// 皮肤说明
         /// </summary>
         public string Info { get { return this._info; } set { this._info = value; } }
+        /// <summary>
+        /// 皮肤文件夹
+        /// </summary>
+        public string Filename { get { return this._filename; } set { this._filename = value; } }
 
         private string _name = string.Empty;
         private string _pic = string.Empty;
         private string _info = string.Empty;
+        private string _filename = string.Empty;
     }
 }

@@ -68,7 +68,7 @@ public partial class Template_templatelist : adminMain
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplates(SkinId, iParentid, iType);
 
-        if (templates.Count != 0)
+        if (templates!=null&&templates.Count != 0)
         {
             this.ItemRepeater.DataSource = templates.Values;
             this.ItemRepeater.DataBind();

@@ -257,6 +257,7 @@ namespace TCG.Handlers
                     skin.Name = row["Name"].ToString();
                     skin.Pic = row["Pic"].ToString();
                     skin.Info = row["info"].ToString();
+                    skin.Filename = row["Filename"].ToString();
                     return (EntityBase)skin;
                 case "TCG.Entity.SheifSourceInfo":
                     SheifSourceInfo sourceinfo = new SheifSourceInfo();

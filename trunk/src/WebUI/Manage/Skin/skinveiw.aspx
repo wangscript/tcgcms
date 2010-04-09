@@ -13,7 +13,7 @@
 <link href="../css/main.css" rel="stylesheet" type="text/css" />
 <link href="../css/contextmenu.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/commonV2.js"></script>
-<script type="text/javascript" src="Common/common.aspx"></script>
+<script type="text/javascript" src="../Common/common.aspx"></script>
 <script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script src="../js/jquery.contextmenu.js" type="text/javascript"></script>
