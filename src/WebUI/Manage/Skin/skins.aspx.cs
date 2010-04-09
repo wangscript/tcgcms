@@ -129,57 +129,64 @@ public partial class Skin_skins : adminMain
         {
             XmlDocument document = new XmlDocument();
             document.Load(Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"));
-            foreach (XmlElement element in document.GetElementsByTagName("Template"))
+            XmlNodeList nodelist = document.GetElementsByTagName("Template");
+            if (nodelist != null && nodelist.Count > 0)
             {
-                Template template = new Template();
-                template.Id = element.SelectSingleNode("Id").InnerText.ToString();
-                template.Content = element.SelectSingleNode("Content").InnerText.ToString();
-                template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
-                template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
-                template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
-                template.iSystemType = objectHandlers.ToInt( element.SelectSingleNode("iSystemType").InnerText.ToString());
-                template.dUpdateDate =objectHandlers.ToTime( element.SelectSingleNode("dUpdateDate").InnerText.ToString());
-                template.dAddDate = objectHandlers.ToTime(element.SelectSingleNode("dAddDate").InnerText.ToString());
-                template.vcTempName = element.SelectSingleNode("vcTempName").InnerText.ToString();
-                template.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+                foreach (XmlElement element in nodelist)
+                {
+                    Template template = new Template();
+                    template.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                    template.Content = element.SelectSingleNode("Content").InnerText.ToString();
+                    template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
+                    template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
+                    template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
+                    template.iSystemType = objectHandlers.ToInt(element.SelectSingleNode("iSystemType").InnerText.ToString());
+                    template.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    template.dAddDate = objectHandlers.ToTime(element.SelectSingleNode("dAddDate").InnerText.ToString());
+                    template.vcTempName = element.SelectSingleNode("vcTempName").InnerText.ToString();
+                    template.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
 
-                Template t_template = base.handlerService.skinService.templateHandlers.GetTemplateByID(template.Id);
-                if (t_template == null)
-                {
-                    base.handlerService.skinService.templateHandlers.AddTemplate(template, base.adminInfo);
-                }
-                else
-                {
-                    base.handlerService.skinService.templateHandlers.MdyTemplate(template, base.adminInfo);
+                    Template t_template = base.handlerService.skinService.templateHandlers.GetTemplateByID(template.Id);
+                    if (t_template == null)
+                    {
+                        base.handlerService.skinService.templateHandlers.AddTemplate(template, base.adminInfo);
+                    }
+                    else
+                    {
+                        base.handlerService.skinService.templateHandlers.MdyTemplate(template, base.adminInfo);
+                    }
                 }
             }
 
             document.Load(Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"));
-
-            foreach (XmlElement element in document.GetElementsByTagName("Categorie"))
+            XmlNodeList nodelis1t = document.GetElementsByTagName("Template");
+            if (nodelis1t != null && nodelis1t.Count > 0)
             {
-                Categories categories = new Categories();
-                categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
-                categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
-                categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
-                categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
-                categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
-                categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
-                categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
-                categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
-                categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
-                categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
-                categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
-                categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
-                categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
-                Categories t_categories = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categories.Id);
-                if (t_categories == null)
+                foreach (XmlElement element in nodelis1t)
                 {
-                    base.handlerService.skinService.categoriesHandlers.CreateCategories(categories);
-                }
-                else
-                {
-                    base.handlerService.skinService.categoriesHandlers.UpdateCategories(categories);
+                    Categories categories = new Categories();
+                    categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                    categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
+                    categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
+                    categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
+                    categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
+                    categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
+                    categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
+                    categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+                    categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
+                    categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
+                    Categories t_categories = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categories.Id);
+                    if (t_categories == null)
+                    {
+                        base.handlerService.skinService.categoriesHandlers.CreateCategories(categories);
+                    }
+                    else
+                    {
+                        base.handlerService.skinService.categoriesHandlers.UpdateCategories(categories);
+                    }
                 }
             }
 
