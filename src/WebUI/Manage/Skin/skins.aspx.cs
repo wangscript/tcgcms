@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Configuration;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ public partial class Skin_skins : adminMain
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
+            this.LoadSkinFiles();
             Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
             if (skins != null && skins.Count != 0)
             {
@@ -41,8 +43,50 @@ public partial class Skin_skins : adminMain
                 case "SetDefalutSkinId":
                     this.SetDefalutSkinId();
                     break;
+                case "CreateSkinSql" :
+                    this.CreateSkinSql();
+                    break;
             }
         }
+    }
+
+    private void LoadSkinFiles()
+    {
+        DirectoryInfo dinfo = new DirectoryInfo(Server.MapPath("~/skin"));
+
+        FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
+
+        foreach (FileSystemInfo fsinfo in fsinfos)
+        {
+
+            FileInfo finfo = new FileInfo(fsinfo.FullName);
+            FileSystemInfo[] files = new DirectoryInfo(finfo.FullName).GetFileSystemInfos();
+            foreach (FileSystemInfo file in files)
+            {
+                string path = file.FullName;
+                string filename = file.Name;
+                if (filename == "skin.txt")
+                {
+                    string skintext = TCG.Utils.TxtReader.ReadW(path);
+                    if (!string.IsNullOrEmpty(skintext))
+                    {
+                        string[] skininfo = skintext.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                        if (skininfo.Length >= 4)
+                        {
+                            Skin skin = new Skin();
+                            skin.Id = skininfo[0];
+                            skin.Info = skininfo[3];
+                            skin.Name = skininfo[1];
+                            skin.Pic = skininfo[2];
+                            int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
+                        }
+                    }
+                    
+                }
+            }
+        }
+        CachingService.Remove(CachingService.CACHING_ALL_SKIN_ENTITY);
+        CachingService.Remove(CachingService.CACHING_ALL_SKIN);
     }
 
     private void SetDefalutSkinId()
@@ -52,13 +96,20 @@ public partial class Skin_skins : adminMain
         {
             base.configService.UpdateConfig(base.configService.m_skinConfig, "DefaultSkinId", "Value", SkinId);
         }
-        catch {
-            base.AjaxErch("{state:false}");
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
             return;
         }
 
-        base.AjaxErch("{state:true}");
+        base.AjaxErch(1, "启用模板成功", "LoginCkBack");
         return;
+    }
+
+    private void CreateSkinSql()
+    {
+        string SkinId = objectHandlers.Post("SkinId");
     }
 
     protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)

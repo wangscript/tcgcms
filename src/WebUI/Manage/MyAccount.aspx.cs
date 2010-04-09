@@ -31,7 +31,7 @@ public partial class MyAccount : adminMain
         {
             string adminname = objectHandlers.Post("adminname");
             string nickname = objectHandlers.Post("iNickName");
-            string oldpwd = objectHandlers.Post("iOldPWD");  
+            string oldpwd = objectHandlers.Post("iOldPWD");
             string npwd = objectHandlers.Post("iNewPWD");
 
             if (string.IsNullOrEmpty(adminname) || string.IsNullOrEmpty(nickname))
@@ -44,14 +44,26 @@ public partial class MyAccount : adminMain
             oldpwd = objectHandlers.MD5(oldpwd);
             if (!string.IsNullOrEmpty(npwd)) npwd = objectHandlers.MD5(npwd);
 
-            int rtn = base.handlerService.manageService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
+            int rtn = 0;
+          
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.ChanageAdminLoginInfo(adminname, oldpwd, npwd, nickname);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
             if (rtn == 1)
             {
                 SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
+                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             }
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
-            return;
+
+            base.AjaxErch(rtn, "密码修改成功！");
         }
     }
 }

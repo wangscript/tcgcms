@@ -9,6 +9,7 @@
 	<link href="css/configsetting.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="Common/common.aspx"></script>
 	<script type="text/javascript" src="js/AJAXRequest.js"></script>
 	<script type="text/javascript" src="js/configsetting.js"></script>
 </head>

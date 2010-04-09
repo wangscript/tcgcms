@@ -70,21 +70,22 @@ function NewsSelectInit(){
 }
 
 function CheckNewPassword(obj){
-	obj.className="itxt1";
-	var cp = $("iCPWD");
-	var og = $("npwdmsg");
+	obj = $(obj);
+	obj.get(0).className="itxt1";
+	var cp = $("#iCPWD");
+	var og = $("#npwdmsg");
 	if(og==null)return false;
-	if(obj.value == ""){
-		og.className = "info_err";
+	if(obj.val() == ""){
+		og.get(0).className = "info_err";
 		SetInnerText(og,"新密码不能为空!");
 		return false;
 	}else{
-		if(cp.value!=obj.value){
-			og.className = "info1";
+		if(cp.val()!=obj.val()){
+			og.get(0).className = "info1";
 			SetInnerText(og,"请保证确认密码和新密码一样!");
 			return false;
 		}else{
-			og.className = "info_ok";
+			og.get(0).className = "info_ok";
 			SetInnerText(og,"输入正确!");
 			return true;
 		}

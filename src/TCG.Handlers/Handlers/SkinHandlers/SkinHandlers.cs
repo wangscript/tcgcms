@@ -96,6 +96,19 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateSkin(Skin skin)
         {
+            base.SetDataBaseConnection();
+            SqlParameter sp0 = new SqlParameter("@Id", SqlDbType.VarChar, 36); sp0.Value = skin.Id;
+            SqlParameter sp1 = new SqlParameter("@Name", SqlDbType.NVarChar, 50); sp1.Value = skin.Name;
+            SqlParameter sp2 = new SqlParameter("@Pic", SqlDbType.NVarChar, 255); sp2.Value = skin.Pic;
+            SqlParameter sp3 = new SqlParameter("@Info", SqlDbType.NVarChar, 255); sp3.Value = skin.Info;
+            SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 36); sp4.Direction = ParameterDirection.Output;
+
+            string[] reValues = conn.Execute("SP_Skin_CreateSkin", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4}, new int[] { 4 });
+            if (reValues != null)
+            {
+                int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
+                return rtn;
+            }
             return -19000000;
         }
 

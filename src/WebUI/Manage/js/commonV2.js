@@ -1,7 +1,6 @@
 ﻿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var ajaxiconRoot = ['images/ajax-loader1.gif', 'images/post_err.gif', 'images/post_ok.gif'];
-var ajaxicon = ['../images/ajax-loader1.gif', '../images/post_err.gif', '../images/post_ok.gif'];
 
 function GoTo(){
 	void(0);
