@@ -261,8 +261,46 @@ namespace TCG.Handlers
         /// <param name="skinid"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        public int CreateTemplateToXML(string skinid, Admin admin)
+        public int CreateTemplateToXML(string skinid)
         {
+            Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
+
+            //得到所有模板
+            StringBuilder sbtemplate = new StringBuilder();
+            sbtemplate.Append("<?xml version=\"1.0\"?>\r\n");
+            sbtemplate.Append("<Templates>\r\n");
+            Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
+            if (templates != null && templates.Count > 0)
+            {
+                foreach (KeyValuePair<string, EntityBase> entity in templates)
+                {
+                    Template temp = (Template)entity.Value;
+                    if (temp.SkinId == skinid)
+                    {
+                        sbtemplate.Append("<Template>\r\n");
+                        sbtemplate.Append("\t<Id>" + temp.Id + "</Id>\r\n");
+                        sbtemplate.Append("\t<Content><![CDATA[" + temp.Content + "]]></Content>\r\n");
+                        sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                        sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
+                        sbtemplate.Append("\t<iParentId>" + temp.iParentId + "</iParentId>\r\n");
+                        sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "</iSystemType>\r\n");
+                        sbtemplate.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                        sbtemplate.Append("\t<dAddDate>" + temp.dAddDate + "</dAddDate>\r\n");
+                        sbtemplate.Append("\t<vcTempName>" + temp.vcTempName + "</vcTempName>\r\n");
+                        sbtemplate.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
+                        sbtemplate.Append("</Template>\r\n");
+                    }
+                }
+            }
+            sbtemplate.Append("</Templates>");
+
+            objectHandlers.SaveFile(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"), sbtemplate.ToString());
+
             return 1;
         }
     }
