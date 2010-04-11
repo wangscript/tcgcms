@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using System.Xml;
 using System.Text.RegularExpressions;
 
 using TCG.Data;
@@ -299,5 +300,110 @@ namespace TCG.Handlers
             }
             return -19000000;
         }
+
+        /// <summary>
+        /// 从一个XML里面更新分类
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public int UpdateCategoriesFromXML(string skinid)
+        {
+            Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
+
+            XmlDocument document = new XmlDocument();
+            document.Load(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"));
+            XmlNodeList nodelis1t = document.GetElementsByTagName("Categorie");
+            if (nodelis1t != null && nodelis1t.Count > 0)
+            {
+                foreach (XmlElement element in nodelis1t)
+                {
+                    Categories categories = new Categories();
+                    categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                    categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
+                    categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
+                    categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
+                    categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
+                    categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
+                    categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
+                    categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+                    categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
+                    categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
+                    Categories t_categories = this.GetCategoriesById(categories.Id);
+                    if (t_categories == null)
+                    {
+                        this.CreateCategories(categories);
+                    }
+                    else
+                    {
+                        this.UpdateCategories(categories);
+                    }
+                }
+            }
+
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            return 1;
+        }
+
+
+        /// <summary>
+        /// 创建皮肤模板文件 
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int CreateCategoriesToXML(string skinid)
+        {
+            Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
+
+            //得到所有模板
+            StringBuilder sbcategories = new StringBuilder();
+            sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
+            sbcategories.Append("<Categories>\r\n");
+            Dictionary<string, EntityBase> categories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
+            if (categories != null && categories.Count > 0)
+            {
+                foreach (KeyValuePair<string, EntityBase> entity in categories)
+                {
+                    Categories temp = (Categories)entity.Value;
+                    if (temp.SkinId == skinid)
+                    {
+                        sbcategories.Append("<Categorie>\r\n");
+                        sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
+                        sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
+                        sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
+                        sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
+                        sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
+                        sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
+                        sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                        sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
+                        sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
+                        sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
+                        sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
+                        sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
+                        sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
+                        sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                        sbcategories.Append("</Categorie>\r\n");
+                    }
+                }
+            }
+            sbcategories.Append("</Categories>");
+            objectHandlers.SaveFile(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"), sbcategories.ToString());
+            return 1;
+        }
+       
     }
 }
