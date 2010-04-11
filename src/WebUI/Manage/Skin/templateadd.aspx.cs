@@ -69,6 +69,7 @@ public partial class Template_templateadd : adminMain
             try
             {
                 rtn = base.handlerService.skinService.templateHandlers.AddTemplate(item,base.adminInfo);
+                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(item.SkinId);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
             }
