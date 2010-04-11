@@ -250,6 +250,8 @@ namespace TCG.Handlers
                     template.vcTempName = (string)row["vcTempName"];
                     template.Content = (string)row["vcContent"];
                     template.vcUrl = (string)row["vcUrl"];
+                    template.dAddDate = (DateTime)row["dAddDate"];
+                    template.dUpdateDate = (DateTime)row["dUpdateDate"];
                     return (EntityBase)template;
                 case "TCG.Entity.Skin":
                     Skin skin = new Skin();
