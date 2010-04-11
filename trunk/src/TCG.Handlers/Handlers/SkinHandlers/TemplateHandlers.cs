@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using TCG.Data;
+using System.Text.RegularExpressions;
 
 using TCG.Entity;
 using TCG.Utils;
@@ -229,6 +230,8 @@ namespace TCG.Handlers
                     Template template = new Template();
                     template.Id = element.SelectSingleNode("Id").InnerText.ToString();
                     template.Content = element.SelectSingleNode("Content").InnerText.ToString();
+                    template.Content = Regex.Replace(template.Content, "<![CDATA[(.+?)]]>", "$1", RegexOptions.Multiline);
+
                     template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
                     template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
                     template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
