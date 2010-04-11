@@ -18,6 +18,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 using TCG.Data;
 
 using TCG.Entity;
@@ -202,5 +203,67 @@ namespace TCG.Handlers
             return -19000000;
         }
 
+        /// <summary>
+        /// 从XML中更新模板
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int UpdateTemplateFromXML(string skinid, Admin admin)
+        {
+            Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
+
+
+            XmlDocument document = new XmlDocument();
+            document.Load(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/template.config"));
+            XmlNodeList nodelist = document.GetElementsByTagName("Template");
+            if (nodelist != null && nodelist.Count > 0)
+            {
+                foreach (XmlElement element in nodelist)
+                {
+                    Template template = new Template();
+                    template.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                    template.Content = element.SelectSingleNode("Content").InnerText.ToString();
+                    template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
+                    template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
+                    template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
+                    template.iSystemType = objectHandlers.ToInt(element.SelectSingleNode("iSystemType").InnerText.ToString());
+                    template.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    template.dAddDate = objectHandlers.ToTime(element.SelectSingleNode("dAddDate").InnerText.ToString());
+                    template.vcTempName = element.SelectSingleNode("vcTempName").InnerText.ToString();
+                    template.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+
+                    Template t_template = this.GetTemplateByID(template.Id);
+                    if (t_template == null)
+                    {
+                        this.AddTemplate(template, admin);
+                    }
+                    else
+                    {
+                        this.MdyTemplate(template, admin);
+                    }
+                }
+
+                CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
+                CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
+            }
+            return 1;
+        }
+
+        /// <summary>
+        /// 创建皮肤模板文件 
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int CreateTemplateToXML(string skinid, Admin admin)
+        {
+            return 1;
+        }
     }
 }
