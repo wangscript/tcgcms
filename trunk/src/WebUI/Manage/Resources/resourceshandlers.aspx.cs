@@ -93,7 +93,7 @@ public partial class resources_resourceshandlers : adminMain
 
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
-        item.vcContent = objectHandlers.Post("iContent$content");
+        item.vcContent = iContent.Value;// objectHandlers.Post("iContent$content");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
 
