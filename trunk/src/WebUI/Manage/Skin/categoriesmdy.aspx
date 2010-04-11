@@ -64,6 +64,7 @@
 	</div>
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
+	    <input type="hidden" id="skinid" runat="server" value="" />
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />
 	</div>
     </form>

@@ -59,7 +59,7 @@ function SetMdyInnerHTML(){
 	var ifCreateAdd=$("#ifCreateAdd");
 	ifCreateAdd.css({ "width": "100%" });
 	ifCreateAdd.css({ "height": "100%" });
-	ifCreateAdd.get(0).src = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID");
+	ifCreateAdd.get(0).src = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID") + "&skinid=" + $("#iSkinId").val();
 }
 
 function SetCreateInnerHTML() {

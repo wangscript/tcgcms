@@ -26,7 +26,7 @@ public partial class skin_categoriesmdy : adminMain
         {
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
+            this.skinid.Value = objectHandlers.Get("skinid");
             this.Init();
         }
         else
@@ -37,6 +37,7 @@ public partial class skin_categoriesmdy : adminMain
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
+            cif.SkinId = objectHandlers.Post("skinid");
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"));
