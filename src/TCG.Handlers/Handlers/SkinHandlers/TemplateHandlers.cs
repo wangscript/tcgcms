@@ -63,7 +63,7 @@ namespace TCG.Handlers
         public DataTable GetAllTemplatesWithOutCaching()
         {
             base.SetDataBaseConnection();
-            string Sql = "SELECT Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl FROM Template (NOLOCK)";
+            string Sql = "SELECT * FROM Template (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
 
