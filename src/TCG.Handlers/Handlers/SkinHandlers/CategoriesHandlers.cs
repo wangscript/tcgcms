@@ -325,7 +325,9 @@ namespace TCG.Handlers
                     Categories categories = new Categories();
                     categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
                     categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
+                    categories.ResourceListTemplate = new Template();
                     categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
+                    categories.ResourceTemplate = new Template();
                     categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
                     categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
                     categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
