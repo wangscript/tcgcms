@@ -230,7 +230,7 @@ public partial class Skin_skins : adminMain
                 {
                     sbtemplate.Append("<Template>\r\n");
                     sbtemplate.Append("\t<Id>" + temp.Id + "</Id>\r\n");
-                    sbtemplate.Append("\t<Content>" + temp.Content + "</Content>\r\n");
+                    sbtemplate.Append("\t<Content><![CDATA[" + temp.Content + "]]></Content>\r\n");
                     sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
                     sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
                     sbtemplate.Append("\t<iParentId>" + temp.iParentId + "</iParentId>\r\n");
