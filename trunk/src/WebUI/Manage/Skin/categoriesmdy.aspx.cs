@@ -62,6 +62,7 @@ public partial class skin_categoriesmdy : adminMain
             try
             {
                 rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
+                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             }
