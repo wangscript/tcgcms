@@ -306,5 +306,29 @@ namespace TCG.Handlers
 
             return 1;
         }
+
+
+        public int CreateSingeTemplateToHtml(string templateid, TCGTagHandlers tcgthdl,ref string text)
+        {
+            if (string.IsNullOrEmpty(templateid)) {return -1000000806;}
+            Template tlif = this.GetTemplateByID(templateid);
+
+            if (tlif == null){return -1000000807;}
+
+            string filepath = string.Empty;
+
+            tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + base.configService.baseConfig["FileExtension"];
+            
+            filepath = HttpContext.Current.Server.MapPath("~" + tlif.vcUrl);
+
+            tcgthdl.Template = tlif.Content;
+            tcgthdl.FilePath = filepath;
+            tcgthdl.configService = base.configService;
+            tcgthdl.conn = base.conn;
+            tcgthdl.Replace();
+
+            text = "<a>生成成功:" + filepath + "</a>";
+            return 1;
+        }
     }
 }

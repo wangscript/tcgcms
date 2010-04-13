@@ -41,6 +41,19 @@ function GetAllChildClassIdByClassId(id) {
     return st;
 }
 
+function GetAllChildClassIdByClassIdForCreateHtml(id) {
+    var st = "";
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].ParentId == id ) {
+            var t = GetAllChildClassIdByClassId(_Categories[i].Id);
+
+            var s = (t == "") ? "" : ",";
+            st += (st == "") ? _Categories[i].Id + s + t : "," + _Categories[i].Id + s + t;
+        }
+    }
+    return st;
+}
+
 
 function GetCategorieById(Id) {
     if (_Categories == null) return null;
@@ -73,4 +86,15 @@ function GetCagetegoriesEnmu(obj, Skinid, CagetegorId) {
         $(o).remove();
     }
 
+}
+
+
+function GetSingTemplate() {
+    var newall = new Array();
+    for (var i = 0; i < _Template.length; i++) {
+        if (_Template[i].Url != "") {
+            newall.push(_Template[i]);
+        }
+    }
+    return newall;
 }

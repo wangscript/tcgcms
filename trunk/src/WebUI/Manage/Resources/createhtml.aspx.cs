@@ -43,8 +43,52 @@ public partial class news_createhtml : adminMain
                 case "Create":
                     this.Create();
                     break;
+                case "CreateClassList":
+                    this.CreateClassList();
+                    break;
+                case "CreateSingeTemplate" :
+                    this.CreateSingeTemplate();
+                    break;
             }
         }
+    }
+
+    private void CreateSingeTemplate()
+    {
+        string iTemplate = objectHandlers.Post("tClassId");
+        string text = string.Empty;
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
+            base.Finish();
+            return;
+        }
+
+        base.AjaxErch(rtn, text, "CreateBack2");
+    }
+
+    private void CreateClassList()
+    {
+        string tClassID = objectHandlers.Post("tClassId");
+        string text = string.Empty;
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesListHtml(tClassID, base.tagService.TCGTagHandlers, ref text);
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
+            base.Finish();
+            return;
+        }
+
+        base.AjaxErch(rtn, text, "CreateBack1");
     }
 
     private void Create()
@@ -176,7 +220,7 @@ public partial class news_createhtml : adminMain
 
         if (pageCount < page)
         {
-            base.AjaxErch(-1,"");
+            base.AjaxErch(1, "已经生成了所有分页！", "PageInit");
             base.Finish();
             return;
         }

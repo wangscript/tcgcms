@@ -118,7 +118,7 @@ namespace TCG.Handlers
         public DataTable GetAllCategoriesWithOutCaching()
         {
             base.SetDataBaseConnection();
-            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService FROM Categories WITH (NOLOCK)";
+            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService FROM Categories WITH (NOLOCK) order by iorder";
             return conn.GetDataTable(Sql);
         }
 
@@ -404,6 +404,54 @@ namespace TCG.Handlers
             }
             sbcategories.Append("</Categories>");
             objectHandlers.SaveFile(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"), sbcategories.ToString());
+            return 1;
+        }
+
+        /// <summary>
+        ///  生成分类列表
+        /// </summary>
+        /// <param name="categoriesid"></param>
+        /// <returns></returns>
+        public int CreateCategoriesListHtml(string categoriesid, TCGTagHandlers tcgthdl,ref string createfilepath)
+        {
+            if (string.IsNullOrEmpty(categoriesid))
+            {
+                return -1000000801;
+            }
+
+            Categories cif = this.GetCategoriesById(categoriesid);
+
+            if (cif == null) { return -1000000802; }
+
+            if (cif.ResourceListTemplate == null) { return -1000000803; }
+
+            if (cif.vcUrl.IndexOf(".") > -1) { return -1000000804; }
+
+            string filepath = "";
+
+            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
+
+            tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", categoriesid.ToString());
+            tcgthdl.FilePath = filepath;
+            tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
+            tcgthdl.configService = base.configService;
+            tcgthdl.conn = base.conn;
+
+            tcgthdl.Replace();
+            if (tcgthdl.PagerInfo.PageCount > 1)
+            {
+
+                for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
+                {
+                    string num = (i == 1) ? "" : i.ToString();
+                    createfilepath += "<a>生成成功:" + cif.vcUrl + "-c" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
+                }
+            }
+            else
+            {
+                createfilepath = "<a>生成成功:" + cif.vcUrl + base.configService.baseConfig["FileExtension"] + "...</a>";
+            }
+
             return 1;
         }
        

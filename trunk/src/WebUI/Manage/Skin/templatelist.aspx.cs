@@ -141,50 +141,19 @@ public partial class Template_templatelist : adminMain
     private void TemplateCreate()
     {
         string iTemplate = objectHandlers.Post("iTemplateId");
-        if (string.IsNullOrEmpty(iTemplate))
-        {
-            base.AjaxErch(1, "<a>生成失败-模版ID不能为0！</a>", "CreateBack");
-            return;
-        }
-
-        Template tlif = base.handlerService.skinService.templateHandlers.GetTemplateByID(iTemplate);
-
-        if (tlif == null)
-        {
-            base.AjaxErch("{state:false,message:'<a>生成失败-编号：" + iTemplate.ToString() + "的模版不存在！</a>'}");
-            return;
-        }
-        string filepath = string.Empty;
-
-        tlif.vcUrl = tlif.vcUrl.IndexOf(".")>-1?tlif.vcUrl: tlif.vcUrl + base.configService.baseConfig["FileExtension"];
+        string text = string.Empty;
+        int rtn = 0;
         try
         {
-            filepath = Server.MapPath("~" + tlif.vcUrl);
-        }
-        catch
-        {
-            base.AjaxErch("{state:false,message:'<a>生成失败-模版生成文件路径不存在!</a>'}");
-            return;
-        }
-
-
-        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-        tcgthdl.Template = tlif.Content;
-        tcgthdl.FilePath = filepath;
-        tcgthdl.configService = base.configService;
-        tcgthdl.conn = base.conn;
-
-        try
-        {
-           tcgthdl.Replace();
+            rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
         }
         catch (Exception ex)
         {
-            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack");
+            base.Finish();
+            return;
         }
 
-        base.AjaxErch(1, "<a>生成成功:" + objectHandlers.JSEncode(filepath) + "...</a>", "CreateBack");
-
-        tlif = null;
+        base.AjaxErch(rtn, text, "CreateBack");
     }
 }
