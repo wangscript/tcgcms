@@ -350,19 +350,19 @@ function strDateTime(str){
 
 /*----------------------------*/
 function AjaxPostFormBack(data) {
-	if(data.state){
-	    if (data.callback != null) {
-	        if (data.callback.indexOf("(") > -1) {
-	            try { eval(data.callback); } catch (err) { }
-	        } else {
-	            try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { }
-	        }
-	        return;
-	    }
-	    SetAjaxDiv("ok", false, data.message);
-	}else{
-		SetAjaxDiv("err",false,data.message);
-	}
+    if (data.state) {
+        if (data.callback != null) {
+            if (data.callback.indexOf("(") > -1) {
+                try { eval(data.callback); } catch (err) { }
+            } else {
+                try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { alert(err) }
+            }
+            return;
+        }
+        SetAjaxDiv("ok", false, data.message);
+    } else {
+        SetAjaxDiv("err", false, data.message);
+    }
 }
 
 function BeforSubmit() {

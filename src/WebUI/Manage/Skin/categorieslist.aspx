@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
-	<script type="text/javascript" src="../js/CreateInput.js"></script>
+	<script type="text/javascript" src="../js/CreateInputV2.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>

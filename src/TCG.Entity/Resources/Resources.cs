@@ -108,6 +108,11 @@ namespace TCG.Entity
         /// 资源标题是否加粗
         /// </summary>
         public string cStrong { get { return this._cstrong; } set { this._cstrong = value; } }
+
+        public string GetUrl()
+        {
+            return string.IsNullOrEmpty(this.vcUrl) ? this.vcFilePath : this.vcUrl;
+        }
           
 
 

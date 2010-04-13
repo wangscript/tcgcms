@@ -109,18 +109,83 @@ function SearchBack(val) {
 }
 
 function CreateBack(val) {
-	CreateDiv.SetSep(val);
-	newsnum--;
-	if (newsnum == -1) {
-		$("#page").val(parseInt($("#page").val()) + 1);
-		StartCreate();
-	}
-	if(newsnum>-1){
-		iId.val(o[newsnum].Id);
-		work.val("Create");
-		tClassId.val(o[newsnum].ClassId);
-		iFilePath.val(o[newsnum].FilePath);
-		tCreated.val(o[newsnum].Created);
-		$("#form1").submit();
-	}
+    CreateDiv.SetSep(val);
+    newsnum--;
+    if (newsnum == -1) {
+        $("#page").val(parseInt($("#page").val()) + 1);
+        StartCreate();
+    }
+    if (newsnum > -1) {
+        iId.val(o[newsnum].Id);
+        work.val("Create");
+        tClassId.val(o[newsnum].ClassId);
+        iFilePath.val(o[newsnum].FilePath);
+        tCreated.val(o[newsnum].Created);
+        $("#form1").submit();
+    }
+}
+
+
+function PageInit() {
+    
+    $("#page").val("1");
+    if ($("#orderClass").attr("checked")) {
+        var t = GetPostClassChild($("#iClassId").val());
+        if (t.indexOf(",") > -1) {
+            PostClasses(t);
+        } else {
+            var t_classinfo = GetCategorieById(t);
+            if (t_classinfo.Url.indexOf(".") == -1) {
+                CreateDiv.set = 1;
+                CreateDiv.setcount = 1;
+                $("#work").val("CreateClassList");
+                $("#tClassId").val(t);
+                $("#form1").submit();
+            }
+        }
+    }
+}
+
+function GetPostClassChild(id) {
+    var t = GetAllChildClassIdByClassId(id);
+    if (t == "") {
+        return id
+    } else {
+        return id + "," + t;
+    }
+}
+
+function PostClasses(ids) {
+    var o = ids.split(",");
+    CreateDiv.set = 1;
+    CreateDiv.setcount = o.length;
+    for (var i = 0; i < o.length; i++) {
+        var t_classinfo = GetCategorieById(o[i]);
+        if (t_classinfo.Url.indexOf(".") == -1) {
+            $("#work").val("CreateClassList");
+            $("#tClassId").val(o[i]);
+            $("#form1").submit();
+        } else {
+            CreateDiv.setcount--;
+        }
+    }
+}
+
+
+function CreateBack1(val) {
+    CreateDiv.SetSep(val);
+    if (CreateDiv.set == (CreateDiv.setcount + 1)) {
+        var ot = GetSingTemplate();
+        CreateDiv.set = 1;
+        CreateDiv.setcount = ot.length;
+        for (var i = 0; i < ot.length; i++) {
+            $("#work").val("CreateSingeTemplate");
+            $("#tClassId").val(ot[i].Id);
+            $("#form1").submit();
+        }
+    }
+}
+
+function CreateBack2(val) {
+    CreateDiv.SetSep(val);
 }

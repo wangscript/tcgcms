@@ -173,8 +173,8 @@ public partial class resources_resourceslist : adminMain
 
         string text = "<a href=\"resourceshandlers.aspx?newsid=" + res.Id + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
-        string url = string.IsNullOrEmpty(res.vcUrl) ? res.vcFilePath : res.vcUrl;
-        sTitle.Text = text + "<a href='../.." + url + "' target='_blank'>" + res.vcTitle + "</a>";
+
+        sTitle.Text = text + "<a href='" + res.GetUrl() + "' target='_blank'>" + res.vcTitle + "</a>";
         sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + res.Categorie.Id + "');</script>";
 
         updatedate.Text = res.dUpDateDate.ToString("yyyy-MM-dd HH:mm:ss");
