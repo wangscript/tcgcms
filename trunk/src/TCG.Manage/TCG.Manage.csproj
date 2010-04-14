@@ -58,6 +58,7 @@
     <Compile Include="Entity\Skin\Speciality.cs" />
     <Compile Include="Entity\Skin\Template.cs" />
     <Compile Include="Entity\Skin\TemplateType.cs" />
+    <Compile Include="Entity\TCGTagPagerInfo.cs" />
     <Compile Include="Entity\Version\VersionItem.cs" />
     <Compile Include="HandlerService.cs" />
     <Compile Include="manageHandlers\adminHandlers.cs" />
@@ -71,6 +72,11 @@
     <Compile Include="SkinHandlers\SkinService.cs" />
     <Compile Include="SkinHandlers\SpecialityHandlers.cs" />
     <Compile Include="SkinHandlers\TemplateHandlers.cs" />
+    <Compile Include="TCGTagHandlers\TagService.cs" />
+    <Compile Include="TCGTagHandlers\TCGTagAttributeHandlers.cs" />
+    <Compile Include="TCGTagHandlers\TCGTagBase.cs" />
+    <Compile Include="TCGTagHandlers\TCGTagHandlers.cs" />
+    <Compile Include="TCGTagHandlers\TCGTagStringFunHandlers.cs" />
     <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>

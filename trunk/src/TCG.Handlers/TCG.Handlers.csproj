@@ -49,11 +49,6 @@
     <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
     <Compile Include="Handlers\manageHandlers\ManageService.cs" />
     <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
-    <Compile Include="Handlers\TCGTagHandlers\TagService.cs" />
-    <Compile Include="Handlers\TCGTagHandlers\TCGTagAttributeHandlers.cs" />
-    <Compile Include="Handlers\TCGTagHandlers\TCGTagBase.cs" />
-    <Compile Include="Handlers\TCGTagHandlers\TCGTagHandlers.cs" />
-    <Compile Include="Handlers\TCGTagHandlers\TCGTagStringFunHandlers.cs" />
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
