@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.Handlers</name>
+    </assembly>
+    <members>
+        <member name="T:TCG.Handlers.ObjectHandlersBase">
+            <summary>
+            方法基类
+            </summary>
+        </member>
+        <member name="M:TCG.Handlers.ObjectHandlersBase.GetEntitysObjectFromTable(System.Data.DataTable,System.Type)">
+            <summary>
+            从记录集中返回实体
+            </summary>
+            <param name="dt"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ObjectHandlersBase.GetJsEntity(TCG.Entity.EntityBase,System.Type)">
+            <summary>
+            得到实体的JSON对象
+            </summary>
+            <param name="entity"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Handlers.ObjectHandlersBase.GetEntityObjectFromRow(System.Data.DataRow,System.Type)">
+            <summary>
+            从记录行中得到实体
+            </summary>
+            <param name="?"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TCG.Handlers.ObjectHandlersBase.conn">
+            <summary>
+            设置数据库链接
+            </summary>
+        </member>
+        <member name="P:TCG.Handlers.ObjectHandlersBase.configService">
+            <summary>
+            获得配置信息支持
+            </summary>
+        </member>
+    </members>
+</doc>
