@@ -1865,49 +1865,6 @@ namespace TCG.Utils
             return MD5(s + Cookie.USER_COOKIE_TOKEN);
         }
 
-        /// <summary>
-        /// 得到用户的属性
-        /// </summary>
-        /// <param name="level"></param>
-        /// <returns></returns>
-        public static UserClubLevel GetUserClubLevel(int level)
-        {
-            switch (level)
-            {
-                case -1:
-                    return UserClubLevel.Guest;
-                case 0:
-                    return UserClubLevel.Limit;
-                case 1:
-                    return UserClubLevel.Ordinary;
-                case 2:
-                    return UserClubLevel.Administrator;
-            }
-            return UserClubLevel.Guest;
-        }
-
-        /// <summary>
-        /// 得到模板类型
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static TemplateType GetTemplateType(int type)
-        {
-            switch (type)
-            {
-                case 0:
-                    return TemplateType.SinglePageType;
-                case 1:
-                    return TemplateType.InfoType;
-                case 2:
-                    return TemplateType.ListType;
-                case 3:
-                    return TemplateType.OriginalType;
-                case 4:
-                    return TemplateType.SystemPage;       
-            }
-            return TemplateType.SinglePageType;
-        }
 
         public void ZipFile(string FileToZip, string ZipedFile, int CompressionLevel, int BlockSize, string password)
         {
