@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="DBHandlers.cs" />
+    <Compile Include="Entity\DbProviderEnum.cs" />
     <Compile Include="PageSearchItem.cs" />
   </ItemGroup>
   <ItemGroup>
