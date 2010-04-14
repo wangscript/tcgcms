@@ -21,11 +21,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TCG.Data;
-using TCG.Utils;
-using TCG.Release;
-using TCG.Handlers;
 
+using TCG.Utils;
+using TCG.Data;
 using TCG.Entity;
 
 namespace TCG.Pages
@@ -35,39 +33,6 @@ namespace TCG.Pages
         public Origin()
         {
             
-        }
-
-        public TagService tagService
-        {
-            get
-            {
-                if (this._ragservice == null)
-                {
-                    this._ragservice = new TagService(this.handlerService);
-                    this._ragservice.configService = this.configService;
-                    this._ragservice.conn = this.conn;
-                }
-                return this._ragservice;
-            }
-        }
-        private TagService _ragservice = null;
-
-
-        /// <summary>
-        /// 提供系统操作方法的服务
-        /// </summary>
-        protected HandlerService handlerService
-        {
-            get
-            {
-                if (this._handlerservice == null)
-                {
-                    this._handlerservice = new HandlerService();
-                    this._handlerservice.configService = this.configService;
-                    this._handlerservice.conn = this.conn;
-                }
-                return this._handlerservice;
-            }
         }
 
         /// <summary>
@@ -163,26 +128,13 @@ namespace TCG.Pages
             }
         }
 
-        public User User
-        {
-            get
-            {
-                if (this._user == null)
-                {
-                    this._user = this.handlerService.userService.userLoginHandlers.User;
-                }
-                return this._user;
-            }
-        }
 
         protected void Finish()
         {
             if ((this._conn != null) && this._conn.Connected) { this._conn.Close(); }
         }
 
-        private User _user = null;
-
         private string _ajaxdata = string.Empty;
-        private HandlerService _handlerservice = null;
+
     }
 }

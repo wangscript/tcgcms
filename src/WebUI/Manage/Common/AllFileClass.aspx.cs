@@ -13,7 +13,7 @@ using TCG.Utils;
 using TCG.Handlers;
 using TCG.Pages;
 
-public partial class Common_AllFileClass : ScriptsMain
+public partial class Common_AllFileClass : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

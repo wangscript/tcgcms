@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="userpost.aspx.cs" Inherits="interface_userpost" %>

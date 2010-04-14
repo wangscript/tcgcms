@@ -14,10 +14,10 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Entity;
-using TCG.Pages;
 using TCG.Handlers;
+using TCG.Pages;
 
-public partial class attach : NewsMain
+public partial class attach : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

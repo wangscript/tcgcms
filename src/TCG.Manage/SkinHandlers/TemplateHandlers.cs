@@ -27,7 +27,7 @@ using TCG.Utils;
 
 namespace TCG.Handlers
 {
-    public class TemplateHandlers : ObjectHandlersBase
+    public class TemplateHandlers : ManageObjectHandlersBase
     {
 
         public DataTable GetAllTemplates()
@@ -233,7 +233,7 @@ namespace TCG.Handlers
                     template.Content = Regex.Replace(template.Content, "<![CDATA[(.+?)]]>", "$1", RegexOptions.Multiline);
 
                     template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
-                    template.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
+                    template.TemplateType = this.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
                     template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
                     template.iSystemType = objectHandlers.ToInt(element.SelectSingleNode("iSystemType").InnerText.ToString());
                     template.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());

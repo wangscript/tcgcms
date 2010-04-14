@@ -17,7 +17,7 @@ using TCG.Handlers;
 using TCG.Pages;
 
 
-public partial class Manage_Common_AllFileCategories : ScriptsMain
+public partial class Manage_Common_AllFileCategories : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

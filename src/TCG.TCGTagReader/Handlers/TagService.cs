@@ -18,10 +18,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
-using TCG.Data;
 
+using TCG.Handlers;
 using TCG.Entity;
 using TCG.Utils;
+
 namespace TCG.Handlers
 {
     public class TagService : TCGTagBase

@@ -244,7 +244,7 @@ namespace TCG.Handlers
                     Template template = new Template();
                     template.Id = row["Id"].ToString();
                     template.SkinId = row["SkinId"].ToString();
-                    template.TemplateType = objectHandlers.GetTemplateType((int)row["TemplateType"]);
+                    template.TemplateType = this.handlerService.skinService.templateHandlers.GetTemplateType((int)row["TemplateType"]);
                     template.iParentId = row["iParentId"].ToString();
                     template.iSystemType = (int)row["iSystemType"];
                     template.vcTempName = (string)row["vcTempName"];

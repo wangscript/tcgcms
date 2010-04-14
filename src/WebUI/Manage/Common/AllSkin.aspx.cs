@@ -10,7 +10,7 @@ using TCG.Handlers;
 using TCG.Pages;
 using TCG.Entity;
 
-public partial class Manage_Common_AllSkin : ScriptsMain
+public partial class Manage_Common_AllSkin : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {

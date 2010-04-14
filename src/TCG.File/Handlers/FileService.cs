@@ -11,7 +11,7 @@ namespace TCG.Handlers
     /// <summary>
     /// 文件处理服务
     /// </summary>
-    public class FileService : ObjectHandlersBase
+    public class FileService : FileObjectHandlersBase
     {
 
         public FileService()
@@ -30,7 +30,6 @@ namespace TCG.Handlers
                     this._fileclasshandlers = new FileCategoriesHandlers();
                     this._fileclasshandlers.configService = base.configService;
                     this._fileclasshandlers.conn = base.conn;
-                    this._fileclasshandlers.handlerService = base.handlerService;
                 }
                 return this._fileclasshandlers;
             }
@@ -51,7 +50,6 @@ namespace TCG.Handlers
                     this._fileInfohandlers.fileClassHandlers = this.fileClassHandlers;
                     this._fileInfohandlers.configService = base.configService;
                     this._fileInfohandlers.conn = base.conn;
-                    this._fileInfohandlers.handlerService = base.handlerService;
                 }
                 return this._fileInfohandlers;
             }

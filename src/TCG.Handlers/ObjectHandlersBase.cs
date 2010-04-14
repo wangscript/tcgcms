@@ -62,22 +62,6 @@ namespace TCG.Handlers
         private ConfigService _configservice = null;
 
         /// <summary>
-        /// 提供系统操作方法的服务
-        /// </summary>
-        public HandlerService handlerService
-        {
-            set
-            {
-                this._handlerservice = value;
-            }
-            get
-            {
-                return this._handlerservice;
-            }
-        }
-        private HandlerService _handlerservice = null;
-
-        /// <summary>
         /// 从记录集中返回实体
         /// </summary>
         /// <param name="dt"></param>

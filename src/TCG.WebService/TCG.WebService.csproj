@@ -58,13 +58,17 @@
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.File\TCG.File.csproj">
+      <Project>{CCEE6ADF-ACAF-480C-9193-304EC5016CD6}</Project>
+      <Name>TCG.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
       <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
       <Name>TCG.Handlers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.Page\TCG.Pages.csproj">
-      <Project>{812DDE97-3E93-42A3-B5E9-81997139F718}</Project>
-      <Name>TCG.Pages</Name>
+    <ProjectReference Include="..\TCG.Manage\TCG.Manage.csproj">
+      <Project>{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}</Project>
+      <Name>TCG.Manage</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>

@@ -40,15 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\FileHandlers\FileResourcesHandlerBase.cs" />
-    <Compile Include="Handlers\manageHandlers\AdminHandlers.cs" />
-    <Compile Include="Handlers\manageHandlers\AdminLoginHandlers.cs" />
-    <Compile Include="Handlers\FileHandlers\FileService.cs" />
-    <Compile Include="Handlers\ResourceHandlers\ResourcsService.cs" />
-    <Compile Include="Handlers\FileHandlers\FileCategoriesHandlers.cs" />
-    <Compile Include="Handlers\FileHandlers\FileResourcesHandlers.cs" />
-    <Compile Include="Handlers\manageHandlers\ManageService.cs" />
-    <Compile Include="Handlers\ResourceHandlers\ResourcesHandlers.cs" />
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

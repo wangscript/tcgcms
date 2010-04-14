@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using TCG.Utils;
+
 
 namespace TCG.Data
 {
@@ -87,11 +87,11 @@ namespace TCG.Data
             if(reValues!=null)
             {
                 //总记录数
-                counts = objectHandlers.ToInt(reValues[2]);
+                counts = (int)Convert.ChangeType(reValues[1], typeof(int));
                 //总页数
-                pageCount = objectHandlers.ToInt(reValues[1]);
+                pageCount = (int)Convert.ChangeType(reValues[2], typeof(int));
                 //当前页数
-                curPage = objectHandlers.ToInt(reValues[0]);
+                curPage = (int)Convert.ChangeType(reValues[0], typeof(int));
 
                 return (int)Convert.ChangeType(reValues[3], typeof(int));
             }
