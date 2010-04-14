@@ -44,7 +44,7 @@ public partial class Template_templateadd : adminMain
         {
             Template item = new Template();
             item.vcTempName = objectHandlers.Post("vcTempName");
-            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(objectHandlers.Post("tType")));
+            item.TemplateType = base.handlerService.skinService.templateHandlers.GetTemplateType(objectHandlers.ToInt(objectHandlers.Post("tType")));
             item.iParentId = objectHandlers.Post("iParentid");
             item.iSystemType = objectHandlers.ToInt(objectHandlers.Post("SytemType"));
             item.vcUrl = objectHandlers.Post("vcUrl");

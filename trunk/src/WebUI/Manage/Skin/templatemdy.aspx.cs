@@ -61,7 +61,7 @@ public partial class Template_templatemdy : adminMain
             Template item = new Template();
             item.vcTempName = objectHandlers.Post("vcTempName");
 
-            item.TemplateType = objectHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
+            item.TemplateType = base.handlerService.skinService.templateHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
             item.SkinId = objectHandlers.Post("iSiteId");

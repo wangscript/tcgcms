@@ -14,7 +14,6 @@
 
 namespace TCG.Data
 {
-    using TCG.Utils;
     using TCG.Entity;
     using System;
     using System.Configuration;
@@ -91,7 +90,6 @@ namespace TCG.Data
                 {
                     throw exception1;
                 }
-                new Terminator().Throw("没有足够的权限对Access数据库进行操作。<br /><br />请设置论坛中的 files 目录的文件系统权限（文件夹属性中的安全选项卡），添加.NET用户（默认地，Win2K为ASPNET用户，Win2003为IIS_WPG用户组），并且授予完全控制权限。");
                 return 0;
             }
         }
@@ -330,7 +328,7 @@ namespace TCG.Data
                 }
                 catch (Exception exception1)
                 {
-                    new Terminator().Throw("数据库连接失败: " + exception1.Message);
+                   
                 }
                 if (this._trace)
                 {

@@ -25,7 +25,7 @@ using TCG.Utils;
 
 namespace TCG.Handlers
 {
-    public class ResourcsService : ObjectHandlersBase
+    public class ResourcsService : ManageObjectHandlersBase
     {
         /// <summary>
         /// 构造函数

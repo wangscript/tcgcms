@@ -30,55 +30,6 @@ namespace TCG.Handlers
     /// </summary>
     public class FileObjectHandlersBase : ObjectHandlersBase
     {
-        /// <summary>
-        /// 设置数据库链接
-        /// </summary>
-        public Connection conn
-        {
-            set
-            {
-                this._conn = value;
-            }
-            get
-            {
-                return this._conn;
-            }
-        }
-
-        private Connection _conn = null;
-        /// <summary>
-        /// 获得配置信息支持
-        /// </summary>
-        public ConfigService configService
-        {
-            set
-            {
-                this._configservice = value;
-            }
-            get
-            {
-                return this._configservice;
-            }
-        }
-        private ConfigService _configservice = null;
-
-        /// <summary>
-        /// 提供系统操作方法的服务
-        /// </summary>
-        public HandlerService handlerService
-        {
-            set
-            {
-                this._handlerservice = value;
-            }
-            get
-            {
-                return this._handlerservice;
-            }
-        }
-        private HandlerService _handlerservice = null;
-
-        
 
         /// <summary>
         /// 得到实体的JSON对象

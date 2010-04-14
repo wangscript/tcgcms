@@ -29,7 +29,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class FileResourcesHandlerBase : ObjectHandlersBase
+    public class FileResourcesHandlerBase : FileObjectHandlersBase
     {
         /// <summary>
         /// 设置数据库链接

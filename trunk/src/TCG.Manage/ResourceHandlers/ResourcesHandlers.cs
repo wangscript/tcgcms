@@ -31,7 +31,7 @@ using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class ResourcesHandlers : ObjectHandlersBase
+    public class ResourcesHandlers : ManageObjectHandlersBase
     {
         /// <summary>
         /// Ìí¼Ó×ÊÑ¶
