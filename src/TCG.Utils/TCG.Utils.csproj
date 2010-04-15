@@ -57,6 +57,7 @@
     <Compile Include="Origin.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="OriginHttpHandler.cs" />
     <Compile Include="socket.cs" />
     <Compile Include="CachingService.cs" />
     <Compile Include="CodeImage.cs">
