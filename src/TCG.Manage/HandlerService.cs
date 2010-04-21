@@ -84,6 +84,7 @@ namespace TCG.Handlers
                     this._resourcsservice = new ResourcsService();
                     this._resourcsservice.configService = base.configService;
                     this._resourcsservice.conn = base.conn;
+                    this._resourcsservice.handlerService = this;
                 }
                 return this._resourcsservice;
             }

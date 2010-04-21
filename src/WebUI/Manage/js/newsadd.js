@@ -156,7 +156,6 @@ $(document).ready(function() {
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
 
     Menu.init("gamelist");
-
     $("#SelectDivW").bind('click', function(e) {
         if ($("#gamelist_c").css('display') == 'block') {
             $("#gamelist_c").hide();
