@@ -34,11 +34,11 @@
 .CreateClassDivClose{ text-align:right; position:relative; top:-17px; left:-3px;}
 .CBackg{ z-index:99; position:absolute; top:0px; left:0px; background-color:#CCCCCC; filter:Alpha(Opacity=30);-moz-opacity:0.3}
 
-.selectDiv{position:relative; width:18px; height:19px; float:left; left:-21px; top:1px; background-position:1px 1px; background-color:#FFFFFF;}
-.sl_bg1{background-image:url(../images/icon/sl_one.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
-.sl_bg2{background-image:url(../images/icon/sl_sc.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
-
 .cagegoriesSelect{ position:absolute;}
 .cagegoriesSelect input{ float:left;}
 
-.cagegoriesSelect .addselect{ display:none; position:relative; float:left; left:-203px; top:21px; background-color:#ffffff; border-top-color:#ffffff; width:182px;}
+.selectDiv{position:relative; width:18px; height:19px; float:left; left:-21px;_left:163px; top:1px;_top:-20px; background-position:1px 1px; background-color:#FFFFFF;}
+.sl_bg1{background-image:url(../images/icon/sl_one.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
+.sl_bg2{background-image:url(../images/icon/sl_sc.gif); border-left:#91a3b3 solid 1px; background-repeat:no-repeat;}
+
+.cagegoriesSelect .addselect{ display:none;_display:block; position:relative; float:left; left:-203px;_left:0px; top:21px;_top:-19px; background-color:#ffffff; border-top-color:#ffffff; width:182px;}

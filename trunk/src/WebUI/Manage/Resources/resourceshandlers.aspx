@@ -70,8 +70,7 @@
 		
 		    <div id="gamelist_c" class="enmu addselect">
                 <div  class="c_box" id="gamelist">
-		            <ul id="Cagetorie_c" class="one">	
-			        </ul>
+		            <ul id="Cagetorie_c" class="one"></ul>
                 </div>
             </div>
 		</div>
