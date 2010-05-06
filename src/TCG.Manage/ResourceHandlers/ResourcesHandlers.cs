@@ -312,7 +312,7 @@ namespace TCG.Handlers
                         if (cates[i].Trim().Length == 36)
                         {
                             string text3 = text1.Length == 0 ? "" : ",";
-                            text1 += text3 + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(cates[i]);
+                            text1 += text3 + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(cates[i].Replace("'",""));
                         }
                     }
 
@@ -323,7 +323,7 @@ namespace TCG.Handlers
                 }
                 else
                 {
-                    sqlsb.Append(" AND iClassID in (" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categories) + ") ");
+                    sqlsb.Append(" AND iClassID in (" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categories.Replace("'", "")) + ") ");
                 }
             }
 
