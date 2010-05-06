@@ -371,6 +371,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" 
                 + (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"])+ "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
