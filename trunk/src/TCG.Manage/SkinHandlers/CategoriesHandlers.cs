@@ -222,6 +222,13 @@ namespace TCG.Handlers
         {
             base.SetDataBaseConnection();
             cif.Id = Guid.NewGuid().ToString();
+            return CreateCategoriesForXml(cif);
+        }
+
+
+        public int CreateCategoriesForXml(Categories cif)
+        {
+            base.SetDataBaseConnection();
             SqlParameter sp2 = new SqlParameter("@vcClassName", SqlDbType.VarChar, 200); sp2.Value = cif.vcClassName;
             SqlParameter sp3 = new SqlParameter("@vcName", SqlDbType.VarChar, 50); sp3.Value = cif.vcName;
             SqlParameter sp4 = new SqlParameter("@Parent", SqlDbType.VarChar, 36); sp4.Value = cif.Parent;
@@ -338,10 +345,11 @@ namespace TCG.Handlers
                     categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
                     categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
                     categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
+                    categories.SkinId = skininfo.Id;
                     Categories t_categories = this.GetCategoriesById(categories.Id);
                     if (t_categories == null)
                     {
-                        this.CreateCategories(categories);
+                        this.CreateCategoriesForXml(categories);
                     }
                     else
                     {

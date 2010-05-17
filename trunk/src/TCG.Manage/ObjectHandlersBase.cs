@@ -126,8 +126,8 @@ namespace TCG.Handlers
         /// <returns></returns>
         public string GetJsEntity(EntityBase entity, Type type)
         {
-            if (entity == null) return null;
-            if(type==null)return null;
+            if (entity == null) return "{}";
+            if (type == null) return "{}";
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             switch (type.ToString())
@@ -139,7 +139,7 @@ namespace TCG.Handlers
                     sb.Append("iOrder:" + categories.iOrder.ToString() + ",");
                     sb.Append("ParentId:\"" + categories.Parent + "\",");
                     sb.Append("ResourceTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceTemplate, typeof(Template)) + ",");
-                    sb.Append("Directory:\"" + categories.vcDirectory + "\","); 
+                    sb.Append("Directory:\"" + categories.vcDirectory + "\",");
                     sb.Append("Url:\"" + categories.vcUrl + "\",");
                     sb.Append("UpdateDate:\"" + categories.dUpdateDate.ToString() + "\",");
                     sb.Append("Visible:\"" + categories.cVisible + "\",");
