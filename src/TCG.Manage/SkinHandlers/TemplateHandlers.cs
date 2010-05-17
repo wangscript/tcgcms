@@ -131,6 +131,20 @@ namespace TCG.Handlers
         {
             base.SetDataBaseConnection();
             item.Id = Guid.NewGuid().ToString();
+
+            return this.AddTemplateForXml(item, admin);
+        }
+
+        /// <summary>
+        /// Ìí¼ÓÄ£°å
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        public int AddTemplateForXml(Template item, Admin admin)
+        {
+            base.SetDataBaseConnection();
+
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
@@ -244,7 +258,7 @@ namespace TCG.Handlers
                     Template t_template = this.GetTemplateByID(template.Id);
                     if (t_template == null)
                     {
-                        this.AddTemplate(template, admin);
+                        this.AddTemplateForXml(template, admin);
                     }
                     else
                     {

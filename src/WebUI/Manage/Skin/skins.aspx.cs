@@ -117,6 +117,8 @@ public partial class Skin_skins : adminMain
         int rtn = 0;
         try
         {
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
             rtn = base.handlerService.skinService.templateHandlers.UpdateTemplateFromXML(SkinId, base.adminInfo);
             rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategoriesFromXML(SkinId);
         }
