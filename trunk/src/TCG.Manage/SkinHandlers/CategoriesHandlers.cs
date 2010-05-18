@@ -389,24 +389,27 @@ namespace TCG.Handlers
                 foreach (KeyValuePair<string, EntityBase> entity in categories)
                 {
                     Categories temp = (Categories)entity.Value;
-                    if (temp.SkinId == skinid)
+                    if (temp.ResourceTemplate != null)
                     {
-                        sbcategories.Append("<Categorie>\r\n");
-                        sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
-                        sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
-                        sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
-                        sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
-                        sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
-                        sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
-                        sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
-                        sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
-                        sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
-                        sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
-                        sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
-                        sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
-                        sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
-                        sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
-                        sbcategories.Append("</Categorie>\r\n");
+                        if (temp.SkinId == skinid)
+                        {
+                            sbcategories.Append("<Categorie>\r\n");
+                            sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
+                            sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
+                            sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
+                            sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
+                            sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
+                            sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
+                            sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                            sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
+                            sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
+                            sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
+                            sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
+                            sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
+                            sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
+                            sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                            sbcategories.Append("</Categorie>\r\n");
+                        }
                     }
                 }
             }
