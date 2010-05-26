@@ -353,6 +353,7 @@ namespace TCG.Handlers
 
             string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
             temp = temp.Replace("$" + this._tagtype + "_vcFilePath$", "<TCG>" + url + "</TCG>");
+            if (!(url.IndexOf("http") > -1)) url = base.configService.baseConfig["WebSite"] + url;
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
@@ -369,8 +370,10 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_Id$", "<TCG>" + categorie.Id + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" 
-                + (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"])+ "</TCG>");
+
+            string url = (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"]);
+            if (!(url.IndexOf("http") > -1)) url = base.configService.baseConfig["WebSite"] + url;
+            temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
