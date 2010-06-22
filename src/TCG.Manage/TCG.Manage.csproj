@@ -10,12 +10,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TCG.Manage</RootNamespace>
     <AssemblyName>TCG.Manage</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,20 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Admin\Admin.cs" />
-    <Compile Include="Entity\Admin\AdminRole.cs" />
-    <Compile Include="Entity\Admin\Popedom.cs" />
-    <Compile Include="Entity\Admin\PopedomKey.cs" />
-    <Compile Include="Entity\ConfigItem.cs" />
-    <Compile Include="Entity\Resources\Resources.cs" />
-    <Compile Include="Entity\Sheif\SheifSourceInfo.cs" />
-    <Compile Include="Entity\Skin\Categories.cs" />
-    <Compile Include="Entity\Skin\Skin.cs" />
-    <Compile Include="Entity\Skin\Speciality.cs" />
-    <Compile Include="Entity\Skin\Template.cs" />
-    <Compile Include="Entity\Skin\TemplateType.cs" />
-    <Compile Include="Entity\TCGTagPagerInfo.cs" />
-    <Compile Include="Entity\Version\VersionItem.cs" />
     <Compile Include="HandlerService.cs" />
     <Compile Include="manageHandlers\adminHandlers.cs" />
     <Compile Include="manageHandlers\AdminLoginHandlers.cs" />
