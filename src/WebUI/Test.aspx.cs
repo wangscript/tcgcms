@@ -19,11 +19,11 @@ using TCG.Data;
 using System.Reflection;
 using System.ComponentModel;
 
-public partial class Test : adminMain
+public partial class Test : Origin
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Response.Write(Guid.NewGuid().ToString());
+        //Response.Write(Guid.NewGuid().ToString());
         //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
         //Response.Write(Guid.NewGuid().ToString());
     }
