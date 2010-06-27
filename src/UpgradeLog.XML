@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="TCG_System">
+</Property><Property Name="Solution File" Value="D:\work\TCG CMS\src\TCG_System.sln">
+</Property><Property Name="Date" Value="2010年5月29日">
+</Property><Property Name="Time" Value="21:03">
+</Property></Properties><Event ErrorLevel="1" Project="TCG.Controls" Source="TCG.Controls\TCG.Controls.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.Controls" Source="TCG.Controls\TCG.Controls.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Controls" Source="TCG.Controls\TCG.Controls.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.Data" Source="TCG.Data\TCG.Data.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.Data" Source="TCG.Data\TCG.Data.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Data" Source="TCG.Data\TCG.Data.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.Utils" Source="TCG.Utils\TCG.Utils.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.Utils" Source="TCG.Utils\TCG.Utils.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Utils" Source="TCG.Utils\TCG.Utils.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.Entity" Source="TCG.Entity\TCG.Entity.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.Entity" Source="TCG.Entity\TCG.Entity.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Entity" Source="TCG.Entity\TCG.Entity.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.WebService" Source="TCG.WebService\TCG.WebService.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.WebService" Source="TCG.WebService\TCG.WebService.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.WebService" Source="TCG.WebService\TCG.WebService.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.Handlers" Source="TCG.Handlers\TCG.Handlers.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.Handlers" Source="TCG.Handlers\TCG.Handlers.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Handlers" Source="TCG.Handlers\TCG.Handlers.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="TCG.File" Source="TCG.File\TCG.File.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="TCG.File" Source="TCG.File\TCG.File.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.File" Source="TCG.File\TCG.File.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TCG.Manage" Source="TCG.Manage\TCG.Manage.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TCG.Manage" Source="TCG.Manage\TCG.Manage.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="TCG_System.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="TCG_System.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TCG.Controls" Source="TCG.Controls\TCG.Controls.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.Data" Source="TCG.Data\TCG.Data.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.Utils" Source="TCG.Utils\TCG.Utils.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.Entity" Source="TCG.Entity\TCG.Entity.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.WebService" Source="TCG.WebService\TCG.WebService.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.Handlers" Source="TCG.Handlers\TCG.Handlers.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.File" Source="TCG.File\TCG.File.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TCG.Manage" Source="TCG.Manage\TCG.Manage.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

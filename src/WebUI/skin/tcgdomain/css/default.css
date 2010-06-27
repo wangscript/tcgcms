@@ -1,3 +1,9 @@
+* 
+{
+    padding:0px;
+    margin:0px;
+}
+
 body
 {
 	background-color:#6d706d;
@@ -89,13 +95,43 @@ a {
 .enmu .small ul li{ float:left;height:30px; line-height:30px;width:80px;}
 .enmu .small ul li a{color:Black;}
 
+.mainput{width:926px;height:207px;margin-left:auto;margin-right:auto; background-color:#1a1a1a;}
 
-.mainput{width:926px;height:212px;margin-left:auto;margin-right:auto; background-color:#1a1a1a;}
-
-.mainput .imgput{clear:both; width:364px; height:198px; overflow:hidden; float:left; position:relative;border:#e4d206 solid 1px; margin-top:10px;}
+.mainput .imgput{clear:both; width:364px; height:198px; overflow:hidden; float:left; position:relative;border:#e4d206 solid 1px; margin-top:5px;}
 .mainput .imgput .emu{ height:30px; position:absolute; top:175px; right:5px;}
 .mainput .imgput .emu a { width:18px; height:18px; border:#e4d206 solid 1px; background-color:#717171; float:left;text-align:center; margin-right:2px;}
 
-.mainput .fontput {  width:340px; height:198px; overflow:hidden; float:left; border:#e4d206 solid 1px; margin-left:5px;margin-top:10px;}
+.mainput .fontput {width:330px; height:188px; padding:5px; overflow:hidden; float:left; border:#e4d206 solid 1px; margin-left:5px;margin-top:5px;}
+.mainput .fontput li{ clear:both; height:18px; width:330px;}
+.mainput .fontput li .infos{ float:left;display:none;}
+.mainput .fontput li a{ float:left;}
+.mainput .fontput li img { float:left; display:none;}
+.mainput .fontput li span { float:left; display:none;}
+.mainput .fontput li .datep{ float:right; display:block;}
 
-.mainput .dowload { width:206px; height:198px; overflow:hidden; float:left; border:#e4d206 solid 1px; margin-left:5px;margin-top:10px;}
+.mainput .fontput li.on a{ float:left;}
+.mainput .fontput li.on .infos{ float:left;display:block; height:70px; width:330px; border-bottom:#bee567 dashed 1px; margin-bottom:5px;}
+.mainput .fontput li.on .infos .info_img{ float:left;}
+.mainput .fontput li.on .infos p{ float:left; height:60px; width:260px; margin-left:4px; margin-top:5px;}
+.mainput .fontput li.on .ont{ float:left; clear:right; height:20px; width:330px;color:#bee567; text-align:center; font-size:14px; font-weight:bold;}
+.mainput .fontput li.on img { float:left; display:block; width:64px; height:64px; }
+.mainput .fontput li.on span { float:left; display:block;}
+.mainput .fontput li.on .datep{ float:right; display:none;}
+
+.mainput .dowload { width:201px; height:118px; overflow:hidden; float:left; border:#e4d206 solid 1px; padding-left:5px;margin-left:5px;margin-top:5px; }
+.mainput .dowload .mtitle{color:#bee567; font-size:14px; line-height:15px; height:15px; font-weight:bold; padding-left:5px; padding-top:5px;}
+.mainput .dowload a{ }
+.mainput .dowload .stitle{color:#7e7e7e; font-size:12px;font-weight:bold;padding-left:5px;line-height:20px; height:20px; clear:both;}
+.mainput .rightad  { width:206px;position:relative; height:73px; overflow:hidden; float:left; border:#e4d206 solid 1px; margin-left:5px;margin-top:5px; background-color:#1a1a1a;}
+.mainput .rightad .content{position:absolute;left:-25px; top:-25px;}
+
+.mianmiddle{width:926px;height:247px;margin-left:auto;margin-right:auto; background-color:#1a1a1a;}
+.mlline { float:left; margin-left:4px; width:1px; height:1px;}
+.mianmiddle .tcgcmsp { float:left; margin-top:5px; width:303px;height:240px;border:#e4d206 solid 1px; }
+.title{ height:28px; line-height:28px;background-color:#c5e57d;}
+.title h1{ font-size:12px; color:#000000; padding-left:10px;}
+.mianmiddle .tcgcmsp ul{ padding:5px;}
+.mianmiddle .tcgcmsp li{ line-height:20px; height:20px;}
+.mianmiddle .tcgcmsp li .datep{ float:right;}
+
+.hfbannerad {width:926px;height:60px;margin-left:auto;margin-right:auto; background-color:#1a1a1a; padding-top:5px; overflow:hidden;}
