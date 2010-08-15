@@ -360,6 +360,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + res.dAddDate.ToString("yyyy-MM-dd") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dUpDateDate$", "<TCG>" + res.dUpDateDate.ToString("yyyy-MM-dd") + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
@@ -372,7 +373,6 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
 
             string url = (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"]);
-            if (!(url.IndexOf("http") > -1)) url = base.configService.baseConfig["WebSite"] + url;
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 
