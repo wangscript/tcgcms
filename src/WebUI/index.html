@@ -9,6 +9,10 @@
 <link rel="icon" href="favicon.gif" type="image/gif" >
 <link href="/skin/chinazex/css/style.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/interface/aspx/categories.aspx?w=getallcategories"></script>
+<script type="text/javascript" src="/interface/js/jquery.1.3.2.js"></script>
+<script type="text/javascript" src="/interface/js/jquery.form.js"></script>
+<script type="text/javascript" src="/interface/js/categories.js"></script>
+<script type="text/javascript" src="/skin/chinazex/js/common.js"></script>
 </head>
 <body>
 <div class="cztopbg">
@@ -22,19 +26,27 @@
   <h1 class="site-name">it.xzdsw.com - 电脑知识-新洲都市网</h1>
   <a class="site-logo" href="_$itSite$_" title="电脑知识-新洲都市网" rel="home"><img src="/skin/chinazex/images/logo.gif" alt="电脑知识-新洲都市网 _$itSite$_" width="165" height="60" /></a>
   </div>
-  
   <div class="ad-banner">
-			<script type="text/javascript"><!--
-			google_ad_client = "pub-0958480561228656";
-			/* 468x60, 创建于 08-11-28 */
-			google_ad_slot = "7430120729";
-			google_ad_width = 468;
-			google_ad_height = 60;
-			//-->
-			</script>
-			<script type="text/javascript"
-			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			</script>
+			<script type='text/javascript'> 
+cpro_client='taocheng2010_cpr';
+cpro_at='text_image'; 
+cpro_161=4; 
+cpro_flush=4; 
+cpro_w=468; 
+cpro_h=60; 
+cpro_template='text_default_468_60'; 
+cpro_cbd='#999999'; 
+cpro_cbg='#FFFFFF'; 
+cpro_ctitle='#000000'; 
+cpro_cdesc='#444444'; 
+cpro_curl='#008000'; 
+cpro_cflush='#e10900'; 
+cpro_uap=1;
+cpro_cad=1;
+cpro_channel=1;
+</script>
+<script language='JavaScript' type='text/javascript' src='http://cpro.baidu.com/cpro/ui/cp.js'></script>
+
   </div>
   <div class="ad-text">
 
@@ -45,14 +57,23 @@
 <div class="nav">
 <div class="navinner">
   <ul class="navlist">
-  <li><a href="/">首页</a></li>
   	
-  <li><a href="/html/web2/asp.html" id="nav_1" onmouseover="showMenu('nav_1','subnav1')">asp</a>
-    <div class="subnav disable" id="subnav1">
+  <li><a href="/index.html" onmouseover="showMenu(this,1)">首页</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+      </span></p>
+    </div>  
+  </li>
+  	
+  <li><a href="/html/web2/asp.html" onmouseover="showMenu(this,2)">asp</a>
+    <div class="subnav" onmousemove="$(this).show()">
       <p class="pointer">.</p>
       <p><span>
       
 	  <a href="/html/web2/asp/aspjc.html">ASP教程</a> 
+	  <a href="/html/chinazex/asp/aspsl.html">ASP实例</a> 
       </span></p>
     </div>  
   </li>
@@ -70,7 +91,7 @@
 <div class="clearfix wrap layout-col2ultra">
 <div class="col1">
   	<div class="box">
-        <div class="box_title"><h3>TCG CMS 源代码</h3></div>
+        <div class="box_title"><h3>开源项目</h3></div>
         <div class="box_1">
         <ul class="hot_box">
            <li><a href="http://sc.chinaz.com" target="_blank"><b>素材</b></a>   <a href="http://sc.chinaz.com/html/Pictures/Pictures.html" target="_blank">高清图片</a> <a href="http://font.chinaz.com" target="_blank">字体下载</a> <a href="http://sc.chinaz.com/html/WebTemplets/index.html" target="_blank">网页模板</a> <a href="http://sc.chinaz.com/html/Icons/index_1.html" target="_blank">图标</a> <a href="http://sc.chinaz.com/html/logos/index_1.html" target="_blank">矢量</a></li>
@@ -391,3 +412,4 @@
   
 
 <!--#include file="/common/links.shtml"-->
+--
