@@ -30,40 +30,6 @@ namespace TCG.Pages
            
         }
 
-        public TagService tagService
-        {
-            get
-            {
-                if (this._ragservice == null)
-                {
-                    this._ragservice = new TagService(this.handlerService);
-                    this._ragservice.configService = base.configService;
-                    this._ragservice.conn = base.conn;
-                }
-                return this._ragservice;
-            }
-        }
-        private TagService _ragservice = null;
-
-
-        /// <summary>
-        /// 提供系统操作方法的服务
-        /// </summary>
-        protected HandlerService handlerService
-        {
-            get
-            {
-                if (this._handlerservice == null)
-                {
-                    this._handlerservice = new HandlerService();
-                    this._handlerservice.configService = base.configService;
-                    this._handlerservice.conn = base.conn;
-                }
-                return this._handlerservice;
-            }
-        }
-        private HandlerService _handlerservice = null;
-
         protected Admin adminInfo
         {
             get

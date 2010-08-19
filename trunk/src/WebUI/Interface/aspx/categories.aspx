@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categories.aspx.cs" Inherits="Interface_aspx_categories" %>
