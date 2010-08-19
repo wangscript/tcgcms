@@ -22,9 +22,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using TCG.Entity;
+using TCG.Handlers;
 using TCG.Utils;
 using TCG.Data;
-using TCG.Entity;
 
 namespace TCG.Pages
 {
@@ -50,6 +51,41 @@ namespace TCG.Pages
             }
         }
         private ConfigService _configservice = null;
+
+
+        public TagService tagService
+        {
+            get
+            {
+                if (this._ragservice == null)
+                {
+                    this._ragservice = new TagService(this.handlerService);
+                    this._ragservice.configService = this.configService;
+                    this._ragservice.conn = this.conn;
+                }
+                return this._ragservice;
+            }
+        }
+        private TagService _ragservice = null;
+
+
+        /// <summary>
+        /// 提供系统操作方法的服务
+        /// </summary>
+        protected HandlerService handlerService
+        {
+            get
+            {
+                if (this._handlerservice == null)
+                {
+                    this._handlerservice = new HandlerService();
+                    this._handlerservice.configService = this.configService;
+                    this._handlerservice.conn = this.conn;
+                }
+                return this._handlerservice;
+            }
+        }
+        private HandlerService _handlerservice = null;
 
         /// <summary>
         /// 设置数据库链接

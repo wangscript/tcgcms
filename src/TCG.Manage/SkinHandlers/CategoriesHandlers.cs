@@ -166,6 +166,35 @@ namespace TCG.Handlers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 获得制定皮肤下所有分类
+        /// </summary>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetAllCategoriesEntitySkinId(string skinid)
+        {
+            Dictionary<string, EntityBase> categories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_DEFAULTSKIN_CATEGROIES_ENTITY + "_" + skinid);
+            if (categories == null || categories.Count==0)
+            {
+                Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+                if (allcategories == null) return null;
+
+                categories = new Dictionary<string, EntityBase>();
+                foreach (KeyValuePair<string, EntityBase> entity in allcategories)
+                {
+                    Categories tempcategories = (Categories)entity.Value;
+                    if (tempcategories.SkinId == skinid)
+                    {
+                        categories.Add(tempcategories.Id, tempcategories);
+                    }
+                }
+
+                CachingService.Set(CachingService.CACHING_DEFAULTSKIN_CATEGROIES_ENTITY + "_" + skinid, categories, null);
+            }
+            return categories.Count == 0 ? null : categories;
+           
+        }
+
         public string GetCategoriesChild(string categoriesid)
         {
             Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();

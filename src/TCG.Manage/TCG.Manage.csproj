@@ -60,6 +60,9 @@
     <Compile Include="Page\adminMain.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Page\Origin.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHandlers\ResourcesHandlers.cs" />
     <Compile Include="ResourceHandlers\ResourcsService.cs" />

@@ -154,6 +154,8 @@ namespace TCG.Utils
         /// </summary>
         public static string CACHING_FILECATEGORIES_ENTITY = "CACHING_FILECATEGORIES_ENTITY_";
 
+        public static string CACHING_DEFAULTSKIN_CATEGROIES_ENTITY = "CACHINGDEFAULTSKINCATEGROIESENTITY";
+
         /// <summary>
         /// 系统缓存集合
         /// </summary>
