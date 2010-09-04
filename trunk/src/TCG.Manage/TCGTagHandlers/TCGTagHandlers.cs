@@ -245,7 +245,7 @@ namespace TCG.Handlers
             {
                 string text1 = this._filepath.Substring(0, this._filepath.LastIndexOf("."));
                 string text2 = this._filepath.Substring(this._filepath.LastIndexOf("."), this._filepath.Length - this._filepath.LastIndexOf("."));
-                return text1 + "-c" + this._pagerinfo.Page.ToString() + text2;
+                return text1 + "_" + this._pagerinfo.Page.ToString() + text2;
             }
             else
             {
@@ -271,48 +271,130 @@ namespace TCG.Handlers
 
                 string pagetemplate = this.GetPagerNode("Page", pagerhtml);
                 string Curpagetemplate = this.GetPagerNode("Cur", pagerhtml);
+                int showcount = objectHandlers.ToInt(this.GetPagerNode("ShowCount", pagerhtml));
 
                 string pagestemplate = this.GetPagerNode("Pages", pagerhtml);
                 pagerhtml = Regex.Replace(pagerhtml, @"<Pages>(.+?)</Pages>", GetPagesUrlHtml(pageurlt, pagetemplate, Curpagetemplate,
-                    this._pagerinfo.curPage, this._pagerinfo.PageCount), RegexOptions.Singleline | RegexOptions.Multiline);
+                    this._pagerinfo.curPage, this._pagerinfo.PageCount, showcount), RegexOptions.Singleline | RegexOptions.Multiline);
+
+                string firsttemplate = this.GetPagerNode("First", pagerhtml);
+                pagerhtml = Regex.Replace(pagerhtml, @"<First>(.+?)</First>", GetFirstUrlHtml(firsttemplate), RegexOptions.Singleline | RegexOptions.Multiline);
+
+                string lasttemplate = this.GetPagerNode("Last", pagerhtml);
+                pagerhtml = Regex.Replace(pagerhtml, @"<Last>(.+?)</Last>", GetLastUrlHtml(pageurlt, lasttemplate, this._pagerinfo.PageCount), RegexOptions.Singleline | RegexOptions.Multiline);
+
+                pagerhtml = pagerhtml.Replace("$pagecount$", this._pagerinfo.PageCount.ToString());
+                pagerhtml = pagerhtml.Replace("$topiccount$", this._pagerinfo.TopicCount.ToString());
+
+                Match mh1 = Regex.Match(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", RegexOptions.Singleline | RegexOptions.Multiline);
+                if (mh1.Success)
+                {
+                    string select1 = mh1.Result("$1");
+                    string select2 = mh1.Result("$2");
+                    string select3 = mh1.Result("$3");
+
+                    string selecthtml = string.Empty;
+
+
+                    for (int i = 1; i < this._pagerinfo.PageCount; i++)
+                    {
+                        selecthtml += string.Format(select2, i == 1?this._webpath:string.Format(pageurlt, i), i, i == this._pagerinfo.curPage ? "selected" : "");
+                    }
+
+
+                    selecthtml = select1 + selecthtml + select3;
+
+                    pagerhtml = Regex.Replace(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", selecthtml, RegexOptions.Singleline | RegexOptions.Multiline);
+                }
+
+               
             }
 
             this._temphtml = Regex.Replace(this._temphtml, @"(<TcgPager>)(.+?)(</TcgPager>)", pagerhtml, RegexOptions.Singleline | RegexOptions.Multiline);
         }
 
-        private string GetPagesUrlHtml(string pageurl, string page, string cur, int curpage, int pagecount)
+
+        private string GetLastUrlHtml(string pageurlt, string lasttemplate,int pagecount)
+        {
+            return string.Format(lasttemplate, string.Format(pageurlt, pagecount));
+        }
+
+        private string GetFirstUrlHtml(string firsttemplate)
+        {
+            return string.Format(firsttemplate, this._webpath);
+        }
+
+        private string GetPagesUrlHtml(string pageurl, string page, string cur, int curpage, int pagecount, int showcount)
         {
             if (pagecount == 0) return "";
             if (pagecount == 1) return string.Format(cur, string.Format(pageurl, ""), curpage);
 
             string str = string.Empty;
-            for (int i = 1; i < pagecount + 1; i++)
+
+            if (curpage < showcount)
             {
-
-                if (i == curpage)
+                for (int i = 1; i < showcount+1; i++)
                 {
-                    if (i == 1)
+                    if (i <= pagecount)
                     {
-                        str += string.Format(cur, string.Format(pageurl, ""), i);
+                        if (i == curpage)
+                        {
+                            if (i == 1)
+                            {
+                                str += string.Format(cur, this._webpath, i);
+                            }
+                            else
+                            {
+                                str += string.Format(cur, string.Format(pageurl, i), i);
+                            }
+                        }
+                        else
+                        {
+                            if (i == 1)
+                            {
+                                str += string.Format(page, this._webpath, i);
+                            }
+                            else
+                            {
+                                str += string.Format(page, string.Format(pageurl, i), i);
+                            }
+
+                        }
                     }
-                    else
-                    {
-                        str += string.Format(cur, string.Format(pageurl, i), i);
-                    }
+
                 }
-                else
+            }
+            else
+            {
+                for (int i = curpage - showcount / 2; i <=(curpage + showcount / 2);i++)
                 {
-                    if (i == 1)
+                    if (i <= pagecount)
                     {
-                        str += string.Format(page, string.Format(pageurl, ""), i);
-                    }
-                    else
-                    {
-                        str += string.Format(page, string.Format(pageurl, i), i);
+                        if (i == curpage)
+                        {
+                            if (i == 1)
+                            {
+                                str += string.Format(cur, this._webpath, i);
+                            }
+                            else
+                            {
+                                str += string.Format(cur, string.Format(pageurl, i), i);
+                            }
+                        }
+                        else
+                        {
+                            if (i == 1)
+                            {
+                                str += string.Format(page, this._webpath, i);
+                            }
+                            else
+                            {
+                                str += string.Format(page, string.Format(pageurl, i), i);
+                            }
+                        }
                     }
 
                 }
-
             }
 
             return str;
@@ -371,7 +453,7 @@ namespace TCG.Handlers
             if (this._webpath.IndexOf("{0}") > -1) return this._webpath;
             string text1 = this._webpath.Substring(0, this._webpath.LastIndexOf("."));
             string text2 = this._webpath.Substring(this._webpath.LastIndexOf("."), this._webpath.Length - this._webpath.LastIndexOf("."));
-            return text1 + "{0}" + text2;
+            return text1 + "_{0}" + text2;
         }
 
         /// <summary>

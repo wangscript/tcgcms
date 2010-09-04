@@ -256,7 +256,7 @@ namespace TCG.Handlers
         /// <param name="del"></param>
         /// <param name="create"></param>
         /// <returns></returns>
-        public Dictionary<string, EntityBase> GetResourcesList(int nums, string categories, string Speciality, string orders, bool check, bool del, bool create)
+        public Dictionary<string, EntityBase> GetResourcesList(int nums, string categories, string Speciality, string orders, bool check, bool del, bool create,bool havechilecategorie)
         {
             Dictionary<string, EntityBase> res = null;
             base.SetDataBaseConnection();
@@ -267,7 +267,7 @@ namespace TCG.Handlers
 
             sqlsb.Append(" * FROM Resources (NOLOCK) WHERE ");
 
-            sqlsb.Append(this.GetTagResourceCondition(categories, Speciality, check, del, create));
+            sqlsb.Append(this.GetTagResourceCondition(categories, Speciality, check, del, create, havechilecategorie));
 
             if (!string.IsNullOrEmpty(orders)) sqlsb.Append(" ORDER BY " + orders);
 
@@ -290,7 +290,7 @@ namespace TCG.Handlers
         /// <param name="del"></param>
         /// <param name="create"></param>
         /// <returns></returns>
-        public string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create)
+        public string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create, bool havechilecategorie)
         {
             StringBuilder sqlsb = new StringBuilder();
             sqlsb.Append("iID>0 ");
@@ -302,28 +302,35 @@ namespace TCG.Handlers
 
             if (!string.IsNullOrEmpty(categories))
             {
-                if (categories.IndexOf(',') > -1)
+                if (havechilecategorie)
                 {
-                    string[] cates = categories.Split(',');
-
-                    string text1 = string.Empty;
-                    for (int i = 0; i < cates.Length; i++)
+                    if (categories.IndexOf(',') > -1)
                     {
-                        if (cates[i].Trim().Length == 36)
+                        string[] cates = categories.Split(',');
+
+                        string text1 = string.Empty;
+                        for (int i = 0; i < cates.Length; i++)
                         {
-                            string text3 = text1.Length == 0 ? "" : ",";
-                            text1 += text3 + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(cates[i].Replace("'",""));
+                            if (cates[i].Trim().Length == 36)
+                            {
+                                string text3 = text1.Length == 0 ? "" : ",";
+                                text1 += text3 + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(cates[i].Replace("'", ""));
+                            }
+                        }
+
+                        if (text1.Length >= 36)
+                        {
+                            sqlsb.Append(" AND iClassID in (" + text1 + ") ");
                         }
                     }
-
-                    if (text1.Length >= 36)
+                    else
                     {
-                        sqlsb.Append(" AND iClassID in (" +  text1 + ") ");
+                        sqlsb.Append(" AND iClassID in (" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categories.Replace("'", "")) + ") ");
                     }
                 }
                 else
                 {
-                    sqlsb.Append(" AND iClassID in (" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categories.Replace("'", "")) + ") ");
+                    sqlsb.Append(" AND iClassID =  '" + categories + "'");
                 }
             }
 

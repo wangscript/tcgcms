@@ -484,7 +484,7 @@ namespace TCG.Handlers
                 for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
                     string num = (i == 1) ? "" : i.ToString();
-                    createfilepath += "<a>生成成功:" + cif.vcUrl + "-c" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
+                    createfilepath += "<a>生成成功:" + cif.vcUrl + "_" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
                 }
             }
             else

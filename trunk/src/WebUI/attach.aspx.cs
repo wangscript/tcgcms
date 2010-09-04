@@ -29,7 +29,7 @@ public partial class attach : adminMain
                 return;
             }
 
-            string iId = objectHandlers.Get("attach");
+            string iId = objectHandlers.Get("id");
             if (string.IsNullOrEmpty(iId))
             {
                 return;
@@ -39,7 +39,7 @@ public partial class attach : adminMain
             FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
 
             string filename = item.Id + item.vcType;
-            string path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(item.vcFileName,item.iClassId);
+            string path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(filename, item.iClassId);
             string str7 = "";
             switch (item.vcType)
             {

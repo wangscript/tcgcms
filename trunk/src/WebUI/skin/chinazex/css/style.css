@@ -395,12 +395,11 @@ a:link, a:visited {
     overflow: hidden;
 }
 .ad-text {
-    float: right;
-    width: 258px;
-    height: 58px;
-    line-height: 1.6;
-    border: 1px solid #b0d7ff;
-    background: #f2f6fb; 
+    border:#B0D7FF solid 1px;
+	float:right;
+	height:58px;
+	line-height:1.6;
+	width:258px;
 }
 .ad-text li {
     width: 49.9%;
@@ -550,10 +549,9 @@ a:link, a:visited {
 ==========================================================*/
 .wrap .ad-loop {
     width: 278px;
-    height: 194px;
-    border: 1px solid #99bbdd;
+    height: 200px;
+    
     overflow: hidden;
-    margin-bottom: 10px;
 }
 .search {
     float: right;
@@ -1461,4 +1459,29 @@ h1{
 }
 .combok li a{
 	color:#333333;
+}
+.ad_index_banner{
+position:absolute;
+left:-0px;
+margin-bottom:5px;
+margin-left:0px;
+margin-right:10px;
+margin-top:0;
+overflow:hidden;
+}
+
+.ad_navtext {
+position:relative;
+border:#96BDDE 1px solid;
+clear:both;
+font-size:12px;
+height:60px;
+line-height:1.8;
+margin-bottom:10px;
+margin-left:10px;
+margin-right:10px;
+margin-top:0;
+overflow-x:hidden;
+overflow-y:hidden;
+padding-left:20px;
 }

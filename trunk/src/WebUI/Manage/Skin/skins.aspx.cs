@@ -110,6 +110,9 @@ public partial class Skin_skins : adminMain
         return;
     }
 
+    /// <summary>
+    /// 导入皮肤操作
+    /// </summary>
     private void UpdateSkin()
     {
         string SkinId = objectHandlers.Post("SkinId");
