@@ -312,9 +312,10 @@ namespace TCG.Handlers
             bool check = this.GetAttribute("check") != "Y" ? false : true;
             bool del = this.GetAttribute("del") != "Y" ? false : true;
             bool create = this.GetAttribute("create") != "Y" ? false : true;
+            bool havechilecategorie = this.GetAttribute("havechilecategorie") == "Y" ? true : false;
 
             Dictionary<string, EntityBase> res = this.handlerService.resourcsService.resourcesHandlers.GetResourcesList(
-                nums, categories, Speciality, orders, check, del, create);
+                nums, categories, Speciality, orders, check, del, create, havechilecategorie);
 
             string tempNew = string.Empty;
             if (res == null)
@@ -353,7 +354,6 @@ namespace TCG.Handlers
 
             string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
             temp = temp.Replace("$" + this._tagtype + "_vcFilePath$", "<TCG>" + url + "</TCG>");
-            if (!(url.IndexOf("http") > -1)) url = base.configService.baseConfig["WebSite"] + url;
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
@@ -396,13 +396,14 @@ namespace TCG.Handlers
             bool check = this.GetAttribute("check") != "Y" ? false : true;
             bool del = this.GetAttribute("del") != "Y" ? false : true;
             bool create = this.GetAttribute("create") != "Y" ? false : true;
+            bool havechilecategorie = this.GetAttribute("havechilecategorie") != "Y" ? false : true;
 
 
             int curPage = 0;
             int pageCount = 0;
             int count = 0;
 
-            string strCondition = base.handlerService.resourcsService.resourcesHandlers.GetTagResourceCondition(categories, Speciality, check, del, create);
+            string strCondition = base.handlerService.resourcsService.resourcesHandlers.GetTagResourceCondition(categories, Speciality, check, del, create, havechilecategorie);
             Dictionary<string, EntityBase> res = null;
             try
             {
