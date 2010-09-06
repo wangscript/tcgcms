@@ -339,9 +339,14 @@ namespace TCG.Handlers
             tcgthdl.FilePath = filepath;
             tcgthdl.configService = base.configService;
             tcgthdl.conn = base.conn;
-            tcgthdl.Replace();
-
-            text = "<a>生成成功:" + filepath + "</a>";
+            if (tcgthdl.Replace())
+            {
+                text = "<a>生成成功:'" + filepath + "'</a>";
+            }
+            else
+            {
+                text = "<a><font color='red'>生成失败:'" + filepath + "'</font></a>";
+            }
             return 1;
         }
 

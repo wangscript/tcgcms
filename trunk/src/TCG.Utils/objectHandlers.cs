@@ -1626,31 +1626,26 @@ namespace TCG.Utils
         /// <param name="filepath"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static bool SaveFile(string filepath, string text)
+        public static void SaveFile(string filepath, string text)
         {
+
             string dir = filepath.Substring(0, filepath.LastIndexOf("\\"));
-            try
+
+            if (!System.IO.Directory.Exists(dir))
             {
-                if (!System.IO.Directory.Exists(dir))
-                {
-                    System.IO.Directory.CreateDirectory(dir);
-                }
-                if (System.IO.File.Exists(filepath))
-                {
-                    System.IO.File.Delete(filepath);
-                }
-                using (System.IO.FileStream fs = System.IO.File.Create(filepath))
-                {
-                    byte[] info = System.Text.Encoding.GetEncoding("utf-8").GetBytes(text);   //·ÀÖ¹ÂÒÂë 
-                    fs.Write(info, 0, info.Length);
-                    fs.Close();
-                }
-                return true;
+                System.IO.Directory.CreateDirectory(dir);
             }
-            catch
+            if (System.IO.File.Exists(filepath))
             {
-                return false;
+                System.IO.File.Delete(filepath);
             }
+            using (System.IO.FileStream fs = System.IO.File.Create(filepath))
+            {
+                byte[] info = System.Text.Encoding.GetEncoding("utf-8").GetBytes(text);   //·ÀÖ¹ÂÒÂë 
+                fs.Write(info, 0, info.Length);
+                fs.Close();
+            }
+
         }
 
         /// <summary>

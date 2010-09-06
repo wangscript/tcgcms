@@ -194,7 +194,10 @@ namespace TCG.Handlers
                         this.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message.ToString());
+                }
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcContent$", item.vcContent);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iId$", item.Id.ToString());
 
@@ -216,9 +219,7 @@ namespace TCG.Handlers
             else
             {
 
-                item = null;
-
-                pagerinfo.Read = false;
+                throw new Exception("编号为:[" + resourceid + "]的文章找不到！");
                 return;
             }
 
@@ -288,9 +289,8 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsList(ref TCGTagPagerInfo pagerinfo)
         {
-            bool pager = false;
-            try { pager = bool.Parse(this.GetAttribute("pager"));}
-            catch { pager = false; };
+            bool pager = objectHandlers.ToBoolen(this.GetAttribute("pager"),false);
+            
             if (pager)
             {
                 this.TagForNewsListWithPager(ref pagerinfo);
@@ -412,8 +412,7 @@ namespace TCG.Handlers
             }
             catch (Exception ex)
             {
-                pagerinfo.Read = false;
-
+                throw new Exception(ex.Message.ToString());
             }
 
             pagerinfo.PageCount = pageCount;

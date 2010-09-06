@@ -149,7 +149,7 @@ public partial class Template_templatelist : adminMain
         }
         catch (Exception ex)
         {
-            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack");
+            base.AjaxErch(1, "<a><font color='red'>" + ex.Message.ToString() + "</font></a>", "CreateBack");
             base.Finish();
             return;
         }
