@@ -74,7 +74,7 @@ namespace TCG.Data
             SqlParameter sp0 = new SqlParameter("@tblName", SqlDbType.NVarChar, 50); sp0.Value = sItem.tableName;
             SqlParameter sp1 = new SqlParameter("@fldName", SqlDbType.NVarChar, 500); sp1.Value = strShowField.ToString();
             SqlParameter sp2 = new SqlParameter("@fldSort", SqlDbType.NVarChar, 200); sp2.Value = strSortField.ToString();
-            SqlParameter sp3 = new SqlParameter("@strCondition", SqlDbType.NVarChar, 1000); sp3.Value = sItem.strCondition;
+            SqlParameter sp3 = new SqlParameter("@strCondition", SqlDbType.NVarChar, 4000); sp3.Value = sItem.strCondition;
             SqlParameter sp4 = new SqlParameter("@pageSize", SqlDbType.Int, 4); sp4.Value = sItem.pageSize.ToString();
             SqlParameter sp5 = new SqlParameter("@page", SqlDbType.Int, 4); sp5.Value = sItem.page.ToString();
 
