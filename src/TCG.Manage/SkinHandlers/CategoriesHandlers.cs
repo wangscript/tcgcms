@@ -163,6 +163,7 @@ namespace TCG.Handlers
                     sb.Append(this.GetCategoriesChild(tempcategories.Id));
                 }
             }
+
             return sb.ToString();
         }
 

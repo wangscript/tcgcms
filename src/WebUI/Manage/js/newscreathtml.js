@@ -42,7 +42,10 @@ $(document).ready(function() {
     var form1 = $("#form1");
     var options;
     options = {
-        beforeSubmit: function() { return true; },
+        beforeSubmit: function () {
+            $("#page").val("1");
+            return true; 
+        },
         dataType: 'json',
         success: AjaxPostFormBack
     };
