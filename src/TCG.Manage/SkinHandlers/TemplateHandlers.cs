@@ -341,11 +341,11 @@ namespace TCG.Handlers
             tcgthdl.conn = base.conn;
             if (tcgthdl.Replace())
             {
-                text = "<a>生成成功:'" + filepath + "'</a>";
+                text = "<a>生成成功:'" + tlif.vcUrl + "'</a>";
             }
             else
             {
-                text = "<a><font color='red'>生成失败:'" + filepath + "'</font></a>";
+                text = "<a><font color='red'>生成失败:'" + tlif.vcUrl + "'</font></a>";
             }
             return 1;
         }
