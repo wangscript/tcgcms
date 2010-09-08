@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCG.File", "TCG.File\TCG.Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCG.Manage", "TCG.Manage\TCG.Manage.csproj", "{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}"
 EndProject
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "TCG.WebUI", "..\..\TCG.WebUI\TCG.WebUI.wdproj", "{C6E8332D-2893-40EE-896E-6A56E4043706}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -217,6 +219,24 @@ Global
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Win32.ActiveCfg = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|.NET.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Default|Win32.ActiveCfg = Debug|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|.NET.ActiveCfg = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C6E8332D-2893-40EE-896E-6A56E4043706}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
