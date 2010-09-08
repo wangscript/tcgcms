@@ -39,8 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCG.File", "TCG.File\TCG.Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCG.Manage", "TCG.Manage\TCG.Manage.csproj", "{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}"
 EndProject
-Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "TCG.WebUI", "..\..\TCG.WebUI\TCG.WebUI\TCG.WebUI.wdproj", "{2BE11989-EFC6-4F8A-8312-DD52392A3343}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -219,24 +217,6 @@ Global
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}.Release|Win32.ActiveCfg = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|.NET.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Default|Win32.ActiveCfg = Debug|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|.NET.ActiveCfg = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2BE11989-EFC6-4F8A-8312-DD52392A3343}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
