@@ -127,32 +127,73 @@ namespace TCG.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.IndexOf(base.configService.baseConfig["FileSite"]) == -1 && temp.IndexOf(text1) == -1)
+                if (text1.IndexOf("/attach.aspx?id=") != 0 && text1.IndexOf(base.configService.baseConfig["WebSite"]) != 0)
                 {
                     FileResources imgfile = new FileResources();
 
                     imgfile.Id = this.GetFlieName();
                     imgfile.iClassId = fileclassid;
 
-                    imgfile.vcFileName = text1.Substring(text1.LastIndexOf("/") + 1, text1.Length - text1.LastIndexOf("/") - 1);
-                    imgfile.vcType = text1.Substring(text1.LastIndexOf(".") + 1, text1.Length - text1.LastIndexOf(".") - 1);
-
-                    WebClient wc = new WebClient();
-                   
-                    imgfile.iSize = 100;
-                    string filename = imgfile.Id + Path.GetExtension(text1);
-
-                    if (filename.IndexOf("?") == -1)
+                    bool isload = false;
+                    try
                     {
+                        WebRequest myre = WebRequest.Create(text1);
+                        isload = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
 
-                        string filepatch = this.GetFilePath(filename, fileclassid);
+                    if (isload)
+                    {
+                        WebClient wc =  new WebClient();
+                        byte[] b = wc.DownloadData(text1);
+                        Stream s = new MemoryStream(b);
+
+                        System.Drawing.Image loadimage = null;
                         try
                         {
-                            objectHandlers.SaveFile(filepatch, "");
-                            if (!string.IsNullOrEmpty(url))text1 = TxtReader.GetFileWebPath(url, text1);
-                            if (this.GetUrlError(text1) == 200)
+                            loadimage = System.Drawing.Image.FromStream(s);
+                        }
+                        catch{}
+
+                        if (loadimage != null)
+                        {
+                            if (loadimage.RawFormat.Equals(ImageFormat.Jpeg))
                             {
-                                wc.DownloadFile(text1, filepatch);
+                                imgfile.vcType = ".jpg";
+                            }
+                            else if (loadimage.RawFormat.Equals(ImageFormat.Png))
+                            {
+                                imgfile.vcType = ".png";
+                            }
+                            else if (loadimage.RawFormat.Equals(ImageFormat.Tiff))
+                            {
+                                imgfile.vcType = ".tiff";
+                            }
+                            else if (loadimage.RawFormat.Equals(ImageFormat.Bmp))
+                            {
+                                imgfile.vcType = ".bmp";
+                            }
+                            else if (loadimage.RawFormat.Equals(ImageFormat.Gif))
+                            {
+                                imgfile.vcType = ".gif";
+                            }
+                            else
+                            {
+                                imgfile.vcType = ".jpg";
+                            }
+
+                            imgfile.iSize = b.Length;
+                            string filename = imgfile.Id + imgfile.vcType;
+
+                            string filepatch = this.GetFilePath(filename, fileclassid);
+                            try
+                            {
+                                objectHandlers.SaveFile(filepatch, "");
+
+                                loadimage.Save(filepatch);
                                 int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
                                 if (rtn < 0)
                                 {
@@ -160,18 +201,17 @@ namespace TCG.Handlers
                                 }
                                 else
                                 {
-                                    content = "/attach.aspx?attach=" + imgfile.Id;
-                                    temp = text1 + "@@@" + temp;
+                                    content = content.Replace(text1, "/attach.aspx?id=" + imgfile.Id);
                                 }
                             }
-
+                            catch
+                            {
+                            }
                         }
-                        catch
-                        {
-                        }
+                       
+                        imgfile = null;
+                        wc = null;
                     }
-                    imgfile = null;
-                    wc = null;
                 }
             }
             return content;
@@ -277,7 +317,7 @@ namespace TCG.Handlers
                 }
                 else
                 {
-                    imagepath = "/attach.aspx?attach=" + imgfile.Id;
+                    imagepath = "/attach.aspx?id=" + imgfile.Id;
                 }
 
                 return 1;
