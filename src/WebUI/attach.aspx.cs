@@ -23,59 +23,61 @@ public partial class attach : adminMain
     {
         if (!Page.IsPostBack)
         {
-            
-            if (objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain)
-            {
-                return;
-            }
-
-            string iId = objectHandlers.Get("id");
-            if (string.IsNullOrEmpty(iId))
-            {
-                return;
-            }
-
-            
-            FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById( iId);
-
-            string filename = item.Id + item.vcType;
-            string path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(filename, item.iClassId);
+            string filename = "";
+            string path = string.Empty;
             string str7 = "";
-            switch (item.vcType)
+
+            if (!(objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain))
             {
-                case ".gif":
-                    str7 = "image/gif";
-                    break;
+                string iId = objectHandlers.Get("id");
+                if (!string.IsNullOrEmpty(iId))
+                {
+                    FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById(iId);
 
-                case ".png":
-                    str7 = "image/png";
-                    break;
+                    if (item != null)
+                    {
+                        filename = item.Id + item.vcType;
+                        path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(filename, item.iClassId);
 
-                case ".bmp":
-                    str7 = "image/bmp";
-                    break;
+                        switch (item.vcType)
+                        {
+                            case ".gif":
+                                str7 = "image/gif";
+                                break;
 
-                case ".jpg":
-                    str7 = "image/jpeg";
-                    break;
-                case ".jpe":
-                    str7 = "image/jpeg";
-                    break;
-                case ".jpeg":
-                    str7 = "image/jpeg";
-                    break;
+                            case ".png":
+                                str7 = "image/png";
+                                break;
 
-                case ".swf":
-                    str7 = "application/x-shockwave-flash";
-                    break;
+                            case ".bmp":
+                                str7 = "image/bmp";
+                                break;
 
-                default:
-                    str7 = "APPLICATION/OCTET-STREAM";
-                    break;
+                            case ".jpg":
+                                str7 = "image/jpeg";
+                                break;
+                            case ".jpe":
+                                str7 = "image/jpeg";
+                                break;
+                            case ".jpeg":
+                                str7 = "image/jpeg";
+                                break;
+
+                            case ".swf":
+                                str7 = "application/x-shockwave-flash";
+                                break;
+
+                            default:
+                                str7 = "APPLICATION/OCTET-STREAM";
+                                break;
+                        }
+                    }
+                }
             }
+
             base.Finish();
             base.Response.ContentType = str7;
-            if ((item.vcType != "swf"))
+            if ((str7 != ".swf"))
             {
                 base.Response.AddHeader("Content-Disposition", "attachment; filename=" + HttpUtility.UrlEncode(filename, Encoding.UTF8));
             }

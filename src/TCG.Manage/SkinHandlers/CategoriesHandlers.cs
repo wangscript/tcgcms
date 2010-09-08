@@ -482,10 +482,10 @@ namespace TCG.Handlers
             if (tcgthdl.PagerInfo.PageCount > 1)
             {
 
-                for (int i = 1; i <= tcgthdl.PagerInfo.PageCount; i++)
+                for (int i = 0; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
-                    string num = (i == 1) ? "" : i.ToString();
-                    createfilepath += "<a>生成成功:" + cif.vcUrl + "_" + num + base.configService.baseConfig["FileExtension"] + "...</a>";
+                    string num = (i == 0) ? "" :"_" + i.ToString();
+                    createfilepath += "<a>生成成功:" + cif.vcUrl + num + base.configService.baseConfig["FileExtension"] + "...</a>";
                 }
             }
             else

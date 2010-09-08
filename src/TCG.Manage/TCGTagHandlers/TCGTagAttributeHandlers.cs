@@ -388,7 +388,6 @@ namespace TCG.Handlers
             pagerinfo.NeedPager = true;
             this._pager = true;
 
-
             int nums = objectHandlers.ToInt(this.GetAttribute("num"));
             string categories = this.GetAttribute("categories");
             string Speciality = this.GetAttribute("speciality");
@@ -398,17 +397,18 @@ namespace TCG.Handlers
             bool create = this.GetAttribute("create") != "Y" ? false : true;
             bool havechilecategorie = this.GetAttribute("havechilecategorie") != "Y" ? false : true;
 
-
             int curPage = 0;
             int pageCount = 0;
             int count = 0;
 
             string strCondition = base.handlerService.resourcsService.resourcesHandlers.GetTagResourceCondition(categories, Speciality, check, del, create, havechilecategorie);
             Dictionary<string, EntityBase> res = null;
+
+            string order = pagerinfo.PageSep == 0 ? "iId DESC" : "iId";
             try
             {
                 res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                       pagerinfo.Page, nums, "iId DESC", strCondition);
+                       pagerinfo.Page, nums, order, strCondition);
             }
             catch (Exception ex)
             {

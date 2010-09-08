@@ -21,19 +21,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-/* 
-  * Copyright (C) 2009-2009 tcgcms.com <http://www.tcgcms.cn/> 
-  *  
-  *    本代码以公共的方式开发下载，任何个人和组织可以下载， 
-  * 修改，进行第二次开发使用，但请保留作者版权信息。 
-  *  
-  *    任何个人或组织在使用本软件过程中造成的直接或间接损失， 
-  * 需要自行承担后果与本软件开发者(三云鬼)无关。 
-  *  
-  *    本软件解决中小型商家产品网络化销售方案。 
-  *     
-  *    使用中的问题，咨询作者QQ邮箱 sanyungui@vip.qq.com 
-  */
 
 using TCG.Data;
 using TCG.Utils;
@@ -106,7 +93,7 @@ namespace TCG.Handlers
             {
                 if (!this._pagerinfo.Read) return this._pagerinfo.Read;
 
-                if (this._pagerinfo.NeedPager && this._pagerinfo.DoAllPage &&this._pagerinfo.Page > 1)
+                if (this._pagerinfo.NeedPager && this._pagerinfo.DoAllPage &&this._pagerinfo.PageSep != 0)
                 {
                     Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     if (item.Success)
@@ -144,7 +131,15 @@ namespace TCG.Handlers
                 this.Save();
                 if (this._pagerinfo.NeedPager&&this._pagerinfo.DoAllPage)
                 {
-                    this._pagerinfo.Page++;
+
+                    if (this._pagerinfo.PageSep == 0)
+                    {
+                        this._pagerinfo.PageSep = 1;
+                    }
+                    else
+                    {
+                        this._pagerinfo.Page++;
+                    }
                     if (this._pagerinfo.Page <= this._pagerinfo.PageCount && this._pagerinfo.PageCount != 0)
                     {
                         this.Replace();
@@ -249,13 +244,15 @@ namespace TCG.Handlers
 
             if (NeedCreate)
             {
-                objectHandlers.SaveFile(this.GetFilePath(), this._temphtml);
+                string text1 = this.GetFilePath();
+                this._pagerinfo.CreatePagesNotic += "<a>生成文件:" + text1 + "</a>";
+                objectHandlers.SaveFile(text1, this._temphtml);
             }
         }
 
         private string GetFilePath()
         {
-            if (this._pagerinfo.NeedPager && this._pagerinfo.Page != 1)
+            if (this._pagerinfo.NeedPager && this._pagerinfo.PageSep!=0)
             {
                 string text1 = this._filepath.Substring(0, this._filepath.LastIndexOf("."));
                 string text2 = this._filepath.Substring(this._filepath.LastIndexOf("."), this._filepath.Length - this._filepath.LastIndexOf("."));
@@ -320,8 +317,7 @@ namespace TCG.Handlers
 
                     pagerhtml = Regex.Replace(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", selecthtml, RegexOptions.Singleline | RegexOptions.Multiline);
                 }
-
-               
+  
             }
 
             this._temphtml = Regex.Replace(this._temphtml, @"(<TcgPager>)(.+?)(</TcgPager>)", pagerhtml, RegexOptions.Singleline | RegexOptions.Multiline);

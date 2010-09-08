@@ -200,7 +200,7 @@ public partial class news_createhtml : adminMain
             {
                 string iClassId = objectHandlers.Post("iClassId");
 
-                strCondition += " AND iClassID = '" + iClassId + "')";
+                strCondition += " AND iClassID = '" + iClassId + "' ";
             }
 
             string Condition = objectHandlers.Post("iCondition");

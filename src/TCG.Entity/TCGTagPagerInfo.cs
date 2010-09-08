@@ -28,6 +28,10 @@ namespace TCG.Entity
         /// </summary>
         public bool NeedPager { get { return this._needpager; } set { this._needpager = value; } }
         /// <summary>
+        /// 分页步骤
+        /// </summary>
+        public int PageSep { get { return this._pagesep; } set { this._pagesep = value; } }
+        /// <summary>
         /// 是否有检测到标签
         /// </summary>
         public bool Read { get { return this._read; } set { this._read = value; } }
@@ -59,15 +63,21 @@ namespace TCG.Entity
         /// 是否声称所有页面
         /// </summary>
         public bool DoAllPage { get { return this._doallpage; } set { this._doallpage = value; } }
+        /// <summary>
+        /// 生成文件列表
+        /// </summary>
+        public string CreatePagesNotic { get { return this._createpagesnotic; } set { this._createpagesnotic = value; } }
 
         private int _curpage = 1;
         private int _topiccount = 0;
         private int _page = 1;
         private int _pgercount = 0;
+        private int _pagesep = 0;
         private bool _needpager = false;
         private bool _read = true;
         private string _pagetitle = string.Empty;
         private string _scriptcss = string.Empty;
         private bool _doallpage = true; // 是否生成所有页面
+        private string _createpagesnotic = string.Empty;
     }
 }
