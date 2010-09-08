@@ -23,9 +23,9 @@ public partial class attach : adminMain
     {
         if (!Page.IsPostBack)
         {
-            string filename = "";
-            string path = string.Empty;
-            string str7 = "";
+            string filename = "nopic.jpg";
+            string path = Server.MapPath("~/images/nopic.jpg");
+            string str7 = ".jpg";
 
             if (!(objectHandlers.IsGetFromAnotherDomain || objectHandlers.IsPostFromAnotherDomain))
             {
