@@ -134,10 +134,63 @@ public partial class skin_categorieslist : adminMain
     {
         string tClassID = objectHandlers.Post("DelClassId");
         string text = string.Empty;
+        int page = objectHandlers.ToInt(objectHandlers.Post("iPage"));
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesListHtml(tClassID, base.tagService.TCGTagHandlers, ref text);
+
+            if (string.IsNullOrEmpty(tClassID))
+            {
+                rtn = -1000000801;
+            }
+            else
+            {
+                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
+
+                if (cif == null)
+                {
+                    rtn = -1000000802;
+                }
+                else
+                {
+                    if (cif.ResourceListTemplate == null)
+                    {
+                        rtn = - 1000000803;
+                    }
+                    else
+                    {
+                        if (cif.vcUrl.IndexOf(".") > -1)
+                        {
+                            rtn = - 1000000804;
+                        }
+                        else
+                        {
+                            string filepath = "";
+                            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
+
+                            TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
+                            tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
+                            tcgthdl.FilePath = filepath;
+                            tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
+                            tcgthdl.configService = base.configService;
+                            tcgthdl.conn = base.conn;
+                            tcgthdl.PagerInfo.DoAllPage = false;
+                            tcgthdl.PagerInfo.Page = page;
+
+                            if (tcgthdl.Replace())
+                            {
+                                rtn = 1;
+                                text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\","/");
+                            }
+                            else
+                            {
+                                rtn = -1000000805;
+                            }
+                        }
+                    }
+                   
+                }
+            }
         }
         catch (Exception ex)
         {

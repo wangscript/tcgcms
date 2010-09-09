@@ -127,6 +127,7 @@
 -1000000802@@@categorieshandlers@@@生成失败,分类信息不存在!
 -1000000803@@@categorieshandlers@@@生成失败,分类模版信息读取失败!
 -1000000804@@@categorieshandlers@@@生成失败,为跳转地址，无需生成！
+-1000000805@@@categorieshandlers@@@生成失败！
 
 -1000000806@@@templatehandlers@@@生成失败-模版ID不能为0!
 -1000000807@@@templatehandlers@@@模版不存在

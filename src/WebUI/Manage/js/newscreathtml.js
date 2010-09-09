@@ -43,7 +43,6 @@ $(document).ready(function() {
     var options;
     options = {
         beforeSubmit: function () {
-            $("#page").val("1");
             return true; 
         },
         dataType: 'json',
@@ -128,9 +127,7 @@ function CreateBack(val) {
     }
 }
 
-
 function PageInit() {
-    
     $("#page").val("1");
     if ($("#orderClass").attr("checked")) {
         var t = GetPostClassChild($("#iClassId").val());

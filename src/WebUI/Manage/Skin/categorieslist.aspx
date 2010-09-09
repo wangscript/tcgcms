@@ -68,6 +68,7 @@
 	<div class="list_bottom">
 	</div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
+    <input type="hidden" id="iPage" name="iPage" runat="server" />
 	<input type="hidden" id="DelClassId" name="DelClassId" runat="server" />
 	<input type="hidden" id="work" name="work"/>
 	<input type="hidden" id="iFeildName" name="iFeildName" runat="server" />

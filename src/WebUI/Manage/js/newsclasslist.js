@@ -124,7 +124,7 @@ function NewsClassCreateHtml() {
 
     CreateDiv.Start("批量生成分类列表");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
-    
+
     if (temps.indexOf(",") > -1) {
         var ts = temps.split(",");
         var ss = "";
@@ -138,33 +138,34 @@ function NewsClassCreateHtml() {
         if (t.indexOf(",") > -1) {
             PostClasses(t);
         } else {
-            var t_classinfo = GetCategorieById(t);
-            if (t_classinfo.Url.indexOf(".") == -1) {
-                CreateDiv.set = 1;
-                CreateDiv.setcount = 1;
-                $("#work").val("Create");
-                $("#DelClassId").val(t);
-                $("#form1").submit();
-            }
+            CreateDiv.set = 1;
+            CreateDiv.setcount = 1;
+            o[0] = t;
+            osep = 0;
+            $("#iPage").val("0");
+            DoCreatClassHtml();
         }
     }
 }
 
-function PostClasses(ids){
-	var o=ids.split(",");
-	CreateDiv.set =1;
-	CreateDiv.setcount=o.length;
-	for (var i = 0; i < o.length; i++) {
-	    var t_classinfo = GetCategorieById(o[i]);
-	    if (t_classinfo.Url.indexOf(".") == -1) {
-	        $("#work").val("Create");
-	        $("#DelClassId").val(o[i]);
-	        $("#form1").submit();
-	    } else {
-	        CreateDiv.setcount--;
-	    }
-	}
+var o = new Array();
+var osep = 0;
+function PostClasses(ids) {
+    o = ids.split(",");
+    osep = 0;
+    CreateDiv.set = 1;
+    CreateDiv.setcount = o.length;
+    $("#iPage").val("0");
+    DoCreatClassHtml();
 }
+
+function DoCreatClassHtml() {
+    debugger;
+    $("#work").val("Create");
+    $("#DelClassId").val(o[osep]);
+    $("#form1").submit();
+}
+
 
 function GetPostClassChild(id){
     var t = GetAllChildClassIdByClassId(id);
@@ -175,8 +176,13 @@ function GetPostClassChild(id){
 	}
 }
 
-function CreateBack(val){
-	CreateDiv.SetSep(val);
+function CreateBack(val) {
+    debugger;
+    CreateDiv.SetSep(val);
+    if (osep < o.length) {
+        DoCreatClassHtml();
+        osep++;
+    }
 }
 
 function MdyFeild(obj, vname) {
