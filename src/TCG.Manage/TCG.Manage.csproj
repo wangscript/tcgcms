@@ -80,22 +80,6 @@
     <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
-      <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
-      <Name>TCG.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
-      <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
-      <Name>TCG.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.File\TCG.File.csproj">
-      <Project>{CCEE6ADF-ACAF-480C-9193-304EC5016CD6}</Project>
-      <Name>TCG.File</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
-      <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
-      <Name>TCG.Handlers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
