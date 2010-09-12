@@ -57,12 +57,15 @@
     <Compile Include="ServiceMain.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SheifSourceService.cs">
+    <Compile Include="SheifService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TCGSoapHeader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
+      <Project>{322D3EF7-CA07-4138-A8BA-7DE45B1C7262}</Project>
+      <Name>TCG.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>

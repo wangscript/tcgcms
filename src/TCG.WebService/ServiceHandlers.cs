@@ -17,16 +17,17 @@ using System.Collections.Generic;
 using System.Web.Services.Protocols;
 using System.Text;
 
+using TCG.Handlers;
+
 namespace TCG.WebService
 {
-    public class ServiceHandlers
+    public class ServiceHandlers : ObjectHandlersBase
     {
 
-        public static TCGSoapHeader header;
-        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
-        public static bool CheckHeader()
+        public bool CheckHeader(TCGSoapHeader header)
         {
             if (header == null)return false;
+            if (header.PassWord != base.configService.baseConfig["WebServiceKey"]) return false;
 
             return true;
         }
