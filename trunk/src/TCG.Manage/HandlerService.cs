@@ -105,6 +105,23 @@ namespace TCG.Handlers
         }
         private ResourcsService _resourcsservice;
 
+
+        public SheifService sheifService
+        {
+            get
+            {
+                if (this._sheifservice == null)
+                {
+                    this._sheifservice = new SheifService();
+                    this._sheifservice.configService = base.configService;
+                    this._sheifservice.conn = base.conn;
+                    this._sheifservice.handlerService = this;
+                }
+                return this._sheifservice;
+            }
+        }
+        private SheifService _sheifservice;
+
    
     }
 }

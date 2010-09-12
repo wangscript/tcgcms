@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddSheifSource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="tns:SheifSourceInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SheifSourceInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SourceName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SourceUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CharSet" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ListAreaRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicListRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicListDataRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicDataRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicPagerOld" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TopicPagerTemp" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddSheifSourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddSheifSourceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllSheifSourceInfos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllSheifSourceInfosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllSheifSourceInfosResult" type="tns:ArrayOfSheifSourceInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSheifSourceInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SheifSourceInfo" nillable="true" type="tns:SheifSourceInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TCGSoapHeader" type="tns:TCGSoapHeader" />
+      <s:complexType name="TCGSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PassWord" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="SheifResources">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="res" type="tns:Resources" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Resources">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Categorie" type="tns:Categories" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcTitle" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcContent" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcAuthor" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="iCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcKeyWord" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcEditor" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cCreated" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cPostByUser" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcSmallImg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcBigImg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcShortContent" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcSpeciality" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cChecked" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cDel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcFilePath" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="dAddDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="dUpDateDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcTitleColor" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cStrong" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Categories">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Parent" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceTemplate" type="tns:Template" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceListTemplate" type="tns:Template" />
+              <s:element minOccurs="1" maxOccurs="1" name="iOrder" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="dUpdateDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcClassName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcDirectory" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cVisible" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataBaseService" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SkinId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Template">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SkinId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TemplateType" type="tns:TemplateType" />
+              <s:element minOccurs="0" maxOccurs="1" name="iParentId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="iSystemType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="dUpdateDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="dAddDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcTempName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcUrl" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="TemplateType">
+        <s:restriction base="s:string">
+          <s:enumeration value="SinglePageType" />
+          <s:enumeration value="InfoType" />
+          <s:enumeration value="ListType" />
+          <s:enumeration value="OriginalType" />
+          <s:enumeration value="SystemPage" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SheifResourcesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SheifResourcesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddSheifSourceSoapIn">
+    <wsdl:part name="parameters" element="tns:AddSheifSource" />
+  </wsdl:message>
+  <wsdl:message name="AddSheifSourceSoapOut">
+    <wsdl:part name="parameters" element="tns:AddSheifSourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllSheifSourceInfosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllSheifSourceInfos" />
+  </wsdl:message>
+  <wsdl:message name="GetAllSheifSourceInfosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllSheifSourceInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllSheifSourceInfosTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="SheifResourcesSoapIn">
+    <wsdl:part name="parameters" element="tns:SheifResources" />
+  </wsdl:message>
+  <wsdl:message name="SheifResourcesSoapOut">
+    <wsdl:part name="parameters" element="tns:SheifResourcesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SheifServiceSoap">
+    <wsdl:operation name="AddSheifSource">
+      <wsdl:input message="tns:AddSheifSourceSoapIn" />
+      <wsdl:output message="tns:AddSheifSourceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSheifSourceInfos">
+      <wsdl:input message="tns:GetAllSheifSourceInfosSoapIn" />
+      <wsdl:output message="tns:GetAllSheifSourceInfosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SheifResources">
+      <wsdl:input message="tns:SheifResourcesSoapIn" />
+      <wsdl:output message="tns:SheifResourcesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SheifServiceSoap" type="tns:SheifServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddSheifSource">
+      <soap:operation soapAction="http://tempuri.org/AddSheifSource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSheifSourceInfos">
+      <soap:operation soapAction="http://tempuri.org/GetAllSheifSourceInfos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllSheifSourceInfosTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheifResources">
+      <soap:operation soapAction="http://tempuri.org/SheifResources" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheifServiceSoap12" type="tns:SheifServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddSheifSource">
+      <soap12:operation soapAction="http://tempuri.org/AddSheifSource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSheifSourceInfos">
+      <soap12:operation soapAction="http://tempuri.org/GetAllSheifSourceInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllSheifSourceInfosTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheifResources">
+      <soap12:operation soapAction="http://tempuri.org/SheifResources" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SheifService">
+    <wsdl:port name="SheifServiceSoap" binding="tns:SheifServiceSoap">
+      <soap:address location="http://demo.tcgcms.cn/WebService/SheifService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheifServiceSoap12" binding="tns:SheifServiceSoap12">
+      <soap12:address location="http://demo.tcgcms.cn/WebService/SheifService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -40,6 +40,21 @@ namespace TCG.WebService
         }
         private TagService _ragservice = null;
 
+      
+        protected ServiceHandlers serviceHandlers
+        {
+            get
+            {
+                if (this._servicehandlers == null)
+                {
+                    this._servicehandlers = new ServiceHandlers();
+                    this._servicehandlers.configService = this.configService;
+                }
+                return this._servicehandlers;
+            }
+        }
+        private ServiceHandlers _servicehandlers = null;
+
 
         /// <summary>
         /// 提供系统操作方法的服务
