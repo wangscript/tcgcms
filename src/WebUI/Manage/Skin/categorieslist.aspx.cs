@@ -133,6 +133,7 @@ public partial class skin_categorieslist : adminMain
     private void NewsClassCreate()
     {
         string tClassID = objectHandlers.Post("DelClassId");
+        string classbackstr = "CreateBack";
         string text = string.Empty;
         int page = objectHandlers.ToInt(objectHandlers.Post("iPage"));
         int rtn = 0;
@@ -176,16 +177,23 @@ public partial class skin_categorieslist : adminMain
                             tcgthdl.conn = base.conn;
                             tcgthdl.PagerInfo.DoAllPage = false;
                             tcgthdl.PagerInfo.Page = page;
+                            tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
 
                             if (tcgthdl.Replace())
                             {
                                 rtn = 1;
                                 text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\","/");
+
+                                if (tcgthdl.PagerInfo.PageCount > page)
+                                {
+                                    classbackstr = "CreateBack1";
+                                }
                             }
                             else
                             {
                                 rtn = -1000000805;
                             }
+
                         }
                     }
                    
@@ -194,12 +202,12 @@ public partial class skin_categorieslist : adminMain
         }
         catch (Exception ex)
         {
-            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack");
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", classbackstr);
             base.Finish();
             return;
         }
 
-        base.AjaxErch(rtn, text, "CreateBack");
+        base.AjaxErch(rtn, text, classbackstr);
     }
 
     private void OrderMdy()
