@@ -163,10 +163,10 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="resourceid"></param>
         /// <returns></returns>
-        public Resources GetResourcesById(string resourceid)
+        public Resources GetResourcesById(int resourceid)
         {
             base.SetDataBaseConnection();
-            DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE iID = " + resourceid.Trim() + "");
+            DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE iID = " + resourceid.ToString().Trim() + "");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
 
@@ -425,6 +425,41 @@ namespace TCG.Handlers
             }
 
             return -19000000;
+        }
+
+
+        public int CreateResourcHtmlById(ref string errText, int id, TCGTagHandlers tcgth)
+        {
+            if (id <= 0) return -1000000308;
+
+            Resources item = this.GetResourcesById(id);
+            if (item == null) return -1000000309;
+
+            if (item.vcUrl.IndexOf(".") > -1) return -1000000310;
+
+            int rtn = 0;
+            tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
+            tcgth.FilePath =  HttpContext.Current.Server.MapPath("~" + item.vcFilePath);
+            tcgth.WebPath = item.vcFilePath;
+            tcgth.configService = base.configService;
+            tcgth.conn = base.conn;
+
+            string text1 = string.Empty;
+
+            if (tcgth.Replace())
+            {
+                if (item.cChecked != "Y")
+                {
+                    item.cChecked = "Y";
+                    rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+                }
+            }
+            else
+            {
+                rtn = -1000000311;
+            }
+
+            return rtn;
         }
     }
 }

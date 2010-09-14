@@ -141,7 +141,7 @@ function NewsClassCreateHtml() {
             CreateDiv.set = 1;
             CreateDiv.setcount = 1;
             o[0] = t;
-            osep = 0;
+            osep = 1;
             $("#iPage").val("0");
             DoCreatClassHtml();
         }
@@ -149,10 +149,10 @@ function NewsClassCreateHtml() {
 }
 
 var o = new Array();
-var osep = 0;
+var osep = 1;
 function PostClasses(ids) {
     o = ids.split(",");
-    osep = 0;
+    osep = 1;
     CreateDiv.set = 1;
     CreateDiv.setcount = o.length;
     $("#iPage").val("0");
@@ -160,9 +160,8 @@ function PostClasses(ids) {
 }
 
 function DoCreatClassHtml() {
-    debugger;
     $("#work").val("Create");
-    $("#DelClassId").val(o[osep]);
+    $("#DelClassId").val(o[osep-1]);
     $("#form1").submit();
 }
 
@@ -177,12 +176,19 @@ function GetPostClassChild(id){
 }
 
 function CreateBack(val) {
-    debugger;
     CreateDiv.SetSep(val);
     if (osep < o.length) {
         DoCreatClassHtml();
         osep++;
+        $("#iPage").val("0");
     }
+}
+
+function CreateBack1(val) {
+    CreateDiv.setcount = CreateDiv.setcount + 1;
+    CreateDiv.SetSep(val);
+    $("#iPage").val(parseInt($("#iPage").val()) + 1);
+    DoCreatClassHtml();
 }
 
 function MdyFeild(obj, vname) {

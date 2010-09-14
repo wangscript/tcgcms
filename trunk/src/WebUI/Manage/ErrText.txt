@@ -132,8 +132,12 @@
 -1000000806@@@templatehandlers@@@生成失败-模版ID不能为0!
 -1000000807@@@templatehandlers@@@模版不存在
 
-
 -1000000307@@@webservice@@@soaoheader验证失败
+
+-1000000308@@@CreateResourcHtmlById@@@需要生成的文章ID <=0
+-1000000309@@@CreateResourcHtmlById@@@需要生成的文章在数据库中未找到
+-1000000310@@@CreateResourcHtmlById@@@需要生成的文章为跳转连接，无须生成
+-1000000311@@@CreateResourcHtmlById@@@模板分析失败
 
 
 
