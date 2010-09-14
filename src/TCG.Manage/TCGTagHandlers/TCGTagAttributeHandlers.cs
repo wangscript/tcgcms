@@ -163,6 +163,7 @@ namespace TCG.Handlers
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
             int resourceid = objectHandlers.ToInt(this.GetAttribute("id"));
+            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"),false);
             if (resourceid==0)
             {
                 pagerinfo.Read = false;
@@ -172,7 +173,7 @@ namespace TCG.Handlers
             Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)
             {
-                pagerinfo.PageTitle = item.vcTitle;
+                if (isintitle) pagerinfo.PageTitle += string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - " + item.vcTitle;
 
                 if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
                     + item.vcTitle + "</font>";
@@ -250,7 +251,8 @@ namespace TCG.Handlers
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
                     this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Id, " > "));
 
-            pagerinfo.PageTitle = item.vcClassName;
+            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
+            if (isintitle) pagerinfo.PageTitle += string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - " + item.vcClassName;
 
             item = null;
 

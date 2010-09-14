@@ -29,7 +29,7 @@
         // Code that runs when a new session is started
 
     }
-
+    
     void Session_End(object sender, EventArgs e) 
     {
         // Code that runs when a session ends. 
