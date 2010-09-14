@@ -40,9 +40,7 @@ public partial class Interface_aspx_categories : Origin
 
     private void GetAllCategories()
     {
-        Response.ContentType = "application/x-javascript";
         string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId), typeof(Categories));
-        Response.Write(cg);
-        Response.End();
+        objectHandlers.SaveFile(Server.MapPath("~/interface/js/categories.js"), cg);
     }
 }
