@@ -173,7 +173,7 @@ namespace TCG.Handlers
             Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)
             {
-                if (isintitle) pagerinfo.PageTitle += string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - " + item.vcTitle;
+                if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - ") + item.vcTitle;
 
                 if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
                     + item.vcTitle + "</font>";
@@ -252,7 +252,7 @@ namespace TCG.Handlers
                     this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Id, " > "));
 
             bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
-            if (isintitle) pagerinfo.PageTitle += string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - " + item.vcClassName;
+            if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - ") + item.vcClassName;
 
             item = null;
 
