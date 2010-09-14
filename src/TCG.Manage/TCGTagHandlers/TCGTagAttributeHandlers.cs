@@ -162,14 +162,12 @@ namespace TCG.Handlers
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
-            string resourceid = this.GetAttribute("id");
-            if (string.IsNullOrEmpty(resourceid))
+            int resourceid = objectHandlers.ToInt(this.GetAttribute("id"));
+            if (resourceid==0)
             {
                 pagerinfo.Read = false;
                 return;
             }
-
-
 
             Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)

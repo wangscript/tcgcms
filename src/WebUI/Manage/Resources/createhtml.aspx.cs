@@ -94,7 +94,7 @@ public partial class news_createhtml : adminMain
     private void Create()
     {
         string ClassId = objectHandlers.Post("tClassId");
-        string id = objectHandlers.Post("iId");
+        int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
         string filepath = objectHandlers.Post("iFilePath");
         string Created = objectHandlers.Post("tCreated");
 

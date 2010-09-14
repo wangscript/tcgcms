@@ -33,11 +33,11 @@ public partial class resources_resourceshandlers : adminMain
             //检测管理员登录
             base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
-            string newsid = objectHandlers.Get("newsid");
+            int newsid = objectHandlers.ToInt(objectHandlers.Get("newsid"));
             string categorieid = objectHandlers.Get("iClassId");
             this.iSkinId.Value = base.configService.DefaultSkinId;
 
-            if (string.IsNullOrEmpty(newsid))
+            if (newsid==0)
             {
                 this.iClassId.Value = categorieid;
                 this.iSpeciality.Value = "0";
@@ -88,7 +88,7 @@ public partial class resources_resourceshandlers : adminMain
         Resources item = new Resources();
         if (ismdy)
         {
-            item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.Post("iNewsId"));
+            item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.ToInt(objectHandlers.Post("iNewsId")));
         }
 
         item.vcTitle = objectHandlers.Post("iTitle");

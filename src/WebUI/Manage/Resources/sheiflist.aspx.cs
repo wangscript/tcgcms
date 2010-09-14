@@ -209,8 +209,8 @@ public partial class Manage_Resources_sheiflist : adminMain
 
     private void CreateNews()
     {
-        string resourceid = objectHandlers.Post("DelClassId");
-        if (string.IsNullOrEmpty(resourceid))
+        int resourceid = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
+        if (resourceid==0)
         {
             base.AjaxErch("-1000000051");
             return;
@@ -221,7 +221,7 @@ public partial class Manage_Resources_sheiflist : adminMain
         if (item == null) return;
 
         TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-        tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid);
+        tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid.ToString());
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
         tcgth.configService = base.configService;
