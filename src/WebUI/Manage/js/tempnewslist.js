@@ -44,7 +44,9 @@ function TempDel() {
         SetAjaxDiv("err", false, "您没选择需要删除的模版！");
         return false;
     }
+    debugger;
     var t = CheckTempsUsed(temps);
+   
     if (t == "") {
         SetAjaxDiv("err", false, "您选择的模版，正在使用中，无法删除！");
         return false;
@@ -88,7 +90,7 @@ function CheckTempUsed(temp) {
     temp = temp.replace("'", "").replace("'", "");
 	if (_Categories == null) return false;
 	for (var i = 0; i < _Categories.length; i++) {
-	    if (temp == _Categories[i].ResourceListTemplate || temp == _Categories[i].ResourceTemplate) return true;
+	    if (temp == _Categories[i].ResourceListTemplate.Id || temp == _Categories[i].ResourceTemplate.Id) return true;
 	}
 	if (_Template == null) return false;
 	for (var i = 0; i < _Template.length; i++) {

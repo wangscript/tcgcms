@@ -94,6 +94,8 @@ public partial class Template_templatemdy : adminMain
                 rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(item.SkinId);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             }
             catch (Exception ex)
             {
