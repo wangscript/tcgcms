@@ -74,5 +74,20 @@ namespace TCG.Handlers
             return 1;
 
         }
+
+        public int CreateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
+        {
+            string Sql = "INSERT INTO SheifCategorieConfig (SheifSourceId,LocalCategorieId) VALUES(";
+            Sql += "'" + sheifcategorieconfig.SheifSourceId + "','" + sheifcategorieconfig.LocalCategorieId + "')";
+            return base.conn.Execute(Sql);
+        }
+
+        public int UpdateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
+        {
+            string Sql = "UPDATE SheifCategorieConfig SET LocalCategorieId = '"
+                + sheifcategorieconfig.LocalCategorieId + "',ResourceCreateDateTime = '" + sheifcategorieconfig.ResourceCreateDateTime.ToString() + "'";
+            Sql += " WHERE SheifSourceId='" + sheifcategorieconfig.SheifSourceId + "'";
+            return base.conn.Execute(Sql);
+        }
     }
 }
