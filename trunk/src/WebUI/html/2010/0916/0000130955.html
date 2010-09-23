@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TCG CMS 开源CMS (C#)</title>
+ <meta name="keywords" content="资讯管理,企业建站,新闻系统,ASP.NET开源新闻系统"/>
+ <meta name="description" content="专注于中小企业,商家网络信息化建设"/>
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" href="favicon.gif" type="image/gif" >
+<link href="/skin/chinazex/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/interface/aspx/categories.aspx?w=getallcategories"></script>
+<script type="text/javascript" src="/interface/js/jquery.1.3.2.js"></script>
+<script type="text/javascript" src="/interface/js/jquery.form.js"></script>
+<script type="text/javascript" src="/interface/js/categories.js"></script>
+<script type="text/javascript" src="/skin/chinazex/js/common.js"></script>
+</head>
+<body>
+<div class="cztopbg">
+<div class="container">
+<div class="clearfix header">
+  <div class="topnav">
+	<!--#include file="/include/toplinks.shtml"-->
+  </div>
+  <div class="brand">
+  <h1 class="site-name">tcgcms.cn - TCG CMS 开源CMS (C#)</h1>
+  <a class="site-logo" href="/" title="TCG CMS 开源CMS (C#)" rel="home"><img src="/skin/chinazex/images/logo.gif" alt="电脑知识-新洲都市网 _$itSite$_" width="165" height="60" /></a>
+  </div>
+  <div class="ad-banner"><script type="text/javascript"> /*468*60，创建于2010-9-1*/ var cpro_id = 'u180159';</script>
+<script type="text/javascript" src="http://cpro.baidu.com/cpro/ui/c.js"></script>
+</div>
+  <div class="ad-text">
+
+  </div>
+
+</div>
+
+<div class="nav">
+<div class="navinner">
+  <ul class="navlist">
+  <li><a href="/index.html">首页</a></li>
+  	
+  <li><a href="/html/tcgcms/index.html" onmouseover="showMenu(this,1)">TCG CMS</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+	  <a href="/html/tcgcms/code.html">TCG CMS 源代码</a> 
+	  <a href="/html/about/index.html">TCG CMS 简介</a> 
+	  <a href="/html/tcgcms/template.html">TCG CMS 模板</a> 
+      </span></p>
+    </div>  
+  </li>
+  	
+  <li><a href="/html/kxyk/index.html" onmouseover="showMenu(this,2)">开心一刻</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+	  <a href="/html/kxyk/wzxh/index.html">文字笑话</a> 
+      </span></p>
+    </div>  
+  </li>
+  	
+  <li><a href="/html/ylbj/index.html" onmouseover="showMenu(this,3)">医疗健康</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+      </span></p>
+    </div>  
+  </li>
+  	
+  <li><a href="/html/dlzs/index.html" onmouseover="showMenu(this,4)">电脑知识</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+	  <a href="/html/dnzs/wlbc.html">网络编程</a> 
+	  <a href="/html/dnzs/clbd.html">冲浪宝典</a> 
+	  <a href="/html/dnzs/rzks.html">认证考试</a> 
+	  <a href="/html/dnzs/wlaq.html">网络安全</a> 
+	  <a href="/html/dnzs/wyzz.html">网页制作</a> 
+	  <a href="/html/dnzs/txtx.html">图形图象</a> 
+	  <a href="/html/dnzs/rjjx.html">软件教学</a> 
+	  <a href="/html/dnzs/czxt.html">操作系统</a> 
+	  <a href="/html/dnzs/zzxy.html">站长学院</a> 
+      </span></p>
+    </div>  
+  </li>
+  	
+  <li><a href="/html/mstx/index.html" onmouseover="showMenu(this,5)">美食天下</a>
+    <div class="subnav" onmousemove="$(this).show()">
+      <p class="pointer">.</p>
+      <p><span>
+      
+	  <a href="/html/mscp/index.html">美食菜谱</a> 
+	  <a href="/html/msyl/index.html">食品原料</a> 
+	  <a href="/html/ms/yszx/index.html">饮食资讯</a> 
+      </span></p>
+    </div>  
+  </li>
+  
+  </ul>
+</div>  
+</div>
+<div class="note"><span><a href="#"><img src="/skin/chinazex/images/td_icon.gif" align="absbottom" /> 匿名投稿</a>  
+  <a href="#"><img src="/skin/chinazex/images/tg_icon.gif" align="absbottom"/> 投稿指南</a>
+  <a href="#"><img src="/skin/chinazex/images/rss.gif" align="absbottom" /> RSS订阅</a></span>
+  <b>本站通告:</b>
+</div>
+<div class="weizhi">
+<form name="formsearch" action="/s.aspx" method="get"><span><b>搜索:</b>
+				<input type="hidden" name="kwtype" value="0" /> <input class="searchtxt" id="p" name="p" /> <select id="searchtype" name="select">
+				<option value="titlekeyword">智能搜索</option>
+				<option value="title" selected="selected">搜索标题</option>
+				</select> <input type="image" src="/skin/chinazex/images/topsearch_submit.gif" /></span></form><b>您的位置</b>：<a href="/">主页</a>&gt; <a href="/html/kxyk/index.html" target="_blank">开心一刻</a> > <a href="/html/kxyk/wzxh/index.html" target="_blank">文字笑话</a> > <a href="/Html/kxyk/wzxh/crxh/list.html" target="_blank">成人笑话</a> &gt; 正文333</div>
+<div class="clearfix wrap layout-cols2">
+	<div class="col1">
+<div id="news">
+	<h1>sdfsdfsd</h1>
+	<div class="times">2010年09月16日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【<a href="javascript:doZoom(16)">大</a> <a href="javascript:doZoom(14)">中</a> <a href="javascript:doZoom(12)">小</a>】 </div>
+	<div class="content" id="textbody">
+		<div class="shoucang"></div>
+<table style="BORDER-RIGHT: #cccccc 1px dotted; TABLE-LAYOUT: fixed; BORDER-TOP: #cccccc 1px dotted; BORDER-LEFT: #cccccc 1px dotted; BORDER-BOTTOM: #cccccc 1px dotted" cellspacing="0" cellpadding="6" width="100%" align="center" border="0">
+    <tbody>
+        <tr>
+            <td align="center" style="WORD-WRAP: break-word" bgcolor="#fdfddf">
+			<script type="text/javascript"> /*580*90，创建于2010-9-1*/ var cpro_id = 'u180175';</script>
+<script type="text/javascript" src="http://cpro.baidu.com/cpro/ui/c.js"></script>
+
+</td>
+        </tr>
+    </tbody>
+</table>
+sdfsdfsdf
+	</div>
+	
+	<div class="box_xg">
+        <div class="title_xg">相关文章列表</div>
+        <ul>
+		<li><a href="/html/2010/0916/0000130955.html" target="_blank">sdfsdfsd</a></li>
+        </ul>
+	</div>
+</div>
+  </div>
+<!--列表左边:结束-->
+
+<!--列表右边:开始--> 
+  <div class="col2">
+	<div class="right_bot" style="margin-left:10px">
+<script type="text/javascript"> /*250*250，创建于2010-9-1*/ var cpro_id = 'u178502';</script>
+<script type="text/javascript" src="http://cpro.baidu.com/cpro/ui/c.js"></script>
+	</div>
+          <div class="right_box right_bot">
+            <div class="right_title">推荐文章</div>
+            <ul>
+<script type="text/javascript" src="/html/js/puttopics.js"></script>
+            </ul>
+        </div>
+  </div>
+</div>
+<div class="sitemap">
+  
+  <a href="/html/faq/index.html">帮助</a>
+</div>
+ 
+<div class="footer">
+ <div class="copyright">
+ 	<p>CopyRight &copy; 2009 - 2010 TCG Content Management System . All Rights Reserved. 联系QQ：644139466</p>
+    <p><a target="_blank" href="http://www.miibeian.gov.cn/">Designed by Tcg Cms 鄂ICP备09016016号</a>    
+	<script type="text/javascript"> 
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff8e3acf12a196f47c88c367a92569328' type='text/javascript'%3E%3C/script%3E"));
+</script> 
+</p>
+  </div>
+</div>
+
+</div>
+</div>
+</body>
+</html>

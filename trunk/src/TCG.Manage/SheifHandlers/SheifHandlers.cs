@@ -45,9 +45,10 @@ namespace TCG.Handlers
             SqlParameter sp9 = new SqlParameter("@TopicPagerTemp", SqlDbType.NVarChar, 255); sp9.Value = sheifsourceinfo.TopicPagerTemp;
             SqlParameter sp10 = new SqlParameter("@Id", SqlDbType.VarChar, 39); sp10.Value = sheifsourceinfo.Id;
             SqlParameter sp11 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp11.Direction = ParameterDirection.Output;
+            SqlParameter sp12 = new SqlParameter("@IsRss", SqlDbType.Bit, 2); sp12.Value = sheifsourceinfo.IsRss;
 
             string[] reValues = conn.Execute("SP_SheifSource_Add", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11}, new int[] { 11 });
+                sp7, sp8, sp9 ,sp10,sp11,sp12}, new int[] { 11 });
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));

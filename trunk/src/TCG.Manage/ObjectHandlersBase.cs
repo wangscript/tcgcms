@@ -238,6 +238,7 @@ namespace TCG.Handlers
                     resources.dUpDateDate = (DateTime)row["dUpDateDate"];
                     resources.vcTitleColor = (string)row["vcTitleColor"].ToString().Trim();
                     resources.cStrong = (string)row["cStrong"].ToString().Trim();
+                    resources.SheifUrl = (string)row["SheifUrl"].ToString().Trim();
                     CachingService.Set(resources.Id, resources, null);
                     return (EntityBase)resources;
                 case "TCG.Entity.Template":

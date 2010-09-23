@@ -109,6 +109,10 @@ namespace TCG.Entity
         /// 资源标题是否加粗
         /// </summary>
         public string cStrong { get { return this._cstrong; } set { this._cstrong = value; } }
+        /// <summary>
+        /// 抓取URL
+        /// </summary>
+        public string SheifUrl { get { return this._sheifurl; } set { this._sheifurl = value; } }
 
         public string GetUrl()
         {
@@ -138,5 +142,6 @@ namespace TCG.Entity
         private DateTime _dupdatedate;
         private string _vctitlecolor;
         private string _cstrong;
+        private string _sheifurl;
     }
 }

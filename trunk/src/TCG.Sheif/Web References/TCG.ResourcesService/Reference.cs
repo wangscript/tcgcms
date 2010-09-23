@@ -534,6 +534,8 @@ namespace TCG.Sheif.TCG.ResourcesService {
         
         private string cStrongField;
         
+        private string sheifUrlField;
+        
         /// <remarks/>
         public Categories Categorie {
             get {
@@ -741,6 +743,16 @@ namespace TCG.Sheif.TCG.ResourcesService {
             }
             set {
                 this.cStrongField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SheifUrl {
+            get {
+                return this.sheifUrlField;
+            }
+            set {
+                this.sheifUrlField = value;
             }
         }
     }
