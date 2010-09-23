@@ -19,10 +19,22 @@ using System.Text;
 using TCG.Entity;
 using TCG.Handlers;
 using TCG.Utils;
+using System.Web.Services.Protocols;
 using TCG.Data;
 
 namespace TCG.WebService
 {
+    public class TCGSoapHeader : SoapHeader
+    {
+        string _passWord;
+
+        public string PassWord
+        {
+            get { return _passWord; }
+            set { _passWord = value; }
+        }
+    }
+
     public class ServiceMain : System.Web.Services.WebService
     {
         public TagService tagService

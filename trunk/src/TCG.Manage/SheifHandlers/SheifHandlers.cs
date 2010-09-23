@@ -56,19 +56,19 @@ namespace TCG.Handlers
             return -19000000;
         }
 
-        public int GetAllShieSourceInfo(ref List<SheifSourceInfo> sourceinfos)
+        public int GetAllShieSourceInfo(ref Dictionary<string,SheifSourceInfo> sourceinfos)
         {
             base.SetDataBaseConnection();
             DataTable dt = base.conn.GetDataTable("SELECT * FROM [SheifSource] (NOLOCK) ");
             if (dt == null) return -19000000;
             if (dt.Rows.Count == 0) return -19000000;
 
-            sourceinfos = new List<SheifSourceInfo>();
+            sourceinfos = new Dictionary<string,SheifSourceInfo>();
 
             foreach (DataRow Row in dt.Rows)
             {
                 SheifSourceInfo sheifSourceInfo = (SheifSourceInfo)base.GetEntityObjectFromRow(Row, typeof(SheifSourceInfo));
-                sourceinfos.Add(sheifSourceInfo);
+                sourceinfos.Add(sheifSourceInfo.Id,sheifSourceInfo);
             }
 
             return 1;
@@ -88,6 +88,24 @@ namespace TCG.Handlers
                 + sheifcategorieconfig.LocalCategorieId + "',ResourceCreateDateTime = '" + sheifcategorieconfig.ResourceCreateDateTime.ToString() + "'";
             Sql += " WHERE SheifSourceId='" + sheifcategorieconfig.SheifSourceId + "'";
             return base.conn.Execute(Sql);
+        }
+
+        public int GeSheifcategorieconfigs(ref List<SheifCategorieConfig> sheifcategorieconfigs)
+        {
+            base.SetDataBaseConnection();
+            DataTable dt = base.conn.GetDataTable("SELECT * FROM [SheifCategorieConfig] (NOLOCK) ");
+            if (dt == null) return -19000000;
+            if (dt.Rows.Count == 0) return -19000000;
+
+            sheifcategorieconfigs = new List<SheifCategorieConfig>();
+
+            foreach (DataRow Row in dt.Rows)
+            {
+                SheifCategorieConfig sheifcategorieconfig = (SheifCategorieConfig)base.GetEntityObjectFromRow(Row, typeof(SheifCategorieConfig));
+                sheifcategorieconfigs.Add(sheifcategorieconfig);
+            }
+
+            return 1;
         }
     }
 }

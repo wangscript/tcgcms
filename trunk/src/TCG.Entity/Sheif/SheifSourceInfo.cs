@@ -32,6 +32,7 @@ namespace TCG.Entity
         private string _topicdatarole;
         private string _topicpagerold;
         private string _topicpagertemp;
+        private bool _isrsss = false;
 
 
         /// <summary>
@@ -132,6 +133,15 @@ namespace TCG.Entity
         {
             set { _topicpagertemp = value; }
             get { return _topicpagertemp; }
+        }
+
+        /// <summary>
+        /// 是否是RSS
+        /// </summary>
+        public bool IsRss
+        {
+            set { _isrsss = value; }
+            get { return _isrsss; }
         }
     }
 }
