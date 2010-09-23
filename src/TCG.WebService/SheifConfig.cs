@@ -15,95 +15,74 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Linq;
 using System.Web.Services;
-using System.Web.Services.Protocols;
+
 
 using TCG.Entity;
 using TCG.Handlers;
 using TCG.Utils;
+using System.Web.Services.Protocols;
 
 namespace TCG.WebService
 {
-    
-
     /// <summary>
-    ///SheifSource 的摘要说明
+    /// Summary description for SheifConfig
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    public class SheifService : ServiceMain
+    public class SheifConfig : ServiceMain
     {
         public TCGSoapHeader header;
 
-        public SheifService()
+        public SheifConfig()
         {
-            //如果使用设计的组件，请取消注释以下行 
+
+            //Uncomment the following line if using designed components 
             //InitializeComponent(); 
         }
 
         [WebMethod]
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]
-        public int AddSheifSource(SheifSourceInfo source)
+        public int CreateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
             if (!base.serviceHandlers.CheckHeader(header))
             {
                 return -1000000307;
             }
 
-            return base.handlerService.sheifService.sheifHandlers.AddShiefSource(source);
+            return base.handlerService.sheifService.sheifHandlers.CreateSheifCategorieConfig(sheifcategorieconfig);
         }
 
         [WebMethod]
-        [SoapHeader("header", Direction = SoapHeaderDirection.In)]  
-        public List<SheifSourceInfo> GetAllSheifSourceInfos()
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public int UpdateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
+        {
+            if (!base.serviceHandlers.CheckHeader(header))
+            {
+                return -1000000307;
+            }
+
+            return base.handlerService.sheifService.sheifHandlers.UpdateSheifCategorieConfig(sheifcategorieconfig);
+        }
+
+
+        [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public List<SheifCategorieConfig> GetSheifCategorieConfigs()
         {
             if (!base.serviceHandlers.CheckHeader(header))
             {
                 return null;
             }
 
-            Dictionary<string,SheifSourceInfo> sources = null;
-            int rtn = base.handlerService.sheifService.sheifHandlers.GetAllShieSourceInfo(ref sources);
+            List<SheifCategorieConfig> sources = null;
+            int rtn = base.handlerService.sheifService.sheifHandlers.GeSheifcategorieconfigs(ref sources);
             if (rtn < 0)
             {
                 return null;
             }
 
-            return sources.Values.ToList();
-        }
-
-        [WebMethod]
-        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
-        public SheifSourceInfo GetSheifSourceInfoById(string id)
-        {
-            if (!base.serviceHandlers.CheckHeader(header))
-            {
-                return null;
-            }
-
-            Dictionary<string, SheifSourceInfo> sources = null;
-            int rtn = base.handlerService.sheifService.sheifHandlers.GetAllShieSourceInfo(ref sources);
-            if (rtn < 0 || sources==null)
-            {
-                return null;
-            }
-
-            if (!sources.ContainsKey(id)) return null;
-
-            return sources[id];
-        }
-
-        [WebMethod]
-        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
-        public int SheifResources(Resources res)
-        {
-            if (!base.serviceHandlers.CheckHeader(header))
-            {
-                return -1000000307;
-            }
-            return base.handlerService.resourcsService.resourcesHandlers.CreateResourcesForSheif(res);
+            return sources;
         }
     }
 }
-

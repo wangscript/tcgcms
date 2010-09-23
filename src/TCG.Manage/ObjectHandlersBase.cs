@@ -200,19 +200,19 @@ namespace TCG.Handlers
             {
                 case "TCG.Entity.Categories":
                     Categories categories = new Categories();
-                    categories.Id = row["Id"].ToString();
+                    categories.Id = row["Id"].ToString().Trim();
                     categories.ResourceListTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iListTemplate"].ToString());
                     categories.iOrder = (int)row["iOrder"];
-                    categories.Parent = row["Parent"].ToString();
+                    categories.Parent = row["Parent"].ToString().Trim();
                     categories.ResourceTemplate = this.handlerService.skinService.templateHandlers.GetTemplateByID(row["iTemplate"].ToString());
-                    categories.vcClassName = row["vcClassName"].ToString();
-                    categories.vcDirectory = row["vcDirectory"].ToString();
-                    categories.vcName = row["vcName"].ToString();
-                    categories.vcUrl = row["vcUrl"].ToString();
+                    categories.vcClassName = row["vcClassName"].ToString().Trim();
+                    categories.vcDirectory = row["vcDirectory"].ToString().Trim();
+                    categories.vcName = row["vcName"].ToString().Trim();
+                    categories.vcUrl = row["vcUrl"].ToString().Trim();
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
-                    categories.cVisible = row["Visible"].ToString();
-                    categories.DataBaseService = row["DataBaseService"].ToString();
-                    categories.SkinId = row["SkinId"].ToString();
+                    categories.cVisible = row["Visible"].ToString().Trim();
+                    categories.DataBaseService = row["DataBaseService"].ToString().Trim();
+                    categories.SkinId = row["SkinId"].ToString().Trim();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();
@@ -220,24 +220,24 @@ namespace TCG.Handlers
                     resources.vcTitle = row["vcTitle"].ToString();
                     resources.Categorie = this.handlerService.skinService.categoriesHandlers.GetCategoriesById(row["iClassID"].ToString());
                     resources.vcUrl = (string)row["vcUrl"].ToString();
-                    resources.vcContent = (string)row["vcContent"].ToString();
-                    resources.vcAuthor = (string)row["vcAuthor"].ToString();
+                    resources.vcContent = (string)row["vcContent"].ToString().Trim();
+                    resources.vcAuthor = (string)row["vcAuthor"].ToString().Trim();
                     resources.iCount = (int)row["iCount"];
-                    resources.vcKeyWord = (string)row["vcKeyWord"].ToString();
-                    resources.vcEditor = (string)row["vcEditor"].ToString();
-                    resources.cCreated = (string)row["cCreated"].ToString();
-                    resources.vcSmallImg = (string)row["vcSmallImg"].ToString();
-                    resources.vcBigImg = (string)row["vcBigImg"].ToString();
-                    resources.vcShortContent = (string)row["vcShortContent"].ToString();
-                    resources.vcSpeciality = (string)row["vcSpeciality"].ToString();
-                    resources.cChecked = (string)row["cChecked"].ToString();
-                    resources.cDel = (string)row["cDel"].ToString();
-                    resources.cPostByUser = (string)row["cPostByUser"].ToString();
-                    resources.vcFilePath = (string)row["vcFilePath"].ToString();
+                    resources.vcKeyWord = (string)row["vcKeyWord"].ToString().Trim();
+                    resources.vcEditor = (string)row["vcEditor"].ToString().Trim();
+                    resources.cCreated = (string)row["cCreated"].ToString().Trim();
+                    resources.vcSmallImg = (string)row["vcSmallImg"].ToString().Trim();
+                    resources.vcBigImg = (string)row["vcBigImg"].ToString().Trim();
+                    resources.vcShortContent = (string)row["vcShortContent"].ToString().Trim();
+                    resources.vcSpeciality = (string)row["vcSpeciality"].ToString().Trim();
+                    resources.cChecked = (string)row["cChecked"].ToString().Trim();
+                    resources.cDel = (string)row["cDel"].ToString().Trim();
+                    resources.cPostByUser = (string)row["cPostByUser"].ToString().Trim();
+                    resources.vcFilePath = (string)row["vcFilePath"].ToString().Trim();
                     resources.dAddDate = (DateTime)row["dAddDate"];
                     resources.dUpDateDate = (DateTime)row["dUpDateDate"];
-                    resources.vcTitleColor = (string)row["vcTitleColor"].ToString();
-                    resources.cStrong = (string)row["cStrong"].ToString();
+                    resources.vcTitleColor = (string)row["vcTitleColor"].ToString().Trim();
+                    resources.cStrong = (string)row["cStrong"].ToString().Trim();
                     CachingService.Set(resources.Id, resources, null);
                     return (EntityBase)resources;
                 case "TCG.Entity.Template":
@@ -255,50 +255,57 @@ namespace TCG.Handlers
                     return (EntityBase)template;
                 case "TCG.Entity.Skin":
                     Skin skin = new Skin();
-                    skin.Id = row["Id"].ToString();
-                    skin.Name = row["Name"].ToString();
-                    skin.Pic = row["Pic"].ToString();
-                    skin.Info = row["info"].ToString();
-                    skin.Filename = row["Filename"].ToString();
+                    skin.Id = row["Id"].ToString().Trim();
+                    skin.Name = row["Name"].ToString().Trim();
+                    skin.Pic = row["Pic"].ToString().Trim();
+                    skin.Info = row["info"].ToString().Trim();
+                    skin.Filename = row["Filename"].ToString().Trim();
                     return (EntityBase)skin;
                 case "TCG.Entity.SheifSourceInfo":
                     SheifSourceInfo sourceinfo = new SheifSourceInfo();
-                    sourceinfo.Id = row["ID"].ToString();
-                    sourceinfo.SourceName = row["SourceName"].ToString();
-                    sourceinfo.SourceUrl = row["SourceUrl"].ToString();
-                    sourceinfo.CharSet = row["CharSet"].ToString();
-                    sourceinfo.ListAreaRole = row["ListAreaRole"].ToString();
-                    sourceinfo.TopicListRole = row["TopicListRole"].ToString();
-                    sourceinfo.TopicListDataRole = row["TopicListDataRole"].ToString();
-                    sourceinfo.TopicRole = row["TopicRole"].ToString();
-                    sourceinfo.TopicDataRole = row["TopicDataRole"].ToString();
-                    sourceinfo.TopicPagerOld = row["TopicPagerOld"].ToString();
-                    sourceinfo.TopicPagerTemp = row["TopicPagerTemp"].ToString();
+                    sourceinfo.Id = row["ID"].ToString().Trim();
+                    sourceinfo.SourceName = row["SourceName"].ToString().Trim();
+                    sourceinfo.SourceUrl = row["SourceUrl"].ToString().Trim();
+                    sourceinfo.CharSet = row["CharSet"].ToString().Trim();
+                    sourceinfo.ListAreaRole = row["ListAreaRole"].ToString().Trim();
+                    sourceinfo.TopicListRole = row["TopicListRole"].ToString().Trim();
+                    sourceinfo.TopicListDataRole = row["TopicListDataRole"].ToString().Trim();
+                    sourceinfo.TopicRole = row["TopicRole"].ToString().Trim();
+                    sourceinfo.TopicDataRole = row["TopicDataRole"].ToString().Trim();
+                    sourceinfo.TopicPagerOld = row["TopicPagerOld"].ToString().Trim();
+                    sourceinfo.TopicPagerTemp = row["TopicPagerTemp"].ToString().Trim();
+                    sourceinfo.IsRss = (bool)row["IsRss"];
                     return (EntityBase)sourceinfo;
                 case "TCG.Entity.FileCategories":
                     FileCategories filecagegories = new FileCategories();
                     filecagegories.Id = row["iId"].ToString();
                     filecagegories.iParentId = objectHandlers.ToInt(row["iParentId"]);
                     filecagegories.dCreateDate = objectHandlers.ToTime(row["dCreateDate"].ToString());
-                    filecagegories.vcFileName = row["vcFileName"].ToString();
-                    filecagegories.vcMeno = row["vcMeno"].ToString();
-                    filecagegories.vcKey = row["vcKey"].ToString();
+                    filecagegories.vcFileName = row["vcFileName"].ToString().Trim();
+                    filecagegories.vcMeno = row["vcMeno"].ToString().Trim();
+                    filecagegories.vcKey = row["vcKey"].ToString().Trim();
                     filecagegories.MaxSpace = objectHandlers.ToLong(row["MaxSpace"]);
                     filecagegories.Space = objectHandlers.ToLong(row["Space"]);
                     return (EntityBase)filecagegories;
                 case "TCG.Entity.FileResources":
                     FileResources fileresource = new FileResources();
-                    fileresource.Id = row["iID"].ToString();
+                    fileresource.Id = row["iID"].ToString().Trim();
                     fileresource.iClassId = (int)row["iClassId"];
                     fileresource.iSize = (int)row["iSize"];
-                    fileresource.vcFileName = row["vcFileName"].ToString();
-                    fileresource.vcIP = row["vcIP"].ToString();
-                    fileresource.vcType = row["vcType"].ToString();
+                    fileresource.vcFileName = row["vcFileName"].ToString().Trim();
+                    fileresource.vcIP = row["vcIP"].ToString().Trim();
+                    fileresource.vcType = row["vcType"].ToString().Trim();
                     fileresource.iRequest = (int)row["iRequest"];
                     fileresource.iDowns = (int)row["iDowns"];
                     fileresource.dCreateDate = (DateTime)row["dCreateDate"];
                     return (EntityBase)fileresource;
-
+                case "TCG.Entity.SheifCategorieConfig":
+                    SheifCategorieConfig sheifcategorieconfig = new SheifCategorieConfig();
+                    sheifcategorieconfig.Id = row["Id"].ToString();
+                    sheifcategorieconfig.SheifSourceId = row["SheifSourceId"].ToString().Trim();
+                    sheifcategorieconfig.LocalCategorieId = row["LocalCategorieId"].ToString().Trim();
+                    sheifcategorieconfig.ResourceCreateDateTime = objectHandlers.ToTime(row["ResourceCreateDateTime"].ToString().Trim());
+                    return (EntityBase)sheifcategorieconfig;
             }
             return null;
         }

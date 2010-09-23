@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace TCG.Sheif.TCG.SheifService {
+namespace TCG.Sheif.TCG.ResourcesService {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -26,25 +26,19 @@ namespace TCG.Sheif.TCG.SheifService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="SheifServiceSoap", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ResourcesServiceSoap", Namespace="http://tempuri.org/")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityBase))]
-    public partial class SheifService : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class ResourcesService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private TCGSoapHeader tCGSoapHeaderValueField;
         
-        private System.Threading.SendOrPostCallback AddSheifSourceOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetAllSheifSourceInfosOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetSheifSourceInfoByIdOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SheifResourcesOperationCompleted;
+        private System.Threading.SendOrPostCallback CreateResourcesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public SheifService() {
-            this.Url = global::TCG.Sheif.Properties.Settings.Default.TCG_Sheif_TCG_SheifService_SheifSourceService;
+        public ResourcesService() {
+            this.Url = global::TCG.Sheif.Properties.Settings.Default.TCG_Sheif_TCG_ResourcesService_ResourcesService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -88,132 +82,35 @@ namespace TCG.Sheif.TCG.SheifService {
         }
         
         /// <remarks/>
-        public event AddSheifSourceCompletedEventHandler AddSheifSourceCompleted;
-        
-        /// <remarks/>
-        public event GetAllSheifSourceInfosCompletedEventHandler GetAllSheifSourceInfosCompleted;
-        
-        /// <remarks/>
-        public event GetSheifSourceInfoByIdCompletedEventHandler GetSheifSourceInfoByIdCompleted;
-        
-        /// <remarks/>
-        public event SheifResourcesCompletedEventHandler SheifResourcesCompleted;
+        public event CreateResourcesCompletedEventHandler CreateResourcesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddSheifSource", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int AddSheifSource(SheifSourceInfo source) {
-            object[] results = this.Invoke("AddSheifSource", new object[] {
-                        source});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/CreateResources", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int CreateResources(Resources inf) {
+            object[] results = this.Invoke("CreateResources", new object[] {
+                        inf});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void AddSheifSourceAsync(SheifSourceInfo source) {
-            this.AddSheifSourceAsync(source, null);
+        public void CreateResourcesAsync(Resources inf) {
+            this.CreateResourcesAsync(inf, null);
         }
         
         /// <remarks/>
-        public void AddSheifSourceAsync(SheifSourceInfo source, object userState) {
-            if ((this.AddSheifSourceOperationCompleted == null)) {
-                this.AddSheifSourceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddSheifSourceOperationCompleted);
+        public void CreateResourcesAsync(Resources inf, object userState) {
+            if ((this.CreateResourcesOperationCompleted == null)) {
+                this.CreateResourcesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateResourcesOperationCompleted);
             }
-            this.InvokeAsync("AddSheifSource", new object[] {
-                        source}, this.AddSheifSourceOperationCompleted, userState);
+            this.InvokeAsync("CreateResources", new object[] {
+                        inf}, this.CreateResourcesOperationCompleted, userState);
         }
         
-        private void OnAddSheifSourceOperationCompleted(object arg) {
-            if ((this.AddSheifSourceCompleted != null)) {
+        private void OnCreateResourcesOperationCompleted(object arg) {
+            if ((this.CreateResourcesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddSheifSourceCompleted(this, new AddSheifSourceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllSheifSourceInfos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SheifSourceInfo[] GetAllSheifSourceInfos() {
-            object[] results = this.Invoke("GetAllSheifSourceInfos", new object[0]);
-            return ((SheifSourceInfo[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetAllSheifSourceInfosAsync() {
-            this.GetAllSheifSourceInfosAsync(null);
-        }
-        
-        /// <remarks/>
-        public void GetAllSheifSourceInfosAsync(object userState) {
-            if ((this.GetAllSheifSourceInfosOperationCompleted == null)) {
-                this.GetAllSheifSourceInfosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllSheifSourceInfosOperationCompleted);
-            }
-            this.InvokeAsync("GetAllSheifSourceInfos", new object[0], this.GetAllSheifSourceInfosOperationCompleted, userState);
-        }
-        
-        private void OnGetAllSheifSourceInfosOperationCompleted(object arg) {
-            if ((this.GetAllSheifSourceInfosCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetAllSheifSourceInfosCompleted(this, new GetAllSheifSourceInfosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetSheifSourceInfoById", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SheifSourceInfo GetSheifSourceInfoById(string id) {
-            object[] results = this.Invoke("GetSheifSourceInfoById", new object[] {
-                        id});
-            return ((SheifSourceInfo)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetSheifSourceInfoByIdAsync(string id) {
-            this.GetSheifSourceInfoByIdAsync(id, null);
-        }
-        
-        /// <remarks/>
-        public void GetSheifSourceInfoByIdAsync(string id, object userState) {
-            if ((this.GetSheifSourceInfoByIdOperationCompleted == null)) {
-                this.GetSheifSourceInfoByIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSheifSourceInfoByIdOperationCompleted);
-            }
-            this.InvokeAsync("GetSheifSourceInfoById", new object[] {
-                        id}, this.GetSheifSourceInfoByIdOperationCompleted, userState);
-        }
-        
-        private void OnGetSheifSourceInfoByIdOperationCompleted(object arg) {
-            if ((this.GetSheifSourceInfoByIdCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetSheifSourceInfoByIdCompleted(this, new GetSheifSourceInfoByIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SheifResources", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int SheifResources(Resources res) {
-            object[] results = this.Invoke("SheifResources", new object[] {
-                        res});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SheifResourcesAsync(Resources res) {
-            this.SheifResourcesAsync(res, null);
-        }
-        
-        /// <remarks/>
-        public void SheifResourcesAsync(Resources res, object userState) {
-            if ((this.SheifResourcesOperationCompleted == null)) {
-                this.SheifResourcesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSheifResourcesOperationCompleted);
-            }
-            this.InvokeAsync("SheifResources", new object[] {
-                        res}, this.SheifResourcesOperationCompleted, userState);
-        }
-        
-        private void OnSheifResourcesOperationCompleted(object arg) {
-            if ((this.SheifResourcesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SheifResourcesCompleted(this, new SheifResourcesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CreateResourcesCompleted(this, new CreateResourcesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -275,7 +172,6 @@ namespace TCG.Sheif.TCG.SheifService {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Template))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Categories))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Resources))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SheifSourceInfo))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -850,237 +746,18 @@ namespace TCG.Sheif.TCG.SheifService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class SheifSourceInfo : EntityBase {
-        
-        private string sourceNameField;
-        
-        private string sourceUrlField;
-        
-        private string charSetField;
-        
-        private string listAreaRoleField;
-        
-        private string topicListRoleField;
-        
-        private string topicListDataRoleField;
-        
-        private string topicRoleField;
-        
-        private string topicDataRoleField;
-        
-        private string topicPagerOldField;
-        
-        private string topicPagerTempField;
-        
-        private bool isRssField;
-        
-        /// <remarks/>
-        public string SourceName {
-            get {
-                return this.sourceNameField;
-            }
-            set {
-                this.sourceNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SourceUrl {
-            get {
-                return this.sourceUrlField;
-            }
-            set {
-                this.sourceUrlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CharSet {
-            get {
-                return this.charSetField;
-            }
-            set {
-                this.charSetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ListAreaRole {
-            get {
-                return this.listAreaRoleField;
-            }
-            set {
-                this.listAreaRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicListRole {
-            get {
-                return this.topicListRoleField;
-            }
-            set {
-                this.topicListRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicListDataRole {
-            get {
-                return this.topicListDataRoleField;
-            }
-            set {
-                this.topicListDataRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicRole {
-            get {
-                return this.topicRoleField;
-            }
-            set {
-                this.topicRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicDataRole {
-            get {
-                return this.topicDataRoleField;
-            }
-            set {
-                this.topicDataRoleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicPagerOld {
-            get {
-                return this.topicPagerOldField;
-            }
-            set {
-                this.topicPagerOldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TopicPagerTemp {
-            get {
-                return this.topicPagerTempField;
-            }
-            set {
-                this.topicPagerTempField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsRss {
-            get {
-                return this.isRssField;
-            }
-            set {
-                this.isRssField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void AddSheifSourceCompletedEventHandler(object sender, AddSheifSourceCompletedEventArgs e);
+    public delegate void CreateResourcesCompletedEventHandler(object sender, CreateResourcesCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AddSheifSourceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CreateResourcesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AddSheifSourceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void GetAllSheifSourceInfosCompletedEventHandler(object sender, GetAllSheifSourceInfosCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetAllSheifSourceInfosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetAllSheifSourceInfosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public SheifSourceInfo[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((SheifSourceInfo[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void GetSheifSourceInfoByIdCompletedEventHandler(object sender, GetSheifSourceInfoByIdCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetSheifSourceInfoByIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetSheifSourceInfoByIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public SheifSourceInfo Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((SheifSourceInfo)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void SheifResourcesCompletedEventHandler(object sender, SheifResourcesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SheifResourcesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SheifResourcesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CreateResourcesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

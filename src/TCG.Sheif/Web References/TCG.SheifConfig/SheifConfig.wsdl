@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateSheifCategorieConfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sheifcategorieconfig" type="tns:SheifCategorieConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SheifCategorieConfig">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SheifSourceId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocalCategorieId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ResourceCreateDateTime" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateSheifCategorieConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateSheifCategorieConfigResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TCGSoapHeader" type="tns:TCGSoapHeader" />
+      <s:complexType name="TCGSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PassWord" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="UpdateSheifCategorieConfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sheifcategorieconfig" type="tns:SheifCategorieConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSheifCategorieConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateSheifCategorieConfigResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSheifCategorieConfigs">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSheifCategorieConfigsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSheifCategorieConfigsResult" type="tns:ArrayOfSheifCategorieConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSheifCategorieConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SheifCategorieConfig" nillable="true" type="tns:SheifCategorieConfig" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateSheifCategorieConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateSheifCategorieConfig" />
+  </wsdl:message>
+  <wsdl:message name="CreateSheifCategorieConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateSheifCategorieConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSheifCategorieConfigTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSheifCategorieConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSheifCategorieConfig" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSheifCategorieConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSheifCategorieConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSheifCategorieConfigTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSheifCategorieConfigs" />
+  </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSheifCategorieConfigsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigsTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:portType name="SheifConfigSoap">
+    <wsdl:operation name="CreateSheifCategorieConfig">
+      <wsdl:input message="tns:CreateSheifCategorieConfigSoapIn" />
+      <wsdl:output message="tns:CreateSheifCategorieConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSheifCategorieConfig">
+      <wsdl:input message="tns:UpdateSheifCategorieConfigSoapIn" />
+      <wsdl:output message="tns:UpdateSheifCategorieConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigs">
+      <wsdl:input message="tns:GetSheifCategorieConfigsSoapIn" />
+      <wsdl:output message="tns:GetSheifCategorieConfigsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SheifConfigSoap" type="tns:SheifConfigSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateSheifCategorieConfig">
+      <soap:operation soapAction="http://tempuri.org/CreateSheifCategorieConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSheifCategorieConfig">
+      <soap:operation soapAction="http://tempuri.org/UpdateSheifCategorieConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigs">
+      <soap:operation soapAction="http://tempuri.org/GetSheifCategorieConfigs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSheifCategorieConfigsTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheifConfigSoap12" type="tns:SheifConfigSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateSheifCategorieConfig">
+      <soap12:operation soapAction="http://tempuri.org/CreateSheifCategorieConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSheifCategorieConfig">
+      <soap12:operation soapAction="http://tempuri.org/UpdateSheifCategorieConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigs">
+      <soap12:operation soapAction="http://tempuri.org/GetSheifCategorieConfigs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSheifCategorieConfigsTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SheifConfig">
+    <wsdl:port name="SheifConfigSoap" binding="tns:SheifConfigSoap">
+      <soap:address location="http://demo.tcgcms.cn/WebService/SheifConfig.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheifConfigSoap12" binding="tns:SheifConfigSoap12">
+      <soap12:address location="http://demo.tcgcms.cn/WebService/SheifConfig.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

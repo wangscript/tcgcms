@@ -5,5 +5,11 @@
     <Setting Name="TCG_Sheif_TCG_SheifService_SheifSourceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/SheifService.asmx</Value>
     </Setting>
+    <Setting Name="TCG_Sheif_TCG_SheifConfig_SheifConfig" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/SheifConfig.asmx</Value>
+    </Setting>
+    <Setting Name="TCG_Sheif_TCG_ResourcesService_ResourcesService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/ResourcesService.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

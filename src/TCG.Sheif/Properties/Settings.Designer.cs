@@ -32,5 +32,25 @@ namespace TCG.Sheif.Properties {
                 return ((string)(this["TCG_Sheif_TCG_SheifService_SheifSourceService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/SheifConfig.asmx")]
+        public string TCG_Sheif_TCG_SheifConfig_SheifConfig {
+            get {
+                return ((string)(this["TCG_Sheif_TCG_SheifConfig_SheifConfig"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/ResourcesService.asmx")]
+        public string TCG_Sheif_TCG_ResourcesService_ResourcesService {
+            get {
+                return ((string)(this["TCG_Sheif_TCG_ResourcesService_ResourcesService"]));
+            }
+        }
     }
 }
