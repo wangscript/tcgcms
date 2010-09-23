@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace TCG.Sheif
 {
@@ -18,6 +19,16 @@ namespace TCG.Sheif
 
         private void Main_Load(object sender, EventArgs e)
         {
+
+            SheifSourceDebug sheifsourcedebug = new SheifSourceDebug();
+            DialogResult debugresult = sheifsourcedebug.ShowDialog(this);
+
+            if (DialogResult.OK == debugresult)
+            {
+
+            }
+
+            return;
 
             TCG.SheifService.SheifService sheif = new TCG.SheifService.SheifService();
             TCG.SheifConfig.SheifConfig sheifconfig = new TCG.SheifConfig.SheifConfig();
@@ -44,14 +55,44 @@ namespace TCG.Sheif
                 TCG.SheifService.SheifSourceInfo sourc = sheif.GetSheifSourceInfoById(scc.SheifSourceId);
                 if (sourc != null)
                 {
+                    //获得列表页面HTML
+                    string html = HttpWebHandlers.GetHtml(string.Format(sourc.SourceUrl, 1), Encoding.GetEncoding(sourc.CharSet));
+
                     if (sourc.IsRss)
                     {
-                           
+                        XmlDocument document = null;
+                        try
+                        {
+                            document = new XmlDocument();
+                            document.LoadXml(html);
+                        }
+                        catch { }
+
+                        if (document != null)
+                        {
+                            XmlNodeList mylist = document.GetElementsByTagName("item");
+                            if (mylist != null)
+                            {
+                                foreach (XmlElement node in mylist)
+                                {
+                                    TCG.ResourcesService.Resources res1 = new TCG.ResourcesService.Resources();
+                                    res1.vcTitle = node.SelectSingleNode("title").InnerText;
+                                    res1.SheifUrl = node.SelectSingleNode("link").InnerText;
+                                    res1.dAddDate = objectHandlers.ToTime(node.SelectSingleNode("pubDate").InnerText);
+
+                                    string reshtml = HttpWebHandlers.GetHtml(res1.SheifUrl, Encoding.GetEncoding(sourc.CharSet));
+                                    Match m = Regex.Match(html, sourc.TopicRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                                    if (m.Success)
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        //获得列表页面HTML
-                        string html = HttpWebHandlers.GetHtml(string.Format(sourc.SourceUrl, 1), Encoding.GetEncoding(sourc.CharSet));
+
 
                         //获得列表区域
                         Match m = Regex.Match(html, sourc.ListAreaRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -76,6 +117,17 @@ namespace TCG.Sheif
                 }
             }
 
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            SheifSourceDebug sheifsourcedebug = new SheifSourceDebug();
+            DialogResult debugresult =  sheifsourcedebug.ShowDialog(this);
+
+            if (DialogResult.OK == debugresult)
+            {
+
+            }
         }
     }
 }

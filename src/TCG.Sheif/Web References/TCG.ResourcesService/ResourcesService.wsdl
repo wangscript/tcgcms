@@ -34,6 +34,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="dUpDateDate" type="s:dateTime" />
               <s:element minOccurs="0" maxOccurs="1" name="vcTitleColor" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="cStrong" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SheifUrl" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
