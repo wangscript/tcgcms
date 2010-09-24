@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetAllCategorieEntity">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllCategorieEntityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllCategorieEntityResult" type="tns:ArrayOfCategories" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCategories">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Categories" nillable="true" type="tns:Categories" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Categories">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Parent" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceTemplate" type="tns:Template" />
+              <s:element minOccurs="0" maxOccurs="1" name="ResourceListTemplate" type="tns:Template" />
+              <s:element minOccurs="1" maxOccurs="1" name="iOrder" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="dUpdateDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcClassName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcDirectory" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="cVisible" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataBaseService" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SkinId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Template">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SkinId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TemplateType" type="tns:TemplateType" />
+              <s:element minOccurs="0" maxOccurs="1" name="iParentId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="iSystemType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="dUpdateDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="dAddDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcTempName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="vcUrl" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="TemplateType">
+        <s:restriction base="s:string">
+          <s:enumeration value="SinglePageType" />
+          <s:enumeration value="InfoType" />
+          <s:enumeration value="ListType" />
+          <s:enumeration value="OriginalType" />
+          <s:enumeration value="SystemPage" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="TCGSoapHeader" type="tns:TCGSoapHeader" />
+      <s:complexType name="TCGSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PassWord" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetDefaultCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDefaultCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefaultCategoriesResult" type="tns:ArrayOfCategories" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllCategorieEntitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCategorieEntity" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCategorieEntitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCategorieEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllCategorieEntityTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDefaultCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefaultCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetDefaultCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefaultCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefaultCategoriesTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
+  <wsdl:portType name="CategorieServiceSoap">
+    <wsdl:operation name="GetAllCategorieEntity">
+      <wsdl:input message="tns:GetAllCategorieEntitySoapIn" />
+      <wsdl:output message="tns:GetAllCategorieEntitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultCategories">
+      <wsdl:input message="tns:GetDefaultCategoriesSoapIn" />
+      <wsdl:output message="tns:GetDefaultCategoriesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CategorieServiceSoap" type="tns:CategorieServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllCategorieEntity">
+      <soap:operation soapAction="http://tempuri.org/GetAllCategorieEntity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllCategorieEntityTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultCategories">
+      <soap:operation soapAction="http://tempuri.org/GetDefaultCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDefaultCategoriesTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CategorieServiceSoap12" type="tns:CategorieServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllCategorieEntity">
+      <soap12:operation soapAction="http://tempuri.org/GetAllCategorieEntity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllCategorieEntityTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultCategories">
+      <soap12:operation soapAction="http://tempuri.org/GetDefaultCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDefaultCategoriesTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CategorieService">
+    <wsdl:port name="CategorieServiceSoap" binding="tns:CategorieServiceSoap">
+      <soap:address location="http://demo.tcgcms.cn/WebService/CategorieService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CategorieServiceSoap12" binding="tns:CategorieServiceSoap12">
+      <soap12:address location="http://demo.tcgcms.cn/WebService/CategorieService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

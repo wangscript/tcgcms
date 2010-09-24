@@ -71,6 +71,11 @@
     </Compile>
     <Compile Include="Utils\HttpWebHandlers.cs" />
     <Compile Include="Utils\objectHandlers.cs" />
+    <Compile Include="Web References\TCG.CategorieService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\TCG.ResourcesService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,6 +117,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Web References\TCG.CategorieService\Categories.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\TCG.CategorieService\CategorieService.wsdl" />
+    <None Include="Web References\TCG.CategorieService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\TCG.ResourcesService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -138,6 +151,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://demo.tcgcms.cn/WebService/CategorieService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TCG.CategorieService\</RelPath>
+      <UpdateFromURL>http://demo.tcgcms.cn/WebService/CategorieService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TCG_Sheif_TCG_CategorieService_CategorieService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://demo.tcgcms.cn/WebService/ResourcesService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TCG.ResourcesService\</RelPath>
@@ -183,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\TCG.ResourcesService\ResourcesService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\TCG.CategorieService\CategorieService.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

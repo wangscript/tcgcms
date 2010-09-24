@@ -17,106 +17,80 @@ namespace TCG.Sheif
             InitializeComponent();
         }
 
+        public TCG.SheifConfig.SheifConfig sheifConfig;
+        public TCG.SheifService.SheifService sheifService;
+        public TCG.ResourcesService.ResourcesService resourcesService;
+        public TCG.CategorieService.CategorieService categorieService;
+        public TCG.CategorieService.Categories[] categories;
+
+        private TreeNode selectNode;
+
         private void Main_Load(object sender, EventArgs e)
         {
+            this.ServiceInit();
 
-            SheifSourceDebug sheifsourcedebug = new SheifSourceDebug();
-            DialogResult debugresult = sheifsourcedebug.ShowDialog(this);
+            this.CategoriesInit();
 
-            if (DialogResult.OK == debugresult)
-            {
-
-            }
-
-            return;
-
-            TCG.SheifService.SheifService sheif = new TCG.SheifService.SheifService();
-            TCG.SheifConfig.SheifConfig sheifconfig = new TCG.SheifConfig.SheifConfig();
-            TCG.ResourcesService.ResourcesService ResourcesService = new TCG.ResourcesService.ResourcesService();
-
-            TCG.SheifService.TCGSoapHeader myHeader = new TCG.SheifService.TCGSoapHeader();
-            myHeader.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
-            sheif.TCGSoapHeaderValue = myHeader;
-
-
-            TCG.SheifConfig.TCGSoapHeader myHeader1 = new TCG.SheifConfig.TCGSoapHeader();
-            myHeader1.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
-            sheifconfig.TCGSoapHeaderValue = myHeader1;
-
-            TCG.ResourcesService.TCGSoapHeader myHeader2 = new TCG.ResourcesService.TCGSoapHeader();
-            myHeader2.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
-            ResourcesService.TCGSoapHeaderValue = myHeader2;
-
-            TCG.SheifConfig.SheifCategorieConfig[] sheifconfigs = sheifconfig.GetSheifCategorieConfigs();
+            TCG.SheifConfig.SheifCategorieConfig[] sheifconfigs = sheifConfig.GetSheifCategorieConfigs();
 
             for (int i = 0; i < sheifconfigs.Length; i++)
             {
                 TCG.SheifConfig.SheifCategorieConfig scc = sheifconfigs[i];
-                TCG.SheifService.SheifSourceInfo sourc = sheif.GetSheifSourceInfoById(scc.SheifSourceId);
+                TCG.SheifService.SheifSourceInfo sourc = sheifService.GetSheifSourceInfoById(scc.SheifSourceId);
                 if (sourc != null)
                 {
-                    //获得列表页面HTML
-                    string html = HttpWebHandlers.GetHtml(string.Format(sourc.SourceUrl, 1), Encoding.GetEncoding(sourc.CharSet));
-
-                    if (sourc.IsRss)
-                    {
-                        XmlDocument document = null;
-                        try
-                        {
-                            document = new XmlDocument();
-                            document.LoadXml(html);
-                        }
-                        catch { }
-
-                        if (document != null)
-                        {
-                            XmlNodeList mylist = document.GetElementsByTagName("item");
-                            if (mylist != null)
-                            {
-                                foreach (XmlElement node in mylist)
-                                {
-                                    TCG.ResourcesService.Resources res1 = new TCG.ResourcesService.Resources();
-                                    res1.vcTitle = node.SelectSingleNode("title").InnerText;
-                                    res1.SheifUrl = node.SelectSingleNode("link").InnerText;
-                                    res1.dAddDate = objectHandlers.ToTime(node.SelectSingleNode("pubDate").InnerText);
-
-                                    string reshtml = HttpWebHandlers.GetHtml(res1.SheifUrl, Encoding.GetEncoding(sourc.CharSet));
-                                    Match m = Regex.Match(html, sourc.TopicRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                                    if (m.Success)
-                                    {
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-
-
-                        //获得列表区域
-                        Match m = Regex.Match(html, sourc.ListAreaRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                        if (m.Success)
-                        {
-                            string listcontenthtml = m.Value;
-
-                            //获得文章页面URL
-
-                            MatchCollection matchs = Regex.Matches(listcontenthtml, sourc.TopicListRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                            if (matchs.Count > 0)
-                            {
-                                foreach (Match mt in matchs)
-                                {
-                                    TCG.ResourcesService.Resources res = new TCG.ResourcesService.Resources();
-
-                                    int rtn = ResourcesService.CreateResources(res);
-                                }
-                            }
-                        }
-                    }
+                    
                 }
             }
 
+        }
+
+        private void CategoriesInit()
+        {
+            categories = categorieService.GetAllCategorieEntity();
+            this.trCategories.Nodes.Add("0", "所有分类");
+            this.InitTreeViewNodes(this.trCategories.Nodes[0], "0");
+        }
+
+        private void InitTreeViewNodes(TreeNode node, string parentid)
+        {
+            for (int i = 0; i < this.categories.Length;i++)
+            {
+                TCG.CategorieService.Categories tempcategories = this.categories[i];
+                if (tempcategories.Parent == parentid)
+                {
+                    TreeNode tnode = new TreeNode();
+                    tnode.Name = tempcategories.Id;
+                    tnode.Text = tempcategories.vcClassName;
+                    node.Nodes.Add(tnode);
+                    this.InitTreeViewNodes(tnode, tempcategories.Id);
+                }
+            }
+        }
+
+        private void ServiceInit()
+        {
+            sheifService = new TCG.SheifService.SheifService();
+            sheifConfig = new TCG.SheifConfig.SheifConfig();
+            resourcesService = new TCG.ResourcesService.ResourcesService();
+            categorieService = new TCG.CategorieService.CategorieService();
+
+            TCG.SheifService.TCGSoapHeader myHeader = new TCG.SheifService.TCGSoapHeader();
+            myHeader.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            sheifService.TCGSoapHeaderValue = myHeader;
+
+
+            TCG.SheifConfig.TCGSoapHeader myHeader1 = new TCG.SheifConfig.TCGSoapHeader();
+            myHeader1.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            sheifConfig.TCGSoapHeaderValue = myHeader1;
+
+            TCG.ResourcesService.TCGSoapHeader myHeader2 = new TCG.ResourcesService.TCGSoapHeader();
+            myHeader2.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            resourcesService.TCGSoapHeaderValue = myHeader2;
+
+            TCG.CategorieService.TCGSoapHeader myHeader3 = new TCG.CategorieService.TCGSoapHeader();
+            myHeader3.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            categorieService.TCGSoapHeaderValue = myHeader3;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -129,5 +103,31 @@ namespace TCG.Sheif
 
             }
         }
+
+        private void trCategories_MouseClick(object sender, MouseEventArgs e)
+        {
+            trCategories.ContextMenuStrip = null;
+            selectNode = trCategories.GetNodeAt(e.X, e.Y);
+
+            if (e.Button == MouseButtons.Right)
+            {
+
+                ContextMenuStrip con = new ContextMenuStrip();
+
+                con.Items.Add("配置爬虫", null, new EventHandler(trCategories_SheifCategorieConfig));
+
+                trCategories.ContextMenuStrip = con;
+                con.Show(trCategories, new Point(e.X + 10, e.Y));
+                trCategories.ContextMenuStrip = null;
+            }
+        }
+
+        private void trCategories_SheifCategorieConfig(object sender, EventArgs e)
+        {
+            string selectid = this.selectNode.Name;
+            if (selectid == "0") return;
+           
+        }
+
     }
 }
