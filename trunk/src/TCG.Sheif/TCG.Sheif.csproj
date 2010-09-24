@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategorieSheifSourccConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategorieSheifSourccConfig.Designer.cs">
+      <DependentUpon>CategorieSheifSourccConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TreeHeadDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -91,6 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CategorieSheifSourccConfig.resx">
+      <DependentUpon>CategorieSheifSourccConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
