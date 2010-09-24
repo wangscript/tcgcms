@@ -27,6 +27,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Xml;
+using System.Web.Services.Protocols;
 using System.Reflection;
 
 namespace TCG.WebService
@@ -41,6 +42,7 @@ namespace TCG.WebService
     // [System.Web.Script.Services.ScriptService]
     public class CategorieService : ServiceMain
     {
+        public TCGSoapHeader header;
 
         public CategorieService()
         {
@@ -50,11 +52,30 @@ namespace TCG.WebService
         }
 
         [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
         public List<Categories> GetAllCategorieEntity()
         {
             //if (!ServiceHandlers.CheckHeader()) return null;
 
             Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
+            if (allcategories != null && allcategories.Count > 0)
+            {
+                List<Categories> alist = new List<Categories>();
+                foreach (KeyValuePair<string, EntityBase> entity in allcategories)
+                {
+                    Categories tempcategories = (Categories)entity.Value;
+                    alist.Add(tempcategories);
+                }
+                return alist;
+            }
+            return null;
+        }
+
+        [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public List<Categories> GetDefaultCategories()
+        {
+            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId);
             if (allcategories != null && allcategories.Count > 0)
             {
                 List<Categories> alist = new List<Categories>();

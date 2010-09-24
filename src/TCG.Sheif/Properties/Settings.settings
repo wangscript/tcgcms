@@ -11,5 +11,8 @@
     <Setting Name="TCG_Sheif_TCG_ResourcesService_ResourcesService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/ResourcesService.asmx</Value>
     </Setting>
+    <Setting Name="TCG_Sheif_TCG_CategorieService_CategorieService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/CategorieService.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
