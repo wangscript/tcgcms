@@ -22,8 +22,10 @@ namespace TCG.Sheif
         public TCG.ResourcesService.ResourcesService resourcesService;
         public TCG.CategorieService.CategorieService categorieService;
         public TCG.CategorieService.Categories[] categories;
+        public TCG.SheifService.SheifSourceInfo[] sheifsourceinfos;
 
         private TreeNode selectNode;
+         
 
         private void Main_Load(object sender, EventArgs e)
         {
@@ -126,6 +128,19 @@ namespace TCG.Sheif
         {
             string selectid = this.selectNode.Name;
             if (selectid == "0") return;
+
+            sheifsourceinfos = this.sheifService.GetAllSheifSourceInfos();
+
+            CategorieSheifSourccConfig categorieSheifSourccConfig = new CategorieSheifSourccConfig();
+            categorieSheifSourccConfig.localCategorieId = selectid;
+            categorieSheifSourccConfig.sheifsourceinfos = sheifsourceinfos;
+
+            DialogResult configresult = categorieSheifSourccConfig.ShowDialog(this);
+
+            if (DialogResult.OK == configresult)
+            {
+
+            }
            
         }
 
