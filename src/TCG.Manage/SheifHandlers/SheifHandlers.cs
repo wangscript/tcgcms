@@ -78,6 +78,7 @@ namespace TCG.Handlers
 
         public int CreateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
+            base.SetDataBaseConnection();
             string Sql = "INSERT INTO SheifCategorieConfig (Id,SheifSourceId,LocalCategorieId) VALUES(";
             Sql += "'"+ Guid.NewGuid().ToString() +"','" + sheifcategorieconfig.SheifSourceId + "','" + sheifcategorieconfig.LocalCategorieId + "')";
             return base.conn.Execute(Sql);
@@ -85,9 +86,10 @@ namespace TCG.Handlers
 
         public int UpdateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
-            string Sql = "UPDATE SheifCategorieConfig SET LocalCategorieId = '"
-                + sheifcategorieconfig.LocalCategorieId + "',ResourceCreateDateTime = '" + sheifcategorieconfig.ResourceCreateDateTime.ToString() + "'";
-            Sql += " WHERE SheifSourceId='" + sheifcategorieconfig.SheifSourceId + "'";
+            base.SetDataBaseConnection();
+            string Sql = "UPDATE SheifCategorieConfig SET SheifSourceId = '"
+                + sheifcategorieconfig.SheifSourceId + "',ResourceCreateDateTime = '" + sheifcategorieconfig.ResourceCreateDateTime.ToString() + "'";
+            Sql += " WHERE LocalCategorieId='" + sheifcategorieconfig.LocalCategorieId + "'";
             return base.conn.Execute(Sql);
         }
 
