@@ -35,13 +35,16 @@ namespace TCG.Sheif
 
             TCG.SheifConfig.SheifCategorieConfig[] sheifconfigs = sheifConfig.GetSheifCategorieConfigs();
 
-            for (int i = 0; i < sheifconfigs.Length; i++)
+            if (sheifconfigs != null)
             {
-                TCG.SheifConfig.SheifCategorieConfig scc = sheifconfigs[i];
-                TCG.SheifService.SheifSourceInfo sourc = sheifService.GetSheifSourceInfoById(scc.SheifSourceId);
-                if (sourc != null)
+                for (int i = 0; i < sheifconfigs.Length; i++)
                 {
-                    
+                    TCG.SheifConfig.SheifCategorieConfig scc = sheifconfigs[i];
+                    TCG.SheifService.SheifSourceInfo sourc = sheifService.GetSheifSourceInfoById(scc.SheifSourceId);
+                    if (sourc != null)
+                    {
+
+                    }
                 }
             }
 
