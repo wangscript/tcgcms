@@ -38,11 +38,41 @@ namespace TCG.Sheif
             {
                 sheifcategorieconfig = new TCG.SheifConfig.SheifCategorieConfig();
                 sheifcategorieconfig.LocalCategorieId = this.localCategorieId;
+
+                DataGridViewComboBoxColumn sheifsources = (DataGridViewComboBoxColumn)this.dataGridView1.Columns[0];
+
+                if (sheifsourceinfos != null)
+                {
+                    for (int i = 0; i < sheifsourceinfos.Length; i++)
+                    {
+                        TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
+                        sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
+                    }
+                }
             }
             else
             {
                 if (sheifcategorieconfig.SheifSourceId.IndexOf(",") > -1)
                 {
+                    string[] sccs = sheifcategorieconfig.SheifSourceId.Split(',');
+                    for (int i = 0; i < sccs.Length; i++)
+                    {
+                        DataGridViewComboBoxColumn sheifsources = new DataGridViewComboBoxColumn();
+                        if (sheifsourceinfos != null)
+                        {
+                            for (int n = 0; n < sheifsourceinfos.Length; n++)
+                            {
+                                TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
+                                sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
+                                if (sourceinfo.Id == sccs[i])
+                                {
+                                    ((DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[0]).Style.NullValue = sourceinfo.SourceName + "|" + sourceinfo.Id;
+                                }
+                            }
+                        }
+
+                        this.dataGridView1.Rows.Add(sheifsources);
+                    }
                 }
                 else
                 {
@@ -63,28 +93,6 @@ namespace TCG.Sheif
                 }
             }
 
-
-            foreach (TUserConfig p in userconfiglsit)
-            {
-                string configx = "";
-
-                int c = 0;
-                foreach (string array in p.PList)
-                {
-                    c++;
-                    configx += array;
-
-                    if (c < p.PList.Count)
-                        configx += ",";
-
-                }
-
-                this.dataGridView1.Rows.Add(configx, p.MinF, p.MaxF);
-
-            }
-
-            
-
             this.Closed += new EventHandler(CategorieSheifSourccConfig_Closed);
 
         }
@@ -96,10 +104,14 @@ namespace TCG.Sheif
                 string sources = string.Empty;
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    if (dataGridView1.Rows[i].Cells[0].Value != null && this.IsInList(dataGridView1.Rows[i].Cells[0].Value.ToString(),i))
+                    if (dataGridView1.Rows[i].Cells[0].Value != null)
                     {
-                        string text = string.IsNullOrEmpty(sources) ? "" : ",";
-                        sources += text + dataGridView1.Rows[i].Cells[0].Value.ToString().Split('|')[1];
+                        string[] arrs = dataGridView1.Rows[i].Cells[0].Value.ToString().Split('|');
+                        if (sources.IndexOf(arrs[1]) == -1)
+                        {
+                            string text = string.IsNullOrEmpty(sources) ? "" : ",";
+                            sources += text + arrs[1];
+                        }
                     }
                 }
 
@@ -119,8 +131,14 @@ namespace TCG.Sheif
         {
             if (e.ColumnIndex == 0)
             {
-                
-                string value = dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString();
+                string value = (dataGridView1[e.ColumnIndex, e.RowIndex].Value + "").ToString();
+                if (string.IsNullOrEmpty(value))
+                {
+                    MessageBox.Show("分类不能为空");
+                    //dataGridView1.Rows.Remove(dataGridView1.Rows[e.RowIndex]);
+                    return;
+                }
+
                 if (IsInList(value, e.RowIndex))
                 {
                     MessageBox.Show("已经设置了该分类");
