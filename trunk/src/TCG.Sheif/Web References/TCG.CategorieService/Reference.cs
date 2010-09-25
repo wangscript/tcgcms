@@ -34,6 +34,8 @@ namespace TCG.Sheif.TCG.CategorieService {
         
         private System.Threading.SendOrPostCallback GetAllCategorieEntityOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetCategorieByIdOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetDefaultCategoriesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -87,6 +89,9 @@ namespace TCG.Sheif.TCG.CategorieService {
         public event GetAllCategorieEntityCompletedEventHandler GetAllCategorieEntityCompleted;
         
         /// <remarks/>
+        public event GetCategorieByIdCompletedEventHandler GetCategorieByIdCompleted;
+        
+        /// <remarks/>
         public event GetDefaultCategoriesCompletedEventHandler GetDefaultCategoriesCompleted;
         
         /// <remarks/>
@@ -114,6 +119,36 @@ namespace TCG.Sheif.TCG.CategorieService {
             if ((this.GetAllCategorieEntityCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAllCategorieEntityCompleted(this, new GetAllCategorieEntityCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetCategorieById", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Categories GetCategorieById(string categorieid) {
+            object[] results = this.Invoke("GetCategorieById", new object[] {
+                        categorieid});
+            return ((Categories)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetCategorieByIdAsync(string categorieid) {
+            this.GetCategorieByIdAsync(categorieid, null);
+        }
+        
+        /// <remarks/>
+        public void GetCategorieByIdAsync(string categorieid, object userState) {
+            if ((this.GetCategorieByIdOperationCompleted == null)) {
+                this.GetCategorieByIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCategorieByIdOperationCompleted);
+            }
+            this.InvokeAsync("GetCategorieById", new object[] {
+                        categorieid}, this.GetCategorieByIdOperationCompleted, userState);
+        }
+        
+        private void OnGetCategorieByIdOperationCompleted(object arg) {
+            if ((this.GetCategorieByIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCategorieByIdCompleted(this, new GetCategorieByIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -536,6 +571,32 @@ namespace TCG.Sheif.TCG.CategorieService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Categories[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetCategorieByIdCompletedEventHandler(object sender, GetCategorieByIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCategorieByIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetCategorieByIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Categories Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Categories)(this.results[0]));
             }
         }
     }

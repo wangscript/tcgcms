@@ -53,6 +53,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetSheifCategorieConfigById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sheifcategorieconfigid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSheifCategorieConfigByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSheifCategorieConfigByIdResult" type="tns:SheifCategorieConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetSheifCategorieConfigs">
         <s:complexType />
       </s:element>
@@ -88,6 +102,15 @@
   <wsdl:message name="UpdateSheifCategorieConfigTCGSoapHeader">
     <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
   </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSheifCategorieConfigById" />
+  </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSheifCategorieConfigByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSheifCategorieConfigByIdTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
   <wsdl:message name="GetSheifCategorieConfigsSoapIn">
     <wsdl:part name="parameters" element="tns:GetSheifCategorieConfigs" />
   </wsdl:message>
@@ -105,6 +128,10 @@
     <wsdl:operation name="UpdateSheifCategorieConfig">
       <wsdl:input message="tns:UpdateSheifCategorieConfigSoapIn" />
       <wsdl:output message="tns:UpdateSheifCategorieConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigById">
+      <wsdl:input message="tns:GetSheifCategorieConfigByIdSoapIn" />
+      <wsdl:output message="tns:GetSheifCategorieConfigByIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetSheifCategorieConfigs">
       <wsdl:input message="tns:GetSheifCategorieConfigsSoapIn" />
@@ -128,6 +155,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:UpdateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigById">
+      <soap:operation soapAction="http://tempuri.org/GetSheifCategorieConfigById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSheifCategorieConfigByIdTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -161,6 +198,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:UpdateSheifCategorieConfigTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSheifCategorieConfigById">
+      <soap12:operation soapAction="http://tempuri.org/GetSheifCategorieConfigById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSheifCategorieConfigByIdTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

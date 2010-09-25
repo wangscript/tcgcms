@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Xml.Linq;
 using System.Web.Services;
 
 
@@ -65,6 +66,26 @@ namespace TCG.WebService
             return base.handlerService.sheifService.sheifHandlers.UpdateSheifCategorieConfig(sheifcategorieconfig);
         }
 
+        [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public SheifCategorieConfig GetSheifCategorieConfigById(string sheifcategorieconfigid)
+        {
+            if (!base.serviceHandlers.CheckHeader(header))
+            {
+                return null;
+            }
+
+            Dictionary<string, SheifCategorieConfig> sources = null;
+            int rtn = base.handlerService.sheifService.sheifHandlers.GeSheifcategorieconfigs(ref sources);
+            if (rtn < 0)
+            {
+                return null;
+            }
+
+            if (sources != null && sources.Count > 0 && sources.ContainsKey(sheifcategorieconfigid)) return sources[sheifcategorieconfigid];
+            return null;
+        }
+
 
         [WebMethod]
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]
@@ -75,14 +96,25 @@ namespace TCG.WebService
                 return null;
             }
 
-            List<SheifCategorieConfig> sources = null;
+            Dictionary<string,SheifCategorieConfig> sources = null;
             int rtn = base.handlerService.sheifService.sheifHandlers.GeSheifcategorieconfigs(ref sources);
             if (rtn < 0)
             {
                 return null;
             }
 
-            return sources;
+            if (sources != null && sources.Count > 0)
+            {
+                List<SheifCategorieConfig> alist = new List<SheifCategorieConfig>();
+                foreach (KeyValuePair<string, SheifCategorieConfig> entity in sources)
+                {
+                    SheifCategorieConfig tempcategories = (SheifCategorieConfig)entity.Value;
+                    alist.Add(tempcategories);
+                }
+                return alist;
+            }
+
+            return null;
         }
     }
 }

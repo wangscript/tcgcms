@@ -134,6 +134,8 @@ namespace TCG.Sheif
             CategorieSheifSourccConfig categorieSheifSourccConfig = new CategorieSheifSourccConfig();
             categorieSheifSourccConfig.localCategorieId = selectid;
             categorieSheifSourccConfig.sheifsourceinfos = sheifsourceinfos;
+            categorieSheifSourccConfig.categorieservice = this.categorieService;
+            categorieSheifSourccConfig.sheifConfig = this.sheifConfig;
 
             DialogResult configresult = categorieSheifSourccConfig.ShowDialog(this);
 

@@ -55,7 +55,10 @@ namespace TCG.WebService
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]
         public List<Categories> GetAllCategorieEntity()
         {
-            //if (!ServiceHandlers.CheckHeader()) return null;
+            if (!base.serviceHandlers.CheckHeader(header))
+            {
+                return null;
+            }
 
             Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
             if (allcategories != null && allcategories.Count > 0)
@@ -67,6 +70,26 @@ namespace TCG.WebService
                     alist.Add(tempcategories);
                 }
                 return alist;
+            }
+            return null;
+        }
+
+        [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public Categories GetCategorieById(string categorieid)
+        {
+            if (!base.serviceHandlers.CheckHeader(header))
+            {
+                return null;
+            }
+
+            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId);
+            if (allcategories != null && allcategories.Count > 0)
+            {
+                if (allcategories.ContainsKey(categorieid))
+                {
+                    return (Categories)allcategories[categorieid];
+                }
             }
             return null;
         }

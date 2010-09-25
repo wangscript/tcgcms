@@ -36,6 +36,8 @@ namespace TCG.Sheif.TCG.SheifConfig {
         
         private System.Threading.SendOrPostCallback UpdateSheifCategorieConfigOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetSheifCategorieConfigByIdOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetSheifCategorieConfigsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -90,6 +92,9 @@ namespace TCG.Sheif.TCG.SheifConfig {
         
         /// <remarks/>
         public event UpdateSheifCategorieConfigCompletedEventHandler UpdateSheifCategorieConfigCompleted;
+        
+        /// <remarks/>
+        public event GetSheifCategorieConfigByIdCompletedEventHandler GetSheifCategorieConfigByIdCompleted;
         
         /// <remarks/>
         public event GetSheifCategorieConfigsCompletedEventHandler GetSheifCategorieConfigsCompleted;
@@ -151,6 +156,36 @@ namespace TCG.Sheif.TCG.SheifConfig {
             if ((this.UpdateSheifCategorieConfigCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UpdateSheifCategorieConfigCompleted(this, new UpdateSheifCategorieConfigCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetSheifCategorieConfigById", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public SheifCategorieConfig GetSheifCategorieConfigById(string sheifcategorieconfigid) {
+            object[] results = this.Invoke("GetSheifCategorieConfigById", new object[] {
+                        sheifcategorieconfigid});
+            return ((SheifCategorieConfig)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetSheifCategorieConfigByIdAsync(string sheifcategorieconfigid) {
+            this.GetSheifCategorieConfigByIdAsync(sheifcategorieconfigid, null);
+        }
+        
+        /// <remarks/>
+        public void GetSheifCategorieConfigByIdAsync(string sheifcategorieconfigid, object userState) {
+            if ((this.GetSheifCategorieConfigByIdOperationCompleted == null)) {
+                this.GetSheifCategorieConfigByIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSheifCategorieConfigByIdOperationCompleted);
+            }
+            this.InvokeAsync("GetSheifCategorieConfigById", new object[] {
+                        sheifcategorieconfigid}, this.GetSheifCategorieConfigByIdOperationCompleted, userState);
+        }
+        
+        private void OnGetSheifCategorieConfigByIdOperationCompleted(object arg) {
+            if ((this.GetSheifCategorieConfigByIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetSheifCategorieConfigByIdCompleted(this, new GetSheifCategorieConfigByIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -351,6 +386,32 @@ namespace TCG.Sheif.TCG.SheifConfig {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void GetSheifCategorieConfigByIdCompletedEventHandler(object sender, GetSheifCategorieConfigByIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetSheifCategorieConfigByIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetSheifCategorieConfigByIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public SheifCategorieConfig Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((SheifCategorieConfig)(this.results[0]));
             }
         }
     }
