@@ -75,6 +75,20 @@
         </s:sequence>
         <s:anyAttribute />
       </s:complexType>
+      <s:element name="GetCategorieById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="categorieid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategorieByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategorieByIdResult" type="tns:Categories" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetDefaultCategories">
         <s:complexType />
       </s:element>
@@ -96,6 +110,15 @@
   <wsdl:message name="GetAllCategorieEntityTCGSoapHeader">
     <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
   </wsdl:message>
+  <wsdl:message name="GetCategorieByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategorieById" />
+  </wsdl:message>
+  <wsdl:message name="GetCategorieByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategorieByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategorieByIdTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
   <wsdl:message name="GetDefaultCategoriesSoapIn">
     <wsdl:part name="parameters" element="tns:GetDefaultCategories" />
   </wsdl:message>
@@ -110,6 +133,10 @@
       <wsdl:input message="tns:GetAllCategorieEntitySoapIn" />
       <wsdl:output message="tns:GetAllCategorieEntitySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetCategorieById">
+      <wsdl:input message="tns:GetCategorieByIdSoapIn" />
+      <wsdl:output message="tns:GetCategorieByIdSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetDefaultCategories">
       <wsdl:input message="tns:GetDefaultCategoriesSoapIn" />
       <wsdl:output message="tns:GetDefaultCategoriesSoapOut" />
@@ -122,6 +149,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:GetAllCategorieEntityTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategorieById">
+      <soap:operation soapAction="http://tempuri.org/GetCategorieById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCategorieByIdTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -145,6 +182,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:GetAllCategorieEntityTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategorieById">
+      <soap12:operation soapAction="http://tempuri.org/GetCategorieById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetCategorieByIdTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

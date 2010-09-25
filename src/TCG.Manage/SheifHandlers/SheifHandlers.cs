@@ -78,8 +78,8 @@ namespace TCG.Handlers
 
         public int CreateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
-            string Sql = "INSERT INTO SheifCategorieConfig (SheifSourceId,LocalCategorieId) VALUES(";
-            Sql += "'" + sheifcategorieconfig.SheifSourceId + "','" + sheifcategorieconfig.LocalCategorieId + "')";
+            string Sql = "INSERT INTO SheifCategorieConfig (Id,SheifSourceId,LocalCategorieId) VALUES(";
+            Sql += "'"+ Guid.NewGuid().ToString() +"','" + sheifcategorieconfig.SheifSourceId + "','" + sheifcategorieconfig.LocalCategorieId + "')";
             return base.conn.Execute(Sql);
         }
 
@@ -91,19 +91,19 @@ namespace TCG.Handlers
             return base.conn.Execute(Sql);
         }
 
-        public int GeSheifcategorieconfigs(ref List<SheifCategorieConfig> sheifcategorieconfigs)
+        public int GeSheifcategorieconfigs(ref Dictionary<string,SheifCategorieConfig> sheifcategorieconfigs)
         {
             base.SetDataBaseConnection();
             DataTable dt = base.conn.GetDataTable("SELECT * FROM [SheifCategorieConfig] (NOLOCK) ");
             if (dt == null) return -19000000;
             if (dt.Rows.Count == 0) return -19000000;
 
-            sheifcategorieconfigs = new List<SheifCategorieConfig>();
+            sheifcategorieconfigs = new Dictionary<string,SheifCategorieConfig>();
 
             foreach (DataRow Row in dt.Rows)
             {
                 SheifCategorieConfig sheifcategorieconfig = (SheifCategorieConfig)base.GetEntityObjectFromRow(Row, typeof(SheifCategorieConfig));
-                sheifcategorieconfigs.Add(sheifcategorieconfig);
+                sheifcategorieconfigs.Add(sheifcategorieconfig.LocalCategorieId,sheifcategorieconfig);
             }
 
             return 1;
