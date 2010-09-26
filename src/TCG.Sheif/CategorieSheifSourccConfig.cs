@@ -33,22 +33,23 @@ namespace TCG.Sheif
 
             this.Text = categories.vcClassName + "源网站配置";
 
+            DataGridViewComboBoxColumn sheifsources = (DataGridViewComboBoxColumn)this.dataGridView1.Columns[0];
+
+            if (sheifsourceinfos != null)
+            {
+                for (int i = 0; i < sheifsourceinfos.Length; i++)
+                {
+                    TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
+                    sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
+                }
+            }
+
+
             sheifcategorieconfig = sheifConfig.GetSheifCategorieConfigById(this.localCategorieId);
             if (sheifcategorieconfig == null)
             {
                 sheifcategorieconfig = new TCG.SheifConfig.SheifCategorieConfig();
                 sheifcategorieconfig.LocalCategorieId = this.localCategorieId;
-
-                DataGridViewComboBoxColumn sheifsources = (DataGridViewComboBoxColumn)this.dataGridView1.Columns[0];
-
-                if (sheifsourceinfos != null)
-                {
-                    for (int i = 0; i < sheifsourceinfos.Length; i++)
-                    {
-                        TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
-                        sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
-                    }
-                }
             }
             else
             {
@@ -57,39 +58,45 @@ namespace TCG.Sheif
                     string[] sccs = sheifcategorieconfig.SheifSourceId.Split(',');
                     for (int i = 0; i < sccs.Length; i++)
                     {
-                        DataGridViewComboBoxColumn sheifsources = new DataGridViewComboBoxColumn();
+                        DataGridViewRow row = new DataGridViewRow();
+                        DataGridViewComboBoxCell cel = new DataGridViewComboBoxCell(); 
                         if (sheifsourceinfos != null)
                         {
                             for (int n = 0; n < sheifsourceinfos.Length; n++)
                             {
-                                TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
-                                sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
+                                TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[n];
+                                cel.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
                                 if (sourceinfo.Id == sccs[i])
                                 {
-                                    ((DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[0]).Style.NullValue = sourceinfo.SourceName + "|" + sourceinfo.Id;
+                                    cel.Value = sourceinfo.SourceName + "|" + sourceinfo.Id;
                                 }
                             }
                         }
+                        this.dataGridView1.Rows.Add();
+                        this.dataGridView1.Rows[i].Cells[0] = cel; 
 
-                        this.dataGridView1.Rows.Add(sheifsources);
+                        
                     }
                 }
                 else
                 {
-                    DataGridViewComboBoxColumn sheifsources = (DataGridViewComboBoxColumn)this.dataGridView1.Columns[0];
+
+                    DataGridViewComboBoxCell cel = new DataGridViewComboBoxCell();
 
                     if (sheifsourceinfos != null)
                     {
                         for (int i = 0; i < sheifsourceinfos.Length; i++)
                         {
                             TCG.SheifService.SheifSourceInfo sourceinfo = sheifsourceinfos[i];
-                            sheifsources.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
+                            cel.Items.Add(sourceinfo.SourceName + "|" + sourceinfo.Id);
                             if (sourceinfo.Id == sheifcategorieconfig.SheifSourceId)
                             {
-                                ((DataGridViewComboBoxCell)dataGridView1.Rows[0].Cells[0]).Style.NullValue = sourceinfo.SourceName + "|" + sourceinfo.Id;
+                                cel.Value = sourceinfo.SourceName + "|" + sourceinfo.Id;
                             }
                         }
                     }
+                    this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[0].Cells[0] = cel; 
                 }
             }
 
