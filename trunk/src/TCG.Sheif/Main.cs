@@ -33,6 +33,11 @@ namespace TCG.Sheif
 
             this.CategoriesInit();
 
+            StartSheif();
+        }
+
+        private void StartSheif()
+        {
             TCG.SheifConfig.SheifCategorieConfig[] sheifconfigs = sheifConfig.GetSheifCategorieConfigs();
 
             if (sheifconfigs != null)
@@ -40,14 +45,46 @@ namespace TCG.Sheif
                 for (int i = 0; i < sheifconfigs.Length; i++)
                 {
                     TCG.SheifConfig.SheifCategorieConfig scc = sheifconfigs[i];
-                    TCG.SheifService.SheifSourceInfo sourc = sheifService.GetSheifSourceInfoById(scc.SheifSourceId);
-                    if (sourc != null)
+                    if (scc.SheifSourceId.IndexOf(",") == -1)
                     {
-
+                        TCG.SheifService.SheifSourceInfo sourc = sheifService.GetSheifSourceInfoById(scc.SheifSourceId);
+                        if (sourc != null)
+                        {
+                            this.SheifRes(sourc, scc);
+                        }
+                    }
+                    else
+                    {
+                        string[] sourceids = scc.SheifSourceId.Split(',');
+                        for (int n = 0; n < sourceids.Length; i++)
+                        {
+                            TCG.SheifService.SheifSourceInfo sourc1 = sheifService.GetSheifSourceInfoById(sourceids[n]);
+                            if (sourc1 != null)
+                            {
+                                this.SheifRes(sourc1, scc);
+                            }
+                        }
                     }
                 }
             }
+        }
 
+        private void SheifRes(TCG.SheifService.SheifSourceInfo sourc, TCG.SheifConfig.SheifCategorieConfig scc)
+        {
+            string errText = string.Empty;
+            List<TCG.ResourcesService.Resources> res = new List<TCG.ResourcesService.Resources>();
+            int rtn = SheifHandlers.SheifTopicList(ref errText, ref res, sourc, 1, 1);
+            if (res != null && res.Count > 0)
+            {
+                for (int i = 0; i < res.Count; i++)
+                {
+                    TCG.ResourcesService.Resources resinfo =new TCG.ResourcesService.Resources();
+                    rtn = SheifHandlers.SheifTopic(ref errText, ref resinfo, sourc, res[i].SheifUrl);
+
+                    this.dataGridView1.Rows.Add(resinfo.vcTitle,resinfo.SheifUrl,resinfo.dAddDate.ToString());
+
+                }
+            }
         }
 
         private void CategoriesInit()
