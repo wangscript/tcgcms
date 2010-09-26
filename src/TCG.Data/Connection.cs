@@ -92,6 +92,7 @@ namespace TCG.Data
                 }
                 return 0;
             }
+            this.Close();
         }
 
         public void Execute(string procName, SqlParameter[] parameters)
@@ -105,6 +106,7 @@ namespace TCG.Data
                 command1.Parameters.Add(parameter1);
             }
             command1.ExecuteNonQuery();
+            this.Close();
         }
 
         /// <summary>
