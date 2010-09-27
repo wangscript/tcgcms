@@ -12,7 +12,9 @@ namespace TCG.Sheif
     public partial class SheifSourceDebug : Form
     {
         private TCG.SheifService.SheifSourceInfo sheifourceinfo;
-        List<TCG.ResourcesService.Resources> topics = null;
+        public List<TCG.ResourcesService.Resources> topics = null;
+        public string Resourceid = string.Empty;
+        public TCG.SheifService.SheifService sheif;
 
         public SheifSourceDebug()
         {
@@ -22,8 +24,35 @@ namespace TCG.Sheif
         private void SheifSourceDebug_Load(object sender, EventArgs e)
         {
             sheifourceinfo = new TCG.SheifService.SheifSourceInfo();
-            this.tblisttopicdatarole.Text = "$1,SheifUrl\r\n$2,vcTitle";
-            this.tbtopicdatarole.Text = "$1,vcTitle\r\n$2,vcContent";
+            if (!string.IsNullOrEmpty(this.Resourceid))
+            {
+                sheifourceinfo = this.sheif.GetSheifSourceInfoById(this.Resourceid);
+                if (sheifourceinfo != null)
+                {
+                    this.SetSheifSource();
+                }
+            }
+            else
+            {
+                this.tblisttopicdatarole.Text = "$1,SheifUrl\r\n$2,vcTitle";
+                this.tbtopicdatarole.Text = "$1,vcTitle\r\n$2,vcContent";
+            }
+        }
+
+        private void SetSheifSource()
+        {
+            this.tbtopicdatarole.Text = this.sheifourceinfo.TopicDataRole;
+            this.tblistpage.Text = this.sheifourceinfo.SourceUrl;
+            this.tbCharSet.Text = this.sheifourceinfo.CharSet;
+            this.tblistrole.Text = this.sheifourceinfo.ListAreaRole;
+            this.tblistlinkrole.Text = this.sheifourceinfo.TopicListRole;
+            this.tblisttopicdatarole.Text = this.sheifourceinfo.TopicListDataRole;
+            this.tbtopicinforole.Text = this.sheifourceinfo.TopicRole;
+            this.tbtopicdatarole.Text = this.sheifourceinfo.TopicDataRole;
+            this.tbtopicpagerOld.Text = this.sheifourceinfo.TopicPagerOld;
+            this.tbtopicpagertemp.Text = this.sheifourceinfo.TopicPagerTemp;
+            this.tbshiefsourcname.Text = this.sheifourceinfo.SourceName;
+            this.checkBox1.Checked = this.sheifourceinfo.IsRss;
         }
 
         private void SheifSourceInfoInit()
@@ -78,14 +107,15 @@ namespace TCG.Sheif
         private void btPostRole_Click(object sender, EventArgs e)
         {
             this.SheifSourceInfoInit();
-
-            TCG.SheifService.SheifService sheif = new TCG.SheifService.SheifService();
-
-            TCG.SheifService.TCGSoapHeader myHeader = new TCG.SheifService.TCGSoapHeader();
-            myHeader.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
-            sheif.TCGSoapHeaderValue = myHeader;
-
-            int rtn = sheif.AddSheifSource(this.sheifourceinfo);
+            int rtn = 0;
+            if (string.IsNullOrEmpty(this.Resourceid))
+            {
+                rtn = sheif.AddSheifSource(this.sheifourceinfo);
+            }
+            else
+            {
+                rtn = sheif.UpdateSheifSource(this.sheifourceinfo);
+            }
 
             if (rtn < 0)
             {

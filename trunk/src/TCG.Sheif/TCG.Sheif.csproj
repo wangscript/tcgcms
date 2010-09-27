@@ -69,6 +69,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SheifSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SheifSource.Designer.cs">
+      <DependentUpon>SheifSource.cs</DependentUpon>
+    </Compile>
     <Compile Include="SheifSourceDebug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SheifSource.resx">
+      <DependentUpon>SheifSource.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SheifSourceDebug.resx">
       <DependentUpon>SheifSourceDebug.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +139,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\TCG.CategorieService\CategorieService.wsdl" />
+    <None Include="Web References\TCG.CategorieService\EntityBase.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\TCG.CategorieService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

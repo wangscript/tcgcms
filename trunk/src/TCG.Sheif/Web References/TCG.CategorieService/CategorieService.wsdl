@@ -95,10 +95,15 @@
       <s:element name="GetDefaultCategoriesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetDefaultCategoriesResult" type="tns:ArrayOfCategories" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefaultCategoriesResult" type="tns:ArrayOfEntityBase" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="ArrayOfEntityBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityBase" nillable="true" type="tns:EntityBase" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetAllCategorieEntitySoapIn">

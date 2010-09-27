@@ -104,8 +104,9 @@ namespace TCG.Handlers
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp17.Direction = ParameterDirection.Output;
+            SqlParameter sp18 = new SqlParameter("@SheifUrl", SqlDbType.VarChar, 255); sp18.Value = inf.SheifUrl;
             string[] reValues = conn.Execute("SP_News_NewsInfoManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6,
-                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp16,sp17}, new int[] { 12,13 ,17});
+                sp7, sp8, sp9 ,sp10,sp11, sp12, sp13 ,sp14,sp16,sp17,sp18}, new int[] { 12,13 ,17});
             if (reValues != null)
             {
                 int rtn = (int)Convert.ChangeType(reValues[1], typeof(int));
