@@ -55,6 +55,18 @@ namespace TCG.WebService
         }
 
         [WebMethod]
+        [SoapHeader("header", Direction = SoapHeaderDirection.In)]
+        public int UpdateSheifSource(SheifSourceInfo source)
+        {
+            if (!base.serviceHandlers.CheckHeader(header))
+            {
+                return -1000000307;
+            }
+
+            return base.handlerService.sheifService.sheifHandlers.UpdateShiefSource(source);
+        }
+
+        [WebMethod]
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]  
         public List<SheifSourceInfo> GetAllSheifSourceInfos()
         {

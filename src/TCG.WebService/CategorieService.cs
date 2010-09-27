@@ -29,6 +29,7 @@ using System.Text;
 using System.Xml;
 using System.Web.Services.Protocols;
 using System.Reflection;
+using System.Linq;
 
 namespace TCG.WebService
 {
@@ -96,20 +97,14 @@ namespace TCG.WebService
 
         [WebMethod]
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]
-        public List<Categories> GetDefaultCategories()
+        public List<EntityBase> GetDefaultCategories()
         {
             Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId);
-            if (allcategories != null && allcategories.Count > 0)
+            if (allcategories == null && allcategories.Count == 0)
             {
-                List<Categories> alist = new List<Categories>();
-                foreach (KeyValuePair<string, EntityBase> entity in allcategories)
-                {
-                    Categories tempcategories = (Categories)entity.Value;
-                    alist.Add(tempcategories);
-                }
-                return alist;
+                return null;
             }
-            return null;
+            return allcategories.Values.ToList();
         }
     }
 }

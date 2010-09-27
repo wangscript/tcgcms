@@ -34,6 +34,8 @@ namespace TCG.Sheif.TCG.SheifService {
         
         private System.Threading.SendOrPostCallback AddSheifSourceOperationCompleted;
         
+        private System.Threading.SendOrPostCallback UpdateSheifSourceOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetAllSheifSourceInfosOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetSheifSourceInfoByIdOperationCompleted;
@@ -91,6 +93,9 @@ namespace TCG.Sheif.TCG.SheifService {
         public event AddSheifSourceCompletedEventHandler AddSheifSourceCompleted;
         
         /// <remarks/>
+        public event UpdateSheifSourceCompletedEventHandler UpdateSheifSourceCompleted;
+        
+        /// <remarks/>
         public event GetAllSheifSourceInfosCompletedEventHandler GetAllSheifSourceInfosCompleted;
         
         /// <remarks/>
@@ -126,6 +131,36 @@ namespace TCG.Sheif.TCG.SheifService {
             if ((this.AddSheifSourceCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddSheifSourceCompleted(this, new AddSheifSourceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateSheifSource", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int UpdateSheifSource(SheifSourceInfo source) {
+            object[] results = this.Invoke("UpdateSheifSource", new object[] {
+                        source});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateSheifSourceAsync(SheifSourceInfo source) {
+            this.UpdateSheifSourceAsync(source, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateSheifSourceAsync(SheifSourceInfo source, object userState) {
+            if ((this.UpdateSheifSourceOperationCompleted == null)) {
+                this.UpdateSheifSourceOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateSheifSourceOperationCompleted);
+            }
+            this.InvokeAsync("UpdateSheifSource", new object[] {
+                        source}, this.UpdateSheifSourceOperationCompleted, userState);
+        }
+        
+        private void OnUpdateSheifSourceOperationCompleted(object arg) {
+            if ((this.UpdateSheifSourceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateSheifSourceCompleted(this, new UpdateSheifSourceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1015,6 +1050,32 @@ namespace TCG.Sheif.TCG.SheifService {
         private object[] results;
         
         internal AddSheifSourceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void UpdateSheifSourceCompletedEventHandler(object sender, UpdateSheifSourceCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateSheifSourceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateSheifSourceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

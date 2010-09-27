@@ -68,8 +68,11 @@ namespace TCG.Sheif
                                 TCG.ResourcesService.Resources res1 = new TCG.ResourcesService.Resources();
 
                                 int rtn = SheifTopicDataInt(ref errText, ref res1, m, sheifourceinfo.TopicListDataRole);
-                                res1.SheifUrl = UrlCheck(res1.SheifUrl, sheifourceinfo);
-                                topics.Add(res1);
+                                if (!string.IsNullOrEmpty(res1.SheifUrl))
+                                {
+                                    res1.SheifUrl = UrlCheck(res1.SheifUrl, sheifourceinfo);
+                                    topics.Add(res1);
+                                }
                             }
                         }
                     }
@@ -102,7 +105,8 @@ namespace TCG.Sheif
                 return -1;
             }
 
-            string[] datas = datarole.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            string splitstr = datarole.IndexOf("\r\n")>-1 ? "\r\n" : "\n";
+            string[] datas = datarole.Split(new string[] { splitstr }, StringSplitOptions.None);
             if (datas.Length == 0)
             {
                 return -2;

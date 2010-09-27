@@ -27,7 +27,6 @@ namespace TCG.Sheif.TCG.CategorieService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="CategorieServiceSoap", Namespace="http://tempuri.org/")]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityBase))]
     public partial class CategorieService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private TCGSoapHeader tCGSoapHeaderValueField;
@@ -155,9 +154,9 @@ namespace TCG.Sheif.TCG.CategorieService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("TCGSoapHeaderValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetDefaultCategories", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Categories[] GetDefaultCategories() {
+        public EntityBase[] GetDefaultCategories() {
             object[] results = this.Invoke("GetDefaultCategories", new object[0]);
-            return ((Categories[])(results[0]));
+            return ((EntityBase[])(results[0]));
         }
         
         /// <remarks/>
@@ -619,10 +618,10 @@ namespace TCG.Sheif.TCG.CategorieService {
         }
         
         /// <remarks/>
-        public Categories[] Result {
+        public EntityBase[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Categories[])(this.results[0]));
+                return ((EntityBase[])(this.results[0]));
             }
         }
     }

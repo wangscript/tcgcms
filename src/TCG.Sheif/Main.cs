@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using System.Threading;
 
 namespace TCG.Sheif
 {
@@ -21,10 +22,11 @@ namespace TCG.Sheif
         public TCG.SheifService.SheifService sheifService;
         public TCG.ResourcesService.ResourcesService resourcesService;
         public TCG.CategorieService.CategorieService categorieService;
-        public TCG.CategorieService.Categories[] categories;
+        public TCG.CategorieService.EntityBase[] categories;
         public TCG.SheifService.SheifSourceInfo[] sheifsourceinfos;
 
         private TreeNode selectNode;
+        private Thread thread;
          
 
         private void Main_Load(object sender, EventArgs e)
@@ -33,7 +35,10 @@ namespace TCG.Sheif
 
             this.CategoriesInit();
 
-            StartSheif();
+
+            this.dataGridView1.Columns.Add("vcTitle","标题");
+            this.dataGridView1.Columns.Add("SheifUrl", "路径");
+            this.dataGridView1.Columns.Add("dAddDate", "添加时间");
         }
 
         private void StartSheif()
@@ -78,10 +83,32 @@ namespace TCG.Sheif
             {
                 for (int i = 0; i < res.Count; i++)
                 {
-                    TCG.ResourcesService.Resources resinfo =new TCG.ResourcesService.Resources();
+                    Thread.Sleep(1000);
+                    TCG.ResourcesService.Resources resinfo = new TCG.ResourcesService.Resources();
+                    resinfo.SheifUrl = res[i].SheifUrl;
+                    resinfo.cChecked = "N";
+                    resinfo.cCreated = "N";
+                    resinfo.vcAuthor = "网络";
+                    resinfo.vcEditor = "三云鬼";
+                    
+                    TCG.ResourcesService.Categories cate = new TCG.ResourcesService.Categories();
+                    cate.Id = scc.LocalCategorieId;
+                    resinfo.Categorie = cate;
                     rtn = SheifHandlers.SheifTopic(ref errText, ref resinfo, sourc, res[i].SheifUrl);
 
-                    this.dataGridView1.Rows.Add(resinfo.vcTitle,resinfo.SheifUrl,resinfo.dAddDate.ToString());
+                    resinfo.vcKeyWord = resinfo.vcTitle;
+
+                    if (!string.IsNullOrEmpty(resinfo.vcTitle))
+                    {
+                        rtn = resourcesService.CreateResources(resinfo);
+                        if (rtn == 1)
+                        {
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                this.dataGridView1.Rows.Add(resinfo.vcTitle, resinfo.SheifUrl, resinfo.dAddDate.ToString());
+                            });
+                        }
+                    }
 
                 }
             }
@@ -89,7 +116,7 @@ namespace TCG.Sheif
 
         private void CategoriesInit()
         {
-            categories = categorieService.GetAllCategorieEntity();
+            categories = categorieService.GetDefaultCategories();
             this.trCategories.Nodes.Add("0", "所有分类");
             this.InitTreeViewNodes(this.trCategories.Nodes[0], "0");
         }
@@ -98,7 +125,7 @@ namespace TCG.Sheif
         {
             for (int i = 0; i < this.categories.Length;i++)
             {
-                TCG.CategorieService.Categories tempcategories = this.categories[i];
+                TCG.CategorieService.Categories tempcategories = (TCG.CategorieService.Categories)this.categories[i];
                 if (tempcategories.Parent == parentid)
                 {
                     TreeNode tnode = new TreeNode();
@@ -138,6 +165,7 @@ namespace TCG.Sheif
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             SheifSourceDebug sheifsourcedebug = new SheifSourceDebug();
+            sheifsourcedebug.sheif = this.sheifService;
             DialogResult debugresult =  sheifsourcedebug.ShowDialog(this);
 
             if (DialogResult.OK == debugresult)
@@ -184,6 +212,32 @@ namespace TCG.Sheif
 
             }
            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.timer1.Stop();
+            this.timer1.Interval = 100;// *60;
+            this.timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            thread = new Thread(new ThreadStart(this.StartSheif));
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            SheifSource sheifSource = new SheifSource();
+            sheifSource.sheifService = this.sheifService;
+            DialogResult configresult = sheifSource.ShowDialog(this);
+
+            if (DialogResult.OK == configresult)
+            {
+
+            }
         }
 
     }

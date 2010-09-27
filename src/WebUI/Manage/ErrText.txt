@@ -139,5 +139,7 @@
 -1000000310@@@CreateResourcHtmlById@@@需要生成的文章为跳转连接，无须生成
 -1000000311@@@CreateResourcHtmlById@@@模板分析失败
 
+-1000000312@@@SP_SheifSource_update@@@抓取源不存在，更新失败
+
 
 

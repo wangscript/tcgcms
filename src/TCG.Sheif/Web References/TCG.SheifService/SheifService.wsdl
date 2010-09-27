@@ -47,6 +47,20 @@
         </s:sequence>
         <s:anyAttribute />
       </s:complexType>
+      <s:element name="UpdateSheifSource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="tns:SheifSourceInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSheifSourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateSheifSourceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetAllSheifSourceInfos">
         <s:complexType />
       </s:element>
@@ -177,6 +191,15 @@
   <wsdl:message name="AddSheifSourceTCGSoapHeader">
     <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
   </wsdl:message>
+  <wsdl:message name="UpdateSheifSourceSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSheifSource" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSheifSourceSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSheifSourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSheifSourceTCGSoapHeader">
+    <wsdl:part name="TCGSoapHeader" element="tns:TCGSoapHeader" />
+  </wsdl:message>
   <wsdl:message name="GetAllSheifSourceInfosSoapIn">
     <wsdl:part name="parameters" element="tns:GetAllSheifSourceInfos" />
   </wsdl:message>
@@ -209,6 +232,10 @@
       <wsdl:input message="tns:AddSheifSourceSoapIn" />
       <wsdl:output message="tns:AddSheifSourceSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateSheifSource">
+      <wsdl:input message="tns:UpdateSheifSourceSoapIn" />
+      <wsdl:output message="tns:UpdateSheifSourceSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllSheifSourceInfos">
       <wsdl:input message="tns:GetAllSheifSourceInfosSoapIn" />
       <wsdl:output message="tns:GetAllSheifSourceInfosSoapOut" />
@@ -229,6 +256,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:AddSheifSourceTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSheifSource">
+      <soap:operation soapAction="http://tempuri.org/UpdateSheifSource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateSheifSourceTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -272,6 +309,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:AddSheifSourceTCGSoapHeader" part="TCGSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSheifSource">
+      <soap12:operation soapAction="http://tempuri.org/UpdateSheifSource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateSheifSourceTCGSoapHeader" part="TCGSoapHeader" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
