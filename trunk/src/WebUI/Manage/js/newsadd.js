@@ -2,9 +2,6 @@
 
 function SaveNewsInfo() {
     setContent();
-    //输入框数据赋值
-    //$("form1").action = "../files/ConentImgCheck.aspx";
-    //ajax.postf($("form1"), function(obj) { CheckImgBack(obj.responseText); });
     $("#form1").submit();
 }
 

@@ -75,6 +75,14 @@ namespace TCG.Sheif
                                 }
                             }
                         }
+                        else
+                        {
+                            return -2;
+                        }
+                    }
+                    else
+                    {
+                        return -1;
                     }
                 }
 
@@ -116,10 +124,11 @@ namespace TCG.Sheif
 
             for (int i = 0; i < datas.Length; i++)
             {
-                string[] keyvalue = datas[i].Split(',');
-
-                int rtn = SheifTopicSheValue(ref errText, ref topic, tproperty, match.Result(keyvalue[0]), keyvalue[1]);
-
+                if (!string.IsNullOrEmpty(datas[i]))
+                {
+                    string[] keyvalue = datas[i].Split(',');
+                    int rtn = SheifTopicSheValue(ref errText, ref topic, tproperty, match.Result(keyvalue[0]), keyvalue[1]);
+                }
             }
             return 1;
         }

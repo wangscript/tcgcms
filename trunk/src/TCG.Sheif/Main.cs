@@ -39,6 +39,8 @@ namespace TCG.Sheif
             this.dataGridView1.Columns.Add("vcTitle","标题");
             this.dataGridView1.Columns.Add("SheifUrl", "路径");
             this.dataGridView1.Columns.Add("dAddDate", "添加时间");
+
+            this.notifyIcon1.Text = this.Text;
         }
 
         private void StartSheif()
@@ -96,10 +98,11 @@ namespace TCG.Sheif
                     resinfo.Categorie = cate;
                     rtn = SheifHandlers.SheifTopic(ref errText, ref resinfo, sourc, res[i].SheifUrl);
 
-                    resinfo.vcKeyWord = resinfo.vcTitle;
-
                     if (!string.IsNullOrEmpty(resinfo.vcTitle))
                     {
+                        resinfo.vcKeyWord = resinfo.vcTitle;
+                        resinfo.vcShortContent = objectHandlers.NoHTML(resinfo.vcContent).Substring(0, 200);
+
                         rtn = resourcesService.CreateResources(resinfo);
                         if (rtn == 1)
                         {
@@ -107,6 +110,12 @@ namespace TCG.Sheif
                             {
                                 this.dataGridView1.Rows.Add(resinfo.vcTitle, resinfo.SheifUrl, resinfo.dAddDate.ToString());
                             });
+
+                            if (this.WindowState == FormWindowState.Minimized)
+                            {
+                                string text3 = "成功抓取:" + resinfo.vcTitle + "\r\n" + resinfo.SheifUrl;
+                                this.notifyIcon1.ShowBalloonTip(200, "资源抓取通知", text3, ToolTipIcon.Error);
+                            }
                         }
                     }
 
@@ -145,20 +154,20 @@ namespace TCG.Sheif
             categorieService = new TCG.CategorieService.CategorieService();
 
             TCG.SheifService.TCGSoapHeader myHeader = new TCG.SheifService.TCGSoapHeader();
-            myHeader.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            myHeader.PassWord = "b6f8e4ef-c977-48dd-8a08-317bac76e7a1";
             sheifService.TCGSoapHeaderValue = myHeader;
 
 
             TCG.SheifConfig.TCGSoapHeader myHeader1 = new TCG.SheifConfig.TCGSoapHeader();
-            myHeader1.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            myHeader1.PassWord = "b6f8e4ef-c977-48dd-8a08-317bac76e7a1";
             sheifConfig.TCGSoapHeaderValue = myHeader1;
 
             TCG.ResourcesService.TCGSoapHeader myHeader2 = new TCG.ResourcesService.TCGSoapHeader();
-            myHeader2.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            myHeader2.PassWord = "b6f8e4ef-c977-48dd-8a08-317bac76e7a1";
             resourcesService.TCGSoapHeaderValue = myHeader2;
 
             TCG.CategorieService.TCGSoapHeader myHeader3 = new TCG.CategorieService.TCGSoapHeader();
-            myHeader3.PassWord = "593fd7e4-1c00-4ade-bab0-426342b9e0d9";
+            myHeader3.PassWord = "b6f8e4ef-c977-48dd-8a08-317bac76e7a1";
             categorieService.TCGSoapHeaderValue = myHeader3;
         }
 
@@ -217,7 +226,7 @@ namespace TCG.Sheif
         private void button1_Click(object sender, EventArgs e)
         {
             this.timer1.Stop();
-            this.timer1.Interval = 100;// *60;
+            this.timer1.Interval = 10000*60;
             this.timer1.Start();
         }
 
@@ -239,6 +248,38 @@ namespace TCG.Sheif
 
             }
         }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                NormalToMinimized();
+            }
+        }
+
+        private void NormalToMinimized()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            this.notifyIcon1.Visible = true;
+        }
+
+        private void MinimizedToMax()
+        {
+            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.MinimizedToMax();
+            }
+        }
+
 
     }
 }

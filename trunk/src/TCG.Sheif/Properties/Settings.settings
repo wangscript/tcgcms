@@ -3,16 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="TCG_Sheif_TCG_SheifService_SheifSourceService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/SheifService.asmx</Value>
+      <Value Profile="(Default)">http://www.tcgcms.cn/WebService/SheifService.asmx</Value>
     </Setting>
     <Setting Name="TCG_Sheif_TCG_SheifConfig_SheifConfig" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/SheifConfig.asmx</Value>
+      <Value Profile="(Default)">http://www.tcgcms.cn/WebService/SheifConfig.asmx</Value>
     </Setting>
     <Setting Name="TCG_Sheif_TCG_ResourcesService_ResourcesService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/ResourcesService.asmx</Value>
+      <Value Profile="(Default)">http://www.tcgcms.cn/WebService/ResourcesService.asmx</Value>
     </Setting>
     <Setting Name="TCG_Sheif_TCG_CategorieService_CategorieService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://demo.tcgcms.cn/WebService/CategorieService.asmx</Value>
+      <Value Profile="(Default)">http://www.tcgcms.cn/WebService/CategorieService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

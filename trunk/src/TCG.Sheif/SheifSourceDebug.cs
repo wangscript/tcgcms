@@ -79,7 +79,10 @@ namespace TCG.Sheif
 
             string errText = string.Empty;
             int rtn = SheifHandlers.SheifTopicList(ref errText, ref topics, this.sheifourceinfo, spage, epage);
-
+            if (rtn < 0)
+            {
+                MessageBox.Show(rtn.ToString());
+            }
             this.thdrTestRes.DataSource = topics;
         }
 

@@ -357,10 +357,10 @@
   </wsdl:binding>
   <wsdl:service name="SheifService">
     <wsdl:port name="SheifServiceSoap" binding="tns:SheifServiceSoap">
-      <soap:address location="http://demo.tcgcms.cn/WebService/SheifService.asmx" />
+      <soap:address location="http://www.tcgcms.cn/WebService/SheifService.asmx" />
     </wsdl:port>
     <wsdl:port name="SheifServiceSoap12" binding="tns:SheifServiceSoap12">
-      <soap12:address location="http://demo.tcgcms.cn/WebService/SheifService.asmx" />
+      <soap12:address location="http://www.tcgcms.cn/WebService/SheifService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

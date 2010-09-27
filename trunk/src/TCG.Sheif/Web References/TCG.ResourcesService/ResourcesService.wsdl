@@ -149,10 +149,10 @@
   </wsdl:binding>
   <wsdl:service name="ResourcesService">
     <wsdl:port name="ResourcesServiceSoap" binding="tns:ResourcesServiceSoap">
-      <soap:address location="http://demo.tcgcms.cn/WebService/ResourcesService.asmx" />
+      <soap:address location="http://www.tcgcms.cn/WebService/ResourcesService.asmx" />
     </wsdl:port>
     <wsdl:port name="ResourcesServiceSoap12" binding="tns:ResourcesServiceSoap12">
-      <soap12:address location="http://demo.tcgcms.cn/WebService/ResourcesService.asmx" />
+      <soap12:address location="http://www.tcgcms.cn/WebService/ResourcesService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

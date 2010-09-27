@@ -215,10 +215,10 @@
   </wsdl:binding>
   <wsdl:service name="CategorieService">
     <wsdl:port name="CategorieServiceSoap" binding="tns:CategorieServiceSoap">
-      <soap:address location="http://demo.tcgcms.cn/WebService/CategorieService.asmx" />
+      <soap:address location="http://www.tcgcms.cn/WebService/CategorieService.asmx" />
     </wsdl:port>
     <wsdl:port name="CategorieServiceSoap12" binding="tns:CategorieServiceSoap12">
-      <soap12:address location="http://demo.tcgcms.cn/WebService/CategorieService.asmx" />
+      <soap12:address location="http://www.tcgcms.cn/WebService/CategorieService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
