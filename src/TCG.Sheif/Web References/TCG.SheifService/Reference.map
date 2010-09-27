@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://demo.tcgcms.cn/WebService/SheifService.asmx?wsdl" filename="SheifService.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://demo.tcgcms.cn/WebService/SheifService.asmx?disco" filename="SheifService.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://www.tcgcms.cn/WebService/SheifService.asmx?wsdl" filename="SheifService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://www.tcgcms.cn/WebService/SheifService.asmx?disco" filename="SheifService.disco" />
   </Results>
 </DiscoveryClientResultsFile>

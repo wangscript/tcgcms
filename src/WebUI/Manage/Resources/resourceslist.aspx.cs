@@ -216,35 +216,19 @@ public partial class resources_resourceslist : adminMain
             base.AjaxErch("-1000000051");
             return;
         }
-
-
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
-        if (item == null) return;
-
-        TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-        tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid.ToString());
-        tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
-        tcgth.WebPath = item.vcFilePath;
-        tcgth.configService = base.configService;
-        tcgth.conn = base.conn;
-
-        string text1 = string.Empty;
+        int rtn = 0;
+        string errText = string.Empty;
         try
         {
-            tcgth.Replace();
-            if (item.cChecked != "Y")
-            {
-                item.cChecked = "Y";
-                base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-            }
+            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, resourceid, base.tagService.TCGTagHandlers);
+            errText = base.tagService.TCGTagHandlers.PagerInfo.CreatePagesNotic.Replace("\\","/");
         }
         catch (Exception ex)
         {
             base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
             return;
         }
-
-        text1 = "<a>生成成功:" + item.vcFilePath + "</a>";
-        base.AjaxErch(1, text1, "CreateBack");
+        
+        base.AjaxErch(rtn, errText, "CreateBack");
     }
 }

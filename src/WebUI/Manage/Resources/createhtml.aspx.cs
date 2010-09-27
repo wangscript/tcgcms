@@ -101,62 +101,18 @@ public partial class news_createhtml : adminMain
         Resources item = new Resources();
         string text1 = "";
 
+        int rtn = 0;
         try
         {
-            item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(id);
-
-            if (item == null)
-            {
-                text1 = "<a>读取文章信息失败...ID:" + id.ToString() + "</a>";
-            }
-            else
-            {
-
-                if (!string.IsNullOrEmpty(item.vcUrl))
-                {
-                    text1 = "<a>页面资源为跳转资源不需要生成...ID:" + item.Id + "</a>";
-                }
-                else
-                {
-
-                    if (item.cCreated != "Y" || Created == "Y")
-                    {
-                        item.cCreated = "Y";
-                        int rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-                        if (rtn < 0)
-                        {
-                            text1 = "<a>更新文章信息失败...ID:" + item.Id + "</a>";
-                        }
-                        else
-                        {
-                            TCGTagHandlers tcgthl = base.tagService.TCGTagHandlers;
-                            tcgthl.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
-                            tcgthl.FilePath = Server.MapPath("~" + filepath);
-                            tcgthl.configService = base.configService;
-                            tcgthl.conn = base.conn;
-                            if (tcgthl.Replace())
-                            {
-                                text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
-                            }
-                            else
-                            {
-                                text1 = "<a><font color='red'>生成失败:" + filepath + "...</font></a>";
-                            }
-                        }
-                    }
-                    else
-                    {
-                        text1 = "<a><font color='green'>文章编号...ID:" + item.Id + " 已经生成，无须再生成！</font></a>";
-                    }
-                }
-            }
+           rtn =  base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref text1, id,base.tagService.TCGTagHandlers);
+           text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
         }
         catch (Exception ex)
         {
-            text1 = "<a><font color='red'>d" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
+            text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
         }
 
-        base.AjaxErch(1, text1, "CreateBack");
+        base.AjaxErch(rtn, text1, "CreateBack");
         base.Finish();
     }
 

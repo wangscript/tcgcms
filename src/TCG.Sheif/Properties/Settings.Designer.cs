@@ -26,7 +26,7 @@ namespace TCG.Sheif.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/SheifService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tcgcms.cn/WebService/SheifService.asmx")]
         public string TCG_Sheif_TCG_SheifService_SheifSourceService {
             get {
                 return ((string)(this["TCG_Sheif_TCG_SheifService_SheifSourceService"]));
@@ -36,7 +36,7 @@ namespace TCG.Sheif.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/SheifConfig.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tcgcms.cn/WebService/SheifConfig.asmx")]
         public string TCG_Sheif_TCG_SheifConfig_SheifConfig {
             get {
                 return ((string)(this["TCG_Sheif_TCG_SheifConfig_SheifConfig"]));
@@ -46,7 +46,7 @@ namespace TCG.Sheif.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/ResourcesService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tcgcms.cn/WebService/ResourcesService.asmx")]
         public string TCG_Sheif_TCG_ResourcesService_ResourcesService {
             get {
                 return ((string)(this["TCG_Sheif_TCG_ResourcesService_ResourcesService"]));
@@ -56,7 +56,7 @@ namespace TCG.Sheif.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://demo.tcgcms.cn/WebService/CategorieService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tcgcms.cn/WebService/CategorieService.asmx")]
         public string TCG_Sheif_TCG_CategorieService_CategorieService {
             get {
                 return ((string)(this["TCG_Sheif_TCG_CategorieService_CategorieService"]));

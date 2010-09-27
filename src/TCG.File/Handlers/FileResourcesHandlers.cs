@@ -110,6 +110,20 @@ namespace TCG.Handlers
             return fileresource;
         }
 
+        public string UrlCheck(string url, Resources resource)
+        {
+            if (url.Substring(0, 7).ToLower() == "http://") return url;
+            if (url.Substring(0, 1).ToLower() == "/")
+            {
+                string text = resource.SheifUrl.Substring(7, resource.SheifUrl.Length - 7);
+                string www = text.Substring(0, text.IndexOf("/"));
+                return "http://" + www + url;
+            }
+            else
+            {
+                return resource.SheifUrl.Substring(0, resource.SheifUrl.LastIndexOf("/") + 1) + url;
+            }
+        }
 
         /// <summary>
         /// 获取文章中间外部网站的图片
@@ -119,10 +133,10 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fileclassid"></param>
         /// <returns></returns>
-        public string ImgPatchInit(string content, string url, string adminname, int fileclassid)
+        public string ImgPatchInit(Resources resource, string url, string adminname, int fileclassid)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
-            MatchCollection matchs = Regex.Matches(content, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            MatchCollection matchs = Regex.Matches(resource.vcContent, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             string temp = "";
             foreach (Match item in matchs)
             {
@@ -133,11 +147,11 @@ namespace TCG.Handlers
 
                     imgfile.Id = this.GetFlieName();
                     imgfile.iClassId = fileclassid;
-
+                    string text2 = UrlCheck(text1, resource);
                     bool isload = false;
                     try
                     {
-                        WebRequest myre = WebRequest.Create(text1);
+                        WebRequest myre = WebRequest.Create(text2);
                         isload = true;
                     }
                     catch (Exception ex)
@@ -148,7 +162,7 @@ namespace TCG.Handlers
                     if (isload)
                     {
                         WebClient wc =  new WebClient();
-                        byte[] b = wc.DownloadData(text1);
+                        byte[] b = wc.DownloadData(text2);
                         Stream s = new MemoryStream(b);
 
                         System.Drawing.Image loadimage = null;
@@ -201,7 +215,7 @@ namespace TCG.Handlers
                                 }
                                 else
                                 {
-                                    content = content.Replace(text1, "/attach.aspx?id=" + imgfile.Id);
+                                    resource.vcContent = resource.vcContent.Replace(text1, "/attach.aspx?id=" + imgfile.Id);
                                 }
                             }
                             catch
@@ -214,7 +228,7 @@ namespace TCG.Handlers
                     }
                 }
             }
-            return content;
+            return resource.vcContent;
         }
 
         /// <summary>

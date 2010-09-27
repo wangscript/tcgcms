@@ -449,18 +449,16 @@ namespace TCG.Handlers
 
             if (tcgth.Replace())
             {
-                if (item.cChecked != "Y")
-                {
-                    item.cChecked = "Y";
-                    rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-                }
+                item.cCreated = "Y";
+                item.cChecked = "Y";
+                rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
             else
             {
                 rtn = -1000000311;
             }
 
-            return rtn;
+            return 1;
         }
     }
 }

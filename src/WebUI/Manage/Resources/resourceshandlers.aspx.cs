@@ -136,6 +136,7 @@ public partial class resources_resourceshandlers : adminMain
         item.vcEditor = base.adminInfo.vcAdminName;
 
         string filepath = "";
+        string errText = string.Empty;
         int rtn = 0;
 
         try
@@ -149,16 +150,8 @@ public partial class resources_resourceshandlers : adminMain
                 rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
 
-            filepath = Server.MapPath("~" + item.vcFilePath);
-            if (rtn == 1 && string.IsNullOrEmpty(item.vcUrl))
-            {
-                TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-                tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", item.Id.ToString());
-                tcgth.FilePath = filepath;
-                tcgth.configService = base.configService;
-                tcgth.conn = base.conn;
-                tcgth.Replace();
-            }
+            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, 
+                objectHandlers.ToInt(item.Id), base.tagService.TCGTagHandlers);
         }
         catch (Exception ex)
         {
