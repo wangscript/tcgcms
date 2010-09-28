@@ -32,7 +32,10 @@
             this.btDebugTopicInfo = new System.Windows.Forms.Button();
             this.tbtopicdatarole = new System.Windows.Forms.TextBox();
             this.gbresview = new System.Windows.Forms.GroupBox();
+            this.thdrTestRes = new System.Windows.Forms.DataGridView();
             this.gblisttest = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tblisttopicdatarole = new System.Windows.Forms.TextBox();
             this.tbshiefsourcname = new System.Windows.Forms.TextBox();
@@ -57,15 +60,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btPostRole = new System.Windows.Forms.Button();
             this.btlistsheif = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.thdrTestRes = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sr_title = new System.Windows.Forms.Label();
             this.sr_content = new System.Windows.Forms.WebBrowser();
+            this.sr_title = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.gbresview.SuspendLayout();
-            this.gblisttest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thdrTestRes)).BeginInit();
+            this.gblisttest.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,9 +82,9 @@
             // 
             // btDebugTopicInfo
             // 
-            this.btDebugTopicInfo.Location = new System.Drawing.Point(125, 517);
+            this.btDebugTopicInfo.Location = new System.Drawing.Point(154, 517);
             this.btDebugTopicInfo.Name = "btDebugTopicInfo";
-            this.btDebugTopicInfo.Size = new System.Drawing.Size(75, 23);
+            this.btDebugTopicInfo.Size = new System.Drawing.Size(64, 23);
             this.btDebugTopicInfo.TabIndex = 19;
             this.btDebugTopicInfo.Text = "调试详细页";
             this.btDebugTopicInfo.UseVisualStyleBackColor = true;
@@ -105,6 +107,15 @@
             this.gbresview.TabIndex = 18;
             this.gbresview.TabStop = false;
             this.gbresview.Text = "调试结果";
+            // 
+            // thdrTestRes
+            // 
+            this.thdrTestRes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.thdrTestRes.Location = new System.Drawing.Point(6, 16);
+            this.thdrTestRes.Name = "thdrTestRes";
+            this.thdrTestRes.RowTemplate.Height = 23;
+            this.thdrTestRes.Size = new System.Drawing.Size(325, 513);
+            this.thdrTestRes.TabIndex = 0;
             // 
             // gblisttest
             // 
@@ -140,6 +151,25 @@
             this.gblisttest.TabIndex = 17;
             this.gblisttest.TabStop = false;
             this.gblisttest.Text = "列表调试";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(76, 75);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(36, 16);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.Text = "是";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 77);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 12);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "是否为RSS：";
             // 
             // label11
             // 
@@ -336,51 +366,23 @@
             // 
             // btPostRole
             // 
-            this.btPostRole.Location = new System.Drawing.Point(215, 517);
+            this.btPostRole.Location = new System.Drawing.Point(224, 517);
             this.btPostRole.Name = "btPostRole";
-            this.btPostRole.Size = new System.Drawing.Size(75, 23);
+            this.btPostRole.Size = new System.Drawing.Size(38, 23);
             this.btPostRole.TabIndex = 20;
-            this.btPostRole.Text = "提交规则";
+            this.btPostRole.Text = "提交";
             this.btPostRole.UseVisualStyleBackColor = true;
             this.btPostRole.Click += new System.EventHandler(this.btPostRole_Click);
             // 
             // btlistsheif
             // 
-            this.btlistsheif.Location = new System.Drawing.Point(37, 517);
+            this.btlistsheif.Location = new System.Drawing.Point(81, 517);
             this.btlistsheif.Name = "btlistsheif";
-            this.btlistsheif.Size = new System.Drawing.Size(75, 23);
+            this.btlistsheif.Size = new System.Drawing.Size(69, 23);
             this.btlistsheif.TabIndex = 16;
             this.btlistsheif.Text = "测试列表";
             this.btlistsheif.UseVisualStyleBackColor = true;
             this.btlistsheif.Click += new System.EventHandler(this.btlistsheif_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(5, 77);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(71, 12);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "是否为RSS：";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(76, 75);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(36, 16);
-            this.checkBox1.TabIndex = 27;
-            this.checkBox1.Text = "是";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // thdrTestRes
-            // 
-            this.thdrTestRes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.thdrTestRes.Location = new System.Drawing.Point(6, 16);
-            this.thdrTestRes.Name = "thdrTestRes";
-            this.thdrTestRes.RowTemplate.Height = 23;
-            this.thdrTestRes.Size = new System.Drawing.Size(325, 513);
-            this.thdrTestRes.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -393,6 +395,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "分析文章结果";
             // 
+            // sr_content
+            // 
+            this.sr_content.Location = new System.Drawing.Point(16, 59);
+            this.sr_content.MinimumSize = new System.Drawing.Size(20, 20);
+            this.sr_content.Name = "sr_content";
+            this.sr_content.Size = new System.Drawing.Size(404, 461);
+            this.sr_content.TabIndex = 1;
+            // 
             // sr_title
             // 
             this.sr_title.AutoSize = true;
@@ -403,19 +413,33 @@
             this.sr_title.TabIndex = 0;
             this.sr_title.Text = "label14";
             // 
-            // sr_content
+            // button1
             // 
-            this.sr_content.Location = new System.Drawing.Point(16, 59);
-            this.sr_content.MinimumSize = new System.Drawing.Size(20, 20);
-            this.sr_content.Name = "sr_content";
-            this.sr_content.Size = new System.Drawing.Size(404, 461);
-            this.sr_content.TabIndex = 1;
+            this.button1.Location = new System.Drawing.Point(13, 517);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(63, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "字符转换";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(269, 517);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(48, 23);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "新增";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SheifSourceDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 560);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btDebugTopicInfo);
             this.Controls.Add(this.gbresview);
@@ -426,9 +450,9 @@
             this.Text = "SheifSourceDebug";
             this.Load += new System.EventHandler(this.SheifSourceDebug_Load);
             this.gbresview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.thdrTestRes)).EndInit();
             this.gblisttest.ResumeLayout(false);
             this.gblisttest.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.thdrTestRes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -472,5 +496,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label sr_title;
         private System.Windows.Forms.WebBrowser sr_content;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -126,7 +126,31 @@ namespace TCG.Sheif
                 return;
             }
 
-            MessageBox.Show("导入成功！");
+            MessageBox.Show("提交成功！");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TexExChange texExChange = new TexExChange();
+            DialogResult result = texExChange.ShowDialog(this);
+
+            if (DialogResult.OK == result)
+            {
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.SheifSourceInfoInit();
+            int rtn = 0;
+            rtn = sheif.AddSheifSource(this.sheifourceinfo);
+
+            if (rtn < 0)
+            {
+                MessageBox.Show("新增失败！" + rtn.ToString());
+                return;
+            }
         }
     }
 }

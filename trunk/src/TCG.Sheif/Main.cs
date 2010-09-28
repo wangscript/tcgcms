@@ -41,6 +41,8 @@ namespace TCG.Sheif
             this.dataGridView1.Columns.Add("dAddDate", "添加时间");
 
             this.notifyIcon1.Text = this.Text;
+
+            this.StartSheif();
         }
 
         private void StartSheif()
@@ -101,7 +103,7 @@ namespace TCG.Sheif
                     if (!string.IsNullOrEmpty(resinfo.vcTitle))
                     {
                         resinfo.vcKeyWord = resinfo.vcTitle;
-                        resinfo.vcShortContent = objectHandlers.NoHTML(resinfo.vcContent).Substring(0, 200);
+                        resinfo.vcShortContent = objectHandlers.Left(objectHandlers.NoHTML(resinfo.vcContent), 200);
 
                         rtn = resourcesService.CreateResources(resinfo);
                         if (rtn == 1)
