@@ -41,8 +41,7 @@ namespace TCG.Sheif
             this.dataGridView1.Columns.Add("dAddDate", "添加时间");
 
             this.notifyIcon1.Text = this.Text;
-
-            this.StartSheif();
+           
         }
 
         private void StartSheif()
@@ -53,6 +52,7 @@ namespace TCG.Sheif
             {
                 for (int i = 0; i < sheifconfigs.Length; i++)
                 {
+                    Thread.Sleep(7000);
                     TCG.SheifConfig.SheifCategorieConfig scc = sheifconfigs[i];
                     if (scc.SheifSourceId.IndexOf(",") == -1)
                     {
@@ -87,7 +87,7 @@ namespace TCG.Sheif
             {
                 for (int i = 0; i < res.Count; i++)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(7000);
                     TCG.ResourcesService.Resources resinfo = new TCG.ResourcesService.Resources();
                     resinfo.SheifUrl = res[i].SheifUrl;
                     resinfo.cChecked = "N";
@@ -227,6 +227,10 @@ namespace TCG.Sheif
 
         private void button1_Click(object sender, EventArgs e)
         {
+            thread = new Thread(new ThreadStart(this.StartSheif));
+            thread.IsBackground = true;
+            thread.Start();
+
             this.timer1.Stop();
             this.timer1.Interval = 10000*60;
             this.timer1.Start();
