@@ -81,6 +81,12 @@
     <Compile Include="SheifSourceDebug.Designer.cs">
       <DependentUpon>SheifSourceDebug.cs</DependentUpon>
     </Compile>
+    <Compile Include="TexExChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TexExChange.Designer.cs">
+      <DependentUpon>TexExChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\HttpWebHandlers.cs" />
     <Compile Include="Utils\objectHandlers.cs" />
     <Compile Include="Web References\TCG.CategorieService\Reference.cs">
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SheifSourceDebug.resx">
       <DependentUpon>SheifSourceDebug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TexExChange.resx">
+      <DependentUpon>TexExChange.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

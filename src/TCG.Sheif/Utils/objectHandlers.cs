@@ -230,6 +230,73 @@ namespace TCG.Sheif
             return Htmlstring;
         }
 
+        /// <summary>
+        /// 取字符左函数
+        /// </summary>
+        /// <param name="Object">要操作的 string  数据</param>
+        /// <param name="MaxLength">最大长度</param>
+        /// <returns>string</returns>
+        public static string Left(object Object, int MaxLength)
+        {
+            if (IsNull(Object)) return "";
+            return Object.ToString().Substring(0, Math.Min(Object.ToString().Length, MaxLength));
+        }
+        /// <summary>
+        /// 取字符中间函数
+        /// </summary>
+        /// <param name="Object">要操作的 string  数据</param>
+        /// <param name="StarIndex">开始的位置索引</param>
+        /// <param name="MaxLength">最大长度</param>
+        /// <returns>string</returns>
+        public static string Mid(string Object, int StarIndex, int MaxLength)
+        {
+            if (IsNull(Object)) return "";
+            if (StarIndex >= Object.Length) return "";
+            return Object.Substring(StarIndex, MaxLength);
+        }
+        /// <summary>
+        /// 取字符右函数
+        /// </summary>
+        /// <param name="Object">要操作的 string  数据</param>
+        /// <param name="MaxLength">最大长度</param>
+        /// <returns>string</returns>
+        public static string Right(object Object, int MaxLength)
+        {
+            if (IsNull(Object)) return "";
+            int i = Object.ToString().Length;
+            if (i < MaxLength) { MaxLength = i; i = 0; } else { i = i - MaxLength; }
+            return Object.ToString().Substring(i, MaxLength);
+        }
+
+        /// <summary>
+        /// 对象是否为空
+        /// 为空返回 false
+        /// 不为空返回 true
+        /// </summary>
+        /// <param name="Object">要判断的对象</param>
+        /// <returns>bool值</returns>
+        public static bool IsNull(object Object) { return IsNull(Object, false); }
+        /// <summary>
+        /// 对象是否为空
+        /// 为空返回 false
+        /// 不为空返回 true
+        /// </summary>
+        /// <param name="Object">要判断的对象</param>
+        /// <param name="IsRemoveSpace">是否去除空格</param>
+        /// <returns>bool值</returns>
+        public static bool IsNull(object Object, bool IsRemoveSpace)
+        {
+            if (Object == null) return true;
+            string Objects = Object.ToString();
+            if (Objects == "") return true;
+            if (IsRemoveSpace)
+            {
+                if (Objects.Replace(" ", "") == "") return true;
+                if (Objects.Replace("　", "") == "") return true;
+            }
+            return false;
+        }
+
 
 
     }
