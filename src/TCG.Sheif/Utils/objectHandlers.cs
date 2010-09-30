@@ -223,10 +223,24 @@ namespace TCG.Sheif
             Htmlstring = Regex.Replace(Htmlstring, @"&(copy|#169);", "\xa9", RegexOptions.IgnoreCase);
             Htmlstring = Regex.Replace(Htmlstring, @"&#(\d+);", "", RegexOptions.IgnoreCase);
 
-            Htmlstring.Replace("<", "");
-            Htmlstring.Replace(">", "");
-            Htmlstring.Replace("\r\n", "");
+            Htmlstring = Htmlstring.Replace("<", "");
+            Htmlstring = Htmlstring.Replace(">", "");
+            Htmlstring = Htmlstring.Replace("\r\n", "");
 
+            return Htmlstring;
+        }
+
+        /// <summary>
+        /// 去掉DIV
+        /// </summary>
+        /// <param name="Htmlstring"></param>
+        /// <returns></returns>
+        public static string NoDiv(string Htmlstring)
+        {
+            Htmlstring = Regex.Replace(Htmlstring, @"<div (.[^>]*)>", "\xa9", RegexOptions.IgnoreCase);
+
+            Htmlstring = Htmlstring.Replace("</div>", "");
+            Htmlstring = Htmlstring.Replace("<div>", "");
             return Htmlstring;
         }
 

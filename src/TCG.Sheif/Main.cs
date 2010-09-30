@@ -104,6 +104,7 @@ namespace TCG.Sheif
                     {
                         resinfo.vcKeyWord = resinfo.vcTitle;
                         resinfo.vcShortContent = objectHandlers.Left(objectHandlers.NoHTML(resinfo.vcContent), 200);
+                        resinfo.vcContent = objectHandlers.NoDiv(resinfo.vcContent);
 
                         rtn = resourcesService.CreateResources(resinfo);
                         if (rtn == 1)
