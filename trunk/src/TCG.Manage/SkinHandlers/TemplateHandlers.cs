@@ -94,7 +94,7 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="templatetype"></param>
         /// <returns></returns>
-        public Dictionary<string, EntityBase> GetTemplates(string skinid, string parentid, int templatetype)
+        public Dictionary<string, EntityBase> GetTemplates(string skinid, string parentid, int [] templatetypes)
         {
             Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
             if (templates == null) return null;
@@ -103,7 +103,7 @@ namespace TCG.Handlers
             foreach (KeyValuePair<string, EntityBase> entity in templates)
             {
                 Template temp = (Template)entity.Value;
-                if (templatetype == -1)
+                if (templatetypes == null)
                 {
                     if (skinid == temp.SkinId && parentid == temp.iParentId)
                     {
@@ -112,13 +112,33 @@ namespace TCG.Handlers
                 }
                 else
                 {
-                    if ((int)temp.TemplateType == templatetype && skinid == temp.SkinId && parentid == temp.iParentId)
+                    bool temptypein = false;
+
+                    for (int i = 0; i < templatetypes.Length; i++)
                     {
-                        childtemplates.Add(temp.Id, (EntityBase)temp);
+                        if (templatetypes[i] == (int)temp.TemplateType) temptypein = true;
+                    }
+                    if (temptypein)
+                    {
+                        if (skinid == temp.SkinId && parentid == temp.iParentId)
+                        {
+                            childtemplates.Add(temp.Id, (EntityBase)temp);
+                        }
                     }
                 }
             }
             return childtemplates;
+        }
+
+        public string GetTemplatePagePatch(string tid)
+        {
+            Template template = this.GetTemplateByID(tid);
+            string str = string.Empty;
+            if(template!=null)
+            {
+                return this.GetTemplatePagePatch(template.iParentId) + "/" + template.vcTempName;
+            }
+            return str;
         }
 
         /// <summary>
@@ -368,7 +388,11 @@ namespace TCG.Handlers
                 case 3:
                     return TemplateType.OriginalType;
                 case 4:
-                    return TemplateType.SystemPage;
+                    return TemplateType.SystemFolider;
+                case 5:
+                    return TemplateType.Folider;
+                case 6:
+                    return TemplateType.SystemFile;
             }
             return TemplateType.SinglePageType;
         }

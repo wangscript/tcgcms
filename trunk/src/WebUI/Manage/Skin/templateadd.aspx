@@ -20,7 +20,7 @@
     <div class="Page_title">添加资讯模版<span class="info1">(添加资讯模版文件)</span><a href="javascript:fGoBack();" class="title_back bold">[返回]</a></div>
 	<div class="Page_g">所属网站：<span class="info2" id="sSite"></span></div>
 	<div class="Page_arrb arb_pr">
-		<span class="p_a_t">模板名称：</span><input id="vcTempName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckTempName();"/>
+		<span class="p_a_t">模板名称：</span><input id="vcTempName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckTempName();" onkeyup="TempnageChange();"/>
 		<span class="info1" id="tnmsg">资讯模版的名称</span>
 	</div>
 	<div class="Page_arrb arb_pr">
@@ -44,6 +44,7 @@
 	<div class="dobtn arb_pr"><input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iSiteId" name="iSiteId" runat="server" />
 	<input type="hidden" id="iParentid" name="iParentid" runat="server" />
+    <input type="hidden" id="parentPath" name="parentPath" value="" runat="server"/>
 	<input type="hidden" id="SytemType" name="SytemType" value="0" runat="server"/>
 	
     </form>

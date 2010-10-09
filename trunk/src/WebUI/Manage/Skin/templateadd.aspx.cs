@@ -34,9 +34,74 @@ public partial class Template_templateadd : adminMain
             this.SytemType.Value = iSytemType.ToString();
             this.iSiteId.Value = SkinId;
 
-            foreach (Option option in base.configService.templateTypes.Values)
+            Template temp = base.handlerService.skinService.templateHandlers.GetTemplateByID(Parentid);
+            string htmltxt = "/";
+            if (temp != null)
             {
-                this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                string filepatch = base.handlerService.skinService.templateHandlers.GetTemplatePagePatch(Parentid);
+                this.parentPath.Value = htmltxt + "html" + filepatch + "/";
+            }
+            else
+            {
+                this.parentPath.Value = htmltxt;
+            }
+
+            this.vcUrl.Disabled = true;
+            
+
+            //列表模板添加
+            if (Parentid == "1")
+            {
+                foreach (Option option in base.configService.templateTypes.Values)
+                {
+                    if (option.Value == "1")
+                    {
+                        this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                        this.tType.Value = option.Value;
+                    }
+                }
+            }
+            else if (Parentid =="0")//跟目录
+            {
+                foreach (Option option in base.configService.templateTypes.Values)
+                {
+                    if (option.Value == "0" || option.Value == "5")
+                    {
+                        this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                    }
+                }
+            }
+            else if (Parentid == "2")  // 详细页
+            {
+                foreach (Option option in base.configService.templateTypes.Values)
+                {
+                    if (option.Value == "2")
+                    {
+                        this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                        this.tType.Value = option.Value;
+                    }
+                }
+            }
+            else if (Parentid == "3")  // 原件
+            {
+                foreach (Option option in base.configService.templateTypes.Values)
+                {
+                    if (option.Value == "3")
+                    {
+                        this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                        this.tType.Value = option.Value;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Option option in base.configService.templateTypes.Values)
+                {
+                    if (option.Value == "0" || option.Value == "5")
+                    {
+                        this.tType.Items.Add(new ListItem(option.Text, option.Value));
+                    }
+                }
             }
 
         }

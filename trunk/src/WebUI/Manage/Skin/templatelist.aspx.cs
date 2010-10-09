@@ -49,6 +49,7 @@ public partial class Template_templatelist : adminMain
     private void SearchInit()
     {
         
+        
         string iParentid = objectHandlers.Get("iParentid");
         iParentid = iParentid.Trim().Length == 0 ? "0" : iParentid;
 
@@ -61,29 +62,48 @@ public partial class Template_templatelist : adminMain
         Skin skinentity = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
         this.classTitle.InnerHtml = "<a href='?SkinId=" + SkinId + "&iParentid=0'>" + skinentity.Name + "</a>";
 
+        if (iParentid == "0")
+        {
+            this.systempagetemplate.Text = "<a href=\"?iParentid=1&skinid=" + SkinId + "\" title=\"详细页模板\">"
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 列表模板";
 
+            this.systemlisttemplate.Text = "<a href=\"?iParentid=2&skinid=" + SkinId + "\" title=\"列表模板\">"
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 详细页模板";
+
+            this.systemctrltemplte.Text = "<a href=\"?iParentid=3&skinid=" + SkinId + "\" title=\"原件模板\">"
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 原件模板";
+        }
+        else
+        {
+            this.systemlisttemplateDiv.Visible = false;
+            this.systempagetemplateDiv.Visible = false;
+            this.systemctrltemplteDiv.Visible = false;
+        }
+
+        //文件夹
         string type = objectHandlers.Get("iType");
         int iType = objectHandlers.ToInt(objectHandlers.Get("iType"));
         if (type.Trim().Length == 0) iType = -1;
 
-        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplates(SkinId, iParentid, iType);
+        Dictionary<string, EntityBase> filetemplates = base.handlerService.skinService.templateHandlers.GetTemplates(SkinId, iParentid, new int [] { (int)TemplateType.Folider});
 
-        if (templates!=null&&templates.Count != 0)
+        if (filetemplates != null && filetemplates.Count != 0)
         {
-            this.ItemRepeater.DataSource = templates.Values;
+            this.ItemRepeater1.DataSource = filetemplates.Values;
+            this.ItemRepeater1.DataBind();
+        }
+
+       
+        //单页
+        Dictionary<string, EntityBase> pagetemplates = base.handlerService.skinService.templateHandlers.GetTemplates(SkinId, iParentid, new int[] { (int)TemplateType.SinglePageType,
+            (int)TemplateType.ListType,(int)TemplateType.InfoType,(int)TemplateType.OriginalType });
+
+        if (pagetemplates != null && pagetemplates.Count != 0)
+        {
+            this.ItemRepeater.DataSource = pagetemplates.Values;
             this.ItemRepeater.DataBind();
         }
-
-        foreach (Option option in base.configService.templateTypes.Values)
-        {
-            this.sType.Items.Add(new ListItem(option.Text, option.Value));
-            int i = objectHandlers.ToInt(option.Value);
-            if (iType == i)
-            {
-                this.sType.SelectedIndex = i + 1;
-            }
-        }
-
+        
         base.Finish();
 
     }
@@ -102,13 +122,32 @@ public partial class Template_templatelist : adminMain
         CheckID.Text = template.Id;
         sId.Text = template.Id;
 
-        string text = "<a href=\"?iParentid=" + template.Id + "&SkinId=" + SkinId + "\" title=\"查看子分类\">"
-            + "<img src=\"../images/icon/12.gif\" border=\"0\"></a>";
-        text += "<a href=\"templatemdy.aspx?templateid=" + template.Id + "\" title=\"修改模版\">"
-            + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
+        string text = "<a href=\"templatemdy.aspx?templateid=" + template.Id + "\" title=\"修改" + template.vcTempName + "\">"
+            + "<img src=\"../images/icon/f_shtml.gif\" border=\"0\"></a>";
         classname.Text = text + template.vcTempName;
         updatedate.Text = (template.dUpdateDate).ToString("yyyy-MM-dd HH:mm:ss");
     }
+
+    protected void ItemRepeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        Template template = (Template)e.Item.DataItem;
+        Span CheckID = (Span)e.Item.FindControl("CheckID");
+        Span sId = (Span)e.Item.FindControl("sId");
+        Span classname = (Span)e.Item.FindControl("classname");
+        Span updatedate = (Span)e.Item.FindControl("updatedate");
+
+
+        string SkinId = objectHandlers.Get("SkinId");
+
+        CheckID.Text = template.Id;
+        sId.Text = template.Id;
+
+        string text = "<a href=\"?iParentid=" + template.Id + "&skinid=" + SkinId + "\" title=\"" + template.vcTempName + "\">"
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a>";
+        classname.Text = text + template.vcTempName;
+        updatedate.Text = (template.dUpdateDate).ToString("yyyy-MM-dd HH:mm:ss");
+    }
+
 
     private void TemplateDel()
     {

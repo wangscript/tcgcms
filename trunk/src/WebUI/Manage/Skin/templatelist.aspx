@@ -50,6 +50,39 @@
 		<span class="l_id1 bold l_rg">ID</span>
 		<span class="l_classname newstitle bold l_rg">模版名称</span><span class="l_updatedate bold">更新时间</span>
 	</div>
+
+    <div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);" id="systemlisttemplateDiv" runat="server">
+		<span class="l_check"><input name="CheckID" type="checkbox" value="" onclick="ForBgCheck(this)" /></span>
+		<Span class='l_id1'>1</Span>
+		<TCG:Span class='l_classname newstitle' id='systemlisttemplate' runat='server' />
+		<Span class='l_updatedate dcolor'></Span>
+	</div>
+
+    <div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);" id="systempagetemplateDiv" runat="server">
+		<span class="l_check"><input name="CheckID" type="checkbox" value="" onclick="ForBgCheck(this)" /></span>
+		<Span class='l_id1'>2</Span>
+		<TCG:Span class='l_classname newstitle' id='systempagetemplate' runat='server' />
+		<Span class='l_updatedate dcolor'></Span>
+	</div>
+
+    <div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);" id="systemctrltemplteDiv" runat="server">
+		<span class="l_check"><input name="CheckID" type="checkbox" value="" onclick="ForBgCheck(this)" /></span>
+		<Span class='l_id1'>3</Span>
+		<TCG:Span class='l_classname newstitle' id='systemctrltemplte' runat='server' />
+		<Span class='l_updatedate dcolor'></Span>
+	</div>
+
+    <asp:Repeater id="ItemRepeater1" runat="server" onitemdatabound="ItemRepeater1_ItemDataBound" EnableViewState="False">
+		<ItemTemplate>
+	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
+		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
+		<TCG:Span class='l_id1' id='sId' runat='server'/>
+		<TCG:Span class='l_classname newstitle' id='classname' runat='server' />
+		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
+	</div>	
+		</ItemTemplate>
+	</asp:Repeater>
+
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
@@ -61,10 +94,7 @@
 		</ItemTemplate>
 	</asp:Repeater>
 	<div class="list_bottom">
-		<span class="bold lfl">查看：</span>
-		<span class="bold lfl"><select id="sType" name="sType" runat="server" onchange="sTypeChange(this);">
-			<option value="-1">全部类型</option>
-		</select></span>
+		
 	</div>
 	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
 	<input type="hidden" id="iParentid" name="iParentid" runat="server" />
