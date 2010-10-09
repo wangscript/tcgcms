@@ -118,6 +118,16 @@ function CheckTempName(){
 	}
 }
 
+
+function TempnageChange() {
+    var obj = $("#vcTempName");
+    var url = $("#vcUrl");
+    var parentPath = $("#parentPath");
+
+    url.val(parentPath.val() + obj.val());
+    
+}
+
 function CheckType() {
     var obj = $("#tType");
     var n = $("#typemsg");

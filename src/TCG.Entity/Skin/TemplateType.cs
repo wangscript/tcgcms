@@ -41,8 +41,16 @@ namespace TCG.Entity
         /// </summary>
         OriginalType = 3,   
         /// <summary>
-        /// //系统必须的页面
+        /// //系统文件夹
         /// </summary>
-        SystemPage = 4,     
+        SystemFolider = 4,
+        /// <summary>
+        /// 文件夹
+        /// </summary>
+        Folider = 5,
+        /// <summary>
+        /// 系统文件
+        /// </summary>
+        SystemFile = 6
     }
 }

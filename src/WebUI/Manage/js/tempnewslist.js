@@ -29,6 +29,14 @@ $(document).ready(function() {
 });
 
 function GetTempTitleBy(site, parentid) {
+
+    if (parentid == "1") {
+        return ">> <a href='?iParentid=1&SkinId=" + site + "'>列表模板</a>"
+    } else if (parentid == "2"){
+        return ">> <a href='?iParentid=2&SkinId=" + site + "'>详细页模板</a>"
+    } else if (parentid == "3") {
+        return ">> <a href='?iParentid=3&SkinId=" + site + "'>原件模板</a>"
+    }
     for (var i = 0; i < _Template.length; i++) {
         if (_Template[i].SkinId == site && _Template[i].Id == parentid) {
             return GetTempTitleBy(site, _Template[i].ParentId) + " >> <a href='?iParentid=" +
@@ -44,7 +52,6 @@ function TempDel() {
         SetAjaxDiv("err", false, "您没选择需要删除的模版！");
         return false;
     }
-    debugger;
     var t = CheckTempsUsed(temps);
    
     if (t == "") {

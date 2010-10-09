@@ -36,12 +36,28 @@ public partial class Template_templatemdy : adminMain
                 return;
             }
 
+            string htmltxt = item.iParentId == "0" ? "" : "/html";
+            string filepatch = base.handlerService.skinService.templateHandlers.GetTemplatePagePatch(templateid);
+            this.parentPath.Value = htmltxt + filepatch.Substring(0, filepatch.LastIndexOf(item.vcTempName));
+
             this.vcTempName.Value = item.vcTempName;
             this.vcContent.Value = item.Content;
-            this.vcUrl.Value = item.vcUrl;
+            this.vcUrl.Value = htmltxt + filepatch;
+            this.vcUrl.Disabled = true;
+
             this.iSiteId.Value = item.SkinId.ToString();
             this.iParentid.Value = item.iParentId.ToString();
             this.SytemType.Value = item.iSystemType.ToString();
+
+            //无法修改父类
+            if (item.TemplateType != TemplateType.Folider && item.TemplateType != TemplateType.SinglePageType)
+            {
+                this.iParentid.Disabled = true;
+            }
+            else
+            {
+                this.iParentid.Disabled = false;
+            }
 
             foreach (Option option in base.configService.templateTypes.Values)            
             {
