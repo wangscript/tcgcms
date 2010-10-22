@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://www.tcgcms.cn/WebService/SheifService.asmx?wsdl" docRef="http://www.tcgcms.cn/WebService/SheifService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://www.tcgcms.cn/WebService/SheifService.asmx" xmlns:q1="http://tempuri.org/" binding="q1:SheifServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://www.tcgcms.cn/WebService/SheifService.asmx" xmlns:q2="http://tempuri.org/" binding="q2:SheifServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <contractRef ref="http://www.taoyanxi.com/WebService/SheifService.asmx?wsdl" docRef="http://www.taoyanxi.com/WebService/SheifService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.taoyanxi.com/WebService/SheifService.asmx" xmlns:q1="http://tempuri.org/" binding="q1:SheifServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.taoyanxi.com/WebService/SheifService.asmx" xmlns:q2="http://tempuri.org/" binding="q2:SheifServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
 </discovery>

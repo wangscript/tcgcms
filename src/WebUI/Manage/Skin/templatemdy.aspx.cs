@@ -43,7 +43,6 @@ public partial class Template_templatemdy : adminMain
             this.vcTempName.Value = item.vcTempName;
             this.vcContent.Value = item.Content;
             this.vcUrl.Value = htmltxt + filepatch;
-            this.vcUrl.Disabled = true;
 
             this.iSiteId.Value = item.SkinId.ToString();
             this.iParentid.Value = item.iParentId.ToString();

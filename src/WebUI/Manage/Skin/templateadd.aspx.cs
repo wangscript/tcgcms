@@ -46,8 +46,6 @@ public partial class Template_templateadd : adminMain
                 this.parentPath.Value = htmltxt;
             }
 
-            this.vcUrl.Disabled = true;
-            
 
             //列表模板添加
             if (Parentid == "1")

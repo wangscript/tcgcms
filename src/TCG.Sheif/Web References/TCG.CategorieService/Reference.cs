@@ -392,7 +392,13 @@ namespace TCG.Sheif.TCG.CategorieService {
         OriginalType,
         
         /// <remarks/>
-        SystemPage,
+        SystemFolider,
+        
+        /// <remarks/>
+        Folider,
+        
+        /// <remarks/>
+        SystemFile,
     }
     
     /// <remarks/>

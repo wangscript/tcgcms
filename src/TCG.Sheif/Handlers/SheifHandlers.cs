@@ -26,7 +26,7 @@ namespace TCG.Sheif
 
             for (int i = startpage; i < endpage + 1; i++)
             {
-                string ListPageHtml = HttpWebHandlers.GetHtml(string.Format(sheifourceinfo.SourceUrl, i.ToString()), Encoding.GetEncoding(sheifourceinfo.CharSet));
+                string ListPageHtml = HttpWebHandlers.GetHtml(string.Format(sheifourceinfo.SourceUrl, i.ToString()), Encoding.GetEncoding(sheifourceinfo.CharSet)).Replace("\r\n","").Replace("\n","").Replace("\t","");
 
                 if (sheifourceinfo.IsRss)
                 {
@@ -149,7 +149,7 @@ namespace TCG.Sheif
 
         public static int SheifTopic(ref string errText, ref TCG.ResourcesService.Resources topicinfo, TCG.SheifService.SheifSourceInfo sourceinfo, string topicurl)
         {
-            string pagehtml = HttpWebHandlers.GetHtml(topicurl, Encoding.GetEncoding(sourceinfo.CharSet));
+            string pagehtml = HttpWebHandlers.GetHtml(topicurl, Encoding.GetEncoding(sourceinfo.CharSet)).Replace("\r\n", "").Replace("\n", "").Replace("\t", "");
             Match match = Regex.Match(pagehtml, sourceinfo.TopicRole, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             if (match.Success)
             {

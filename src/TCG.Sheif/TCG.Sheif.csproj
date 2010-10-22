@@ -181,10 +181,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://www.tcgcms.cn/WebService/CategorieService.asmx">
+    <WebReferenceUrl Include="http://www.taoyanxi.com/WebService/CategorieService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TCG.CategorieService\</RelPath>
-      <UpdateFromURL>http://www.tcgcms.cn/WebService/CategorieService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://www.taoyanxi.com/WebService/CategorieService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -192,10 +192,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>TCG_Sheif_TCG_CategorieService_CategorieService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://www.tcgcms.cn/WebService/ResourcesService.asmx">
+    <WebReferenceUrl Include="http://www.taoyanxi.com/WebService/ResourcesService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TCG.ResourcesService\</RelPath>
-      <UpdateFromURL>http://www.tcgcms.cn/WebService/ResourcesService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://www.taoyanxi.com/WebService/ResourcesService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -203,10 +203,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>TCG_Sheif_TCG_ResourcesService_ResourcesService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://www.tcgcms.cn/WebService/SheifConfig.asmx">
+    <WebReferenceUrl Include="http://www.taoyanxi.com/WebService/SheifConfig.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TCG.SheifConfig\</RelPath>
-      <UpdateFromURL>http://www.tcgcms.cn/WebService/SheifConfig.asmx</UpdateFromURL>
+      <UpdateFromURL>http://www.taoyanxi.com/WebService/SheifConfig.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -214,10 +214,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>TCG_Sheif_TCG_SheifConfig_SheifConfig</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://www.tcgcms.cn/WebService/SheifService.asmx">
+    <WebReferenceUrl Include="http://www.taoyanxi.com/WebService/SheifService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\TCG.SheifService\</RelPath>
-      <UpdateFromURL>http://www.tcgcms.cn/WebService/SheifService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://www.taoyanxi.com/WebService/SheifService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
