@@ -65,7 +65,9 @@
           <s:enumeration value="InfoType" />
           <s:enumeration value="ListType" />
           <s:enumeration value="OriginalType" />
-          <s:enumeration value="SystemPage" />
+          <s:enumeration value="SystemFolider" />
+          <s:enumeration value="Folider" />
+          <s:enumeration value="SystemFile" />
         </s:restriction>
       </s:simpleType>
       <s:element name="TCGSoapHeader" type="tns:TCGSoapHeader" />
@@ -215,10 +217,10 @@
   </wsdl:binding>
   <wsdl:service name="CategorieService">
     <wsdl:port name="CategorieServiceSoap" binding="tns:CategorieServiceSoap">
-      <soap:address location="http://www.tcgcms.cn/WebService/CategorieService.asmx" />
+      <soap:address location="http://www.taoyanxi.com/WebService/CategorieService.asmx" />
     </wsdl:port>
     <wsdl:port name="CategorieServiceSoap12" binding="tns:CategorieServiceSoap12">
-      <soap12:address location="http://www.tcgcms.cn/WebService/CategorieService.asmx" />
+      <soap12:address location="http://www.taoyanxi.com/WebService/CategorieService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

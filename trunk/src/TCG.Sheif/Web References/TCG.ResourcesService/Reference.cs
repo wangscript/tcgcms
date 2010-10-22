@@ -328,7 +328,13 @@ namespace TCG.Sheif.TCG.ResourcesService {
         OriginalType,
         
         /// <remarks/>
-        SystemPage,
+        SystemFolider,
+        
+        /// <remarks/>
+        Folider,
+        
+        /// <remarks/>
+        SystemFile,
     }
     
     /// <remarks/>

@@ -170,7 +170,9 @@
           <s:enumeration value="InfoType" />
           <s:enumeration value="ListType" />
           <s:enumeration value="OriginalType" />
-          <s:enumeration value="SystemPage" />
+          <s:enumeration value="SystemFolider" />
+          <s:enumeration value="Folider" />
+          <s:enumeration value="SystemFile" />
         </s:restriction>
       </s:simpleType>
       <s:element name="SheifResourcesResponse">
@@ -357,10 +359,10 @@
   </wsdl:binding>
   <wsdl:service name="SheifService">
     <wsdl:port name="SheifServiceSoap" binding="tns:SheifServiceSoap">
-      <soap:address location="http://www.tcgcms.cn/WebService/SheifService.asmx" />
+      <soap:address location="http://www.taoyanxi.com/WebService/SheifService.asmx" />
     </wsdl:port>
     <wsdl:port name="SheifServiceSoap12" binding="tns:SheifServiceSoap12">
-      <soap12:address location="http://www.tcgcms.cn/WebService/SheifService.asmx" />
+      <soap12:address location="http://www.taoyanxi.com/WebService/SheifService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

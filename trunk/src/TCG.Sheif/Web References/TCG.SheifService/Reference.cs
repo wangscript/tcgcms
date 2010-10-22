@@ -467,7 +467,13 @@ namespace TCG.Sheif.TCG.SheifService {
         OriginalType,
         
         /// <remarks/>
-        SystemPage,
+        SystemFolider,
+        
+        /// <remarks/>
+        Folider,
+        
+        /// <remarks/>
+        SystemFile,
     }
     
     /// <remarks/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://www.tcgcms.cn/WebService/CategorieService.asmx?disco" filename="CategorieService.disco" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://www.tcgcms.cn/WebService/CategorieService.asmx?wsdl" filename="CategorieService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://www.taoyanxi.com/WebService/CategorieService.asmx?disco" filename="CategorieService.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://www.taoyanxi.com/WebService/CategorieService.asmx?wsdl" filename="CategorieService.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

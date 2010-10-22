@@ -226,10 +226,10 @@
   </wsdl:binding>
   <wsdl:service name="SheifConfig">
     <wsdl:port name="SheifConfigSoap" binding="tns:SheifConfigSoap">
-      <soap:address location="http://www.tcgcms.cn/WebService/SheifConfig.asmx" />
+      <soap:address location="http://www.taoyanxi.com/WebService/SheifConfig.asmx" />
     </wsdl:port>
     <wsdl:port name="SheifConfigSoap12" binding="tns:SheifConfigSoap12">
-      <soap12:address location="http://www.tcgcms.cn/WebService/SheifConfig.asmx" />
+      <soap12:address location="http://www.taoyanxi.com/WebService/SheifConfig.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

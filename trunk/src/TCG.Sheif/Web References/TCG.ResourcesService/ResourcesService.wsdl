@@ -67,7 +67,9 @@
           <s:enumeration value="InfoType" />
           <s:enumeration value="ListType" />
           <s:enumeration value="OriginalType" />
-          <s:enumeration value="SystemPage" />
+          <s:enumeration value="SystemFolider" />
+          <s:enumeration value="Folider" />
+          <s:enumeration value="SystemFile" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="Categories">
@@ -149,10 +151,10 @@
   </wsdl:binding>
   <wsdl:service name="ResourcesService">
     <wsdl:port name="ResourcesServiceSoap" binding="tns:ResourcesServiceSoap">
-      <soap:address location="http://www.tcgcms.cn/WebService/ResourcesService.asmx" />
+      <soap:address location="http://www.taoyanxi.com/WebService/ResourcesService.asmx" />
     </wsdl:port>
     <wsdl:port name="ResourcesServiceSoap12" binding="tns:ResourcesServiceSoap12">
-      <soap12:address location="http://www.tcgcms.cn/WebService/ResourcesService.asmx" />
+      <soap12:address location="http://www.taoyanxi.com/WebService/ResourcesService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
