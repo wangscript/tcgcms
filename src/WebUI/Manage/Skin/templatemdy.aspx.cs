@@ -45,8 +45,16 @@ public partial class Template_templatemdy : adminMain
             this.vcUrl.Value = htmltxt + filepatch;
 
             this.iSiteId.Value = item.SkinId.ToString();
-            this.iParentid.Value = item.iParentId.ToString();
-            this.SytemType.Value = item.iSystemType.ToString();
+            if (item.TemplateType == TemplateType.Folider)
+            {
+                this.iParentid.Value = item.iParentId.ToString();
+            }
+            else
+            {
+                this.parentdiv.Visible = false;
+            }
+            
+            this.SytemType.Value = ((int)item.TemplateType).ToString();
 
             //无法修改父类
             if (item.TemplateType != TemplateType.Folider && item.TemplateType != TemplateType.SinglePageType)
@@ -73,14 +81,18 @@ public partial class Template_templatemdy : adminMain
         else
         {
 
-            Template item = new Template();
+            Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
             item.vcTempName = objectHandlers.Post("vcTempName");
 
             item.TemplateType = base.handlerService.skinService.templateHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
             item.SkinId = objectHandlers.Post("iSiteId");
-            item.iParentId = objectHandlers.Post("iParentId");
+            string parentid = objectHandlers.Post("iParentId");
+            if (!string.IsNullOrEmpty(parentid))
+            {
+                item.iParentId = objectHandlers.Post("iParentId");
+            }
 
             if (string.IsNullOrEmpty(item.iParentId)) item.iParentId = "0";
 
@@ -124,7 +136,8 @@ public partial class Template_templatemdy : adminMain
             }
             else
             {
-                  if (!string.IsNullOrEmpty(item.vcUrl))
+                bool create = false;
+                if (item.TemplateType == TemplateType.SinglePageType)
                 {
                     string filepath = string.Empty;
                     filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + base.configService.baseConfig["FileExtension"];
@@ -136,7 +149,10 @@ public partial class Template_templatemdy : adminMain
                         tcgthdl.FilePath = filepath;
                         tcgthdl.configService = base.configService;
                         tcgthdl.conn = base.conn;
-                        tcgthdl.Replace();
+                        if (tcgthdl.Replace())
+                        {
+                            create = true;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -147,7 +163,7 @@ public partial class Template_templatemdy : adminMain
 
                 }
 
-                base.AjaxErch("{state:true,message:'模板修改成功！'}");
+                base.AjaxErch("{state:true,message:'" + ((create) ? "模板修改成功" : "模板修改失败") + "!'}");
             }
             
 

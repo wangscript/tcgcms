@@ -307,7 +307,7 @@ namespace TCG.Handlers
                     string selecthtml = string.Empty;
 
 
-                    for (int i = 1; i < this._pagerinfo.PageCount; i++)
+                    for (int i = 1; i <= this._pagerinfo.PageCount; i++)
                     {
                         selecthtml += string.Format(select2, i == 1?this._webpath:string.Format(pageurlt, i), i, i == this._pagerinfo.curPage ? "selected" : "");
                     }
@@ -316,7 +316,10 @@ namespace TCG.Handlers
                     selecthtml = select1 + selecthtml + select3;
 
                     pagerhtml = Regex.Replace(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", selecthtml, RegexOptions.Singleline | RegexOptions.Multiline);
+                   
                 }
+
+                pagerhtml = pagerhtml + "<input type='hidden' value='" + pageurlt + "' id='txtpageurlt'>";
   
             }
 

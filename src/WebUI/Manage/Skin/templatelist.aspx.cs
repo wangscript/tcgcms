@@ -65,10 +65,10 @@ public partial class Template_templatelist : adminMain
         if (iParentid == "0")
         {
             this.systempagetemplate.Text = "<a href=\"?iParentid=1&skinid=" + SkinId + "\" title=\"详细页模板\">"
-                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 列表模板";
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a>  详细页模板";
 
             this.systemlisttemplate.Text = "<a href=\"?iParentid=2&skinid=" + SkinId + "\" title=\"列表模板\">"
-                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 详细页模板";
+                + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 列表模板";
 
             this.systemctrltemplte.Text = "<a href=\"?iParentid=3&skinid=" + SkinId + "\" title=\"原件模板\">"
                 + "<img src=\"../images/icon/24.gif\" border=\"0\"></a> 原件模板";

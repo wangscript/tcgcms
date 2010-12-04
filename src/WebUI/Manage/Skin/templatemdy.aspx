@@ -20,7 +20,7 @@
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="Page_title">添加资讯模版<span class="info1">(添加资讯模版文件)</span><a href="javascript:fGoBack();" class="title_back bold">[返回]</a></div>
 	<div class="Page_g">所属网站：<span class="info2" id="sSite"></span></div>
-	<div class="Page_arrb arb_pr">
+	<div class="Page_arrb arb_pr" id="parentdiv" runat="server">
 		<span class="p_a_t">父类编号：</span><input id="iParentid" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" />
 	</div>
 	<div class="Page_arrb arb_pr">
