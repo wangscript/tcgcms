@@ -70,13 +70,13 @@ namespace TCG.Handlers
             if (type == "") return;
             switch (type)
             {
-                case "Template":
+                case "Template": //<tcg:id1 type="Template" id=''>dfddfd</tcg:id1>
                     this.TagForNewsTemplate(ref pagerinfo);
                     break;
-                case "Resource":
+                case "Resource": //<tcg:id1 type="Resource" id='topic1'> </tcg:id1>
                     this.TagForNewsTopic(ref pagerinfo);
                     break;
-                case "Categories":
+                case "Categories": //<tcg:id1 type="Categories" id='Categoriesid'>dfddfd</tcg:id1>
                     this.TagForNewsClassInfo(ref pagerinfo);
                     break;
                 case "Resourcelist":
@@ -85,7 +85,7 @@ namespace TCG.Handlers
                 case "CategoriesList":
                     this.TagForNewsClassList(ref pagerinfo);
                     break;
-                case "scriptcss":
+                case "scriptcss": // <tcg:id1 type="scriptcss" text='/sdfsdf.js|ggg.js'>dfddfd</tcg:id1>
                     this.TagForScriptCss(ref pagerinfo);
                     break;
             }
@@ -243,7 +243,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iID$", item.Id.ToString());
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_Id$", item.Id.ToString());
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcName$", item.vcName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());

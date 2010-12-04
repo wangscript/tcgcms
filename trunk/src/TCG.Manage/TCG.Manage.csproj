@@ -51,6 +51,9 @@
     <Compile Include="Page\adminMain.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Page\NewsMain.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Page\Origin.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
