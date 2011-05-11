@@ -41,7 +41,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateResources(Resources inf)
         {
-            base.SetDataBaseConnection();
+            
             inf.dAddDate = DateTime.Now;
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.Categorie.Id;
@@ -83,7 +83,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateResourcesForSheif(Resources inf)
         {
-            base.SetDataBaseConnection();
+            
             inf.dAddDate = DateTime.Now;
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.Categorie.Id;
@@ -124,7 +124,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateResources(Resources inf)
         {
-            base.SetDataBaseConnection();
+            
 
             SqlParameter sp0 = new SqlParameter("@iClassID", SqlDbType.VarChar, 36); sp0.Value = inf.Categorie.Id;
             SqlParameter sp1 = new SqlParameter("@vcTitle", SqlDbType.VarChar, 100); sp1.Value = inf.vcTitle;
@@ -166,7 +166,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Resources GetResourcesById(int resourceid)
         {
-            base.SetDataBaseConnection();
+            
             DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) WHERE iID = " + resourceid.ToString().Trim() + "");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
@@ -206,7 +206,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelNewsInfoHtmlByIds(string ids)
         {
-            base.SetDataBaseConnection();
+            
             if (string.IsNullOrEmpty(ids)) return -19000000;
 
             Dictionary<string, EntityBase> res = GetDelNewsInfoList(ids);
@@ -232,14 +232,14 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Dictionary<string, EntityBase> GetAllResurces()
         {
-            base.SetDataBaseConnection();
+            
             Dictionary<string, EntityBase> resurceses = GetAllResuresFromDataBase();         
             return resurceses;
         }
 
         public Dictionary<string, EntityBase> GetAllResuresFromDataBase()
         {
-            base.SetDataBaseConnection();
+            
             DataTable dt = base.conn.GetDataTable("SELECT * FROM Resources (NOLOCK) ");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
@@ -260,7 +260,7 @@ namespace TCG.Handlers
         public Dictionary<string, EntityBase> GetResourcesList(int nums, string categories, string Speciality, string orders, bool check, bool del, bool create,bool havechilecategorie)
         {
             Dictionary<string, EntityBase> res = null;
-            base.SetDataBaseConnection();
+            
             StringBuilder sqlsb = new StringBuilder();
             sqlsb.Append("SELECT ");
 
@@ -353,7 +353,7 @@ namespace TCG.Handlers
         public Dictionary<string, EntityBase> GetResourcesListPager(ref int curPage, ref int pageCount,ref int count, int page, int pagesize, string order, string strCondition)
         {
             Dictionary<string, EntityBase> res = null;
-            base.SetDataBaseConnection();
+            
 
             PageSearchItem sItem = new PageSearchItem();
             sItem.tableName = "Resources";
@@ -409,7 +409,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int SaveOrDelResource(string ids,string action,string adminname)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp1 = new SqlParameter("@ids", SqlDbType.NVarChar, 100); sp1.Value = ids;
             SqlParameter sp2 = new SqlParameter("@Action", SqlDbType.NVarChar, 10); sp2.Value = action;
             SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp3.Direction = ParameterDirection.Output;

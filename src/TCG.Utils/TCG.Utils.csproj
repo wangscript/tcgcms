@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigService.cs" />
+    <Compile Include="ConfigServierEx.cs" />
     <Compile Include="errHandlers.cs" />
     <Compile Include="objectHandlers.cs" />
     <Compile Include="OriginHttpHandler.cs" />

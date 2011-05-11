@@ -84,7 +84,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllSkinWithOutCaching()
         {
-            base.SetDataBaseConnection();
+            
             string Sql = "SELECT * FROM Skin WITH (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
@@ -96,7 +96,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CreateSkin(Skin skin)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@Id", SqlDbType.VarChar, 36); sp0.Value = skin.Id;
             SqlParameter sp1 = new SqlParameter("@Name", SqlDbType.NVarChar, 50); sp1.Value = skin.Name;
             SqlParameter sp2 = new SqlParameter("@Pic", SqlDbType.NVarChar, 255); sp2.Value = skin.Pic;

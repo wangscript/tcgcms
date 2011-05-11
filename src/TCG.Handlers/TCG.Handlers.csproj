@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerFactory.cs" />
+    <Compile Include="HandlerService.cs" />
+    <Compile Include="ManageService.cs" />
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +59,10 @@
     <ProjectReference Include="..\TCG.Entity\TCG.Entity.csproj">
       <Project>{B471F2AF-C8E8-49E8-BF11-9BBEEED676FD}</Project>
       <Name>TCG.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCG.Handlers.Inteface\TCG.Handlers.Inteface.csproj">
+      <Project>{8247CB7E-9156-4574-86F6-0278B6A69524}</Project>
+      <Name>TCG.Handlers.Inteface</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>

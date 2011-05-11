@@ -1,0 +1,688 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCG.Entity</name>
+    </assembly>
+    <members>
+        <member name="T:TCG.Entity.Popedom">
+            <summary>
+            后台权限项实体
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.iID">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.dAddtime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.vcPopName">
+            <summary>
+            权限名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.vcUrl">
+            <summary>
+            连接地址
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.iParentId">
+            <summary>
+            父级ID
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Popedom.cValid">
+            <summary>
+            是否为后台链接项
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.VersionItem.Text">
+            <summary>
+            更新内容
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.VersionItem.Ver">
+            <summary>
+            更新版本号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.VersionItem.Date">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.VersionItem.LogUrl">
+            <summary>
+            更新说明文档
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.VersionItem.Sqls">
+            <summary>
+            SQL语句文本个数
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.EntityBase.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Skin.Name">
+            <summary>
+            皮肤名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Skin.Pic">
+            <summary>
+            缩略图
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Skin.Info">
+            <summary>
+            皮肤说明
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Skin.Filename">
+            <summary>
+            皮肤文件夹
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.TemplateType">
+            <summary>
+            模版类型
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.SinglePageType">
+            <summary>
+            //单页模版
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.InfoType">
+            <summary>
+            //详细页模版
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.ListType">
+            <summary>
+            //列表模版
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.OriginalType">
+            <summary>
+            //原件模版
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.SystemFolider">
+            <summary>
+            //系统文件夹
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.Folider">
+            <summary>
+            文件夹
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.TemplateType.SystemFile">
+            <summary>
+            系统文件
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.Option">
+            <summary>
+            值对 写入数据库字段为{Text:'',Value:''}
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Option.Text">
+            <summary>
+            //内容   
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Option.Value">
+            <summary>
+            //值
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.Resources">
+            <summary>
+            资源信息
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.Categorie">
+            <summary>
+            资源分类信息
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcTitle">
+            <summary>
+            资源标题
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcUrl">
+            <summary>
+            资源跳转地址
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcContent">
+            <summary>
+            资源内容
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcAuthor">
+            <summary>
+            资源作者
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.iCount">
+            <summary>
+            资源访问量
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcKeyWord">
+            <summary>
+            资源关键字
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcEditor">
+            <summary>
+            资源编辑者
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.cCreated">
+            <summary>
+            资源是否生成
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.cPostByUser">
+            <summary>
+            资源发布者
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcSmallImg">
+            <summary>
+            资源小图，用户列表
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcBigImg">
+            <summary>
+            资源大图，用于图片展示
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcShortContent">
+            <summary>
+            资源简介
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcSpeciality">
+            <summary>
+            资源特性
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.cChecked">
+            <summary>
+            资源审核状态
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.cDel">
+            <summary>
+            资源是否删除
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcFilePath">
+            <summary>
+            资源路径
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.dAddDate">
+            <summary>
+            资源添加时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.dUpDateDate">
+            <summary>
+            资源修改时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.vcTitleColor">
+            <summary>
+            资源标题颜色
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.cStrong">
+            <summary>
+            资源标题是否加粗
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Resources.SheifUrl">
+            <summary>
+            抓取URL
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.iID">
+            <summary>
+            权限组编号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.dUpdateDate">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.vcRoleName">
+            <summary>
+            权限组名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.vcContent">
+            <summary>
+            权限组说明
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.vcPopedom">
+            <summary>
+            功能项权限 
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.vcClassPopedom">
+            <summary>
+            分类管理权限
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.AdminRole.PopedomStr">
+            <summary>
+            权限ID字符串
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.Speciality">
+            <summary>
+            资源特性的实体
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.iId">
+            <summary>
+            特性编号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.iSiteId">
+            <summary>
+            皮肤ID
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.iParent">
+            <summary>
+            父亲的编号
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.dUpDateDate">
+            <summary>
+            更新的时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.vcTitle">
+            <summary>
+            特性标题
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Speciality.vcExplain">
+            <summary>
+            特性说明
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.Id">
+            <summary>
+            源的名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.SourceName">
+            <summary>
+            源的名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.SourceUrl">
+            <summary>
+            源的地址
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.CharSet">
+            <summary>
+            编码格式
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.ListAreaRole">
+            <summary>
+            列表区域规则
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicListRole">
+            <summary>
+            文章列表的规则
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicListDataRole">
+            <summary>
+            文章列表中的文章的属性匹配的规则
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicRole">
+            <summary>
+            文章内容匹配规则
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicDataRole">
+            <summary>
+            文章的属性匹配的规则
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicPagerOld">
+            <summary>
+            文章分页的替换前
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.TopicPagerTemp">
+            <summary>
+            文章分页的替换过程量
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.SheifSourceInfo.IsRss">
+            <summary>
+            是否是RSS
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.CheckGetEnum">
+            <summary>
+            获得URL参数
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.PopedomKey">
+            <summary>
+            后台管理权限项操作
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.PopedomKey.SystemManage">
+            <summary>
+            系统管理 总操作项
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.PopedomKey.SystemManageAccManage">
+            <summary>
+            系统管理 帐号管理
+            </summary>
+        </member>
+        <member name="F:TCG.Entity.PopedomKey.SystemManageAccManageMyAcc">
+            <summary>
+            系统管理 帐号管理 个人帐号维护
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.Admin">
+            <summary>
+            后台管理员实体
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcAdminName">
+            <summary>
+            管理员姓名
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcNickName">
+            <summary>
+            管理员昵称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcPassword">
+            <summary>
+            管理员密码
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.iRole">
+            <summary>
+            管理员分组
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcPopedom">
+            <summary>
+            管理员特定权限
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcClassPopedom">
+            <summary>
+            管理员分类权限
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.cLock">
+            <summary>
+            是否锁定 ，为Y的时候表示锁定
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.dAddDate">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.dUpdateDate">
+            <summary>
+            最后一次更新的时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.dLoginDate">
+            <summary>
+            最后一次登陆的时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.dLastLoginDate">
+            <summary>
+            最后一次登陆的时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.iLoginCount">
+            <summary>
+            登陆次数
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.vcLastLoginIp">
+            <summary>
+            最后一次登陆的IP
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.cIsOnline">
+            <summary>
+            是否在线
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.cIsDel">
+            <summary>
+            是否被删除
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Admin.PopedomStr">
+            <summary>
+            权限ID字符串
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.DataBaseConnStr">
+            <summary>
+            文件数据库配置
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.DataBaseConnStr.Text">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.DataBaseConnStr.Value">
+            <summary>
+            链接串
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.DataBaseConnStr.Service">
+            <summary>
+            服务类型
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.DataBaseConnStr.IsBaseDataBase">
+            <summary>
+            是否为主数据库
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.TCGTagPagerInfo">
+            <summary>
+            标签的页面暂存内容，存储在标签检测中的零时变量
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.NeedPager">
+            <summary>
+            文章是否需要分页
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.PageSep">
+            <summary>
+            分页步骤
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.Read">
+            <summary>
+            是否有检测到标签
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.Page">
+            <summary>
+            分页时，当前页
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.PageCount">
+            <summary>
+            分页时，总页数
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.curPage">
+            <summary>
+            分页时，当前页 修正
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.TopicCount">
+            <summary>
+            分页时，总记录数
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.PageTitle">
+            <summary>
+            页面的标题
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.ScriptCss">
+            <summary>
+            页面的脚本和样式 
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.DoAllPage">
+            <summary>
+            是否声称所有页面
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.TCGTagPagerInfo.CreatePagesNotic">
+            <summary>
+            生成文件列表
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.Content">
+            <summary>
+            膜板块内容
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.SkinId">
+            <summary>
+            皮肤ID
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.TemplateType">
+            <summary>
+            模板类型
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.iParentId">
+            <summary>
+            模板父亲ID
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.dUpdateDate">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.dAddDate">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.vcTempName">
+            <summary>
+            模板名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Template.vcUrl">
+            <summary>
+            单页URL地址
+            </summary>
+        </member>
+        <member name="T:TCG.Entity.Categories">
+            <summary>
+            资源分类
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.Parent">
+            <summary>
+            父类ID
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.ResourceTemplate">
+            <summary>
+            文章模版
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.ResourceListTemplate">
+            <summary>
+            列表模版
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.iOrder">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.dUpdateDate">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.vcClassName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.vcName">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.vcDirectory">
+            <summary>
+            磁盘路径
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.cVisible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.DataBaseService">
+            <summary>
+            指定数据库连接
+            </summary>
+        </member>
+        <member name="P:TCG.Entity.Categories.SkinId">
+            <summary>
+             所属皮肤的ID
+            </summary>
+        </member>
+    </members>
+</doc>

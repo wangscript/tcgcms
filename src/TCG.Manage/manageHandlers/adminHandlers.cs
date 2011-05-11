@@ -43,7 +43,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AdminLogin(string name, string pwd)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = name;
             SqlParameter sp1 = new SqlParameter("@vcPassword", SqlDbType.VarChar, 32); sp1.Value = pwd;
             SqlParameter sp2 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp2.Value = objectHandlers.UserIp;
@@ -77,7 +77,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int GetAdminInfoByName(string name,string caction,ref DataSet ds)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = name;
             SqlParameter sp1 = new SqlParameter("@vcIP", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.VarChar, 15); sp2.Value = caction;
@@ -144,7 +144,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetALLAdminRole()
         {
-            base.SetDataBaseConnection();
+            
             string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM dbo.AdminRole (NOLOCK)";
             return base.conn.GetDataTable(sql);
         }
@@ -243,7 +243,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllAdmin()
         {
-            base.SetDataBaseConnection();
+            
             string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel FROM Admin (NOLOCK)";
             return base.conn.GetDataTable(sql);
         }
@@ -260,7 +260,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddAdmin(string admin,string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom,string classpop)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcNickName", SqlDbType.VarChar, 50); sp1.Value = nickname;
             SqlParameter sp2 = new SqlParameter("@vcPassWord", SqlDbType.VarChar, 32); sp2.Value = vPassWord;
@@ -294,7 +294,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateAdminInfo(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcNickName", SqlDbType.VarChar, 50); sp1.Value = nickname;
             SqlParameter sp2 = new SqlParameter("@vcPassWord", SqlDbType.VarChar, 32); sp2.Value = vPassWord;
@@ -327,7 +327,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int UpdateAdminInfo(int AdminID,string nickname,int iRole,string filesysroot,int slock)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@id", SqlDbType.Int, 4); sp0.Value = AdminID.ToString();
             SqlParameter sp1 = new SqlParameter("@nickname", SqlDbType.VarChar, 50); sp1.Value = nickname;
             SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = iRole.ToString();
@@ -352,7 +352,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DeleteAdminById(int AdminID)
         {
-            base.SetDataBaseConnection();
+            
             if (AdminID == 0) return -19000000;
             string sql = "DELETE FROM T_Manage_Admin WHERE id=" + AdminID.ToString();
             return base.conn.Execute(sql);
@@ -421,7 +421,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public DataTable GetAllPopedom()
         {
-            base.SetDataBaseConnection();
+            
             string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom WITH (NOLOCK)";
             return base.conn.GetDataTable(sql);
         }
@@ -519,7 +519,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int ChanageAdminLoginInfo(string adminname, string oldpwd, string npwd, string nickname)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
             SqlParameter sp1 = new SqlParameter("@oldPwd", SqlDbType.VarChar, 32); sp1.Value = oldpwd;
             SqlParameter sp2 = new SqlParameter("@NewPwd", SqlDbType.VarChar, 32); sp2.Value = npwd;
@@ -544,7 +544,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int GetAdminRoleInfo(ref int admincount,ref int delcount, ref DataSet ds)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@admincount", SqlDbType.Int, 4); sp0.Direction = ParameterDirection.Output;
             SqlParameter sp1 = new SqlParameter("@deladmincount", SqlDbType.Int, 4); sp1.Direction = ParameterDirection.Output;
             SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
@@ -571,7 +571,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int GetAdminList(int iRoleID,ref int admincount, ref int rolecount,ref string rolename,ref DataSet ds)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@iRoleId", SqlDbType.Int, 4); sp0.Value = iRoleID.ToString();
             SqlParameter sp1 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp1.Direction = ParameterDirection.Output;
             SqlParameter sp2 = new SqlParameter("@iRoleCount", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
@@ -600,7 +600,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AdminChangeGroup(string vcAdminname,string admins, int irole)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             SqlParameter sp1 = new SqlParameter("@iRoleId", SqlDbType.Int, 4); sp1.Value = irole.ToString() ;
             SqlParameter sp2 = new SqlParameter("@vcAdmins", SqlDbType.VarChar, 1000); sp2.Value = admins;
@@ -628,7 +628,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
@@ -658,7 +658,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int MdyAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content, int roleid)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
@@ -686,7 +686,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelAdminRole(string vcAdminname, int roleid)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = roleid.ToString();
@@ -710,7 +710,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelAdmins(string vcAdminname, string admins,string action)
         {
-            base.SetDataBaseConnection();
+            
             if (string.IsNullOrEmpty(action)) action = "01";
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
@@ -733,7 +733,7 @@ namespace TCG.Handlers
         /// <param name="vcAdminname"></param>
         public void AdminLoginOut(string vcAdminname)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             base.conn.Execute("Sp_Manage_AdminLogout", new SqlParameter[] { sp0 });
         }
@@ -745,7 +745,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int CheckAdminNameForReg(string adminname)
         {
-            base.SetDataBaseConnection();
+            
             if (string.IsNullOrEmpty(adminname)) return -1;
             return (int)base.conn.GetScalar("SELECT COUNT(1) FROM Admin (NOLOCK) WHERE vcAdminName='" + adminname + "'");
         }

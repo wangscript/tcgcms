@@ -62,7 +62,7 @@ namespace TCG.Handlers
 
         public DataTable GetAllTemplatesWithOutCaching()
         {
-            base.SetDataBaseConnection();
+            
             string Sql = "SELECT * FROM Template (NOLOCK)";
             return conn.GetDataTable(Sql);
         }
@@ -149,7 +149,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddTemplate(Template item,Admin admin)
         {
-            base.SetDataBaseConnection();
+            
             item.Id = Guid.NewGuid().ToString();
 
             return this.AddTemplateForXml(item, admin);
@@ -163,7 +163,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int AddTemplateForXml(Template item, Admin admin)
         {
-            base.SetDataBaseConnection();
+            
 
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
@@ -194,7 +194,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int DelTemplate(string temps,Admin admin)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@vctemps", SqlDbType.VarChar, 1000); sp2.Value = temps;
@@ -216,7 +216,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public int MdyTemplate(Template item,Admin admin)
         {
-            base.SetDataBaseConnection();
+            
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
