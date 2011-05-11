@@ -177,17 +177,6 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// 设置资讯数据库连接
-        /// </summary>
-        public void SetDataBaseConnection()
-        {
-            if (this.configService == null) return;
-            if (this.configService.ManageDataBaseStr == null) return;
-            this.conn.SetConnStr = this.configService.ManageDataBaseStr;
-
-        }
-
-        /// <summary>
         /// 从记录行中得到实体
         /// </summary>
         /// <param name="?"></param>

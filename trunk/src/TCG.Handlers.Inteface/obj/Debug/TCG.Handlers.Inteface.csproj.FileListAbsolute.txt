@@ -1,0 +1,8 @@
+E:\TCGCMS\src\TCG.Handlers.Inteface\bin\Debug\TCG.Handlers.Inteface.dll
+E:\TCGCMS\src\TCG.Handlers.Inteface\bin\Debug\TCG.Handlers.Inteface.pdb
+E:\TCGCMS\src\TCG.Handlers.Inteface\bin\Debug\TCG.Entity.dll
+E:\TCGCMS\src\TCG.Handlers.Inteface\bin\Debug\TCG.Entity.pdb
+E:\TCGCMS\src\TCG.Handlers.Inteface\bin\Debug\TCG.Entity.xml
+E:\TCGCMS\src\TCG.Handlers.Inteface\obj\Debug\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.Handlers.Inteface\obj\Debug\TCG.Handlers.Inteface.dll
+E:\TCGCMS\src\TCG.Handlers.Inteface\obj\Debug\TCG.Handlers.Inteface.pdb

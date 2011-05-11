@@ -30,7 +30,6 @@ namespace TCG.Handlers
     {
         public int AddShiefSource(SheifSourceInfo sheifsourceinfo)
         {
-            base.SetDataBaseConnection();
             sheifsourceinfo.Id = Guid.NewGuid().ToString();
 
             SqlParameter sp0 = new SqlParameter("@SourceName", SqlDbType.NVarChar, 500); sp0.Value = sheifsourceinfo.SourceName;
@@ -61,7 +60,6 @@ namespace TCG.Handlers
 
         public int UpdateShiefSource(SheifSourceInfo sheifsourceinfo)
         {
-            base.SetDataBaseConnection();
 
             SqlParameter sp0 = new SqlParameter("@SourceName", SqlDbType.NVarChar, 500); sp0.Value = sheifsourceinfo.SourceName;
             SqlParameter sp1 = new SqlParameter("@SourceUrl", SqlDbType.NVarChar, 255); sp1.Value = sheifsourceinfo.SourceUrl;
@@ -93,7 +91,6 @@ namespace TCG.Handlers
             sourceinfos = (Dictionary<string, SheifSourceInfo>)CachingService.Get(CachingService.CACHING_ALL_SHEIFSOURCE_ENTITY);
             if (sourceinfos == null)
             {
-                base.SetDataBaseConnection();
                 DataTable dt = base.conn.GetDataTable("SELECT * FROM [SheifSource] (NOLOCK) ");
                 if (dt == null) return -19000000;
                 if (dt.Rows.Count == 0) return -19000000;
@@ -114,7 +111,6 @@ namespace TCG.Handlers
 
         public int CreateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
-            base.SetDataBaseConnection();
             string Sql = "INSERT INTO SheifCategorieConfig (Id,SheifSourceId,LocalCategorieId) VALUES(";
             Sql += "'"+ Guid.NewGuid().ToString() +"','" + sheifcategorieconfig.SheifSourceId + "','" + sheifcategorieconfig.LocalCategorieId + "')";
             CachingService.Remove(CachingService.CACHING_SHEIF_CATEGORIES_CONFIG);
@@ -123,7 +119,6 @@ namespace TCG.Handlers
 
         public int UpdateSheifCategorieConfig(SheifCategorieConfig sheifcategorieconfig)
         {
-            base.SetDataBaseConnection();
             string Sql = "UPDATE SheifCategorieConfig SET SheifSourceId = '"
                 + sheifcategorieconfig.SheifSourceId + "',ResourceCreateDateTime = '" + sheifcategorieconfig.ResourceCreateDateTime.ToString() + "'";
             Sql += " WHERE LocalCategorieId='" + sheifcategorieconfig.LocalCategorieId + "'";
@@ -137,7 +132,6 @@ namespace TCG.Handlers
             sheifcategorieconfigs = (Dictionary<string, SheifCategorieConfig>)CachingService.Get(CachingService.CACHING_SHEIF_CATEGORIES_CONFIG);
             if (sheifcategorieconfigs == null)
             {
-                base.SetDataBaseConnection();
                 DataTable dt = base.conn.GetDataTable("SELECT * FROM [SheifCategorieConfig] (NOLOCK) ");
                 if (dt == null) return -19000000;
                 if (dt.Rows.Count == 0) return -19000000;

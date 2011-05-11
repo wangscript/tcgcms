@@ -1,0 +1,5 @@
+E:\TCGCMS\src\TCG.DBHelper.Interface\bin\Debug\TCG.DBHelper.Interface.dll
+E:\TCGCMS\src\TCG.DBHelper.Interface\bin\Debug\TCG.DBHelper.Interface.pdb
+E:\TCGCMS\src\TCG.DBHelper.Interface\obj\Debug\ResolveAssemblyReference.cache
+E:\TCGCMS\src\TCG.DBHelper.Interface\obj\Debug\TCG.DBHelper.Interface.dll
+E:\TCGCMS\src\TCG.DBHelper.Interface\obj\Debug\TCG.DBHelper.Interface.pdb
