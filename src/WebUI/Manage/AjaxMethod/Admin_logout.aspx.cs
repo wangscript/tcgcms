@@ -14,7 +14,7 @@ using TCG.Pages;
 using TCG.Entity;
 
 
-public partial class AjaxMethod_Admin_logout : adminMain
+public partial class AjaxMethod_Admin_logout : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,9 +22,9 @@ public partial class AjaxMethod_Admin_logout : adminMain
         {
             try
             {
-                base.handlerService.manageService.adminLoginHandlers.Logout();
+                base.handlerService.manageService.adminHandlers.Logout();
             }
-            catch
+            catch(Exception ex)
             {
                 base.AjaxErch("{state:false}");
                 return;

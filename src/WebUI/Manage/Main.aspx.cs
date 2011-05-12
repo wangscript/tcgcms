@@ -14,16 +14,16 @@ using TCG.Pages;
 using TCG.Release;
 
 
-public partial class Main : adminMain
+public partial class Main : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
-            this.title.Text = base.configService.baseConfig["WebTitle"] + " - " + Versions.version;
+            this.title.Text = ConfigServiceEx.baseConfig["WebTitle"] + " - " + Versions.version;
         }
     }
 }

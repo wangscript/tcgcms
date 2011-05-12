@@ -16,7 +16,6 @@ using TCG.Pages;
 
 using TCG.Release;
 using TCG.Entity;
-
 using TCG.Handlers;
 
 public partial class aLogin : BasePage
@@ -46,11 +45,11 @@ public partial class aLogin : BasePage
                 case "LOGIN":
                     this.Login();
                     break;
-                case "UPDATE" :
+                case "UPDATE":
                     this.Update();
                     break;
             }
-            
+
             return;
         }
     }
@@ -70,7 +69,7 @@ public partial class aLogin : BasePage
         //{
         //    bool re = false;
         //    WebClient wc = new WebClient();
-            
+
         //    string zip = Versions.WebSite + "/update/" + vers + "/" + vers + ".zip";
         //    string filepath = Server.MapPath("~/" + vers + ".zip");
         //    try
@@ -141,9 +140,21 @@ public partial class aLogin : BasePage
         {
             if (lname != null) TCG.Utils.Cookie.Remove(lname);
         }
-        string password1 = objectHandlers.MD5(password);
+
         string response = "";
-        int rtn = base.handlerService.manageService.adminHandlers.AdminLogin(adminname, password1);
+
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.manageService.adminHandlers.AdminLogin(adminname, password);
+
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
 
         if (rtn < 0)
         {

@@ -39,33 +39,47 @@ namespace TCG.Handlers.Imp.AccEss
         public int AdminLogin(string name, string pwd)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = name;
-            //SqlParameter sp1 = new SqlParameter("@vcPassword", SqlDbType.VarChar, 32); sp1.Value = pwd;
-            //SqlParameter sp2 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp2.Value = objectHandlers.UserIp;
-            //SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminLogin", new SqlParameter[] { sp0, sp1, sp2, sp3 }, new int[] { 3 });
-            
-            
+            Admin admininfo = this.GetAdminEntityByAdminName(name);
 
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    if (rtn == 1)
-            //    {
-            //        HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
-            //        if (admincookie == null)
-            //        {
-            //            admincookie = Cookie.Set(ConfigServiceEx.baseConfig["AdminCookieName"]);
-            //        }
-            //        admincookie.Values["AdminName"] = HttpContext.Current.Server.UrlEncode(name);
-            //        Cookie.Save(admincookie);
+            //用户不存在
+            if (admininfo == null || admininfo.cIsDel == "Y")
+            {
+                return -1000000002;
+            }
 
-            //        object TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
-            //        if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
-            //    }
-            //    return rtn;
-            //}
-            return -19000000;
+            //管理员已经在线
+            if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != objectHandlers.GetIP())
+            {
+                return -1000000005;
+            }
+
+            //用户密码错误
+            if (admininfo.vcPassword != objectHandlers.MD5(pwd))
+            {
+                return -1000000003;
+            }
+
+            //用户已经被锁定
+            if (admininfo.cLock == "Y")
+            {
+                return -1000000004;
+            }
+
+            admininfo.cIsOnline = "Y";
+            DBHelper.conn.Execute("UPDATE admin SET cIsOnline = 'Y' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+
+            HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
+            if (admincookie == null)
+            {
+                admincookie = Cookie.Set(ConfigServiceEx.baseConfig["AdminCookieName"]);
+            }
+            admincookie.Values["AdminName"] = HttpContext.Current.Server.UrlEncode(name);
+            Cookie.Save(admincookie);
+
+            object TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
+            if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
+
+            return 1;
         }
 
         /// <summary>
@@ -143,7 +157,7 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetALLAdminRole()
         {
 
-            string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM dbo.AdminRole (NOLOCK)";
+            string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM AdminRole";
             return DBHelper.conn.DataTable(sql);
         }
 
@@ -242,7 +256,7 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetAllAdmin()
         {
 
-            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel FROM Admin (NOLOCK)";
+            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel FROM Admin";
             return DBHelper.conn.DataTable(sql);
         }
 
@@ -420,7 +434,7 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetAllPopedom()
         {
 
-            string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom WITH (NOLOCK)";
+            string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom";
             return DBHelper.conn.DataTable(sql);
         }
 
@@ -518,20 +532,53 @@ namespace TCG.Handlers.Imp.AccEss
         public int ChanageAdminLoginInfo(string adminname, string oldpwd, string npwd, string nickname)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            //SqlParameter sp1 = new SqlParameter("@oldPwd", SqlDbType.VarChar, 32); sp1.Value = oldpwd;
-            //SqlParameter sp2 = new SqlParameter("@NewPwd", SqlDbType.VarChar, 32); sp2.Value = npwd;
-            //SqlParameter sp3 = new SqlParameter("@vcNickName", SqlDbType.VarChar, 50); sp3.Value = nickname;
-            //SqlParameter sp4 = new SqlParameter("@vcIP", SqlDbType.VarChar, 15); sp4.Value = objectHandlers.UserIp;
-            //SqlParameter sp5 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp5.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_ChanageAdminLoginInfo", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5 }, new int[] { 5 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
+            Admin admininfo = this.GetAdminEntityByAdminName(adminname);
 
-            return -19000000;
+            int rtn = this.CheckAdminPower(admininfo);
+            if (rtn < 0) return rtn;
+
+            //输入原始密码不正确
+            if(oldpwd!=admininfo.vcPassword)
+            {
+                return  -1000000009;
+            }
+     
+            //您的帐号已经锁定，不能修改登陆信息
+            if(admininfo.cLock=="Y")
+            {
+                return -1000000010;
+            }
+
+            if (string.IsNullOrEmpty(npwd))
+            {
+                admininfo.vcNickName = nickname;
+                DBHelper.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + adminname + "'");
+            }
+            else
+            {
+                admininfo.vcNickName = nickname;
+                admininfo.vcPassword = npwd;
+                DBHelper.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + adminname + "'");
+            }
+
+            return 1;
+        }
+
+        private int CheckAdminPower(Admin admininfo)
+        {
+
+            //-操作员为空，您是否尚未登陆？
+            if (string.IsNullOrEmpty(admininfo.vcAdminName))
+            {
+                return -1000000012;
+            }
+
+            //您不并不在线，您是否尚未登陆？
+            if (admininfo.cIsOnline != "Y")
+            {
+                return -1000000017;
+            }
+            return 1;
         }
 
         /// <summary>
@@ -554,6 +601,15 @@ namespace TCG.Handlers.Imp.AccEss
             //    int rtn = (int)Convert.ChangeType(reValues[2], typeof(int));
             //    return rtn;
             //}
+
+           
+
+            SELECT  @admincount = COUNT(1) FROM  admin (NOLOCK) WHERE cIsDel <> 'Y'  
+  
+SELECT  @deladmincount = COUNT(1) FROM  admin (NOLOCK) WHERE cIsDel = 'Y'  
+  
+SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE iRole = A.iID AND cIsDel <> 'Y') AS num   
+FROM dbo.AdminRole A (NOLOCK) ORDER BY num DESC  
 
             return -19000000;
         }
@@ -731,9 +787,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="vcAdminname"></param>
         public void AdminLoginOut(string vcAdminname)
         {
-
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //base.conn.Execute("Sp_Manage_AdminLogout", new SqlParameter[] { sp0 });
+            DBHelper.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
+            //DBHelper.conn.Execute("DELETE AdminOnline WHERE vcAdminName ='" + vcAdminname + "'");
         }
 
         /// <summary>
@@ -765,6 +820,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         private void AdminInit()
         {
+            this.Initialization();
             if (this._admin != null) return;
             object TempAdmin = null;
             if (string.IsNullOrEmpty(this._name))
@@ -777,7 +833,7 @@ namespace TCG.Handlers.Imp.AccEss
             TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
             if (TempAdmin == null)
             {
-                this._admin = this._adminh.GetAdminEntityByAdminName(this._name);
+                this._admin = this.GetAdminEntityByAdminName(this._name);
 
                 if (this._admin != null && this._admin.cIsOnline == "Y" && this._admin.vcLastLoginIp == objectHandlers.UserIp && this._admin.cIsDel != "Y")
                 {
@@ -836,13 +892,14 @@ namespace TCG.Handlers.Imp.AccEss
         public void Logout()
         {
             this.AdminInit();
-            this._adminh.AdminLoginOut(this._name);
+            this.AdminLoginOut(this._name);
             if (this._admincookie != null)
             {
                 Cookie.Remove(this._admincookie);
             }
             if (this._admin != null)
             {
+                this._admin.cIsOnline = "N";
                 SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
             }
         }
@@ -856,6 +913,12 @@ namespace TCG.Handlers.Imp.AccEss
                 if (this._admin == null) return new Admin();
                 return this._admin;
             }
+        }
+
+        public Admin GetAdminInfo()
+        {
+            this.AdminInit();
+            return this._admin;
         }
 
 

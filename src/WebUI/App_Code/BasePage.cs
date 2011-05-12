@@ -7,6 +7,7 @@ using System.Text;
 
 using TCG.Handlers;
 using TCG.Utils;
+using TCG.Entity;
 
 /// <summary>
 /// Summary description for BasePage
@@ -99,4 +100,17 @@ public class BasePage : Page
     }
 
     private string _ajaxdata = string.Empty;
+
+    protected Admin adminInfo
+    {
+        get
+        {
+            if (this._admininfo == null)
+            {
+                this._admininfo = this.handlerService.manageService.adminHandlers.GetAdminInfo();
+            }
+            return this._admininfo;
+        }
+    }
+    private Admin _admininfo = null;
 }

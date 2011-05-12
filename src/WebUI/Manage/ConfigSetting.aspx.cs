@@ -16,7 +16,7 @@ using TCG.Entity;
 using TCG.Pages;
 
 
-public partial class ConfigSetting : adminMain
+public partial class ConfigSetting : BasePage
 {
     private string _file = objectHandlers.MapPath("/config/baseConfig.Config");
     private StringBuilder _sb;
@@ -26,7 +26,7 @@ public partial class ConfigSetting : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             this.GetData();
         }
@@ -51,12 +51,10 @@ public partial class ConfigSetting : adminMain
             {
                 document.Save(this._file);
                 base.AjaxErch("1");
-                base.Finish();
             }
             catch
             {
                 base.AjaxErch("-1000000019");
-                base.Finish();
             }
         }
     }

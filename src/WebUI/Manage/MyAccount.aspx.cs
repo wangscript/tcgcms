@@ -14,7 +14,7 @@ using TCG.Utils;
 using TCG.Pages;
 
 
-public partial class MyAccount : adminMain
+public partial class MyAccount : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,7 +22,7 @@ public partial class MyAccount : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             this.iNickName.Value = base.adminInfo.vcNickName;
             this.adminname.Value = base.adminInfo.vcAdminName;
@@ -37,7 +37,6 @@ public partial class MyAccount : adminMain
             if (string.IsNullOrEmpty(adminname) || string.IsNullOrEmpty(nickname))
             {
                 base.AjaxErch("-1");
-                base.Finish();
                 return;
             }
 
@@ -59,7 +58,7 @@ public partial class MyAccount : adminMain
 
             if (rtn == 1)
             {
-                SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
+                SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
                 CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             }
 

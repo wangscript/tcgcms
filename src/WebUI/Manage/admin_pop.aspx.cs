@@ -14,7 +14,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
 
-public partial class admin_pop : adminMain
+public partial class admin_pop : BasePage
 {
     private int inum = 1;
     private string astr = string.Empty;
@@ -23,7 +23,7 @@ public partial class admin_pop : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             DataSet ds = new DataSet();
             int admincount = 0;
@@ -31,10 +31,8 @@ public partial class admin_pop : adminMain
             int rtn = base.handlerService.manageService.adminHandlers.GetAdminRoleInfo(ref admincount,ref delcount, ref ds);
             if (rtn < 0)
             {
-                base.Finish();
                 return;
             }
-            base.Finish();
             this.admincount.Text = admincount.ToString();
             this.deladmincount.Text = delcount.ToString();
             this.ItemRepeater.DataSource = ds;
@@ -50,13 +48,11 @@ public partial class admin_pop : adminMain
             if (string.IsNullOrEmpty(admins) || iRole == 0)
             {
                 base.AjaxErch("-1");
-                base.Finish();
                 return;
             }
 
             int rtn = base.handlerService.manageService.adminHandlers.AdminChangeGroup(base.adminInfo.vcAdminName, admins, iRole);
             base.AjaxErch(rtn.ToString());
-            base.Finish();
             return;
         }
     }
