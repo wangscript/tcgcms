@@ -1045,78 +1045,6 @@
             前台用户COOKIE名称
             </summary>
         </member>
-        <member name="M:TCG.Utils.errHandlers.GetErrTextByErrCode(System.Int32,System.String)">
-            <summary>
-            根据错误ID获得错误信息
-            </summary>
-            <param name="errCode"></param>
-        </member>
-        <member name="M:TCG.Utils.OriginHttpHandler.AjaxErch(System.Int32,System.String)">
-            <summary>
-            判断数据库执行参数
-            </summary>
-            <param name="rtn"></param>
-            <param name="okmessage"></param>
-        </member>
-        <member name="P:TCG.Utils.OriginHttpHandler.configService">
-            <summary>
-            获得配置信息支持
-            </summary>
-        </member>
-        <member name="P:TCG.Utils.OriginHttpHandler.conn">
-            <summary>
-            设置数据库链接
-            </summary>
-        </member>
-        <member name="P:TCG.Utils.OriginHttpHandler.ajaxdata">
-            <summary>
-            AJAX输出字符串
-            </summary>
-        </member>
-        <member name="T:TCG.Utils.TxtReader">
-            <summary>
-            文件的操作方法
-            </summary>
-        </member>
-        <member name="M:TCG.Utils.TxtReader.Read(System.String)">
-            <summary>
-            判断页面是否存在
-            </summary>
-            <param name="file"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TCG.Utils.TxtReader.ReadW(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="filepath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TCG.Utils.TxtReader.GetFileWebPath(System.String,System.String)">
-            <summary>
-            得到连接或图片中的文件的网页地址
-            </summary>
-            <param name="page">页面地址</param>
-            <param name="filepath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TCG.Utils.TxtReader.GetRequestText(System.String,System.String)">
-            <summary>
-            获取远程页面的HTML代码！
-            </summary>
-            <param name="ls_Url"></param>
-            <param name="charset"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TCG.Utils.TxtReader.GetRequestTextByPost(System.String,System.String,System.String)">
-            <summary>
-            获取远程HTML代码
-            </summary>
-            <param name="ls_Url"></param>
-            <param name="sData"></param>
-            <param name="charset"></param>
-            <returns></returns>
-        </member>
         <member name="T:TCG.Utils.ConfigServiceEx">
             <summary>
             站点配置信息服务提供者
@@ -1192,6 +1120,78 @@
             <summary>
             系统基本配置
             </summary>
+        </member>
+        <member name="M:TCG.Utils.errHandlers.GetErrTextByErrCode(System.Int32,System.String)">
+            <summary>
+            根据错误ID获得错误信息
+            </summary>
+            <param name="errCode"></param>
+        </member>
+        <member name="M:TCG.Utils.OriginHttpHandler.AjaxErch(System.Int32,System.String)">
+            <summary>
+            判断数据库执行参数
+            </summary>
+            <param name="rtn"></param>
+            <param name="okmessage"></param>
+        </member>
+        <member name="P:TCG.Utils.OriginHttpHandler.configService">
+            <summary>
+            获得配置信息支持
+            </summary>
+        </member>
+        <member name="P:TCG.Utils.OriginHttpHandler.conn">
+            <summary>
+            设置数据库链接
+            </summary>
+        </member>
+        <member name="P:TCG.Utils.OriginHttpHandler.ajaxdata">
+            <summary>
+            AJAX输出字符串
+            </summary>
+        </member>
+        <member name="T:TCG.Utils.TxtReader">
+            <summary>
+            文件的操作方法
+            </summary>
+        </member>
+        <member name="M:TCG.Utils.TxtReader.Read(System.String)">
+            <summary>
+            判断页面是否存在
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Utils.TxtReader.ReadW(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="filepath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Utils.TxtReader.GetFileWebPath(System.String,System.String)">
+            <summary>
+            得到连接或图片中的文件的网页地址
+            </summary>
+            <param name="page">页面地址</param>
+            <param name="filepath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Utils.TxtReader.GetRequestText(System.String,System.String)">
+            <summary>
+            获取远程页面的HTML代码！
+            </summary>
+            <param name="ls_Url"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TCG.Utils.TxtReader.GetRequestTextByPost(System.String,System.String,System.String)">
+            <summary>
+            获取远程HTML代码
+            </summary>
+            <param name="ls_Url"></param>
+            <param name="sData"></param>
+            <param name="charset"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

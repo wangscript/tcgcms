@@ -254,5 +254,7 @@ namespace TCG.Handlers
         void CheckAdminLogin();
 
         void Logout();
+
+        Admin GetAdminInfo();
     }
 }

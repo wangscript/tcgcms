@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace TCG.Handlers.Imp
                 if (_conn == null)
                 {
                     _conn = ConnFactory.CreateConn(ConfigServiceEx.baseConfig["dbtype"]);
+                    _conn.SetConnStr(HttpContext.Current.Server.MapPath(ConfigServiceEx.ManageDataBaseStr));
                 }
                 return _conn;
             }

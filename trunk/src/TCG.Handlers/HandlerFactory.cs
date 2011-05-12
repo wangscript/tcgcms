@@ -13,8 +13,9 @@ namespace TCG.Handlers
 
         public static IAdminHandlers CreateAdminHandlers()
         {
-            string className = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"] + ".AdminHandlers";
-            return (IAdminHandlers)Assembly.Load("TCG.Handlers.Imp").CreateInstance(className);
+            string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
+            string className = assc + ".AdminHandlers";
+            return (IAdminHandlers)Assembly.Load(assc).CreateInstance(className);
         }
     }
 }

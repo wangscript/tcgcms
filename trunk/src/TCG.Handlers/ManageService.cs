@@ -37,7 +37,7 @@ namespace TCG.Handlers
             {
                 if (this._adminhandlers == null)
                 {
-                    HandlerFactory.CreateAdminHandlers();
+                   this._adminhandlers = HandlerFactory.CreateAdminHandlers();
                 }
                 return this._adminhandlers;
             }
