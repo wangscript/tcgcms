@@ -50,6 +50,7 @@
     <Compile Include="ManageService.cs" />
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourcsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">

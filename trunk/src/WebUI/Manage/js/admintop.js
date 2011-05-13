@@ -44,6 +44,3 @@ function DelAdminsBack(val){
 	SetAjaxDivAdminMian("ok",false,"成功删除指定的管理员！");
 }
 
-function refinsh(){
-	window.parent.adminmain.location.href=window.parent.adminmain.location.href;	
-}

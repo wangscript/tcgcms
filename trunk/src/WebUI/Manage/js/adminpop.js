@@ -1,5 +1,5 @@
-//--------------
-var ajax = new AJAXRequest();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
+
 
 function onPop2(obj,action){
 	if(obj==null)return;
@@ -15,13 +15,23 @@ function onPop(obj){
 	if(obj==null)return;
 	obj.className = "pop1 popbg";
 	for(var i=1;i<emunum+1;i++){
-		var o = $("l_" + i);
+		var o = $("#l_" + i);
 		if(o==null)continue;
-		if(o.id!=obj.id){
-			o.className = "pop2";
+		if(o[0].id!=obj.id){
+			o[0].className = "pop2";
 		}
 	}
 }
+
+$(document).ready(function () {
+    //添加提交方法
+    var options = {
+        beforeSubmit: function () { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack2
+    };
+    $("#form1").ajaxForm(options);
+});
 
 var GroupDiv = new MenuDiv();
 function GetAddGroupDiv(){
@@ -40,14 +50,8 @@ function AddGroup(iRole){
 		window.parent.adminmain.SetAjaxDiv("err",false,"您还没选择需要移动的管理员!");
 		return;
 	}
-	$("admins").value=admins;
-	$("iRole").value=iRole;
-	SetAjaxDivAdminMian("loader",false,"正在发送移动请求...");
-	ajax.postf($("form1"),function(obj) { AddGroupBack(obj.responseText);});
-}
-
-function AddGroupBack(val){
-	if(GetErrTextFrameRoot(val))return;
-	window.parent.adminpop.location.href=window.parent.adminpop.location.href;
-	SetAjaxDivAdminMian("ok",false,"成功移动管理员到指定的角色组！");
+	$("#admins").val(admins);
+	$("#iRole").val(iRole);
+	SetAjaxDivAdminMian("loader", false, "正在发送移动请求...");
+	$("#form1").submit();
 }

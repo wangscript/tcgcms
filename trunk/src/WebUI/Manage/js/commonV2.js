@@ -366,7 +366,6 @@ function AjaxPostFormBack(data) {
 }
 
 function AjaxPostFormBack2(data) {
-    debugger;
     if (data.state) {
         if (data.callback != null) {
             if (data.callback.indexOf("(") > -1) {
@@ -384,4 +383,11 @@ function AjaxPostFormBack2(data) {
 
 function BeforSubmit() {
     return true;
+}
+
+function refash() {
+
+    window.parent.adminpop.location.href = window.parent.adminpop.location.href;
+    window.location.href = window.location.href;
+    window.parent.adminmain.location.href = window.parent.adminmain.location.href;
 }

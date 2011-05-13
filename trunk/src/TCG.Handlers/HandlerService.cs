@@ -23,5 +23,22 @@ namespace TCG.Handlers
             }
         }
         private ManageServiceEx _manageservice;
+
+        /// <summary>
+        /// 后台框架操作方法
+        /// </summary>
+        public SkinServiceEx skinService
+        {
+            get
+            {
+                if (this._skinservice == null)
+                {
+                    this._skinservice = new SkinServiceEx();
+                    this._skinservice.handlerService = this;
+                }
+                return this._skinservice;
+            }
+        }
+        private SkinServiceEx _skinservice;
     }
 }

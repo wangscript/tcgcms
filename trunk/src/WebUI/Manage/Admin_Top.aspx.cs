@@ -42,7 +42,7 @@ public partial class Admin_Top : BasePage
                 base.AjaxErch(base.ajaxdata);
                 return;
             }
-            base.AjaxErch(rtn, "删除管理员[" + admins + "]成功");
+            base.AjaxErch(rtn, "删除管理员[" + admins + "]成功", "refash()");
         }
     }
 }
