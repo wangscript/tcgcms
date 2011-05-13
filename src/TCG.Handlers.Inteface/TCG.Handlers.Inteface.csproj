@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdminHandlers.cs" />
+    <Compile Include="ICategoriesHandlers.cs" />
+    <Compile Include="IResourceHandlers.cs" />
+    <Compile Include="ISkinHandlers.cs" />
+    <Compile Include="ITemplateHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

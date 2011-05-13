@@ -63,7 +63,7 @@ public partial class adminRecovery : BasePage
                 base.AjaxErch(base.ajaxdata);
                 return;
             }
-            base.AjaxErch(rtn, "管理员[" + admins + "]删除成功！");
+            base.AjaxErch(rtn, "管理员[" + admins + "]删除成功！", "refash()");
         }
     }
 

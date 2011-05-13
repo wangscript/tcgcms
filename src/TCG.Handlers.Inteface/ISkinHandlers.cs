@@ -16,33 +16,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TCG.Entity;
 
 namespace TCG.Handlers
 {
-    public class ManageServiceEx : ObjectHandlersBase
+    public interface ISkinHandlers
     {
         /// <summary>
-        /// 构造函数
+        /// 根据皮肤ID得到皮肤信息
         /// </summary>
-        public ManageServiceEx()
-        {
-        }
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        Skin GetSkinEntityBySkinId(string skinid);
 
         /// <summary>
-        /// 管理员的操作方法
+        /// 获得所有皮肤实体
         /// </summary>
-        public IAdminHandlers adminHandlers
-        {
-            get
-            {
-                if (this._adminhandlers == null)
-                {
-                   this._adminhandlers = HandlerFactory.CreateAdminHandlers();
-                }
-                return this._adminhandlers;
-            }
-        }
-        private IAdminHandlers _adminhandlers = null;
+        /// <returns></returns>
+        Dictionary<string, EntityBase> GetAllSkinEntity();
 
+
+        /// <summary>
+        /// 创建皮肤
+        /// </summary>
+        /// <param name="skin">皮肤实体</param>
+        /// <returns></returns>
+        int CreateSkin(Skin skin);
+
+        /// <summary>
+        /// 修改皮肤
+        /// </summary>
+        /// <param name="skin">皮肤实体</param>
+        /// <returns></returns>
+        int UpdateSkin(Skin skin);
     }
 }

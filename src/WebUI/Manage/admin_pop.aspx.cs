@@ -47,12 +47,22 @@ public partial class admin_pop : BasePage
 
             if (string.IsNullOrEmpty(admins) || iRole == 0)
             {
-                base.AjaxErch("-1");
+                base.AjaxErch(-1,"");
                 return;
             }
 
-            int rtn = base.handlerService.manageService.adminHandlers.AdminChangeGroup(base.adminInfo.vcAdminName, admins, iRole);
-            base.AjaxErch(rtn.ToString());
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.AdminChangeGroup(base.adminInfo.vcAdminName, admins, iRole);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+            base.AjaxErch(rtn, "1", "refash()");
             return;
         }
     }

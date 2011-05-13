@@ -650,20 +650,30 @@ namespace TCG.Handlers.Imp.AccEss
         public int AdminChangeGroup(string vcAdminname, string admins, int irole)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@iRoleId", SqlDbType.Int, 4); sp1.Value = irole.ToString();
-            //SqlParameter sp2 = new SqlParameter("@vcAdmins", SqlDbType.VarChar, 1000); sp2.Value = admins;
-            //SqlParameter sp3 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp3.Value = objectHandlers.UserIp;
-            //SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp4.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminChangeGroup", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4 },
-            //    new int[] { 4 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
+            Admin admininfos = this.GetAdminEntityByAdminName(vcAdminname);
 
-            return -19000000;
+            int rtn = this.CheckAdminPower(admininfos);
+            if (rtn < 0) return rtn;
+
+            //组编号不正确
+            if (irole == 0)
+            {
+                return -1000000011;
+            }
+
+            if (admins.IndexOf(",") > -1)
+            {
+                DBHelper.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
+                    + " WHERE vcAdminName IN (+admins+)");
+            }
+            else
+            {
+                admins = admins.Replace("'", "");
+                DBHelper.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
+                    + " WHERE vcAdminName = '" + admins + "'");
+            }
+
+            return 1;
         }
 
         /// <summary>
@@ -776,7 +786,7 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN ('" + admins + "')' ");
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
@@ -788,7 +798,7 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName IN ('" + admins + "')' ");
+                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
@@ -800,7 +810,7 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN ('" + admins + "')' ");
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
