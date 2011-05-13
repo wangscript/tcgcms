@@ -14,27 +14,35 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
 
-public partial class Admin_Top : adminMain
+public partial class Admin_Top : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             string admins = objectHandlers.Post("admins");
             
             if (string.IsNullOrEmpty(admins))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch(-1,"");
                 return;
             }
 
-            int rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, "01");
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, "01");
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+            base.AjaxErch(rtn, "删除管理员[" + admins + "]成功");
         }
     }
 }

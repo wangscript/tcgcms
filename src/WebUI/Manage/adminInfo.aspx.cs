@@ -16,17 +16,18 @@ using TCG.Pages;
 
 using TCG.Entity;
 
-public partial class adminInfo : adminMain
+public partial class adminInfo : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Safety));
 
+            this.iRoleId.Value = iRoleId.ToString();
             if (iRoleId == 0)
             {
                 this.iRoleAll.Visible = true;
@@ -48,11 +49,9 @@ public partial class adminInfo : adminMain
             int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(iRoleId, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
-                base.Finish();
                 return;
             }
 
-            base.Finish();
             this.sAdmincount.Text = admincount.ToString();
             this.sRolecount.Text = rolecount.ToString();
             this.srolename.Text = strRolename;

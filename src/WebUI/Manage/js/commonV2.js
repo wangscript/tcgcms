@@ -145,25 +145,25 @@ function SetAjaxDivRoot(action, IsHide, txt) {
 }
 
 function SetAjaxDivAdminMian(action,IsHide,txt){
-	var ajaxdiv = window.parent.adminmain.$("ajaxdiv");
-	var ajaximg = window.parent.adminmain.$("ajaximg");
-	var ajaxText = window.parent.adminmain.$("ajaxText");
+	var ajaxdiv = window.parent.adminmain.$("#ajaxdiv");
+	var ajaximg = window.parent.adminmain.$("#ajaximg");
+	var ajaxText = window.parent.adminmain.$("#ajaxText");
 	if(ajaxdiv==null)return;
 
-	ajaxdiv.className = IsHide?"ajaxdiv hid":"ajaxdiv";
+	ajaxdiv[0].className = IsHide?"ajaxdiv hid":"ajaxdiv";
 	SetInnerText(ajaxText,txt);
 	switch(action){
 		case "loader" :
-			ajaximg.src = ajaxicon[0];
-			ajaxText.className = "loader";
+			ajaximg[0].src = ajaxicon[0];
+			ajaxText[0].className = "loader";
 		break;
 		case "err" :
-			ajaximg.src = ajaxicon[1];
-			ajaxText.className = "err red";
+			ajaximg[0].src = ajaxicon[1];
+			ajaxText[0].className = "err red";
 		break;
 		case "ok" :
-			ajaximg.src = ajaxicon[2];
-			ajaxText.className = "ok bold";
+			ajaximg[0].src = ajaxicon[2];
+			ajaxText[0].className = "ok bold";
 		break;
 	}
 }
@@ -362,6 +362,23 @@ function AjaxPostFormBack(data) {
         SetAjaxDiv("ok", false, data.message);
     } else {
         SetAjaxDiv("err", false, data.message);
+    }
+}
+
+function AjaxPostFormBack2(data) {
+    debugger;
+    if (data.state) {
+        if (data.callback != null) {
+            if (data.callback.indexOf("(") > -1) {
+                try { eval(data.callback); } catch (err) { }
+            } else {
+                try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
+            }
+            return;
+        }
+        SetAjaxDivAdminMian("ok", false, data.message);
+    } else {
+        SetAjaxDivAdminMian("err", false, data.message);
     }
 }
 

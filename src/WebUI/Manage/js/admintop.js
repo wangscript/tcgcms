@@ -1,5 +1,15 @@
 //--------------
-var ajax = new AJAXRequest();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
+
+$(document).ready(function () {
+    //添加提交方法
+    var options = {
+        beforeSubmit: function () { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack2
+    };
+    $("#form1").ajaxForm(options);
+});
 
 function AdminEdit(){
 	var admins = window.parent.adminmain.GetCheckBoxValues("CheckID");
@@ -14,17 +24,18 @@ function AdminEdit(){
 	window.parent.adminmain.location.href="adminmdy.aspx?adminname="+admins;
 }
 
-function AdminDel(){
-	var admins = window.parent.adminmain.GetCheckBoxValuesForSql("CheckID");
-	if(admins==""){
-		window.parent.adminmain.SetAjaxDiv("err",false,"您还没选择需要删除的管理员!");
-		return;
-	}
-	$("admins").value=admins;
-	if(confirm("您确定删除管理员["+admins+"]")){
-		SetAjaxDivAdminMian("loader",false,"正在发送删除["+admins+"]的请求...");
-		ajax.postf($("form1"),function(obj) { DelAdminsBack(obj.responseText);});
-	}
+function AdminDel() {
+    var admins = window.parent.adminmain.GetCheckBoxValuesForSql("CheckID");
+    if (admins == "") {
+        window.parent.adminmain.SetAjaxDiv("err", false, "您还没选择需要删除的管理员!");
+        return;
+    }
+    $("#admins").val(admins);
+    if (confirm("您确定删除管理员[" + admins + "]")) {
+        SetAjaxDivAdminMian("loader", false, "正在发送删除[" + admins + "]的请求...");
+        $("#form1").submit();
+    }
+    return false;
 }
 
 function DelAdminsBack(val){

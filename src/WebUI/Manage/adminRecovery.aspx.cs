@@ -14,14 +14,14 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 
 
-public partial class adminRecovery : adminMain
+public partial class adminRecovery : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             DataSet ds = new DataSet();
             string strRolename = string.Empty;
@@ -32,11 +32,9 @@ public partial class adminRecovery : adminMain
             int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
             if (rtn < 0)
             {
-                base.Finish();
                 return;
             }
 
-            base.Finish();
             this.sAdmincount.Text = admincount.ToString();
             this.sRolecount.Text = rolecount.ToString();
             this.srolename.Text = strRolename;
@@ -51,13 +49,21 @@ public partial class adminRecovery : adminMain
             if (string.IsNullOrEmpty(admins) || string.IsNullOrEmpty(action))
             {
                 base.AjaxErch("-1");
-                base.Finish();
                 return;
             }
 
-            int rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
-            base.AjaxErch(rtn.ToString());
-            base.Finish();
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+            base.AjaxErch(rtn, "管理员[" + admins + "]删除成功！");
         }
     }
 
