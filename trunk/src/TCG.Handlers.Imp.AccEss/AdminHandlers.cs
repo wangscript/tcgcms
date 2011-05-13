@@ -48,7 +48,8 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             //管理员已经在线
-            if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != objectHandlers.GetIP())
+            string ip = objectHandlers.GetIP();
+            if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != ip)
             {
                 return -1000000005;
             }
@@ -67,6 +68,7 @@ namespace TCG.Handlers.Imp.AccEss
 
             admininfo.cIsOnline = "Y";
             DBHelper.conn.Execute("UPDATE admin SET cIsOnline = 'Y' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+            DBHelper.conn.Execute("UPDATE admin SET vcLastLoginIp = '" + ip + "' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
 
             HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
             if (admincookie == null)
@@ -590,28 +592,11 @@ namespace TCG.Handlers.Imp.AccEss
         public int GetAdminRoleInfo(ref int admincount, ref int delcount, ref DataSet ds)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@admincount", SqlDbType.Int, 4); sp0.Direction = ParameterDirection.Output;
-            //SqlParameter sp1 = new SqlParameter("@deladmincount", SqlDbType.Int, 4); sp1.Direction = ParameterDirection.Output;
-            //SqlParameter sp2 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.GetDataSet("SP_Manage_GetAdminRoleInfo", new SqlParameter[] { sp0, sp1, sp2 }, new int[] { 0, 1, 2 }, ref ds);
-            //if (reValues != null)
-            //{
-            //    admincount = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    delcount = (int)Convert.ChangeType(reValues[1], typeof(int));
-            //    int rtn = (int)Convert.ChangeType(reValues[2], typeof(int));
-            //    return rtn;
-            //}
-
-           
-
-            SELECT  @admincount = COUNT(1) FROM  admin (NOLOCK) WHERE cIsDel <> 'Y'  
-  
-SELECT  @deladmincount = COUNT(1) FROM  admin (NOLOCK) WHERE cIsDel = 'Y'  
-  
-SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE iRole = A.iID AND cIsDel <> 'Y') AS num   
-FROM dbo.AdminRole A (NOLOCK) ORDER BY num DESC  
-
-            return -19000000;
+            admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'"));
+            delcount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel = 'Y'"));
+            ds = DBHelper.conn.DataSet("SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE [iRole] "
+                +"= A.iID AND cIsDel <> 'Y') AS [num]  FROM AdminRole A ");
+            return 1;
         }
 
         /// <summary>
@@ -626,23 +611,33 @@ FROM dbo.AdminRole A (NOLOCK) ORDER BY num DESC
         public int GetAdminList(int iRoleID, ref int admincount, ref int rolecount, ref string rolename, ref DataSet ds)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@iRoleId", SqlDbType.Int, 4); sp0.Value = iRoleID.ToString();
-            //SqlParameter sp1 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp1.Direction = ParameterDirection.Output;
-            //SqlParameter sp2 = new SqlParameter("@iRoleCount", SqlDbType.Int, 4); sp2.Direction = ParameterDirection.Output;
-            //SqlParameter sp3 = new SqlParameter("@iAdminCount", SqlDbType.Int, 4); sp3.Direction = ParameterDirection.Output;
-            //SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp4.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.GetDataSet("SP_Manage_GetAdminList", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4 },
-            //    new int[] { 1, 2, 3, 4 }, ref ds);
-            //if (reValues != null)
-            //{
-            //    rolecount = (int)Convert.ChangeType(reValues[1], typeof(int));
-            //    admincount = (int)Convert.ChangeType(reValues[2], typeof(int));
-            //    rolename = reValues[0];
-            //    int rtn = (int)Convert.ChangeType(reValues[3], typeof(int));
-            //    return rtn;
-            //}
+            if (iRoleID == 0)
+            {
 
-            return -19000000;
+                rolename = "所有管理员";
+                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel <> 'Y' "));
+                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel <> 'Y'  ");
+            }
+            else if (iRoleID > 0)
+            {
+                rolename = objectHandlers.ToString(DBHelper.conn.ExecuteScalar("SELECT vcRoleName FROM AdminRole WHERE iId = " + iRoleID.ToString()));
+                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + iRoleID.ToString() + " AND cIsDel <> 'Y' "));
+
+                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND B.iID = " + iRoleID.ToString() + " AND A.cIsDel <> 'Y'  ");
+            }
+            else if (iRoleID==-1)
+            {
+
+                rolename = "管理员回收站";
+                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel = 'Y' "));
+
+                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel = 'Y'  ");
+            }
+
+            return 1;
         }
 
         /// <summary>
@@ -765,20 +760,56 @@ FROM dbo.AdminRole A (NOLOCK) ORDER BY num DESC
         public int DelAdmins(string vcAdminname, string admins, string action)
         {
 
-            //if (string.IsNullOrEmpty(action)) action = "01";
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@vcAdmins", SqlDbType.VarChar, 1000); sp2.Value = admins;
-            //SqlParameter sp3 = new SqlParameter("@action", SqlDbType.Char, 2); sp3.Value = action;
-            //SqlParameter sp4 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp4.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_DelAdmins", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4 },
-            //    new int[] { 4 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            Admin admin = this.GetAdminEntityByAdminName(vcAdminname);
+            if (admin == null) return -19000000;
+
+            int rtn = this.CheckAdminPower(admin);
+            if (rtn < 0) return rtn;
+
+             //尚未选择需要删除的管理员 
+            if (string.IsNullOrEmpty(admins))
+            {
+                return -1000000016;
+            }
+
+            if (action == "01")
+            {
+                if (admins.IndexOf(",") > -1)
+                {
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN ('" + admins + "')' ");
+                }
+                else
+                {
+                    admins = admins.Replace("'", "");
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName ='" + admins + "' ");
+                }
+            }
+            else if(action == "02")
+            {
+                if (admins.IndexOf(",") > -1)
+                {
+                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName IN ('" + admins + "')' ");
+                }
+                else
+                {
+                    admins = admins.Replace("'", "");
+                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName ='" + admins + "' ");
+                }
+            }
+            else if (action == "03")
+            {
+                if (admins.IndexOf(",") > -1)
+                {
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN ('" + admins + "')' ");
+                }
+                else
+                {
+                    admins = admins.Replace("'", "");
+                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName ='" + admins + "' ");
+                }
+            }
+
+            return 1;
         }
 
         /// <summary>

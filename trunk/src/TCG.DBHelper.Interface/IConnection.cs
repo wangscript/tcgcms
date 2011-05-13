@@ -84,5 +84,12 @@ namespace TCG.DBHelper
         /// <param name="conn"></param>
         /// <returns></returns>
         void SetConnStr(string conn);
+
+        /// <summary>
+        /// 执行Sql查询语句并返回第一行的第一条记录,返回值为object 使用时需要拆箱操作 -> Unbox
+        /// </summary>
+        /// <param name="sqlstr">传入的Sql语句</param>
+        /// <returns>object 返回值 </returns>
+        object ExecuteScalar(string sql);
     }
 }

@@ -3,7 +3,7 @@
 .txt{ color:#333333}
 .green{ color:#009900;}
 .page_title1{ color:#000000; font-size:14px; line-height:30px; height:30px; text-align:left;padding-left:10px;}
-.listtitle1{ float:left;height:25px; line-height:25px; text-align:left; padding-left:10px; border-bottom:#ebebeb solid 1px;}
+.listtitle1{ float:left;height:25px; width:100%; line-height:25px; text-align:left; padding-left:10px; border-bottom:#ebebeb solid 1px;}
 
 .CheckID{ float:left;width:30px; height:25px; padding-top:2px;}
 .loginName { float:left;width:150px; height:25px;}
