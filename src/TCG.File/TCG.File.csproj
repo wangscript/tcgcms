@@ -43,13 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\FileCategories.cs" />
-    <Compile Include="Entity\FileResources.cs" />
     <Compile Include="FileObjectHandlersBase.cs" />
     <Compile Include="Handlers\FileCategoriesHandlers.cs" />
     <Compile Include="Handlers\FileResourcesHandlerBase.cs" />
     <Compile Include="Handlers\FileResourcesHandlers.cs" />
-    <Compile Include="Handlers\FileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +66,9 @@
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

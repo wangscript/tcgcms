@@ -16,12 +16,12 @@ using TCG.Utils;
 using TCG.Pages;
 using TCG.Entity;
 
-public partial class Top : adminMain
+public partial class Top : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         //检测管理员登录
-        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
         if (!Page.IsPostBack)
         {

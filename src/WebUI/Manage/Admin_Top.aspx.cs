@@ -18,11 +18,11 @@ public partial class Admin_Top : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             string admins = objectHandlers.Post("admins");
             
             if (string.IsNullOrEmpty(admins))

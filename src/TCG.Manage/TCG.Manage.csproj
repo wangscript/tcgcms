@@ -43,33 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlerService.cs" />
     <Compile Include="manageHandlers\adminHandlers.cs" />
     <Compile Include="manageHandlers\AdminLoginHandlers.cs" />
-    <Compile Include="manageHandlers\ManageService.cs" />
-    <Compile Include="ObjectHandlersBase.cs" />
-    <Compile Include="Page\adminMain.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Page\Origin.cs">
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="ObjectHandlersBase.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHandlers\ResourcesHandlers.cs" />
-    <Compile Include="ResourceHandlers\ResourcsService.cs" />
     <Compile Include="SheifHandlers\SheifHandlers.cs" />
     <Compile Include="SheifHandlers\SheifService.cs" />
     <Compile Include="SkinHandlers\CategoriesHandlers.cs" />
     <Compile Include="SkinHandlers\SkinHandlers.cs" />
-    <Compile Include="SkinHandlers\SkinService.cs" />
     <Compile Include="SkinHandlers\SpecialityHandlers.cs" />
     <Compile Include="SkinHandlers\TemplateHandlers.cs" />
-    <Compile Include="TCGTagHandlers\TagService.cs" />
-    <Compile Include="TCGTagHandlers\TCGTagAttributeHandlers.cs" />
-    <Compile Include="TCGTagHandlers\TCGTagBase.cs" />
-    <Compile Include="TCGTagHandlers\TCGTagHandlers.cs" />
-    <Compile Include="TCGTagHandlers\TCGTagStringFunHandlers.cs" />
-    <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TCG.Data\TCG.Data.csproj">
@@ -92,6 +78,9 @@
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Page\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

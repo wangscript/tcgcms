@@ -25,11 +25,11 @@ public partial class Skin_skins : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             this.LoadSkinFiles();
             Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
             if (skins != null && skins.Count != 0)

@@ -25,18 +25,18 @@ public class BasePage : Page
     /// <summary>
     /// 提供系统操作方法的服务
     /// </summary>
-    protected HandlerServiceEx handlerService
+    protected HandlerService handlerService
     {
         get
         {
             if (this._handlerservice == null)
             {                                            
-                this._handlerservice = new HandlerServiceEx();
+                this._handlerservice = new HandlerService();
             }
             return this._handlerservice;
         }
     }
-    private HandlerServiceEx _handlerservice = null;
+    private HandlerService _handlerservice = null;
 
     protected void AjaxErch(string str)
     {

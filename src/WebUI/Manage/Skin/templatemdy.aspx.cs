@@ -23,12 +23,12 @@ public partial class Template_templatemdy : BasePage
     {
 
         string templateid = objectHandlers.Get("templateid");
-        
+
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
             if (item == null)
             {

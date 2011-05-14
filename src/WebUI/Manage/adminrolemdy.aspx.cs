@@ -18,11 +18,12 @@ public partial class adminrolemdy : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //检测管理员登录
+        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.Init();
         }
         else

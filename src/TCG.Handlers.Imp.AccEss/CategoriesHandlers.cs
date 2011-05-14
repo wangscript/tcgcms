@@ -230,7 +230,6 @@ namespace TCG.Handlers.Imp.AccEss
             return CreateCategoriesForXml(admininfo,cif);
         }
 
-
         public int CreateCategoriesForXml(Admin admininfo,Categories cif)
         {
             int rtn = AccessFactory.adminHandlers.CheckAdminPower(admininfo);
@@ -289,38 +288,6 @@ namespace TCG.Handlers.Imp.AccEss
                     + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "')");
             return 1;
         }
-
-        /*
- 
-
-
-IF(@action='01')
-BEGIN
-	
-   
-
-
-END
-
-IF(@action='02')
-BEGIN
-   IF(@iClassId=@Parent)
-   BEGIN
-       SET @reValue=-1000000030 --父类ID不能为自己的ID
-       RETURN;
-   END
-
-   UPDATE Categories SET vcClassName=@vcClassName,vcName=@vcName,Parent=@Parent,
-   iTemplate=@iTemplate,iListTemplate=@iListTemplate,vcDirectory=@vcDirectory,vcUrl=@vcUrl,iOrder=@iOrder,
-   Visible = @cVisible,DataBaseService=@DataBaseService
-   WHERE ID =@iClassId
-END
-
-
-        */
-
-       
-
 
         /// <summary>
         /// 修改分类

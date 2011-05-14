@@ -18,11 +18,12 @@ public partial class adminRecovery : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             DataSet ds = new DataSet();
             string strRolename = string.Empty;
             int admincount = 0;

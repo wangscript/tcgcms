@@ -5,12 +5,12 @@ using System.Text;
 
 namespace TCG.Handlers
 {
-    public class ResourcsServiceEx : ObjectHandlersBase
+    public class ResourcsService : ObjectHandlersBase
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ResourcsServiceEx()
+        public ResourcsService()
         {
         }
 

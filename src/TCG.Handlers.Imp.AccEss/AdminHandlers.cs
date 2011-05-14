@@ -225,6 +225,7 @@ namespace TCG.Handlers.Imp.AccEss
             admininfo.vcClassPopedom = Row["vcClassPopedom"].ToString();
             admininfo.cIsDel = Row["cIsDel"].ToString();
             admininfo.cIsOnline = Row["cIsOnline"].ToString();
+            admininfo.vcLastLoginIp = Row["vcLastLoginIp"].ToString();
             return admininfo;
         }
 
@@ -259,7 +260,7 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetAllAdmin()
         {
 
-            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel,cIsOnline FROM Admin";
+            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel,cIsOnline,vcLastLoginIp FROM Admin";
             return AccessFactory.conn.DataTable(sql);
         }
 
@@ -867,11 +868,10 @@ namespace TCG.Handlers.Imp.AccEss
                 this._admin = null;
                 return;
             }
+            this._admin = this.GetAdminEntityByAdminName(this._name);
             TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
             if (TempAdmin == null)
             {
-                this._admin = this.GetAdminEntityByAdminName(this._name);
-
                 if (this._admin != null && this._admin.cIsOnline == "Y" && this._admin.vcLastLoginIp == objectHandlers.UserIp && this._admin.cIsDel != "Y")
                 {
                     SessionState.Set(ConfigServiceEx.baseConfig["AdminSessionName"], this._admin);
@@ -937,6 +937,7 @@ namespace TCG.Handlers.Imp.AccEss
             if (this._admin != null)
             {
                 this._admin.cIsOnline = "N";
+                AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + this._admin.vcAdminName + "'");
                 SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
             }
         }
