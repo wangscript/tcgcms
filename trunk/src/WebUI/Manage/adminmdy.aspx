@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/admincommon.js"></script>
-	<script type="text/javascript" src="js/adminadd.js"></script>
+	<script type="text/javascript" src="js/adminmdy.js"></script>
 	<script type="text/javascript" src="Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="Common/AllPop.aspx"></script>
 </head>
@@ -36,7 +36,7 @@
 		<span class="info1" id="nnmsg">登陆时的显示名，将会出现在资源发布的编辑者</span>
 	</div>
 	<div class="Page_arrb arb_pr"><span class="p_a_t">登陆密码：</span>
-	  <input id="iNewPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckNewPassword(this);"/>
+	  <input id="iNewPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" />
 		<span id="npwdmsg" class="info1">登陆密码,不修改请留空！</span>
 	</div>
 	<div class="Page_arrb arb_pr"><span class="p_a_t">确认密码：</span>

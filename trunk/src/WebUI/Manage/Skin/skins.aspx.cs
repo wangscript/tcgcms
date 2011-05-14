@@ -21,14 +21,14 @@ using TCG.Pages;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Skin_skins : adminMain
+public partial class Skin_skins : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             this.LoadSkinFiles();
             Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
@@ -97,7 +97,7 @@ public partial class Skin_skins : adminMain
         string SkinId = objectHandlers.Post("SkinId");
         try
         {
-            base.configService.UpdateConfig(base.configService.m_skinConfig, "DefaultSkinId", "Value", SkinId);
+            ConfigServiceEx.UpdateConfig(ConfigServiceEx.m_skinConfig, "DefaultSkinId", "Value", SkinId);
         }
         catch (Exception ex)
         {
@@ -176,7 +176,7 @@ public partial class Skin_skins : adminMain
         sitename.Text = skininfo.Name;
         pic.Src = skininfo.Pic;
         sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;
-        if (skininfo.Id == base.configService.DefaultSkinId)
+        if (skininfo.Id == ConfigServiceEx.DefaultSkinId)
         {
             IsDefault.Visible = true;
         }

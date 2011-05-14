@@ -93,10 +93,10 @@ namespace TCG.Handlers
         /// <param name="url"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        int CreateCategories(Categories cif);
+        int CreateCategories(Admin admininfo, Categories cif);
 
 
-        int CreateCategoriesForXml(Categories cif);
+        int CreateCategoriesForXml(Admin admininfo, Categories cif);
 
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="classinf"></param>
         /// <returns></returns>
-        int UpdateCategories(Categories classinf);
+        int UpdateCategories(Admin admin,Categories classinf);
 
         /// <summary>
         /// 删除资讯分类
@@ -115,7 +115,7 @@ namespace TCG.Handlers
         /// <param name="classid"></param>
         /// <param name="adminname"></param>
         /// <returns></returns>
-        int DelCategories(string classid, string adminname);
+        int DelCategories(string classid, Admin adminname);
 
         /// <summary>
         /// 从一个XML里面更新分类

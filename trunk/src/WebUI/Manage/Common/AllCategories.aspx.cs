@@ -16,7 +16,7 @@ using TCG.Entity;
 using TCG.Handlers;
 using TCG.Pages;
 
-public partial class Common_AllCategories : adminMain
+public partial class Common_AllCategories : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

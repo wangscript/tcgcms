@@ -1,4 +1,4 @@
-//--------------
+﻿//--------------
 
 
 function CheckForm() {
@@ -22,12 +22,12 @@ function CheckForm() {
         nnmsg.text("昵称不能为空!");
     }
 
-    if (!(CheckAdminName() && CheckRole() && CheckNewPassword(pwd) && CheckCPWD(cpwd))) return false;
+    if (!(CheckAdminName() && CheckRole() && CheckCPWD(cpwd))) return false;
     return true;
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     //添加提交方法
     var options = {
         beforeSubmit: CheckForm,
@@ -35,7 +35,7 @@ $(document).ready(function() {
         success: AddadminPostBack
     };
     $("#form1").ajaxForm(options);
-    
+
 });
 
 
@@ -48,7 +48,7 @@ function AddadminPostBack(data) {
     }
 }
 
-function CheckAdminName(){
+function CheckAdminName() {
     var adminname = $("#vcAdminName");
     if (!adminname.attr("disabled")) {
         adminname[0].className = "itxt1";
@@ -62,10 +62,10 @@ function CheckAdminName(){
         }
 
         $.ajax({
-        type: "GET", url: "AjaxMethod/Admin_CheckAdminName.aspx?temp=" + new Date().toString(), data: "admin=" + adminname.val(),
-            errror: function() { },
-            success: function(data) {
-                
+            type: "GET", url: "AjaxMethod/Admin_CheckAdminName.aspx?temp=" + new Date().toString(), data: "admin=" + adminname.val(),
+            errror: function () { },
+            success: function (data) {
+
                 if (data.state) {
                     SetAjaxDivRoot("ok", false, data.message);
                 } else {
@@ -79,15 +79,15 @@ function CheckAdminName(){
 }
 
 
-function CheckRole(){
-	var sRole = $("#sRole");
-	var rolemsg = $("#rolemsg");
-	if(sRole.val()=="0"){
-		rolemsg[0].className="info_err";
-		rolemsg.text("还未给管理员分配角色!");
-		return false;
-	}
-	rolemsg[0].className="info_ok";
-	rolemsg.text("管理员角色分配成功!");
-	return true;
+function CheckRole() {
+    var sRole = $("#sRole");
+    var rolemsg = $("#rolemsg");
+    if (sRole.val() == "0") {
+        rolemsg[0].className = "info_err";
+        rolemsg.text("还未给管理员分配角色!");
+        return false;
+    }
+    rolemsg[0].className = "info_ok";
+    rolemsg.text("管理员角色分配成功!");
+    return true;
 }

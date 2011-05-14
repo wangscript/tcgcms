@@ -17,14 +17,14 @@ using TCG.Entity;
 using TCG.Handlers;
 using TCG.Data;
 
-public partial class Template_templateadd : adminMain
+public partial class Template_templateadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             string SkinId = objectHandlers.Get("iSkinId");
             string Parentid = objectHandlers.Get("iParentid");
@@ -50,7 +50,7 @@ public partial class Template_templateadd : adminMain
             //列表模板添加
             if (Parentid == "1")
             {
-                foreach (Option option in base.configService.templateTypes.Values)
+                foreach (Option option in ConfigServiceEx.templateTypes.Values)
                 {
                     if (option.Value == "1")
                     {
@@ -61,7 +61,7 @@ public partial class Template_templateadd : adminMain
             }
             else if (Parentid =="0")//跟目录
             {
-                foreach (Option option in base.configService.templateTypes.Values)
+                foreach (Option option in ConfigServiceEx.templateTypes.Values)
                 {
                     if (option.Value == "0" || option.Value == "5")
                     {
@@ -71,7 +71,7 @@ public partial class Template_templateadd : adminMain
             }
             else if (Parentid == "2")  // 详细页
             {
-                foreach (Option option in base.configService.templateTypes.Values)
+                foreach (Option option in ConfigServiceEx.templateTypes.Values)
                 {
                     if (option.Value == "2")
                     {
@@ -82,7 +82,7 @@ public partial class Template_templateadd : adminMain
             }
             else if (Parentid == "3")  // 原件
             {
-                foreach (Option option in base.configService.templateTypes.Values)
+                foreach (Option option in ConfigServiceEx.templateTypes.Values)
                 {
                     if (option.Value == "3")
                     {
@@ -93,7 +93,7 @@ public partial class Template_templateadd : adminMain
             }
             else
             {
-                foreach (Option option in base.configService.templateTypes.Values)
+                foreach (Option option in ConfigServiceEx.templateTypes.Values)
                 {
                     if (option.Value == "0" || option.Value == "5")
                     {
@@ -118,14 +118,12 @@ public partial class Template_templateadd : adminMain
             {
                 base.ajaxdata = "{state:false,message:\"模板内容和名称不能为空！\"}";
                 base.AjaxErch(base.ajaxdata);
-                base.Finish();
                 return;
             }
             if ((int)item.TemplateType == 0 && string.IsNullOrEmpty(item.vcUrl))
             {
-                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, base.configService.baseConfig["ManagePath"]) + "\"}";
+                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, ConfigServiceEx.baseConfig["ManagePath"]) + "\"}";
                 base.AjaxErch(base.ajaxdata);
-                base.Finish();
             }
 
             int rtn = 0;
@@ -145,7 +143,6 @@ public partial class Template_templateadd : adminMain
 
             base.AjaxErch(rtn,"模板添加成功！");
             item = null;
-            base.Finish();
         }
     }
 }

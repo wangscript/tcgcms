@@ -271,5 +271,7 @@ namespace TCG.Handlers
         void Logout();
 
         Admin GetAdminInfo();
+
+        int CheckAdminPower(Admin admininfo);
     }
 }

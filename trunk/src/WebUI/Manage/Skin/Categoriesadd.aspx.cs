@@ -16,15 +16,15 @@ using TCG.Pages;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class skin_categoriesadd : adminMain
+public partial class skin_categoriesadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.Init();
         }
         else
@@ -41,8 +41,7 @@ public partial class skin_categoriesadd : adminMain
             cif.SkinId = objectHandlers.Post("iSkinId");
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch(-1,"");
                 return;
             }
 
@@ -50,8 +49,7 @@ public partial class skin_categoriesadd : adminMain
             {
                 if (cif.ResourceTemplate == null || cif.ResourceListTemplate==null)
                 {
-                    base.AjaxErch("-1");
-                    base.Finish();
+                    base.AjaxErch(-1,"");
                     return;
                 }
             }
@@ -59,7 +57,7 @@ public partial class skin_categoriesadd : adminMain
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(cif);
+                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(base.adminInfo,cif);
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
@@ -72,7 +70,6 @@ public partial class skin_categoriesadd : adminMain
             }
 
             base.AjaxErch(rtn, "分类添加成功！");
-            base.Finish();
         }
     }
 
