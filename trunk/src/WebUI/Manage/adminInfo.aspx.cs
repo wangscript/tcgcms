@@ -20,11 +20,11 @@ public partial class adminInfo : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             int iRoleId = objectHandlers.ToInt(objectHandlers.Get("roleid", CheckGetEnum.Safety));
 
             this.iRoleId.Value = iRoleId.ToString();

@@ -5,12 +5,12 @@ using System.Text;
 
 namespace TCG.Handlers
 {
-    public class SkinServiceEx : ObjectHandlersBase
+    public class SkinService : ObjectHandlersBase
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public SkinServiceEx()
+        public SkinService()
         {
 
         }

@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +44,7 @@
   <ItemGroup>
     <Compile Include="IAdminHandlers.cs" />
     <Compile Include="ICategoriesHandlers.cs" />
+    <Compile Include="IFileHandlers.cs" />
     <Compile Include="IResourceHandlers.cs" />
     <Compile Include="ISkinHandlers.cs" />
     <Compile Include="ITemplateHandlers.cs" />

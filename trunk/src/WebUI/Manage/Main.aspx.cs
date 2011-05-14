@@ -18,11 +18,10 @@ public partial class Main : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             this.title.Text = ConfigServiceEx.baseConfig["WebTitle"] + " - " + Versions.version;
         }
     }

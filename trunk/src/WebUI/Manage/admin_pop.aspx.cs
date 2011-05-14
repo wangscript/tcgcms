@@ -20,11 +20,12 @@ public partial class admin_pop : BasePage
     private string astr = string.Empty;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             DataSet ds = new DataSet();
             int admincount = 0;
             int delcount = 0;

@@ -13,44 +13,40 @@
   */
 
 using System;
-using System.Web;
-using System.Data;
-using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
-using TCG.Data;
 
-using TCG.Entity;
 using TCG.Utils;
+using TCG.Entity;
+using TCG.Data;
 
 namespace TCG.Handlers
 {
-    public class ResourcsService : ManageObjectHandlersBase
+    /// <summary>
+    /// 文件处理服务
+    /// </summary>
+    public class FileService : ObjectHandlersBase
     {
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public ResourcsService()
+
+        public FileService()
         {
         }
 
         /// <summary>
-        /// 提供对资讯操作的方法
+        /// 提供文件分类操作的方法
         /// </summary>
-        public ResourcesHandlers resourcesHandlers
+        public IFileHandlers fileHandlers
         {
             get
             {
-                if (this._resourceshandlers == null)
+                if (this._filehandlers == null)
                 {
-                    this._resourceshandlers = new ResourcesHandlers();
-                    this._resourceshandlers.configService = base.configService;
-                    this._resourceshandlers.conn = base.conn;
-                    this._resourceshandlers.handlerService = base.handlerService;
+
                 }
-                return this._resourceshandlers;
+                return this._filehandlers;
             }
         }
-        private ResourcesHandlers _resourceshandlers;
+        private IFileHandlers _filehandlers;
+
     }
 }

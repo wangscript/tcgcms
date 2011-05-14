@@ -32,7 +32,7 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供系统操作方法的服务
         /// </summary>
-        public HandlerServiceEx handlerService
+        public HandlerService handlerService
         {
             set
             {
@@ -43,7 +43,7 @@ namespace TCG.Handlers
                 return this._handlerservice;
             }
         }
-        private HandlerServiceEx _handlerservice = null;
+        private HandlerService _handlerservice = null;
 
 
         /// <summary>

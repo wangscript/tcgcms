@@ -21,11 +21,11 @@ public partial class Template_templateadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-
             string SkinId = objectHandlers.Get("iSkinId");
             string Parentid = objectHandlers.Get("iParentid");
             int iSytemType = objectHandlers.ToInt(objectHandlers.Get("SytemType"));

@@ -17,11 +17,11 @@ public partial class adminroleadd : adminMain
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.DefaultSkinId.Value = base.configService.DefaultSkinId;
         }
         else
