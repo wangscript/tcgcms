@@ -18,6 +18,7 @@ using System.Web.Services.Protocols;
 using System.Text;
 
 using TCG.Handlers;
+using TCG.Utils;
 
 namespace TCG.WebService
 {
@@ -27,7 +28,7 @@ namespace TCG.WebService
         public bool CheckHeader(TCGSoapHeader header)
         {
             if (header == null)return false;
-            if (header.PassWord != base.configService.baseConfig["WebServiceKey"]) return false;
+            if (header.PassWord != ConfigServiceEx.baseConfig["WebServiceKey"]) return false;
 
             return true;
         }

@@ -836,10 +836,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int CheckAdminNameForReg(string adminname)
         {
-
-            //if (string.IsNullOrEmpty(adminname)) return -1;
-            //return (int)base.conn.GetScalar("SELECT COUNT(1) FROM Admin (NOLOCK) WHERE vcAdminName='" + adminname + "'");
-            return 1;
+            if (string.IsNullOrEmpty(adminname)) return -1;
+            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Admin WHERE vcAdminName='" + adminname + "'"));
         }
 
         private void Initialization()

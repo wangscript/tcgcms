@@ -6,12 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 
 using TCG.Entity;
 using TCG.Handlers;
 
-public partial class Manage_upload_editUploadfile : adminMain
+public partial class Manage_upload_editUploadfile : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -41,7 +41,7 @@ public partial class Manage_upload_editUploadfile : adminMain
                 try
                 {
                     rtn = base.handlerService.fileService.fileInfoHandlers.UploadFile(bPicture, base.adminInfo.vcAdminName, Path.GetExtension(PF.FileName),
-                        objectHandlers.ToInt(base.configService.baseConfig["NewsFileClass"]), ref reUrl);
+                        objectHandlers.ToInt(ConfigServiceEx.baseConfig["NewsFileClass"]), ref reUrl);
                 }
                 catch (Exception ex)
                 {
@@ -50,7 +50,7 @@ public partial class Manage_upload_editUploadfile : adminMain
 
                 if (rtn < 0)
                 {
-                    text = "{Url:'',Err:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}";
+                    text = "{Url:'',Err:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}";
                 }
                 else if (rtn == 1)
                 {
@@ -65,7 +65,7 @@ public partial class Manage_upload_editUploadfile : adminMain
     private bool CheckType(string str)
     {
         string t = str.Replace(".", "");
-        string text = base.configService.baseConfig["alowFileType"].Replace("'", "");
+        string text = ConfigServiceEx.baseConfig["alowFileType"].Replace("'", "");
         string[] te = text.Split(',');
         for (int i = 0; i < te.Length; i++)
         {

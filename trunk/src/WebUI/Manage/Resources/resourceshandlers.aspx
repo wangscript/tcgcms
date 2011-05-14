@@ -23,10 +23,13 @@
     <script type="text/javascript" src="../js/layer.js"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
-	<script type="text/javascript">var fileclassid = <%=base.configService.baseConfig["NewsFileClass"] %> ;</script>
+	
 </head>
 <body>
     <form id="form1" runat="server">
+    <script type="text/javascript">
+        var fileclassid = <asp:Literal ID="ltfileclassid" runat="server"></asp:Literal> ;
+    </script>
     <div class="page_title" style="margin-bottom:5px;">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="SaveNewsInfo();">
 			<img src="../images/icon/save.gif" /> 保存

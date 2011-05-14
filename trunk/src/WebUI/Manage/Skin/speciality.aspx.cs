@@ -15,14 +15,14 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class skin_speciality : adminMain
+public partial class skin_speciality : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -70,7 +70,7 @@ public partial class skin_speciality : adminMain
         sItem.arrSortField = arrsortfield;
 
         sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        sItem.pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
         int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentID"));
         sItem.strCondition = "iParent=" + iParent.ToString();

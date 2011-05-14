@@ -11,9 +11,9 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Handlers;
-using TCG.Pages;
 
-public partial class Common_AllFileClass : adminMain
+
+public partial class Common_AllFileClass : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,7 +21,7 @@ public partial class Common_AllFileClass : adminMain
         {
             Response.Write("var AllFileClass = new Array();\r\n");
 
-            DataTable dt = base.handlerService.fileService.fileClassHandlers.GetAllFileClass(true);
+            DataTable dt = base.handlerService.fileService.fileHandlers.GetAllFileClass(true);
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)

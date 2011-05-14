@@ -396,5 +396,79 @@ namespace TCG.DBHelper
         {
             throw new Exception("ACCESS数据库不支持该方法!   Execute(string procName, SqlParameter[] parameters)");
         }
+
+        /**/
+        /// <summary>
+        /// 获取当前页应该显示的记录，注意：查询中必须包含名为ID的自动编号列，若不符合你的要求，就修改一下源码吧 :)
+        /// </summary>
+        /// <param name="pageIndex">当前页码</param>
+        /// <param name="pageSize">分页容量</param>
+        /// <param name="showString">显示的字段</param>
+        /// <param name="queryString">查询字符串，支持联合查询</param>
+        /// <param name="whereString">查询条件，若有条件限制则必须以where 开头</param>
+        /// <param name="orderString">排序规则</param>
+        /// <param name="pageCount">传出参数：总页数统计</param>
+        /// <param name="recordCount">传出参数：总记录统计</param>
+        /// <returns>装载记录的DataTable</returns>
+        public DataTable ExecutePager(int pageIndex, int pageSize, string showString, string queryString, string whereString, string orderString, out int pageCount, out int recordCount)
+        {
+            if (pageIndex < 1) pageIndex = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (string.IsNullOrEmpty(showString)) showString = "*";
+            if (string.IsNullOrEmpty(orderString)) orderString = "iID desc";
+            string myVw = string.Format(" {0} tempVw ", queryString);
+
+            string text1 = string.Format(" select count(0) as recordCount from {0} WHERE {1}", myVw, whereString);
+
+            recordCount = Convert.ToInt32(this.ExecuteScalar(text1));
+
+            if ((recordCount % pageSize) > 0)
+                pageCount = recordCount / pageSize + 1;
+            else
+                pageCount = recordCount / pageSize;
+            
+
+            string sql111 =string.Empty;
+            if (pageIndex == 1)//第一页
+            {
+                sql111 = string.Format("select top {0} {1} from {2} WHERE {3} order by {4} ", pageSize, showString, myVw, whereString, orderString);
+            }
+            else if (pageIndex > pageCount)//超出总页数
+            {
+                sql111 = string.Format("select top {0} {1} from {2} WHERE {3} order by {4} ", pageSize, showString, myVw, "where 1=2", orderString);
+            }
+            else
+            {
+                int pageLowerBound = pageSize * pageIndex;
+                int pageUpperBound = pageLowerBound - pageSize;
+                string recordIDs = recordID(string.Format("select top {0} {1} from {2} WHERE {3} order by {4} ", pageLowerBound, "ID", myVw, whereString, orderString), pageUpperBound);
+                sql111 = string.Format("select {0} from {1} where id in ({2}) order by {3} ", showString, myVw, recordIDs, orderString);  
+
+            }
+
+            return this.DataTable(sql111);
+        }
+
+        private string recordID(string query, int passCount)
+        {
+            connOpen();
+            string result = string.Empty;
+            comm.CommandType = CommandType.Text;
+            comm.CommandText = query;
+            using (IDataReader dr = comm.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    if (passCount < 1)
+                    {
+                        result += "," + dr.GetInt32(0);
+                    }
+                    passCount--;
+                }
+            }
+            connClose();
+            return result.Substring(1);
+        }
+
     }
 }

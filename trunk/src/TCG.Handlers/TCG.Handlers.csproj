@@ -45,19 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileService.cs" />
+    <Compile Include="Service\FileService.cs" />
     <Compile Include="HandlerFactory.cs" />
-    <Compile Include="HandlerService.cs" />
-    <Compile Include="ManageService.cs" />
+    <Compile Include="Service\HandlerService.cs" />
+    <Compile Include="Service\ManageService.cs" />
     <Compile Include="ObjectHandlersBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourcsService.cs" />
-    <Compile Include="SkinService.cs" />
-    <Compile Include="TagService.cs" />
-    <Compile Include="TCGTagAttributeHandlers.cs" />
-    <Compile Include="TCGTagBase.cs" />
-    <Compile Include="TCGTagHandlers.cs" />
-    <Compile Include="TCGTagStringFunHandlers.cs" />
+    <Compile Include="Service\ResourcsService.cs" />
+    <Compile Include="Service\SheifService.cs" />
+    <Compile Include="Service\SkinService.cs" />
+    <Compile Include="Service\TagService.cs" />
+    <Compile Include="TCGTag\TCGTagAttributeHandlers.cs" />
+    <Compile Include="TCGTag\TCGTagBase.cs" />
+    <Compile Include="TCGTag\TCGTagHandlers.cs" />
+    <Compile Include="TCGTag\TCGTagStringFunHandlers.cs" />
     <Compile Include="Versions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +79,7 @@
       <Name>TCG.Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

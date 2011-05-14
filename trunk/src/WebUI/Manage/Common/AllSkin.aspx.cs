@@ -7,10 +7,10 @@ using System.Web.UI.WebControls;
 
 using TCG.Utils;
 using TCG.Handlers;
-using TCG.Pages;
+
 using TCG.Entity;
 
-public partial class Manage_Common_AllSkin : adminMain
+public partial class Manage_Common_AllSkin : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

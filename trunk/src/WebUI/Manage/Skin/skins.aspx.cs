@@ -16,7 +16,7 @@ using System.Xml;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Handlers;
 using TCG.Entity;

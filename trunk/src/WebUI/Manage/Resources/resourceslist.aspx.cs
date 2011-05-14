@@ -15,22 +15,22 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class resources_resourceslist : adminMain
+public partial class resources_resourceslist : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.SearchInit();
         }
         else
@@ -45,7 +45,6 @@ public partial class resources_resourceslist : adminMain
                     this.CreateNews();
                     break;
             }
-            base.Finish();
             return;
         }
     }
@@ -55,7 +54,7 @@ public partial class resources_resourceslist : adminMain
        
 
         int page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        int pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
         string iClassId = objectHandlers.Get("iClassId");
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
@@ -64,7 +63,7 @@ public partial class resources_resourceslist : adminMain
         string skinId = objectHandlers.Get("SkinId");
         if (string.IsNullOrEmpty(skinId))
         {
-            skinId = base.configService.DefaultSkinId;
+            skinId = ConfigServiceEx.DefaultSkinId;
         }
 
         this.iSkinId.Value = skinId;
@@ -96,10 +95,10 @@ public partial class resources_resourceslist : adminMain
 
         int Speciality = objectHandlers.ToInt(objectHandlers.Get("Speciality"));
         this.iSpeciality.Value = Speciality.ToString();
-        if (Speciality != 0)
-        {
-            strCondition += " AND dbo.IsSpeciality(vcSpeciality,'" + Speciality.ToString() + "') >0 ";
-        }
+        //if (Speciality != 0)
+        //{
+        //    strCondition += " AND dbo.IsSpeciality(vcSpeciality,'" + Speciality.ToString() + "') >0 ";
+        //}
 
         strCondition += " AND cDel ='N'";
 
@@ -173,8 +172,11 @@ public partial class resources_resourceslist : adminMain
 
         string text = "<a href=\"resourceshandlers.aspx?newsid=" + res.Id + "\" title=\"查看子分类\">"
             + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
-
-        sTitle.Text = text + "<a href='" + res.GetUrl() + "' target='_blank'>" + res.vcTitle + "</a>";
+        string tstyle = string.Empty;
+        if (!string.IsNullOrEmpty(res.vcTitleColor))
+            tstyle = "style=' color:" + res.vcTitleColor + ";'";
+        sTitle.Text = text + "<a href='" + res.GetUrl() + "' " + tstyle 
+            + " target='_blank'>" + res.vcTitle + "</a>";
         sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + res.Categorie.Id + "');</script>";
 
         updatedate.Text = res.dUpDateDate.ToString("yyyy-MM-dd HH:mm:ss");
@@ -220,8 +222,8 @@ public partial class resources_resourceslist : adminMain
         string errText = string.Empty;
         try
         {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, resourceid, base.tagService.TCGTagHandlers);
-            errText = base.tagService.TCGTagHandlers.PagerInfo.CreatePagesNotic.Replace("\\","/");
+            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, resourceid, base.tagService.TCGTagHandlers);
+            //errText = base.tagService.TCGTagHandlers.PagerInfo.CreatePagesNotic.Replace("\\","/");
         }
         catch (Exception ex)
         {

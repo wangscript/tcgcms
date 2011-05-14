@@ -4,11 +4,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using TCG.Pages;
+
 using TCG.Utils;
 using TCG.Release;
 
-public partial class Manage_Version_Ver : adminMain
+public partial class Manage_Version_Ver : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

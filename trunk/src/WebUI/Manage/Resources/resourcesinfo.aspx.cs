@@ -6,14 +6,14 @@ using System.Web.UI.WebControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class resources_resourcesinfo : adminMain
+public partial class resources_resourcesinfo : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

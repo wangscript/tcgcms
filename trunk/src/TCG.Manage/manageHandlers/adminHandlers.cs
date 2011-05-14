@@ -54,16 +54,16 @@ namespace TCG.Handlers
                 int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
                 if (rtn == 1)
                 {
-                    HttpCookie admincookie = Cookie.Get(base.configService.baseConfig["AdminCookieName"]);
+                    HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
                     if (admincookie == null)
                     {
-                        admincookie = Cookie.Set(base.configService.baseConfig["AdminCookieName"]);
+                        admincookie = Cookie.Set(ConfigServiceEx.baseConfig["AdminCookieName"]);
                     }
                     admincookie.Values["AdminName"] = HttpContext.Current.Server.UrlEncode(name);
                     Cookie.Save(admincookie);
 
-                    object TempAdmin = SessionState.Get(base.configService.baseConfig["AdminSessionName"]);
-                    if (TempAdmin != null) SessionState.Remove(base.configService.baseConfig["AdminSessionName"]);
+                    object TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
+                    if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
                 }
                 return rtn;
             }

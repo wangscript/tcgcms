@@ -130,7 +130,7 @@ namespace TCG.Handlers
         /// <param name="ids"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        int SaveOrDelResource(string ids, string action, string adminname);
+        int SaveOrDelResource(string ids, string action, Admin adminname);
 
     }
 }

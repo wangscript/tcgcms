@@ -16,20 +16,20 @@ using System.Text.RegularExpressions;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 
-public partial class resources_resourcesrecovery : adminMain
+public partial class resources_resourcesrecovery : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.SearchInit();
         }
         else
@@ -44,7 +44,6 @@ public partial class resources_resourcesrecovery : adminMain
                     this.DelNews();
                     break;
             }
-            base.Finish();
             return;
         }
     }
@@ -56,7 +55,7 @@ public partial class resources_resourcesrecovery : adminMain
 
 
         int page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        int pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
         string strCondition = " cDel ='Y'";
 
         int curPage = 0;
@@ -139,7 +138,7 @@ public partial class resources_resourcesrecovery : adminMain
 
         try
         {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids,"SAVE",base.adminInfo.vcAdminName);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids,"SAVE",base.adminInfo);
         }
         catch (Exception ex)
         {
@@ -165,7 +164,7 @@ public partial class resources_resourcesrecovery : adminMain
 
         try
         {
-            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids, "DEL", base.adminInfo.vcAdminName);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.SaveOrDelResource(delids, "DEL", base.adminInfo);
         }
         catch (Exception ex)
         {

@@ -92,7 +92,7 @@ namespace TCG.WebService
             {
                 if (this._admininfo == null)
                 {
-                    this._admininfo = this.handlerService.manageService.adminLoginHandlers.adminInfo;
+                    this._admininfo = this.handlerService.manageService.adminHandlers.GetAdminInfo();
                 }
                 return this._admininfo;
             }

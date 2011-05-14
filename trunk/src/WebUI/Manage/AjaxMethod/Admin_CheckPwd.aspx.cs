@@ -10,11 +10,11 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Entity;
 
 
-public partial class AjaxMethod_Admin_CheckPwd : adminMain
+public partial class AjaxMethod_Admin_CheckPwd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -25,18 +25,15 @@ public partial class AjaxMethod_Admin_CheckPwd : adminMain
             if (base.adminInfo == null)
             {
                 base.AjaxErch(-1000000601,"");
-                base.Finish();
                 return;
             }
             pwd = objectHandlers.MD5(pwd);
             if (pwd.ToLower() == base.adminInfo.vcPassword.ToLower())
             {
                 base.AjaxErch(1,"原始密码输入正确！");
-                base.Finish();
                 return;
             }
             base.AjaxErch(-1000000602,"");
-            base.Finish();
         }
     }
 }

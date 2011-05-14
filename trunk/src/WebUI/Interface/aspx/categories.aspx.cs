@@ -18,11 +18,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using TCG.Pages;
+
 using TCG.Utils;
 using TCG.Entity;
 
-public partial class Interface_aspx_categories : Origin
+public partial class Interface_aspx_categories : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -40,7 +40,7 @@ public partial class Interface_aspx_categories : Origin
 
     private void GetAllCategories()
     {
-        string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId), typeof(Categories));
+        string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(ConfigServiceEx.DefaultSkinId), typeof(Categories));
         objectHandlers.SaveFile(Server.MapPath("~/interface/js/categories.js"), cg);
     }
 }

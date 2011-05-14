@@ -28,7 +28,7 @@ namespace TCG.Handlers
         public static IResourceHandlers CreateResourceHandlers()
         {
             string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
-            string className = assc + ".ResourceHandlers";
+            string className = assc + ".ResourcesHandlers";
             return (IResourceHandlers)Assembly.Load(assc).CreateInstance(className);
         }
 

@@ -13,10 +13,10 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Handlers;
-using TCG.Pages;
+
 using TCG.Entity;
 
-public partial class Common_AllTemplates : adminMain
+public partial class Common_AllTemplates : BasePage
 
 {
     protected void Page_Load(object sender, EventArgs e)

@@ -11,9 +11,9 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
 
-public partial class files_classadd : adminMain
+
+public partial class files_classadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

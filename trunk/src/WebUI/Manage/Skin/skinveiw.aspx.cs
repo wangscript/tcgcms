@@ -9,12 +9,12 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Manage_Skin_skinveiw : adminMain
+public partial class Manage_Skin_skinveiw : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

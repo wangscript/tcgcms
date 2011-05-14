@@ -136,7 +136,7 @@ namespace TCG.Entity
         private string _vcShortContent = string.Empty;
         private string _vcSpeciality = string.Empty;
         private string _cChecked = string.Empty;
-        private string _cDel = string.Empty;
+        private string _cDel = "N";
         private string _vcFilePath = string.Empty;
         private DateTime _dadddate;
         private DateTime _dupdatedate;

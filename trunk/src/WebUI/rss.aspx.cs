@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Text;
 using System.Web.UI.WebControls;
 
-using TCG.Pages;
+
 using TCG.Entity;
 using System.Collections;
 
@@ -21,9 +21,9 @@ public partial class rss : Origin
             sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             sb.Append("<rss version=\"2.0\">");
             sb.Append("<channel>");
-            sb.Append("<title>" + base.configService.baseConfig["WebTitle"] + "</title>");
-            sb.Append("<link>" + base.configService.baseConfig["WebSite"] + "</link>");
-            sb.Append("<description>" + base.configService.baseConfig["WebDescription"] + "</description>");
+            sb.Append("<title>" + ConfigServiceEx.baseConfig["WebTitle"] + "</title>");
+            sb.Append("<link>" + ConfigServiceEx.baseConfig["WebSite"] + "</link>");
+            sb.Append("<description>" + ConfigServiceEx.baseConfig["WebDescription"] + "</description>");
             sb.Append("<language>zh-cn</language>");
             sb.Append("<generator></generator>");
             sb.Append("<webmaster>sanyungui@tcgcms.cn</webmaster>");
@@ -36,7 +36,7 @@ public partial class rss : Origin
                 {
                     Resources tempres = (Resources)entity.Value;
                     sb.Append("<item>");
-                    string text1 = (string.IsNullOrEmpty(tempres.vcUrl)) ? base.configService.baseConfig["WebSite"] + tempres.vcFilePath : tempres.vcUrl;
+                    string text1 = (string.IsNullOrEmpty(tempres.vcUrl)) ? ConfigServiceEx.baseConfig["WebSite"] + tempres.vcFilePath : tempres.vcUrl;
                     sb.Append("<link>" + text1 + "</link>");
                     sb.Append("<title><![CDATA[" + tempres.vcTitle + "]]></title>");
                     sb.Append("<author></author>");

@@ -10,11 +10,11 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Entity;
 
 
-public partial class AjaxMethod_Admin_DelAdminRole : adminMain
+public partial class AjaxMethod_Admin_DelAdminRole : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,13 +23,11 @@ public partial class AjaxMethod_Admin_DelAdminRole : adminMain
             int iRole = objectHandlers.ToInt(objectHandlers.Post("iRole"));
             if (iRole == 0)
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch(-1,"");
                 return;
             }
             int rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo.vcAdminName, iRole);
             base.AjaxErch(rtn.ToString());
-            base.Finish();
         }
     }
 }

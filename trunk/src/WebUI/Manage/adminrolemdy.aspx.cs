@@ -10,11 +10,11 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class adminrolemdy : adminMain
+public partial class adminrolemdy : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -52,7 +52,7 @@ public partial class adminrolemdy : adminMain
 
             if (rtn < 0)
             {
-                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
             }
             else
             {
@@ -74,6 +74,6 @@ public partial class adminrolemdy : adminMain
             this.popedom.Value = role.PopedomStr;
             this.classpopedom.Value = role.vcClassPopedom;
         }
-        this.DefaultSkinId.Value = base.configService.DefaultSkinId;
+        this.DefaultSkinId.Value = ConfigServiceEx.DefaultSkinId;
     }
 }

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Entity;
 
 

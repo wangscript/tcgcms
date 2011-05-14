@@ -126,7 +126,7 @@ namespace TCG.Handlers
         public string GetFilesPathByClassId(int classid)
         {
             string text1 = this.GetFilesPathByClassIdW(classid);
-            return base.configService.baseConfig["filePatch"] + text1 + @"/";
+            return ConfigServiceEx.baseConfig["filePatch"] + text1 + @"/";
         }
 
         private string GetFilesPathByClassIdW(int classid)

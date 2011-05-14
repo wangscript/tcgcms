@@ -91,5 +91,20 @@ namespace TCG.DBHelper
         /// <param name="sqlstr">传入的Sql语句</param>
         /// <returns>object 返回值 </returns>
         object ExecuteScalar(string sql);
+
+        /**/
+        /// <summary>
+        /// 获取当前页应该显示的记录，注意：查询中必须包含名为ID的自动编号列，若不符合你的要求，就修改一下源码吧 :)
+        /// </summary>
+        /// <param name="pageIndex">当前页码</param>
+        /// <param name="pageSize">分页容量</param>
+        /// <param name="showString">显示的字段</param>
+        /// <param name="queryString">查询字符串，支持联合查询</param>
+        /// <param name="whereString">查询条件，若有条件限制则必须以where 开头</param>
+        /// <param name="orderString">排序规则</param>
+        /// <param name="pageCount">传出参数：总页数统计</param>
+        /// <param name="recordCount">传出参数：总记录统计</param>
+        /// <returns>装载记录的DataTable</returns>
+        DataTable ExecutePager(int pageIndex, int pageSize, string showString, string queryString, string whereString, string orderString, out int pageCount, out int recordCount);
     }
 }

@@ -13,14 +13,14 @@ using System.Web.UI.HtmlControls;
 using TCG.Utils;
 using TCG.Data;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 
 
 using TCG.Entity;
 using TCG.Handlers;
 
-public partial class files_fileinfos : adminMain
+public partial class files_fileinfos : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -74,7 +74,7 @@ public partial class files_fileinfos : adminMain
         //sItem.arrSortField = arrsortfield;
 
         //sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        //sItem.pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        //sItem.pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
         //int tClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
         //sItem.strCondition = "iClassID = " + tClassId.ToString();
