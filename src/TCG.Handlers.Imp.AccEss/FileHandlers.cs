@@ -15,8 +15,10 @@
 using System;
 using System.Web;
 using System.Data;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -24,6 +26,7 @@ using System.Drawing.Drawing2D;
 
 using TCG.Utils;
 using TCG.Entity;
+using System.Net;
 
 namespace TCG.Handlers.Imp.AccEss
 {
@@ -36,7 +39,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllFilesClassFromDb()
         {
-            return AccessFactory.conn.DataTable("SELECT * FROM filecategories)");
+            return AccessFactory.conn.DataTable("SELECT * FROM filecategories");
         }
 
         /// <summary>
@@ -147,23 +150,29 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        public int AddFileClass(string adminname, FileCategories fcif)
+        public int AddFileClass(Admin adminf, FileCategories fcif)
         {
-            base.SetMainFileDataBase();
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@vcFileName", SqlDbType.NVarChar, 100); sp2.Value = fcif.vcFileName;
-            SqlParameter sp3 = new SqlParameter("@iParentId", SqlDbType.Int, 4); sp3.Value = fcif.iParentId;
-            SqlParameter sp4 = new SqlParameter("@vcMeno", SqlDbType.NVarChar, 100); sp4.Value = fcif.vcMeno;
-            SqlParameter sp5 = new SqlParameter("@reValue", SqlDbType.Int); sp5.Direction = ParameterDirection.Output;
-            string[] reValues = base.conn.Execute("SP_Files_FilesClassManage", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5 }, new int[] { 5 });
-            if (reValues != null)
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(adminf);
+            if (rtn < 0) return rtn;
+
+            //文件名不能为空
+            if (string.IsNullOrEmpty(fcif.vcFileName))
             {
-                int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-                return rtn;
+                return -1000000057;
             }
-            return -19000000;
+
+            //简单说明不能为空
+            if (string.IsNullOrEmpty(fcif.vcMeno))
+            {
+               return -1000000058;
+            }
+
+            AccessFactory.conn.Execute("INSERT INTO filecategories (vcFileName,iParentId,vcMeno) VALUES('" + fcif.vcFileName + "','" + fcif.iParentId + "','" + fcif.vcMeno + "')");
+
+            return 1;
         }
+
+
 
         /// <summary>
         /// 添加新的分类
@@ -172,25 +181,40 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        public int AddFileInfoByAdmin(string adminname, FileResources fif)
+        public int AddFileInfoByAdmin(Admin adminf, FileResources fif)
         {
-            SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = adminname;
-            SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@iID", SqlDbType.BigInt, 8); sp2.Value = fif.Id;
-            SqlParameter sp3 = new SqlParameter("@iClassId", SqlDbType.Int, 4); sp3.Value = fif.iClassId;
-            SqlParameter sp4 = new SqlParameter("@vcFileName", SqlDbType.NVarChar, 100); sp4.Value = fif.vcFileName;
-            SqlParameter sp5 = new SqlParameter("@iSize", SqlDbType.Int, 4); sp5.Value = fif.iSize;
-            SqlParameter sp6 = new SqlParameter("@vcType", SqlDbType.VarChar, 10); sp6.Value = fif.vcType;
-            SqlParameter sp7 = new SqlParameter("@reValue", SqlDbType.Int); sp7.Direction = ParameterDirection.Output;
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(adminf);
+            if (rtn < 0) return rtn;
 
-            string[] reValues = base.conn.Execute("SP_Files_FileInfoManageByAdmin", new SqlParameter[] { sp0, sp1,
-                sp2, sp3, sp4, sp5, sp6, sp7 }, new int[] { 7 });
-            if (reValues != null)
+            //文件所在的文件夹不能为空
+            if (fif.iClassId == 0)
             {
-                int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-                return rtn;
+                return -1000000060;
             }
-            return -19000000;
+
+            //文件名称不能为空
+            if (string.IsNullOrEmpty(fif.vcFileName))
+            {
+                return -1000000061;
+            }
+
+            //文件类型不能为空
+            if (string.IsNullOrEmpty(fif.vcType))
+            {
+                return -1000000062;
+            }
+
+            //文件类型不能为空
+            if (fif.iSize==0)
+            {
+                return -1000000063;
+            }
+
+            AccessFactory.conn.Execute("INSERT INTO fileresources (iID,iClassId,vcFileName,iSize,vcType,dCreateDate,vcIP)"
+                                        + "VALUES('" + fif.Id + "'," + fif.iClassId + ",'" + fif.vcFileName + "'," + fif.iSize + ",'" 
+                                        + fif.vcType + "',now(),'" + fif.vcIP + "')");
+            
+            return 1;
         }
 
 
@@ -206,14 +230,13 @@ namespace TCG.Handlers.Imp.AccEss
 
             if (fileresource == null)
             {
-                if (!base.SetFileDatabase(id)) return null;
-                string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources (NOLOCK) WHERE iId=" + id.ToString();
-                DataTable dt = base.conn.GetDataTable(SQL);
+                string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources WHERE iId=" + id.ToString();
+                DataTable dt = AccessFactory.conn.DataTable(SQL);
                 if (dt != null)
                 {
                     if (dt.Rows.Count == 1)
                     {
-                        fileresource = (FileResources)base.GetEntityObjectFromRow(dt.Rows[0], typeof(FileResources));
+                        fileresource = (FileResources)AccessFactory.GetEntityObjectFromRow(dt.Rows[0], typeof(FileResources));
                         CachingService.Set(CachingService.CACHING_FILECATEGORIES_ENTITY + id, fileresource, null);
                     }
                 }
@@ -244,7 +267,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="adminname"></param>
         /// <param name="fileclassid"></param>
         /// <returns></returns>
-        public string ImgPatchInit(Resources resource, string url, string adminname, int fileclassid)
+        public string ImgPatchInit(Resources resource, string url, Admin adminname, int fileclassid)
         {
             string parrten = "<(img|IMG)[^>]+src=\"([^\"]+)\"[^>]*>";
             MatchCollection matchs = Regex.Matches(resource.vcContent, parrten, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -391,7 +414,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         public string GetFilePath(string filename, int fileclassid)
         {
-            return HttpContext.Current.Server.MapPath("~" + this._fileclasshandlers.GetFilesPathByClassId(fileclassid)
+            return HttpContext.Current.Server.MapPath("~" + this.GetFilesPathByClassId(fileclassid)
                 + filename.Substring(0, 6) + "/" + filename.Substring(6, 2) + "/" + filename);
         }
 
@@ -400,7 +423,7 @@ namespace TCG.Handlers.Imp.AccEss
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff").Replace("-", "").Replace(":", "").Replace(" ", "");
         }
 
-        public int UploadFile(byte[] _bytes, string adminname, string imagetype, int fileclassid, ref string imagepath)
+        public int UploadFile(byte[] _bytes, Admin adminname, string imagetype, int fileclassid, ref string imagepath)
         {
             if (!IsAllowImgExtension(imagetype))
             {
@@ -431,7 +454,7 @@ namespace TCG.Handlers.Imp.AccEss
 
 
                 int rtn = 0;
-                if (!string.IsNullOrEmpty(adminname))
+                if (adminname != null)
                 {
                     rtn = this.AddFileInfoByAdmin(adminname, imgfile);
                 }
@@ -511,7 +534,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// 根据后缀获取图片格式
         /// </summary>
         /// <param name="filePath">图片路径</param>
-        public static ImageFormat GetImgFormat(string filePath)
+        public ImageFormat GetImgFormat(string filePath)
         {
             ImageFormat format;
             switch (Path.GetExtension(filePath).ToLower())
