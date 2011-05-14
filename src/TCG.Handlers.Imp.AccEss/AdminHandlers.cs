@@ -67,8 +67,8 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             admininfo.cIsOnline = "Y";
-            DBHelper.conn.Execute("UPDATE admin SET cIsOnline = 'Y' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
-            DBHelper.conn.Execute("UPDATE admin SET vcLastLoginIp = '" + ip + "' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+            AccessFactory.conn.Execute("UPDATE admin SET vcLastLoginIp = '" + ip + "' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
 
             HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
             if (admincookie == null)
@@ -160,7 +160,7 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM AdminRole";
-            return DBHelper.conn.DataTable(sql);
+            return AccessFactory.conn.DataTable(sql);
         }
 
         /// <summary>
@@ -224,6 +224,7 @@ namespace TCG.Handlers.Imp.AccEss
             admininfo.cLock = Row["clock"].ToString();
             admininfo.vcClassPopedom = Row["vcClassPopedom"].ToString();
             admininfo.cIsDel = Row["cIsDel"].ToString();
+            admininfo.cIsOnline = Row["cIsOnline"].ToString();
             return admininfo;
         }
 
@@ -258,8 +259,8 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetAllAdmin()
         {
 
-            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel FROM Admin";
-            return DBHelper.conn.DataTable(sql);
+            string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel,cIsOnline FROM Admin";
+            return AccessFactory.conn.DataTable(sql);
         }
 
         /// <summary>
@@ -275,23 +276,15 @@ namespace TCG.Handlers.Imp.AccEss
         public int AddAdmin(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminName;
-            //SqlParameter sp1 = new SqlParameter("@vcNickName", SqlDbType.VarChar, 50); sp1.Value = nickname;
-            //SqlParameter sp2 = new SqlParameter("@vcPassWord", SqlDbType.VarChar, 32); sp2.Value = vPassWord;
-            //SqlParameter sp3 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp3.Value = iRole;
-            //SqlParameter sp4 = new SqlParameter("@clock", SqlDbType.Char, 1); sp4.Value = clock;
-            //SqlParameter sp5 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp5.Value = vcPopedom;
-            //SqlParameter sp6 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp6.Value = classpop;
-            //SqlParameter sp7 = new SqlParameter("@aAdminName", SqlDbType.VarChar, 50); sp7.Value = admin;
-            //SqlParameter sp8 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp8.Value = objectHandlers.UserIp;
-            //SqlParameter sp9 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp9.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AddAdmin", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8, sp9 }, new int[] { 9 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int));
-            //}
+            Admin admininfos = this.GetAdminEntityByAdminName(admin);
 
-            return -19000000;
+            int rtn = this.CheckAdminPower(admininfos);
+            if (rtn < 0) return rtn;
+
+            AccessFactory.conn.Execute("INSERT INTO admin (vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom)"
+                                + "VALUES('" + vcAdminName + "','" + nickname + "','" + vPassWord + "'," + iRole + ",'" + clock + "','" + vcPopedom + "','" + classpop + "')");
+            this.AminInfoRefash();
+            return 1;
         }
 
         /// <summary>
@@ -308,26 +301,29 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int UpdateAdminInfo(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
+            Admin admininfos = this.GetAdminEntityByAdminName(admin);
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminName;
-            //SqlParameter sp1 = new SqlParameter("@vcNickName", SqlDbType.VarChar, 50); sp1.Value = nickname;
-            //SqlParameter sp2 = new SqlParameter("@vcPassWord", SqlDbType.VarChar, 32); sp2.Value = vPassWord;
-            //SqlParameter sp3 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp3.Value = iRole;
-            //SqlParameter sp4 = new SqlParameter("@clock", SqlDbType.Char, 1); sp4.Value = clock;
-            //SqlParameter sp5 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp5.Value = vcPopedom;
-            //SqlParameter sp6 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp6.Value = classpop;
-            //SqlParameter sp7 = new SqlParameter("@aAdminName", SqlDbType.VarChar, 50); sp7.Value = admin;
-            //SqlParameter sp8 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp8.Value = objectHandlers.UserIp;
-            //SqlParameter sp9 = new SqlParameter("@action", SqlDbType.Char, 2); sp9.Value = "02";
-            //SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp10.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AddAdmin", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8, sp9, sp10 },
-            //    new int[] { 10 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int));
-            //}
+            int rtn = this.CheckAdminPower(admininfos);
+            if (rtn < 0) return rtn;
 
-            return -19000000;
+
+            string SQL = "UPDATE admin SET ";
+
+            if (!string.IsNullOrEmpty(vPassWord))
+            {
+                SQL += "vcPassWord='" + vPassWord + "',";
+            }
+
+            SQL += "vcNickName='" + nickname + "',iRole=" + iRole + ",clock='" + clock + "',vcPopedom='" + vcPopedom + "',vcClassPopedom='" + vcPopedom + "' WHERE vcAdminName='" + vcAdminName + "'";
+            AccessFactory.conn.Execute(SQL);
+            this.AminInfoRefash();
+            return 1;
+        }
+
+
+        public void AminInfoRefash()
+        {
+            CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
         }
 
         /// <summary>
@@ -437,7 +433,7 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom";
-            return DBHelper.conn.DataTable(sql);
+            return AccessFactory.conn.DataTable(sql);
         }
 
         /// <summary>
@@ -554,19 +550,19 @@ namespace TCG.Handlers.Imp.AccEss
             if (string.IsNullOrEmpty(npwd))
             {
                 admininfo.vcNickName = nickname;
-                DBHelper.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + adminname + "'");
+                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + adminname + "'");
             }
             else
             {
                 admininfo.vcNickName = nickname;
                 admininfo.vcPassword = npwd;
-                DBHelper.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + adminname + "'");
+                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + adminname + "'");
             }
 
             return 1;
         }
 
-        private int CheckAdminPower(Admin admininfo)
+        public int CheckAdminPower(Admin admininfo)
         {
 
             //-操作员为空，您是否尚未登陆？
@@ -592,9 +588,9 @@ namespace TCG.Handlers.Imp.AccEss
         public int GetAdminRoleInfo(ref int admincount, ref int delcount, ref DataSet ds)
         {
 
-            admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'"));
-            delcount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel = 'Y'"));
-            ds = DBHelper.conn.DataSet("SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE [iRole] "
+            admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'"));
+            delcount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel = 'Y'"));
+            ds = AccessFactory.conn.DataSet("SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE [iRole] "
                 +"= A.iID AND cIsDel <> 'Y') AS [num]  FROM AdminRole A ");
             return 1;
         }
@@ -615,25 +611,25 @@ namespace TCG.Handlers.Imp.AccEss
             {
 
                 rolename = "所有管理员";
-                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel <> 'Y' "));
-                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel <> 'Y' "));
+                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
                                             + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel <> 'Y'  ");
             }
             else if (iRoleID > 0)
             {
-                rolename = objectHandlers.ToString(DBHelper.conn.ExecuteScalar("SELECT vcRoleName FROM AdminRole WHERE iId = " + iRoleID.ToString()));
-                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + iRoleID.ToString() + " AND cIsDel <> 'Y' "));
+                rolename = objectHandlers.ToString(AccessFactory.conn.ExecuteScalar("SELECT vcRoleName FROM AdminRole WHERE iId = " + iRoleID.ToString()));
+                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + iRoleID.ToString() + " AND cIsDel <> 'Y' "));
 
-                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
                                             + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND B.iID = " + iRoleID.ToString() + " AND A.cIsDel <> 'Y'  ");
             }
             else if (iRoleID==-1)
             {
 
                 rolename = "管理员回收站";
-                admincount = objectHandlers.ToInt(DBHelper.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel = 'Y' "));
+                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel = 'Y' "));
 
-                ds = DBHelper.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
                                             + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel = 'Y'  ");
             }
 
@@ -663,13 +659,13 @@ namespace TCG.Handlers.Imp.AccEss
 
             if (admins.IndexOf(",") > -1)
             {
-                DBHelper.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
+                AccessFactory.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
                     + " WHERE vcAdminName IN (+admins+)");
             }
             else
             {
                 admins = admins.Replace("'", "");
-                DBHelper.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
+                AccessFactory.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
                     + " WHERE vcAdminName = '" + admins + "'");
             }
 
@@ -786,36 +782,36 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN (" + admins + ") ");
+                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName ='" + admins + "' ");
+                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName ='" + admins + "' ");
                 }
             }
             else if(action == "02")
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName IN (" + admins + ") ");
+                    AccessFactory.conn.Execute("DELETE FROM admin WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    DBHelper.conn.Execute("DELETE FROM admin WHERE vcAdminName ='" + admins + "' ");
+                    AccessFactory.conn.Execute("DELETE FROM admin WHERE vcAdminName ='" + admins + "' ");
                 }
             }
             else if (action == "03")
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN (" + admins + ") ");
+                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN (" + admins + ") ");
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    DBHelper.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName ='" + admins + "' ");
+                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName ='" + admins + "' ");
                 }
             }
 
@@ -828,7 +824,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="vcAdminname"></param>
         public void AdminLoginOut(string vcAdminname)
         {
-            DBHelper.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
+            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
             //DBHelper.conn.Execute("DELETE AdminOnline WHERE vcAdminName ='" + vcAdminname + "'");
         }
 

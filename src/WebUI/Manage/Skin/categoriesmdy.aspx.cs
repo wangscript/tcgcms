@@ -17,7 +17,7 @@ using TCG.Handlers;
 
 using TCG.Entity;
 
-public partial class skin_categoriesmdy : adminMain
+public partial class skin_categoriesmdy : BasePage
 {
 
     protected void Page_Load(object sender, EventArgs e)
@@ -25,7 +25,7 @@ public partial class skin_categoriesmdy : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
             this.skinid.Value = objectHandlers.Get("skinid");
             this.Init();
         }
@@ -46,23 +46,21 @@ public partial class skin_categoriesmdy : adminMain
 
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch(-1,"");
                 return;
             }
 
 
             if (cif.ResourceTemplate == null || cif.ResourceListTemplate == null)
             {
-                base.AjaxErch("-1");
-                base.Finish();
+                base.AjaxErch(-1,"");
                 return;
             }
 
             int rtn = 0;
             try
             {
-                rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
+                rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
@@ -75,8 +73,6 @@ public partial class skin_categoriesmdy : adminMain
             }
 
             base.AjaxErch(rtn, "分类添加成功！");
-
-            base.Finish();
         }
     }
 
@@ -87,7 +83,6 @@ public partial class skin_categoriesmdy : adminMain
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iClassId);
         if (cif == null)
         {
-            base.Finish();
             return;
         }
 
@@ -131,7 +126,5 @@ public partial class skin_categoriesmdy : adminMain
                 i++;
             }
         }
-
-        base.Finish();
     }
 }

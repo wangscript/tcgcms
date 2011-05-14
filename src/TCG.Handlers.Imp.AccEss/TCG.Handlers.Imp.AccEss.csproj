@@ -8,8 +8,8 @@
     <ProjectGuid>{4602692D-65C7-473D-A511-660B01C92D94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TCG.Handlers.Imp</RootNamespace>
-    <AssemblyName>TCG.Handlers.Imp.Access</AssemblyName>
+    <RootNamespace>TCG.Handlers.Imp.AccEss</RootNamespace>
+    <AssemblyName>TCG.Handlers.Imp.AccEss</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -43,8 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminHandlers.cs" />
-    <Compile Include="DBHelper.cs" />
+    <Compile Include="CategoriesHandlers.cs" />
+    <Compile Include="AccessFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkinHandlers.cs" />
+    <Compile Include="TemplateHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TCG.DBHelper.Interface\TCG.DBHelper.csproj">

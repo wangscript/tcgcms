@@ -16,19 +16,18 @@ using TCG.Pages;
 
 using TCG.Entity;
 
-public partial class adminmdy : adminMain
+public partial class adminmdy : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
-            this.DefaultSkinId.Value = base.configService.DefaultSkinId;
+            this.DefaultSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
             this.AdminInfoInit();
-            base.Finish();
         }
         else
         {
@@ -55,17 +54,10 @@ public partial class adminmdy : adminMain
             catch (Exception ex)
             {
                 base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
+                return;
             }
 
-            try
-            {
-                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
-            }
-            catch (Exception ex)
-            {
-            }
-
-            base.AjaxErch("{state:true,message:\"管理员信息修改成功!\"}");
+            base.AjaxErch(rtn,"管理员信息修改成功!");
         }
     }
 

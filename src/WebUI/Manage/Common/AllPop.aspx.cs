@@ -17,7 +17,7 @@ using TCG.Pages;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Common_AllPop : adminMain
+public partial class Common_AllPop : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

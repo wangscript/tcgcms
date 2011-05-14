@@ -17,7 +17,7 @@ using TCG.Handlers;
 using TCG.Entity;
 using TCG.Data;
 
-public partial class Template_templatemdy : adminMain
+public partial class Template_templatemdy : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,12 +27,11 @@ public partial class Template_templatemdy : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             Template item = base.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
             if (item == null)
             {
-                base.Finish();
                 return;
             }
 
@@ -66,7 +65,7 @@ public partial class Template_templatemdy : adminMain
                 this.iParentid.Disabled = false;
             }
 
-            foreach (Option option in base.configService.templateTypes.Values)            
+            foreach (Option option in ConfigServiceEx.templateTypes.Values)            
             {
                 this.tType.Items.Add(new ListItem(option.Text, option.Value));
                 int i = objectHandlers.ToInt(option.Value);
@@ -76,7 +75,6 @@ public partial class Template_templatemdy : adminMain
                 }
             }
             item = null;
-            base.Finish();
         }
         else
         {
@@ -100,13 +98,12 @@ public partial class Template_templatemdy : adminMain
             {
                 base.ajaxdata = "{state:false,message:\"模板内容和名称不能为空！\"}";
                 base.AjaxErch(base.ajaxdata);
-                base.Finish();
                 return;
             }
 
             if ((int)item.TemplateType == 0 && string.IsNullOrEmpty(item.vcUrl))
             {
-                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, base.configService.baseConfig["ManagePath"]) + "\"}";
+                base.ajaxdata = "{state:false,message:\"" + errHandlers.GetErrTextByErrCode(-1000000024, ConfigServiceEx.baseConfig["ManagePath"]) + "\"}";
                 base.AjaxErch(base.ajaxdata);
                 return;
 
@@ -132,37 +129,37 @@ public partial class Template_templatemdy : adminMain
             }
             if (rtn < 0)
             {
-                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
             }
             else
             {
                 bool create = false;
-                if (item.TemplateType == TemplateType.SinglePageType)
-                {
-                    string filepath = string.Empty;
-                    filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + base.configService.baseConfig["FileExtension"];
-                    try
-                    {
-                        filepath = Server.MapPath("~" + filepath);
-                        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-                        tcgthdl.Template = item.Content;
-                        tcgthdl.FilePath = filepath;
-                        tcgthdl.configService = base.configService;
-                        tcgthdl.conn = base.conn;
-                        if (tcgthdl.Replace())
-                        {
-                            create = true;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-                        base.AjaxErch(base.ajaxdata);
-                        return;
-                    }
+                //if (item.TemplateType == TemplateType.SinglePageType)
+                //{
+                //    string filepath = string.Empty;
+                //    filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+                //    try
+                //    {
+                //        filepath = Server.MapPath("~" + filepath);
+                //        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
+                //        tcgthdl.Template = item.Content;
+                //        tcgthdl.FilePath = filepath;
+                //        tcgthdl.configService = base.configService;
+                //        tcgthdl.conn = base.conn;
+                //        if (tcgthdl.Replace())
+                //        {
+                //            create = true;
+                //        }
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                //        base.AjaxErch(base.ajaxdata);
+                //        return;
+                //    }
 
-                }
-
+                //}
+                create = true;
                 base.AjaxErch("{state:true,message:'" + ((create) ? "模板修改成功" : "模板修改失败") + "!'}");
             }
             

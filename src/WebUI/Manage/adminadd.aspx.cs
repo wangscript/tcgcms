@@ -15,16 +15,16 @@ using TCG.Controls.HtmlControls;
 using TCG.Pages;
 using TCG.Entity;
 
-public partial class adminadd : adminMain
+public partial class adminadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
-            this.DefaultSkinId.Value = base.configService.DefaultSkinId;
+            this.DefaultSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
             this.iRoleInit();
         }
@@ -65,7 +65,6 @@ public partial class adminadd : adminMain
             }
 
             base.AjaxErch(rtn,"成功添加新的管理员!");
-            base.Finish();
         }
     }
 

@@ -18,7 +18,7 @@ using TCG.Entity;
 using TCG.Handlers;
 using TCG.Data;
 
-public partial class Template_templatelist : adminMain
+public partial class Template_templatelist : BasePage
 {
     
     protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class Template_templatelist : adminMain
         if (!Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             this.SearchInit();
         }
@@ -42,7 +42,6 @@ public partial class Template_templatelist : adminMain
                     this.TemplateCreate();
                     break;
             }
-            base.Finish();
         }
     }
 
@@ -103,8 +102,6 @@ public partial class Template_templatelist : adminMain
             this.ItemRepeater.DataSource = pagetemplates.Values;
             this.ItemRepeater.DataBind();
         }
-        
-        base.Finish();
 
     }
 
@@ -174,7 +171,6 @@ public partial class Template_templatelist : adminMain
         }
 
         base.AjaxErch("{state:true,message:'模板删除成功！'}");
-        base.Finish();
     }
 
     private void TemplateCreate()
@@ -184,12 +180,11 @@ public partial class Template_templatelist : adminMain
         int rtn = 0;
         try
         {
-            rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
+           // rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
         }
         catch (Exception ex)
         {
             base.AjaxErch(1, "<a><font color='red'>" + ex.Message.ToString() + "</font></a>", "CreateBack");
-            base.Finish();
             return;
         }
 

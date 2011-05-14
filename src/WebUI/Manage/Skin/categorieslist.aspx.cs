@@ -22,15 +22,16 @@ using TCG.Entity;
 using TCG.Handlers;
 
 
-public partial class skin_categorieslist : adminMain
+public partial class skin_categorieslist : BasePage
 {
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.SearchInit();
         }
         else
@@ -55,8 +56,6 @@ public partial class skin_categorieslist : adminMain
                     this.OrderMdy();
                     break;   
             }
-
-            base.Finish();
 
         }
     }
@@ -107,14 +106,13 @@ public partial class skin_categorieslist : adminMain
         if (string.IsNullOrEmpty(tClassID ))
         {
             base.AjaxErch(-1,"");
-            base.Finish();
             return;
         }
 
         int rtn = 0; 
         try
         {
-            rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(tClassID,base.adminInfo.vcAdminName);
+            rtn = base.handlerService.skinService.categoriesHandlers.DelCategories(tClassID,base.adminInfo);
             CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
             CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
         }
@@ -126,7 +124,6 @@ public partial class skin_categorieslist : adminMain
         }
 
         base.AjaxErch(rtn, "分类删除成功", "refinsh()");
-        base.Finish();
 
     }
 
@@ -137,75 +134,75 @@ public partial class skin_categorieslist : adminMain
         string text = string.Empty;
         int page = objectHandlers.ToInt(objectHandlers.Post("iPage"));
         int rtn = 0;
-        try
-        {
+        //try
+        //{
 
-            if (string.IsNullOrEmpty(tClassID))
-            {
-                rtn = -1000000801;
-            }
-            else
-            {
-                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
+        //    if (string.IsNullOrEmpty(tClassID))
+        //    {
+        //        rtn = -1000000801;
+        //    }
+        //    else
+        //    {
+        //        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
 
-                if (cif == null)
-                {
-                    rtn = -1000000802;
-                }
-                else
-                {
-                    if (cif.ResourceListTemplate == null)
-                    {
-                        rtn = - 1000000803;
-                    }
-                    else
-                    {
-                        if (cif.vcUrl.IndexOf(".") > -1)
-                        {
-                            rtn = - 1000000804;
-                        }
-                        else
-                        {
-                            string filepath = "";
-                            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
+        //        if (cif == null)
+        //        {
+        //            rtn = -1000000802;
+        //        }
+        //        else
+        //        {
+        //            if (cif.ResourceListTemplate == null)
+        //            {
+        //                rtn = - 1000000803;
+        //            }
+        //            else
+        //            {
+        //                if (cif.vcUrl.IndexOf(".") > -1)
+        //                {
+        //                    rtn = - 1000000804;
+        //                }
+        //                else
+        //                {
+        //                    string filepath = "";
+        //                    filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
 
-                            TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-                            tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
-                            tcgthdl.FilePath = filepath;
-                            tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
-                            tcgthdl.configService = base.configService;
-                            tcgthdl.conn = base.conn;
-                            tcgthdl.PagerInfo.DoAllPage = false;
-                            tcgthdl.PagerInfo.Page = page;
-                            tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
+        //                    TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
+        //                    tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
+        //                    tcgthdl.FilePath = filepath;
+        //                    tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
+        //                    tcgthdl.configService = base.configService;
+        //                    tcgthdl.conn = base.conn;
+        //                    tcgthdl.PagerInfo.DoAllPage = false;
+        //                    tcgthdl.PagerInfo.Page = page;
+        //                    tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
 
-                            if (tcgthdl.Replace())
-                            {
-                                rtn = 1;
-                                text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\","/");
+        //                    if (tcgthdl.Replace())
+        //                    {
+        //                        rtn = 1;
+        //                        text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\","/");
 
-                                if (tcgthdl.PagerInfo.PageCount > page)
-                                {
-                                    classbackstr = "CreateBack1";
-                                }
-                            }
-                            else
-                            {
-                                rtn = -1000000805;
-                            }
+        //                        if (tcgthdl.PagerInfo.PageCount > page)
+        //                        {
+        //                            classbackstr = "CreateBack1";
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        rtn = -1000000805;
+        //                    }
 
-                        }
-                    }
+        //                }
+        //            }
                    
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", classbackstr);
-            base.Finish();
-            return;
-        }
+        //        }
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", classbackstr);
+        //    base.Finish();
+        //    return;
+        //}
 
         base.AjaxErch(rtn, text, classbackstr);
     }
@@ -220,13 +217,12 @@ public partial class skin_categorieslist : adminMain
         if (cif != null)
         {
             cif.iOrder = objectHandlers.ToInt(KeyValue);
-            int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(cif);
+            int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
         }
 
         CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
         CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
         base.AjaxErch(1, "", "NewsSMDYPostBack");
-        base.Finish();
         cif = null;
 
     }
