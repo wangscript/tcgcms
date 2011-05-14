@@ -20,22 +20,21 @@ public partial class Common_AllNewsSpeciality : BasePage
     {
         if (!Page.IsPostBack)
         {
-            Response.Write("var NewsSpeciality = new Array();\r\n");
-            SpecialityHandlers cldl = new SpecialityHandlers();
-            DataTable dt = cldl.GetAllNewsSpecialityInfoByCache(base.conn,false);
-            if (dt != null)
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        DataRow Row = dt.Rows[i];
-                        Response.Write("NewsSpeciality[" + i.ToString() + "]=[" + Row["iID"].ToString() + "," + Row["iSiteId"].ToString() + "," + Row["iParent"].ToString() + ",\"" +
-                            Row["vcTitle"].ToString() + "\"];\r\n");
-                    }
-                }
-            }
-            base.Finish();
+            //Response.Write("var NewsSpeciality = new Array();\r\n");
+            //SpecialityHandlers cldl = new SpecialityHandlers();
+            //DataTable dt = cldl.GetAllNewsSpecialityInfoByCache(base.conn,false);
+            //if (dt != null)
+            //{
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        for (int i = 0; i < dt.Rows.Count; i++)
+            //        {
+            //            DataRow Row = dt.Rows[i];
+            //            Response.Write("NewsSpeciality[" + i.ToString() + "]=[" + Row["iID"].ToString() + "," + Row["iSiteId"].ToString() + "," + Row["iParent"].ToString() + ",\"" +
+            //                Row["vcTitle"].ToString() + "\"];\r\n");
+            //        }
+            //    }
+            //}
 
         }
     }

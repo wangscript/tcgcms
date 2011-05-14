@@ -41,6 +41,19 @@ namespace TCG.Handlers
         }
         private HandlerService _handlerservice;
 
+        public Admin adminInfo
+        {
+            set
+            {
+                this._admininfo = value;
+            }
+            get
+            {
+                return this._admininfo;
+            }
+        }
+        private Admin _admininfo;
+
 
         public TCGTagStringFunHandlers tcgTagStringFunHandlers
         {

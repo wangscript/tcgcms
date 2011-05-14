@@ -24,15 +24,16 @@ public partial class files_fileinfos : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
+            
             int ClassId = objectHandlers.ToInt(objectHandlers.Get("iClassId"));
             this.iClassId.Value = ClassId.ToString();
 
-            Dictionary<string, EntityBase> filecategories = base.handlerService.fileService.fileClassHandlers.GetFileCategories(ClassId);
+            Dictionary<string, EntityBase> filecategories = base.handlerService.fileService.fileHandlers.GetFileCategories(ClassId);
             if (filecategories != null)
             {
                 this.ItemRepeater.DataSource = filecategories.Values;
@@ -49,7 +50,6 @@ public partial class files_fileinfos : BasePage
                     this.AddClass();
                     break;
             }
-            base.Finish();
             return;
         }
 
@@ -170,11 +170,11 @@ public partial class files_fileinfos : BasePage
             return;
         }
 
-        int rtn = base.handlerService.fileService.fileClassHandlers.AddFileClass( base.adminInfo.vcAdminName, item);
+        int rtn = base.handlerService.fileService.fileHandlers.AddFileClass( base.adminInfo, item);
         if (rtn == 1)
         {
             CachingService.Remove(CachingService.CACHING_ALL_FILECLASS);
-            string text1 = base.handlerService.fileService.fileClassHandlers.GetFilesPathByClassId( item.iParentId);
+            string text1 = base.handlerService.fileService.fileHandlers.GetFilesPathByClassId( item.iParentId);
             string text2 = "~" + text1 + item.vcFileName + @"/";
             text2 = Server.MapPath(text2);
             objectHandlers.SaveFile(text2, "");

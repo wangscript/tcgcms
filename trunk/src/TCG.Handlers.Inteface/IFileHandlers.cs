@@ -56,7 +56,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        int AddFileClass(string adminname, FileCategories fcif);
+        int AddFileClass(Admin adminname, FileCategories fcif);
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        int AddFileInfoByAdmin(string adminname, FileResources fif);
+        int AddFileInfoByAdmin(Admin adminname, FileResources fif);
 
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fileclassid"></param>
         /// <returns></returns>
-        string ImgPatchInit(Resources resource, string url, string adminname, int fileclassid);
+        string ImgPatchInit(Resources resource, string url, Admin adminname, int fileclassid);
 
         /// <summary>
         /// 判断远程文件是否存在
@@ -98,7 +98,7 @@ namespace TCG.Handlers
 
         string GetFilePath(string filename, int fileclassid);
 
-        int UploadFile(byte[] _bytes, string adminname, string imagetype, int fileclassid, ref string imagepath);
+        int UploadFile(byte[] _bytes, Admin adminname, string imagetype, int fileclassid, ref string imagepath);
 
         /// <summary>
         /// 根据后缀获取图片格式
