@@ -135,7 +135,7 @@ namespace TCG.Handlers
             if (string.IsNullOrEmpty(classid) || classid == "0") return "";
             Categories categorie = this.GetCategoriesById(classid);
             if (classid == null) return "";
-            string url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + base.configService.baseConfig["FileExtension"];
+            string url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
             string str = "<a href=\"" + url + "\" target=\"_blank\">" + categorie.vcClassName + "</a>";
             string t = this.GetResourcesCategoriesIndex(categorie.Parent, sh);
             if (!string.IsNullOrEmpty(t)) str = t + sh + str;
@@ -469,13 +469,12 @@ namespace TCG.Handlers
 
             string filepath = "";
 
-            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
+            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
 
             tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", categoriesid.ToString());
             tcgthdl.FilePath = filepath;
-            tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
-            tcgthdl.configService = base.configService;
-            tcgthdl.conn = base.conn;
+            tcgthdl.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+
 
             tcgthdl.Replace();
             if (tcgthdl.PagerInfo.PageCount > 1)
@@ -484,12 +483,12 @@ namespace TCG.Handlers
                 for (int i = 0; i <= tcgthdl.PagerInfo.PageCount; i++)
                 {
                     string num = (i == 0) ? "" :"_" + i.ToString();
-                    createfilepath += "<a>生成成功:" + cif.vcUrl + num + base.configService.baseConfig["FileExtension"] + "...</a>";
+                    createfilepath += "<a>生成成功:" + cif.vcUrl + num + ConfigServiceEx.baseConfig["FileExtension"] + "...</a>";
                 }
             }
             else
             {
-                createfilepath = "<a>生成成功:" + cif.vcUrl + base.configService.baseConfig["FileExtension"] + "...</a>";
+                createfilepath = "<a>生成成功:" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"] + "...</a>";
             }
 
             return 1;

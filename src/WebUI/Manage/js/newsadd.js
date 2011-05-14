@@ -131,14 +131,13 @@ function ClassInit() {
 function ColorInit() {
     var sTitleColor = $("#sTitleColor");
     var iTitleColor = $("#iTitleColor");
-
     sTitleColor.append("<option value=''>请选择颜色</option>");
 
     var o = { "White": "#FFFFFF", "Green": "#008000", "Silver": "#C0C0C0", "Lime": "#00FF00", "Gray": "#808080", "Olive": "#808000", "Black": "#000000", "Yellow": "#FFFF00", "Maroon": "#800000", "Navy": "#000080", "Red": "#FF0000", "Blue": "#0000FF", "Purple": "#800080", "Teal": "#008080", "Fuchsia": "#FF00FF", "Aqua": "#00FFFF" };
     for (key in o) {
 
-        sTitleColor.append("<option value='" + key + "' style='background-color:" + o[key] + ";'>" + key + "</option>");
-        
+        sTitleColor.append("<option value='" + o[key] + "' style='background-color:" + o[key] + ";'>" + key + "</option>");
+
         if (o[key] == iTitleColor.val()) {
             sTitleColor.val(o[key]);
         }

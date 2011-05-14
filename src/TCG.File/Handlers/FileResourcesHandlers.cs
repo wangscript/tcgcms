@@ -141,7 +141,7 @@ namespace TCG.Handlers
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.IndexOf("/attach.aspx?id=") != 0 && text1.IndexOf(base.configService.baseConfig["WebSite"]) != 0)
+                if (text1.IndexOf("/attach.aspx?id=") != 0 && text1.IndexOf(ConfigServiceEx.baseConfig["WebSite"]) != 0)
                 {
                     FileResources imgfile = new FileResources();
 
@@ -273,7 +273,7 @@ namespace TCG.Handlers
         /// <param name="filePath">Í¼Æ¬Â·¾¶</param>
         private bool IsAllowImgExtension(string filePath)
         {
-            if (base.configService.baseConfig["alowFileType"].IndexOf("'" + Path.GetExtension(filePath).ToLower() + "'") == -1)
+            if (ConfigServiceEx.baseConfig["alowFileType"].IndexOf("'" + Path.GetExtension(filePath).ToLower() + "'") == -1)
                 return false;
             return true;
         }

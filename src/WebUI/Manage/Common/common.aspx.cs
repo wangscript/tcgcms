@@ -13,17 +13,17 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Handlers;
-using TCG.Pages;
+
 using TCG.Entity;
 
-public partial class Manage_Common_common : adminMain
+public partial class Manage_Common_common : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         Response.ContentType = "application/x-javascript";
 
-        Response.Write("var ajaxicon = ['" + base.configService.baseConfig["ManagePath"] + "images/ajax-loader1.gif', '" + base.configService.baseConfig["ManagePath"]
-            + "images/post_err.gif', '" + base.configService.baseConfig["ManagePath"] + "images/post_ok.gif'];\r\n");
+        Response.Write("var ajaxicon = ['" + ConfigServiceEx.baseConfig["ManagePath"] + "images/ajax-loader1.gif', '" + ConfigServiceEx.baseConfig["ManagePath"]
+            + "images/post_err.gif', '" + ConfigServiceEx.baseConfig["ManagePath"] + "images/post_ok.gif'];\r\n");
         Response.End();
     }
 }

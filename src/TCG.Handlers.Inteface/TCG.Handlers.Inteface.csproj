@@ -46,6 +46,7 @@
     <Compile Include="ICategoriesHandlers.cs" />
     <Compile Include="IFileHandlers.cs" />
     <Compile Include="IResourceHandlers.cs" />
+    <Compile Include="ISheifHandlers.cs" />
     <Compile Include="ISkinHandlers.cs" />
     <Compile Include="ITemplateHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

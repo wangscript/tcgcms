@@ -37,12 +37,12 @@ namespace TCG.Handlers
         /// <returns></returns>
         protected bool SetFileDatabase(string fid)
         {
-            if (base.configService == null) return false;
-            if (base.configService.fileDataBaseConfig == null) return false;
-            if (base.configService.fileDataBaseConfig.Count == 0) return false;
-            int index = objectHandlers.ToInt(objectHandlers.ToLong(fid) % base.configService.fileDataBaseConfig.Count);
-            DataBaseConnStr filedatabase = base.configService.fileDataBaseConfig[index];
-            base.conn.SetConnStr = filedatabase.Value;
+            //if (ConfigServiceEx == null) return false;
+            //if (ConfigServiceEx.fileDataBaseConfig == null) return false;
+            //if (ConfigServiceEx.fileDataBaseConfig.Count == 0) return false;
+            //int index = objectHandlers.ToInt(objectHandlers.ToLong(fid) % ConfigServiceEx.fileDataBaseConfig.Count);
+            //DataBaseConnStr filedatabase = ConfigServiceEx.fileDataBaseConfig[index];
+            //base.conn.SetConnStr = filedatabase.Value;
             return true;
         }
 
@@ -57,18 +57,18 @@ namespace TCG.Handlers
         /// <returns></returns>
         private string GetMainFileDatabaseStr()
         {
-            if (base.configService == null) return null;
-            if (base.configService.fileDataBaseConfig == null) return null;
-            if (base.configService.fileDataBaseConfig.Count == 0) return null;
+            //if (ConfigServiceEx == null) return null;
+            //if (ConfigServiceEx.fileDataBaseConfig == null) return null;
+            //if (ConfigServiceEx.fileDataBaseConfig.Count == 0) return null;
 
-            foreach (DataBaseConnStr database in base.configService.fileDataBaseConfig)
-            {
-                if (database.IsBaseDataBase)
-                {
-                    return database.Value;
+            //foreach (DataBaseConnStr database in ConfigServiceEx.fileDataBaseConfig)
+            //{
+            //    if (database.IsBaseDataBase)
+            //    {
+            //        return database.Value;
 
-                }
-            }
+            //    }
+            //}
             return null;
         }
 

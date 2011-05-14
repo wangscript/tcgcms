@@ -15,9 +15,9 @@ using System.Text;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Handlers;
-using TCG.Pages;
 
-public partial class attach : adminMain
+
+public partial class attach : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

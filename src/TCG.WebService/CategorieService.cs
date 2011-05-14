@@ -84,7 +84,7 @@ namespace TCG.WebService
                 return null;
             }
 
-            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId);
+            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(ConfigServiceEx.DefaultSkinId);
             if (allcategories != null && allcategories.Count > 0)
             {
                 if (allcategories.ContainsKey(categorieid))
@@ -99,7 +99,7 @@ namespace TCG.WebService
         [SoapHeader("header", Direction = SoapHeaderDirection.In)]
         public List<EntityBase> GetDefaultCategories()
         {
-            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(base.configService.DefaultSkinId);
+            Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(ConfigServiceEx.DefaultSkinId);
             if (allcategories == null && allcategories.Count == 0)
             {
                 return null;

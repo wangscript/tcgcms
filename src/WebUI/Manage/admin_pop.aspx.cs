@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 
 public partial class admin_pop : BasePage

@@ -126,9 +126,56 @@ namespace TCG.Handlers
         /// <param name="entity"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public virtual string GetJsEntity(EntityBase entity, Type type)
+        public string GetJsEntity(EntityBase entity, Type type)
         {
-            return string.Empty;
+            if (entity == null) return "{}";
+            if (type == null) return "{}";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            switch (type.ToString())
+            {
+                case "TCG.Entity.Categories":
+                    Categories categories = (Categories)entity;
+                    sb.Append("Id:\"" + categories.Id + "\",");
+                    sb.Append("ResourceListTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceListTemplate, typeof(Template)) + ",");
+                    sb.Append("iOrder:" + categories.iOrder.ToString() + ",");
+                    sb.Append("ParentId:\"" + categories.Parent + "\",");
+                    sb.Append("ResourceTemplate:" + this.GetJsEntity((EntityBase)categories.ResourceTemplate, typeof(Template)) + ",");
+                    sb.Append("Directory:\"" + categories.vcDirectory + "\",");
+                    sb.Append("Url:\"" + categories.vcUrl + "\",");
+                    sb.Append("UpdateDate:\"" + categories.dUpdateDate.ToString() + "\",");
+                    sb.Append("Visible:\"" + categories.cVisible + "\",");
+                    sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
+                    sb.Append("Name:\"" + categories.vcName + "\",");
+                    sb.Append("SkinId:\"" + categories.SkinId + "\",");
+                    sb.Append("ClassName:\"" + categories.vcClassName + "\"");
+                    break;
+                case "TCG.Entity.Template":
+                    Template template = (Template)entity;
+                    sb.Append("Id:\"" + template.Id + "\",");
+                    sb.Append("SkinId:\"" + template.SkinId + "\",");
+                    sb.Append("TemplateType:" + ((int)template.TemplateType).ToString() + ",");
+                    sb.Append("ParentId:\"" + template.iParentId + "\",");
+                    sb.Append("SystemType:" + template.iSystemType.ToString() + ",");
+                    sb.Append("TempName:\"" + template.vcTempName + "\",");
+                    sb.Append("Url:\"" + template.vcUrl + "\"");
+                    break;
+                case "TCG.Entity.Skin":
+                    Skin skin = (Skin)entity;
+                    sb.Append("Id:\"" + skin.Id + "\",");
+                    sb.Append("Name:\"" + skin.Name + "\",");
+                    sb.Append("Pic:\"" + skin.Pic + "\",");
+                    sb.Append("Info:\"" + skin.Info + "\"");
+                    break;
+                case "TCG.Entity.FileCategories":
+                    FileCategories filecategories = (FileCategories)entity;
+                    sb.Append("Id:" + filecategories.Id + ",");
+                    sb.Append("iParentId:" + filecategories.iParentId.ToString() + ",");
+                    sb.Append("vcFileName:\"" + filecategories.vcFileName + "\"");
+                    break;
+            }
+            sb.Append("}");
+            return sb.ToString();
         }
 
         
@@ -139,7 +186,7 @@ namespace TCG.Handlers
         /// <param name="?"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public virtual EntityBase GetEntityObjectFromRow(DataRow row, Type type)
+        public EntityBase GetEntityObjectFromRow(DataRow row, Type type)
         {
             return null;
         }

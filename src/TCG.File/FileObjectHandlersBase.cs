@@ -30,32 +30,6 @@ namespace TCG.Handlers
     /// </summary>
     public class FileObjectHandlersBase : ObjectHandlersBase
     {
-
-        /// <summary>
-        /// 得到实体的JSON对象
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public override string GetJsEntity(EntityBase entity, Type type)
-        {
-            if (entity == null) return null;
-            if(type==null)return null;
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            switch (type.ToString())
-            {
-                case "TCG.Entity.FileCategories":
-                    FileCategories filecategories = (FileCategories)entity;
-                    sb.Append("Id:" + filecategories.Id + ",");
-                    sb.Append("iParentId:" + filecategories.iParentId.ToString() + ",");
-                    sb.Append("vcFileName:\"" + filecategories.vcFileName + "\"");
-                    break;
-            }
-            sb.Append("}");
-            return sb.ToString();
-        }
-
         /// <summary>
         /// 设置资讯数据库连接
         /// </summary>
@@ -67,44 +41,44 @@ namespace TCG.Handlers
 
         }
 
-        /// <summary>
-        /// 从记录行中得到实体
-        /// </summary>
-        /// <param name="?"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public override EntityBase GetEntityObjectFromRow(DataRow row, Type type)
-        {
-            if (row == null) return null;
-            switch (type.ToString())
-            {
+        ///// <summary>
+        ///// 从记录行中得到实体
+        ///// </summary>
+        ///// <param name="?"></param>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //public override EntityBase GetEntityObjectFromRow(DataRow row, Type type)
+        //{
+        //    if (row == null) return null;
+        //    switch (type.ToString())
+        //    {
                
-                case "TCG.Entity.FileCategories":
-                    FileCategories filecagegories = new FileCategories();
-                    filecagegories.Id = row["iId"].ToString();
-                    filecagegories.iParentId = objectHandlers.ToInt(row["iParentId"]);
-                    filecagegories.dCreateDate = objectHandlers.ToTime(row["dCreateDate"].ToString());
-                    filecagegories.vcFileName = row["vcFileName"].ToString();
-                    filecagegories.vcMeno = row["vcMeno"].ToString();
-                    filecagegories.vcKey = row["vcKey"].ToString();
-                    filecagegories.MaxSpace = objectHandlers.ToLong(row["MaxSpace"]);
-                    filecagegories.Space = objectHandlers.ToLong(row["Space"]);
-                    return (EntityBase)filecagegories;
-                case "TCG.Entity.FileResources":
-                    FileResources fileresource = new FileResources();
-                    fileresource.Id = row["iID"].ToString();
-                    fileresource.iClassId = (int)row["iClassId"];
-                    fileresource.iSize = (int)row["iSize"];
-                    fileresource.vcFileName = row["vcFileName"].ToString();
-                    fileresource.vcIP = row["vcIP"].ToString();
-                    fileresource.vcType = row["vcType"].ToString();
-                    fileresource.iRequest = (int)row["iRequest"];
-                    fileresource.iDowns = (int)row["iDowns"];
-                    fileresource.dCreateDate = (DateTime)row["dCreateDate"];
-                    return (EntityBase)fileresource;
+        //        case "TCG.Entity.FileCategories":
+        //            FileCategories filecagegories = new FileCategories();
+        //            filecagegories.Id = row["iId"].ToString();
+        //            filecagegories.iParentId = objectHandlers.ToInt(row["iParentId"]);
+        //            filecagegories.dCreateDate = objectHandlers.ToTime(row["dCreateDate"].ToString());
+        //            filecagegories.vcFileName = row["vcFileName"].ToString();
+        //            filecagegories.vcMeno = row["vcMeno"].ToString();
+        //            filecagegories.vcKey = row["vcKey"].ToString();
+        //            filecagegories.MaxSpace = objectHandlers.ToLong(row["MaxSpace"]);
+        //            filecagegories.Space = objectHandlers.ToLong(row["Space"]);
+        //            return (EntityBase)filecagegories;
+        //        case "TCG.Entity.FileResources":
+        //            FileResources fileresource = new FileResources();
+        //            fileresource.Id = row["iID"].ToString();
+        //            fileresource.iClassId = (int)row["iClassId"];
+        //            fileresource.iSize = (int)row["iSize"];
+        //            fileresource.vcFileName = row["vcFileName"].ToString();
+        //            fileresource.vcIP = row["vcIP"].ToString();
+        //            fileresource.vcType = row["vcType"].ToString();
+        //            fileresource.iRequest = (int)row["iRequest"];
+        //            fileresource.iDowns = (int)row["iDowns"];
+        //            fileresource.dCreateDate = (DateTime)row["dCreateDate"];
+        //            return (EntityBase)fileresource;
 
-            }
-            return null;
-        }
+        //    }
+        //    return null;
+        //}
     }
 }

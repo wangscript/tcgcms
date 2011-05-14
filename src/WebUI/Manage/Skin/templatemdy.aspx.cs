@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Handlers;
 using TCG.Entity;
@@ -134,32 +134,29 @@ public partial class Template_templatemdy : BasePage
             else
             {
                 bool create = false;
-                //if (item.TemplateType == TemplateType.SinglePageType)
-                //{
-                //    string filepath = string.Empty;
-                //    filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
-                //    try
-                //    {
-                //        filepath = Server.MapPath("~" + filepath);
-                //        TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-                //        tcgthdl.Template = item.Content;
-                //        tcgthdl.FilePath = filepath;
-                //        tcgthdl.configService = base.configService;
-                //        tcgthdl.conn = base.conn;
-                //        if (tcgthdl.Replace())
-                //        {
-                //            create = true;
-                //        }
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-                //        base.AjaxErch(base.ajaxdata);
-                //        return;
-                //    }
+                if (item.TemplateType == TemplateType.SinglePageType)
+                {
+                    string filepath = string.Empty;
+                    filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+                    try
+                    {
+                        filepath = Server.MapPath("~" + filepath);
+                        TCGTagHandlers tcgthdl = base.handlerService.tagService.tcgTagHandlers;
+                        tcgthdl.Template = item.Content;
+                        tcgthdl.FilePath = filepath;
+                        if (tcgthdl.Replace())
+                        {
+                            create = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                        base.AjaxErch(base.ajaxdata);
+                        return;
+                    }
 
-                //}
-                create = true;
+                }
                 base.AjaxErch("{state:true,message:'" + ((create) ? "模板修改成功" : "模板修改失败") + "!'}");
             }
             

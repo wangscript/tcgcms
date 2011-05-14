@@ -15,21 +15,21 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Manage_Resources_sheiflist : adminMain
+public partial class Manage_Resources_sheiflist : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             this.SearchInit();
         }
         else
@@ -44,7 +44,6 @@ public partial class Manage_Resources_sheiflist : adminMain
                     this.CreateNews();
                     break;
             }
-            base.Finish();
             return;
         }
     }
@@ -54,7 +53,7 @@ public partial class Manage_Resources_sheiflist : adminMain
 
 
         int page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pageSize = objectHandlers.ToInt(base.configService.baseConfig["PageSize"]);
+        int pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
         string iClassId = objectHandlers.Get("iClassId");
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
@@ -63,7 +62,7 @@ public partial class Manage_Resources_sheiflist : adminMain
         string skinId = objectHandlers.Get("SkinId");
         if (string.IsNullOrEmpty(skinId))
         {
-            skinId = base.configService.DefaultSkinId;
+            skinId = ConfigServiceEx.DefaultSkinId;
         }
 
         this.iSkinId.Value = skinId;
@@ -224,7 +223,7 @@ public partial class Manage_Resources_sheiflist : adminMain
         tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid.ToString());
         tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
         tcgth.WebPath = item.vcFilePath;
-        tcgth.configService = base.configService;
+        tcgth.configService = ConfigServiceEx;
         tcgth.conn = base.conn;
 
         string text1 = string.Empty;

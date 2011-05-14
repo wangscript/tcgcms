@@ -37,8 +37,7 @@ namespace TCG.Handlers
                 if (this._sheifhandlers == null)
                 {
                     this._sheifhandlers = new SheifHandlers();
-                    this._sheifhandlers.configService = base.configService;
-                    this._sheifhandlers.conn = base.conn;
+                  
                     this._sheifhandlers.handlerService = base.handlerService;
                 }
                 return this._sheifhandlers;

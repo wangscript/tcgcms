@@ -16,23 +16,23 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class news_createhtml : adminMain
+public partial class news_createhtml : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.iSkinId.Value = base.configService.DefaultSkinId;
+        this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
         if (Page.IsPostBack)
         {
             //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
             string vwork = objectHandlers.Post("work");
             switch (vwork)
@@ -65,7 +65,6 @@ public partial class news_createhtml : adminMain
         catch (Exception ex)
         {
             base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
-            base.Finish();
             return;
         }
 
@@ -84,7 +83,6 @@ public partial class news_createhtml : adminMain
         catch (Exception ex)
         {
             base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
-            base.Finish();
             return;
         }
 
@@ -113,7 +111,6 @@ public partial class news_createhtml : adminMain
         }
 
         base.AjaxErch(rtn, text1, "CreateBack");
-        base.Finish();
     }
 
     private void Search()
@@ -166,7 +163,7 @@ public partial class news_createhtml : adminMain
             }
 
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                page, objectHandlers.ToInt(base.configService.baseConfig["PageSize"]), "iId DESC", strCondition);
+                page, objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]), "iId DESC", strCondition);
   
         }
         catch (Exception ex)
@@ -178,7 +175,6 @@ public partial class news_createhtml : adminMain
         if (pageCount < page)
         {
             base.AjaxErch(1, "已经生成了所有分页！");
-            base.Finish();
             return;
         }
 
@@ -193,11 +189,9 @@ public partial class news_createhtml : adminMain
             }
 
             base.AjaxErch(1, text, "SearchBack");
-            base.Finish();
             return;
         }
 
-        base.Finish();
         base.AjaxErch(1,"搜索完成！");
     }
 }

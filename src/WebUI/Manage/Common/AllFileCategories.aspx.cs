@@ -14,17 +14,17 @@ using System.Text;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Handlers;
-using TCG.Pages;
 
 
-public partial class Manage_Common_AllFileCategories : adminMain
+
+public partial class Manage_Common_AllFileCategories : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.fileService.fileClassHandlers.GetAllFileCategoriesEntity()
+            string cg = base.handlerService.GetJsEntitys(base.handlerService.fileService.fileHandlers.GetAllFileCategoriesEntity()
                 , typeof(FileCategories));
             Response.Write(cg);
             Response.End();

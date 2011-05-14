@@ -10,10 +10,10 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Handlers;
 
-public partial class adminroleadd : adminMain
+public partial class adminroleadd : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,7 +22,7 @@ public partial class adminroleadd : adminMain
 
         if (!Page.IsPostBack)
         {
-            this.DefaultSkinId.Value = base.configService.DefaultSkinId;
+            this.DefaultSkinId.Value = ConfigServiceEx.DefaultSkinId;
         }
         else
         {
@@ -48,7 +48,7 @@ public partial class adminroleadd : adminMain
 
             if (rtn < 0)
             {
-                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, base.configService.baseConfig["ManagePath"]) + "'}");
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
             }
             else
             {

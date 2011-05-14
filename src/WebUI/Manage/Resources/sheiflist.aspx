@@ -27,6 +27,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="AddNewsInfo();">
 			<img src="../images/icon/24.gif" /> 新建

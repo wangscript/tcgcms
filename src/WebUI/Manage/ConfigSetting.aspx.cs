@@ -13,7 +13,7 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Entity;
-using TCG.Pages;
+
 
 
 public partial class ConfigSetting : BasePage

@@ -70,6 +70,10 @@
       <Project>{CCEE6ADF-ACAF-480C-9193-304EC5016CD6}</Project>
       <Name>TCG.File</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCG.Handlers.Inteface\TCG.Handlers.Inteface.csproj">
+      <Project>{8247CB7E-9156-4574-86F6-0278B6A69524}</Project>
+      <Name>TCG.Handlers.Inteface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCG.Handlers\TCG.Handlers.csproj">
       <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
       <Name>TCG.Handlers</Name>

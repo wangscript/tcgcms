@@ -59,7 +59,7 @@ namespace TCG.Handlers
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Direction = ParameterDirection.Output;;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
             SqlParameter sp14 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp14.Direction = ParameterDirection.Output;
-            SqlParameter sp15 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp15.Value = base.configService.baseConfig["FileExtension"];
+            SqlParameter sp15 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp15.Value = ConfigServiceEx.baseConfig["FileExtension"];
             SqlParameter sp16 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp16.Value = inf.cCreated;
             SqlParameter sp17 = new SqlParameter("@vcTitleColor", SqlDbType.VarChar, 10); sp17.Value = inf.vcTitleColor;
             SqlParameter sp18 = new SqlParameter("@cStrong", SqlDbType.Char, 1); sp18.Value = inf.cStrong;
@@ -100,7 +100,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp11.Value = inf.cChecked;
             SqlParameter sp12 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp12.Direction = ParameterDirection.Output;
             SqlParameter sp13 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp13.Direction = ParameterDirection.Output;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"];
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = ConfigServiceEx.baseConfig["FileExtension"];
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cShief", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iIDOut", SqlDbType.Int, 4); sp17.Direction = ParameterDirection.Output;
@@ -139,7 +139,7 @@ namespace TCG.Handlers
             SqlParameter sp11 = new SqlParameter("@vcSpeciality", SqlDbType.VarChar, 100); sp11.Value = inf.vcSpeciality;
             SqlParameter sp12 = new SqlParameter("@cChecked", SqlDbType.Char, 1); sp12.Value = inf.cChecked;
             SqlParameter sp13 = new SqlParameter("@vcFilePath", SqlDbType.VarChar, 255); sp13.Direction = ParameterDirection.Output;
-            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = base.configService.baseConfig["FileExtension"];
+            SqlParameter sp14 = new SqlParameter("@vcExtension", SqlDbType.VarChar, 6); sp14.Value = ConfigServiceEx.baseConfig["FileExtension"];
             SqlParameter sp15 = new SqlParameter("@cCreated", SqlDbType.Char, 1); sp15.Value = inf.cCreated;
             SqlParameter sp16 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp16.Value = "02";
             SqlParameter sp17 = new SqlParameter("@iId", SqlDbType.VarChar, 36); sp17.Value = inf.Id;
@@ -396,7 +396,7 @@ namespace TCG.Handlers
             text += nif.Categorie.vcDirectory;
             text += nif.dAddDate.Year.ToString() + objectHandlers.AddZeros(nif.dAddDate.Month.ToString(), 2);
             text += objectHandlers.AddZeros(nif.dAddDate.Day.ToString(), 2) + "/";
-            text += nif.Id + base.configService.baseConfig["FileExtension"];
+            text += nif.Id + ConfigServiceEx.baseConfig["FileExtension"];
             return text;
         }
 
@@ -442,8 +442,7 @@ namespace TCG.Handlers
             tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
             tcgth.FilePath =  HttpContext.Current.Server.MapPath("~" + item.vcFilePath);
             tcgth.WebPath = item.vcFilePath;
-            tcgth.configService = base.configService;
-            tcgth.conn = base.conn;
+
 
             string text1 = string.Empty;
 

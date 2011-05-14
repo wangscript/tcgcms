@@ -45,7 +45,9 @@
     <Compile Include="AdminHandlers.cs" />
     <Compile Include="CategoriesHandlers.cs" />
     <Compile Include="AccessFactory.cs" />
+    <Compile Include="FileHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourcesHandlers.cs" />
     <Compile Include="SkinHandlers.cs" />
     <Compile Include="TemplateHandlers.cs" />
   </ItemGroup>

@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Text;
 
 using TCG.Utils;
-using TCG.Pages;
+
 using TCG.Entity;
 
 public partial class Top : BasePage

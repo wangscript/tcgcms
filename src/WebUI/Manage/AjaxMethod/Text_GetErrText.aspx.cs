@@ -11,11 +11,11 @@ using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 
 using TCG.Utils;
-using TCG.Pages;
+
 
 using TCG.Entity;
 
-public partial class AjaxMethod_Text_GetErrText : adminMain
+public partial class AjaxMethod_Text_GetErrText : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -25,14 +25,12 @@ public partial class AjaxMethod_Text_GetErrText : adminMain
             if (string.IsNullOrEmpty(ErrCode))
             {
                 base.AjaxErch("错误代码请求错误！");
-                base.Finish();
                 return;
             }
 
             if (ErrCode == "1")
             {
                 base.AjaxErch("操作成功！");
-                base.Finish();
                 return;
             }
 
@@ -50,7 +48,6 @@ public partial class AjaxMethod_Text_GetErrText : adminMain
             }
 
             base.AjaxErch(errText);
-            base.Finish();
             return;
         }
     }

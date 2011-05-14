@@ -11,10 +11,10 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Handlers;
-using TCG.Pages;
 
 
-public partial class Common_AllNewsSpeciality : adminMain
+
+public partial class Common_AllNewsSpeciality : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

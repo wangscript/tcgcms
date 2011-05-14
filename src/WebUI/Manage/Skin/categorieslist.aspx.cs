@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Entity;
@@ -164,13 +164,13 @@ public partial class skin_categorieslist : BasePage
         //                else
         //                {
         //                    string filepath = "";
-        //                    filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + base.configService.baseConfig["FileExtension"]);
+        //                    filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
 
         //                    TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
         //                    tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
         //                    tcgthdl.FilePath = filepath;
-        //                    tcgthdl.WebPath = cif.vcUrl + base.configService.baseConfig["FileExtension"];
-        //                    tcgthdl.configService = base.configService;
+        //                    tcgthdl.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+        //                    tcgthdl.configService = ConfigServiceEx;
         //                    tcgthdl.conn = base.conn;
         //                    tcgthdl.PagerInfo.DoAllPage = false;
         //                    tcgthdl.PagerInfo.Page = page;

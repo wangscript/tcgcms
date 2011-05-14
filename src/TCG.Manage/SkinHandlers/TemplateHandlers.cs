@@ -351,14 +351,12 @@ namespace TCG.Handlers
 
             string filepath = string.Empty;
 
-            tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + base.configService.baseConfig["FileExtension"];
+            tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
             
             filepath = HttpContext.Current.Server.MapPath("~" + tlif.vcUrl);
 
             tcgthdl.Template = tlif.Content;
             tcgthdl.FilePath = filepath;
-            tcgthdl.configService = base.configService;
-            tcgthdl.conn = base.conn;
             if (tcgthdl.Replace())
             {
                 text = "<a>生成成功:'" + tlif.vcUrl + "'</a>";

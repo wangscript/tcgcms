@@ -166,7 +166,7 @@ namespace TCG.Handlers.Imp.AccEss
 
             AccessFactory.conn.Execute("INSERT INTO Template (Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl,dUpdateDate,dAddDate)"
                 + "VALUES('" + item.Id + "','" + item.SkinId + "','" + (int)item.TemplateType + "','" + item.iParentId + "','" + item.iSystemType + "','"
-                + item.vcTempName + "','" + item.Content + "','" + item.vcUrl + "',now(),now())");
+                + item.vcTempName + "','" + item.Content.Replace("'", "''") + "','" + item.vcUrl + "',now(),now())");
 
             return 1;
         }
@@ -214,9 +214,10 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 return -1000000027;
             }
+            string sql = "UPDATE Template SET vcTempName='" + item.vcTempName + "',vcContent='" + item.Content.Replace("'", "''") + "',vcUrl='" + item.vcUrl
+                                    + "',dUpdateDate=now(),iParentId='" + item.iParentId + "' WHERE Id = '" + item.Id + "'";
 
-            AccessFactory.conn.Execute("UPDATE Template SET vcTempName='" + item.vcTempName + "',vcContent='" + item.Content + "',vcUrl='" + item.vcUrl
-                                    + "',dUpdateDate=now(),iParentId='" + item.iParentId + "' WHERE Id = '" + item.Id + "'");
+            AccessFactory.conn.Execute(sql);
 
             return 1;
         }

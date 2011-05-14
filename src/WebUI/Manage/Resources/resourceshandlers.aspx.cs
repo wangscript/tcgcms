@@ -16,26 +16,25 @@ using System.Text.RegularExpressions;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-using TCG.Pages;
+
 
 using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
 
-public partial class resources_resourceshandlers : adminMain
+public partial class resources_resourceshandlers : BasePage
 {
-
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检测管理员登录
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        this.ltfileclassid.Text = ConfigServiceEx.baseConfig["NewsFileClass"];
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
-
             int newsid = objectHandlers.ToInt(objectHandlers.Get("newsid"));
             string categorieid = objectHandlers.Get("iClassId");
-            this.iSkinId.Value = base.configService.DefaultSkinId;
+            this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
             if (newsid==0)
             {
@@ -111,23 +110,20 @@ public partial class resources_resourceshandlers : adminMain
 
         if (string.IsNullOrEmpty(item.vcTitle))
         {
-            base.AjaxErch("-1000000039");
-            base.Finish();
+            base.AjaxErch(-1000000039,"");
             return;
         }
 
         if (string.IsNullOrEmpty(item.vcKeyWord))
         {
-            base.AjaxErch("-1000000043");
-            base.Finish();
+            base.AjaxErch(-1000000043,"");
             return;
         }
 
 
         if (string.IsNullOrEmpty(item.Categorie.Id))
         {
-            base.AjaxErch("-1000000056");
-            base.Finish();
+            base.AjaxErch(-1000000056,"");
             return;
         }
 
@@ -150,8 +146,7 @@ public partial class resources_resourceshandlers : adminMain
                 rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
 
-            rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, 
-                objectHandlers.ToInt(item.Id), base.tagService.TCGTagHandlers);
+            rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, objectHandlers.ToInt(item.Id));
         }
         catch (Exception ex)
         {
@@ -168,7 +163,5 @@ public partial class resources_resourceshandlers : adminMain
         {
             base.AjaxErch(rtn, "文章添加成功，请继续添加！", "NewsAddPostBack()");
         }
-
-        base.Finish();
     }
 }
