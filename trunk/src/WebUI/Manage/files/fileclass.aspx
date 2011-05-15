@@ -1,10 +1,10 @@
-๏ปฟ<%@ Page Language="C#" AutoEventWireup="true" CodeFile="fileclass.aspx.cs" Inherits="files_fileclass" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="fileclass.aspx.cs" Inherits="files_fileclass" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>ๆ— ๆ ้ข้กต</title>
+    <title>ฮÞฑ๊ฬโาณ</title>
 </head>
 <body>
     <form id="form1" runat="server">

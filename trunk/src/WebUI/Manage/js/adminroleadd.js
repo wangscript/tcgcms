@@ -2,7 +2,7 @@
 
 function CheckForm() { 
 	if(CheckRoleName()){
-	    SetAjaxDivRoot("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
+	    SetAjaxDivRoot("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
 	    return true;
 	}
 	return false;
@@ -20,7 +20,7 @@ function AddRoleBack(data) {
 }
 
 $(document).ready(function() {
-    //æ·»åŠ æäº¤æ–¹æ³•
+    //Ìí¼ÓÌá½»·½·¨
     var options = {
     beforeSubmit: CheckForm,
         dataType: 'json',
@@ -35,10 +35,10 @@ function CheckRoleName() {
 	vcRoleName[0].className='itxt1';
 	if(vcRoleName.val().length==0){
 		rnmsg[0].className="info_err";
-		rnmsg.text("è§’è‰²åä¸èƒ½ä¸ºç©ºï¼");
+		rnmsg.text("½ÇÉ«Ãû²»ÄÜÎª¿Õ£¡");
 		return false;
 	}
 	rnmsg[0].className="info_ok";
-	rnmsg.text("è§’è‰²åå¯ä»¥ä½¿ç”¨ï¼");
+	rnmsg.text("½ÇÉ«Ãû¿ÉÒÔÊ¹ÓÃ£¡");
 	return true;
 }

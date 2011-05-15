@@ -5,16 +5,16 @@ function DeleteRole(){
 	if(iRoleId==0)return false;
 	var count = GetCheckBoxCount("CheckID");
 	if(count>0){
-	    SetAjaxDiv("err", false, "è¦åˆ é™¤æ­¤è”ç³»ç»„ï¼Œè¯·å…ˆç§»å‡ºæˆ–åˆ é™¤æ­¤ç»„ä¸­çš„ç®¡ç†å‘˜");
+	    SetAjaxDiv("err", false, "ÒªÉ¾³ı´ËÁªÏµ×é£¬ÇëÏÈÒÆ³ö»òÉ¾³ı´Ë×éÖĞµÄ¹ÜÀíÔ±");
 		return false;
 	}
-    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
+    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
 	return true;
 }
 
 var iRoleId = 0;
 $(document).ready(function () {
-    //æ·»åŠ æäº¤æ–¹æ³•
+    //Ìí¼ÓÌá½»·½·¨
     iRoleId = $("#iRoleId").val();
     var options = {
         beforeSubmit: DeleteRole,

@@ -11,7 +11,7 @@ function CheckForm(){
 	
 	if(iNickName.val()==""){
 		nnmsg.get(0).className = "info_err";
-		SetInnerText(nnmsg,"æ˜µç§°ä¸èƒ½ä¸ºç©º!");
+		SetInnerText(nnmsg,"êÇ³Æ²»ÄÜÎª¿Õ!");
 	}
 	
 	if(!(CheckCPWD(iCPWD))){
@@ -23,7 +23,7 @@ function CheckForm(){
 
 function ChanagePostBack(val){
 	if(GetErrTextRoot(val))return;
-	SetAjaxDivRoot("ok",false,"ç”¨æˆ·ç™»é™†ä¿¡æ¯æ›´æ”¹æˆåŠŸï¼");
+	SetAjaxDivRoot("ok",false,"ÓÃ»§µÇÂ½ĞÅÏ¢¸ü¸Ä³É¹¦£¡");
 }
 
 function CheckPassword(obj) {
@@ -35,7 +35,7 @@ function CheckPassword(obj) {
 	if(og==null)return false;
 	if(obj.val()== ""){
 	    og.get(0).className = "info_err";
-		SetInnerText(og,"åŸå§‹å¯†ç ä¸èƒ½ä¸ºç©º!");
+		SetInnerText(og,"Ô­Ê¼ÃÜÂë²»ÄÜÎª¿Õ!");
 		return false;
 	}
 	$.ajax({
@@ -66,7 +66,7 @@ function CheckPasswordFrom(obj) {
     if (og == null) return false;
     if (obj.val() == "") {
         og.get(0).className = "info_err";
-        SetInnerText(og, "åŸå§‹å¯†ç ä¸èƒ½ä¸ºç©º!");
+        SetInnerText(og, "Ô­Ê¼ÃÜÂë²»ÄÜÎª¿Õ!");
         return false;
     }
 

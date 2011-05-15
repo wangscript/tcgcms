@@ -108,7 +108,7 @@ public class BasePage : Page
             if (this._admininfo == null)
             {
                 this._admininfo = this.handlerService.manageService.adminHandlers.GetAdminInfo();
-                //this.handlerService.tagService.tcgTagHandlers.adminInfo = this._admininfo;
+                this.handlerService.tagService.tcgTagHandlers.adminInfo = this._admininfo;
             }
             return this._admininfo;
         }

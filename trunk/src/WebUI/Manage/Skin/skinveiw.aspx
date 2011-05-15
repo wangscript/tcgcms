@@ -1,4 +1,4 @@
-ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skinveiw.aspx.cs" Inherits="Manage_Skin_skinveiw" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skinveiw.aspx.cs" Inherits="Manage_Skin_skinveiw" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -32,26 +32,26 @@
 <script type="text/javascript">
 
 
-    /** ç¤ºä¾‹1 **/
+    /** Ê¾Àı1 **/
     function test1() {
         jQuery.jMessageBox.show({
             width: 600,
-            title: 'ç³»ç»Ÿæ¶ˆæ¯',
+            title: 'ÏµÍ³ÏûÏ¢',
             message: $("#divCategoriesManage").html(),
             yesButton: {
-                text: 'ç¡®å®š',
+                text: 'È·¶¨',
                 click: function() {
                     jQuery.jMessageBox.hide();
                 }
             },
             cancelButton: {
-                text: 'å–æ¶ˆ',
+                text: 'È¡Ïû',
                 click: function() {
                     jQuery.jMessageBox.hide();
                 }
             },
             bottom: {
-                text: 'è¯´æ˜: å¦‚æœä½ æƒ³ç»§ç»­æ“ä½œ,è¯·ç‚¹å‡»"ç¡®å®š"!',
+                text: 'ËµÃ÷: Èç¹ûÄãÏë¼ÌĞø²Ù×÷,Çëµã»÷"È·¶¨"!',
                 click: function() { }
             }
         });
@@ -59,7 +59,7 @@
     
  $().ready(function() {
         var option = { width: 150, items: [
-                        { text: "æ·»åŠ åˆ†ç±»", icon: "../images/icons/chart_organisation_add.png", alias: "1-1", action: test1 }], onShow: applyrule,
+                        { text: "Ìí¼Ó·ÖÀà", icon: "../images/icons/chart_organisation_add.png", alias: "1-1", action: test1 }], onShow: applyrule,
             onContextMenu: BeforeContextMenu
         };
         function menuAction() {
@@ -89,42 +89,42 @@
 <body>
     <form id="form1" runat="server">
     <div id="divCategories" class="target">
-        <h1>åˆ†ç±»ä¿¡æ¯</h1>
+        <h1>·ÖÀàĞÅÏ¢</h1>
         <ul id="ulCategories" class="lightTreeview"></ul>
         
     </div>
     <div id="divCategoriesManage" style="display:none;">
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ† ç±» å ç§°ï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">·Ö Àà Ãû ³Æ£º</span>
 	      <input id="iClassName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
-		    <span id="cnamemsg" class="info1">åˆ†ç±»åç§°ï¼Œå¿…é¡»å¡«å†™</span>
+		    <span id="cnamemsg" class="info1">·ÖÀàÃû³Æ£¬±ØĞëÌîĞ´</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ† ç±» åˆ« åï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">·Ö Àà ±ğ Ãû£º</span>
 	      <input id="iName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iName','inamemsg');"/>
-		    <span id="inamemsg" class="info1">åˆ†ç±»åˆ«åï¼Œæ˜¾ç¤ºåœ¨å‰å°çš„åç§°</span>
+		    <span id="inamemsg" class="info1">·ÖÀà±ğÃû£¬ÏÔÊ¾ÔÚÇ°Ì¨µÄÃû³Æ</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">æŒ‡ å®š ç›® å½•ï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">Ö¸ ¶¨ Ä¿ Â¼£º</span>
 	      <input id="iDirectory" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iDirectory','dirmsg');"/>
-		    <span id="dirmsg" class="info1">ç›¸å¯¹ç®¡ç†ç½‘ç«™çš„çš„ç›®å½•ï¼Œå­˜æ”¾ç”Ÿæˆçš„é™æ€æ–‡ä»¶</span>
+		    <span id="dirmsg" class="info1">Ïà¶Ô¹ÜÀíÍøÕ¾µÄµÄÄ¿Â¼£¬´æ·ÅÉú³ÉµÄ¾²Ì¬ÎÄ¼ş</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ†ç±» é¦–åœ°å€ï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">·ÖÀà Ê×µØÖ·£º</span>
 	      <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iUrl','urlmsg');"/>
-		    <span id="urlmsg" class="info1">åˆ†ç±»åœ¨ç½‘ç«™å‰å°çš„é¦–é¡µåœ°å€ï¼Œç”¨äºç”Ÿæˆå¯¼èˆª</span>
+		    <span id="urlmsg" class="info1">·ÖÀàÔÚÍøÕ¾Ç°Ì¨µÄÊ×Ò³µØÖ·£¬ÓÃÓÚÉú³Éµ¼º½</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">è¯¦ ç»† æ¨¡ æ¿ï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">Ïê Ï¸ Ä£ °å£º</span>
 	      <select id="sTemplate" runat="server"  onchange="CheckTemplate('sTemplate','stdmsg')">
-	  	    <option value="-1">è¯·é€‰æ‹©</option>
+	  	    <option value="-1">ÇëÑ¡Ôñ</option>
 	      </select>
-		    <span id="stdmsg" class="info1">åˆ†ç±»èµ„è®¯è¯¦ç»†é¡µæ¨¡æ¿</span>
+		    <span id="stdmsg" class="info1">·ÖÀà×ÊÑ¶ÏêÏ¸Ò³Ä£°å</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ— è¡¨ æ¨¡ æ¿ï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">ÁĞ ±í Ä£ °å£º</span>
 	      <select id="slTemplate" runat="server" onchange="CheckTemplate('slTemplate','stsdmsg')">
-	  	    <option value="-1">è¯·é€‰æ‹©</option>
+	  	    <option value="-1">ÇëÑ¡Ôñ</option>
 	      </select>
-		    <span id="stsdmsg" class="info1">åˆ†ç±»èµ„è®¯åˆ—è¡¨é¡µæ¨¡æ¿</span>
+		    <span id="stsdmsg" class="info1">·ÖÀà×ÊÑ¶ÁĞ±íÒ³Ä£°å</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ† ç±» æ’ åºï¼š</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">·Ö Àà ÅÅ Ğò£º</span>
 	      <input id="iOrder" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
-		    <span id="urlmsg" class="info1">åœ¨åˆ—è¡¨ä¸­çš„æ˜¾ç¤ºé¡ºåº</span>
+		    <span id="urlmsg" class="info1">ÔÚÁĞ±íÖĞµÄÏÔÊ¾Ë³Ğò</span>
 	    </div>
         </div>
         <input type="hidden" id="work" name="work"/>

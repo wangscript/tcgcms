@@ -10,10 +10,10 @@ function ChangPager(s,obj){
 }
 function pager(url, page, maxPage, total, per, countsIsVisible)
 {
-	var first		= "首页";
-	var previous	= "上一页";
-	var next		= "下一页";
-	var last		= "末页";
+	var first		= "��ҳ";
+	var previous	= "��һҳ";
+	var next		= "��һҳ";
+	var last		= "ĩҳ";
 	
 	var s = "";
 			  
@@ -63,9 +63,9 @@ function pager(url, page, maxPage, total, per, countsIsVisible)
 	if (countsIsVisible)
 	{
 		s += "<span class='info1 rfl'>";
-		s += ("总记录:<span class='bold'>" + total + "</span>　");
-		s += ("每页:<span class='bold'>" + per + "</span>　");
-		s += ("总页数:<span class='bold'>" + maxPage + "</span>");
+		s += ("�ܼ�¼:<span class='bold'>" + total + "</span>��");
+		s += ("ÿҳ:<span class='bold'>" + per + "</span>��");
+		s += ("��ҳ��:<span class='bold'>" + maxPage + "</span>");
 		s += "</span>";
 	}
 	

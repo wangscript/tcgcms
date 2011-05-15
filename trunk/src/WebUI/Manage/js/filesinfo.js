@@ -8,9 +8,9 @@ function CAdd(){
 function fileclassTitleInit(){
 	var iClassId =$("iClassId");
 	if(iClassId.value==0){
-		$("classTitle").innerHTML = "<span class='bold'>æ–‡ä»¶ç³»ç»Ÿæ ¹ç›®å½•</span>";
+		$("classTitle").innerHTML = "<span class='bold'>ÎÄ¼şÏµÍ³¸ùÄ¿Â¼</span>";
 	}else{
-		$("classTitle").innerHTML = "<span class='bold'><a href='?'>æ–‡ä»¶ç³»ç»Ÿæ ¹ç›®å½•</a></span> >>" + GetTitleListByID(iClassId.value);
+		$("classTitle").innerHTML = "<span class='bold'><a href='?'>ÎÄ¼şÏµÍ³¸ùÄ¿Â¼</a></span> >>" + GetTitleListByID(iClassId.value);
 	}
 }
 
@@ -28,7 +28,7 @@ function GetTitleListByID(ID) {
 
 function CreateCatge() {
     if ($("#inTitle").val() == '' || $("#inInfo").val() == '' || $("#iSize").val() == "") {
-        alert("è¯·è¾“å…¥å®Œæ•´ä¿¡æ¯ï¼");
+        alert("ÇëÊäÈëÍêÕûĞÅÏ¢£¡");
         return false;
     }
     $("#form1").submit();
@@ -61,7 +61,7 @@ function ShowFilesCreate(obj){
 }
 
 function MoveFiles(obj){
-	var addlist = [{href:"javascript:GoTo();",onclick:"AddClassS();",Text:"å¢åŠ æ–°æ–‡ä»¶å¤¹"},{href:"javascript:GoTo();",onclick:"AddFiles();",Text:"å¢åŠ æ–‡ä»¶"}];
+	var addlist = [{href:"javascript:GoTo();",onclick:"AddClassS();",Text:"Ôö¼ÓĞÂÎÄ¼ş¼Ğ"},{href:"javascript:GoTo();",onclick:"AddFiles();",Text:"Ôö¼ÓÎÄ¼ş"}];
 	GroupDiv.CreadDiv("MoveS",obj,addlist,100,null,0,0);
 }
 

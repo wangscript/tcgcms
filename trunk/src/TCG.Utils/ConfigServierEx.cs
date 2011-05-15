@@ -326,6 +326,8 @@ namespace TCG.Utils
                 document1.GetElementsByTagName(element)[0].SelectSingleNode(nodename).InnerText = nodevalue;
                 document1.Save(_filepath);
 
+                DefalutSkinIdInit();
+
             }
             catch
             {

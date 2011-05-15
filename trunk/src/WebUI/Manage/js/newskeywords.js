@@ -1,4 +1,4 @@
-ï»¿var ajax = new AJAXRequest();
+var ajax = new AJAXRequest();
 var GroupDiv = new MenuDiv();
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -46,7 +46,7 @@ function SearchBack(val){
 	if(GetErrText(val))return;
 	eval("o=["+val+"]");
 	if(o!=null){	
-		CreateDiv.Start("æ‰¹é‡æ ¼å¼å…³é”®å­—...ç¬¬"+$("page").value+"é¡µ");
+		CreateDiv.Start("ÅúÁ¿¸ñÊ½¹Ø¼ü×Ö...µÚ"+$("page").value+"Ò³");
 		CreateDiv.set =1;
 		CreateDiv.setcount=o.length;
 		sheifnum = o.length-1;
@@ -117,7 +117,7 @@ function SelectClassValue(val,txt){
 }
 
 function ClassInit(){
-    SetAjaxDiv("loader",false,"æ­£åœ¨åŠ è½½ä¸­æ–‡è¯åº“...");
+    SetAjaxDiv("loader",false,"ÕıÔÚ¼ÓÔØÖĞÎÄ´Ê¿â...");
     
 	var iClassName=$("iClassName");
 	var iClassId=$("iClassId");
@@ -127,7 +127,7 @@ function ClassInit(){
 	SelectDivW.style.left=(pos.x+iClassName.offsetWidth-20)+"px";
 	var o=GetNewsItemById(iClassId.value);
 	if(o==null){
-		iClassName.value="è¯·é€‰æ‹©èµ„è®¯åˆ†ç±»...";
+		iClassName.value="ÇëÑ¡Ôñ×ÊÑ¶·ÖÀà...";
 	}else{
 		iClassName.value=o[2];
 	}
@@ -149,7 +149,7 @@ function ClassInit(){
 
 function LoadBack(val){
     if(GetErrText(val))return;
-    SetAjaxDiv("ok",false,"ä¸­æ–‡è¯åº“å·²ç»åŠ è½½å®Œæˆï¼");
+    SetAjaxDiv("ok",false,"ÖĞÎÄ´Ê¿âÒÑ¾­¼ÓÔØÍê³É£¡");
 }
 
 function ShowNewsClassSl(){

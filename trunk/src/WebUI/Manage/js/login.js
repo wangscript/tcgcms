@@ -4,21 +4,21 @@
 function FromPost() {
     var errText = $("#errText");
     errText[0].className = "errText";
-    SetAjaxLoad(errText[0],"æ­£åœ¨æäº¤æ•°æ®...");
+    SetAjaxLoad(errText[0],"ÕıÔÚÌá½»Êı¾İ...");
 
     var adminname = $("#username");
     var password = $("#password");
     var radminName = $("#rUsername");
 
     if (adminname.val() == "") {
-        errText.html("è¯·è¾“å…¥ç”¨æˆ·åï¼");
+        errText.html("ÇëÊäÈëÓÃ»§Ãû£¡");
         errText[0].className = "errTextW";
         adminname.focus();
         return false;
     }
 
     if (password.val() == "") {
-        errText.html("è¯·è¾“å…¥ç™»é™†å¯†ç ï¼");
+        errText.html("ÇëÊäÈëµÇÂ½ÃÜÂë£¡");
         errText[0].className = "errTextW";
         password.focus();
         return false;
@@ -46,7 +46,7 @@ function LoginCkBack(data) {
 }
 
 $(document).ready(function() {
-    //æ·»åŠ æäº¤æ–¹æ³•
+    //Ìí¼ÓÌá½»·½·¨
     var options = {
         beforeSubmit: FromPost,
         dataType: 'json',
@@ -55,7 +55,7 @@ $(document).ready(function() {
     $("#form1").ajaxForm(options);
 });
 
-//è¡¨å•é‡ç½®
+//±íµ¥ÖØÖÃ
 function oncunle() {
     var errText = $("#errText");
     errText.html("");

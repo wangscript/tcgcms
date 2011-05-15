@@ -2,7 +2,7 @@
 /// <reference path="jquery-1.3.1-vsdoc.js" />
 
 $(document).ready(function () {
-    //æ·»åŠ æäº¤æ–¹æ³•
+    //Ìí¼ÓÌá½»·½·¨
     var options = {
         beforeSubmit: function () { return true; },
         dataType: 'json',
@@ -14,11 +14,11 @@ $(document).ready(function () {
 function AdminEdit(){
 	var admins = window.parent.adminmain.GetCheckBoxValues("CheckID");
 	if(admins==""){
-		window.parent.adminmain.SetAjaxDiv("err",false,"æ‚¨è¿˜æ²¡é€‰æ‹©éœ€è¦ç¼–è¾‘çš„ç®¡ç†å‘˜!");
+		window.parent.adminmain.SetAjaxDiv("err",false,"Äú»¹Ã»Ñ¡ÔñĞèÒª±à¼­µÄ¹ÜÀíÔ±!");
 		return;
 	}
 	if(admins.indexOf(",")!=-1){
-		window.parent.adminmain.SetAjaxDiv("err",false,"ä¸€æ¬¡åªèƒ½å¯¹ä¸€ä¸ªç®¡ç†å‘˜è¿›è¡Œç¼–è¾‘!");
+		window.parent.adminmain.SetAjaxDiv("err",false,"Ò»´ÎÖ»ÄÜ¶ÔÒ»¸ö¹ÜÀíÔ±½øĞĞ±à¼­!");
 		return;
 	}
 	window.parent.adminmain.location.href="adminmdy.aspx?adminname="+admins;
@@ -27,12 +27,12 @@ function AdminEdit(){
 function AdminDel() {
     var admins = window.parent.adminmain.GetCheckBoxValuesForSql("CheckID");
     if (admins == "") {
-        window.parent.adminmain.SetAjaxDiv("err", false, "æ‚¨è¿˜æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„ç®¡ç†å‘˜!");
+        window.parent.adminmain.SetAjaxDiv("err", false, "Äú»¹Ã»Ñ¡ÔñĞèÒªÉ¾³ıµÄ¹ÜÀíÔ±!");
         return;
     }
     $("#admins").val(admins);
-    if (confirm("æ‚¨ç¡®å®šåˆ é™¤ç®¡ç†å‘˜[" + admins + "]")) {
-        SetAjaxDivAdminMian("loader", false, "æ­£åœ¨å‘é€åˆ é™¤[" + admins + "]çš„è¯·æ±‚...");
+    if (confirm("ÄúÈ·¶¨É¾³ı¹ÜÀíÔ±[" + admins + "]")) {
+        SetAjaxDivAdminMian("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ı[" + admins + "]µÄÇëÇó...");
         $("#form1").submit();
     }
     return false;
@@ -41,6 +41,6 @@ function AdminDel() {
 function DelAdminsBack(val){
 	if(GetErrTextFrame(val))return;
 	window.parent.adminpop.location.href=window.parent.adminpop.location.href;
-	SetAjaxDivAdminMian("ok",false,"æˆåŠŸåˆ é™¤æŒ‡å®šçš„ç®¡ç†å‘˜ï¼");
+	SetAjaxDivAdminMian("ok",false,"³É¹¦É¾³ıÖ¸¶¨µÄ¹ÜÀíÔ±£¡");
 }
 

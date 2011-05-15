@@ -93,7 +93,7 @@ function SearchBack(val) {
 	if(val=="")return;
 	eval("o=["+val+"]");
 	if(o!=null){
-	    CreateDiv.Start("æ‰¹é‡ç”Ÿæˆèµ„æº...ç¬¬" + $("#page").val() + "é¡µ");
+	    CreateDiv.Start("ÅúÁ¿Éú³É×ÊÔ´...µÚ" + $("#page").val() + "Ò³");
 	    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function() { } 
 	    });
 		CreateDiv.set =1;

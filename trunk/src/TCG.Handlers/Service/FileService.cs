@@ -41,7 +41,7 @@ namespace TCG.Handlers
             {
                 if (this._filehandlers == null)
                 {
-
+                    this._filehandlers = HandlerFactory.CreateFileHandlers();
                 }
                 return this._filehandlers;
             }

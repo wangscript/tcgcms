@@ -3,10 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>å¤´éƒ¨</title>
+    <title>Í·²¿</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/top.css" rel="stylesheet" type="text/css" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/top.js"></script>
 </head>
@@ -16,10 +16,10 @@
 	<tr>
 		<td width="13%" rowspan="2"><img src="images/logo.gif" width="160" height="44" /></td>
 		<td width="66%" align="left" class="logininf">
-			&nbsp;&nbsp;æ‚¨å¥½ï¼Œ<strong>
+			&nbsp;&nbsp;ÄúºÃ£¬<strong>
 			<TCG:Span id='adminName' runat='server' /></strong> [
-			<a onclick="LoginOut()" href="#">é€€å‡º</a>&nbsp;&nbsp;
-          	<a onclick="GoMyAccount();" href="MyAccount.aspx" target="main">ä¸ªäººå¸æˆ·</a>]
+			<a onclick="LoginOut()" href="#">ÍË³ö</a>&nbsp;&nbsp;
+          	<a onclick="GoMyAccount();" href="MyAccount.aspx" target="main">¸öÈËÕÊ»§</a>]
 	  </td>
 		<td width="21%" rowspan="2">&nbsp;</td>
 	</tr>

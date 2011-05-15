@@ -11,7 +11,7 @@ function classTitleInit() {
     a = "";
 
     GetNewsListTitleByClassId(classobj.val());
-    m.html("<span class='txt bold lfl'><a href='?iClassId=0&skinid=" + $("#iSkinId").val() + "'>æ‰€æœ‰èµ„è®¯</a>>>" + a + "</span>" + m.html());
+    m.html("<span class='txt bold lfl'><a href='?iClassId=0&skinid=" + $("#iSkinId").val() + "'>ËùÓĞ×ÊÑ¶</a>>>" + a + "</span>" + m.html());
 
 }
 
@@ -54,11 +54,11 @@ function GetNewsListTitleByClassId(classid) {
 function EditNewsInfo(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦ç¼–è¾‘çš„æ–°é—»ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª±à¼­µÄĞÂÎÅ£¡");
 		return;
 	}
 	if(temps.indexOf(",")>-1){
-		SetAjaxDiv("err",false,"è¯·ä¿è¯æ‚¨åªé€‰æ‹©äº†ä¸€ä¸ªèµ„æºï¼");
+		SetAjaxDiv("err",false,"Çë±£Ö¤ÄúÖ»Ñ¡ÔñÁËÒ»¸ö×ÊÔ´£¡");
 		return;
 	}
 	window.location.href = "resourceshandlers.aspx?newsid=" + temps;
@@ -77,10 +77,10 @@ function AddNewsInfo(){
 function CreateNews(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦ç”Ÿæˆçš„èµ„è®¯ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒªÉú³ÉµÄ×ÊÑ¶£¡");
 		return;
 	}
-	CreateDiv.Start("æ‰¹é‡ç”Ÿæˆæ–‡ä»¶");
+	CreateDiv.Start("ÅúÁ¿Éú³ÉÎÄ¼ş");
 	layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function() { } });
 	
 	if(temps.indexOf(",")>-1){
@@ -189,13 +189,13 @@ function GetSpecialItemsW(id){
 function NewsDel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„èµ„è®¯ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒªÉ¾³ıµÄ×ÊÑ¶£¡");
 		return;
 	}
 	$("#iAction").val("DEL");
 	$("#DelClassId").val(temps);
-	if(confirm("æ‚¨ç¡®å®šåˆ é™¤èµ„è®¯["+temps+"]")){
-	    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
+	if(confirm("ÄúÈ·¶¨É¾³ı×ÊÑ¶["+temps+"]")){
+	    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
 	    $("#form1").submit();
 	}
 }
@@ -203,24 +203,24 @@ function NewsDel(){
 function SaveNews(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦æ•‘å›çš„èµ„è®¯ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª¾È»ØµÄ×ÊÑ¶£¡");
 		return;
 	}
 	$("#iAction").val("SAVE");
 	$("#DelClassId").val(temps);
-	SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
+	SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
 	$("#form1").submit();
 }
 
 function realdel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦å½»åº•åˆ é™¤çš„èµ„è®¯ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª³¹µ×É¾³ıµÄ×ÊÑ¶£¡");
 		return;
 	}
 	$("#iAction").val("DEL");
 	$("#DelClassId").val(temps);
-	SetAjaxDiv("loader",false,"æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
+	SetAjaxDiv("loader",false,"ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
 	$("#form1").submit();
 }
 

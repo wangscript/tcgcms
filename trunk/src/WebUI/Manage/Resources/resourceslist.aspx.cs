@@ -222,8 +222,7 @@ public partial class resources_resourceslist : BasePage
         string errText = string.Empty;
         try
         {
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref errText, resourceid, base.tagService.TCGTagHandlers);
-            //errText = base.tagService.TCGTagHandlers.PagerInfo.CreatePagesNotic.Replace("\\","/");
+            rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, resourceid);
         }
         catch (Exception ex)
         {

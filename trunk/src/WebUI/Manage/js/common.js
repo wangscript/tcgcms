@@ -1,4 +1,4 @@
-ï»¿//è¿”å›é¡µé¢å…ƒç´ 
+//·µ»ØÒ³ÃæÔªËØ
 function $(element) { 
 	var elements = new Array(); 
 	for (var i = 0;i<arguments.length;i++){ 
@@ -39,7 +39,7 @@ function SetInnerText(obj,value){
 	}
 }
 
-//è·å¾—Ceckboxé€‰ä¸­çš„å€¼
+//»ñµÃCeckboxÑ¡ÖĞµÄÖµ
 function GetCheckBoxValues(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return "";
@@ -64,7 +64,7 @@ function GetCheckBoxValuesForSql(BoxName){
 	return str;
 }
 
-//è·å¾—checkboxçš„ä¸ªæ•°
+//»ñµÃcheckboxµÄ¸öÊı
 function GetCheckBoxCount(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return 0;
@@ -85,7 +85,7 @@ function GetCheckedBoxSetting(vals){
 	return os;
 }
 
-//è®¾ç½®checkboxé€‰æ‹©å±æ€§
+//ÉèÖÃcheckboxÑ¡ÔñÊôĞÔ
 function SetCheckBox(BoxName,Action){
 	if(Action==null)Action="SELECT ALL";
 	var boxs = document.getElementsByName(BoxName);

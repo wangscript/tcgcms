@@ -7,7 +7,7 @@
     <title>修改管理员</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 	<script type="text/javascript" src="js/commonV2.js"></script>
 	<script type="text/javascript" src="Common/common.aspx"></script>
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>

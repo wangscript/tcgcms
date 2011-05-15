@@ -17,7 +17,7 @@ function Editer(){
 	}
 	
 	this.Start=function(){
-		this.EditBgInit();//åˆå§‹åŒ–èƒŒæ™¯ 
+		this.EditBgInit();//³õÊ¼»¯±³¾° 
 		this.iframeInit();
 	}
 	

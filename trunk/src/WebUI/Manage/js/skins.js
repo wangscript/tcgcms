@@ -1,4 +1,4 @@
-ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function SetDefaultSkin(skinid) {
     $("#Work").val("SetDefalutSkinId");
@@ -22,13 +22,13 @@ $(document).ready(function() {
 function CreateSql(skinid) {
     $("#Work").val("CreateSkinSql");
     $("#SkinId").val(skinid);
-    SetAjaxDiv("loader", false, "æ­£åœ¨ç”Ÿæˆæ¨¡æ¿è„šæœ¬...");
+    SetAjaxDiv("loader", false, "ÕıÔÚÉú³ÉÄ£°å½Å±¾...");
     $("#form1").submit();
 }
 
 function UpdateSkin(skinid) {
     $("#Work").val("UpdateSkin");
     $("#SkinId").val(skinid);
-    SetAjaxDiv("loader", false, "æ­£åœ¨æ›´æ–°æ¨¡æ¿ä¿¡æ¯...");
+    SetAjaxDiv("loader", false, "ÕıÔÚ¸üĞÂÄ£°åĞÅÏ¢...");
     $("#form1").submit();
 }

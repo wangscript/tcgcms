@@ -1641,7 +1641,7 @@ namespace TCG.Utils
             }
             using (System.IO.FileStream fs = System.IO.File.Create(filepath))
             {
-                byte[] info = System.Text.Encoding.GetEncoding("utf-8").GetBytes(text);   //·ÀÖ¹ÂÒÂë 
+                byte[] info = System.Text.Encoding.GetEncoding("gb2312").GetBytes(text);   //·ÀÖ¹ÂÒÂë 
                 fs.Write(info, 0, info.Length);
                 fs.Close();
             }

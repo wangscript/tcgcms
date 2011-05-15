@@ -1,11 +1,11 @@
-ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categorieslist.aspx.cs" Inherits="skin_categorieslist" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categorieslist.aspx.cs" Inherits="skin_categorieslist" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>æ— æ ‡é¢˜é¡µ</title>
+    <title>ÎÞ±êÌâÒ³</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -22,36 +22,36 @@
 	<script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
 	<script type="text/javascript" src="../js/CreateInputV2.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CreatClass(this);">
-			<img src="../images/icon/24.gif" /> æ–°å»º
+			<img src="../images/icon/24.gif" /> ÐÂ½¨
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="EditClass(this);">
-			<img src="../images/icon/05.gif" />ç¼–è¾‘
+			<img src="../images/icon/05.gif" />±à¼­
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsClassDel();">
-			<img src="../images/icon/08.gif" />åˆ é™¤
+			<img src="../images/icon/08.gif" />É¾³ý
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsClassCreateHtml();">
-			<img src="../images/icon/8.gif" />ç”Ÿæˆ
+			<img src="../images/icon/8.gif" />Éú³É
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />åˆ·æ–°
+			<img src="../images/icon/07.gif" />Ë¢ÐÂ
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="newslistt" id="classTitle"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
-		<span class="l_classname bold l_rg">èµ„æºåˆ†ç±»åç§°</span>
-		<span class="l_classname bold l_rg">åˆ†ç±»åˆ«å</span>
-		<span class="l_classname bold l_rg">ç”Ÿæˆç›®å½•</span>
-		<span class="l_id bold l_rg">æŽ’åº</span>
-		<span class="l_updatedate bold">æ›´æ–°æ—¶é—´</span>
+		<span class="l_classname bold l_rg">×ÊÔ´·ÖÀàÃû³Æ</span>
+		<span class="l_classname bold l_rg">·ÖÀà±ðÃû</span>
+		<span class="l_classname bold l_rg">Éú³ÉÄ¿Â¼</span>
+		<span class="l_id bold l_rg">ÅÅÐò</span>
+		<span class="l_updatedate bold">¸üÐÂÊ±¼ä</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

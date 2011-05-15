@@ -45,5 +45,12 @@ namespace TCG.Handlers
             string className = assc + ".TemplateHandlers";
             return (ITemplateHandlers)Assembly.Load(assc).CreateInstance(className);
         }
+
+        public static IFileHandlers CreateFileHandlers()
+        {
+            string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
+            string className = assc + ".FileHandlers";
+            return (IFileHandlers)Assembly.Load(assc).CreateInstance(className);
+        }
     }
 }

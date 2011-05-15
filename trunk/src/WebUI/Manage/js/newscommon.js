@@ -1,4 +1,4 @@
-﻿/// <reference path="jquery-1.3.1-vsdoc.js" />
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 /// <reference path="../Common/AllCategories.aspx" />
 
 function GetNewsItemById(id) {

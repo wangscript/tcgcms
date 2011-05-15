@@ -13,8 +13,8 @@ function CreateDiv(){
 		this.create_num.value=0;
 		this.createjdtPlacebg.style.width="0px";
 		this.MsgDiv.innerHTML="";
-		SetInnerText(this.Msg,"æ­£åœ¨"+val+"...");
-		SetInnerText(this.createtitle,"æ“ä½œæ­£åœ¨è¿›è¡Œä¸­...");
+		SetInnerText(this.Msg,"ÕıÔÚ"+val+"...");
+		SetInnerText(this.createtitle,"²Ù×÷ÕıÔÚ½øĞĞÖĞ...");
 		this.msgstr=val;
 		this.o.className="MsgDiv";
 		this.o.style.left =(this.Screen.w-this.o.offsetWidth+this.Default.w) +"px";
@@ -22,8 +22,8 @@ function CreateDiv(){
 	}
 	
 	this.End=function(){
-		SetInnerText(this.createtitle,"æ“ä½œå·²ç»æ‰§è¡Œå®Œæˆï¼");
-		SetInnerText(this.Msg,this.msgstr+"å·²å®Œæˆ!");
+		SetInnerText(this.createtitle,"²Ù×÷ÒÑ¾­Ö´ĞĞÍê³É£¡");
+		SetInnerText(this.Msg,this.msgstr+"ÒÑÍê³É!");
 	}
 	
 	this.SetSep=function(){
@@ -50,7 +50,7 @@ function CreateDiv(){
 		this.o = document.createElement("div");
 		this.o.className="MsgDiv";
 		this.o.setAttribute("id","CreateMsgPlace");
-		var strHtml ="<div class=\"createclose\"><a onclick=\"$('CreateMsgPlace').className='MsgDiv hid';\"  href='javascript:GoTo();'></a></div><div class=\"createtitle\"><span id=\"createtitle\">æ“ä½œæ­£åœ¨è¿›è¡Œä¸­...</span></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">å®Œæˆåº¦:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>";
+		var strHtml ="<div class=\"createclose\"><a onclick=\"$('CreateMsgPlace').className='MsgDiv hid';\"  href='javascript:GoTo();'></a></div><div class=\"createtitle\"><span id=\"createtitle\">²Ù×÷ÕıÔÚ½øĞĞÖĞ...</span></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">Íê³É¶È:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>";
 		this.o.innerHTML = strHtml
 		document.body.appendChild(this.o);
 	}
