@@ -4,12 +4,12 @@ var itemidstr="filesitems_";
 function SeBack(val){
 	var tFiles=$("file_"+Items.length);
 	tFiles.className="uploaddiv_info_title_emu hid";
-	Items[Items.length]={title:GetFileName(val),id:Items.length,stat:"ç­‰å¾…å¤„ç†",obj:tFiles,Timer:null,Sep:170};
+	Items[Items.length]={title:GetFileName(val),id:Items.length,stat:"µÈ´ı´¦Àí",obj:tFiles,Timer:null,Sep:170};
 	AddItemToInfo(Items[Items.length-1]);
 	if(Items.length<FileCount){
 		CreateFileInput(Items.length);
 	}
-	uploaddiv_info_title.innerHTML = "æ‚¨é€‰æ‹©äº†<span class='bold'>"+GetFileNum()+"</span>ä¸ªæ–‡ä»¶ï¼";
+	uploaddiv_info_title.innerHTML = "ÄúÑ¡ÔñÁË<span class='bold'>"+GetFileNum()+"</span>¸öÎÄ¼ş£¡";
 }
 
 function CheckFileType(str){
@@ -54,7 +54,7 @@ function DelAllUpload(){
 		}
 	}
 	Items.splice(0,Items.length);
-	uploaddiv_info_title.innerHTML = "æ‚¨é€‰æ‹©äº†<span class='bold'>"+GetFileNum()+"</span>ä¸ªæ–‡ä»¶ï¼";
+	uploaddiv_info_title.innerHTML = "ÄúÑ¡ÔñÁË<span class='bold'>"+GetFileNum()+"</span>¸öÎÄ¼ş£¡";
 }
 function CFileById(id){
 	var o =Items[id];
@@ -65,10 +65,10 @@ function CFileById(id){
 		delete Items[id];
 		var tFiles=$("file_"+id);
 	}
-	uploaddiv_info_title.innerHTML = "æ‚¨é€‰æ‹©äº†<span class='bold'>"+GetFileNum()+"</span>ä¸ªæ–‡ä»¶ï¼";
+	uploaddiv_info_title.innerHTML = "ÄúÑ¡ÔñÁË<span class='bold'>"+GetFileNum()+"</span>¸öÎÄ¼ş£¡";
 }
 
-//æ ¹æ®IDå¯åŠ¨ä¸Šä¼ 
+//¸ù¾İIDÆô¶¯ÉÏ´«
 function StartUpdateById(id){
 	var sid="sep_"+id;
 	var o=$(sid);

@@ -1,4 +1,4 @@
-ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var ajaxiconRoot = ['images/ajax-loader1.gif', 'images/post_err.gif', 'images/post_ok.gif'];
 
@@ -23,7 +23,7 @@ function SetInnerText(obj,value){
     obj.text(value);
 }
 
-//èŽ·å¾—Ceckboxé€‰ä¸­çš„å€¼
+//»ñµÃCeckboxÑ¡ÖÐµÄÖµ
 function GetCheckBoxValues(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return "";
@@ -48,7 +48,7 @@ function GetCheckBoxValuesForSql(BoxName){
 	return str;
 }
 
-//èŽ·å¾—checkboxçš„ä¸ªæ•°
+//»ñµÃcheckboxµÄ¸öÊý
 function GetCheckBoxCount(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return 0;
@@ -69,7 +69,7 @@ function GetCheckedBoxSetting(vals){
 	return os;
 }
 
-//è®¾ç½®checkboxé€‰æ‹©å±žæ€§
+//ÉèÖÃcheckboxÑ¡ÔñÊôÐÔ
 function SetCheckBox(BoxName,Action){
 	if(Action==null)Action="SELECT ALL";
 	var boxs = document.getElementsByName(BoxName);

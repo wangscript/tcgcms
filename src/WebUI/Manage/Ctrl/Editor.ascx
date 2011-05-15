@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Editor.ascx.cs" Inherits="Manage_Ctrl_Editor" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Editor.ascx.cs" Inherits="Manage_Ctrl_Editor" %>
 <div id="ContentWin" style="width:800px;height:200px">
 <iframe src="../QzoneEditor/edit.html?I=<% =content.ClientID %>&B=<% =ContentBg.ClientID %>" 
     frameBorder="0" 

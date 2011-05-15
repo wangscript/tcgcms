@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/adminRecovery.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 </head>
 <body>
     <form id="form1" runat="server">

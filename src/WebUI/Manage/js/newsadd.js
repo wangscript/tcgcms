@@ -9,7 +9,7 @@ function CheckAdd(){
 	if(!(CheckValueIsNull('iTitle','titlemsg')&&CheckValueIsNull('iClassName','classmsg')&&CheckValueIsNull('iAuthor','autmsg')&&CheckValueIsNull('iKeyWords','keymsg'))){
 		return false;
 	}
-	SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
+	SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
 	return true;
 }
 
@@ -42,7 +42,7 @@ function SelectSmallImg(obj) {
 			var reg2 = /src="([^"]+)"/;
 			var result2 = reg2.exec(result[i]);
 			var c=(iSmallImg.value==RegExp.$1)?"checked":"";
-			imgPace.innerHTML +="<ul><img src=\""+RegExp.$1 +"\" /><li><input name=\"CheckImg\" "+c+" type=\"radio\" onclick=\"SetSmallImge('"+RegExp.$1+"')\" />è®¾ç½®</li></ul>";
+			imgPace.innerHTML +="<ul><img src=\""+RegExp.$1 +"\" /><li><input name=\"CheckImg\" "+c+" type=\"radio\" onclick=\"SetSmallImge('"+RegExp.$1+"')\" />ÉèÖÃ</li></ul>";
 		}
 	}
 }
@@ -65,7 +65,7 @@ function SelectBigImg(obj) {
 			var reg2 = /src="([^"]+)"/;
 			var result2 = reg2.exec(result[i]);
 			var c=(iBigImg.value==RegExp.$1)?"checked":"";
-			imgPace.innerHTML +="<ul><img src=\""+RegExp.$1 +"\" /><li><input name=\"CheckImg\" "+c+" type=\"radio\" onclick=\"SetBigImge('"+RegExp.$1+"')\" />è®¾ç½®</li></ul>";
+			imgPace.innerHTML +="<ul><img src=\""+RegExp.$1 +"\" /><li><input name=\"CheckImg\" "+c+" type=\"radio\" onclick=\"SetBigImge('"+RegExp.$1+"')\" />ÉèÖÃ</li></ul>";
 		}
 	}
 }
@@ -88,14 +88,14 @@ function SetBigImge(src){
 
 function NewsMdyPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"èµ„è®¯æˆåŠŸä¿®æ”¹å¹¶ç”Ÿæˆæ–‡ä»¶ï¼");
+	SetAjaxDiv("ok",false,"×ÊÑ¶³É¹¦ĞŞ¸Ä²¢Éú³ÉÎÄ¼ş£¡");
 }
 
 function NewsAddPostBack() {
 	var iTitle=$("#iTitle");
 	var iAuthor=$("#iAuthor");
 	var iKeyWords=$("#iKeyWords");
-	var msg = "èµ„è®¯["+iTitle.val()+"]å·²ç»æˆåŠŸæ·»åŠ ï¼Œä¸ç»§ç»­æ·»åŠ è¯·ç‚¹å–æ¶ˆï¼";
+	var msg = "×ÊÑ¶["+iTitle.val()+"]ÒÑ¾­³É¹¦Ìí¼Ó£¬²»¼ÌĞøÌí¼ÓÇëµãÈ¡Ïû£¡";
 	SetAjaxDiv("ok",false,msg);
 	iTitle.val("");
 	iAuthor.val("");
@@ -112,14 +112,14 @@ function SelectClassValue(val, txt) {
 var tempWork;
 function ClassInit() {
 
-    ColorInit(); //åˆå§‹åŒ–é¢œè‰²é€‰æ‹©
+    ColorInit(); //³õÊ¼»¯ÑÕÉ«Ñ¡Ôñ
     var iClassName = $("#iClassName");
     var iClassId = $("#iClassId");
     var SelectDivW = $("#SelectDivW");
 
     var o = GetCategorieById(iClassId.val());
     if (o == null) {
-        iClassName.val("è¯·é€‰æ‹©èµ„è®¯åˆ†ç±»...");
+        iClassName.val("ÇëÑ¡Ôñ×ÊÑ¶·ÖÀà...");
     } else {
         iClassName.val(o.ClassName);
     }
@@ -127,11 +127,11 @@ function ClassInit() {
 }
 
 
-//é¢œè‰²é€‰æ‹©åˆå§‹åŒ–
+//ÑÕÉ«Ñ¡Ôñ³õÊ¼»¯
 function ColorInit() {
     var sTitleColor = $("#sTitleColor");
     var iTitleColor = $("#iTitleColor");
-    sTitleColor.append("<option value=''>è¯·é€‰æ‹©é¢œè‰²</option>");
+    sTitleColor.append("<option value=''>ÇëÑ¡ÔñÑÕÉ«</option>");
 
     var o = { "White": "#FFFFFF", "Green": "#008000", "Silver": "#C0C0C0", "Lime": "#00FF00", "Gray": "#808080", "Olive": "#808000", "Black": "#000000", "Yellow": "#FFFF00", "Maroon": "#800000", "Navy": "#000080", "Red": "#FF0000", "Blue": "#0000FF", "Purple": "#800080", "Teal": "#008080", "Fuchsia": "#FF00FF", "Aqua": "#00FFFF" };
     for (key in o) {
@@ -143,12 +143,12 @@ function ColorInit() {
         }
     }
 
-    SetAjaxDiv("ok", false, "å°æç¤ºï¼šå‘å¸ƒå®Œä»¥åå¯ä»¥å½“é¡µæ¥ç€å‘å¸ƒï¼");
+    SetAjaxDiv("ok", false, "Ğ¡ÌáÊ¾£º·¢²¼ÍêÒÔºó¿ÉÒÔµ±Ò³½Ó×Å·¢²¼£¡");
 }
 
 $(document).ready(function() {
 
-    //åˆå§‹åŒ–åˆ†ç±»é€‰æ‹©æ§ä»¶
+    //³õÊ¼»¯·ÖÀàÑ¡Ôñ¿Ø¼ş
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
 
     Menu.init("gamelist");

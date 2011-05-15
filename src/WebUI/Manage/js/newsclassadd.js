@@ -10,7 +10,7 @@ function CheckAddClassForm() {
         return false;
     }
     
-    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
+    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
     return true;
 }
 
@@ -19,11 +19,11 @@ function GetParentTitle() {
     if (o == null) return;
     var placemsg = $("#placemsg");
     if (o.val() == "0") {
-        placemsg.html(placemsg.html() + "ä½œä¸ºç½‘ç«™åˆ†ç±»");
+        placemsg.html(placemsg.html() + "×÷ÎªÍøÕ¾·ÖÀà");
     } else {
         a = "";
         GetNewsListTitleByClassIdW(o.val());
-        a = "æ ¹ç±»åˆ«>>" + a;
+        a = "¸ùÀà±ğ>>" + a;
         placemsg.html(placemsg.html() + a);
     }
 }
@@ -68,18 +68,18 @@ function CheckEditClassForm() {
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
         return false;
     }
-    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
+    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
     return true;
 }
 
 function EditClassPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"èµ„è®¯åˆ†ç±»ä¿®æ”¹æˆåŠŸï¼");
+	SetAjaxDiv("ok",false,"×ÊÑ¶·ÖÀàĞŞ¸Ä³É¹¦£¡");
 }
 
 function AddClassPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"èµ„è®¯åˆ†ç±»æ·»åŠ æˆåŠŸï¼");
+	SetAjaxDiv("ok",false,"×ÊÑ¶·ÖÀàÌí¼Ó³É¹¦£¡");
 }
 
 function CheckTemplate(on, jn) {

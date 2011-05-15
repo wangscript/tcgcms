@@ -1,11 +1,11 @@
-ï»¿/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
+/// <reference path="../intellisense/jquery-1.2.6-vsdoc-cn.js" />
 /* --------------------------------------------------	
-å‚æ•°è¯´æ˜
+²ÎÊıËµÃ÷
 option: {width:Number, items:Array, onShow:Function, rule:JSON}
-æˆå‘˜è¯­æ³•(ä¸‰ç§å½¢å¼)	-- para.items
--> {text:String, icon:String, type:String, alias:String, width:Number, items:Array}		--	èœå•ç»„
--> {text:String, icon:String, type:String, alias:String, action:Function }				--	èœå•é¡¹
--> {type:String}																		--	èœå•åˆ†éš”çº¿
+³ÉÔ±Óï·¨(ÈıÖÖĞÎÊ½)	-- para.items
+-> {text:String, icon:String, type:String, alias:String, width:Number, items:Array}		--	²Ëµ¥×é
+-> {text:String, icon:String, type:String, alias:String, action:Function }				--	²Ëµ¥Ïî
+-> {type:String}																		--	²Ëµ¥·Ö¸ôÏß
 --------------------------------------------------*/
 (function($) {
     function returnfalse() { return false; };
@@ -17,7 +17,7 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
         var gTemplet = $("<div/>").addClass("b-m-mpanel").attr("unselectable", "on").css("display", "none");
         var iTemplet = $("<div/>").addClass("b-m-item").attr("unselectable", "on");
         var sTemplet = $("<div/>").addClass("b-m-split");
-        //åˆ›å»ºèœå•ç»„
+        //´´½¨²Ëµ¥×é
         var buildGroup = function(obj) {
             groups[obj.alias] = this;
             this.gidx = obj.alias;
@@ -49,23 +49,23 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
             T = obj = null;
             return this;
         };
-        //æ·»åŠ èœå•é¡¹
+        //Ìí¼Ó²Ëµ¥Ïî
         var addItems = function(gidx, items) {
             var tmp = null;
             for (var i = 0; i < items.length; i++) {
                 if (items[i].type == "splitLine") {
-                    //èœå•åˆ†éš”çº¿
+                    //²Ëµ¥·Ö¸ôÏß
                     tmp = sTemplet.clone()[0];
                 } else {
                     items[i].gidx = gidx;
                     if (items[i].type == "group") {
-                        //èœå•ç»„
+                        //²Ëµ¥×é
                         buildGroup.apply(gTemplet.clone()[0], [items[i]]);
                         arguments.callee(items[i].alias, items[i].items);
                         items[i].type = "arrow";
                         tmp = buildItem.apply(iTemplet.clone()[0], [items[i]]);
                     } else {
-                        //èœå•é¡¹
+                        //²Ëµ¥Ïî
                         items[i].type = "ibody";
                         tmp = buildItem.apply(iTemplet.clone()[0], [items[i]]);
                         $(tmp).click(function(e) {
@@ -87,11 +87,11 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
             gidx = items = null;
         };
         var overItem = function(e) {
-            //å¦‚æœèœå•é¡¹ä¸å¯ç”¨          
+            //Èç¹û²Ëµ¥Ïî²»¿ÉÓÃ          
             if (this.disable)
                 return false;
             hideMenuPane.call(groups[this.gidx]);
-            //å¦‚æœæ˜¯èœå•ç»„
+            //Èç¹ûÊÇ²Ëµ¥×é
             if (this.group) {
                 var pos = $(this).offset();
                 var width = $(this).outerWidth();
@@ -100,18 +100,18 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
             this.className = "b-m-ifocus";
             return false;
         };
-        //èœå•é¡¹å¤±å»ç„¦ç‚¹
+        //²Ëµ¥ÏîÊ§È¥½¹µã
         var outItem = function(e) {
-            //å¦‚æœèœå•é¡¹ä¸å¯ç”¨
+            //Èç¹û²Ëµ¥Ïî²»¿ÉÓÃ
             if (this.disable )
                 return false;
             if (!this.group) {
-                //èœå•é¡¹
+                //²Ëµ¥Ïî
                 this.className = "b-m-item";
             } //Endif
             return false;
         };
-        //åœ¨æŒ‡å®šä½ç½®æ˜¾ç¤ºæŒ‡å®šçš„èœå•ç»„
+        //ÔÚÖ¸¶¨Î»ÖÃÏÔÊ¾Ö¸¶¨µÄ²Ëµ¥×é
         var showMenuGroup = function(pos, width) {
             var bwidth = $("body").width();
             var bheight = document.documentElement.clientHeight;
@@ -122,7 +122,7 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
             $(this).css(pos).show();
             showGroups.push(this.gidx);
         };
-        //éšè—èœå•ç»„
+        //Òş²Ø²Ëµ¥×é
         var hideMenuPane = function() {
             var alias = null;
             for (var i = showGroups.length - 1; i >= 0; i--) {
@@ -148,7 +148,7 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
             item.className = (item.disable = item.lastChild.disabled = disabled) ? "b-m-idisable" : "b-m-item";
         };
 
-        /** å³é”®èœå•æ˜¾ç¤º */
+        /** ÓÒ¼ü²Ëµ¥ÏÔÊ¾ */
         function showMenu(e, menutarget) {
             target = menutarget;
             showMenuGroup.call(groups.cmroot, { left: e.pageX, top: e.pageY }, 0);
@@ -177,7 +177,7 @@ option: {width:Number, items:Array, onShow:Function, rule:JSON}
                 return false;
             });
         });
-        //è®¾ç½®æ˜¾ç¤ºè§„åˆ™
+        //ÉèÖÃÏÔÊ¾¹æÔò
         if (option.rule) {
             applyRule(option.rule);
         }

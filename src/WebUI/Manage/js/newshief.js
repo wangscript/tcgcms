@@ -12,7 +12,7 @@ function ClassInit(){
 	SelectDivW.style.left=(pos.x+iClassName.offsetWidth-20)+"px";
 	var o=GetNewsItemById(iClassId.value);
 	if(o==null){
-		iClassName.value="璇烽�夋嫨璧勮鍒嗙被...";
+		iClassName.value="请选择资讯分类...";
 	}else{
 		iClassName.value=o[2];
 	}
@@ -107,7 +107,7 @@ function SearchBack(val){
 	eval("o=["+val+"]");
 	if(o!=null){
 		var work=$("work");		
-		CreateDiv.Start("鎵归噺鐢熸垚鏂囦欢");
+		CreateDiv.Start("批量生成文件");
 		CreateDiv.set =1;
 		CreateDiv.setcount=o.length;
 		sheifnum = o.length-1;

@@ -1,4 +1,4 @@
-ï»¿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AjaxDiv.ascx.cs" Inherits="Ctrl_AjaxDiv" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AjaxDiv.ascx.cs" Inherits="Ctrl_AjaxDiv" %>
 <div class="ajaxdiv hid" id="ajaxdiv">
-		<img src="../images/ajax-loader1.gif" id="ajaximg" /><span id="ajaxText"> æ­£åœ¨å‘é€è¯·æ±‚...</span><a href="javascript:GoTo();" class="ajaxclose" onclick="ajaxClose();" title="å…³é—­"></a>
+		<img src="../images/ajax-loader1.gif" id="ajaximg" /><span id="ajaxText"> ÕýÔÚ·¢ËÍÇëÇó...</span><a href="javascript:GoTo();" class="ajaxclose" onclick="ajaxClose();" title="¹Ø±Õ"></a>
 </div>

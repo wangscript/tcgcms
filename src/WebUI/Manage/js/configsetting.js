@@ -19,7 +19,7 @@ function CheckFrom(obj){
 		}
 	}
 	if(canpost){
-		SetAjaxDiv("loader",false,"æ­£åœ¨å‘é€è¯·æ±‚...");
+		SetAjaxDiv("loader",false,"ÕıÔÚ·¢ËÍÇëÇó...");
 		ajax.postf($("form1"),function(obj) { ChanagePostBack(obj.responseText);});
 	}
 	return false;
@@ -27,5 +27,5 @@ function CheckFrom(obj){
 
 function ChanagePostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"ç³»ç»Ÿå‚æ•°ä¿®æ”¹æˆåŠŸï¼");
+	SetAjaxDiv("ok",false,"ÏµÍ³²ÎÊıĞŞ¸Ä³É¹¦£¡");
 }

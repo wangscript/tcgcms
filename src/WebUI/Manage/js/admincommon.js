@@ -1,6 +1,6 @@
 var Pstr = "";
 var Plever = 0;
-var Pico = "‚îî ";
+var Pico = "©∏ ";
 var level = 0;
 
 function PopSelectInit(){
@@ -10,7 +10,7 @@ function PopSelectInit(){
 	var popedom = $("#popedom"); 
 	var r=110,g=187,b=88;
 	var oOption = document.createElement("OPTION");
-	oOption.text = "‰∏çÈÄâÊã©‰ªª‰ΩïÊùÉÈôê...";
+	oOption.text = "≤ª—°‘Ò»Œ∫Œ»®œﬁ...";
 	oOption.value = 0;
 	oOption.style.cssText="background-color:"+GetColor(r,g,b)+";"
 	vcPopedom[0].options.add(oOption);
@@ -48,7 +48,7 @@ function PopLisFind(iParentId, obj, Lis, sList, level, r, g, b) {
 function GerPsrt(num){
 	var str="";
 	for(var i=0;i<(num-1);i++){
-		str+="„ÄÄ";
+		str+="°°";
 	}
 	return str;
 }
@@ -60,7 +60,7 @@ function NewsSelectInit(){
 	var classpopedom = $("#classpopedom"); 
 	var r=110,g=187,b=88;
 	var oOption = document.createElement("OPTION");
-	oOption.text = "‰∏çÈÄâÊã©‰ªª‰ΩïÊùÉÈôê...";
+	oOption.text = "≤ª—°‘Ò»Œ∫Œ»®œﬁ...";
 	oOption.value = 0;
 	oOption.style.cssText="background-color:"+GetColor(r,g,b)+";"
 	vcClassPopedom[0].options.add(oOption);
@@ -77,16 +77,16 @@ function CheckNewPassword(obj){
 	if(og==null)return false;
 	if(obj.val() == ""){
 		og.get(0).className = "info_err";
-		SetInnerText(og,"Êñ∞ÂØÜÁ†Å‰∏çËÉΩ‰∏∫Á©∫!");
+		SetInnerText(og,"–¬√‹¬Î≤ªƒ‹Œ™ø’!");
 		return false;
 	}else{
 		if(cp.val()!=obj.val()){
 			og.get(0).className = "info1";
-			SetInnerText(og,"ËØ∑‰øùËØÅÁ°ÆËÆ§ÂØÜÁ†ÅÂíåÊñ∞ÂØÜÁ†Å‰∏ÄÊ†∑!");
+			SetInnerText(og,"«Î±£÷§»∑»œ√‹¬Î∫Õ–¬√‹¬Î“ª—˘!");
 			return false;
 		}else{
 			og.get(0).className = "info_ok";
-			SetInnerText(og,"ËæìÂÖ•Ê≠£Á°Æ!");
+			SetInnerText(og," ‰»Î’˝»∑!");
 			return true;
 		}
 	}
@@ -101,11 +101,11 @@ function CheckCPWD(obj) {
 	if(og==null)return false;
 	if(cp.val()!=obj.val()){
 		og.get(0).className = "info_err";
-		SetInnerText(og,"ËØ∑‰øùËØÅÁ°ÆËÆ§ÂØÜÁ†ÅÂíåÊñ∞ÂØÜÁ†Å‰∏ÄÊ†∑!");
+		SetInnerText(og,"«Î±£÷§»∑»œ√‹¬Î∫Õ–¬√‹¬Î“ª—˘!");
 		return false;
 	}else{
 		og.get(0).className = "info_ok";
-		SetInnerText(og,"ËæìÂÖ•Ê≠£Á°Æ!");
+		SetInnerText(og," ‰»Î’˝»∑!");
 		return true;
 	}
 }

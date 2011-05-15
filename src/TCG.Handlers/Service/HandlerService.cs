@@ -59,7 +59,7 @@ namespace TCG.Handlers
         {
             get
             {
-                if (this._resourcsservice == null)
+                if (this._fileservice == null)
                 {
                     this._fileservice = new FileService();
                     this._fileservice.handlerService = this;

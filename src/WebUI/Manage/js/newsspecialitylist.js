@@ -24,7 +24,7 @@ function classTitleInitW(){
 	}else{
 		a="";
 		GetNewsSpecialityTitleByClassId(iSiteId.value,iParentID.value);
-		a="<a href='?iSiteId="+iSiteId.value+"'>æ ¹ç‰¹æ€§</a>>>"+a;
+		a="<a href='?iSiteId="+iSiteId.value+"'>¸ùÌØĞÔ</a>>>"+a;
 		m.innerHTML="<span class='txt'>"+a+"</span>";
 	}
 }
@@ -109,7 +109,7 @@ function NewsSDel(){
 	iAction.value="DEL";
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„ç‰¹æ€§ï¼");
+		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒªÉ¾³ıµÄÌØĞÔ£¡");
 		return;
 	}
 	iIds.value=temps;

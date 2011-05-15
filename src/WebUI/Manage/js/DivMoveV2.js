@@ -11,11 +11,11 @@ function DivMove(){
 	this.DefaultPos={w:0,h:0};
 	this.times=10;
 	this.a=1;
-	this.i=1;//è®°å½•åŠ é€Ÿåº¦
+	this.i=1;//¼ÇÂ¼¼ÓËÙ¶È
 	this.sound=null;
-	this.bAction=false;//è¾¹æ¡†åŠ¨ç”»
-	this.bw=8;//è¾¹æ¡†å®½åº¦*2
-	this.n=1;//è®°å½•è¾¹æ¡†
+	this.bAction=false;//±ß¿ò¶¯»­
+	this.bw=8;//±ß¿ò¿í¶È*2
+	this.n=1;//¼ÇÂ¼±ß¿ò
 	
 	this.getAbsolutePosition = function (){
 		var obj,ac=arguments.length,av=arguments;
