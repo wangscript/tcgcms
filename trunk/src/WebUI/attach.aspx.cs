@@ -32,12 +32,12 @@ public partial class attach : BasePage
                 string iId = objectHandlers.Get("id");
                 if (!string.IsNullOrEmpty(iId))
                 {
-                    FileResources item = base.handlerService.fileService.fileInfoHandlers.GetFileInfosById(iId);
+                    FileResources item = base.handlerService.fileService.fileHandlers.GetFileInfosById(iId);
 
                     if (item != null)
                     {
                         filename = item.Id + item.vcType;
-                        path = base.handlerService.fileService.fileInfoHandlers.GetFilePath(filename, item.iClassId);
+                        path = base.handlerService.fileService.fileHandlers.GetFilePath(filename, item.iClassId);
 
                         switch (item.vcType)
                         {
@@ -75,7 +75,6 @@ public partial class attach : BasePage
                 }
             }
 
-            base.Finish();
             base.Response.ContentType = str7;
             if ((str7 != ".swf"))
             {

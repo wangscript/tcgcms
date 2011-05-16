@@ -35,13 +35,12 @@ public partial class Template_templatemdy : BasePage
                 return;
             }
 
-            string htmltxt = item.iParentId == "0" ? "" : "/html";
             string filepatch = base.handlerService.skinService.templateHandlers.GetTemplatePagePatch(templateid);
-            this.parentPath.Value = htmltxt + filepatch.Substring(0, filepatch.LastIndexOf(item.vcTempName));
+            this.parentPath.Value =  filepatch.Substring(0, filepatch.LastIndexOf(item.vcTempName));
 
             this.vcTempName.Value = item.vcTempName;
             this.vcContent.Value = item.Content;
-            this.vcUrl.Value = htmltxt + filepatch;
+            this.vcUrl.Value =  filepatch;
 
             this.iSiteId.Value = item.SkinId.ToString();
             if (item.TemplateType == TemplateType.Folider)

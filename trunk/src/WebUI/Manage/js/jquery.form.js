@@ -106,7 +106,7 @@ $.fn.ajaxSubmit = function(options) {
         return this;
     }
 
-    var q = $.param(a);
+    var q = this.param(a);
 
     if (options.type.toUpperCase() == 'GET') {
         options.url += (options.url.indexOf('?') >= 0 ? '&' : '?') + q;
@@ -459,7 +459,7 @@ $.fn.formToArray = function(semantic) {
  */
 $.fn.formSerialize = function(semantic) {
     //hand off to jQuery.param for proper encoding
-    return $.param(this.formToArray(semantic));
+    return this.param(this.formToArray(semantic));
 };
 
 /**
@@ -480,7 +480,7 @@ $.fn.fieldSerialize = function(successful) {
             a.push({name: this.name, value: v});
     });
     //hand off to jQuery.param for proper encoding
-    return $.param(a);
+    return this.param(a);
 };
 
 /**
@@ -645,4 +645,35 @@ function log() {
         window.console.log('[jquery.form] ' + Array.prototype.join.call(arguments,''));
 };
 
+$.fn.param=function( a ) {
+
+   var encode=function(v){//如果包含中文就escape,避免重复escape)
+        return /[^\x00-\xff]/g.test(v)?escape(v):v;
+   }
+   var s = [];
+   // If an array was passed in, assume that it is an array
+   // of form elements
+   if ( a.constructor == Array || a.jquery ){
+    // Serialize the form elements
+    jQuery.each( a, function(){
+     s.push( encode(this.name) + "=" + encode( this.value ) );
+    });
+
+   // Otherwise, assume that it's an object of key/value pairs
+   }else{
+    // Serialize the key/values
+    for ( var j in a ){
+     // If the value is an array then the key names need to be repeated
+     if ( a[j] && a[j].constructor == Array )
+      jQuery.each( a[j], function(){
+       s.push( encode(j) + "=" + encode( this ) );
+      });
+     else
+      s.push( encode(j) + "=" + encode( a[j] ) );
+
+      }
+      }
+   // Return the resulting serialization
+   return s.join("&").replace(/%20/g, "+");
+};
 })(jQuery);

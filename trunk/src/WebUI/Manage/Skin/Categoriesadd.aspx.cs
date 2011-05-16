@@ -29,6 +29,9 @@ public partial class skin_categoriesadd : BasePage
         }
         else
         {
+            string skinid = objectHandlers.Get("SkinId");
+            if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
+
             Categories cif = new Categories();
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
@@ -38,7 +41,7 @@ public partial class skin_categoriesadd : BasePage
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"));
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
-            cif.SkinId = objectHandlers.Post("iSkinId");
+            cif.SkinId = skinid;
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch(-1,"");
@@ -75,11 +78,13 @@ public partial class skin_categoriesadd : BasePage
 
     private void Init()
     {
+        string skinid = objectHandlers.Get("SkinId");
+        if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
         string iParent = string.IsNullOrEmpty(objectHandlers.Get("iParentId")) ? "0" : objectHandlers.Get("iParentId");
         this.iClassId.Value = iParent.ToString();
-        this.iSkinId.Value = objectHandlers.Get("SkinId");
+        this.iSkinId.Value = skinid;
 
-        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType);
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         if (templates != null && templates.Count != 0)
         {
             foreach (KeyValuePair<string, EntityBase> keyvalue in templates)
@@ -90,7 +95,7 @@ public partial class skin_categoriesadd : BasePage
         }
 
 
-        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType);
+        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType, skinid);
         if (templates != null && templates.Count != 0)
         {
             foreach (KeyValuePair<string, EntityBase> keyvalue in templates)

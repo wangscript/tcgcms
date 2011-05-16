@@ -57,7 +57,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// </summary>
         /// <param name="templatetype"></param>
         /// <returns></returns>
-        public Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype)
+        public Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype, string skinid)
         {
             Dictionary<string, EntityBase> templates = this.GetAllTemplatesEntity();
             if (templates == null) return null;
@@ -66,7 +66,7 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (KeyValuePair<string, EntityBase> entity in templates)
             {
                 Template temp = (Template)entity.Value;
-                if (temp.TemplateType == templatetype)
+                if (temp.TemplateType == templatetype&&temp.SkinId == skinid)
                 {
                     childtemplates.Add(temp.Id, (EntityBase)temp);
                 }

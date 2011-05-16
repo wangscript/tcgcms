@@ -7,9 +7,10 @@ using System.Web.UI.WebControls;
 
 
 using TCG.Entity;
+using TCG.Utils;
 using System.Collections;
 
-public partial class rss : Origin
+public partial class rss : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -35,15 +35,15 @@ public partial class Template_templateadd : BasePage
             this.iSiteId.Value = SkinId;
 
             Template temp = base.handlerService.skinService.templateHandlers.GetTemplateByID(Parentid);
-            string htmltxt = "/";
+            
             if (temp != null)
             {
                 string filepatch = base.handlerService.skinService.templateHandlers.GetTemplatePagePatch(Parentid);
-                this.parentPath.Value = htmltxt + "html" + filepatch + "/";
+                this.parentPath.Value = filepatch + "/";
             }
             else
             {
-                this.parentPath.Value = htmltxt;
+                this.parentPath.Value = "/";
             }
 
 

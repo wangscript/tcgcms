@@ -18,7 +18,7 @@ public partial class adminroleadd : BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
         //检测管理员登录
-        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
         if (!Page.IsPostBack)
         {

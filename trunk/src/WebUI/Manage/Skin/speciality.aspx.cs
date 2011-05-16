@@ -28,10 +28,10 @@ public partial class skin_speciality : BasePage
     {
         if (!Page.IsPostBack)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+           // //检测管理员登录
+           //base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
-            this.SearchInit();
+           // this.SearchInit();
         }
         else
         {
@@ -53,54 +53,54 @@ public partial class skin_speciality : BasePage
 
     private void SearchInit()
     {
-        PageSearchItem sItem = new PageSearchItem();
-        sItem.tableName = "Speciality";
+        //PageSearchItem sItem = new PageSearchItem();
+        //sItem.tableName = "Speciality";
 
-        ArrayList arrshowfied = new ArrayList();
-        arrshowfied.Add("iId");
-        arrshowfied.Add("iParent");
-        arrshowfied.Add("iSiteId");
-        arrshowfied.Add("vcTitle");
-        arrshowfied.Add("vcExplain");
-        arrshowfied.Add("dUpDateDate");
-        sItem.arrShowField = arrshowfied;
+        //ArrayList arrshowfied = new ArrayList();
+        //arrshowfied.Add("iId");
+        //arrshowfied.Add("iParent");
+        //arrshowfied.Add("iSiteId");
+        //arrshowfied.Add("vcTitle");
+        //arrshowfied.Add("vcExplain");
+        //arrshowfied.Add("dUpDateDate");
+        //sItem.arrShowField = arrshowfied;
 
-        ArrayList arrsortfield = new ArrayList();
-        arrsortfield.Add("iId");
-        sItem.arrSortField = arrsortfield;
+        //ArrayList arrsortfield = new ArrayList();
+        //arrsortfield.Add("iId");
+        //sItem.arrSortField = arrsortfield;
 
-        sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        sItem.pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
+        //sItem.page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        //sItem.pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
-        int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentID"));
-        sItem.strCondition = "iParent=" + iParent.ToString();
-        this.iParentID.Value = iParent.ToString();
-        this.inParentId.Value = iParent.ToString();
+        //int iParent = objectHandlers.ToInt(objectHandlers.Get("iParentID"));
+        //sItem.strCondition = "iParent=" + iParent.ToString();
+        //this.iParentID.Value = iParent.ToString();
+        //this.inParentId.Value = iParent.ToString();
 
-        int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
-        sItem.strCondition += " AND iSiteId=" + iSiteId.ToString();
-        this.iSiteId.Value = iSiteId.ToString();
+        //int iSiteId = objectHandlers.ToInt(objectHandlers.Get("iSiteId"));
+        //sItem.strCondition += " AND iSiteId=" + iSiteId.ToString();
+        //this.iSiteId.Value = iSiteId.ToString();
 
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
-        DataSet ds = new DataSet();
-        int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
-        if (rtn < 0)
-        {
-            return;
-        }
-        this.pager.Per = sItem.pageSize;
-        this.pager.SetItem("iParentId", iParent);
-        this.pager.SetItem("iSiteId", iSiteId);
-        this.pager.Total = count;
-        this.pager.Calculate();
+        //int curPage = 0;
+        //int pageCount = 0;
+        //int count = 0;
+        //DataSet ds = new DataSet();
+        //int rtn = DBHandlers.GetPage(sItem, base.conn, ref curPage, ref pageCount, ref count, ref ds);
+        //if (rtn < 0)
+        //{
+        //    return;
+        //}
+        //this.pager.Per = sItem.pageSize;
+        //this.pager.SetItem("iParentId", iParent);
+        //this.pager.SetItem("iSiteId", iSiteId);
+        //this.pager.Total = count;
+        //this.pager.Calculate();
 
-        if (ds.Tables.Count != 0)
-        {
-            this.ItemRepeater.DataSource = ds;
-            this.ItemRepeater.DataBind();
-        }
+        //if (ds.Tables.Count != 0)
+        //{
+        //    this.ItemRepeater.DataSource = ds;
+        //    this.ItemRepeater.DataBind();
+        //}
 
     }
 
@@ -127,115 +127,115 @@ public partial class skin_speciality : BasePage
 
     private void SpecialityADD()
     {
-        Speciality  item = new Speciality();
-        item.vcTitle = objectHandlers.Post("inTitle");
-        item.vcExplain = objectHandlers.Post("inExplain");
-        item.iParent = objectHandlers.ToInt(objectHandlers.Post("inParentId"));
-        item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
-        if (string.IsNullOrEmpty(item.vcTitle))
-        {
-            base.AjaxErch("-1000000035");
-            base.Finish();
-            return;
-        }
-        //if (item.iSiteId == 0)
+        //Speciality  item = new Speciality();
+        //item.vcTitle = objectHandlers.Post("inTitle");
+        //item.vcExplain = objectHandlers.Post("inExplain");
+        //item.iParent = objectHandlers.ToInt(objectHandlers.Post("inParentId"));
+        //item.iSiteId = objectHandlers.ToInt(objectHandlers.Post("iSiteId"));
+        //if (string.IsNullOrEmpty(item.vcTitle))
         //{
-        //    base.AjaxErch("-1000000034");
+        //    base.AjaxErch("-1000000035");
         //    base.Finish();
         //    return;
         //}
+        ////if (item.iSiteId == 0)
+        ////{
+        ////    base.AjaxErch("-1000000034");
+        ////    base.Finish();
+        ////    return;
+        ////}
 
-        int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityAdd(base.conn, base.adminInfo.vcAdminName, item);
-        CachingService.Remove("AllNewsSpeciality");
-        base.AjaxErch(rtn.ToString());
-        base.Finish();
+        //int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityAdd(base.conn, base.adminInfo.vcAdminName, item);
+        //CachingService.Remove("AllNewsSpeciality");
+        //base.AjaxErch(rtn.ToString());
+        //base.Finish();
 
-        item = null;
+        //item = null;
     }
 
     private void SpecialityMDY()
     {
-        string KeyValue = objectHandlers.Post("KeyValue");
-        if (string.IsNullOrEmpty(KeyValue))
-        {
-            base.AjaxErch("-1");
-            base.Finish();
-            return;
-        }
-        string iFeildName = objectHandlers.Post("iFeildName");
-        if (string.IsNullOrEmpty(iFeildName))
-        {
-            base.AjaxErch("-1");
-            base.Finish();
-            return;
-        }
+        //string KeyValue = objectHandlers.Post("KeyValue");
+        //if (string.IsNullOrEmpty(KeyValue))
+        //{
+        //    base.AjaxErch("-1");
+        //    base.Finish();
+        //    return;
+        //}
+        //string iFeildName = objectHandlers.Post("iFeildName");
+        //if (string.IsNullOrEmpty(iFeildName))
+        //{
+        //    base.AjaxErch("-1");
+        //    base.Finish();
+        //    return;
+        //}
 
-        int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
-        if (iMdyID == 0)
-        {
-            base.AjaxErch("-1");
-            base.Finish();
-            return;
-        }
+        //int iMdyID = objectHandlers.ToInt(objectHandlers.Post("iMdyID"));
+        //if (iMdyID == 0)
+        //{
+        //    base.AjaxErch("-1");
+        //    base.Finish();
+        //    return;
+        //}
          
 
-        Speciality item = base.handlerService.skinService.specialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
-        bool ismdy = true;
-        if (item == null)
-        {
-            base.AjaxErch("-1");
-            base.Finish();
-            return;
-        }
+        //Speciality item = base.handlerService.skinService.specialityHandlers.GetNewsSpecialityInfoById(base.conn, iMdyID);
+        //bool ismdy = true;
+        //if (item == null)
+        //{
+        //    base.AjaxErch("-1");
+        //    base.Finish();
+        //    return;
+        //}
 
-        switch (iFeildName)
-        {
-            case "Title":
-                item.vcTitle = KeyValue;
-                break;
-            case "Explain":
-                item.vcExplain = KeyValue;
-                break;
-            case "Parent":
-                int iKeyValue = objectHandlers.ToInt(KeyValue);
-                if (item.iId == iKeyValue)
-                {
-                    ismdy = false;
-                    base.AjaxErch("-1000000036");
-                }
-                else
-                {
-                    item.iParent = iKeyValue;
-                }
-                break;
-            default:
-                ismdy = false;
-                break;
-        }
-        if (ismdy)
-        {
-            int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityMdy(base.conn, base.adminInfo.vcAdminName, item);
-            CachingService.Remove("AllNewsSpeciality");
-            base.AjaxErch(rtn.ToString());
-        }
+        //switch (iFeildName)
+        //{
+        //    case "Title":
+        //        item.vcTitle = KeyValue;
+        //        break;
+        //    case "Explain":
+        //        item.vcExplain = KeyValue;
+        //        break;
+        //    case "Parent":
+        //        int iKeyValue = objectHandlers.ToInt(KeyValue);
+        //        if (item.iId == iKeyValue)
+        //        {
+        //            ismdy = false;
+        //            base.AjaxErch("-1000000036");
+        //        }
+        //        else
+        //        {
+        //            item.iParent = iKeyValue;
+        //        }
+        //        break;
+        //    default:
+        //        ismdy = false;
+        //        break;
+        //}
+        //if (ismdy)
+        //{
+        //    int rtn = base.handlerService.skinService.specialityHandlers.NewsSpecialityMdy(base.conn, base.adminInfo.vcAdminName, item);
+        //    CachingService.Remove("AllNewsSpeciality");
+        //    base.AjaxErch(rtn.ToString());
+        //}
 
-        base.Finish();
-        item = null;
+        //base.Finish();
+        //item = null;
     }
 
     private void SpecialityDEL()
     {
-        string Ids = objectHandlers.Post("iIds");
-        if (string.IsNullOrEmpty(Ids))
-        {
-            base.AjaxErch("-1000000038");
-            base.Finish();
-            return;
-        }
+        //string Ids = objectHandlers.Post("iIds");
+        //if (string.IsNullOrEmpty(Ids))
+        //{
+        //    base.AjaxErch("-1000000038");
+        //    base.Finish();
+        //    return;
+        //}
 
-        int rtn = base.handlerService.skinService.specialityHandlers.NewSpecialityDel(base.conn, base.adminInfo.vcAdminName, Ids);
-        CachingService.Remove("AllNewsSpeciality");
-        base.AjaxErch(rtn.ToString());
-        base.Finish();
+        //int rtn = base.handlerService.skinService.specialityHandlers.NewSpecialityDel(base.conn, base.adminInfo.vcAdminName, Ids);
+        //CachingService.Remove("AllNewsSpeciality");
+        //base.AjaxErch(rtn.ToString());
+        //base.Finish();
     }
 }

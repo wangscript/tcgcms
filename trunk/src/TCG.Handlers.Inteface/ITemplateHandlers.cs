@@ -34,7 +34,7 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="templatetype"></param>
         /// <returns></returns>
-        Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype);
+        Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype,string skinid);
 
         /// <summary>
         /// 根据模板类型获取模板

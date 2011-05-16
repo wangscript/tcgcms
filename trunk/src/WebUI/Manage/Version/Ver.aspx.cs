@@ -21,7 +21,6 @@ public partial class Manage_Version_Ver : BasePage
                     this.IsHigherVer();
                     break;
             }
-            base.Finish();
         }
     }
 
