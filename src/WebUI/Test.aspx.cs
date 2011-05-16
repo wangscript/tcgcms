@@ -19,7 +19,7 @@ using TCG.Data;
 using System.Reflection;
 using System.ComponentModel;
 
-public partial class Test : Origin
+public partial class Test : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

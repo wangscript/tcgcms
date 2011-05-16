@@ -20,7 +20,7 @@ public partial class adminrolemdy : BasePage
     {
 
         //检测管理员登录
-        base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
         if (!Page.IsPostBack)
         {

@@ -208,41 +208,41 @@ public partial class Manage_Resources_sheiflist : BasePage
 
     private void CreateNews()
     {
-        int resourceid = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
-        if (resourceid==0)
-        {
-            base.AjaxErch("-1000000051");
-            return;
-        }
+        //int resourceid = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
+        //if (resourceid==0)
+        //{
+        //    base.AjaxErch("-1000000051");
+        //    return;
+        //}
 
 
-        Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
-        if (item == null) return;
+        //Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
+        //if (item == null) return;
 
-        TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
-        tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid.ToString());
-        tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
-        tcgth.WebPath = item.vcFilePath;
-        tcgth.configService = ConfigServiceEx;
-        tcgth.conn = base.conn;
+        //TCGTagHandlers tcgth = base.tagService.TCGTagHandlers;
+        //tcgth.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", resourceid.ToString());
+        //tcgth.FilePath = Server.MapPath("~" + item.vcFilePath);
+        //tcgth.WebPath = item.vcFilePath;
+        //tcgth.configService = ConfigServiceEx;
+        //tcgth.conn = base.conn;
 
-        string text1 = string.Empty;
-        try
-        {
-            tcgth.Replace();
-            if (item.cChecked != "Y")
-            {
-                item.cChecked = "Y";
-                base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-            }
-        }
-        catch (Exception ex)
-        {
-            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
-            return;
-        }
+        //string text1 = string.Empty;
+        //try
+        //{
+        //    tcgth.Replace();
+        //    if (item.cChecked != "Y")
+        //    {
+        //        item.cChecked = "Y";
+        //        base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
+        //    return;
+        //}
 
-        text1 = "<a>生成成功:" + item.vcFilePath + "</a>";
-        base.AjaxErch(1, text1, "CreateBack");
+        //text1 = "<a>生成成功:" + item.vcFilePath + "</a>";
+        // base.AjaxErch(1, text1, "CreateBack");
     }
 }

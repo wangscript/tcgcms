@@ -32,13 +32,15 @@ public partial class skin_categoriesmdy : BasePage
         }
         else
         {
-           
+
+            string skinid = objectHandlers.Get("SkinId");
+            if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
             Categories cif = new Categories();
             cif.Id = objectHandlers.Get("iClassId");
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
-            cif.SkinId = objectHandlers.Post("skinid");
+            cif.SkinId = skinid;
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"));
@@ -80,7 +82,8 @@ public partial class skin_categoriesmdy : BasePage
     private void Init()
     {
         string iClassId = objectHandlers.Get("iClassId");
-
+        string skinid = objectHandlers.Get("SkinId");
+        if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iClassId);
         if (cif == null)
         {
@@ -94,7 +97,7 @@ public partial class skin_categoriesmdy : BasePage
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
 
-        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType);
+        Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         int i = 0;
         if (templates != null && templates.Count!=0)
         {
@@ -112,7 +115,7 @@ public partial class skin_categoriesmdy : BasePage
         }
 
 
-        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType);
+        templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.ListType, skinid);
         if (templates != null && templates.Count != 0)
         {
             i = 0;
