@@ -42,6 +42,7 @@ public partial class skin_categoriesadd : BasePage
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             cif.SkinId = skinid;
+            cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch(-1,"");

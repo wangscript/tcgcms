@@ -83,6 +83,20 @@ namespace TCG.Handlers.Imp.AccEss
 
         public static ISkinHandlers _skinhandlers = null;
 
+        public static IResourceHandlers resourcesHandlers
+        {
+            get
+            {
+                if (_resourcehandlers == null)
+                {
+                    _resourcehandlers = new ResourcesHandlers();
+                }
+                return _resourcehandlers;
+            }
+        }
+
+        public static IResourceHandlers _resourcehandlers = null;
+
 
         /// <summary>
         /// 从记录集中返回实体
@@ -130,6 +144,7 @@ namespace TCG.Handlers.Imp.AccEss
                     categories.cVisible = row["Visible"].ToString().Trim();
                     categories.DataBaseService = row["DataBaseService"].ToString().Trim();
                     categories.SkinId = row["SkinId"].ToString().Trim();
+                    categories.IsSinglePage = row["IsSinglePage"].ToString().Trim();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();

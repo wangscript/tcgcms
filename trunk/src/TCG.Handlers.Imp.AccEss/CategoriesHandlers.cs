@@ -93,7 +93,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllCategoriesWithOutCaching()
         {
-            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService FROM Categories order by iorder";
+            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage FROM Categories order by iorder";
             return AccessFactory.conn.DataTable(Sql);
         }
 
@@ -104,14 +104,29 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="conn"></param>
         /// <param name="config"></param>
         /// <param name="classid"></param>
-        /// <param name="sh"></param>
+        /// <param name="sh">间隔符</param>
         /// <returns></returns>
         public string GetResourcesCategoriesIndex(string classid, string sh)
         {
             if (string.IsNullOrEmpty(classid) || classid == "0") return "";
             Categories categorie = this.GetCategoriesById(classid);
             if (classid == null) return "";
-            string url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            string url = string.Empty;
+            if (!string.IsNullOrEmpty(categorie.vcUrl))
+            {
+                url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            }
+            else
+            {
+                url = "#";
+                Resources res = AccessFactory.resourcesHandlers.GetNewsResourcesAtCategorie(categorie.Id);
+                if (res != null && categorie.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
+                {
+                    url = res.vcFilePath;
+                }
+                url = "#";
+
+            }
             string str = "<a href=\"" + url + "\" target=\"_blank\">" + categorie.vcClassName + "</a>";
             string t = this.GetResourcesCategoriesIndex(categorie.Parent, sh);
             if (!string.IsNullOrEmpty(t)) str = t + sh + str;
@@ -275,17 +290,11 @@ namespace TCG.Handlers.Imp.AccEss
                 {
                     return -1000000022;
                 }
-
-                //前台分类首页不能为空
-                if (string.IsNullOrEmpty(cif.vcUrl))
-                {
-                    return -1000000023;
-                }
             }
 
-            AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService)"
-                    + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinId + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','" 
-                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "')");
+            AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage)"
+                    + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinId + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
+                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" + cif.IsSinglePage + "')");
             return 1;
         }
 
@@ -343,16 +352,11 @@ namespace TCG.Handlers.Imp.AccEss
                     return -1000000022;
                 }
 
-                //前台分类首页不能为空
-                if (string.IsNullOrEmpty(cif.vcUrl))
-                {
-                    return -1000000023;
-                }
             }
 
             AccessFactory.conn.Execute("UPDATE Categories SET vcClassName='" + cif.vcClassName + "',vcName='" + cif.vcName + "',Parent='" + cif.Parent + "',"
                     + "iTemplate='" + cif.ResourceTemplate.Id + "',iListTemplate='" + cif.ResourceListTemplate.Id + "',vcDirectory='" + cif.vcDirectory + "',vcUrl='"
-                    + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "' WHERE ID ='" + cif.Id + "'");
+                    + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "', IsSinglePage = '" + cif.IsSinglePage + "' WHERE ID ='" + cif.Id + "'");
             return 1;
         }
 

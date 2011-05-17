@@ -43,8 +43,12 @@
 		<span id="dirmsg" class="info1">相对管理网站的的目录，存放生成的静态文件</span>
 	</div>
 	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 地 址：</span>
-	  <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iUrl','urlmsg');"/>
+	  <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" />
 		<span id="urlmsg" class="info1">分类在网站前台的首页地址，用于生成导航</span>
+	</div>
+    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">是否为单页：</span>
+      <input type="checkbox" name="iIsSinglePage" id="iIsSinglePage" runat="server" />
+		<span id="iIsSinglePagemsg" class="info1">如果为单页，则链接到该分类下的最新一篇文章</span>
 	</div>
 	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">详 细 模 板：</span>
 	  <select id="sTemplate" runat="server"  onchange="CheckTemplate('sTemplate','stdmsg')">

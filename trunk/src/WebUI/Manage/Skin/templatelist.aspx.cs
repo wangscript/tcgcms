@@ -179,7 +179,7 @@ public partial class Template_templatelist : BasePage
         int rtn = 0;
         try
         {
-           // rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
+           rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref text);
         }
         catch (Exception ex)
         {

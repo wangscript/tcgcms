@@ -106,7 +106,8 @@ public partial class resources_resourceshandlers : BasePage
         item.vcSmallImg = objectHandlers.Post("iSmallImg");
         item.vcTitleColor = objectHandlers.Post("sTitleColor");
         item.cStrong = objectHandlers.Post("iStrong");
-        item.vcShortContent = objectHandlers.Post("iShortContent");
+        string s = objectHandlers.Post("iShortContent");
+        item.vcShortContent = string.IsNullOrEmpty(s)? objectHandlers.Left(objectHandlers.Post("iShortContent"),100):s;
 
         if (string.IsNullOrEmpty(item.vcTitle))
         {
@@ -145,8 +146,10 @@ public partial class resources_resourceshandlers : BasePage
             {
                 rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
-
-            rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, objectHandlers.ToInt(item.Id));
+            if (rtn == 1)
+            {
+                rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, objectHandlers.ToInt(item.Id));
+            }
         }
         catch (Exception ex)
         {

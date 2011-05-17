@@ -341,33 +341,6 @@ namespace TCG.Handlers
             return 1;
         }
 
-
-        public int CreateSingeTemplateToHtml(string templateid, TCGTagHandlers tcgthdl,ref string text)
-        {
-            if (string.IsNullOrEmpty(templateid)) {return -1000000806;}
-            Template tlif = this.GetTemplateByID(templateid);
-
-            if (tlif == null){return -1000000807;}
-
-            string filepath = string.Empty;
-
-            tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
-            
-            filepath = HttpContext.Current.Server.MapPath("~" + tlif.vcUrl);
-
-            tcgthdl.Template = tlif.Content;
-            tcgthdl.FilePath = filepath;
-            if (tcgthdl.Replace())
-            {
-                text = "<a>生成成功:'" + tlif.vcUrl + "'</a>";
-            }
-            else
-            {
-                text = "<a><font color='red'>生成失败:'" + tlif.vcUrl + "'</font></a>";
-            }
-            return 1;
-        }
-
         /// <summary>
         /// 得到模板类型
         /// </summary>

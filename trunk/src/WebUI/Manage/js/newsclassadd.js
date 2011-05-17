@@ -5,7 +5,7 @@ function CheckAddClassForm() {
     var iClassId = $("#iClassId");
 
     if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
-			&& CheckValueIsNull('iDirectory', 'dirmsg') && CheckValueIsNull('iUrl', 'urlmsg') &&
+			&& CheckValueIsNull('iDirectory', 'dirmsg') &&
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
         return false;
     }
@@ -64,7 +64,7 @@ function CheckEditClassForm() {
     var iClassId = $("#iClassId");
 
     if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
-			&& CheckValueIsNull('iDirectory', 'dirmsg') && CheckValueIsNull('iUrl', 'urlmsg') &&
+			&& CheckValueIsNull('iDirectory', 'dirmsg') &&
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
         return false;
     }
