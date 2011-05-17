@@ -67,8 +67,8 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             admininfo.cIsOnline = "Y";
-            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
-            AccessFactory.conn.Execute("UPDATE admin SET vcLastLoginIp = '" + ip + "' WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y',vcLastLoginIp = '" + ip
+                + "',iLoginCount = iLoginCount+1,dLastLoginDate=now() WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
 
             HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
             if (admincookie == null)
