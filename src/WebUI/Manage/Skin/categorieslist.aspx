@@ -78,7 +78,7 @@
 	<!-- class="layerbox"-->
 	<div id="layerbox1" class="layerbox">
 	    <div class="CreateClassDiv">
-		    <iframe id="ifCreateAdd" width="600" height="369" frameborder="0"></iframe>
+		    <iframe id="ifCreateAdd" width="600" height="379" frameborder="0"></iframe>
 	    </div>
 	</div>
 	<script type="text/javascript">classTitleInit();</script>

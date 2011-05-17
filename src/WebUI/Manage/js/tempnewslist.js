@@ -31,9 +31,9 @@ $(document).ready(function() {
 function GetTempTitleBy(site, parentid) {
 
     if (parentid == "1") {
-        return ">> <a href='?iParentid=1&SkinId=" + site + "'>列表模板</a>"
+        return ">> <a href='?iParentid=1&SkinId=" + site + "'>详细页模板</a>"
     } else if (parentid == "2"){
-        return ">> <a href='?iParentid=2&SkinId=" + site + "'>详细页模板</a>"
+        return ">> <a href='?iParentid=2&SkinId=" + site + "'>列表模板</a>"
     } else if (parentid == "3") {
         return ">> <a href='?iParentid=3&SkinId=" + site + "'>原件模板</a>"
     }

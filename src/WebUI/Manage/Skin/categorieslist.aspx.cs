@@ -134,77 +134,74 @@ public partial class skin_categorieslist : BasePage
         string text = string.Empty;
         int page = objectHandlers.ToInt(objectHandlers.Post("iPage"));
         int rtn = 0;
-        //try
-        //{
+        try
+        {
 
-        //    if (string.IsNullOrEmpty(tClassID))
-        //    {
-        //        rtn = -1000000801;
-        //    }
-        //    else
-        //    {
-        //        Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
+            if (string.IsNullOrEmpty(tClassID))
+            {
+                rtn = -1000000801;
+            }
+            else
+            {
+                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
 
-        //        if (cif == null)
-        //        {
-        //            rtn = -1000000802;
-        //        }
-        //        else
-        //        {
-        //            if (cif.ResourceListTemplate == null)
-        //            {
-        //                rtn = - 1000000803;
-        //            }
-        //            else
-        //            {
-        //                if (cif.vcUrl.IndexOf(".") > -1)
-        //                {
-        //                    rtn = - 1000000804;
-        //                }
-        //                else
-        //                {
-        //                    string filepath = "";
-        //                    filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
+                if (cif == null)
+                {
+                    rtn = -1000000802;
+                }
+                else
+                {
+                    if (cif.ResourceListTemplate == null)
+                    {
+                        rtn = -1000000803;
+                    }
+                    else
+                    {
+                        if (cif.vcUrl.IndexOf(".") > -1)
+                        {
+                            rtn = -1000000804;
+                        }
+                        else
+                        {
+                            string filepath = "";
+                            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
 
-        //                    TCGTagHandlers tcgthdl = base.tagService.TCGTagHandlers;
-        //                    tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
-        //                    tcgthdl.FilePath = filepath;
-        //                    tcgthdl.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
-        //                    tcgthdl.configService = ConfigServiceEx;
-        //                    tcgthdl.conn = base.conn;
-        //                    tcgthdl.PagerInfo.DoAllPage = false;
-        //                    tcgthdl.PagerInfo.Page = page;
-        //                    tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
+                            TCGTagHandlers tcgthdl = base.handlerService.tagService.tcgTagHandlers;
+                            tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
+                            tcgthdl.FilePath = filepath;
+                            tcgthdl.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+                            tcgthdl.PagerInfo.DoAllPage = false;
+                            tcgthdl.PagerInfo.Page = page;
+                            tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
 
-        //                    if (tcgthdl.Replace())
-        //                    {
-        //                        rtn = 1;
-        //                        text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\","/");
+                            if (tcgthdl.Replace())
+                            {
+                                rtn = 1;
+                                text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\", "/");
 
-        //                        if (tcgthdl.PagerInfo.PageCount > page)
-        //                        {
-        //                            classbackstr = "CreateBack1";
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        rtn = -1000000805;
-        //                    }
+                                if (tcgthdl.PagerInfo.PageCount > page)
+                                {
+                                    classbackstr = "CreateBack1";
+                                }
+                            }
+                            else
+                            {
+                                rtn = -1000000805;
+                            }
 
-        //                }
-        //            }
-                   
-        //        }
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", classbackstr);
-        //    base.Finish();
-        //    return;
-        //}
+                        }
+                    }
 
-        base.AjaxErch(rtn, text, classbackstr);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", classbackstr);
+            return;
+        }
+
+        base.AjaxErch(1, text, classbackstr);
     }
 
     private void OrderMdy()

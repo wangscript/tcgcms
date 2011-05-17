@@ -162,6 +162,7 @@ namespace TCG.Handlers
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$SystemName$_", Versions.SystemName);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
+            this._temphtml = _temphtml.Replace("_$MainPage$_", ConfigServiceEx.baseConfig["MainPage"]);
             this._temphtml = _temphtml.Replace("_$ManagePath$_", ConfigServiceEx.baseConfig["ManagePath"]);
         }
 
@@ -489,7 +490,7 @@ namespace TCG.Handlers
         /// <summary>
         ///设置获得模板
         /// </summary>
-        public string Template { set { this._template = value; } get { return this._temphtml; } }
+        public string Template { set { this._template = value; } get { return this._template; } }
         /// <summary>
         /// 标签规则
         /// </summary>

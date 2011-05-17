@@ -47,6 +47,10 @@ namespace TCG.Handlers
                 }
                 return this._tcgtaghandlers;
             }
+            set
+            {
+                this._tcgtaghandlers = value;
+            }
         }
 
         public int CreateResourcHtmlById(ref string errText, int id)
@@ -59,6 +63,7 @@ namespace TCG.Handlers
             if (item.vcUrl.IndexOf(".") > -1) return -1000000310;
 
             int rtn = 0;
+            tcgTagHandlers = new TCGTagHandlers(base.handlerService);
             tcgTagHandlers.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
             tcgTagHandlers.FilePath = HttpContext.Current.Server.MapPath("~" + item.vcFilePath);
             tcgTagHandlers.WebPath = item.vcFilePath;
@@ -77,6 +82,33 @@ namespace TCG.Handlers
                 rtn = -1000000311;
             }
 
+            return 1;
+        }
+
+        public int CreateSingeTemplateToHtml(string templateid, ref string text)
+        {
+            if (string.IsNullOrEmpty(templateid)) { return -1000000806; }
+            Template tlif = tcgTagHandlers.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
+
+            if (tlif == null) { return -1000000807; }
+
+            string filepath = string.Empty;
+
+            tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+
+            filepath = HttpContext.Current.Server.MapPath("~" + tlif.vcUrl);
+
+            tcgTagHandlers = new TCGTagHandlers(base.handlerService);
+            tcgTagHandlers.Template = tlif.Content;
+            tcgTagHandlers.FilePath = filepath;
+            if (tcgTagHandlers.Replace())
+            {
+                text = "<a>生成成功:'" + tlif.vcUrl + "'</a>";
+            }
+            else
+            {
+                text = "<a><font color='red'>生成失败:'" + tlif.vcUrl + "'</font></a>";
+            }
             return 1;
         }
 

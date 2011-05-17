@@ -451,6 +451,20 @@ namespace TCG.Handlers.Imp.AccEss
 
             return 1;
         }
+
+        /// <summary>
+        /// 获取分类下最新的一篇文章
+        /// </summary>
+        /// <param name="ategorie"></param>
+        /// <returns></returns>
+        public Resources GetNewsResourcesAtCategorie(string ategorie)
+        {
+            DataTable dt = AccessFactory.conn.DataTable("SELECT TOP 1 * FROM Resources WHERE iClassID = '" + ategorie + "'");
+            if (dt == null) return null;
+            if (dt.Rows.Count == 0) return null;
+
+            return (Resources)AccessFactory.GetEntityObjectFromRow(dt.Rows[0], typeof(Resources));
+        }
         
     }
 }

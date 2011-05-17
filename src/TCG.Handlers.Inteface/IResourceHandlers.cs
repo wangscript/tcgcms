@@ -132,5 +132,12 @@ namespace TCG.Handlers
         /// <returns></returns>
         int SaveOrDelResource(string ids, string action, Admin adminname);
 
+        /// <summary>
+        /// 获取分类下最新的一篇文章
+        /// </summary>
+        /// <param name="ategorie"></param>
+        /// <returns></returns>
+        Resources GetNewsResourcesAtCategorie(string ategorie);
+
     }
 }

@@ -29,11 +29,12 @@ function HidClassTitle() {
 }
 
 function childClassTitleInit() {
+    var skinid = $("#iSkinId").val();
     var m = $("#ChildclassTitle");
     var classobj = $("#iClassId");
     a = "";
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories[i].ParentId == classobj.val()) {
+        if (_Categories[i].ParentId == classobj.val() && _Categories[i].SkinId == skinid) {
             a += " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "' class='childnewstitle bold'>" + _Categories[i].ClassName + "</a>";
         }
     }
@@ -41,9 +42,10 @@ function childClassTitleInit() {
 }
 
 function GetNewsListTitleByClassId(classid) {
+    var skinid = $("#iSkinId").val();
     if (_Categories == null) return;
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories[i].Id == classid) {
+        if (_Categories[i].Id == classid && _Categories[i].SkinId == skinid) {
             var t = (_Categories[i].ParentId == 0) ? "" : " >>";
             a = t + " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>" + a;
             GetNewsListTitleByClassId(_Categories[i].ParentId);

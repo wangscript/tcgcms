@@ -213,7 +213,8 @@ namespace TCG.Handlers
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId$", item.Categorie.Parent);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId2$", this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id).Id);
                 this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));        
+                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));       
+
             }
             else
             {
@@ -243,7 +244,22 @@ namespace TCG.Handlers
                 return;
             }
 
+            string url = "#";
+            if (!string.IsNullOrEmpty(item.vcUrl))
+            {
+                url = (item.vcUrl.IndexOf(".") > -1) ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            }
+            else
+            {
+                Resources res = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(item.Id);
+                if (res != null && item.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
+                {
+                    url = res.vcFilePath;
+                }
+            }
+
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_Id$", item.Id.ToString());
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcUrl$", url);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcName$", item.vcName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
             this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
@@ -372,7 +388,20 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
 
-            string url = (categorie.vcUrl.IndexOf('.') > -1 ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
+            string url = "#";
+
+            if (!string.IsNullOrEmpty(categorie.vcUrl))
+            {
+                url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            }
+            else
+            {
+                Resources res = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(categorie.Id);
+                if (res != null && categorie.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
+                {
+                    url = res.vcFilePath;
+                }
+            }
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 

@@ -46,6 +46,7 @@ public partial class skin_categoriesmdy : BasePage
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"));
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
+            cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
 
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -64,9 +65,12 @@ public partial class skin_categoriesmdy : BasePage
             try
             {
                 rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
-                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                if (rtn == 1)
+                {
+                    rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
+                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                }
             }
             catch (Exception ex)
             {
@@ -96,6 +100,7 @@ public partial class skin_categoriesmdy : BasePage
         this.iUrl.Value = cif.vcUrl;
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
+        this.iIsSinglePage.Checked = cif.IsSinglePage == "Y" ? true : false;
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         int i = 0;
