@@ -47,6 +47,12 @@
 		
 
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
+    <div class="g-tabnav">
+        <a style="margin-left:-13px;"></a>
+        <a>基本信息</a>
+        <a onmouseover="this.className='moson';" onmouseout="this.className ='';">详细内容</a>
+        <a>资源属性</a>
+    </div>
 	<div class="Page_arrb arb_pr1">
 		<span class="p_a_t1">资讯标题：</span><input id="iTitle" name="iTitle" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="CheckValueIsNull('iTitle','titlemsg');" runat="server"/>
 		<span class="info1" id="titlemsg">资讯标题内容，不能为空</span>

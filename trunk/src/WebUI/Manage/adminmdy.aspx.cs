@@ -50,6 +50,7 @@ public partial class adminmdy : BasePage
             {
                 rtn = base.handlerService.manageService.adminHandlers.UpdateAdminInfo(base.adminInfo.vcAdminName, vcAdminName, vcNickname, pwd, iRole, cLock,
                     popedom, classpopedom);
+
             }
             catch (Exception ex)
             {
