@@ -43,6 +43,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{8C9EE0E
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "WebUI_deploy", "D:\WebUI_deploy\WebUI_deploy.wdproj", "{322786E1-5F30-4CBC-AFC5-C560192B70D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -275,6 +277,24 @@ Global
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Win32.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|.NET.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Default|Win32.ActiveCfg = Debug|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|.NET.ActiveCfg = Release|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{322786E1-5F30-4CBC-AFC5-C560192B70D1}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -146,13 +146,13 @@ function ColorInit() {
     SetAjaxDiv("ok", false, "小提示：发布完以后可以当页接着发布！");
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     //初始化分类选择控件
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
 
     Menu.init("gamelist");
-    $("#SelectDivW").bind('click', function(e) {
+    $("#SelectDivW").bind('click', function (e) {
         if ($("#gamelist_c").css('display') == 'block') {
             $("#gamelist_c").hide();
         } else {
@@ -162,7 +162,7 @@ $(document).ready(function() {
 
     });
 
-    $(document).bind('click', function(e) {
+    $(document).bind('click', function (e) {
 
         if ($("#gamelist_c").css('display') == 'block') {
             $("#gamelist_c").hide();
@@ -179,6 +179,20 @@ $(document).ready(function() {
     form1.ajaxForm(options);
 
     ClassInit();
+
+    var afromlist = $(".g-tabnav a");
+
+    afromlist.each(function (i) {
+        if (i > 0) {
+            var vv = afromlist.eq(i);
+            if (i == 1) {
+                vv.attr("class", "ln-c-mid on");
+            } else {
+                vv.mouseover(function () { this.className = "moson"; });
+                vv.mouseout(function () { this.className = ""; });
+            }
+        }
+    });
 
 });
 

@@ -58,3 +58,70 @@
 .imgPace ul { float:left; width:120px; text-align:center; margin-top:4px;}
 .imgPace ul li { text-align:center}
 .imgPace img {width:100px; height:100px;}
+
+.g-tabnav {
+    background-image: url("../images/bgx.png");
+    background-repeat: repeat-x;
+}
+
+.g-tabnav {
+    background-position: 0 -144px;
+    clear: both;
+    height: 35px;
+    padding-bottom: 0;
+    padding-left: 6px;
+    padding-right: 0;
+    padding-top: 6px;
+    position: relative;
+    white-space: nowrap;
+    font-family: verdana,sans-serif;
+}
+
+.g-tabnav a {
+    display: block;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    padding-bottom: 0;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 0;
+    text-decoration: none;
+    vertical-align: baseline;
+    color: #005590;
+    font-size: 100%;
+    font-family: verdana,sans-serif;
+}
+
+.ln-c-mid {
+    border-bottom-color: #9CB8CC;
+    border-left-color: #9CB8CC;
+    border-right-color: #9CB8CC;
+    border-top-color: #9CB8CC;
+}
+
+.g-tabnav a.on {
+    border-bottom-color: -moz-use-text-color;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    -moz-background-clip: border;
+    -moz-background-origin: padding;
+    -moz-background-size: auto auto;
+    background-attachment: scroll;
+    background-color: #FFFFFF;
+    background-image: none;
+    background-position: 0 0;
+    background-repeat: repeat;
+}
+
+.g-tabnav a.moson
+{
+	background-color: #5D99CE;
+    color: #FFFFFF !important;
+}
