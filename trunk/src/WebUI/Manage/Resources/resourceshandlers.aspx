@@ -43,69 +43,77 @@
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
 			<img src="../images/icon/5.gif" />取消
 		</a>
+        <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
+			<img src="../images/icon/07.gif" />刷新
+		</a>
 	</div>
 		
 
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="g-tabnav">
         <a style="margin-left:-13px;"></a>
-        <a>基本信息</a>
-        <a onmouseover="this.className='moson';" onmouseout="this.className ='';">详细内容</a>
-        <a>资源属性</a>
+        <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
+        <a id="a2" onclick="SetFromsByNum('a2')">详细内容</a>
+        <a id="a3" onclick="SetFromsByNum('a3')">资源属性</a>
     </div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">资讯标题：</span><input id="iTitle" name="iTitle" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="CheckValueIsNull('iTitle','titlemsg');" runat="server"/>
-		<span class="info1" id="titlemsg">资讯标题内容，不能为空</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">标题效果：</span>
-		颜色：
-		<select name="sTitleColor" id="sTitleColor" runat="server">
-		</select>
-		加粗:<input type="checkbox" id="iStrong" name="iStrong" value="Y" runat="server"/>
+    <div id="a1_from">
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1">资讯标题：</span><input id="iTitle" name="iTitle" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="CheckValueIsNull('iTitle','titlemsg');" runat="server"/>
+		    <span class="info1" id="titlemsg">资讯标题内容，不能为空</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1">标题效果：</span>
+		    颜色：
+		    <select name="sTitleColor" id="sTitleColor" runat="server">
+		    </select>
+		    加粗:<input type="checkbox" id="iStrong" name="iStrong" value="Y" runat="server"/>
 		
-		<span class="info1" id="Span1">资讯标题内容，不能为空</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">跳转地址：</span><input id="iUrl" name="iUrl" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="this.className='itxt1'" runat="server"/>
-		<span class="info1" id="urlmsg">点击标题转向该地址，没有可为空</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1 lfl">资讯类别： </span>
-		<span class="p_a_t1 lfl">
-		<div class="cagegoriesSelect">
-		    <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
-		    <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
+		    <span class="info1" id="Span1">资讯标题内容，不能为空</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1">跳转地址：</span><input id="iUrl" name="iUrl" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" onblur="this.className='itxt1'" runat="server"/>
+		    <span class="info1" id="urlmsg">点击标题转向该地址，没有可为空</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1 lfl">资讯类别： </span>
+		    <span class="p_a_t1 lfl">
+		    <div class="cagegoriesSelect">
+		        <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
+		        <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
 		
-		    <div id="gamelist_c" class="enmu addselect">
-                <div  class="c_box" id="gamelist">
-		            <ul id="Cagetorie_c" class="one"></ul>
+		        <div id="gamelist_c" class="enmu addselect">
+                    <div  class="c_box" id="gamelist">
+		                <ul id="Cagetorie_c" class="one"></ul>
+                    </div>
                 </div>
-            </div>
-		</div>
-		</span>
-		<span class="info1" id="classmsg" style=" margin-left:210px;">资讯所属的分类，不能为空</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">资讯作者：</span><input id="iAuthor" name="iAuthor" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iAuthor','autmsg');" runat="server"/>
-		<span class="info1" id="autmsg">资讯作者，能为空</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<span class="p_a_t1">关 键 字：</span><input id="iKeyWords" name="iKeyWords" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:400px;" runat="server"/>
-		<span class="info1" id="keymsg">生成相关资源的标记</span>
-	</div>
-	<div class="Page_arrb arb_pr1">
-		<input id="iBigImg" name="iBigImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectBigImg(this)">设置大图片</a>
-	</div>
-	<div class="Page_arrb arb_pr1">
-	    <input id="iSmallImg" name="iSmallImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
-	</div>
-	<div class="Page_arrb arb_pr1 templateaddnew1">
-		<TCG:WebUserControl ID="iContent" runat="server" />
-	</div>
-	<div class="Page_arrb arb_pr1 templateaddnew2">
-		<textarea id="iShortContent" name="iShortContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
-	</div>
+		    </div>
+		    </span>
+		    <span class="info1" id="classmsg" style=" margin-left:210px;">资讯所属的分类，不能为空</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1">资讯作者：</span><input id="iAuthor" name="iAuthor" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iAuthor','autmsg');" runat="server"/>
+		    <span class="info1" id="autmsg">资讯作者，能为空</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1">关 键 字：</span><input id="iKeyWords" name="iKeyWords" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:400px;" runat="server"/>
+		    <span class="info1" id="keymsg">生成相关资源的标记</span>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+		    <input id="iBigImg" name="iBigImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectBigImg(this)">设置大图片</a>
+	    </div>
+	    <div class="Page_arrb arb_pr1">
+	        <input id="iSmallImg" name="iSmallImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
+	    </div>
+    </div>
+    <div id="a2_from">
+	    <div class="Page_arrb arb_pr1 templateaddnew1">
+		    <TCG:WebUserControl ID="iContent" runat="server" />
+	    </div>
+	    <div class="Page_arrb arb_pr1 templateaddnew2">
+		    <textarea id="iShortContent" name="iShortContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
+	    </div>
+    </div>
+    <div id="a3_from"></div>
 	<div class="imgPace hid" id="imgPace"></div>
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>

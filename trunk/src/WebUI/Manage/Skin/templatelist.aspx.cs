@@ -54,7 +54,10 @@ public partial class Template_templatelist : BasePage
         this.iParentid.Value = iParentid;
 
         string SkinId = objectHandlers.Get("SkinId");
-        SkinId = SkinId.Trim().Length == 0 ? "0" : SkinId;
+        if (string.IsNullOrEmpty(SkinId))
+        {
+            SkinId = ConfigServiceEx.DefaultSkinId;
+        }
 
         this.iSkinId.Value = SkinId;
         Skin skinentity = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(SkinId);
@@ -114,7 +117,10 @@ public partial class Template_templatelist : BasePage
 
 
         string SkinId = objectHandlers.Get("SkinId");
-
+        if (string.IsNullOrEmpty(SkinId))
+        {
+            SkinId = ConfigServiceEx.DefaultSkinId;
+        }
         CheckID.Text = template.Id;
         sId.Text = template.Id;
 
@@ -134,6 +140,10 @@ public partial class Template_templatelist : BasePage
 
 
         string SkinId = objectHandlers.Get("SkinId");
+        if (string.IsNullOrEmpty(SkinId))
+        {
+            SkinId = ConfigServiceEx.DefaultSkinId;
+        }
 
         CheckID.Text = template.Id;
         sId.Text = template.Id;

@@ -180,21 +180,33 @@ $(document).ready(function () {
 
     ClassInit();
 
-    var afromlist = $(".g-tabnav a");
-
-    afromlist.each(function (i) {
-        if (i > 0) {
-            var vv = afromlist.eq(i);
-            if (i == 1) {
-                vv.attr("class", "ln-c-mid on");
-            } else {
-                vv.mouseover(function () { this.className = "moson"; });
-                vv.mouseout(function () { this.className = ""; });
-            }
-        }
-    });
+    SetFromsByNum("a1");
 
 });
+
+var objss = ["a1","a2","a3"];
+function SetFromsByNum(lb) {
+
+    for (var i = 0; i < objss.length; i++) {
+        var obj = $("#" + objss[i]);
+        if (lb == objss[i]) {
+            obj.attr("class", "ln-c-mid on");
+            obj.unbind("mouseover");
+            obj.unbind("mouseout");
+            obj.unbind("click");
+            $("#" + objss[i] + "_from").show();
+        } else {
+            obj.attr("class", "");
+            obj.unbind("mouseover");
+            obj.unbind("mouseout");
+            obj.unbind("click");
+            obj.mouseover(function () { this.className = "moson"; });
+            obj.mouseout(function () { this.className = ""; });
+            obj.attr("href", "javascript:GoTo();");
+            $("#" + objss[i] + "_from").hide();
+        }
+    }
+}
 
 function UpLodatFileBack() {
 
