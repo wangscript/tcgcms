@@ -1,7 +1,6 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceshandlers.aspx.cs" Inherits="resources_resourceshandlers" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
-<%@ Register src="../Ctrl/Editor.ascx" tagname="WebUserControl" tagprefix="TCG" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -107,13 +106,33 @@
     </div>
     <div id="a2_from">
 	    <div class="Page_arrb arb_pr1 templateaddnew1">
-		    <TCG:WebUserControl ID="iContent" runat="server" />
+		    <script type="text/javascript" charset="gb2312" src="../KindEditer/kindeditor-min.js"></script>
+                <script type="text/javascript">
+                    KE.show({
+                        id: 'taContent',
+                        imageUploadJson: '/manage/upload/editUploadfile.aspx',
+                        fileManagerJson: '../../asp.net/file_manager_json.ashx',
+                        allowFileManager: true,
+                        afterCreate: function (id) {
+                            KE.event.ctrl(document, 13, function () {
+                                KE.util.setData(id);
+                                document.forms['form1'].submit();
+                            });
+                            KE.event.ctrl(KE.g[id].iframeDoc, 13, function () {
+                                KE.util.setData(id);
+                                document.forms['form1'].submit();
+                            });
+                        }
+                    });
+            </script>
+            <textarea id="taContent" cols="100" rows="8" style="width:800px;height:300px;visibility:hidden;" runat="server"></textarea>
 	    </div>
 	    <div class="Page_arrb arb_pr1 templateaddnew2">
 		    <textarea id="iShortContent" name="iShortContent" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
 	    </div>
     </div>
-    <div id="a3_from"></div>
+    <div id="a3_from">
+    </div>
 	<div class="imgPace hid" id="imgPace"></div>
 	<div class="dobtn arb_pr" style="margin-top:5px;clear:left;"><input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>
