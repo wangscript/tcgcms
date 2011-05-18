@@ -111,7 +111,7 @@
                     KE.show({
                         id: 'taContent',
                         imageUploadJson: '/manage/upload/editUploadfile.aspx',
-                        fileManagerJson: '../../asp.net/file_manager_json.ashx',
+                        fileManagerJson: '/manage/upload/filemanager.aspx',
                         allowFileManager: true,
                         afterCreate: function (id) {
                             KE.event.ctrl(document, 13, function () {

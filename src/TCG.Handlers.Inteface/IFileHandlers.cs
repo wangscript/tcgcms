@@ -96,7 +96,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         int GetUrlError(string curl);
 
-        string GetFilePath(string filename, int fileclassid);
+        string GetFilePath(string filename, int fileclassid, ref string imagepath);
 
         int UploadFile(byte[] _bytes, Admin adminname, string imagetype, int fileclassid, ref string imagepath);
 

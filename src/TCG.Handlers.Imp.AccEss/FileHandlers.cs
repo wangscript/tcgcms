@@ -275,7 +275,9 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                if (text1.IndexOf("/attach.aspx?id=") != 0 && text1.IndexOf(ConfigServiceEx.baseConfig["WebSite"]) != 0)
+                string domainstr = objectHandlers.GetDomainName(text1);
+                string domainstr1 = objectHandlers.GetDomainName(ConfigServiceEx.baseConfig["WebSite"]);
+                if (!string.IsNullOrEmpty(domainstr) && domainstr != domainstr1)
                 {
                     FileResources imgfile = new FileResources();
 
@@ -336,21 +338,25 @@ namespace TCG.Handlers.Imp.AccEss
                             imgfile.iSize = b.Length;
                             string filename = imgfile.Id + imgfile.vcType;
 
-                            string filepatch = this.GetFilePath(filename, fileclassid);
+                            string imagepath1 = string.Empty;
+
+                            string filepatch = this.GetFilePath(filename, fileclassid, ref imagepath1);
                             try
                             {
                                 objectHandlers.SaveFile(filepatch, "");
 
                                 loadimage.Save(filepatch);
-                                int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
-                                if (rtn < 0)
-                                {
-                                    System.IO.File.Delete(filepatch);
-                                }
-                                else
-                                {
-                                    resource.vcContent = resource.vcContent.Replace(text1, "/attach.aspx?id=" + imgfile.Id);
-                                }
+                                //int rtn = this.AddFileInfoByAdmin(adminname, imgfile);
+                                //if (rtn < 0)
+                                //{
+                                //    System.IO.File.Delete(filepatch);
+                                //}
+                                //else
+                                //{
+                                //    resource.vcContent = resource.vcContent.Replace(text1, imagepath1);
+                                //}
+
+                                resource.vcContent = resource.vcContent.Replace(text1, imagepath1);
                             }
                             catch
                             {
@@ -412,10 +418,11 @@ namespace TCG.Handlers.Imp.AccEss
             return true;
         }
 
-        public string GetFilePath(string filename, int fileclassid)
+        public string GetFilePath(string filename, int fileclassid, ref string imagepath)
         {
-            return HttpContext.Current.Server.MapPath("~" + this.GetFilesPathByClassId(fileclassid)
-                + filename.Substring(0, 6) + "/" + filename.Substring(6, 2) + "/" + filename);
+            imagepath = this.GetFilesPathByClassId(fileclassid)
+                + filename.Substring(0, 6) + "/" + filename.Substring(6, 2) + "/" + filename;
+            return HttpContext.Current.Server.MapPath("~" + imagepath);
         }
 
         private string GetFlieName()
@@ -444,7 +451,7 @@ namespace TCG.Handlers.Imp.AccEss
 
             imgfile.iSize = 100;
 
-            string filepatch = this.GetFilePath(imgfile.vcFileName, fileclassid);
+            string filepatch = this.GetFilePath(imgfile.vcFileName, fileclassid, ref imagepath);
             FileStream fs = null;
             try
             {
@@ -453,20 +460,20 @@ namespace TCG.Handlers.Imp.AccEss
                 ms.WriteTo(fs);
 
 
-                int rtn = 0;
-                if (adminname != null)
-                {
-                    rtn = this.AddFileInfoByAdmin(adminname, imgfile);
-                }
+                //int rtn = 0;
+                //if (adminname != null)
+                //{
+                //    rtn = this.AddFileInfoByAdmin(adminname, imgfile);
+                //}
 
-                if (rtn < 0)
-                {
-                    System.IO.File.Delete(filepatch);
-                }
-                else
-                {
-                    imagepath = "/attach.aspx?id=" + imgfile.Id;
-                }
+                //if (rtn < 0)
+                //{
+                //    System.IO.File.Delete(filepatch);
+                //}
+                //else
+                //{
+                //    imagepath = "/attach.aspx?id=" + imgfile.Id;
+                //}
 
                 return 1;
             }

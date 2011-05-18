@@ -33,7 +33,7 @@ namespace TCG.Entity
         /// <summary>
         /// 皮肤说明
         /// </summary>
-        public string Info { get { return this._info; } set { this._info = value; } }
+        public string WebDescription { get { return this._info; } set { this._info = value; } }
         /// <summary>
         /// 皮肤文件夹
         /// </summary>

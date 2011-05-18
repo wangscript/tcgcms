@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Collections;
+using LitJson;
+
 using TCG.Utils;
-
-
 using TCG.Entity;
 using TCG.Handlers;
 
@@ -53,10 +55,16 @@ public partial class Manage_upload_editUploadfile : BasePage
             }
             else if (rtn == 1)
             {
-                text = "{url:'" + reUrl + "',error:''}";
+                Hashtable hash = new Hashtable();
+                hash["error"] = 0;
+                hash["url"] = reUrl;
+
+                text = JsonMapper.ToJson(hash);
             }
 
         }
+        
+
         base.AjaxErch(text);
 
     }

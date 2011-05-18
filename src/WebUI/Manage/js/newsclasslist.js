@@ -41,9 +41,11 @@ function GetNewsListTitleByClassIdW(classid){
 }
 
 
-function CreatClass(obj){
-    layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
-    SetCreateInnerHTML();
+function CreatClass(obj) {
+    var par = $("#iClassId");
+    location.href = "Categoriesadd.aspx?iParentId=" + par.val() + "&skinid=" + $("#iSkinId").val()
+    //layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
+    //SetCreateInnerHTML();
 }
 
 function operback() { 
@@ -51,8 +53,10 @@ function operback() {
 }
 
 function EditClass(obj) {
-    layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
-    SetMdyInnerHTML();
+    location.href = "categoriesmdy.aspx?iClassId=" + GetCheckBoxValues("CheckID") + "&skinid=" + $("#iSkinId").val();
+    
+    //layer.openLayer({ id: 'layerbox1', width: 600, height: 369, callBack: operback });
+    //SetMdyInnerHTML();
 }
 
 function SetMdyInnerHTML(){
