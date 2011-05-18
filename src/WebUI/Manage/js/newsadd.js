@@ -15,14 +15,18 @@ function CheckAdd(){
 
 function CheckImgBack(val) {
     alert(val);
-    $("iContent_content").value = val;
-    $("form1").action = "newsadd.aspx";
-	var work = $("work");
-	if(work.value=="AddNew"){
+    $("#taContent").val(val);
+    $("#form1")[0].action = "newsadd.aspx";
+	var work = $("#work");
+	if(work.val()=="AddNew"){
 		ajax.postf($("form1"),function(obj) { NewsAddPostBack(obj.responseText);});
 	}else{
 		ajax.postf($("form1"),function(obj) { NewsMdyPostBack(obj.responseText);})
 	}
+}
+
+function setContent() {
+    $("#taContent").val(KE.html("taContent"));
 }
 
 function SelectSmallImg(obj) {
@@ -34,7 +38,7 @@ function SelectSmallImg(obj) {
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("#iContent_content").val();
+	var iContent = $("#taContent").val();
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);
 	if (result != null) {
@@ -56,7 +60,7 @@ function SelectBigImg(obj) {
 	imgPace.style.left=pos.x+"px";
 	imgPace.innerHTML = "";
 	setContent();
-	var iContent = $("#iContent_content").val();
+	var iContent = $("#taContent").val();
 	
 	var reg = /<(img|IMG|input type=\"image\")[^>]+src="[^"]+"[^>]*>/g;
 	var result = iContent.match(reg);

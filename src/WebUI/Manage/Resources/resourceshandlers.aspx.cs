@@ -49,7 +49,7 @@ public partial class resources_resourceshandlers : BasePage
             this.iTitle.Value = item.vcTitle;
             this.iUrl.Value = item.vcUrl;
             this.iKeyWords.Value = item.vcKeyWord;
-            this.iContent.Value = item.vcContent;
+            this.taContent.Value = item.vcContent;
             this.iAuthor.Value = item.vcAuthor;
             this.work.Value = "MdyNews";
             this.iNewsId.Value = item.Id.ToString();
@@ -92,7 +92,7 @@ public partial class resources_resourceshandlers : BasePage
 
         item.vcTitle = objectHandlers.Post("iTitle");
         item.vcUrl = objectHandlers.Post("iUrl");
-        item.vcContent = iContent.Value;// objectHandlers.Post("iContent$content");
+        item.vcContent = objectHandlers.Post("taContent");
         item.vcAuthor = objectHandlers.Post("iAuthor");
         item.vcKeyWord = objectHandlers.Post("iKeyWords");
 
