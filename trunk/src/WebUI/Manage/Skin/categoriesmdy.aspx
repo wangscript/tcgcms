@@ -6,6 +6,7 @@
 <head>
     <title>修改资讯分类</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
+	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../Common/common.aspx"></script>
@@ -18,54 +19,72 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <div class="page_title" style="margin-bottom:5px;">
+		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="$('#form1').submit();">
+			<img src="../images/icon/save.gif" /> 保存
+		</a>
+		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
+			<img src="../images/icon/5.gif" />取消
+		</a>
+        <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
+			<img src="../images/icon/07.gif" />刷新
+		</a>
+	</div>
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="Page_title bold">
-		修改资讯分类　<a href="javascript:GoTo();" class="title_back bold" onclick="window.parent.refinsh();">[关闭]</a>
-	</div>
-	<div id="placemsg" class="Page_arrb arb_pr classaddline">
-		<span class="p_a_t">详 细 位 置：</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">父 类 编 号：</span>
-	  <input id="iClassId" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
-	  <script type="text/javascript">GetParentTitle();</script>
-		<span id="cnamemsg" class="info1">分类名称，必须填写</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 名 称：</span>
-	  <input id="iClassName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
-		<span id="cnamemsg" class="info1">分类名称，必须填写</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 别 名：</span>
-	  <input id="iName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iName','inamemsg');"/>
-		<span id="inamemsg" class="info1">分类别名，显示在前台的名称</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">指 定 目 录：</span>
-	  <input id="iDirectory" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iDirectory','dirmsg');"/>
-		<span id="dirmsg" class="info1">相对管理网站的的目录，存放生成的静态文件</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分类 首地址：</span>
-	  <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" />
-		<span id="urlmsg" class="info1">分类在网站前台的首页地址，用于生成导航</span>
-	</div>
-    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">是否为单页：</span>
-      <input type="checkbox" name="iIsSinglePage" id="iIsSinglePage" runat="server" />
-		<span id="iIsSinglePagemsg" class="info1">如果为单页，则链接到该分类下的最新一篇文章</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">详 细 模 板：</span>
-	  <select id="sTemplate" runat="server"  onchange="CheckTemplate('sTemplate','stdmsg')">
-	  	<option value="-1">请选择</option>
-	  </select>
-		<span id="stdmsg" class="info1">分类资讯详细页模板</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">列 表 模 板：</span>
-	  <select id="slTemplate" runat="server" onchange="CheckTemplate('slTemplate','stsdmsg')">
-	  	<option value="-1">请选择</option>
-	  </select>
-		<span id="stsdmsg" class="info1">分类资讯列表页模板</span>
-	</div>
-	<div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 排 序：</span>
-	  <input id="iOrder" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
-		<span id="urlmsg" class="info1">在列表中的显示顺序</span>
-	</div>
+    <div class="g-tabnav">
+        <a style="margin-left:-13px;"></a>
+        <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
+        <a id="a2" onclick="SetFromsByNum('a2')">分类属性</a>
+        <a id="a3" onclick="SetFromsByNum('a3')">数据源</a>
+    </div>
+    <div id="a1_from">
+	    <div id="placemsg" class="Page_arrb arb_pr classaddline">
+		    <span class="p_a_t">详 细 位 置：</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">父 类 编 号：</span>
+	      <input id="iClassId" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
+	      <script type="text/javascript">GetParentTitle();</script>
+		    <span id="cnamemsg" class="info1">分类名称，必须填写</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 名 称：</span>
+	      <input id="iClassName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
+		    <span id="cnamemsg" class="info1">分类名称，必须填写</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 别 名：</span>
+	      <input id="iName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iName','inamemsg');"/>
+		    <span id="inamemsg" class="info1">分类别名，显示在前台的名称</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">指 定 目 录：</span>
+	      <input id="iDirectory" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iDirectory','dirmsg');"/>
+		    <span id="dirmsg" class="info1">相对管理网站的的目录，存放生成的静态文件</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分类 首地址：</span>
+	      <input id="iUrl" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" />
+		    <span id="urlmsg" class="info1">分类在网站前台的首页地址，用于生成导航</span>
+	    </div>
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">是否为单页：</span>
+          <input type="checkbox" name="iIsSinglePage" id="iIsSinglePage" runat="server" />
+		    <span id="iIsSinglePagemsg" class="info1">如果为单页，则链接到该分类下的最新一篇文章</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">详 细 模 板：</span>
+	      <select id="sTemplate" runat="server"  onchange="CheckTemplate('sTemplate','stdmsg')">
+	  	    <option value="-1">请选择</option>
+	      </select>
+		    <span id="stdmsg" class="info1">分类资讯详细页模板</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">列 表 模 板：</span>
+	      <select id="slTemplate" runat="server" onchange="CheckTemplate('slTemplate','stsdmsg')">
+	  	    <option value="-1">请选择</option>
+	      </select>
+		    <span id="stsdmsg" class="info1">分类资讯列表页模板</span>
+	    </div>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 排 序：</span>
+	      <input id="iOrder" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
+		    <span id="urlmsg" class="info1">在列表中的显示顺序</span>
+	    </div>
+    </div>
+    <div id="a2_from"></div>
+    <div id="a3_from"></div>
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
 	    <input type="hidden" id="skinid" runat="server" value="" />

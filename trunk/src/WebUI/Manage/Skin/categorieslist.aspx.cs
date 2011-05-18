@@ -65,6 +65,10 @@ public partial class skin_categorieslist : BasePage
         string iParent = objectHandlers.Get("iParentId");
         this.iClassId.Value = iParent;
         string skinid = objectHandlers.Get("skinid");
+        if (string.IsNullOrEmpty(skinid))
+        {
+            skinid = ConfigServiceEx.DefaultSkinId;
+        }
         this.iSkinId.Value = skinid;
         if (string.IsNullOrEmpty(iParent)) iParent = "0";
         Dictionary<string, EntityBase> allcategories = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(iParent, skinid);

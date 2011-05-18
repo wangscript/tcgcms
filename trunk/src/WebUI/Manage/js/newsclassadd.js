@@ -40,7 +40,7 @@ function GetNewsListTitleByClassIdW(classid) {
     }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     var options;
     if ($("#Work").length != 0) {
         options = {
@@ -57,7 +57,36 @@ $(document).ready(function() {
         };
     }
     $("#form1").ajaxForm(options);
+
+    SetFromsByNum("a1");
+
+    SetAjaxDiv("ok", false, "小提示：根据分类属性的定义，可以实现文章向特殊分类的转变，如：产品");
 });
+
+
+var objss = ["a1", "a2","a3"];
+function SetFromsByNum(lb) {
+
+    for (var i = 0; i < objss.length; i++) {
+        var obj = $("#" + objss[i]);
+        if (lb == objss[i]) {
+            obj.attr("class", "ln-c-mid on");
+            obj.unbind("mouseover");
+            obj.unbind("mouseout");
+            obj.unbind("click");
+            $("#" + objss[i] + "_from").show();
+        } else {
+            obj.attr("class", "");
+            obj.unbind("mouseover");
+            obj.unbind("mouseout");
+            obj.unbind("click");
+            obj.mouseover(function () { this.className = "moson"; });
+            obj.mouseout(function () { this.className = ""; });
+            obj.attr("href", "javascript:GoTo();");
+            $("#" + objss[i] + "_from").hide();
+        }
+    }
+}
 
 
 function CheckEditClassForm() {

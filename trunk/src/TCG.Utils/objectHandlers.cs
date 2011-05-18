@@ -2037,7 +2037,22 @@ namespace TCG.Utils
             }
         }
 
+        //根据URL得到网站域名
+        public static string GetDomainName(string url)
+        {
+            string result = null;
+            try
+            {
+                HttpRequest request = new HttpRequest(string.Empty, url, string.Empty);
+                result = request.Url.Host;
 
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            return result;
+        }
 
     };
 }
