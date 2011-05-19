@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Web;
+using System.Xml;
+using System.IO;
 using System.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +30,7 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (KeyValuePair<string, EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinId)
+                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinInfo.Id)
                 {
                     childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
                 }
@@ -147,7 +150,7 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (KeyValuePair<string, EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.SkinId == skinid && tempcategories.Parent == "0")
+                if (tempcategories.SkinInfo.Id == skinid && tempcategories.Parent == "0")
                 {
                     if (sb.Length > 0) sb.Append(",");
                     sb.Append(this.GetCategoriesChild(tempcategories.Id));
@@ -174,7 +177,7 @@ namespace TCG.Handlers.Imp.AccEss
                 foreach (KeyValuePair<string, EntityBase> entity in allcategories)
                 {
                     Categories tempcategories = (Categories)entity.Value;
-                    if (tempcategories.SkinId == skinid)
+                    if (tempcategories.SkinInfo.Id == skinid)
                     {
                         categories.Add(tempcategories.Id, tempcategories);
                     }
@@ -245,7 +248,7 @@ namespace TCG.Handlers.Imp.AccEss
             return CreateCategoriesForXml(admininfo,cif);
         }
 
-        public int CreateCategoriesForXml(Admin admininfo,Categories cif)
+        public int CreateCategoriesForXml(Admin admininfo, Categories cif)
         {
             int rtn = AccessFactory.adminHandlers.CheckAdminPower(admininfo);
             if (rtn < 0) return rtn;
@@ -257,7 +260,7 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             //分类所属模板不能为空
-            if (string.IsNullOrEmpty(cif.SkinId))
+            if (cif.SkinInfo == null)
             {
                 return -1000000100;
             }
@@ -293,7 +296,7 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage)"
-                    + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinId + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
+                    + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinInfo.Id + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
                     + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" + cif.IsSinglePage + "')");
             return 1;
         }
@@ -402,53 +405,56 @@ namespace TCG.Handlers.Imp.AccEss
         /// </summary>
         /// <param name="skinid"></param>
         /// <returns></returns>
-        public int UpdateCategoriesFromXML(string skinid)
+        public int UpdateCategoriesFromXML(Admin admininfo,string skinid)
         {
-            //Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admininfo);
+            if (rtn < 0) return rtn;
 
-            //if (skininfo == null)
-            //{
-            //    return -1000000701;
-            //}
+            Skin skininfo = AccessFactory.skinHandlers.GetSkinEntityBySkinId(skinid);
 
-            //XmlDocument document = new XmlDocument();
-            //document.Load(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"));
-            //XmlNodeList nodelis1t = document.GetElementsByTagName("Categorie");
-            //if (nodelis1t != null && nodelis1t.Count > 0)
-            //{
-            //    foreach (XmlElement element in nodelis1t)
-            //    {
-            //        Categories categories = new Categories();
-            //        categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
-            //        categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
-            //        categories.ResourceListTemplate = new Template();
-            //        categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
-            //        categories.ResourceTemplate = new Template();
-            //        categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
-            //        categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
-            //        categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
-            //        categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
-            //        categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
-            //        categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
-            //        categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
-            //        categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
-            //        categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
-            //        categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
-            //        categories.SkinId = skininfo.Id;
-            //        Categories t_categories = this.GetCategoriesById(categories.Id);
-            //        if (t_categories == null)
-            //        {
-            //            this.CreateCategoriesForXml(categories);
-            //        }
-            //        else
-            //        {
-            //            this.UpdateCategories(categories);
-            //        }
-            //    }
-            //}
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
 
-            //CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
-            //CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            XmlDocument document = new XmlDocument();
+            document.Load(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"));
+            XmlNodeList nodelis1t = document.GetElementsByTagName("Categorie");
+            if (nodelis1t != null && nodelis1t.Count > 0)
+            {
+                foreach (XmlElement element in nodelis1t)
+                {
+                    Categories categories = new Categories();
+                    categories.Id = element.SelectSingleNode("Id").InnerText.ToString();
+                    categories.Parent = element.SelectSingleNode("Parent").InnerText.ToString();
+                    categories.ResourceListTemplate = new Template();
+                    categories.ResourceListTemplate.Id = element.SelectSingleNode("ResourceListTemplate").InnerText.ToString();
+                    categories.ResourceTemplate = new Template();
+                    categories.ResourceTemplate.Id = element.SelectSingleNode("ResourceTemplate").InnerText.ToString();
+                    categories.iOrder = objectHandlers.ToInt(element.SelectSingleNode("iOrder").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.dUpdateDate = objectHandlers.ToTime(element.SelectSingleNode("dUpdateDate").InnerText.ToString());
+                    categories.vcClassName = element.SelectSingleNode("vcClassName").InnerText.ToString();
+                    categories.vcName = element.SelectSingleNode("vcName").InnerText.ToString();
+                    categories.vcDirectory = element.SelectSingleNode("vcDirectory").InnerText.ToString();
+                    categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
+                    categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
+                    categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
+                    categories.SkinInfo = skininfo;
+                    Categories t_categories = this.GetCategoriesById(categories.Id);
+                    if (t_categories == null)
+                    {
+                        this.CreateCategoriesForXml(admininfo,categories);
+                    }
+                    else
+                    {
+                        this.UpdateCategories(admininfo,categories);
+                    }
+                }
+            }
+
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             return 1;
         }
 
@@ -459,51 +465,54 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="skinid"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        public int CreateCategoriesToXML(string skinid)
+        public int CreateCategoriesToXML(Admin admininfo,string skinid)
         {
-            //Skin skininfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admininfo);
+            if (rtn < 0) return rtn;
 
-            //if (skininfo == null)
-            //{
-            //    return -1000000701;
-            //}
+            Skin skininfo = AccessFactory.skinHandlers.GetSkinEntityBySkinId(skinid);
+
+            if (skininfo == null)
+            {
+                return -1000000701;
+            }
 
             //得到所有模板
-            //StringBuilder sbcategories = new StringBuilder();
-            //sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
-            //sbcategories.Append("<Categories>\r\n");
-            //Dictionary<string, EntityBase> categories = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity();
-            //if (categories != null && categories.Count > 0)
-            //{
-            //    foreach (KeyValuePair<string, EntityBase> entity in categories)
-            //    {
-            //        Categories temp = (Categories)entity.Value;
-            //        if (temp.ResourceTemplate != null)
-            //        {
-            //            if (temp.SkinId == skinid)
-            //            {
-            //                sbcategories.Append("<Categorie>\r\n");
-            //                sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
-            //                sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
-            //                sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
-            //                sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
-            //                sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
-            //                sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
-            //                sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
-            //                sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
-            //                sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
-            //                sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
-            //                sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
-            //                sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
-            //                sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
-            //                sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
-            //                sbcategories.Append("</Categorie>\r\n");
-            //            }
-            //        }
-            //    }
-            //}
-            //sbcategories.Append("</Categories>");
-            //objectHandlers.SaveFile(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"), sbcategories.ToString());
+            StringBuilder sbcategories = new StringBuilder();
+            sbcategories.Append("<?xml version=\"1.0\"?>\r\n");
+            sbcategories.Append("<Categories>\r\n");
+            Dictionary<string, EntityBase> categories = AccessFactory.categoriesHandlers.GetAllCategoriesEntity();
+            if (categories != null && categories.Count > 0)
+            {
+                foreach (KeyValuePair<string, EntityBase> entity in categories)
+                {
+                    Categories temp = (Categories)entity.Value;
+                    if (temp.ResourceTemplate != null)
+                    {
+                        if (temp.SkinInfo.Id == skinid)
+                        {
+                            sbcategories.Append("<Categorie>\r\n");
+                            sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
+                            sbcategories.Append("\t<Parent>" + temp.Parent + "</Parent>\r\n");
+                            sbcategories.Append("\t<ResourceTemplate>" + temp.ResourceTemplate.Id + "</ResourceTemplate>\r\n");
+                            sbcategories.Append("\t<ResourceListTemplate>" + temp.ResourceListTemplate.Id + "</ResourceListTemplate>\r\n");
+                            sbcategories.Append("\t<iOrder>" + temp.iOrder.ToString() + "</iOrder>\r\n");
+                            sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate.ToString() + "</dUpdateDate>\r\n");
+                            sbcategories.Append("\t<dUpdateDate>" + temp.dUpdateDate + "</dUpdateDate>\r\n");
+                            sbcategories.Append("\t<vcClassName>" + temp.vcClassName + "</vcClassName>\r\n");
+                            sbcategories.Append("\t<vcName>" + temp.vcName + "</vcName>\r\n");
+                            sbcategories.Append("\t<vcDirectory>" + temp.vcDirectory + "</vcDirectory>\r\n");
+                            sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
+                            sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
+                            sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
+                            sbcategories.Append("\t<SkinId>" + temp.SkinInfo.Id + "</SkinId>\r\n");
+                            sbcategories.Append("</Categorie>\r\n");
+                        }
+                    }
+                }
+            }
+            sbcategories.Append("</Categories>");
+            objectHandlers.SaveFile(HttpContext.Current.Server.MapPath("~/skin/" + skininfo.Filename + "/categories.config"), sbcategories.ToString());
             return 1;
         }
       

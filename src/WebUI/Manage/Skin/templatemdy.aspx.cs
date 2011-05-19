@@ -42,7 +42,7 @@ public partial class Template_templatemdy : BasePage
             this.vcContent.Value = item.Content;
             this.vcUrl.Value =  filepatch;
 
-            this.iSiteId.Value = item.SkinId.ToString();
+            this.iSiteId.Value = item.SkinInfo.ToString();
             if (item.TemplateType == TemplateType.Folider)
             {
                 this.iParentid.Value = item.iParentId.ToString();
@@ -84,7 +84,7 @@ public partial class Template_templatemdy : BasePage
             item.TemplateType = base.handlerService.skinService.templateHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
-            item.SkinId = objectHandlers.Post("iSiteId");
+            item.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(objectHandlers.Post("iSiteId"));
             string parentid = objectHandlers.Post("iParentId");
             if (!string.IsNullOrEmpty(parentid))
             {
@@ -114,7 +114,7 @@ public partial class Template_templatemdy : BasePage
             try
             {
                 rtn = base.handlerService.skinService.templateHandlers.MdyTemplate(item,base.adminInfo);
-                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(item.SkinId);
+                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(base.adminInfo,item.SkinInfo.Id);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
@@ -135,18 +135,11 @@ public partial class Template_templatemdy : BasePage
                 bool create = false;
                 if (item.TemplateType == TemplateType.SinglePageType)
                 {
-                    string filepath = string.Empty;
-                    filepath = item.vcUrl.IndexOf(".") > -1 ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+
                     try
                     {
-                        filepath = Server.MapPath("~" + filepath);
-                        TCGTagHandlers tcgthdl = base.handlerService.tagService.tcgTagHandlers;
-                        tcgthdl.Template = item.Content;
-                        tcgthdl.FilePath = filepath;
-                        if (tcgthdl.Replace())
-                        {
-                            create = true;
-                        }
+                        string path = string.Empty;
+                        rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(item.Id, ref path);
                     }
                     catch (Exception ex)
                     {
@@ -154,6 +147,8 @@ public partial class Template_templatemdy : BasePage
                         base.AjaxErch(base.ajaxdata);
                         return;
                     }
+
+                    create = rtn == 1 ? true : false;
 
                 }
                 base.AjaxErch("{state:true,message:'" + ((create) ? "模板修改成功" : "模板修改失败") + "!'}");

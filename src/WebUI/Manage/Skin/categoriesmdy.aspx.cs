@@ -40,7 +40,7 @@ public partial class skin_categoriesmdy : BasePage
             cif.vcClassName = objectHandlers.Post("iClassName");
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
-            cif.SkinId = skinid;
+            cif.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
             cif.vcUrl = objectHandlers.Post("iUrl");
             cif.Parent = objectHandlers.Post("iClassId");
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID( objectHandlers.Post("sTemplate"));
@@ -67,7 +67,7 @@ public partial class skin_categoriesmdy : BasePage
                 rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
                 if (rtn == 1)
                 {
-                    rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
+                    rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo,cif.SkinInfo.Id);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
                 }

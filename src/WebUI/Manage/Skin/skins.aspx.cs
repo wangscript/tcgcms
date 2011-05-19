@@ -79,9 +79,11 @@ public partial class Skin_skins : BasePage
                     {
                         Skin skin = new Skin();
                         skin.Id =  nodelist[0].SelectSingleNode("Id").InnerText.ToString();
-                        skin.Info = nodelist[0].SelectSingleNode("Info").InnerText.ToString();
+                        skin.WebDescription = nodelist[0].SelectSingleNode("WebDescription").InnerText.ToString();
                         skin.Name = nodelist[0].SelectSingleNode("Name").InnerText.ToString();
                         skin.Pic = nodelist[0].SelectSingleNode("Pic").InnerText.ToString();
+                        skin.IndexPage = nodelist[0].SelectSingleNode("IndexPage").InnerText.ToString();
+                        skin.WebKeyWords = nodelist[0].SelectSingleNode("WebKeyWords").InnerText.ToString();
                         skin.Filename = finfo.Name;
                         int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
                     }
@@ -123,7 +125,7 @@ public partial class Skin_skins : BasePage
             CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
             rtn = base.handlerService.skinService.templateHandlers.UpdateTemplateFromXML(SkinId, base.adminInfo);
-            rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategoriesFromXML(SkinId);
+            rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategoriesFromXML(base.adminInfo,SkinId);
         }
         catch (Exception ex)
         {
@@ -143,8 +145,8 @@ public partial class Skin_skins : BasePage
 
         try
         {
-            rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(SkinId);
-            rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(SkinId);
+            rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(base.adminInfo,SkinId);
+            rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo,SkinId);
         }
         catch (Exception ex)
         {
@@ -172,7 +174,7 @@ public partial class Skin_skins : BasePage
         Span sid2 = (Span)e.Item.FindControl("sid2");
         
 
-        info.Text = skininfo.Info;
+        info.Text = skininfo.WebDescription;
         sitename.Text = skininfo.Name;
         pic.Src = skininfo.Pic;
         sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;

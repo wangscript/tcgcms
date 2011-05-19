@@ -152,12 +152,14 @@ namespace TCG.Handlers
 
         private void SysteConfigReplace()
         {
+            if (SkinInfo == null) return;
             this._temphtml = _temphtml.Replace("_$FileExtension$_", ConfigServiceEx.baseConfig["FileExtension"]);
             this._temphtml = _temphtml.Replace("_$WebSite$_", ConfigServiceEx.baseConfig["WebSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", ConfigServiceEx.baseConfig["PageSize"]);
-            this._temphtml = _temphtml.Replace("_$WebTitle$_", ConfigServiceEx.baseConfig["WebTitle"]);
-            this._temphtml = _temphtml.Replace("_$WebKeyWords$_", ConfigServiceEx.baseConfig["WebKeyWords"]);
-            this._temphtml = _temphtml.Replace("_$WebDescription$_", ConfigServiceEx.baseConfig["WebDescription"]);
+            this._temphtml = _temphtml.Replace("_$WebTitle$_", SkinInfo.Name);
+            this._temphtml = _temphtml.Replace("_$WebKeyWords$_", SkinInfo.WebKeyWords);
+            this._temphtml = _temphtml.Replace("_$WebDescription$_", SkinInfo.WebDescription);
+            this._temphtml = _temphtml.Replace("_$IndexPage$_", SkinInfo.IndexPage);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
             this._temphtml = _temphtml.Replace("_$SystemName$_", Versions.SystemName);
@@ -504,6 +506,10 @@ namespace TCG.Handlers
         /// </summary>
         public string FilePath { get { return this._filepath; } set { this._filepath = value; } }
         /// <summary>
+        /// 资源所在皮肤
+        /// </summary>
+        public Skin SkinInfo { get { return this._skin; } set { this._skin = value; } }
+        /// <summary>
         /// 需要生成文件
         /// </summary>
         public bool NeedCreate { get { return this._needcreate; } set { this._needcreate = value; } }
@@ -526,6 +532,6 @@ namespace TCG.Handlers
         private TCGTagAttributeHandlers _tagtemplate = null;
         private bool _needcreate = true;
         private int _currentpage = 0;                         /// 当前页
-                                                              /// 
+        private Skin _skin = null;
     }
 }

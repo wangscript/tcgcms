@@ -147,13 +147,13 @@ namespace TCG.Handlers
                     sb.Append("Visible:\"" + categories.cVisible + "\",");
                     sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
                     sb.Append("Name:\"" + categories.vcName + "\",");
-                    sb.Append("SkinId:\"" + categories.SkinId + "\",");
+                    sb.Append("SkinId:\"" + categories.SkinInfo + "\",");
                     sb.Append("ClassName:\"" + categories.vcClassName + "\"");
                     break;
                 case "TCG.Entity.Template":
                     Template template = (Template)entity;
                     sb.Append("Id:\"" + template.Id + "\",");
-                    sb.Append("SkinId:\"" + template.SkinId + "\",");
+                    sb.Append("SkinId:\"" + template.SkinInfo + "\",");
                     sb.Append("TemplateType:" + ((int)template.TemplateType).ToString() + ",");
                     sb.Append("ParentId:\"" + template.iParentId + "\",");
                     sb.Append("SystemType:" + template.iSystemType.ToString() + ",");
@@ -165,7 +165,9 @@ namespace TCG.Handlers
                     sb.Append("Id:\"" + skin.Id + "\",");
                     sb.Append("Name:\"" + skin.Name + "\",");
                     sb.Append("Pic:\"" + skin.Pic + "\",");
-                    sb.Append("Info:\"" + skin.Info + "\"");
+                    sb.Append("Info:\"" + skin.WebDescription + "\",");
+                    sb.Append("IndexPage:\"" + skin.IndexPage + "\",");
+                    sb.Append("WebKeyWords:\"" + skin.WebKeyWords + "\"");
                     break;
                 case "TCG.Entity.FileCategories":
                     FileCategories filecategories = (FileCategories)entity;

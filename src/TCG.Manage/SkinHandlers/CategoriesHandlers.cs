@@ -51,7 +51,7 @@ namespace TCG.Handlers
             foreach ( KeyValuePair<string,EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinId)
+                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinInfo.Id)
                 {
                     childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
                 }
@@ -156,7 +156,7 @@ namespace TCG.Handlers
             foreach (KeyValuePair<string, EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.SkinId == skinid && tempcategories.Parent == "0")
+                if (tempcategories.SkinInfo.Id == skinid && tempcategories.Parent == "0")
                 {
                     if (sb.Length > 0) sb.Append(",");
                     sb.Append(this.GetCategoriesChild(tempcategories.Id));
@@ -183,7 +183,7 @@ namespace TCG.Handlers
                 foreach (KeyValuePair<string, EntityBase> entity in allcategories)
                 {
                     Categories tempcategories = (Categories)entity.Value;
-                    if (tempcategories.SkinId == skinid)
+                    if (tempcategories.SkinInfo.Id == skinid)
                     {
                         categories.Add(tempcategories.Id, tempcategories);
                     }
@@ -269,7 +269,7 @@ namespace TCG.Handlers
             SqlParameter sp10 = new SqlParameter("@reValue", SqlDbType.Int); sp10.Direction = ParameterDirection.Output;
             SqlParameter sp11 = new SqlParameter("@cVisible", SqlDbType.Char, 1); sp11.Value = cif.cVisible;
             SqlParameter sp12 = new SqlParameter("@iClassId", SqlDbType.VarChar, 36); sp12.Value = cif.Id;
-            SqlParameter sp13 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp13.Value = cif.SkinId;
+            SqlParameter sp13 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp13.Value = cif.SkinInfo;
             string[] reValues = conn.Execute("SP_Skin_categories_Manage", new SqlParameter[] { sp2, sp3, sp4, sp5, sp6,
                 sp7, sp8, sp9 ,sp10,sp11,sp12,sp13}, new int[] { 8 });
             if (reValues != null)
@@ -374,7 +374,7 @@ namespace TCG.Handlers
                     categories.vcUrl = element.SelectSingleNode("vcUrl").InnerText.ToString();
                     categories.cVisible = element.SelectSingleNode("cVisible").InnerText.ToString();
                     categories.DataBaseService = element.SelectSingleNode("DataBaseService").InnerText.ToString();
-                    categories.SkinId = skininfo.Id;
+                    //categories.SkinInfo = skininfo.Id;
                     Categories t_categories = this.GetCategoriesById(categories.Id);
                     if (t_categories == null)
                     {
@@ -420,7 +420,7 @@ namespace TCG.Handlers
                     Categories temp = (Categories)entity.Value;
                     if (temp.ResourceTemplate != null)
                     {
-                        if (temp.SkinId == skinid)
+                        if (temp.SkinInfo.Id == skinid)
                         {
                             sbcategories.Append("<Categorie>\r\n");
                             sbcategories.Append("\t<Id>" + temp.Id + "</Id>\r\n");
@@ -436,7 +436,7 @@ namespace TCG.Handlers
                             sbcategories.Append("\t<vcUrl>" + temp.vcUrl + "</vcUrl>\r\n");
                             sbcategories.Append("\t<cVisible>" + temp.cVisible + "</cVisible>\r\n");
                             sbcategories.Append("\t<DataBaseService>" + temp.DataBaseService + "</DataBaseService>\r\n");
-                            sbcategories.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                            sbcategories.Append("\t<SkinId>" + temp.SkinInfo.Id + "</SkinId>\r\n");
                             sbcategories.Append("</Categorie>\r\n");
                         }
                     }

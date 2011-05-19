@@ -38,10 +38,20 @@ namespace TCG.Entity
         /// 皮肤文件夹
         /// </summary>
         public string Filename { get { return this._filename; } set { this._filename = value; } }
+        /// <summary>
+        /// 首页地址
+        /// </summary>
+        public string IndexPage { get { return this._indexpage; } set { this._indexpage = value; } }
+        /// <summary>
+        /// 关键字
+        /// </summary>
+        public string WebKeyWords { get { return this._webkeywords; } set { this._webkeywords = value; } }
 
         private string _name = string.Empty;
         private string _pic = string.Empty;
         private string _info = string.Empty;
         private string _filename = string.Empty;
+        private string _indexpage = string.Empty;
+        private string _webkeywords = string.Empty;
     }
 }

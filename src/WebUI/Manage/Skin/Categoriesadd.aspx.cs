@@ -41,7 +41,7 @@ public partial class skin_categoriesadd : BasePage
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"));
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
-            cif.SkinId = skinid;
+            cif.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -62,7 +62,7 @@ public partial class skin_categoriesadd : BasePage
             try
             {
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(base.adminInfo,cif);
-                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(cif.SkinId);
+                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo, cif.SkinInfo.Id);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             }

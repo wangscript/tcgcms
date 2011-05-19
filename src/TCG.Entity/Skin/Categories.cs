@@ -69,11 +69,12 @@ namespace TCG.Entity
         /// <summary>
         ///  所属皮肤的ID
         /// </summary>
-        public string SkinId { get { return this._skinid; } set { this._skinid = value; } }
+        public Skin SkinInfo { get { return this._skin; } set { this._skin = value; } }
         /// <summary>
         /// 是否为单页
         /// </summary>
         public string IsSinglePage { get { return this._sssinglepage; } set { this._sssinglepage = value; } }
+ 
 
         
         private string _iparent;
@@ -89,5 +90,6 @@ namespace TCG.Entity
         private string _dbService = null;
         private string _skinid;
         private string _sssinglepage;
+        private Skin _skin;
     }
 }

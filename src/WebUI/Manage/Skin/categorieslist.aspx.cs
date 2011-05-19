@@ -138,65 +138,20 @@ public partial class skin_categorieslist : BasePage
         string text = string.Empty;
         int page = objectHandlers.ToInt(objectHandlers.Post("iPage"));
         int rtn = 0;
+        int PageCount = 0;
+
         try
         {
-
-            if (string.IsNullOrEmpty(tClassID))
+            string pagepath = string.Empty;
+            rtn = base.handlerService.tagService.CreateClassList(tClassID, page, ref PageCount, ref pagepath);
+            if (rtn == 1)
             {
-                rtn = -1000000801;
+                if (PageCount > page) classbackstr = "CreateBack1";
+                text = "<a>生成成功：" + pagepath + "</a>";
             }
             else
             {
-                Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(tClassID);
-
-                if (cif == null)
-                {
-                    rtn = -1000000802;
-                }
-                else
-                {
-                    if (cif.ResourceListTemplate == null)
-                    {
-                        rtn = -1000000803;
-                    }
-                    else
-                    {
-                        if (cif.vcUrl.IndexOf(".") > -1)
-                        {
-                            rtn = -1000000804;
-                        }
-                        else
-                        {
-                            string filepath = "";
-                            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
-
-                            TCGTagHandlers tcgthdl = base.handlerService.tagService.tcgTagHandlers;
-                            tcgthdl.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", tClassID.ToString());
-                            tcgthdl.FilePath = filepath;
-                            tcgthdl.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
-                            tcgthdl.PagerInfo.DoAllPage = false;
-                            tcgthdl.PagerInfo.Page = page;
-                            tcgthdl.PagerInfo.PageSep = page <= 0 ? 0 : 1;
-
-                            if (tcgthdl.Replace())
-                            {
-                                rtn = 1;
-                                text = tcgthdl.PagerInfo.CreatePagesNotic.Replace("\\", "/");
-
-                                if (tcgthdl.PagerInfo.PageCount > page)
-                                {
-                                    classbackstr = "CreateBack1";
-                                }
-                            }
-                            else
-                            {
-                                rtn = -1000000805;
-                            }
-
-                        }
-                    }
-
-                }
+                text = "<a>生成失败：" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "</a>";
             }
         }
         catch (Exception ex)

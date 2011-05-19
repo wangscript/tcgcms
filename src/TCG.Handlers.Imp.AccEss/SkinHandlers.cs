@@ -76,10 +76,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
             int count = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Skin WHERE id = '" + skin.Id + "'"));
 
-            string sql = "UPDATE Skin SET [Name]='" + skin.Name + "',Pic='" + skin.Pic + "',Info='" + skin.Info + "',Filename='" + skin.Filename + "' WHERE id = '" + skin.Id + "'";
+            string sql = "UPDATE Skin SET [Name]='" + skin.Name + "',Pic='" + skin.Pic + "',WebDescription='" + skin.WebDescription + "',Filename='" + skin.Filename
+                + "',IndexPage='" + skin.IndexPage + "',WebKeyWords='" + skin.WebKeyWords + "' WHERE id = '" + skin.Id + "'";
             if (count == 0)
             {
-                sql = "INSERT INTO Skin (ID,[NAME],PIC,INFO,Filename) VALUES('" + skin.Id + "','" + skin.Name + "','" + skin.Pic + "','" + skin.Info + "','" + skin.Filename + "')";
+                sql = "INSERT INTO Skin (ID,[NAME],PIC,WebDescription,Filename,IndexPage,WebKeyWords) VALUES('" + skin.Id + "','" + skin.Name + "','"
+                    + skin.Pic + "','" + skin.WebDescription + "','" + skin.Filename + "','" + skin.IndexPage + "','" + skin.WebKeyWords + "')";
             }
 
             AccessFactory.conn.Execute(sql);

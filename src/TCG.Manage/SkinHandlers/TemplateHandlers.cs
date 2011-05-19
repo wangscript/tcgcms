@@ -105,7 +105,7 @@ namespace TCG.Handlers
                 Template temp = (Template)entity.Value;
                 if (templatetypes == null)
                 {
-                    if (skinid == temp.SkinId && parentid == temp.iParentId)
+                    if (skinid == temp.SkinInfo.Id && parentid == temp.iParentId)
                     {
                         childtemplates.Add(temp.Id, (EntityBase)temp);
                     }
@@ -120,7 +120,7 @@ namespace TCG.Handlers
                     }
                     if (temptypein)
                     {
-                        if (skinid == temp.SkinId && parentid == temp.iParentId)
+                        if (skinid == temp.SkinInfo.Id && parentid == temp.iParentId)
                         {
                             childtemplates.Add(temp.Id, (EntityBase)temp);
                         }
@@ -167,7 +167,7 @@ namespace TCG.Handlers
 
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
+            SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinInfo;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;
             SqlParameter sp4 = new SqlParameter("@vcTempName", SqlDbType.VarChar, 50); sp4.Value = item.vcTempName;
             SqlParameter sp5 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp5.Value = item.Content;
@@ -219,7 +219,7 @@ namespace TCG.Handlers
             
             SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = admin.vcAdminName;
             SqlParameter sp1 = new SqlParameter("@vcip", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinId;
+            SqlParameter sp2 = new SqlParameter("@SkinId", SqlDbType.VarChar, 36); sp2.Value = item.SkinInfo;
             SqlParameter sp3 = new SqlParameter("@TemplateType", SqlDbType.Int, 4); sp3.Value = (int)item.TemplateType;
             SqlParameter sp4 = new SqlParameter("@vcTempName", SqlDbType.VarChar, 50); sp4.Value = item.vcTempName;
             SqlParameter sp5 = new SqlParameter("@vcContent", SqlDbType.Text, 0); sp5.Value = item.Content;
@@ -266,7 +266,7 @@ namespace TCG.Handlers
                     template.Content = element.SelectSingleNode("Content").InnerText.ToString();
                     template.Content = Regex.Replace(template.Content, "<![CDATA[(.+?)]]>", "$1", RegexOptions.Multiline);
 
-                    template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
+                    //template.SkinInfo = access element.SelectSingleNode("SkinId").InnerText.ToString();
                     template.TemplateType = this.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
                     template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
                     template.iSystemType = objectHandlers.ToInt(element.SelectSingleNode("iSystemType").InnerText.ToString());
@@ -317,12 +317,12 @@ namespace TCG.Handlers
                 foreach (KeyValuePair<string, EntityBase> entity in templates)
                 {
                     Template temp = (Template)entity.Value;
-                    if (temp.SkinId == skinid)
+                    if (temp.SkinInfo.Id == skinid)
                     {
                         sbtemplate.Append("<Template>\r\n");
                         sbtemplate.Append("\t<Id>" + temp.Id + "</Id>\r\n");
                         sbtemplate.Append("\t<Content><![CDATA[" + temp.Content + "]]></Content>\r\n");
-                        sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                        sbtemplate.Append("\t<SkinId>" + temp.SkinInfo + "</SkinId>\r\n");
                         sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
                         sbtemplate.Append("\t<iParentId>" + temp.iParentId + "</iParentId>\r\n");
                         sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "</iSystemType>\r\n");

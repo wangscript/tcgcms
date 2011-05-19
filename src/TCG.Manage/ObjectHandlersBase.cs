@@ -145,13 +145,13 @@ namespace TCG.Handlers
                     sb.Append("Visible:\"" + categories.cVisible + "\",");
                     sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
                     sb.Append("Name:\"" + categories.vcName + "\",");
-                    sb.Append("SkinId:\"" + categories.SkinId + "\",");
+                    sb.Append("SkinId:\"" + categories.SkinInfo + "\",");
                     sb.Append("ClassName:\"" + categories.vcClassName + "\"");
                     break;
                 case "TCG.Entity.Template":
                     Template template = (Template)entity;
                     sb.Append("Id:\"" + template.Id + "\",");
-                    sb.Append("SkinId:\"" + template.SkinId + "\",");
+                    sb.Append("SkinId:\"" + template.SkinInfo + "\",");
                     sb.Append("TemplateType:" + ((int)template.TemplateType).ToString() + ",");
                     sb.Append("ParentId:\"" + template.iParentId + "\",");
                     sb.Append("SystemType:" + template.iSystemType.ToString() + ",");
@@ -163,7 +163,7 @@ namespace TCG.Handlers
                     sb.Append("Id:\"" + skin.Id + "\",");
                     sb.Append("Name:\"" + skin.Name + "\",");
                     sb.Append("Pic:\"" + skin.Pic + "\",");
-                    sb.Append("Info:\"" + skin.Info + "\"");
+                    //sb.Append("Info:\"" + skin.Info + "\"");
                     break;
                 case "TCG.Entity.FileCategories":
                     FileCategories filecategories = (FileCategories)entity;
@@ -201,7 +201,7 @@ namespace TCG.Handlers
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = row["Visible"].ToString().Trim();
                     categories.DataBaseService = row["DataBaseService"].ToString().Trim();
-                    categories.SkinId = row["SkinId"].ToString().Trim();
+                    //categories.SkinInfo = row["SkinId"].ToString().Trim();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();
@@ -233,7 +233,7 @@ namespace TCG.Handlers
                 case "TCG.Entity.Template":
                     Template template = new Template();
                     template.Id = row["Id"].ToString();
-                    template.SkinId = row["SkinId"].ToString();
+                    //template.SkinInfo = row["SkinId"].ToString();
                     template.TemplateType = this.handlerService.skinService.templateHandlers.GetTemplateType((int)row["TemplateType"]);
                     template.iParentId = row["iParentId"].ToString();
                     template.iSystemType = (int)row["iSystemType"];
@@ -248,7 +248,7 @@ namespace TCG.Handlers
                     skin.Id = row["Id"].ToString().Trim();
                     skin.Name = row["Name"].ToString().Trim();
                     skin.Pic = row["Pic"].ToString().Trim();
-                    skin.Info = row["info"].ToString().Trim();
+                    //skin.Info = row["info"].ToString().Trim();
                     skin.Filename = row["Filename"].ToString().Trim();
                     return (EntityBase)skin;
                 case "TCG.Entity.SheifSourceInfo":
