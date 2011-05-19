@@ -84,6 +84,16 @@
 	    </div>
     </div>
     <div id="a2_from"></div>
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">属性名称：</span>
+	      <input id="Text1" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
+		    <input type="radio" name="radio" id="raInPut" value="01" /><label for="raInPut">输入</label>
+            <input type="radio" name="radio" id="raSSelect" value="02" /><label for="raSSelect">单选</label>
+            <input type="radio" name="radio" id="raMSelect" value="03" /><label for="raMSelect">复选</label>
+            <span id="Span1" class="info1">可选项目请用"|"间隔</span>
+	    </div>
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">可选项目：</span>
+	      <input id="Text2" type="text" runat="server" value="0" style="width:480px;" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
+	    </div>
     <div id="a3_from"></div>
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
