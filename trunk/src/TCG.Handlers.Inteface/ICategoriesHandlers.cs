@@ -122,7 +122,7 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="skinid"></param>
         /// <returns></returns>
-        int UpdateCategoriesFromXML(string skinid);
+        int UpdateCategoriesFromXML(Admin admininfo,string skinid);
 
         /// <summary>
         /// 创建皮肤模板文件 
@@ -130,7 +130,7 @@ namespace TCG.Handlers
         /// <param name="skinid"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        int CreateCategoriesToXML(string skinid);
+        int CreateCategoriesToXML(Admin admininfo,string skinid);
 
         
     }

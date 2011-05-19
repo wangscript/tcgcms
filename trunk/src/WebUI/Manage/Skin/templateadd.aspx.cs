@@ -112,7 +112,7 @@ public partial class Template_templateadd : BasePage
             item.iSystemType = objectHandlers.ToInt(objectHandlers.Post("SytemType"));
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
-            item.SkinId = objectHandlers.Post("iSiteId");
+            item.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId( objectHandlers.Post("iSiteId"));
 
             if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.Content))
             {
@@ -130,7 +130,7 @@ public partial class Template_templateadd : BasePage
             try
             {
                 rtn = base.handlerService.skinService.templateHandlers.AddTemplate(item,base.adminInfo);
-                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(item.SkinId);
+                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(base.adminInfo,item.SkinInfo.Id);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES);
                 CachingService.Remove(CachingService.CACHING_All_TEMPLATES_ENTITY);
             }

@@ -66,7 +66,7 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (KeyValuePair<string, EntityBase> entity in templates)
             {
                 Template temp = (Template)entity.Value;
-                if (temp.TemplateType == templatetype&&temp.SkinId == skinid)
+                if (temp.TemplateType == templatetype&&temp.SkinInfo.Id == skinid)
                 {
                     childtemplates.Add(temp.Id, (EntityBase)temp);
                 }
@@ -90,7 +90,7 @@ namespace TCG.Handlers.Imp.AccEss
                 Template temp = (Template)entity.Value;
                 if (templatetypes == null)
                 {
-                    if (skinid == temp.SkinId && parentid == temp.iParentId)
+                    if (skinid == temp.SkinInfo.Id && parentid == temp.iParentId)
                     {
                         childtemplates.Add(temp.Id, (EntityBase)temp);
                     }
@@ -105,7 +105,7 @@ namespace TCG.Handlers.Imp.AccEss
                     }
                     if (temptypein)
                     {
-                        if (skinid == temp.SkinId && parentid == temp.iParentId)
+                        if (skinid == temp.SkinInfo.Id && parentid == temp.iParentId)
                         {
                             childtemplates.Add(temp.Id, (EntityBase)temp);
                         }
@@ -165,7 +165,7 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             AccessFactory.conn.Execute("INSERT INTO Template (Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl,dUpdateDate,dAddDate)"
-                + "VALUES('" + item.Id + "','" + item.SkinId + "','" + (int)item.TemplateType + "','" + item.iParentId + "','" + item.iSystemType + "','"
+                + "VALUES('" + item.Id + "','" + item.SkinInfo.Id + "','" + (int)item.TemplateType + "','" + item.iParentId + "','" + item.iSystemType + "','"
                 + item.vcTempName + "','" + item.Content.Replace("'", "''") + "','" + item.vcUrl + "',now(),now())");
 
             return 1;
@@ -230,6 +230,9 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int UpdateTemplateFromXML(string skinid, Admin admin)
         {
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admin);
+            if (rtn < 0) return rtn;
+
             Skin skininfo = AccessFactory.skinHandlers.GetSkinEntityBySkinId(skinid);
 
             if (skininfo == null)
@@ -250,7 +253,7 @@ namespace TCG.Handlers.Imp.AccEss
                     template.Content = element.SelectSingleNode("Content").InnerText.ToString();
                     template.Content = Regex.Replace(template.Content, "<![CDATA[(.+?)]]>", "$1", RegexOptions.Multiline);
 
-                    template.SkinId = element.SelectSingleNode("SkinId").InnerText.ToString();
+                    template.SkinInfo = AccessFactory.skinHandlers.GetSkinEntityBySkinId(element.SelectSingleNode("SkinId").InnerText.ToString());
                     template.TemplateType = this.GetTemplateType(objectHandlers.ToInt(element.SelectSingleNode("TemplateType").InnerText.ToString()));
                     template.iParentId = element.SelectSingleNode("iParentId").InnerText.ToString();
                     template.iSystemType = objectHandlers.ToInt(element.SelectSingleNode("iSystemType").InnerText.ToString());
@@ -282,8 +285,12 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="skinid"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        public int CreateTemplateToXML(string skinid)
+        public int CreateTemplateToXML( Admin admin,string skinid)
         {
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admin);
+            if (rtn < 0) return rtn;
+
+
             Skin skininfo = AccessFactory.skinHandlers.GetSkinEntityBySkinId(skinid);
 
             if (skininfo == null)
@@ -301,12 +308,12 @@ namespace TCG.Handlers.Imp.AccEss
                 foreach (KeyValuePair<string, EntityBase> entity in templates)
                 {
                     Template temp = (Template)entity.Value;
-                    if (temp.SkinId == skinid)
+                    if (temp.SkinInfo.Id == skinid)
                     {
                         sbtemplate.Append("<Template>\r\n");
                         sbtemplate.Append("\t<Id>" + temp.Id + "</Id>\r\n");
                         sbtemplate.Append("\t<Content><![CDATA[" + temp.Content + "]]></Content>\r\n");
-                        sbtemplate.Append("\t<SkinId>" + temp.SkinId + "</SkinId>\r\n");
+                        sbtemplate.Append("\t<SkinId>" + temp.SkinInfo.Id + "</SkinId>\r\n");
                         sbtemplate.Append("\t<TemplateType>" + ((int)temp.TemplateType).ToString() + "</TemplateType>\r\n");
                         sbtemplate.Append("\t<iParentId>" + temp.iParentId + "</iParentId>\r\n");
                         sbtemplate.Append("\t<iSystemType>" + temp.iSystemType + "</iSystemType>\r\n");

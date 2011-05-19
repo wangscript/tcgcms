@@ -29,7 +29,7 @@ namespace TCG.Entity
         /// <summary>
         /// Æ¤·ôID
         /// </summary>
-        public string SkinId { get { return this._isiteid; } set { this._isiteid = value; } }
+        public Skin SkinInfo { get { return this._isiteid; } set { this._isiteid = value; } }
         /// <summary>
         /// Ä£°åÀàĞÍ
         /// </summary>
@@ -58,7 +58,7 @@ namespace TCG.Entity
 
         private string _vccontent;
         private string _iid;
-        private string _isiteid;
+        private Skin _isiteid;
         private TemplateType _itype;
         private string _iparentid;
         private int _isystemtype;

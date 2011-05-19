@@ -67,6 +67,7 @@ namespace TCG.Handlers
             tcgTagHandlers.Template = item.Categorie.ResourceTemplate.Content.Replace("_$Id$_", id.ToString());
             tcgTagHandlers.FilePath = HttpContext.Current.Server.MapPath("~" + item.vcFilePath);
             tcgTagHandlers.WebPath = item.vcFilePath;
+            tcgTagHandlers.SkinInfo = item.Categorie.SkinInfo;
 
 
             string text1 = string.Empty;
@@ -85,14 +86,12 @@ namespace TCG.Handlers
             return 1;
         }
 
-        public int CreateSingeTemplateToHtml(string templateid, ref string text)
+        public int CreateSingeTemplateToHtml(string templateid, ref string filepath)
         {
             if (string.IsNullOrEmpty(templateid)) { return -1000000806; }
             Template tlif = tcgTagHandlers.handlerService.skinService.templateHandlers.GetTemplateByID(templateid);
 
             if (tlif == null) { return -1000000807; }
-
-            string filepath = string.Empty;
 
             tlif.vcUrl = tlif.vcUrl.IndexOf(".") > -1 ? tlif.vcUrl : tlif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
 
@@ -101,15 +100,64 @@ namespace TCG.Handlers
             tcgTagHandlers = new TCGTagHandlers(base.handlerService);
             tcgTagHandlers.Template = tlif.Content;
             tcgTagHandlers.FilePath = filepath;
+            tcgTagHandlers.SkinInfo = tlif.SkinInfo;
             if (tcgTagHandlers.Replace())
             {
-                text = "<a>生成成功:'" + tlif.vcUrl + "'</a>";
+                return 1;
             }
             else
             {
-                text = "<a><font color='red'>生成失败:'" + tlif.vcUrl + "'</font></a>";
+                return -1000000313;
             }
-            return 1;
+        }
+
+        public int CreateClassList(string categorieid, int page,ref int pagecount,ref string pagepath)
+        {
+            if (string.IsNullOrEmpty(categorieid))
+            {
+                return -1000000801;
+            }
+
+            Categories cif = tcgTagHandlers.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
+
+            if (cif == null)
+            {
+                return -1000000802;
+            }
+
+            if (cif.ResourceListTemplate == null)
+            {
+                return -1000000803;
+            }
+
+            if (cif.vcUrl.IndexOf(".") > -1)
+            {
+                return -1000000804;
+            }
+
+            string filepath = "";
+            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
+
+            tcgTagHandlers = new TCGTagHandlers(base.handlerService);
+            tcgTagHandlers.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", categorieid.ToString());
+            tcgTagHandlers.FilePath = filepath;
+            tcgTagHandlers.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            tcgTagHandlers.PagerInfo.DoAllPage = false;
+            tcgTagHandlers.PagerInfo.Page = page;
+            tcgTagHandlers.PagerInfo.PageSep = page <= 0 ? 0 : 1;
+            tcgTagHandlers.SkinInfo = cif.SkinInfo;
+
+            if (tcgTagHandlers.Replace())
+            {
+                pagecount = tcgTagHandlers.PagerInfo.PageCount;
+                pagepath = tcgTagHandlers.FilePath;
+                return 1;
+            }
+            else
+            {
+                return -1000000805;
+            }
+
         }
 
         private TCGTagHandlers _tcgtaghandlers;

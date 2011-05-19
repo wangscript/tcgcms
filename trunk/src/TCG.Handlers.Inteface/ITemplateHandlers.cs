@@ -91,7 +91,7 @@ namespace TCG.Handlers
         /// <param name="skinid"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        int CreateTemplateToXML(string skinid);
+        int CreateTemplateToXML( Admin admin,string skinid);
 
 
         /// <summary>

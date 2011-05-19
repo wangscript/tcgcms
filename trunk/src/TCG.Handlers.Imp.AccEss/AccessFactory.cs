@@ -143,7 +143,7 @@ namespace TCG.Handlers.Imp.AccEss
                     categories.dUpdateDate = (DateTime)row["dUpdateDate"];
                     categories.cVisible = row["Visible"].ToString().Trim();
                     categories.DataBaseService = row["DataBaseService"].ToString().Trim();
-                    categories.SkinId = row["SkinId"].ToString().Trim();
+                    categories.SkinInfo = skinHandlers.GetSkinEntityBySkinId(row["SkinId"].ToString().Trim());
                     categories.IsSinglePage = row["IsSinglePage"].ToString().Trim();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
@@ -176,7 +176,7 @@ namespace TCG.Handlers.Imp.AccEss
                 case "TCG.Entity.Template":
                     Template template = new Template();
                     template.Id = row["Id"].ToString();
-                    template.SkinId = row["SkinId"].ToString();
+                    template.SkinInfo = skinHandlers.GetSkinEntityBySkinId(row["SkinId"].ToString());
                     template.TemplateType = templateHandlers.GetTemplateType((int)row["TemplateType"]);
                     template.iParentId = row["iParentId"].ToString();
                     template.iSystemType = (int)row["iSystemType"];
@@ -191,8 +191,10 @@ namespace TCG.Handlers.Imp.AccEss
                     skin.Id = row["Id"].ToString().Trim();
                     skin.Name = row["Name"].ToString().Trim();
                     skin.Pic = row["Pic"].ToString().Trim();
-                    skin.Info = row["info"].ToString().Trim();
+                    skin.WebDescription = row["WebDescription"].ToString().Trim();
                     skin.Filename = row["Filename"].ToString().Trim();
+                    skin.WebKeyWords = row["WebKeyWords"].ToString().Trim();
+                    skin.IndexPage = row["IndexPage"].ToString().Trim();
                     return (EntityBase)skin;
                 case "TCG.Entity.SheifSourceInfo":
                     SheifSourceInfo sourceinfo = new SheifSourceInfo();

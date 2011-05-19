@@ -185,16 +185,26 @@ public partial class Template_templatelist : BasePage
     private void TemplateCreate()
     {
         string iTemplate = objectHandlers.Post("iTemplateId");
+        string filepath = string.Empty;
         string text = string.Empty;
         int rtn = 0;
         try
         {
-           rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref text);
+            rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref filepath);
         }
         catch (Exception ex)
         {
             base.AjaxErch(1, "<a><font color='red'>" + ex.Message.ToString() + "</font></a>", "CreateBack");
             return;
+        }
+
+        if (rtn == 1)
+        {
+            text = "<a>生成成功：" + filepath + "</a>";
+        }
+        else
+        {
+            text = "<a>生成失败：" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "</a>";
         }
 
         base.AjaxErch(rtn, text, "CreateBack");
