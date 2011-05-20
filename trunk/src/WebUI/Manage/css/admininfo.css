@@ -125,3 +125,33 @@
 	background-color: #5D99CE;
     color: #FFFFFF !important;
 }
+
+.ln-thin {
+    border-top-color: -moz-use-text-color;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top:#9CB8CC solid 1px;
+}
+
+.ln-thin, .ln-thick, .ln-dotted {
+    font-size: 0;
+    line-height: 0;
+}
+
+.fn-bg {
+    background-image: url("../images/bg.png");
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    height: 14px;
+    margin-top: -14px;
+    text-indent: 300px;
+    width: 14px;
+    position:relative;
+    top:22px;
+    left:12px;
+}
+
+.Bopned {
+    background-position: -1655px -215px;
+}

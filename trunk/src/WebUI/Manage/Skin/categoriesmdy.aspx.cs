@@ -67,9 +67,28 @@ public partial class skin_categoriesmdy : BasePage
                 rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
                 if (rtn == 1)
                 {
+                    foreach (string key in Request.Form.AllKeys)
+                    {
+                        if (key.IndexOf("name_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
+                        {
+                            string[] keys = key.Split('_');
+                            CategorieProperties cps = new CategorieProperties();
+                            cps.Id = objectHandlers.Post("cpid_" + keys[1]);
+                            cps.ProertieName = objectHandlers.Post(key);
+                            cps.CategorieId = cif.Id;
+                            cps.Type = objectHandlers.Post("type_" + keys[1]);
+                            cps.Values = objectHandlers.Post("pttext_" + keys[1]);
+                            cps.width = objectHandlers.ToInt(objectHandlers.Post("pwidth_" + keys[1]));
+                            cps.height = objectHandlers.ToInt(objectHandlers.Post("pheight_" + keys[1]));
+                            rtn = base.handlerService.skinService.categoriesHandlers.CategoriePropertiesManage(base.adminInfo, cps);
+                        }
+                    }
+
                     rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo,cif.SkinInfo.Id);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cif.Id);
+                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cif.Id);
                 }
             }
             catch (Exception ex)
@@ -86,7 +105,9 @@ public partial class skin_categoriesmdy : BasePage
     private void Init()
     {
         string iClassId = objectHandlers.Get("iClassId");
+        this.cid.Text = iClassId + "&t=" + DateTime.Now.ToString();
         string skinid = objectHandlers.Get("SkinId");
+        this.iMaxPId.Value = base.handlerService.skinService.categoriesHandlers.GetMaxCategoriesProperties().ToString();
         if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iClassId);
         if (cif == null)

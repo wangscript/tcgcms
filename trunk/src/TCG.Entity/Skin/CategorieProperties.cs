@@ -5,12 +5,14 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class CategorieProperties
+    public class CategorieProperties : EntityBase
     {
-        public int Id { get; set; }
         public string CategorieId { get; set; }
         public string ProertieName { get; set; }
         public string Type { get; set; }
         public string Values { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+
     }
 }

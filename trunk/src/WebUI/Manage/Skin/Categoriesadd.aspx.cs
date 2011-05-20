@@ -9,6 +9,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
+using System.Text;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
@@ -29,6 +31,7 @@ public partial class skin_categoriesadd : BasePage
         }
         else
         {
+
             string skinid = objectHandlers.Get("SkinId");
             if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
 
@@ -37,12 +40,13 @@ public partial class skin_categoriesadd : BasePage
             cif.vcName = objectHandlers.Post("iName");
             cif.vcDirectory = objectHandlers.Post("iDirectory");
             cif.vcUrl = objectHandlers.Post("iUrl");
-            cif.Parent = objectHandlers.Post("iClassId");
+            cif.Parent = objectHandlers.Post("iParentId");
             cif.ResourceTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("sTemplate"));
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             cif.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
+            
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
                 base.AjaxErch(-1,"");
@@ -61,10 +65,34 @@ public partial class skin_categoriesadd : BasePage
             int rtn = 0;
             try
             {
+                string cid = Guid.NewGuid().ToString();
+                cif.Id = cid;
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategories(base.adminInfo,cif);
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo, cif.SkinInfo.Id);
+                if (rtn == 1)
+                {
+                    foreach (string key in Request.Form.AllKeys)
+                    {
+                        if (key.IndexOf("name_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
+                        {
+                            string[] keys = key.Split('_');
+                            CategorieProperties cps = new CategorieProperties();
+                            cps.Id = "";
+                            cps.ProertieName = objectHandlers.Post(key);
+                            cps.CategorieId = cid;
+                            cps.Type = objectHandlers.Post("type_" + keys[1]);
+                            cps.Values = objectHandlers.Post("pttext_" + keys[1]);
+                            cps.width = objectHandlers.ToInt(objectHandlers.Post("pwidth_" + keys[1]));
+                            cps.height = objectHandlers.ToInt(objectHandlers.Post("pheight_" + keys[1]));
+                            rtn = base.handlerService.skinService.categoriesHandlers.CategoriePropertiesManage(base.adminInfo, cps);
+                        }
+                    }
+                }
+
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                 CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cif.Id);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cif.Id);
             }
             catch (Exception ex)
             {
@@ -82,8 +110,9 @@ public partial class skin_categoriesadd : BasePage
         string skinid = objectHandlers.Get("SkinId");
         if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
         string iParent = string.IsNullOrEmpty(objectHandlers.Get("iParentId")) ? "0" : objectHandlers.Get("iParentId");
-        this.iClassId.Value = iParent.ToString();
+        this.iParentId.Value = iParent.ToString();
         this.iSkinId.Value = skinid;
+        this.iMaxPId.Value = "0";
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         if (templates != null && templates.Count != 0)

@@ -241,6 +241,17 @@ namespace TCG.Handlers.Imp.AccEss
                     sheifcategorieconfig.LocalCategorieId = row["LocalCategorieId"].ToString().Trim();
                     sheifcategorieconfig.ResourceCreateDateTime = objectHandlers.ToTime(row["ResourceCreateDateTime"].ToString().Trim());
                     return (EntityBase)sheifcategorieconfig;
+                case "TCG.Entity.CategorieProperties":
+                    CategorieProperties categorieProperties = new CategorieProperties();
+                    categorieProperties.Id = row["Id"].ToString();
+                    categorieProperties.ProertieName = row["ProertieName"].ToString();
+                    categorieProperties.CategorieId = row["CategorieId"].ToString();
+                    categorieProperties.Type = row["Type"].ToString();
+                    categorieProperties.Values = row["Values"].ToString();
+                    categorieProperties.width = objectHandlers.ToInt(row["width"].ToString());
+                    categorieProperties.height = objectHandlers.ToInt(row["height"].ToString());
+
+                    return (EntityBase)categorieProperties;
             }
             return null;
         }

@@ -229,7 +229,7 @@ public partial class resources_resourceslist : BasePage
             base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
             return;
         }
-        
-        base.AjaxErch(rtn, errText, "CreateBack");
+
+        base.AjaxErch(rtn, "<a>" + errText.Replace("\\", "/") + "</a>", "CreateBack");
     }
 }

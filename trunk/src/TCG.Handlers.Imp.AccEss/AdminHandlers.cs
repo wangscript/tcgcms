@@ -81,6 +81,7 @@ namespace TCG.Handlers.Imp.AccEss
             object TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
             if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
 
+            CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             return 1;
         }
 

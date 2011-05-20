@@ -132,6 +132,30 @@ namespace TCG.Handlers
         /// <returns></returns>
         int CreateCategoriesToXML(Admin admininfo,string skinid);
 
+        /// <summary>
+        /// 分类属性管理
+        /// </summary>
+        /// <param name="admin"></param>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        int CategoriePropertiesManage(Admin admin, CategorieProperties cp);
+
+        /// <summary>
+        /// 所有的资源分类属性信息
+        /// </summary>
+        /// <param name="cid"></param>
+        /// <returns></returns>
+        Dictionary<string, EntityBase> GetCategoriePropertiesByCIdEntity(string cid);
+
+        int GetMaxCategoriesProperties();
+
+        /// <summary>
+        /// 删除分类属性
+        /// </summary>
+        /// <param name="admininf"></param>
+        /// <param name="cpid"></param>
+        /// <returns></returns>
+        int CategoriePropertiesDEL(Admin admininf, int cpid);
         
     }
 }

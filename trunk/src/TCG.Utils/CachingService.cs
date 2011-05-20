@@ -120,6 +120,14 @@ namespace TCG.Utils
         /// </summary>
         public static string CACHING_ALL_CATEGORIES = "CACHING_ALL_CATEGORIES";
         /// <summary>
+        /// 所有的资源分类属性信息DATATABle
+        /// </summary>
+        public static string CACHING_ALL_CATEGORIES_PROPERTIES = "CACHING_ALL_CATEGORIES_PROPERTIES";
+        /// <summary>
+        /// 所有的资源分类属性信息实体
+        /// </summary>
+        public static string CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY = "CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY";
+        /// <summary>
         /// 所有的资源分类信息实体
         /// </summary>
         public static string CACHING_ALL_CATEGORIES_ENTITY = "CACHING_ALL_CATEGORIES_ENTITY";

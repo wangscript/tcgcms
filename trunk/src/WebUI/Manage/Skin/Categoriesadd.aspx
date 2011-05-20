@@ -21,8 +21,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
+	<input type="hidden" id="iParentId" name="iParentId" runat="server" />
 	<input type="hidden" id="iSkinId" name="iSkinId" runat="server" />
+    <input type="hidden" id="iMaxPId" name="iMaxPId" runat="server" />
     <div class="page_title" style="margin-bottom:5px;">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="$('#form1').submit();">
 			<img src="../images/icon/save.gif" /> 保存
@@ -30,16 +31,19 @@
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
 			<img src="../images/icon/5.gif" />取消
 		</a>
+        <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CategoriePropertieHTMLAdd();">
+			<img src="../images/add.png" />加属性
+		</a>
         <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
 			<img src="../images/icon/07.gif" />刷新
 		</a>
+        
 	</div>
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="g-tabnav">
         <a style="margin-left:-13px;"></a>
         <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
         <a id="a2" onclick="SetFromsByNum('a2')">分类属性</a>
-        <a id="a3" onclick="SetFromsByNum('a3')">数据源</a>
     </div>
     <div id="a1_from">
 	    <div id="placemsg" class="Page_arrb arb_pr classaddline">
@@ -84,7 +88,6 @@
 	    </div>
     </div>
     <div id="a2_from"></div>
-    <div id="a3_from"></div>
 	<div class="dobtn arb_pr">
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />
 	</div>

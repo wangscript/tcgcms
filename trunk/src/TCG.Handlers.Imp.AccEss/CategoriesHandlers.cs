@@ -102,6 +102,42 @@ namespace TCG.Handlers.Imp.AccEss
 
 
         /// <summary>
+        /// 所有的资源分类属性信息
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetCategoriePropertiesByCIdEntity(string cid)
+        {
+            Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cid);
+            if (allcategories == null)
+            {
+                DataTable dt = GetCategoriePropertiesByCId(cid);
+                if (dt == null) return null;
+                allcategories = AccessFactory.GetEntitysObjectFromTable(dt, typeof(CategorieProperties));
+                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cid, allcategories, null);
+            }
+            return allcategories;
+        }
+
+
+        public DataTable GetCategoriePropertiesByCId(string cid)
+        {
+            DataTable allcategoriesp = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cid);
+            if (allcategoriesp == null)
+            {
+                allcategoriesp = GetCategoriePropertiesByCIdWithOutCaching(cid);
+                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cid, allcategoriesp, null);
+            }
+            return allcategoriesp;
+        }
+
+        private DataTable GetCategoriePropertiesByCIdWithOutCaching(string cid)
+        {
+            string Sql = "SELECT * FROM CategorieProperties WHERE CategorieId='" + cid + "' order by id";
+            return AccessFactory.conn.DataTable(Sql);
+        }
+
+
+        /// <summary>
         /// 获得文章的导航！~
         /// </summary>
         /// <param name="conn"></param>
@@ -243,8 +279,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int CreateCategories(Admin admininfo,Categories cif)
         {
-
-            cif.Id = Guid.NewGuid().ToString();
+            if (string.IsNullOrEmpty(cif.Id))cif.Id = Guid.NewGuid().ToString();
             return CreateCategoriesForXml(admininfo,cif);
         }
 
@@ -298,6 +333,44 @@ namespace TCG.Handlers.Imp.AccEss
             AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage)"
                     + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinInfo.Id + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
                     + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" + cif.IsSinglePage + "')");
+            return 1;
+        }
+
+        public int CategoriePropertiesManage(Admin admin, CategorieProperties cp)
+        {
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admin);
+            if (rtn < 0) return rtn;
+
+            string sql = string.Empty;
+            if (string.IsNullOrEmpty(cp.Id))
+            {
+                sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
+                + "'" + cp.CategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+            }
+            else
+            {
+                int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM CategorieProperties WHERE id = " + cp.Id + ""));
+                if (ncount > 0)
+                {
+                    sql = "UPDATE CategorieProperties SET CategorieId='" + cp.CategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
+                        + "',[Values]='" + cp.Values + "',width=" + cp.width + ",height=" + cp.height + " WHERE id=" + cp.Id;
+                }
+                else
+                {
+                    sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
+            + "'" + cp.CategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+                }
+            }
+
+            AccessFactory.conn.Execute(sql);
+            return 1;
+        }
+
+        public int CategoriePropertiesDEL(Admin admininf, int cpid)
+        {
+            //删除属性
+            AccessFactory.conn.Execute("DELETE FROM CategorieProperties WHERE id=" + cpid + "");
+
             return 1;
         }
 
@@ -397,7 +470,13 @@ namespace TCG.Handlers.Imp.AccEss
                 return -1000000033;
             }
             AccessFactory.conn.Execute("DELETE FROM Categories WHERE ID='" + classid + "'");
+            AccessFactory.conn.Execute("DELETE FROM CategorieProperties WHERE CategorieId='" + classid + "'");
             return 1;
+        }
+
+        public int GetMaxCategoriesProperties()
+        {
+           return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT Max(id) FROM CategorieProperties"));
         }
 
         /// <summary>
