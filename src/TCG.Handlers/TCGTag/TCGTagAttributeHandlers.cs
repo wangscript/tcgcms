@@ -88,6 +88,9 @@ namespace TCG.Handlers
                 case "scriptcss": // <tcg:id1 type="scriptcss" text='/sdfsdf.js|ggg.js'>dfddfd</tcg:id1>
                     this.TagForScriptCss(ref pagerinfo);
                     break;
+                case "ResourceProperties":
+                    this.TagForResourceProperties(ref pagerinfo);
+                    break;
             }
         }
 
@@ -157,13 +160,38 @@ namespace TCG.Handlers
 
         }
 
+        private void TagForResourceProperties(ref TCGTagPagerInfo pagerinfo)
+        {
+            string resid = this.GetAttribute("resid");
+            if (string.IsNullOrEmpty(resid))
+            {
+                pagerinfo.Read = false;
+                return;
+            }
+
+            Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(resid);
+
+            if (ress == null || ress.Count == 0)
+            {
+                pagerinfo.Read = false;
+                return;
+            }
+
+            foreach (KeyValuePair<string, EntityBase> entity in ress)
+            {
+                ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_PropertieName$", resourceProperties.PropertieName);
+                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_PropertieValue$", resourceProperties.PropertieValue);
+            }
+
+        }
+
         /// <summary>
         /// 处理单篇资讯的标签
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
             int resourceid = objectHandlers.ToInt(this.GetAttribute("id"));
-            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"),false);
             if (resourceid==0)
             {
                 pagerinfo.Read = false;
@@ -173,52 +201,13 @@ namespace TCG.Handlers
             Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)
             {
-                if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - ") + item.vcTitle;
-
-                if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
-                    + item.vcTitle + "</font>";
-                if (item.cStrong == "Y") item.vcTitle = "<strong>" + item.vcTitle + "</strong>";
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcTitle$", item.vcTitle);
-
-                //替换正文内容，检查图片
-                try
-                {
-                    string tContent = this.handlerService.fileService.fileHandlers.ImgPatchInit(item, "", adminInfo,
-                        objectHandlers.ToInt(ConfigServiceEx.baseConfig["NewsFileClass"]));
-                    if (tContent != item.vcContent)
-                    {
-                        item.vcContent = tContent;
-                        int outid = 0;
-                        string filepatch = string.Empty;
-                        this.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message.ToString());
-                }
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcContent$", item.vcContent);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iId$", item.Id.ToString());
-
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcFilePath$", item.vcFilePath);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_dUpdateDate$", item.dUpDateDate.ToString("yyyy年MM月dd日"));
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_dAddDate$", item.dAddDate.ToString("yyyy年MM月dd日"));
-               
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcKeyWord$", item.vcKeyWord);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcAuthor$", item.vcAuthor);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcShortContent$", objectHandlers.GetTextWithoutHtml(item.vcShortContent));
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.Categorie.vcClassName);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassId$", item.Categorie.Id);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId$", item.Categorie.Parent);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iClassParentId2$", this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id).Id);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_TopicClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > "));       
+                string temp = this._tagtext;
+                this.NewslistTagFieldsReplace(ref temp, ref pagerinfo, item);
+                this._tagtext = temp;
 
             }
             else
             {
-
                 throw new Exception("编号为:[" + resourceid + "]的文章找不到！");
                 return;
             }
@@ -351,7 +340,7 @@ namespace TCG.Handlers
                     Resources tempres = (Resources)entity.Value;
                     string temp = tempOld;
                     temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
-                    this.NewslistTagFieldsReplace(ref temp, tempres);
+                    this.NewslistTagFieldsReplace(ref temp,ref pagerinfo, tempres);
                     tempNew += temp;
                     n++;
                 }
@@ -360,23 +349,58 @@ namespace TCG.Handlers
             this._tagtext = tempNew;
         }
 
-        private void NewslistTagFieldsReplace(ref string temp, Resources res)
+        private void NewslistTagFieldsReplace(ref string temp,ref TCGTagPagerInfo pagerinfo, Resources item)
         {
-            string Title = res.vcTitle;
-            if (!string.IsNullOrEmpty(res.vcTitleColor)) Title = "<font color='" + res.vcTitleColor + "'>" + Title + "</font>";
-            if (res.cStrong == "Y") Title = "<strong>" + Title + "</strong>";
+            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
+            if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle) ? "" : " - ") + item.vcTitle;
 
-            temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + Title + "</TCG>");
+            if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
+                + item.vcTitle + "</font>";
+            if (item.cStrong == "Y") item.vcTitle = "<strong>" + item.vcTitle + "</strong>";
+            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcTitle$", item.vcTitle);
 
-            string url = res.vcUrl.Trim().Length == 0 ? res.vcFilePath : res.vcUrl;
+            //替换正文内容，检查图片
+            //try
+            //{
+            //    string tContent = this.handlerService.fileService.fileHandlers.ImgPatchInit(item, "", adminInfo,
+            //        objectHandlers.ToInt(ConfigServiceEx.baseConfig["NewsFileClass"]));
+            //    if (tContent != item.vcContent)
+            //    {
+            //        item.vcContent = tContent;
+            //        int outid = 0;
+            //        string filepatch = string.Empty;
+            //        this.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message.ToString());
+            //}
+
+            temp = temp.Replace("$" + this._tagtype + "_vcContent$", "<TCG>" + item.vcContent + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iId$", "<TCG>" + item.Id.ToString() + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dUpdateDate$", "<TCG>" + item.dUpDateDate.ToString("yyyy年MM月dd日") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + item.dAddDate.ToString("yyyy年MM月dd日") + "</TCG>");
+
+            temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcAuthor$", "<TCG>" + item.vcAuthor + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + objectHandlers.GetTextWithoutHtml(item.vcShortContent) + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + item.Categorie.vcClassName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iClassId$", "<TCG>" + item.Categorie.Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iClassParentId$", "<TCG>" + item.Categorie.Parent + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iClassParentId2$", "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id).Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_TopicClassTitleList$",
+                "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > ") + "</TCG>");
+
+            string url = item.vcUrl.Trim().Length == 0 ? item.vcFilePath : item.vcUrl;
             temp = temp.Replace("$" + this._tagtype + "_vcFilePath$", "<TCG>" + url + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
 
-            temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + res.vcSmallImg + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + res.vcBigImg + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + res.vcShortContent + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + res.dAddDate.ToString("yyyy-MM-dd") + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_dUpDateDate$", "<TCG>" + res.dUpDateDate.ToString("yyyy-MM-dd") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + item.vcSmallImg + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + item.vcBigImg + "</TCG>");
+
+
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
@@ -458,7 +482,7 @@ namespace TCG.Handlers
                     Resources tempres = (Resources)entity.Value;
                     string temp = tempOld;
                     temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
-                    this.NewslistTagFieldsReplace(ref temp, tempres);
+                    this.NewslistTagFieldsReplace(ref temp,ref pagerinfo, tempres);
                     tempNew += temp;
                     n++;
                 }

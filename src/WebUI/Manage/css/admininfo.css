@@ -152,6 +152,56 @@
     left:12px;
 }
 
+.fn-bg1 {
+    background-image: url("../images/bg.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 14px;
+    text-indent: 300px;
+    width: 14px;
+}
+
 .Bopned {
     background-position: -1655px -215px;
+}
+
+.Bclded {
+    background-position: -1655px -251px;
+}
+
+.g-title-2 {
+    line-height: 30px;
+    text-indent: 3px;
+    text-align:left;
+}
+
+.fn-hand {
+    cursor: pointer;
+}
+
+.fn-bg2 {
+    display: block;
+    float: left;
+    height: 14px;
+    margin-left: 18px;
+    margin-top: 8px;
+    text-indent: 300px;
+    width: 14px;
+}
+
+ .fn-bg2 {
+    background-image: url("../images/bg.png");
+    background-repeat: no-repeat;
+}
+
+.fn-hand {
+    cursor: pointer;
+}
+
+
+.g-title-2 h3 {
+    display: inline;
+    font-size: 12px;
+    margin-right: 10px;
+    font-weight:bold;
 }

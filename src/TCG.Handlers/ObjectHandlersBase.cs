@@ -147,7 +147,7 @@ namespace TCG.Handlers
                     sb.Append("Visible:\"" + categories.cVisible + "\",");
                     sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
                     sb.Append("Name:\"" + categories.vcName + "\",");
-                    sb.Append("SkinId:\"" + categories.SkinInfo + "\",");
+                    sb.Append("Skin:" + this.GetJsEntity((EntityBase)categories.SkinInfo, typeof(Skin)) + ",");
                     sb.Append("ClassName:\"" + categories.vcClassName + "\"");
                     break;
                 case "TCG.Entity.Template":
@@ -165,7 +165,7 @@ namespace TCG.Handlers
                     sb.Append("Id:\"" + skin.Id + "\",");
                     sb.Append("Name:\"" + skin.Name + "\",");
                     sb.Append("Pic:\"" + skin.Pic + "\",");
-                    sb.Append("Info:\"" + skin.WebDescription + "\",");
+                    sb.Append("WebDescription:\"" + skin.WebDescription + "\",");
                     sb.Append("IndexPage:\"" + skin.IndexPage + "\",");
                     sb.Append("WebKeyWords:\"" + skin.WebKeyWords + "\"");
                     break;
@@ -183,6 +183,16 @@ namespace TCG.Handlers
                     sb.Append("Values:\"" + categorieProperties.Values + "\",");
                     sb.Append("width:" + categorieProperties.width + ",");
                     sb.Append("height:" + categorieProperties.height + "");
+                    break;
+
+                case "TCG.Entity.ResourceProperties":
+                    ResourceProperties rategorieProperties = (ResourceProperties)entity;
+                    sb.Append("Id:" + rategorieProperties.Id + ",");
+                    sb.Append("ResourceId:\"" + rategorieProperties.ResourceId + "\",");
+                    sb.Append("PropertieName:\"" + rategorieProperties.PropertieName + "\",");
+                    sb.Append("PropertieValue:\"" + rategorieProperties.PropertieValue + "\",");
+                    sb.Append("CategoriePropertieId:" + rategorieProperties.CategoriePropertieId + "");
+
                     break;
             }
             sb.Append("}");

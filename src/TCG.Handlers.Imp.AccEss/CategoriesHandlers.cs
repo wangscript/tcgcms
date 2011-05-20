@@ -369,6 +369,7 @@ namespace TCG.Handlers.Imp.AccEss
         public int CategoriePropertiesDEL(Admin admininf, int cpid)
         {
             //删除属性
+            AccessFactory.conn.Execute("DELETE FROM ResourceProperties WHERE CategoriePropertieId='" + cpid + "'");
             AccessFactory.conn.Execute("DELETE FROM CategorieProperties WHERE id=" + cpid + "");
 
             return 1;

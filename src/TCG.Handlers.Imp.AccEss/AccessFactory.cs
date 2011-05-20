@@ -252,6 +252,15 @@ namespace TCG.Handlers.Imp.AccEss
                     categorieProperties.height = objectHandlers.ToInt(row["height"].ToString());
 
                     return (EntityBase)categorieProperties;
+                case "TCG.Entity.ResourceProperties":
+                    ResourceProperties rategorieProperties = new ResourceProperties();
+                    rategorieProperties.Id = row["Id"].ToString();
+                    rategorieProperties.ResourceId = row["ResourceId"].ToString();
+                    rategorieProperties.PropertieName = row["PropertieName"].ToString();
+                    rategorieProperties.PropertieValue = row["PropertieValue"].ToString();
+                    rategorieProperties.CategoriePropertieId = objectHandlers.ToInt(row["CategoriePropertieId"].ToString());
+                    return (EntityBase)rategorieProperties;
+                    break;
             }
             return null;
         }
