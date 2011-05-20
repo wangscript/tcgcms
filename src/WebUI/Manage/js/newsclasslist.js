@@ -139,16 +139,7 @@ function NewsClassCreateHtml() {
         PostClasses(ss);
     } else {
         var t = GetPostClassChild(temps);
-        if (t.indexOf(",") > -1) {
-            PostClasses(t);
-        } else {
-            CreateDiv.set = 1;
-            CreateDiv.setcount = 1;
-            o[0] = t;
-            osep = 1;
-            $("#iPage").val("0");
-            DoCreatClassHtml();
-        }
+        PostClasses(t);
     }
 }
 

@@ -147,7 +147,7 @@ public partial class skin_categorieslist : BasePage
             if (rtn == 1)
             {
                 if (PageCount > page) classbackstr = "CreateBack1";
-                text = "<a>生成成功：" + pagepath + "</a>";
+                text = @"<a>生成成功：" + pagepath.Replace("\\","/") + @"</a>";
             }
             else
             {

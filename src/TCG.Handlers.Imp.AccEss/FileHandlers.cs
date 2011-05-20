@@ -275,7 +275,7 @@ namespace TCG.Handlers.Imp.AccEss
             foreach (Match item in matchs)
             {
                 string text1 = item.Result("$2");
-                string domainstr = objectHandlers.GetDomainName(text1);
+                string domainstr = string.Empty;// objectHandlers.GetDomainName(text1);
                 string domainstr1 = objectHandlers.GetDomainName(ConfigServiceEx.baseConfig["WebSite"]);
                 if (!string.IsNullOrEmpty(domainstr) && domainstr != domainstr1)
                 {

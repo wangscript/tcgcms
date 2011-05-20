@@ -1215,6 +1215,7 @@ namespace TCG.Utils
         {
             StringBuilder builder1 = new StringBuilder(s);
             builder1.Replace("\"", "\\\"");
+            builder1.Replace("/", "//");
             builder1.Replace("\r\n", "\\n");
             builder1.Replace("\n", "\\n");
             return builder1.ToString();
@@ -2045,9 +2046,8 @@ namespace TCG.Utils
             {
                 HttpRequest request = new HttpRequest(string.Empty, url, string.Empty);
                 result = request.Url.Host;
-
             }
-            catch (Exception ex)
+            catch 
             {
                 result = "";
             }

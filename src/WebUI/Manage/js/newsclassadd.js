@@ -1,5 +1,5 @@
 //--------------
-
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function CheckAddClassForm() {
     var iClassId = $("#iClassId");
@@ -7,6 +7,7 @@ function CheckAddClassForm() {
     if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
 			&& CheckValueIsNull('iDirectory', 'dirmsg') &&
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
+        SetFromsByNum("a1");
         return false;
     }
     
@@ -18,7 +19,7 @@ function GetParentTitle() {
     var o = $("#iClassId");
     if (o == null) return;
     var placemsg = $("#placemsg");
-    if (o.val() == "0") {
+    if (o.length == 0) {
         placemsg.html(placemsg.html() + "作为网站分类");
     } else {
         a = "";
@@ -60,11 +61,61 @@ $(document).ready(function () {
 
     SetFromsByNum("a1");
 
+    //设置属性
+    var classid = $("#iClassId");
+    var a2from = $("#a2_from");
+    if (classid.length != 0) {
+
+        if (_CategorieProperties != null) {
+            for (var i = 0; i < _CategorieProperties.length; i++) {
+                var cp = _CategorieProperties[i];
+                var chtml = CategoriePropertieMdyHtml(cp.Id, cp.ProertieName, cp.Type, cp.Values, cp.width, cp.height);
+                var ohtml = a2from.html();
+                var line = ohtml.toString().length == 0 ? "" : "<div id=\"line_" + cp.Id + "\" class=\"ln-c-mid ln-thin\"></div>";
+                a2from.html(ohtml + line + chtml);
+            }
+        }
+    }
+
     SetAjaxDiv("ok", false, "小提示：根据分类属性的定义，可以实现文章向特殊分类的转变，如：产品");
 });
 
 
-var objss = ["a1", "a2","a3"];
+function CategoriePropertieHTMLAdd() {
+    var ohtml = $("#a2_from").html();
+    var MaxPid = $("#iMaxPId");
+    var n = parseInt(MaxPid.val()) + 1;
+    MaxPid.val(n);
+    var chtml = CategoriePropertieMdyHtml(n,"",null,"",0,0);
+    var line = "<div id=\"line_" + n + "\" class=\"ln-c-mid ln-thin\"></div>";
+    $("#a2_from").html(ohtml + line + chtml);
+}
+
+function CategoriePropertieHTMLDel(id) {
+
+    var classid = $("#iClassId");
+
+    if (classid.length != 0) {
+
+        if (!confirm("您确定彻底该分类属性么?")) return;
+        $.post("../AjaxMethod/CategoriePropertiesDel.aspx?id=" + id, { Action: "post", Id: id },
+    function (data, textStatus) {
+        // data 可以是 xmlDoc, jsonObj, html, text, 等等.
+        //this; // 这个Ajax请求的选项配置信息，请参考jQuery.get()说到的this
+        if (data.state) {
+            $("#cp_" + id).remove();
+            $("#line_" + id).remove();
+        }
+        AjaxPostFormBack(data);
+
+    }, "json");
+    } else {
+        $("#cp_" + id).remove();
+        $("#line_" + id).remove();
+    }
+}
+
+var objss = ["a1", "a2"];
 function SetFromsByNum(lb) {
 
     for (var i = 0; i < objss.length; i++) {

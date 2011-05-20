@@ -77,6 +77,7 @@ namespace TCG.Handlers
                 item.cCreated = "Y";
                 item.cChecked = "Y";
                 rtn = tcgTagHandlers.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+                errText = tcgTagHandlers.FilePath;
             }
             else
             {
@@ -132,16 +133,34 @@ namespace TCG.Handlers
 
             if (cif.vcUrl.IndexOf(".") > -1)
             {
-                return -1000000804;
+                pagepath = cif.vcUrl;
+                return 1;
+            }
+
+            string url = cif.vcUrl;
+            if (!string.IsNullOrEmpty(url))
+            {
+                url = (cif.vcUrl.IndexOf(".") > -1) ? cif.vcUrl : cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            }
+            else
+            {
+                if (cif.IsSinglePage == "Y" )
+                {
+                    Resources res = tcgTagHandlers.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(cif.Id);
+                    if (res == null) return -1000000810;
+                    return this.CreateResourcHtmlById(ref pagepath, objectHandlers.ToInt(res.Id));
+                }
+
+                return -1000000809;
             }
 
             string filepath = "";
-            filepath = HttpContext.Current.Server.MapPath("~" + cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"]);
+            filepath = HttpContext.Current.Server.MapPath("~" + url);
 
             tcgTagHandlers = new TCGTagHandlers(base.handlerService);
             tcgTagHandlers.Template = cif.ResourceListTemplate.Content.Replace("_$ClassId$_", categorieid.ToString());
             tcgTagHandlers.FilePath = filepath;
-            tcgTagHandlers.WebPath = cif.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+            tcgTagHandlers.WebPath = url;
             tcgTagHandlers.PagerInfo.DoAllPage = false;
             tcgTagHandlers.PagerInfo.Page = page;
             tcgTagHandlers.PagerInfo.PageSep = page <= 0 ? 0 : 1;

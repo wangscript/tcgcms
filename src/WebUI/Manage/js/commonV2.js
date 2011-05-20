@@ -391,3 +391,28 @@ function refash() {
     window.location.href = window.location.href;
     window.parent.adminmain.location.href = window.parent.adminmain.location.href;
 }
+
+
+function CategoriePropertieMdyHtml(id, name, type,Values, width, height) {
+
+    var type1Check = type == "01" ? "checked" : "";
+    var type2Check = type == "02" ? "checked" : "";
+    var type3Check = type == "03" ? "checked" : "";
+
+    return "<div id=\"cp_" + id + "\" style=\"height:100px;\"><a class=\"fn-bg Bopned\" href=\"javascript:GoTo()\" onclick=\"CategoriePropertieHTMLDel(" + id
+        + ")\"></a><div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">属性名称：</span>"
+	    + "<input id=\"name_" + id + "\" name=\"name_" + id + "\" type=\"text\" value=\"" + name + "\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+		+ "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_1\" " + type1Check + " value=\"01\" /><label for=\"type_" + id + "_1\">输入</label>"
+        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_2\" " + type2Check + " value=\"02\" /><label for=\"type_" + id + "_2\">单选</label>"
+        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_3\" " + type3Check + " value=\"03\" /><label for=\"type_" + id + "_3\">复选</label>"
+        + "<span id=\"Span1\" class=\"info1\">可选项目请用\"|\"间隔</span>"
+	    + "</div>"
+        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">宽&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span>"
+	    + "<input id=\"pwidth_" + id + "\" name=\"pwidth_" + id + "\" type=\"text\" value=\"" + (width == 0 ? "" : width) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	    + "<span class=\"p_a_t\">高&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span><input id=\"pheight_" + id + "\" name=\"pheight_" + id + "\" type=\"text\" value=\"" + (height == 0 ? "" : height) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+        + "</div>"
+        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">可选项目：</span>"
+	    + "<input id=\"pttext_" + id + "\" name=\"pttext_" + id + "\" type=\"text\" value=\"" + Values + "\" style=\"width:480px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+	    + "</div>"
+        + "<input name=\"cpid_" + id + "\" type=\"hidden\" id=\"cpid_" + id + "\" value=\"" + id + "\" /></div>";
+}

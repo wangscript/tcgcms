@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
+    <script type="text/javascript" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 </head>
@@ -26,6 +27,9 @@
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
 			<img src="../images/icon/5.gif" />取消
 		</a>
+        <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CategoriePropertieHTMLAdd();">
+			<img src="../images/add.png" />加属性
+		</a>
         <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
 			<img src="../images/icon/07.gif" />刷新
 		</a>
@@ -35,7 +39,6 @@
         <a style="margin-left:-13px;"></a>
         <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
         <a id="a2" onclick="SetFromsByNum('a2')">分类属性</a>
-        <a id="a3" onclick="SetFromsByNum('a3')">数据源</a>
     </div>
     <div id="a1_from">
 	    <div id="placemsg" class="Page_arrb arb_pr classaddline">
@@ -84,19 +87,9 @@
 	    </div>
     </div>
     <div id="a2_from"></div>
-        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">属性名称：</span>
-	      <input id="Text1" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
-		    <input type="radio" name="radio" id="raInPut" value="01" /><label for="raInPut">输入</label>
-            <input type="radio" name="radio" id="raSSelect" value="02" /><label for="raSSelect">单选</label>
-            <input type="radio" name="radio" id="raMSelect" value="03" /><label for="raMSelect">复选</label>
-            <span id="Span1" class="info1">可选项目请用"|"间隔</span>
-	    </div>
-        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">可选项目：</span>
-	      <input id="Text2" type="text" runat="server" value="0" style="width:480px;" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
-	    </div>
-    <div id="a3_from"></div>
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
+        <input type="hidden" id="iMaxPId" name="iMaxPId" runat="server" />
 	    <input type="hidden" id="skinid" runat="server" value="" />
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />
 	</div>

@@ -175,6 +175,15 @@ namespace TCG.Handlers
                     sb.Append("iParentId:" + filecategories.iParentId.ToString() + ",");
                     sb.Append("vcFileName:\"" + filecategories.vcFileName + "\"");
                     break;
+                case "TCG.Entity.CategorieProperties":
+                    CategorieProperties categorieProperties = (CategorieProperties)entity;
+                    sb.Append("Id:" + categorieProperties.Id + ",");
+                    sb.Append("ProertieName:\"" + categorieProperties.ProertieName + "\",");
+                    sb.Append("Type:\"" + categorieProperties.Type + "\",");
+                    sb.Append("Values:\"" + categorieProperties.Values + "\",");
+                    sb.Append("width:" + categorieProperties.width + ",");
+                    sb.Append("height:" + categorieProperties.height + "");
+                    break;
             }
             sb.Append("}");
             return sb.ToString();

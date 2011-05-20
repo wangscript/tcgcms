@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CategorieProperties.aspx.cs" Inherits="Manage_Common_CategorieProperties" %>
