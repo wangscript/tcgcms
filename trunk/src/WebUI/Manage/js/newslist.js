@@ -33,8 +33,9 @@ function childClassTitleInit() {
     var m = $("#ChildclassTitle");
     var classobj = $("#iClassId");
     a = "";
+    if (_Categories == null) return;
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories[i].ParentId == classobj.val() && _Categories[i].SkinId == skinid) {
+        if (_Categories[i].ParentId == classobj.val() && _Categories[i].Skin.Id == skinid) {
             a += " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "' class='childnewstitle bold'>" + _Categories[i].ClassName + "</a>";
         }
     }

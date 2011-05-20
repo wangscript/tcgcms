@@ -186,7 +186,30 @@ $(document).ready(function () {
 
     SetFromsByNum("a1");
 
+    var a2from = $("#a3_from");
+
+    if (_CategorieProperties != null) {
+        for (var i = 0; i < _CategorieProperties.length; i++) {
+            var cp = _CategorieProperties[i];
+            var po = GetResourceByCpid(cp.Id);
+            var oth = ResourcePropertiesHTMLADD(cp, po);
+            var ohtml = a2from.html();
+            a2from.html(ohtml + oth);
+        }
+    }
+
 });
+
+function GetResourceByCpid(cpid) {
+    if (_ResourceProperties == null || _ResourceProperties.length == 0) return null;
+    for (var i = 0; i < _ResourceProperties.length; i++) {
+        var cp = _ResourceProperties[i];
+        if (cp.CategoriePropertieId == cpid) {
+            return cp;
+        }
+    }
+    return null;
+}
 
 var objss = ["a1","a2","a3"];
 function SetFromsByNum(lb) {
@@ -214,4 +237,144 @@ function SetFromsByNum(lb) {
 
 function UpLodatFileBack() {
 
+}
+
+
+function ProperDivShowChange(id) {
+    var bonck = $("#B2_" + id);
+    var pat = $("#pat_" + id);
+    if (bonck.attr("class") == "fn-bg2 Bopned") {
+        bonck.attr("class", "").attr("class", "fn-bg2 Bclded");
+        pat.hide();
+    } else {
+        bonck.attr("class", "").attr("class", "fn-bg2 Bopned");
+        pat.show();
+    }
+}
+
+function ResourcePropertiesHTMLADD(cpobj,rpobj) {
+
+    if (cpobj == null) return;
+
+    var resourceid = rpobj == null ? "" : rpobj.ResourceId;
+
+    var height = cpobj.height < 80 ? 80 : cpobj.height;
+    var text = "<div id=\"" + cpobj.Id + "\" >"
+    text += "<input name=\"ptname_" + cpobj.Id + "\" type=\"hidden\" id=\"ptname_" + cpobj.Id + "\" value=\"" + cpobj.ProertieName + "\" />";
+    text += "<input name=\"cpid_" + cpobj.Id + "\" type=\"hidden\" id=\"cpid_" + cpobj.Id + "\" value=\"" + cpobj.Id + "\" />";
+    text += "<input name=\"rpid_" + cpobj.Id + "\" type=\"hidden\" id=\"rpid_" + cpobj.Id + "\" value=\"" + resourceid + "\" />";
+
+    text += "<div onclick=\"ProperDivShowChange('" + cpobj.Id + "');\" class=\"g-title-2 fn-hand\">"
+            + "<b class=\"fn-bg2 Bopned\" id=\"B2_" + cpobj.Id + "\"></b><h3>" + cpobj.ProertieName + "</h3>"
+            + "</div><div class=\"ln-c-mid ln-thin\"></div><div id=\"pat_" + cpobj.Id + "\" style=\"text-align:left;\">"
+
+    var revalue = rpobj == null ? "" : rpobj.PropertieValue;
+    if (cpobj.Type == "01") {
+        if (cpobj.height < 80) {
+
+            text += "<input id=\"rpvalue_" + cpobj.Id + "\" name=\"rpvalue_" + cpobj.Id + "\" "
+                + "type=\"text\"  class=\"itxt1\" onfocus=\"this.className='itxt2'\" "
+                + "onblur=\"CheckValueIsNull('iKeyWords','keymsg');\" "
+                + "style=\"width:800px; margin-top:15px;margin-left:35px;margin-bottom:10px;\" value=\"" + revalue + "\" />";
+        } else {
+            text += "<textarea rows=\"10\" cols=\"1\" id=\"rpvalue_" + cpobj.Id + "\" name=\"rpvalue_" + cpobj.Id + "\" "
+                + "class=\"itxt1\" onfocus=\"this.className='itxt2'\" "
+                + "onblur=\"CheckValueIsNull('iKeyWords','keymsg');\" "
+                + "style=\"width:800px; height:" + cpobj.height + "px; margin-top:10px;margin-left:35px;margin-bottom:10px;\">" + revalue + "</textarea>";
+        }
+    } else if (cpobj.Type == "02") {
+        text += "<select style=\"margin-top:5px;margin-left:35px;margin-bottom:10px;\" id=\"rpvalue_" + cpobj.Id + "\" name=\"rpvalue_" + cpobj.Id + "\">";
+        text += "<option value=\"\">请选择" + cpobj.ProertieName + "</option>";
+        if (cpobj.Values.indexOf("|") > -1) {
+            var vales = cpobj.Values.toString().split("|");
+            for (var i = 0; i < vales.length; i++) {
+                var checkh = revalue.indexOf(vales[i]) > -1 ? "selected" : "";
+                text += "<option value=\"" + vales[i] + "\" " + checkh + ">" + vales[i] + "</option>";
+            }
+        } else {
+            var checkh = revalue.indexOf(cpobj.Values) > -1 ? "selected" : "";
+            text += "<option value=\"" + cpobj.Values + "\"  " + checkh + ">" + cpobj.Values + "</option>";
+        }
+
+        text += "</select>";
+    } else if (cpobj.Type == "03") {
+        text += "<div style=\"margin-top:5px;margin-left:35px;margin-bottom:10px;\">";
+        if (cpobj.Values.indexOf("|") > -1) {
+            var vales = cpobj.Values.toString().split("|");
+            for (var i = 0; i < vales.length; i++) {
+                var checkh = revalue.indexOf(vales[i]) > -1 ? "checked" : "";
+                text += "<label><input type=\"checkbox\" name=\"rpvalue_" + cpobj.Id + "\" value=\"" + vales[i] + "\"  " + checkh + "/>" + vales[i] + "</label>";
+            }
+        } else {
+            var checkh = revalue.indexOf(cpobj.Values) > -1 ? "checked" : "";
+            text += "<label><input type=\"checkbox\" name=\"rpvalue_" + cpobj.Id + "\" value=\"" + cpobj.Values + "\"  " + checkh + "/>" + cpobj.Values + "</label>";
+        }
+        text += "</div>";
+         
+    }
+    /*
+    <div id="cp_" style="height:100px;">
+            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
+                <b class="fn-bg2 Bopned" id="psnB0"></b><h3>基本信息</h3>
+            </div>
+            <div id="line_" class="ln-c-mid ln-thin"></div>
+
+            <div class="Page_arrb arb_pr1">
+                <input id="Text1" name="iKeyWords" 
+                type="text"  class="itxt1" onfocus="this.className='itxt2'" 
+                onblur="CheckValueIsNull('iKeyWords','keymsg');" 
+                style="width:400px; margin-top:5px;margin-left:15px;" />
+	        </div>
+        </div>
+
+         <div id="Div1" style="height:100px;">
+            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
+                <b class="fn-bg2 Bopned" id="B1"></b><h3>基本信息</h3>
+            </div>
+            <div id="Div2" class="ln-c-mid ln-thin"></div>
+
+            <div class="Page_arrb arb_pr1">
+               <textarea rows="10" cols="1" id="Textarea1" name="iShortContent" 
+                class="itxt1" onfocus="this.className='itxt2'" 
+                onblur="CheckValueIsNull('iKeyWords','keymsg');" 
+                style="width:800px; height:80px; margin-top:5px;margin-left:15px;"></textarea>
+	        </div>
+        </div>
+
+        <div id="Div3" style="height:100px;">
+            <div onclick="ProperDivShowChange('Div3');" class="g-title-2 fn-hand">
+                <b class="fn-bg2 Bopned" id="B2_Div3"></b><h3>基本信息</h3>
+            </div>
+            <div id="Div4" class="ln-c-mid ln-thin"></div>
+
+            <div class="Page_arrb arb_pr1" id="pat_Div3">
+               <select style="margin-top:5px;margin-left:15px;">
+                    <option>测试测是个</option>
+                     <option>测试测是个</option>
+                      <option>测试测是个</option>
+                       <option>测试测是个</option>
+                        <option>测试测是个</option>
+                         <option>测试测是个</option>
+                          <option>测试测是个</option>
+               </select>
+	        </div>
+        </div>
+
+        <div id="Div5" style="height:100px;">
+            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
+                <b class="fn-bg2 Bopned" id="B3"></b><h3>基本信息</h3>
+            </div>
+            <div id="Div6" class="ln-c-mid ln-thin"></div>
+
+            <div class="Page_arrb arb_pr1">
+               <label><input type="checkbox" name="checkbox2" value="checkbox" />测测是个</label>
+                <label><input type="checkbox" name="checkbox2" value="checkbox" />测试是个</label>
+                 <label><input type="checkbox" name="checkbox2" value="checkbox" />测试测是个</label>
+                  <label><input type="checkbox" name="checkbox2" value="checkbox" />测试测个</label>
+                   <label><input type="checkbox" name="checkbox2" value="checkbox" />试测是个</label>
+	        </div>
+        </div>
+        */
+    text += "</div></div>";
+    return text;
 }

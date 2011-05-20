@@ -465,6 +465,54 @@ namespace TCG.Handlers.Imp.AccEss
 
             return (Resources)AccessFactory.GetEntityObjectFromRow(dt.Rows[0], typeof(Resources));
         }
+
+
+        public int ResourcePropertiesManage(Admin admin, ResourceProperties cp)
+        {
+            int rtn = AccessFactory.adminHandlers.CheckAdminPower(admin);
+            if (rtn < 0) return rtn;
+
+            string sql = string.Empty;
+            if (string.IsNullOrEmpty(cp.Id))
+            {
+                sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,CategoriePropertieId) VALUES("
+                + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.CategoriePropertieId + "')";
+            }
+            else
+            {
+                int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM ResourceProperties WHERE ResourceId = '"
+                    + cp.ResourceId + "' AND CategoriePropertieId='" + cp.CategoriePropertieId + "'"));
+                if (ncount > 0)
+                {
+                    sql = "UPDATE ResourceProperties SET ResourceId='" + cp.ResourceId + "',PropertieName='" + cp.PropertieName + "',PropertieValue='" + cp.PropertieValue
+                        + "',CategoriePropertieId='" + cp.CategoriePropertieId + "' WHERE id=" + cp.Id;
+                }
+                else
+                {
+                    sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,CategoriePropertieId) VALUES("
+                 + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.CategoriePropertieId + "')";
+                }
+            }
+
+            AccessFactory.conn.Execute(sql);
+            return 1;
+        }
+
+
+        public Dictionary<string, EntityBase> GetResourcePropertiesByRIdEntity(string rid)
+        {
+            Dictionary<string, EntityBase> res = null;
+
+
+            DataTable dt = AccessFactory.conn.DataTable("SELECT * FROM ResourceProperties WHERE ResourceId='" + rid + "'");
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                res = AccessFactory.GetEntitysObjectFromTable(dt, typeof(ResourceProperties));
+            }
+
+            return res;
+        }
         
     }
 }

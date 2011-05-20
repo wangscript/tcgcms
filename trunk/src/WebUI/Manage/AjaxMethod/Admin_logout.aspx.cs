@@ -23,6 +23,7 @@ public partial class AjaxMethod_Admin_logout : BasePage
             try
             {
                 base.handlerService.manageService.adminHandlers.Logout();
+                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             }
             catch(Exception ex)
             {

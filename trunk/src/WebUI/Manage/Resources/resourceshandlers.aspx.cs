@@ -35,6 +35,7 @@ public partial class resources_resourceshandlers : BasePage
             int newsid = objectHandlers.ToInt(objectHandlers.Get("newsid"));
             string categorieid = objectHandlers.Get("iClassId");
             this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
+            this.cid.Text = categorieid + "&t=" + DateTime.Now.ToString();
 
             if (newsid==0)
             {
@@ -45,6 +46,8 @@ public partial class resources_resourceshandlers : BasePage
 
             Resources item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(newsid);
             this.iClassId.Value = item.Categorie.Id.ToString();
+            this.cid.Text = item.Categorie.Id + "&t=" + DateTime.Now.ToString();
+            this.nid.Text = item.Id + "&t=" + DateTime.Now.ToString();
 
             this.iTitle.Value = item.vcTitle;
             this.iUrl.Value = item.vcUrl;
@@ -88,6 +91,10 @@ public partial class resources_resourceshandlers : BasePage
         if (ismdy)
         {
             item = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(objectHandlers.ToInt(objectHandlers.Post("iNewsId")));
+        }
+        else
+        {
+            item.Id = Guid.NewGuid().ToString();
         }
 
         item.vcTitle = objectHandlers.Post("iTitle");
@@ -146,6 +153,25 @@ public partial class resources_resourceshandlers : BasePage
             {
                 rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
             }
+            
+            if (rtn == 1)
+            {
+                foreach (string key in Request.Form.AllKeys)
+                {
+                    if (key.IndexOf("rpvalue_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
+                    {
+                        string[] keys = key.Split('_');
+                        ResourceProperties rps = new ResourceProperties();
+                        rps.Id = objectHandlers.Post("rpid_" + keys[1]);
+                        rps.PropertieName = objectHandlers.Post("ptname_" + keys[1]);
+                        rps.ResourceId = item.Id;
+                        rps.PropertieValue = objectHandlers.Post("rpvalue_" + keys[1]);
+                        rps.CategoriePropertieId = objectHandlers.ToInt( objectHandlers.Post("cpid_" + keys[1]));
+                        rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, rps);
+                    }
+                }
+            }
+
             if (rtn == 1)
             {
                 rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, objectHandlers.ToInt(item.Id));

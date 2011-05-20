@@ -139,5 +139,15 @@ namespace TCG.Handlers
         /// <returns></returns>
         Resources GetNewsResourcesAtCategorie(string ategorie);
 
+        /// <summary>
+        /// 文章属性管理
+        /// </summary>
+        /// <param name="admin"></param>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        int ResourcePropertiesManage(Admin admin, ResourceProperties cp);
+
+        Dictionary<string, EntityBase> GetResourcePropertiesByRIdEntity(string rid);
+
     }
 }

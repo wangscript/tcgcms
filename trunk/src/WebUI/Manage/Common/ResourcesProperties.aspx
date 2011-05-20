@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ResourcesProperties.aspx.cs" Inherits="Manage_Common_ResourcesProperties" %>
