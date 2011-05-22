@@ -356,8 +356,8 @@ namespace TCG.Handlers
 
             if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
                 + item.vcTitle + "</font>";
-            if (item.cStrong == "Y") item.vcTitle = "<strong>" + item.vcTitle + "</strong>";
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcTitle$", item.vcTitle);
+            if (item.cStrong == "Y") item.vcTitle = "<strong>" +"<TCG>" + item.vcTitle + "</strong>";
+            temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + item.vcTitle + "</TCG>");
 
             //替换正文内容，检查图片
             //try

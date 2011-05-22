@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="../Common/common.aspx"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="../js/newstempadd.js"></script>
 </head>
 <body>

@@ -99,16 +99,16 @@ function CategoriePropertieHTMLDel(id) {
 
         if (!confirm("您确定彻底该分类属性么?")) return;
         $.post("../AjaxMethod/CategoriePropertiesDel.aspx?id=" + id, { Action: "post", Id: id },
-    function (data, textStatus) {
-        // data 可以是 xmlDoc, jsonObj, html, text, 等等.
-        //this; // 这个Ajax请求的选项配置信息，请参考jQuery.get()说到的this
-        if (data.state) {
-            $("#cp_" + id).remove();
-            $("#line_" + id).remove();
-        }
-        AjaxPostFormBack(data);
+            function (data, textStatus) {
+                // data 可以是 xmlDoc, jsonObj, html, text, 等等.
+                //this; // 这个Ajax请求的选项配置信息，请参考jQuery.get()说到的this
+                if (data.state) {
+                    $("#cp_" + id).remove();
+                    $("#line_" + id).remove();
+                }
+                AjaxPostFormBack(data);
 
-    }, "json");
+        }, "json");
     } else {
         $("#cp_" + id).remove();
         $("#line_" + id).remove();

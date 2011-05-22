@@ -42,7 +42,7 @@ public partial class Template_templatemdy : BasePage
             this.vcContent.Value = item.Content;
             this.vcUrl.Value =  filepatch;
 
-            this.iSiteId.Value = item.SkinInfo.ToString();
+            this.iSiteId.Value = item.SkinInfo.Id;
             if (item.TemplateType == TemplateType.Folider)
             {
                 this.iParentid.Value = item.iParentId.ToString();
@@ -85,6 +85,13 @@ public partial class Template_templatemdy : BasePage
             item.vcUrl = objectHandlers.Post("vcUrl");
             item.Content = objectHandlers.Post("vcContent");
             item.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(objectHandlers.Post("iSiteId"));
+            if (item.SkinInfo == null)
+            {
+                base.ajaxdata = "{state:false,message:\"模版所属皮肤未找到！\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
             string parentid = objectHandlers.Post("iParentId");
             if (!string.IsNullOrEmpty(parentid))
             {

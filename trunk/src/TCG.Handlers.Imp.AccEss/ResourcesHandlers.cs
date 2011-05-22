@@ -216,7 +216,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         public Dictionary<string, EntityBase> GetDelNewsInfoList(string ids)
         {
-            AccessFactory.conn.Execute("UPDATE resources SET cDel = ''Y'',cCreated = ''N'' WHERE iId IN (" + ids + ")");
+            AccessFactory.conn.Execute("UPDATE resources SET cDel = 'Y',cCreated = 'N' WHERE iId IN (" + ids + ")");
 
             DataSet ds = AccessFactory.conn.DataSet("SELECT * FROM resources WHERE iId IN (" + ids + ")");
             Dictionary<string, EntityBase> res = null;

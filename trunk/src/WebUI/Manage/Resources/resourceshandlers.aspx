@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../js/layer.js"></script>
 	<script type="text/javascript" src="../js/MenuDiv.js"></script>
 	<script type="text/javascript" src="../js/newsadd.js"></script>
-	<script type="text/javascript" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
+	<script type="text/javascript" id="cptid" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
     <script type="text/javascript" src="../Common/ResourcesProperties.aspx?nid=<asp:Literal ID='nid' runat='server'></asp:Literal>"></script>
 </head>
 <body>
