@@ -107,10 +107,18 @@ function NewsAddPostBack() {
 }
 
 function SelectClassValue(val, txt) {
-	var iClassName=$("#iClassName");
-	var iClassId=$("#iClassId");
-	iClassName.val(txt);
-	iClassId.val(val);
+
+    $.get("../Common/CategorieProperties.aspx?cid=" + val,
+        { Action: "get" },
+        function (data, textStatus) {
+            data = data.substring(4, data.length);
+            eval(data);
+            var iClassName = $("#iClassName");
+            var iClassId = $("#iClassId");
+            iClassName.val(txt);
+            iClassId.val(val);
+            PropertieInit();
+        });
 }
 
 var tempWork;
@@ -186,8 +194,14 @@ $(document).ready(function () {
 
     SetFromsByNum("a1");
 
-    var a2from = $("#a3_from");
+    PropertieInit();
 
+});
+
+//初始化属性
+function PropertieInit() {
+    var a2from = $("#a3_from");
+    a2from.html("");
     if (_CategorieProperties != null) {
         for (var i = 0; i < _CategorieProperties.length; i++) {
             var cp = _CategorieProperties[i];
@@ -197,8 +211,7 @@ $(document).ready(function () {
             a2from.html(ohtml + oth);
         }
     }
-
-});
+}
 
 function GetResourceByCpid(cpid) {
     if (_ResourceProperties == null || _ResourceProperties.length == 0) return null;
@@ -312,69 +325,6 @@ function ResourcePropertiesHTMLADD(cpobj,rpobj) {
         text += "</div>";
          
     }
-    /*
-    <div id="cp_" style="height:100px;">
-            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
-                <b class="fn-bg2 Bopned" id="psnB0"></b><h3>基本信息</h3>
-            </div>
-            <div id="line_" class="ln-c-mid ln-thin"></div>
-
-            <div class="Page_arrb arb_pr1">
-                <input id="Text1" name="iKeyWords" 
-                type="text"  class="itxt1" onfocus="this.className='itxt2'" 
-                onblur="CheckValueIsNull('iKeyWords','keymsg');" 
-                style="width:400px; margin-top:5px;margin-left:15px;" />
-	        </div>
-        </div>
-
-         <div id="Div1" style="height:100px;">
-            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
-                <b class="fn-bg2 Bopned" id="B1"></b><h3>基本信息</h3>
-            </div>
-            <div id="Div2" class="ln-c-mid ln-thin"></div>
-
-            <div class="Page_arrb arb_pr1">
-               <textarea rows="10" cols="1" id="Textarea1" name="iShortContent" 
-                class="itxt1" onfocus="this.className='itxt2'" 
-                onblur="CheckValueIsNull('iKeyWords','keymsg');" 
-                style="width:800px; height:80px; margin-top:5px;margin-left:15px;"></textarea>
-	        </div>
-        </div>
-
-        <div id="Div3" style="height:100px;">
-            <div onclick="ProperDivShowChange('Div3');" class="g-title-2 fn-hand">
-                <b class="fn-bg2 Bopned" id="B2_Div3"></b><h3>基本信息</h3>
-            </div>
-            <div id="Div4" class="ln-c-mid ln-thin"></div>
-
-            <div class="Page_arrb arb_pr1" id="pat_Div3">
-               <select style="margin-top:5px;margin-left:15px;">
-                    <option>测试测是个</option>
-                     <option>测试测是个</option>
-                      <option>测试测是个</option>
-                       <option>测试测是个</option>
-                        <option>测试测是个</option>
-                         <option>测试测是个</option>
-                          <option>测试测是个</option>
-               </select>
-	        </div>
-        </div>
-
-        <div id="Div5" style="height:100px;">
-            <div onclick="MM.personal.switchFolder(0)" class="g-title-2 fn-hand">
-                <b class="fn-bg2 Bopned" id="B3"></b><h3>基本信息</h3>
-            </div>
-            <div id="Div6" class="ln-c-mid ln-thin"></div>
-
-            <div class="Page_arrb arb_pr1">
-               <label><input type="checkbox" name="checkbox2" value="checkbox" />测测是个</label>
-                <label><input type="checkbox" name="checkbox2" value="checkbox" />测试是个</label>
-                 <label><input type="checkbox" name="checkbox2" value="checkbox" />测试测是个</label>
-                  <label><input type="checkbox" name="checkbox2" value="checkbox" />测试测个</label>
-                   <label><input type="checkbox" name="checkbox2" value="checkbox" />试测是个</label>
-	        </div>
-        </div>
-        */
     text += "</div></div>";
     return text;
 }

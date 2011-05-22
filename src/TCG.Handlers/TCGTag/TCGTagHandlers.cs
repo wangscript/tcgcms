@@ -157,11 +157,13 @@ namespace TCG.Handlers
             this._temphtml = _temphtml.Replace("_$WebSite$_", ConfigServiceEx.baseConfig["WebSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", ConfigServiceEx.baseConfig["PageSize"]);
             this._temphtml = _temphtml.Replace("_$WebTitle$_", SkinInfo.Name);
+            this._temphtml = _temphtml.Replace("_$SkinId$_", SkinInfo.Id);
             this._temphtml = _temphtml.Replace("_$WebKeyWords$_", SkinInfo.WebKeyWords);
             this._temphtml = _temphtml.Replace("_$WebDescription$_", SkinInfo.WebDescription);
             this._temphtml = _temphtml.Replace("_$IndexPage$_", SkinInfo.IndexPage);
             this._temphtml = _temphtml.Replace("_$SoftCopyright$_", Versions.version);
             this._temphtml = _temphtml.Replace("_$SoftWebSite$_", Versions.WebSite);
+            this._temphtml = _temphtml.Replace("_$SkinPath$_", ConfigServiceEx.baseConfig["WebSite"] + "/skin/" + SkinInfo.Filename);
             this._temphtml = _temphtml.Replace("_$SystemName$_", Versions.SystemName);
             this._temphtml = _temphtml.Replace("_$author$_", Versions.Author);
             this._temphtml = _temphtml.Replace("_$MainPage$_", ConfigServiceEx.baseConfig["MainPage"]);

@@ -21,7 +21,11 @@ namespace TCG.Handlers.Imp.AccEss
         {
             Dictionary<string, EntityBase> skins = this.GetAllSkinEntity();
             if (skins == null) return null;
-            return (Skin)skins[skinid];
+            if (skins.ContainsKey(skinid))
+            {
+                return (Skin)skins[skinid];
+            }
+            return null;
         }
 
         /// <summary>

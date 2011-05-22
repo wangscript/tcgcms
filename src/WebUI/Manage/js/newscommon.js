@@ -73,12 +73,12 @@ function GetCagetegoriesEnmu(obj, Skinid, CagetegorId) {
 
     var find = false;
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories[i].ParentId == CagetegorId && _Categories[i].SkinId == Skinid) {
+        if (_Categories[i].ParentId == CagetegorId && _Categories[i].Skin.Id == Skinid) {
             var li = $("<li><a href=\"javascript:SelectClassValue('" + _Categories[i].Id
                 + "','" + _Categories[i].ClassName + "');\" ><span>" + _Categories[i].ClassName + "</span></a></li>");
             $(o).append(li);
             find = true;
-            GetCagetegoriesEnmu(li, _Categories[i].SkinId, _Categories[i].Id);
+            GetCagetegoriesEnmu(li, _Categories[i].Skin.Id, _Categories[i].Id);
         }
     }
 

@@ -1,4 +1,4 @@
-//--------------
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 
 function classTitleInit(){
