@@ -14,6 +14,7 @@
 
 
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,13 +32,8 @@ namespace TCG.Handlers
         /// <returns></returns>
         int CreateResources(Resources inf);
 
-        /// <summary>
-        /// 添加资讯
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="inf"></param>
-        /// <returns></returns>
-        int CreateResourcesForSheif(Resources inf);
+        int GetMaxResourceId();
+
 
         /// <summary>
         /// 更新资源
@@ -51,30 +47,14 @@ namespace TCG.Handlers
         /// </summary>
         /// <param name="resourceid"></param>
         /// <returns></returns>
-        Resources GetResourcesById(int resourceid);
+        DataTable GetResourcesById(int resourceid);
 
 
 
-        Dictionary<string, EntityBase> GetDelNewsInfoList(string ids);
+        DataTable GetDelNewsInfoList(string ids);
 
 
-        /// <summary>
-        /// 批量删除资源文件
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="config"></param>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        int DelNewsInfoHtmlByIds(string ids);
-
-
-        /// <summary>
-        /// 获取所有的文章咨询,并放入内存中,不要轻易调用,将消耗大量的时间
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<string, EntityBase> GetAllResurces();
-
-        Dictionary<string, EntityBase> GetAllResuresFromDataBase();
+        DataTable GetAllResuresFromDataBase();
 
         /// <summary>
         /// 
@@ -87,18 +67,7 @@ namespace TCG.Handlers
         /// <param name="del"></param>
         /// <param name="create"></param>
         /// <returns></returns>
-        Dictionary<string, EntityBase> GetResourcesList(int nums, string categories, string Speciality, string orders, bool check, bool del, bool create, bool havechilecategorie);
-
-        /// <summary>
-        /// 获得标签中文章的搜索条件
-        /// </summary>
-        /// <param name="categories"></param>
-        /// <param name="Speciality"></param>
-        /// <param name="check"></param>
-        /// <param name="del"></param>
-        /// <param name="create"></param>
-        /// <returns></returns>
-        string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create, bool havechilecategorie);
+        DataTable GetResourcesList(string sqlsb);
 
 
         /// <summary>
@@ -112,17 +81,9 @@ namespace TCG.Handlers
         /// <param name="order"></param>
         /// <param name="strCondition"></param>
         /// <returns></returns>
-        Dictionary<string, EntityBase> GetResourcesListPager(ref int curPage, ref int pageCount, ref int count, int page, int pagesize, string order, string strCondition);
+        DataTable GetResourcesListPager(ref int curPage, ref int pageCount, ref int count, int page, int pagesize, string order, string strCondition);
 
-        /// <summary>
-        /// 生成文章路径
-        /// </summary>
-        /// <param name="extion"></param>
-        /// <param name="title"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        string CreateNewsInfoFilePath(Resources nif);
-
+        
 
         /// <summary>
         /// 就会或删除资源
@@ -130,14 +91,14 @@ namespace TCG.Handlers
         /// <param name="ids"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        int SaveOrDelResource(string ids, string action, Admin adminname);
+        int SaveOrDelResource(string ids, string action);
 
         /// <summary>
         /// 获取分类下最新的一篇文章
         /// </summary>
         /// <param name="ategorie"></param>
         /// <returns></returns>
-        Resources GetNewsResourcesAtCategorie(string ategorie);
+        DataTable GetNewsResourcesAtCategorie(string ategorie);
 
         /// <summary>
         /// 文章属性管理
@@ -145,9 +106,9 @@ namespace TCG.Handlers
         /// <param name="admin"></param>
         /// <param name="cp"></param>
         /// <returns></returns>
-        int ResourcePropertiesManage(Admin admin, ResourceProperties cp);
+        int ResourcePropertiesManage(ResourceProperties cp);
 
-        Dictionary<string, EntityBase> GetResourcePropertiesByRIdEntity(string rid);
+        DataTable GetResourcePropertiesByRIdEntity(string rid);
 
     }
 }

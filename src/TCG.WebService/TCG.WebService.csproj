@@ -89,10 +89,6 @@
       <Project>{A740596A-E101-4572-9724-512B46B7491E}</Project>
       <Name>TCG.Handlers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCG.Manage\TCG.Manage.csproj">
-      <Project>{AAB48088-4572-4CFD-BD5A-73E0477DF5D0}</Project>
-      <Name>TCG.Manage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCG.Utils\TCG.Utils.csproj">
       <Project>{D2738357-0BA8-4F82-8278-0B88EFB0EF66}</Project>
       <Name>TCG.Utils</Name>

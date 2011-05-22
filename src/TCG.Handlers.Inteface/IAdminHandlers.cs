@@ -35,49 +35,11 @@ namespace TCG.Handlers
         /// <param name="pwd"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        int AdminLogin(string name, string pwd);
+        int AdminLogin(Admin admininfo, string pwd);
 
-        /// <summary>
-        /// 获得所有管理组实体
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<int, AdminRole> GetAllAdminRoleEntity();
+        DataTable GetALLAdminRole();
 
-        /// <summary>
-        /// 根据权限组ID获取权限组信息
-        /// </summary>
-        /// <param name="iRoleId"></param>
-        /// <returns></returns>
-        AdminRole GetAdminRoleInfoByRoleId(int iRoleId);
-
-
-        /// <summary>
-        /// 获得所有权限实体
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetPopedomsEntityFromDataTable(DataTable dt);
-
-        /// <summary>
-        /// 根据管理员姓名获得管理员信息
-        /// </summary>
-        /// <param name="adminname"></param>
-        /// <returns></returns>
-        Admin GetAdminEntityByAdminName(string adminname);
-
-        /// <summary>
-        /// 从管理员记录行中得到管理员实体
-        /// </summary>
-        /// <param name="Row"></param>
-        /// <returns></returns>
-        Admin GetAdminEntityFromDataRow(DataRow Row);
-
-        /// <summary>
-        /// 获得所有管理员实体
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<string, Admin> GetAllAdminEntity();
-
+        DataTable GetAllAdmin();
 
         /// <summary>
         /// 添加新的管理员
@@ -116,40 +78,9 @@ namespace TCG.Handlers
         /// <returns></returns>
         int DeleteAdminById(int AdminID);
 
-        /// <summary>
-        /// 获得所有权限项
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetAllPopedomEntity();
 
-        /// <summary>
-        /// 获得后台管理的菜单项目
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetManagePopedomEntity();
 
-        /// <summary>
-        /// 获得子权限
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetChildManagePopedomEntity(int pid);
-
-        /// <summary>
-        /// 获得部分权限选项目
-        /// </summary>
-        /// <param name="iIds"></param>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetPopedomsByIDs(string iIds);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rid"></param>
-        /// <param name="iIds"></param>
-        /// <returns></returns>
-        Dictionary<int, Popedom> GetAdminPopedomsByID(AdminRole adminrole, string iIds);
-
+        DataTable GetAllPopedom();
 
         /// <summary>
         /// 更改自己的登陆信息
@@ -159,7 +90,7 @@ namespace TCG.Handlers
         /// <param name="npwd"></param>
         /// <param name="nickname"></param>
         /// <returns></returns>
-        int ChanageAdminLoginInfo(string adminname, string oldpwd, string npwd, string nickname);
+        int ChanageAdminLoginInfo(Admin admininfo, string oldpwd, string npwd, string nickname);
 
         /// <summary>
         /// 获得角色组基本信息
@@ -187,7 +118,7 @@ namespace TCG.Handlers
         /// <param name="admins"></param>
         /// <param name="irole"></param>
         /// <returns></returns>
-        int AdminChangeGroup(string vcAdminname,string admins, int irole);
+        int AdminChangeGroup(string admins, int irole);
 
         /// <summary>
         /// 添加新的角色组
@@ -227,7 +158,7 @@ namespace TCG.Handlers
         /// <param name="admins"></param>
         /// <param name="action">01，逻辑删除 02物理删除 03救回管理员</param>
         /// <returns></returns>
-        int DelAdmins(string vcAdminname, string admins,string action);
+        int DelAdmins( string admins,string action);
 
         /// <summary>
         /// 用户退出
@@ -242,21 +173,6 @@ namespace TCG.Handlers
         /// <returns></returns>
         int CheckAdminNameForReg(string adminname);
 
-        /// <summary>
-        /// 检测权限操作项目
-        /// </summary>
-        /// <param name="pid">操作项编号</param>
-        void CheckAdminPop(int pid);
-
-        /// <summary>
-        /// 检测管理员登录
-        /// </summary>
-        void CheckAdminLogin();
-
-        void Logout();
-
-        Admin GetAdminInfo();
-
-        int CheckAdminPower(Admin admininfo);
+        void Logout(Admin admin);
     }
 }

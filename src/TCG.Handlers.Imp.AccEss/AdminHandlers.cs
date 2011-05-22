@@ -36,123 +36,16 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="pwd"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        public int AdminLogin(string name, string pwd)
+        public int AdminLogin(Admin admininfo, string pwd)
         {
-
-            Admin admininfo = this.GetAdminEntityByAdminName(name);
-
-            //用户不存在
-            if (admininfo == null || admininfo.cIsDel == "Y")
-            {
-                return -1000000002;
-            }
-
-            //管理员已经在线
-            string ip = objectHandlers.GetIP();
-            if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != ip)
-            {
-                return -1000000005;
-            }
-
-            //用户密码错误
-            if (admininfo.vcPassword != objectHandlers.MD5(pwd))
-            {
-                return -1000000003;
-            }
-
-            //用户已经被锁定
-            if (admininfo.cLock == "Y")
-            {
-                return -1000000004;
-            }
-
-            admininfo.cIsOnline = "Y";
-            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y',vcLastLoginIp = '" + ip
+            
+            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y',vcLastLoginIp = '" + objectHandlers.GetIP()
                 + "',iLoginCount = iLoginCount+1,dLastLoginDate=now() WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
 
-            HttpCookie admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
-            if (admincookie == null)
-            {
-                admincookie = Cookie.Set(ConfigServiceEx.baseConfig["AdminCookieName"]);
-            }
-            admincookie.Values["AdminName"] = HttpContext.Current.Server.UrlEncode(name);
-            Cookie.Save(admincookie);
-
-            object TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
-            if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
-
-            CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             return 1;
         }
 
-        /// <summary>
-        /// 根据管理员名获得管理员信息
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public int GetAdminInfoByName(string name, string caction, ref DataSet ds)
-        {
-
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = name;
-            //SqlParameter sp1 = new SqlParameter("@vcIP", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@cAction", SqlDbType.VarChar, 15); sp2.Value = caction;
-            //SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int); sp3.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.GetDataSet("SP_Manage_GetAdminInfoByName", new SqlParameter[] { sp0, sp1, sp2, sp3 }, new int[] { 3 }, ref ds);
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int));
-            //}
-            return -19000000;
-        }
-
-        /// <summary>
-        /// 获得所有管理组实体
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<int, AdminRole> GetAllAdminRoleEntity()
-        {
-            Dictionary<int, AdminRole> alladminrole = (Dictionary<int, AdminRole>)CachingService.Get(CachingService.CACHING_ALL_ADMINROLE_ENTITY);
-            if (alladminrole == null)
-            {
-                DataTable dt = GetALLAdminRole();
-                if (dt == null) return null;
-                if (dt.Rows.Count == 0) return null;
-                alladminrole = new Dictionary<int, AdminRole>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataRow Row = dt.Rows[i];
-                    AdminRole role = new AdminRole();
-
-                    role.iID = (int)Row["iId"];
-                    role.vcRoleName = Row["vcRoleName"].ToString();
-                    role.vcContent = Row["vcContent"].ToString();
-                    role.vcPopedom = this.GetPopedomsByIDs(Row["vcPopedom"].ToString());
-                    role.PopedomStr = Row["vcPopedom"].ToString();
-                    role.vcClassPopedom = Row["vcClassPopedom"].ToString();
-                    role.dUpdateDate = objectHandlers.ToTime(Row["dUpdateDate"].ToString());
-
-                    alladminrole.Add(role.iID, role);
-                }
-
-                CachingService.Set(CachingService.CACHING_ALL_ADMINROLE_ENTITY, alladminrole, null);
-            }
-            return alladminrole;
-        }
-
-        /// <summary>
-        /// 根据权限组ID获取权限组信息
-        /// </summary>
-        /// <param name="iRoleId"></param>
-        /// <returns></returns>
-        public AdminRole GetAdminRoleInfoByRoleId(int iRoleId)
-        {
-            Dictionary<int, AdminRole> allRole = this.GetAllAdminRoleEntity();
-            if (allRole == null) return null;
-            if (allRole.Count == 0) return null;
-            if (!allRole.ContainsKey(iRoleId)) return null;
-            return allRole[iRoleId];
-        }
-
+        
         /// <summary>
         /// 获得所有管理角色
         /// </summary>
@@ -162,95 +55,6 @@ namespace TCG.Handlers.Imp.AccEss
 
             string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM AdminRole";
             return AccessFactory.conn.DataTable(sql);
-        }
-
-        /// <summary>
-        /// 获得所有权限实体
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetPopedomsEntityFromDataTable(DataTable dt)
-        {
-            if (dt == null) return null;
-            if (dt.Rows.Count == 0) return null;
-            Dictionary<int, Popedom> allpopedom = new Dictionary<int, Popedom>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                DataRow Row = dt.Rows[i];
-                Popedom pop = new Popedom();
-
-                pop.iID = (int)Row["iId"];
-                pop.dAddtime = (DateTime)Row["dAddtime"];
-                pop.vcPopName = Row["vcPopName"].ToString();
-                pop.cValid = Row["cValid"].ToString();
-                pop.iParentId = (int)Row["iParentId"];
-                pop.vcUrl = Row["vcUrl"].ToString();
-
-                allpopedom.Add(pop.iID, pop);
-            }
-            return allpopedom;
-        }
-
-        /// <summary>
-        /// 根据管理员姓名获得管理员信息
-        /// </summary>
-        /// <param name="adminname"></param>
-        /// <returns></returns>
-        public Admin GetAdminEntityByAdminName(string adminname)
-        {
-            Dictionary<string, Admin> allamdin = this.GetAllAdminEntity();
-            if (allamdin == null) return null;
-            if (allamdin.ContainsKey(adminname))
-            {
-                return allamdin[adminname];
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// 从管理员记录行中得到管理员实体
-        /// </summary>
-        /// <param name="Row"></param>
-        /// <returns></returns>
-        public Admin GetAdminEntityFromDataRow(DataRow Row)
-        {
-            if (Row == null) return null;
-            Admin admininfo = new Admin();
-            admininfo.vcAdminName = Row["vcAdminName"].ToString();
-            admininfo.vcNickName = Row["vcNickName"].ToString();
-            admininfo.vcPassword = Row["vcPassword"].ToString();
-            admininfo.iRole = this.GetAdminRoleInfoByRoleId((int)Row["iRole"]);
-            admininfo.vcPopedom = this.GetAdminPopedomsByID(admininfo.iRole, Row["vcPopedom"].ToString());
-            admininfo.PopedomStr = Row["vcPopedom"].ToString();
-            admininfo.cLock = Row["clock"].ToString();
-            admininfo.vcClassPopedom = Row["vcClassPopedom"].ToString();
-            admininfo.cIsDel = Row["cIsDel"].ToString();
-            admininfo.cIsOnline = Row["cIsOnline"].ToString();
-            admininfo.vcLastLoginIp = Row["vcLastLoginIp"].ToString();
-            return admininfo;
-        }
-
-        /// <summary>
-        /// 获得所有管理员实体
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<string, Admin> GetAllAdminEntity()
-        {
-            Dictionary<string, Admin> alladmin = (Dictionary<string, Admin>)CachingService.Get(CachingService.CACHING_ALL_ADMIN_ENTITY);
-            if (alladmin == null)
-            {
-                DataTable dt = this.GetAllAdmin();
-                if (dt == null) return null;
-                if (dt.Rows.Count == 0) return null;
-                alladmin = new Dictionary<string, Admin>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    Admin admin = this.GetAdminEntityFromDataRow(dt.Rows[i]);
-                    alladmin.Add(admin.vcAdminName, admin);
-                }
-                CachingService.Set(CachingService.CACHING_ALL_ADMIN_ENTITY, alladmin, null);
-            }
-            return alladmin;
         }
 
         /// <summary>
@@ -278,14 +82,8 @@ namespace TCG.Handlers.Imp.AccEss
         public int AddAdmin(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
 
-            Admin admininfos = this.GetAdminEntityByAdminName(admin);
-
-            int rtn = this.CheckAdminPower(admininfos);
-            if (rtn < 0) return rtn;
-
             AccessFactory.conn.Execute("INSERT INTO admin (vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom)"
                                 + "VALUES('" + vcAdminName + "','" + nickname + "','" + vPassWord + "'," + iRole + ",'" + clock + "','" + vcPopedom + "','" + classpop + "')");
-            this.AminInfoRefash();
             return 1;
         }
 
@@ -303,11 +101,6 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int UpdateAdminInfo(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
-            Admin admininfos = this.GetAdminEntityByAdminName(admin);
-
-            int rtn = this.CheckAdminPower(admininfos);
-            if (rtn < 0) return rtn;
-
 
             string SQL = "UPDATE admin SET ";
 
@@ -318,14 +111,7 @@ namespace TCG.Handlers.Imp.AccEss
 
             SQL += "vcNickName='" + nickname + "',iRole=" + iRole + ",clock='" + clock + "',vcPopedom='" + vcPopedom + "',vcClassPopedom='" + vcPopedom + "' WHERE vcAdminName='" + vcAdminName + "'";
             AccessFactory.conn.Execute(SQL);
-            this.AminInfoRefash();
             return 1;
-        }
-
-
-        public void AminInfoRefash()
-        {
-            CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
         }
 
         /// <summary>
@@ -371,63 +157,6 @@ namespace TCG.Handlers.Imp.AccEss
         }
 
         /// <summary>
-        /// 获得所有权限项
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetAllPopedomEntity()
-        {
-            Dictionary<int, Popedom> allpop = (Dictionary<int, Popedom>)CachingService.Get(CachingService.CACHING_ALL_POPDOM);
-            if (allpop == null)
-            {
-                DataTable dt = GetAllPopedom();
-                if (dt == null) return null;
-                allpop = this.GetPopedomsEntityFromDataTable(dt);
-                CachingService.Set(CachingService.CACHING_ALL_POPDOM, allpop, null);
-            }
-            return allpop;
-        }
-
-        /// <summary>
-        /// 获得后台管理的菜单项目
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetManagePopedomEntity()
-        {
-            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
-            if (allpop == null) return null;
-            if (allpop.Count == 0) return null;
-            Dictionary<int, Popedom> managepop = new Dictionary<int, Popedom>();
-            foreach (KeyValuePair<int, Popedom> keyvalue in allpop)
-            {
-                if (keyvalue.Value.cValid == "Y")
-                {
-                    managepop.Add(keyvalue.Key, keyvalue.Value);
-                }
-            }
-            return managepop;
-        }
-
-        /// <summary>
-        /// 获得子权限
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetChildManagePopedomEntity(int pid)
-        {
-            Dictionary<int, Popedom> managepop = this.GetManagePopedomEntity();
-            if (managepop == null) return null;
-            Dictionary<int, Popedom> cmpop = new Dictionary<int, Popedom>();
-            foreach (KeyValuePair<int, Popedom> keyvalue in managepop)
-            {
-                if (keyvalue.Value.iParentId == pid)
-                {
-                    cmpop.Add(keyvalue.Key, keyvalue.Value);
-                }
-            }
-            return cmpop;
-        }
-
-        /// <summary>
         /// 获得所有权限选项目
         /// </summary>
         /// <returns></returns>
@@ -436,88 +165,6 @@ namespace TCG.Handlers.Imp.AccEss
 
             string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom";
             return AccessFactory.conn.DataTable(sql);
-        }
-
-        /// <summary>
-        /// 获得部分权限选项目
-        /// </summary>
-        /// <param name="iIds"></param>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetPopedomsByIDs(string iIds)
-        {
-            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
-            if (allpop == null) return null;
-            if (allpop.Count == 0) return null;
-            Dictionary<int, Popedom> pops = new Dictionary<int, Popedom>();
-            if (iIds.IndexOf(",") > -1)
-            {
-                string[] ids = iIds.Split(',');
-                for (int i = 0; i < ids.Length; i++)
-                {
-                    int tid = objectHandlers.ToInt(ids[i]);
-                    if (allpop.ContainsKey(tid))
-                    {
-                        pops.Add(tid, allpop[tid]);
-                    }
-                }
-            }
-            else
-            {
-                int id = objectHandlers.ToInt(iIds);
-                if (allpop.ContainsKey(id))
-                {
-                    pops.Add(id, allpop[id]);
-                }
-            }
-
-            return (pops.Count == 0) ? null : pops;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rid"></param>
-        /// <param name="iIds"></param>
-        /// <returns></returns>
-        public Dictionary<int, Popedom> GetAdminPopedomsByID(AdminRole adminrole, string iIds)
-        {
-            Dictionary<int, Popedom> allpop = this.GetAllPopedomEntity();
-            if (allpop == null) return null;
-            if (allpop.Count == 0) return null;
-            Dictionary<int, Popedom> pops = new Dictionary<int, Popedom>();
-            if (iIds.IndexOf(",") > -1)
-            {
-                string[] ids = iIds.Split(',');
-                for (int i = 0; i < ids.Length; i++)
-                {
-                    int tid = objectHandlers.ToInt(ids[i]);
-                    if (allpop.ContainsKey(tid))
-                    {
-                        pops.Add(tid, allpop[tid]);
-                    }
-                }
-            }
-            else
-            {
-                int id = objectHandlers.ToInt(iIds);
-                if (allpop.ContainsKey(id))
-                {
-                    pops.Add(id, allpop[id]);
-                }
-            }
-
-            if (adminrole.vcPopedom != null && adminrole.vcPopedom.Count != 0)
-            {
-                foreach (KeyValuePair<int, Popedom> keyvalue in adminrole.vcPopedom)
-                {
-                    if (!pops.ContainsKey(keyvalue.Key))
-                    {
-                        pops.Add(keyvalue.Key, keyvalue.Value);
-                    }
-                }
-            }
-
-            return (pops.Count == 0) ? null : pops;
         }
 
 
@@ -529,55 +176,22 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="npwd"></param>
         /// <param name="nickname"></param>
         /// <returns></returns>
-        public int ChanageAdminLoginInfo(string adminname, string oldpwd, string npwd, string nickname)
+        public int ChanageAdminLoginInfo(Admin admininfo, string oldpwd, string npwd, string nickname)
         {
 
-            Admin admininfo = this.GetAdminEntityByAdminName(adminname);
-
-            int rtn = this.CheckAdminPower(admininfo);
-            if (rtn < 0) return rtn;
-
-            //输入原始密码不正确
-            if(oldpwd!=admininfo.vcPassword)
-            {
-                return  -1000000009;
-            }
-     
-            //您的帐号已经锁定，不能修改登陆信息
-            if(admininfo.cLock=="Y")
-            {
-                return -1000000010;
-            }
 
             if (string.IsNullOrEmpty(npwd))
             {
                 admininfo.vcNickName = nickname;
-                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + adminname + "'");
+                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'");
             }
             else
             {
                 admininfo.vcNickName = nickname;
                 admininfo.vcPassword = npwd;
-                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + adminname + "'");
+                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'");
             }
 
-            return 1;
-        }
-
-        public int CheckAdminPower(Admin admininfo)
-        {
-
-            //-操作员为空，您是否尚未登陆？
-            if (string.IsNullOrEmpty(admininfo.vcAdminName))
-            {
-                return -1000000012;
-            }
-
-            //您不并不在线，您是否尚未登陆？
-            if (admininfo.cIsOnline != "Y")
-            {
-                return -1000000017;
-            }
             return 1;
         }
 
@@ -645,19 +259,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="admins"></param>
         /// <param name="irole"></param>
         /// <returns></returns>
-        public int AdminChangeGroup(string vcAdminname, string admins, int irole)
+        public int AdminChangeGroup(string admins, int irole)
         {
-
-            Admin admininfos = this.GetAdminEntityByAdminName(vcAdminname);
-
-            int rtn = this.CheckAdminPower(admininfos);
-            if (rtn < 0) return rtn;
-
-            //组编号不正确
-            if (irole == 0)
-            {
-                return -1000000011;
-            }
 
             if (admins.IndexOf(",") > -1)
             {
@@ -743,7 +346,6 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int DelAdminRole(string vcAdminname, int roleid)
         {
-
             //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
             //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
             //SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = roleid.ToString();
@@ -765,14 +367,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="admins"></param>
         /// <param name="action">01，逻辑删除 02物理删除 03救回管理员</param>
         /// <returns></returns>
-        public int DelAdmins(string vcAdminname, string admins, string action)
+        public int DelAdmins( string admins, string action)
         {
-
-            Admin admin = this.GetAdminEntityByAdminName(vcAdminname);
-            if (admin == null) return -19000000;
-
-            int rtn = this.CheckAdminPower(admin);
-            if (rtn < 0) return rtn;
 
              //尚未选择需要删除的管理员 
             if (string.IsNullOrEmpty(admins))
@@ -841,121 +437,11 @@ namespace TCG.Handlers.Imp.AccEss
             return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Admin WHERE vcAdminName='" + adminname + "'"));
         }
 
-        private void Initialization()
+       
+
+        public void Logout(Admin admin)
         {
-            if (this._admincookie == null)
-            {
-                this._admincookie = Cookie.Get(ConfigServiceEx.baseConfig["AdminCookieName"]);
-                if (this._admincookie != null)
-                {
-                    if (this._admincookie.Values.Count != 1) return;
-                    this._name = objectHandlers.UrlDecode(this._admincookie.Values["AdminName"].ToString());
-                }
-            }
-            this._currenturl = this.RemoveA(objectHandlers.CurrentUrl);
-        }
-
-        private void AdminInit()
-        {
-            this.Initialization();
-            if (this._admin != null) return;
-            object TempAdmin = null;
-            if (string.IsNullOrEmpty(this._name))
-            {
-                TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
-                if (TempAdmin != null) SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
-                this._admin = null;
-                return;
-            }
-            this._admin = this.GetAdminEntityByAdminName(this._name);
-            TempAdmin = SessionState.Get(ConfigServiceEx.baseConfig["AdminSessionName"]);
-            if (TempAdmin == null)
-            {
-                if (this._admin != null && this._admin.cIsOnline == "Y" && this._admin.vcLastLoginIp == objectHandlers.UserIp && this._admin.cIsDel != "Y")
-                {
-                    SessionState.Set(ConfigServiceEx.baseConfig["AdminSessionName"], this._admin);
-                }
-                else
-                {
-                    SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 检测权限操作项目
-        /// </summary>
-        /// <param name="pid">操作项编号</param>
-        public void CheckAdminPop(int pid)
-        {
-            if (!(this._admin != null && this._admin.vcPopedom != null && this._admin.vcPopedom.Count != 0 && this._admin.vcPopedom.ContainsKey(pid)))
-            {
-                new Terminator().Throw("您无权限访问改页面!", "", "," + ConfigServiceEx.baseConfig["WebSite"]
-                         + ConfigServiceEx.baseConfig["ManagePath"]
-                         + "login.aspx", ConfigServiceEx.baseConfig["WebSite"] +
-                         ConfigServiceEx.baseConfig["ManagePath"] + "login.aspx", false);
-                return;
-            }
-        }
-
-        /// <summary>
-        /// 检测管理员登录
-        /// </summary>
-        public void CheckAdminLogin()
-        {
-            this.AdminInit();
-
-            if (this._admin == null)
-            {
-                new Terminator().Throw("您还未登录后台!", "登录后台", "返回首页," + ConfigServiceEx.baseConfig["WebSite"]
-                         + ConfigServiceEx.baseConfig["ManagePath"]
-                         + "login.aspx", ConfigServiceEx.baseConfig["WebSite"] +
-                         ConfigServiceEx.baseConfig["ManagePath"] + "login.aspx", false);
-                return;
-            }
-        }
-
-
-        private string RemoveA(string str)
-        {
-            if (str.IndexOf("?") > 0)
-            {
-                str = str.Substring(0, str.IndexOf("?"));
-            }
-            return str;
-        }
-
-        public void Logout()
-        {
-            this.AdminInit();
-            this.AdminLoginOut(this._name);
-            if (this._admincookie != null)
-            {
-                Cookie.Remove(this._admincookie);
-            }
-            if (this._admin != null)
-            {
-                this._admin.cIsOnline = "N";
-                AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + this._admin.vcAdminName + "'");
-                SessionState.Remove(ConfigServiceEx.baseConfig["AdminSessionName"]);
-            }
-        }
-
-
-        public Admin adminInfo
-        {
-            get
-            {
-                this.AdminInit();
-                if (this._admin == null) return new Admin();
-                return this._admin;
-            }
-        }
-
-        public Admin GetAdminInfo()
-        {
-            this.AdminInit();
-            return this._admin;
+            AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + admin.vcAdminName + "'");
         }
 
 

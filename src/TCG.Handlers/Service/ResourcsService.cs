@@ -17,17 +17,17 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供对资讯操作的方法
         /// </summary>
-        public IResourceHandlers resourcesHandlers
+        public ResourcesHandlers resourcesHandlers
         {
             get
             {
                 if (this._resourceshandlers == null)
                 {
-                    this._resourceshandlers = HandlerFactory.CreateResourceHandlers();
+                    this._resourceshandlers = new ResourcesHandlers();
                 }
                 return this._resourceshandlers;
             }
         }
-        private IResourceHandlers _resourceshandlers;
+        private ResourcesHandlers _resourceshandlers;
     }
 }

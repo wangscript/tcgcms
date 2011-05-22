@@ -88,9 +88,6 @@ namespace TCG.Handlers
                 case "scriptcss": // <tcg:id1 type="scriptcss" text='/sdfsdf.js|ggg.js'>dfddfd</tcg:id1>
                     this.TagForScriptCss(ref pagerinfo);
                     break;
-                case "ResourceProperties":
-                    this.TagForResourceProperties(ref pagerinfo);
-                    break;
             }
         }
 
@@ -157,32 +154,6 @@ namespace TCG.Handlers
             }
 
             this._tagtext = tempNew;
-
-        }
-
-        private void TagForResourceProperties(ref TCGTagPagerInfo pagerinfo)
-        {
-            string resid = this.GetAttribute("resid");
-            if (string.IsNullOrEmpty(resid))
-            {
-                pagerinfo.Read = false;
-                return;
-            }
-
-            Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(resid);
-
-            if (ress == null || ress.Count == 0)
-            {
-                pagerinfo.Read = false;
-                return;
-            }
-
-            foreach (KeyValuePair<string, EntityBase> entity in ress)
-            {
-                ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_PropertieName$", resourceProperties.PropertieName);
-                this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_PropertieValue$", resourceProperties.PropertieValue);
-            }
 
         }
 
@@ -400,7 +371,31 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + item.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + item.vcBigImg + "</TCG>");
 
+            bool isshowrp = objectHandlers.ToBoolen(this.GetAttribute("inpropertie"), false);
+            if (isshowrp)
+            {
+                Match mh = Regex.Match(temp, @"(<ResourcePropertiesList>)([\S\s]*?)(</ResourcePropertiesList>)", RegexOptions.Singleline | RegexOptions.Multiline);
+                string rplist = string.Empty;
+                if (mh.Success)
+                {
+                    string temp1 = mh.Result("$2");
+                    Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(item.Id);
 
+                    if (ress != null || ress.Count != 0)
+                    {
+                        foreach (KeyValuePair<string, EntityBase> entity in ress)
+                        {
+                            string temp2 = temp1;
+                            ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
+                            temp2 = temp2.Replace("$PropertieName$", resourceProperties.PropertieName);
+                            temp2 = temp2.Replace("$PropertieValue$", resourceProperties.PropertieValue);
+                            rplist += temp2;
+                            temp = temp.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
+                        }
+                    }
+                }
+                temp = Regex.Replace(temp, @"(<ResourcePropertiesList>)(.+?)(</ResourcePropertiesList>)", rplist, RegexOptions.Singleline | RegexOptions.Multiline);
+            }
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }

@@ -12,54 +12,7 @@ namespace TCG.Handlers.Imp.AccEss
 {
     public class SkinHandlers : ISkinHandlers
     {
-        /// <summary>
-        /// 根据皮肤ID得到皮肤信息
-        /// </summary>
-        /// <param name="skinid"></param>
-        /// <returns></returns>
-        public Skin GetSkinEntityBySkinId(string skinid)
-        {
-            Dictionary<string, EntityBase> skins = this.GetAllSkinEntity();
-            if (skins == null) return null;
-            if (skins.ContainsKey(skinid))
-            {
-                return (Skin)skins[skinid];
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// 获得所有皮肤实体
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<string, EntityBase> GetAllSkinEntity()
-        {
-            Dictionary<string, EntityBase> allskin = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_SKIN_ENTITY);
-            if (allskin == null)
-            {
-                DataTable dt = GetAllSkin();
-                if (dt == null) return null;
-                allskin = AccessFactory.GetEntitysObjectFromTable(dt, typeof(Skin));
-                CachingService.Set(CachingService.CACHING_ALL_SKIN_ENTITY, allskin, null);
-            }
-            return allskin;
-        }
-
-        /// <summary>
-        /// 从缓存获得所有皮肤记录集
-        /// </summary>
-        /// <returns></returns>
-        public DataTable GetAllSkin()
-        {
-            DataTable allskin = (DataTable)CachingService.Get(CachingService.CACHING_ALL_SKIN);
-            if (allskin == null)
-            {
-                allskin = GetAllSkinWithOutCaching();
-                CachingService.Set(CachingService.CACHING_ALL_SKIN, allskin, null);
-            }
-            return allskin;
-        }
-
+       
         /// <summary>
         /// 从数据库中获得皮肤记录集
         /// </summary>

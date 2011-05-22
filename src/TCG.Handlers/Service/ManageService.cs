@@ -31,18 +31,18 @@ namespace TCG.Handlers
         /// <summary>
         /// 管理员的操作方法
         /// </summary>
-        public IAdminHandlers adminHandlers
+        public AdminHandlers adminHandlers
         {
             get
             {
                 if (this._adminhandlers == null)
                 {
-                   this._adminhandlers = HandlerFactory.CreateAdminHandlers();
+                   this._adminhandlers = new AdminHandlers();
                 }
                 return this._adminhandlers;
             }
         }
-        private IAdminHandlers _adminhandlers = null;
+        private AdminHandlers _adminhandlers = null;
 
     }
 }
