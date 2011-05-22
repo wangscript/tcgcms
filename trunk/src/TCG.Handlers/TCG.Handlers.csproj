@@ -45,8 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\HandlersFactory.cs" />
+    <Compile Include="Handlers\AdminHandlers.cs" />
+    <Compile Include="Handlers\CategoriesHandlers.cs" />
+    <Compile Include="Handlers\FileHandlers.cs" />
+    <Compile Include="Handlers\ResourcesHandlers.cs" />
+    <Compile Include="Handlers\SkinHandlers.cs" />
+    <Compile Include="Handlers\TemplateHandlers.cs" />
     <Compile Include="Service\FileService.cs" />
-    <Compile Include="HandlerFactory.cs" />
+    <Compile Include="Handlers\DataBaseFactory.cs" />
     <Compile Include="Service\HandlerService.cs" />
     <Compile Include="Service\ManageService.cs" />
     <Compile Include="ObjectHandlersBase.cs" />

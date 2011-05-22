@@ -13,6 +13,7 @@
   */
 
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,27 +24,7 @@ namespace TCG.Handlers
     public interface ITemplateHandlers
     {
 
-
-        Dictionary<string, EntityBase> GetAllTemplatesEntity();
-
-        Template GetTemplateByID(string templateid);
-
-
-        /// <summary>
-        /// 根据模板类型获取模板
-        /// </summary>
-        /// <param name="templatetype"></param>
-        /// <returns></returns>
-        Dictionary<string, EntityBase> GetTemplatesByTemplateType(TemplateType templatetype,string skinid);
-
-        /// <summary>
-        /// 根据模板类型获取模板
-        /// </summary>
-        /// <param name="templatetype"></param>
-        /// <returns></returns>
-        Dictionary<string, EntityBase> GetTemplates(string skinid, string parentid, int[] templatetypes);
-
-        string GetTemplatePagePatch(string tid);
+        DataTable GetAllTemplatesWithOutCaching();
 
         /// <summary>
         /// 添加模板
@@ -51,15 +32,7 @@ namespace TCG.Handlers
         /// <param name="item"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        int AddTemplate(Template item, Admin admin);
-
-        /// <summary>
-        /// 添加模板
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="admin"></param>
-        /// <returns></returns>
-        int AddTemplateForXml(Template item, Admin admin);
+        int AddTemplate(Template item);
 
         /// <summary>
         /// 删除模板
@@ -67,7 +40,7 @@ namespace TCG.Handlers
         /// <param name="temps"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        int DelTemplate(string temps, Admin admin);
+        int DelTemplate(string temps);
 
         /// <summary>
         /// 修改模板信息
@@ -75,30 +48,6 @@ namespace TCG.Handlers
         /// <param name="item"></param>
         /// <param name="admin"></param>
         /// <returns></returns>
-        int MdyTemplate(Template item, Admin admin);
-
-        /// <summary>
-        /// 从XML中更新模板
-        /// </summary>
-        /// <param name="skinid"></param>
-        /// <param name="admin"></param>
-        /// <returns></returns>
-        int UpdateTemplateFromXML(string skinid, Admin admin);
-
-        /// <summary>
-        /// 创建皮肤模板文件 
-        /// </summary>
-        /// <param name="skinid"></param>
-        /// <param name="admin"></param>
-        /// <returns></returns>
-        int CreateTemplateToXML( Admin admin,string skinid);
-
-
-        /// <summary>
-        /// 得到模板类型
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        TemplateType GetTemplateType(int type);
+        int MdyTemplate(Template item);
     }
 }

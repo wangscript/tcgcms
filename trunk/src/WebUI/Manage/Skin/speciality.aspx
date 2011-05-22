@@ -10,15 +10,16 @@
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
-	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../Common/common.aspx"></script>
-	<script type="text/javascript" src="../js/AJAXRequest.js"></script>
-	<script type="text/javascript" src="../Common/AllNewsClass.aspx"></script>
+	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="../Common/AllNewsSpeciality.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/newsspecialitylist.js"></script>
-	<script type="text/javascript" src="../js/CreateInput.js"></script>
+	<script type="text/javascript" src="../js/CreateInputV2.js"></script>
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return CheckForm()">

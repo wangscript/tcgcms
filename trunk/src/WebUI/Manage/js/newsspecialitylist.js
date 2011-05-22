@@ -1,14 +1,13 @@
-//--------------
-var ajax = new AJAXRequest();
+/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var a="";
 function classTitleInit(){
-	var m=$("classTitle");
-	var iSiteId=$("iSiteId");
+	var m=$("#classTitle");
+	var iSiteId=$("#iSiteId");
 	if(m==null||iSiteId==null)return;
 	if(NewsLis==null)return;
 	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][0]==iSiteId.value){
+		if(NewsLis[i][0]==iSiteId.val()){
 			m.innerHTML="<span class='txt bold'>"+NewsLis[i][2]+"</span><span class='info1'>("+NewsLis[i][3]+")</span>";
 		}
 	}

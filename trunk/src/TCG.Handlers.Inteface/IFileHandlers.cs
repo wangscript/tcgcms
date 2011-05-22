@@ -13,6 +13,7 @@
   */
 
 using System;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -26,37 +27,7 @@ namespace TCG.Handlers
     public interface IFileHandlers
     {
 
-        /// <summary>
-        /// 获得所有文章分类实体
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<string, EntityBase> GetAllFileCategoriesEntity();
-
-        /// <summary>
-        /// 根据ID获得文章分类信息
-        /// </summary>
-        /// <param name="filecateorieid"></param>
-        /// <returns></returns>
-        FileCategories GetFileCategories(string filecateorieid);
-
-        /// <summary>
-        /// 根据父亲获得文件夹
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="prarentid"></param>
-        /// <returns></returns>
-        Dictionary<string, EntityBase> GetFileCategories(int prarentid);
-
-        string GetFilesPathByClassId(int classid);
-
-        /// <summary>
-        /// 添加新的分类
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="adminname"></param>
-        /// <param name="fcif"></param>
-        /// <returns></returns>
-        int AddFileClass(Admin adminname, FileCategories fcif);
+        DataTable GetAllFilesClassFromDb();
 
 
         /// <summary>
@@ -66,7 +37,17 @@ namespace TCG.Handlers
         /// <param name="adminname"></param>
         /// <param name="fcif"></param>
         /// <returns></returns>
-        int AddFileInfoByAdmin(Admin adminname, FileResources fif);
+        int AddFileClass( FileCategories fcif);
+
+
+        /// <summary>
+        /// 添加新的分类
+        /// </summary>
+        /// <param name="conn"></param>
+        /// <param name="adminname"></param>
+        /// <param name="fcif"></param>
+        /// <returns></returns>
+        int AddFileInfoByAdmin(FileResources fif);
 
 
         /// <summary>
@@ -75,35 +56,7 @@ namespace TCG.Handlers
         /// <param name="conn"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        FileResources GetFileInfosById(string id);
+        DataTable GetFileInfosById(string id);
 
-        string UrlCheck(string url, Resources resource);
-
-        /// <summary>
-        /// 获取文章中间外部网站的图片
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="url"></param>
-        /// <param name="adminname"></param>
-        /// <param name="fileclassid"></param>
-        /// <returns></returns>
-        string ImgPatchInit(Resources resource, string url, Admin adminname, int fileclassid);
-
-        /// <summary>
-        /// 判断远程文件是否存在
-        /// </summary>
-        /// <param name="curl"></param>
-        /// <returns></returns>
-        int GetUrlError(string curl);
-
-        string GetFilePath(string filename, int fileclassid, ref string imagepath);
-
-        int UploadFile(byte[] _bytes, Admin adminname, string imagetype, int fileclassid, ref string imagepath);
-
-        /// <summary>
-        /// 根据后缀获取图片格式
-        /// </summary>
-        /// <param name="filePath">图片路径</param>
-        ImageFormat GetImgFormat(string filePath);
     }
 }

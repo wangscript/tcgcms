@@ -94,7 +94,7 @@ public partial class resources_resourceshandlers : BasePage
         }
         else
         {
-            item.Id = Guid.NewGuid().ToString();
+            item.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
         }
 
         item.vcTitle = objectHandlers.Post("iTitle");

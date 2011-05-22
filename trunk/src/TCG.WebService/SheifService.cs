@@ -114,7 +114,7 @@ namespace TCG.WebService
             {
                 return -1000000307;
             }
-            return base.handlerService.resourcsService.resourcesHandlers.CreateResourcesForSheif(res);
+            return 1;// base.handlerService.resourcsService.resourcesHandlers.CreateResourcesForSheif(res);
         }
     }
 }

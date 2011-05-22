@@ -18,50 +18,50 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供系统的分类操作
         /// </summary>
-        public ICategoriesHandlers categoriesHandlers
+        public CategoriesHandlers categoriesHandlers
         {
             get
             {
                 if (this._categorieshandlers == null)
                 {
-                    this._categorieshandlers = HandlerFactory.CreateCategoriesHandlers();
+                    this._categorieshandlers = new CategoriesHandlers();
                 }
                 return this._categorieshandlers;
             }
         }
-        private ICategoriesHandlers _categorieshandlers = null;
+        private CategoriesHandlers _categorieshandlers = null;
 
 
         /// <summary>
         /// 提供皮肤的操作
         /// </summary>
-        public ITemplateHandlers templateHandlers
+        public TemplateHandlers templateHandlers
         {
             get
             {
                 if (this._templateHandlers == null)
                 {
-                    this._templateHandlers = HandlerFactory.CreateTemplateHandlers();
+                    this._templateHandlers = new TemplateHandlers();
                 }
                 return this._templateHandlers;
             }
         }
-        private ITemplateHandlers _templateHandlers = null;
+        private TemplateHandlers _templateHandlers = null;
 
         /// <summary>
         /// 提供皮肤类别的操作
         /// </summary>
-        public ISkinHandlers skinHandlers
+        public SkinHandlers skinHandlers
         {
             get
             {
                 if (this._skinhandlers == null)
                 {
-                    this._skinhandlers = HandlerFactory.CreateSkinHandlers();
+                    this._skinhandlers = new SkinHandlers();
                 }
                 return this._skinhandlers;
             }
         }
-        private ISkinHandlers _skinhandlers = null;
+        private SkinHandlers _skinhandlers = null;
     }
 }

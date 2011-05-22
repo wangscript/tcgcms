@@ -35,18 +35,18 @@ namespace TCG.Handlers
         /// <summary>
         /// 提供文件分类操作的方法
         /// </summary>
-        public IFileHandlers fileHandlers
+        public FileHandlers fileHandlers
         {
             get
             {
                 if (this._filehandlers == null)
                 {
-                    this._filehandlers = HandlerFactory.CreateFileHandlers();
+                    this._filehandlers = new FileHandlers();
                 }
                 return this._filehandlers;
             }
         }
-        private IFileHandlers _filehandlers;
+        private FileHandlers _filehandlers;
 
     }
 }

@@ -13,6 +13,7 @@
   */
 
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,18 +24,10 @@ namespace TCG.Handlers
     public interface ISkinHandlers
     {
         /// <summary>
-        /// 根据皮肤ID得到皮肤信息
-        /// </summary>
-        /// <param name="skinid"></param>
-        /// <returns></returns>
-        Skin GetSkinEntityBySkinId(string skinid);
-
-        /// <summary>
-        /// 获得所有皮肤实体
+        /// 从数据库中获得所有皮肤
         /// </summary>
         /// <returns></returns>
-        Dictionary<string, EntityBase> GetAllSkinEntity();
-
+        DataTable GetAllSkinWithOutCaching();
 
         /// <summary>
         /// 创建皮肤
