@@ -312,6 +312,7 @@ namespace TCG.Handlers
 
         public void AminInfoRefash()
         {
+            DataBaseFactory.AdminHandlers.AminInfoRefash();
             CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
         }
 
@@ -729,6 +730,7 @@ namespace TCG.Handlers
                 {
                     if (this._admincookie.Values.Count != 1) return;
                     this._name = objectHandlers.UrlDecode(this._admincookie.Values["AdminName"].ToString());
+                    DataBaseFactory.AdminHandlers.UpdateAdminLastloginTime(this._name);
                 }
             }
             this._currenturl = this.RemoveA(objectHandlers.CurrentUrl);

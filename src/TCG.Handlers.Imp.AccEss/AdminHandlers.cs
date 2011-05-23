@@ -444,6 +444,15 @@ namespace TCG.Handlers.Imp.AccEss
             AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + admin.vcAdminName + "'");
         }
 
+        public void AminInfoRefash()
+        {
+            AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE DATEDIFF('n',dLastLoginDate,now())>30");
+        }
+
+        public void UpdateAdminLastloginTime(string Adminname)
+        {
+            AccessFactory.conn.Execute("UPDATE [admin] SET dLastLoginDate= now() WHERE vcAdminName ='" + Adminname + "'");
+        }
 
         private HttpCookie _admincookie = null;
         private string _name = string.Empty;

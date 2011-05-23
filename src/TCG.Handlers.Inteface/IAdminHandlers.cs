@@ -174,5 +174,9 @@ namespace TCG.Handlers
         int CheckAdminNameForReg(string adminname);
 
         void Logout(Admin admin);
+
+        void AminInfoRefash();
+
+        void UpdateAdminLastloginTime(string Adminname);
     }
 }
