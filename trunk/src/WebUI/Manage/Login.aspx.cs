@@ -34,6 +34,8 @@ public partial class aLogin : BasePage
                 this.rUsername.Checked = true;
                 this.username.Value = HttpContext.Current.Server.UrlDecode(lname.Values["radminName"].ToString());
             }
+
+            base.handlerService.manageService.adminHandlers.AminInfoRefash();
         }
         else
         {
