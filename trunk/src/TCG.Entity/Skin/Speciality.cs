@@ -22,16 +22,13 @@ namespace TCG.Entity
     /// <summary>
     /// 资源特性的实体
     /// </summary>
-    public class Speciality
+    public class Speciality : EntityBase
     {
-        /// <summary>
-        /// 特性编号
-        /// </summary>
-        public int iId { get { return this._iid; } set { this._iid = value; } }
+       
         /// <summary>
         /// 皮肤ID
         /// </summary>
-        public int iSiteId { get { return this._isiteid; } set { this._isiteid = value; } }
+        public string SkinId { get { return this._isiteid; } set { this._isiteid = value; } }
         /// <summary>
         /// 父亲的编号
         /// </summary>
@@ -50,7 +47,7 @@ namespace TCG.Entity
         public string vcExplain { get { return this._vcexplain; } set { this._vcexplain = value; } }
 
         private int _iid;
-        private int _isiteid;
+        private string _isiteid;
         private int _iparent;
         private DateTime _dupdatedate;
         private string _vctitle;

@@ -74,8 +74,8 @@ namespace TCG.Entity
         /// ÊÇ·ñÎªµ¥Ò³
         /// </summary>
         public string IsSinglePage { get { return this._sssinglepage; } set { this._sssinglepage = value; } }
- 
 
+        public string vcPic { get; set; }
         
         private string _iparent;
         private Template _itemplate;

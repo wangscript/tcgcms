@@ -46,6 +46,7 @@ public partial class skin_categoriesadd : BasePage
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             cif.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
+            cif.vcPic = objectHandlers.Post("iPic");
             
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -71,28 +72,10 @@ public partial class skin_categoriesadd : BasePage
                 rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo, cif.SkinInfo.Id);
                 if (rtn == 1)
                 {
-                    foreach (string key in Request.Form.AllKeys)
-                    {
-                        if (key.IndexOf("name_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
-                        {
-                            string[] keys = key.Split('_');
-                            CategorieProperties cps = new CategorieProperties();
-                            cps.Id = "";
-                            cps.ProertieName = objectHandlers.Post(key);
-                            cps.CategorieId = cid;
-                            cps.Type = objectHandlers.Post("type_" + keys[1]);
-                            cps.Values = objectHandlers.Post("pttext_" + keys[1]);
-                            cps.width = objectHandlers.ToInt(objectHandlers.Post("pwidth_" + keys[1]));
-                            cps.height = objectHandlers.ToInt(objectHandlers.Post("pheight_" + keys[1]));
-                            rtn = base.handlerService.skinService.categoriesHandlers.CategoriePropertiesManage(base.adminInfo, cps);
-                        }
-                    }
+                      CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
                 }
-
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cif.Id);
-                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cif.Id);
+               
             }
             catch (Exception ex)
             {

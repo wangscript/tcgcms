@@ -24,11 +24,11 @@ namespace TCG.Handlers.Imp.AccEss
 
             AccessFactory.conn.Execute("INSERT INTO resources (iid,iClassID,vcTitle,vcUrl,vcContent,vcAuthor,iCount,vcKeyWord,"
         + "vcEditor,cCreated,vcSmallImg,vcBigImg,vcShortContent,vcSpeciality,cChecked,cDel,cPostByUser,"
-        + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
+        + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl,PropertiesCategorieId) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
         + inf.vcUrl + "','" + inf.vcContent.Replace("'", "''") + "','" + inf.vcAuthor + "','" + inf.iCount + "','" + inf.vcKeyWord + "','" + inf.vcEditor + "','" + inf.cCreated + "','"
         + inf.vcSmallImg + "','" + inf.vcBigImg + "','" + inf.vcShortContent.Replace("'", "''") + "','" + inf.vcSpeciality + "','" + inf.cChecked + "','"
         + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + DateTime.Now.ToString() + "','" + DateTime.Now.ToString() + "','"
-        + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "')");
+        + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "','" + inf.PropertiesCategorieId + "')");
             return 1;
 
         }
@@ -53,7 +53,7 @@ namespace TCG.Handlers.Imp.AccEss
                 + inf.vcShortContent.Replace("'", "''") + "',vcSpeciality='" + inf.vcSpeciality + "',cChecked='" + inf.cChecked + "',cDel='"
                 + inf.cDel + "',cPostByUser='" + inf.cPostByUser + "',vcFilePath='" + inf.vcFilePath
                 + "',dUpDateDate=now(),vcTitleColor = '" + inf.vcTitleColor + "',cStrong = '"
-                + inf.cStrong + "' WHERE iId = " + inf.Id;
+                + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "' WHERE iId = " + inf.Id;
             AccessFactory.conn.Execute(sql);
 
             return 1;
@@ -175,22 +175,22 @@ namespace TCG.Handlers.Imp.AccEss
             string sql = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
-                sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,CategoriePropertieId) VALUES("
-                + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.CategoriePropertieId + "')";
+                sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId) VALUES("
+                + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "')";
             }
             else
             {
                 int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM ResourceProperties WHERE ResourceId = '"
-                    + cp.ResourceId + "' AND CategoriePropertieId='" + cp.CategoriePropertieId + "'"));
+                    + cp.ResourceId + "' AND PropertieId='" + cp.PropertieId + "'"));
                 if (ncount > 0)
                 {
                     sql = "UPDATE ResourceProperties SET ResourceId='" + cp.ResourceId + "',PropertieName='" + cp.PropertieName + "',PropertieValue='" + cp.PropertieValue
-                        + "',CategoriePropertieId='" + cp.CategoriePropertieId + "' WHERE id=" + cp.Id;
+                        + "',PropertieId='" + cp.PropertieId + "' WHERE id=" + cp.Id;
                 }
                 else
                 {
-                    sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,CategoriePropertieId) VALUES("
-                 + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.CategoriePropertieId + "')";
+                    sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId) VALUES("
+                 + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "')";
                 }
             }
 
@@ -202,6 +202,12 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetResourcePropertiesByRIdEntity(string rid)
         {
             return AccessFactory.conn.DataTable("SELECT * FROM ResourceProperties WHERE ResourceId='" + rid + "'");
+        }
+
+        public int DelResourcesProperties(string resid)
+        {
+             AccessFactory.conn.DataTable("DELETE FROM ResourceProperties WHERE ResourceId='" + resid + "'");
+             return 1;
         }
         
     }

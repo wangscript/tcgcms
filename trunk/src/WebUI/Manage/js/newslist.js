@@ -46,7 +46,7 @@ function GetNewsListTitleByClassId(classid) {
     var skinid = $("#iSkinId").val();
     if (_Categories == null) return;
     for (var i = 0; i < _Categories.length; i++) {
-        if (_Categories[i].Id == classid && _Categories[i].SkinId == skinid) {
+        if (_Categories[i].Id == classid && _Categories[i].Skin.Id == skinid) {
             var t = (_Categories[i].ParentId == 0) ? "" : " >>";
             a = t + " <a href='?iClassId=" + _Categories[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Categories[i].ClassName + "</a>" + a;
             GetNewsListTitleByClassId(_Categories[i].ParentId);
@@ -103,6 +103,34 @@ function CreateNews(){
 		$("#DelClassId").val(temps);
 		$('#form1').submit();
 	}
+}
+
+function CheckNews() {
+    var temps = GetCheckBoxValues("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没选择需要审核的资讯！");
+        return;
+    }
+    CreateDiv.Start("批量审核文件");
+    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { } });
+
+    if (temps.indexOf(",") > -1) {
+        var ts = temps.split(",");
+        CreateDiv.set = 1;
+        CreateDiv.setcount = ts.length;
+        for (var i = 0; i < ts.length; i++) {
+            if (ts[i] == "") continue;
+            $("#iAction").val("CHECK");
+            $("#DelClassId").val(ts[i]);
+            $('#form1').submit();
+        }
+    } else {
+        CreateDiv.set = 1;
+        CreateDiv.setcount = 1;
+        $("#iAction").val("CHECK");
+        $("#DelClassId").val(temps);
+        $('#form1').submit();
+    }
 }
 
 function CreateBack(val) {

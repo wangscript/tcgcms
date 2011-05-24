@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
 	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
-    <script type="text/javascript" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 </head>
@@ -35,12 +34,7 @@
 		</a>
 	</div>
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-    <div class="g-tabnav">
-        <a style="margin-left:-13px;"></a>
-        <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
-        <a id="a2" onclick="SetFromsByNum('a2')">分类属性</a>
-    </div>
-    <div id="a1_from">
+
 	    <div id="placemsg" class="Page_arrb arb_pr classaddline">
 		    <span class="p_a_t">详 细 位 置：</span>
 	    </div>
@@ -85,8 +79,11 @@
 	      <input id="iOrder" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
 		    <span id="urlmsg" class="info1">在列表中的显示顺序</span>
 	    </div>
-    </div>
-    <div id="a2_from"></div>
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">分 类 展 图：</span>
+	      <input id="iPic" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
+		    <span id="iPicmsg" class="info1">在列表中的显示顺序</span>
+	    </div>
+
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
         <input type="hidden" id="iMaxPId" name="iMaxPId" runat="server" />

@@ -1,93 +1,97 @@
 /// <reference path="jquery-1.3.1-vsdoc.js" />
 
-var a="";
-function classTitleInit(){
-	var m=$("#classTitle");
-	var iSiteId=$("#iSiteId");
-	if(m==null||iSiteId==null)return;
-	if(NewsLis==null)return;
-	for(var i=0;i<NewsLis.length;i++){
-		if(NewsLis[i][0]==iSiteId.val()){
-			m.innerHTML="<span class='txt bold'>"+NewsLis[i][2]+"</span><span class='info1'>("+NewsLis[i][3]+")</span>";
-		}
-	}
+var a = "";
+function classTitleInit() {
+    var m = $("#classTitle");
+    var iParentID = $("#iParentID");
+    if (m.length == 0 || iParentID.length == 0) return;
+
+    a = "";
+    GetNewsListTitleByClassId(iParentID.val());
+    a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>站点根目录</a>>>" + a;
+    m.html("<span class='txt bold'>" + a + "</span>");
+
 }
 
-function classTitleInitW(){
-	var m=$("classTitleW");
-	var iParentID=$("iParentID");
-	var iSiteId=$("iSiteId");
-	if(m==null||iParentID==null)return;
-	if(iParentID.value=="0"){
-		m.className="Page_g hid";
-	}else{
-		a="";
-		GetNewsSpecialityTitleByClassId(iSiteId.value,iParentID.value);
-		a="<a href='?iSiteId="+iSiteId.value+"'>根特性</a>>>"+a;
-		m.innerHTML="<span class='txt'>"+a+"</span>";
-	}
-}
-
-function GetNewsSpecialityTitleByClassId(siteid,classid){
-	if(NewsSpeciality==null)return;
-	for(var i=0;i<NewsSpeciality.length;i++){
-		if(NewsSpeciality[i][0]==classid&&NewsSpeciality[i][1]==siteid){
-			var t=(NewsSpeciality[i][2]==0)?"":">>";
-			a =t+"<a href='?iParentId="+NewsSpeciality[i][0]+"&iSiteId="
-				+siteid+"'>"+NewsSpeciality[i][3]+"</a>"+a;
-			GetNewsSpecialityTitleByClassId(siteid,NewsSpeciality[i][2]);
-		}
-	}
+function GetNewsListTitleByClassId(classid) {
+    if (_Speciality == null) return;
+    for (var i = 0; i < _Speciality.length; i++) {
+        if (_Speciality[i].Id == classid) {
+            var t = (_Speciality[i].iParent == 0) ? "" : ">>";
+            a = t + "<a href='?iParentId=" + _Speciality[i].Id + "&skinid=" + $("#iSkinId").val() + "'>" + _Speciality[i].vcTitle + "</a>" + a;
+            GetNewsListTitleByClassId(_Speciality[i].iParent);
+        }
+    }
 }
 
 function AddNewSAction(){
-	var iAction=$("iAction");
-	var iParentID=$("iParentID");
-	var AddNewS=$("AddNewS");
-	iAction.value="ADD";
-	var inTitle=$("inTitle");
-	var inExplain=$("inExplain");
-	var inParentId=$("inParentId");
-	AddNewS.className = "list_title_c";
-	inTitle.value="";
-	inExplain.value="";
-	inParentId.value=iParentID.value;
+	var iAction=$("#iAction");
+	var iParentID=$("#iParentID");
+	var AddNewS=$("#AddNewS");
+	iAction[0].value="ADD";
+	var inTitle=$("#inTitle");
+	var inExplain=$("#inExplain");
+	var inParentId=$("#inParentId");
+	AddNewS[0].className = "list_title_c";
+	inTitle[0].value="";
+	inExplain[0].value="";
+	inParentId[0].value=iParentID[0].value;
 }
 
 function CAdd(){
-	var AddNewS=$("AddNewS");
-	AddNewS.className = "list_title_c hid";
+	var AddNewS=$("#AddNewS");
+	AddNewS[0].className = "list_title_c hid";
 }
 
-function CheckForm(){
-	ajax.postf($("form1"),function(obj) { NewsSADDPostBack(obj.responseText);});
-	return false;
-}
+var _Speciality = [];
+$(document).ready(function () {
+    var form1 = $("#form1");
+    if (form1.lenght == 0) return;
+    var options;
+
+    options = {
+        beforeSubmit: function () { return true; },
+        dataType: 'json',
+        success: AjaxPostFormBack
+    };
+    form1.ajaxForm(options);
+
+    $.get("../Common/AllNewsSpeciality.aspx?skinid=" + $("#iSkinId").val() + "&temp=" + new Date().toString(),
+        { Action: "get" },
+        function (data, textStatus) {
+            data = data.substring(4, data.length);
+            eval(data);
+            classTitleInit();
+        });
+
+
+    SetAjaxDiv("ok", false, "小提示：特性的修改，在列表中就可以完成！");
+});
+
 
 function NewsSADDPostBack(val){
 	if(GetErrText(val))return;
 	refinsh();
 }
 
-function NewsSMDYPostBack(val){
-	var KeyValue = $("KeyValue");
-	if(KeyValue==null)return;
-	$("form1").removeChild(KeyValue);
-	var aValue=KeyValue.value;
-	var CloseImg=$("CloseImg");
-	if(CloseImg!=null)document.body.removeChild(CloseImg);
-	if(GetErrText(val))return;
+function NewsSMDYPostBack(){
+    var KeyValue = $("#KeyValue");
+    if (KeyValue.length == 0) return;
+    $("#form1")[0].removeChild(KeyValue[0]);
+    var aValue = KeyValue[0].value;
+    var CloseImg = $("#CloseImg");
+    if (CloseImg.length != 0) document.body.removeChild(CloseImg[0]);
 	SetInnerText(CreateInputobj,aValue);
 }
 
 function MdyFeild(obj,vname){
-	var iAction=$("iAction");
-	iAction.value="MDY";
-	var o = $("iFeildName");
-	o.value=vname;
-	var iMdyID=$("iMdyID");
-	var form=$("form1");
-	iMdyID.value=GetCheckColumnCheckID(obj);
+	var iAction=$("#iAction");
+	iAction[0].value="MDY";
+	var o = $("#iFeildName");
+	o[0].value=vname;
+	var iMdyID=$("#iMdyID");
+	var form=$("#form1");
+	iMdyID[0].value=GetCheckColumnCheckID(obj);
 	var ci = new CreateInput();
 	ci.obj=obj;
 	ci.fobj=form;
@@ -102,17 +106,17 @@ function MdyFeild(obj,vname){
 function ImgCheck(){
 }
 
-function NewsSDel(){
-	var iAction=$("iAction");
-	var iIds=$("iIds");
-	iAction.value="DEL";
-	var temps=GetCheckBoxValues("CheckID");
-	if(temps==""){
-		SetAjaxDiv("err",false,"您没选择需要删除的特性！");
-		return;
-	}
-	iIds.value=temps;
-	ajax.postf($("form1"),function(obj) { NewsSADDPostBack(obj.responseText);});
+function NewsSDel() {
+    var iAction = $("#iAction");
+    var iIds = $("#iIds");
+    iAction[0].value = "DEL";
+    var temps = GetCheckBoxValues("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没选择需要删除的特性！");
+        return;
+    }
+    iIds[0].value = temps;
+    $("#form1").submit();
 }
 
 function GetCheckColumnCheckID(obj){
@@ -139,14 +143,14 @@ function GetCheckColumnCheckID(obj){
 	return "";
 }
 
-function CheckMdyFild(){
-	var KeyValue = $("KeyValue");
-	if(KeyValue==null)return;
-	if(KeyValue.value==""){
-		$("form1").removeChild(KeyValue);
-		var CloseImg=$("CloseImg");
-		if(CloseImg!=null)document.body.removeChild(CloseImg);
-	}else{
-		ajax.postf($("form1"),function(obj) { NewsSMDYPostBack(obj.responseText);});
-	}
+function CheckMdyFild() {
+    var KeyValue = $("#KeyValue");
+    if (KeyValue == null) return;
+    if (KeyValue[0].value == "") {
+        $("#form1")[0].removeChild(KeyValue);
+        var CloseImg = $("#CloseImg");
+        if (CloseImg.length != 0) document.body.removeChild(CloseImg[0]);
+    } else {
+        $("#form1").submit();
+    }
 }

@@ -1,3 +1,5 @@
+/// <reference path="../../../manage/js/jquery-1.3.1-vsdoc.js" />
+
 /**
  * --------------------------------------------------------------------
  * jQuery-Plugin "pngFix"
@@ -111,6 +113,10 @@ jQuery.fn.pngFix = function(settings) {
 };
 
 })(jQuery);
-$(document).ready(function(){     
-$(document).pngFix();     
+    $(document).ready(function(){     
+    $(document).pngFix();
+});
+
+$(document).ready(function () {
+    $(".menu > ul > li").eq(12).find("ul").eq(0).html("")
 });

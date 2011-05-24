@@ -68,6 +68,8 @@ namespace TCG.Entity
         /// </summary>
         public string CreatePagesNotic { get { return this._createpagesnotic; } set { this._createpagesnotic = value; } }
 
+        public Skin SkinInfo { get; set; }
+
         private int _curpage = 1;
         private int _topiccount = 0;
         private int _page = 1;

@@ -16,7 +16,7 @@ public partial class Manage_Common_CategorieProperties : BasePage
 
         string categorieid = objectHandlers.Get("cid");
         Response.ContentType = "application/x-javascript";
-        string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetCategoriePropertiesByCIdEntity(categorieid), typeof(CategorieProperties));
+        string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.propertiesHandlers.GetPropertiesByCIdEntity(categorieid), typeof(Properties));
         Response.Write(cg);
         Response.End();
     }

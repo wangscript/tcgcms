@@ -85,7 +85,31 @@ function GetCagetegoriesEnmu(obj, Skinid, CagetegorId) {
     if (!find) {
         $(o).remove();
     }
+}
 
+function GetSpecialityEnmu(obj, Skinid, CagetegorId) {
+    if (_Speciality == null) return null;
+    var o = obj;
+    if ($(obj).html() != "") {
+        o = $("<ul></ul>")
+        $(obj).append(o);
+    }
+
+    var find = false;
+    for (var i = 0; i < _Speciality.length; i++) {
+        if (_Speciality[i].iParent == CagetegorId && _Speciality[i].SkinId == Skinid) {
+            var checkh = $("#iSpeciality").val().indexOf(_Speciality[i].Id) > -1 ? "checked" : "";
+            var li = $("<li><input type=\"checkbox\" name=\"iiSpeciality\" value=\"" + _Speciality[i].Id + "\" " + checkh + " /><a href=\"javascript:SelectSpecialityValue('" + _Speciality[i].Id
+                + "','" + _Speciality[i].vcTitle + "');\" ><span>" + _Speciality[i].vcTitle + "</span></a></li>");
+            $(o).append(li);
+            find = true;
+            GetSpecialityEnmu(li, _Speciality[i].SkinId, _Speciality[i].Id);
+        }
+    }
+
+    if (!find) {
+        $(o).remove();
+    }
 }
 
 

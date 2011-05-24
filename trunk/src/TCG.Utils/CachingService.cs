@@ -122,11 +122,11 @@ namespace TCG.Utils
         /// <summary>
         /// 所有的资源分类属性信息DATATABle
         /// </summary>
-        public static string CACHING_ALL_CATEGORIES_PROPERTIES = "CACHING_ALL_CATEGORIES_PROPERTIES";
+        public static string CACHING_ALL_PROPERTIES = "CACHING_ALL_PROPERTIES";
         /// <summary>
         /// 所有的资源分类属性信息实体
         /// </summary>
-        public static string CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY = "CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY";
+        public static string CACHING_ALL_PROPERTIES_ENTITY = "CACHING_ALL_PROPERTIES_ENTITY";
         /// <summary>
         /// 所有的资源分类信息实体
         /// </summary>
@@ -167,7 +167,13 @@ namespace TCG.Utils
         public static string CACHING_SHEIF_CATEGORIES_CONFIG = "CACHINGSHEIFCATEGORIESCONFIG";
 
         public static string CACHING_ALL_SHEIFSOURCE_ENTITY = "CACHINGALLSHEIFSOURCEENTITY";
+        /// <summary>
+        /// 分类属性缓存
+        /// </summary>
+        public static string CACHING_ALL_PROPERTIES_CATEGORIES_ENTITY = "CACHING_ALL_PROPERTIES_CATEGORIES_ENTITY";
+        public static string CACHING_ALL_PROPERTIES_CATEGORIES = "CACHING_ALL_PROPERTIES_CATEGORIES";
 
+        public static string CACHING_ALL_SPECIALITY_ENTITY = "CACHING_ALL_SPECIALITY_ENTITY";
         /// <summary>
         /// 系统缓存集合
         /// </summary>

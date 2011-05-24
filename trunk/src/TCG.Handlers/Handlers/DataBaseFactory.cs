@@ -101,5 +101,36 @@ namespace TCG.Handlers
             }
         }
         private static IFileHandlers _filehandlers;
+
+        public static IPropertiesHandlers propertiesHandlers
+        {
+            get
+            {
+                if (_propertieshandlers == null)
+                {
+                    string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
+                    string className = assc + ".PropertiesHandlers";
+                    _propertieshandlers = (IPropertiesHandlers)Assembly.Load(assc).CreateInstance(className);
+                }
+                return _propertieshandlers;
+            }
+        }
+        private static IPropertiesHandlers _propertieshandlers;
+
+
+        public static ISpecialityHandlers specialityHandlers
+        {
+            get
+            {
+                if (_specialityhandlers == null)
+                {
+                    string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
+                    string className = assc + ".SpecialityHandlers";
+                    _specialityhandlers = (ISpecialityHandlers)Assembly.Load(assc).CreateInstance(className);
+                }
+                return _specialityhandlers;
+            }
+        }
+        private static ISpecialityHandlers _specialityhandlers;
     }
 }

@@ -29,7 +29,7 @@ li{ text-align:left}
 .Page_g{ border-top:#98b1c8 solid 1px;text-align:left; line-height:30px; color:#666666;font-size:12px; font-weight:bold; padding-left:20px; border-bottom:#98b1c8 solid 1px; background-color:#f2f6fb;}
 .info2 { font-size:12px; color:#777777; font-weight:100; margin-left:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-.Page_arrb{line-height:40px; height:40px;  font-size:12px; padding-left:150px; text-align:left; clear:both;}
+.Page_arrb{line-height:40px;  font-size:12px; padding-left:150px; text-align:left; }
 .itxt1{ border:#8aa3be solid 1px; height:17px; font-family: Verdana, Arial, Helvetica, sans-serif; width:180px;}
 .itxt3{ position:absolute;border:#617993 solid 1px; background-image:url(../images/input_bg1.gif);height:14px; font-family: Verdana, Arial, Helvetica, sans-serif; z-index:88;}
 .itxt2{ border:#afafaf solid 1px; height:17px; background-color:#ffffdb; width:180px;font-family: Verdana, Arial, Helvetica, sans-serif;}
@@ -39,7 +39,7 @@ li{ text-align:left}
 .nfl{float:none;}
 .rfl{float:right}
 
-.dobtn { border-bottom:#ececec solid 1px; border-top:#ececec solid 1px; background-color:#fafafa; height:32px; line-height:32px; text-align:left; padding-left:214px;}
+.dobtn { border-bottom:#ececec solid 1px; border-top:#ececec solid 1px; background-color:#fafafa; height:32px; line-height:32px; text-align:left; padding-left:214px; }
 .btn2{ background-image:url(../images/btn_bg.jpg); width:60px; height:20px; border:0px; margin:0px; padding:0px; margin-top:6px; color:#174b73;}
 
 .bold{ font-weight:bold;}

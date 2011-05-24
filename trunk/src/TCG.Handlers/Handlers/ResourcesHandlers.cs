@@ -250,6 +250,23 @@ namespace TCG.Handlers
 
             if (create) { sqlsb.Append(" AND cCreated='Y' "); } else { sqlsb.Append(" AND cCreated='N' "); }
 
+            if (Speciality.IndexOf(",") > -1)
+            {
+                sqlsb.Append(" AND (");
+                string[] aaa = Speciality.Split(',');
+                for (int n = 0; n < aaa.Length; n++)
+                {
+                    string text = n == 0 ? "" : " OR ";
+                    sqlsb.Append(text + " vcSpeciality like '%" + aaa[n] + "%'");
+                }
+                sqlsb.Append(" )");
+            }
+            else
+            {
+                sqlsb.Append(" AND vcSpeciality like '%" + Speciality + "%' ");
+            }
+
+
             if (!string.IsNullOrEmpty(categories))
             {
                 if (havechilecategorie)
@@ -385,7 +402,6 @@ namespace TCG.Handlers
 
             Dictionary<string, EntityBase> res = null;
 
-
             DataTable dt = DataBaseFactory.ResourceHandlers.GetResourcePropertiesByRIdEntity(rid);
 
             if (dt != null && dt.Rows.Count > 0)
@@ -394,6 +410,11 @@ namespace TCG.Handlers
             }
 
             return res;
+        }
+
+        public int DelResourcesProperties(string resid)
+        {
+            return     DataBaseFactory.ResourceHandlers.DelResourcesProperties(resid);
         }
         
     }

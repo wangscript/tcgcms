@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PropertiesDel.aspx.cs" Inherits="Manage_AjaxMethod_PropertiesDel" %>

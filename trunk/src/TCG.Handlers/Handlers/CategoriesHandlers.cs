@@ -91,36 +91,6 @@ namespace TCG.Handlers
 
 
         /// <summary>
-        /// 所有的资源分类属性信息
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<string, EntityBase> GetCategoriePropertiesByCIdEntity(string cid)
-        {
-            Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cid);
-            if (allcategories == null)
-            {
-                DataTable dt = GetCategoriePropertiesByCId(cid);
-                if (dt == null) return null;
-                allcategories = HandlersFactory.GetEntitysObjectFromTable(dt, typeof(CategorieProperties));
-                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cid, allcategories, null);
-            }
-            return allcategories;
-        }
-
-
-        public DataTable GetCategoriePropertiesByCId(string cid)
-        {
-            DataTable allcategoriesp = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cid);
-            if (allcategoriesp == null)
-            {
-                allcategoriesp = DataBaseFactory.CategoriesHandlers.GetCategoriePropertiesByCIdWithOutCaching(cid);
-                CachingService.Set(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cid, allcategoriesp, null);
-            }
-            return allcategoriesp;
-        }
-
-
-        /// <summary>
         /// 获得文章的导航！~
         /// </summary>
         /// <param name="conn"></param>
@@ -316,7 +286,7 @@ namespace TCG.Handlers
             return DataBaseFactory.CategoriesHandlers.CreateCategories(cif);
         }
 
-        public int CategoriePropertiesManage(Admin admin, CategorieProperties cp)
+        public int CategoriePropertiesManage(Admin admin, Properties cp)
         {
             int rtn = HandlersFactory.adminHandlers.CheckAdminPower(admin);
             if (rtn < 0) return rtn;
@@ -413,10 +383,6 @@ namespace TCG.Handlers
             return DataBaseFactory.CategoriesHandlers.DelCategories(classid);
         }
 
-        public int GetMaxCategoriesProperties()
-        {
-            return DataBaseFactory.CategoriesHandlers.GetMaxCategoriesProperties();
-        }
 
         /// <summary>
         /// 从一个XML里面更新分类

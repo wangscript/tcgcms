@@ -153,6 +153,7 @@ namespace TCG.Handlers
         private void SysteConfigReplace()
         {
             if (SkinInfo == null) return;
+            this._pagerinfo.SkinInfo = SkinInfo;
             this._temphtml = _temphtml.Replace("_$FileExtension$_", ConfigServiceEx.baseConfig["FileExtension"]);
             this._temphtml = _temphtml.Replace("_$WebSite$_", ConfigServiceEx.baseConfig["WebSite"]);
             this._temphtml = _temphtml.Replace("_$PageSize$_", ConfigServiceEx.baseConfig["PageSize"]);

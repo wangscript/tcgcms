@@ -108,18 +108,18 @@ function NewsAddPostBack() {
 
 function SelectClassValue(val, txt) {
 
-    $.get("../Common/CategorieProperties.aspx?cid=" + val,
-        { Action: "get" },
-        function (data, textStatus) {
-            data = data.substring(4, data.length);
-            eval(data);
-            var iClassName = $("#iClassName");
-            var iClassId = $("#iClassId");
-            iClassName.val(txt);
-            iClassId.val(val);
-            PropertieInit();
-        });
+    var iClassName = $("#iClassName");
+    var iClassId = $("#iClassId");
+    iClassName.val(txt);
+    iClassId.val(val);
 }
+
+function SelectSpecialityValue(val, txt) {
+    $("#iSpeciality_t").val(txt);
+    $("#iSpeciality").val(val);
+
+}
+
 
 var tempWork;
 function ClassInit() {
@@ -158,7 +158,21 @@ function ColorInit() {
     SetAjaxDiv("ok", false, "小提示：发布完以后可以当页接着发布！");
 }
 
+
+var _Speciality = [];
 $(document).ready(function () {
+
+
+    $.get("../Common/AllNewsSpeciality.aspx?skinid=" + $("#iSkinId").val() + "&temp=" + new Date().toString(),
+        { Action: "get" },
+        function (data, textStatus) {
+            data = data.substring(4, data.length);
+            eval(data);
+
+            GetSpecialityEnmu($("#iSpeciality_cc"), $("#iSkinId").val(), "0");
+
+            Menu.init("iSpeciality_c");
+        });
 
     //初始化分类选择控件
     GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
@@ -173,11 +187,25 @@ $(document).ready(function () {
         e.stopPropagation();
 
     });
+    
+    $("#SelectDivWW").bind('click', function (e) {
+        if ($("#iSpeciality_1").css('display') == 'block') {
+            $("#iSpeciality_1").hide();
+        } else {
+            $("#iSpeciality_1").show();
+        }
+        e.stopPropagation();
+
+    });
 
     $(document).bind('click', function (e) {
 
         if ($("#gamelist_c").css('display') == 'block') {
             $("#gamelist_c").hide();
+        }
+
+        if ($("#iSpeciality_1").css('display') == 'block') {
+            $("#iSpeciality_1").hide();
         }
     });
 
@@ -200,11 +228,12 @@ $(document).ready(function () {
 
 //初始化属性
 function PropertieInit() {
-    var a2from = $("#a3_from");
+    var a2from = $("#a3_form_p");
     a2from.html("");
-    if (_CategorieProperties != null) {
-        for (var i = 0; i < _CategorieProperties.length; i++) {
-            var cp = _CategorieProperties[i];
+    if (_Properties != null) {
+   
+        for (var i = 0; i < _Properties.length; i++) {
+            var cp = _Properties[i];
             var po = GetResourceByCpid(cp.Id);
             var oth = ResourcePropertiesHTMLADD(cp, po);
             var ohtml = a2from.html();
@@ -217,11 +246,23 @@ function GetResourceByCpid(cpid) {
     if (_ResourceProperties == null || _ResourceProperties.length == 0) return null;
     for (var i = 0; i < _ResourceProperties.length; i++) {
         var cp = _ResourceProperties[i];
-        if (cp.CategoriePropertieId == cpid) {
+        if (cp.PropertieId == cpid) {
             return cp;
         }
     }
     return null;
+}
+
+function ChangePCtype(obj) {
+
+    $.get("../Common/CategorieProperties.aspx?cid=" + $(obj).val() + "&temp=" + new Date().toString(),
+        { Action: "get" },
+        function (data, textStatus) {
+            data = data.substring(4, data.length);
+            eval(data);
+            PropertieInit();
+
+        });
 }
 
 var objss = ["a1","a2","a3"];
@@ -270,12 +311,13 @@ function ResourcePropertiesHTMLADD(cpobj,rpobj) {
     if (cpobj == null) return;
 
     var resourceid = rpobj == null ? "" : rpobj.ResourceId;
+    var resourcepid = rpobj == null ? "" : rpobj.Id;
 
     var height = cpobj.height < 80 ? 80 : cpobj.height;
     var text = "<div id=\"" + cpobj.Id + "\" >"
     text += "<input name=\"ptname_" + cpobj.Id + "\" type=\"hidden\" id=\"ptname_" + cpobj.Id + "\" value=\"" + cpobj.ProertieName + "\" />";
     text += "<input name=\"cpid_" + cpobj.Id + "\" type=\"hidden\" id=\"cpid_" + cpobj.Id + "\" value=\"" + cpobj.Id + "\" />";
-    text += "<input name=\"rpid_" + cpobj.Id + "\" type=\"hidden\" id=\"rpid_" + cpobj.Id + "\" value=\"" + resourceid + "\" />";
+    text += "<input name=\"rpid_" + cpobj.Id + "\" type=\"hidden\" id=\"rpid_" + cpobj.Id + "\" value=\"" + resourcepid + "\" />";
 
     text += "<div onclick=\"ProperDivShowChange('" + cpobj.Id + "');\" class=\"g-title-2 fn-hand\">"
             + "<b class=\"fn-bg2 Bopned\" id=\"B2_" + cpobj.Id + "\"></b><h3>" + cpobj.ProertieName + "</h3>"

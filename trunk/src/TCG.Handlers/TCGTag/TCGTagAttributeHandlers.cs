@@ -145,7 +145,7 @@ namespace TCG.Handlers
                     Categories tempres = (Categories)entity.Value;
                     string temp = tempOld;
                     temp = temp.Replace("$" + this._tagtype + "_Index$", (n + 1).ToString());
-                    this.CategorieslistTagFieldsRelace(ref temp, tempres);
+                    this.CategorieslistTagFieldsRelace(ref temp,ref pagerinfo ,tempres);
                     tempNew += temp;
                     n++;
                 }
@@ -204,31 +204,7 @@ namespace TCG.Handlers
                 return;
             }
 
-            string url = "#";
-            if (!string.IsNullOrEmpty(item.vcUrl))
-            {
-                url = (item.vcUrl.IndexOf(".") > -1) ? item.vcUrl : item.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
-            }
-            else
-            {
-                Resources res = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(item.Id);
-                if (res != null && item.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
-                {
-                    url = res.vcFilePath;
-                }
-            }
-
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_Id$", item.Id.ToString());
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcUrl$", url);
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcName$", item.vcName);
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_vcClassName$", item.vcClassName);
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent$", item.Parent.ToString());
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_iParent2$",this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Id).Id);
-            this._tagtext = this._tagtext.Replace("$" + this._tagtype + "_ClassTitleList$",
-                    this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Id, " > "));
-
-            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
-            if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle)?"":" - ") + item.vcClassName;
+            this.CategorieslistTagFieldsRelace(ref this._tagtext, ref pagerinfo,item);
 
             item = null;
 
@@ -355,6 +331,8 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + item.dAddDate.ToString("yyyyƒÍMM‘¬dd»’") + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcClassPic$", "<TCG>" + ConfigServiceEx.baseConfig["WebSite"] + "/skin/"
+                + pagerinfo.SkinInfo.Filename + item.Categorie.vcPic + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcAuthor$", "<TCG>" + item.vcAuthor + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + objectHandlers.GetTextWithoutHtml(item.vcShortContent) + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + item.Categorie.vcClassName + "</TCG>");
@@ -400,15 +378,10 @@ namespace TCG.Handlers
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
         }
 
-        private void CategorieslistTagFieldsRelace(ref string temp, Categories categorie)
+        private void CategorieslistTagFieldsRelace(ref string temp, ref TCGTagPagerInfo pagerinfo,Categories categorie)
         {
 
-            temp = temp.Replace("$" + this._tagtype + "_Id$", "<TCG>" + categorie.Id + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
-
             string url = "#";
-
             if (!string.IsNullOrEmpty(categorie.vcUrl))
             {
                 url = (categorie.vcUrl.IndexOf(".") > -1) ? categorie.vcUrl : categorie.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
@@ -421,7 +394,22 @@ namespace TCG.Handlers
                     url = res.vcFilePath;
                 }
             }
+
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
+
+            temp = temp.Replace("$" + this._tagtype + "_iParent$", "<TCG>" + categorie.Parent.ToString() + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iParent2$", "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(categorie.Id).Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_ClassTitleList$",
+                    "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(categorie.Id, " > ") + "</TCG>");
+
+            bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
+            if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle) ? "" : " - ") + categorie.vcClassName;
+
+            temp = temp.Replace("$" + this._tagtype + "_Id$", "<TCG>" + categorie.Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcPic$", "<TCG>" + ConfigServiceEx.baseConfig["WebSite"] + "/skin/" 
+                + pagerinfo.SkinInfo.Filename + categorie.vcPic + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);

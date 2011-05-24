@@ -36,6 +36,9 @@
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsDel();">
 			<img src="../images/icon/08.gif" />É¾³ý
 		</a>
+        <a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CheckNews();">
+			<img src="../images/icon/8.gif" />ÉóºË
+		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CreateNews();">
 			<img src="../images/icon/8.gif" />Éú³É
 		</a>

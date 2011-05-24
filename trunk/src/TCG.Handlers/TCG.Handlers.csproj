@@ -49,8 +49,10 @@
     <Compile Include="Handlers\AdminHandlers.cs" />
     <Compile Include="Handlers\CategoriesHandlers.cs" />
     <Compile Include="Handlers\FileHandlers.cs" />
+    <Compile Include="Handlers\PropertiesHandlers.cs" />
     <Compile Include="Handlers\ResourcesHandlers.cs" />
     <Compile Include="Handlers\SkinHandlers.cs" />
+    <Compile Include="Handlers\SpecialityHandlers.cs" />
     <Compile Include="Handlers\TemplateHandlers.cs" />
     <Compile Include="Service\FileService.cs" />
     <Compile Include="Handlers\DataBaseFactory.cs" />
