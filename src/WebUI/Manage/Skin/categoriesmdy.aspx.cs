@@ -47,6 +47,7 @@ public partial class skin_categoriesmdy : BasePage
             cif.ResourceListTemplate = base.handlerService.skinService.templateHandlers.GetTemplateByID(objectHandlers.Post("slTemplate"));
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
+            cif.vcPic = objectHandlers.Post("iPic");
 
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -67,28 +68,9 @@ public partial class skin_categoriesmdy : BasePage
                 rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
                 if (rtn == 1)
                 {
-                    foreach (string key in Request.Form.AllKeys)
-                    {
-                        if (key.IndexOf("name_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
-                        {
-                            string[] keys = key.Split('_');
-                            CategorieProperties cps = new CategorieProperties();
-                            cps.Id = objectHandlers.Post("cpid_" + keys[1]);
-                            cps.ProertieName = objectHandlers.Post(key);
-                            cps.CategorieId = cif.Id;
-                            cps.Type = objectHandlers.Post("type_" + keys[1]);
-                            cps.Values = objectHandlers.Post("pttext_" + keys[1]);
-                            cps.width = objectHandlers.ToInt(objectHandlers.Post("pwidth_" + keys[1]));
-                            cps.height = objectHandlers.ToInt(objectHandlers.Post("pheight_" + keys[1]));
-                            rtn = base.handlerService.skinService.categoriesHandlers.CategoriePropertiesManage(base.adminInfo, cps);
-                        }
-                    }
-
                     rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo,cif.SkinInfo.Id);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
                     CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
-                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES + cif.Id);
-                    CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_PROPERTIES_ENTITY + cif.Id);
                 }
             }
             catch (Exception ex)
@@ -98,16 +80,14 @@ public partial class skin_categoriesmdy : BasePage
                 return;
             }
 
-            base.AjaxErch(rtn, "分类添加成功！");
+            base.AjaxErch(rtn, "分类修改成功！");
         }
     }
 
     private void Init()
     {
         string iClassId = objectHandlers.Get("iClassId");
-        this.cid.Text = iClassId + "&t=" + DateTime.Now.ToString();
         string skinid = objectHandlers.Get("SkinId");
-        this.iMaxPId.Value = base.handlerService.skinService.categoriesHandlers.GetMaxCategoriesProperties().ToString();
         if (string.IsNullOrEmpty(skinid)) skinid = ConfigServiceEx.DefaultSkinId;
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iClassId);
         if (cif == null)
@@ -122,6 +102,7 @@ public partial class skin_categoriesmdy : BasePage
         this.iDirectory.Value = cif.vcDirectory;
         this.iOrder.Value = cif.iOrder.ToString();
         this.iIsSinglePage.Checked = cif.IsSinglePage == "Y" ? true : false;
+        this.iPic.Value = cif.vcPic;
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         int i = 0;

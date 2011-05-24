@@ -19,54 +19,46 @@ using System.Linq;
 using System.Text;
 using TCG.Entity;
 
+
+
 namespace TCG.Handlers
 {
-    public interface ICategoriesHandlers
+    public interface ISpecialityHandlers
     {
         /// <summary>
-        /// 从数据库中加载分类信息
-        /// </summary>
-        /// <returns></returns>
-        DataTable GetAllCategoriesWithOutCaching();
-
-
-        DataTable GetCategoriePropertiesByCIdWithOutCaching(string cid);
-
-        int CreateCategories(Categories cif);
-
-
-        /// <summary>
-        /// 修改分类
+        /// 添加新的资讯类型
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="adminname"></param>
-        /// <param name="classinf"></param>
+        /// <param name="nif"></param>
         /// <returns></returns>
-        int UpdateCategories(Categories classinf);
+        int NewsSpecialityAdd(Speciality nif);
 
         /// <summary>
-        /// 删除资讯分类
+        /// 修改资讯类型
         /// </summary>
         /// <param name="conn"></param>
-        /// <param name="classid"></param>
         /// <param name="adminname"></param>
+        /// <param name="nif"></param>
         /// <returns></returns>
-        int DelCategories(string classid);
+        int NewsSpecialityMdy(Speciality nif);
+
 
         /// <summary>
-        /// 分类属性管理
+        /// 删除特性
         /// </summary>
-        /// <param name="admin"></param>
-        /// <param name="cp"></param>
+        /// <param name="conn"></param>
+        /// <param name="adminname"></param>
+        /// <param name="ids"></param>
         /// <returns></returns>
-        int CategoriePropertiesManage(Properties cp);
+        int NewSpecialityDel(string ids);
+
 
         /// <summary>
-        /// 删除分类属性
+        /// 获得所有资源特性
         /// </summary>
-        /// <param name="admininf"></param>
-        /// <param name="cpid"></param>
+        /// <param name="conn"></param>
         /// <returns></returns>
-        int CategoriePropertiesDEL(int cpid);
+        DataTable GetAllNewsSpecialityInfo(string skinid);
     }
 }

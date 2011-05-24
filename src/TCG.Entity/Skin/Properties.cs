@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TCG.Entity
 {
-    public class CategorieProperties : EntityBase
+    public class Properties : EntityBase
     {
-        public string CategorieId { get; set; }
+        public string PropertiesCategorieId { get; set; }
         public string ProertieName { get; set; }
         public string Type { get; set; }
         public string Values { get; set; }

@@ -10,7 +10,7 @@ using TCG.Utils;
 
 using TCG.Entity;
 
-public partial class Manage_AjaxMethod_CategoriePropertiesDel : BasePage
+public partial class Manage_AjaxMethod_PropertiesDel : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,7 +19,7 @@ public partial class Manage_AjaxMethod_CategoriePropertiesDel : BasePage
         int rtn = 1;
         if(id>0)
         {
-            rtn = base.handlerService.skinService.categoriesHandlers.CategoriePropertiesDEL(base.adminInfo, id);
+            rtn = base.handlerService.skinService.propertiesHandlers.PropertiesDEL(base.adminInfo, id);
         }
 
         base.AjaxErch(1, "删除属性成功");

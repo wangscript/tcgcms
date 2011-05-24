@@ -34,12 +34,6 @@
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="SaveNewsInfo();">
 			<img src="../images/icon/save.gif" /> 保存
 		</a>
-		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="ShowFromDiv(this);">
-			<img src="../images/icon/from.gif" />来源
-		</a>
-		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="SpecialitySel(this);">
-			<img src="../images/icon/6.gif" />特性
-		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
 			<img src="../images/icon/5.gif" />取消
 		</a>
@@ -90,6 +84,23 @@
 		    </span>
 		    <span class="info1" id="classmsg" style=" margin-left:210px;">资讯所属的分类，不能为空</span>
 	    </div>
+
+        <div class="Page_arrb arb_pr1">
+		    <span class="p_a_t1 lfl">资讯类别： </span>
+		    <span class="p_a_t1 lfl">
+		    <div class="cagegoriesSelect">
+		        <input id="iSpeciality_t" name="iSpeciality" type="text"  class="itxt1" />
+		        <a id="SelectDivWW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
+		
+		        <div id="iSpeciality_1" class="enmu addselect">
+                    <div  class="c_box" id="iSpeciality_c">
+		                <ul id="iSpeciality_cc" class="one"></ul>
+                    </div>
+                </div>
+		    </div>
+		    </span>
+		    <span class="info1" id="iSpeciality_msg" style=" margin-left:210px;">设置资讯特性，可以让文章显示在特殊的位置!</span>
+	    </div>
 	    <div class="Page_arrb arb_pr1">
 		    <span class="p_a_t1">资讯作者：</span><input id="iAuthor" name="iAuthor" type="text"  class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iAuthor','autmsg');" runat="server"/>
 		    <span class="info1" id="autmsg">资讯作者，能为空</span>
@@ -104,9 +115,12 @@
 	    <div class="Page_arrb arb_pr1">
 	        <input id="iSmallImg" name="iSmallImg" type="text"  class="itxt1" onfocus="this.className='itxt2'"  style="width:400px;" runat="server"/><img src="../images/icon/fj.gif" /> <a href="javascript:GoTo();"  onclick="SelectSmallImg(this)">设置小图片</a>
 	    </div>
+        <div class="Page_arrb arb_pr1">
+		    <textarea id="iShortContent" name="iShortContent" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
+	    </div>
     </div>
     <div id="a2_from">
-	    <div class="Page_arrb arb_pr1 templateaddnew1">
+	    <div class="Page_arrb arb_pr1">
 		    <script type="text/javascript" charset="gb2312" src="../KindEditer/kindeditor-min.js"></script>
                 <script type="text/javascript">
                     KE.show({
@@ -128,13 +142,16 @@
             </script>
             <textarea id="taContent" cols="100" rows="8" style="width:800px;height:300px;visibility:hidden;" runat="server"></textarea>
 	    </div>
-	    <div class="Page_arrb arb_pr1 templateaddnew2">
-		    <textarea id="iShortContent" name="iShortContent" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iKeyWords','keymsg');" style="width:800px; height:80px; margin-top:5px;" runat="server"/>
-	    </div>
     </div>
-    <div id="a3_from"></div>
-	<div class="imgPace hid" id="imgPace"></div>
-	<div class="dobtn arb_pr" style="margin-top:5px;clear:both;"><input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" /></div>
+    <div id="a3_from">
+        <div class="Page_g">资讯属性：<select id="scp" name="scp" runat="server" onchange="ChangePCtype(this)">
+        </select></div>
+        <div id="a3_form_p">
+        </div>
+    </div>
+	<div class="dobtn arb_pr1 Page_arrb" style="margin-top:5px;">
+        <input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" />
+    </div>
 	<input type="hidden" id="iClassId" name="iClassId" runat="server"/>
 	<input type="hidden" id="iSkinId" name="iSkinId" runat="server"/>
 	<input type="hidden" id="iFrom" name="iFrom" value="1" runat="server"/>

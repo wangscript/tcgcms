@@ -22,7 +22,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllCategoriesWithOutCaching()
         {
-            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage FROM Categories order by iorder";
+            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic FROM Categories order by iorder";
             return AccessFactory.conn.DataTable(Sql);
         }
 
@@ -35,32 +35,33 @@ namespace TCG.Handlers.Imp.AccEss
         public int CreateCategories(Categories cif)
         {
 
-            AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage)"
+            AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic)"
                     + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinInfo.Id + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
-                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" + cif.IsSinglePage + "')");
+                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" 
+                    + cif.IsSinglePage + "','"+cif.vcPic+"')");
             return 1;
         }
 
-        public int CategoriePropertiesManage(CategorieProperties cp)
+        public int CategoriePropertiesManage(Properties cp)
         {
             string sql = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
                 sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
-                + "'" + cp.CategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+                + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
             }
             else
             {
                 int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM CategorieProperties WHERE id = " + cp.Id + ""));
                 if (ncount > 0)
                 {
-                    sql = "UPDATE CategorieProperties SET CategorieId='" + cp.CategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
+                    sql = "UPDATE CategorieProperties SET CategorieId='" + cp.PropertiesCategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
                         + "',[Values]='" + cp.Values + "',width=" + cp.width + ",height=" + cp.height + " WHERE id=" + cp.Id;
                 }
                 else
                 {
                     sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
-            + "'" + cp.CategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+            + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
                 }
             }
 
@@ -89,7 +90,8 @@ namespace TCG.Handlers.Imp.AccEss
 
             AccessFactory.conn.Execute("UPDATE Categories SET vcClassName='" + cif.vcClassName + "',vcName='" + cif.vcName + "',Parent='" + cif.Parent + "',"
                     + "iTemplate='" + cif.ResourceTemplate.Id + "',iListTemplate='" + cif.ResourceListTemplate.Id + "',vcDirectory='" + cif.vcDirectory + "',vcUrl='"
-                    + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "', IsSinglePage = '" + cif.IsSinglePage + "' WHERE ID ='" + cif.Id + "'");
+                    + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "', IsSinglePage = '"
+                    + cif.IsSinglePage + "',vcPic='" + cif.vcPic + "' WHERE ID ='" + cif.Id + "'");
             return 1;
         }
 
@@ -122,9 +124,5 @@ namespace TCG.Handlers.Imp.AccEss
             return 1;
         }
 
-        public int GetMaxCategoriesProperties()
-        {
-           return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT Max(id) FROM CategorieProperties"));
-        }
     }
 }

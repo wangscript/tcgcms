@@ -45,9 +45,11 @@
     <Compile Include="IAdminHandlers.cs" />
     <Compile Include="ICategoriesHandlers.cs" />
     <Compile Include="IFileHandlers.cs" />
+    <Compile Include="IPropertiesHandlers.cs" />
     <Compile Include="IResourceHandlers.cs" />
     <Compile Include="ISheifHandlers.cs" />
     <Compile Include="ISkinHandlers.cs" />
+    <Compile Include="ISpecialityHandlers.cs" />
     <Compile Include="ITemplateHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

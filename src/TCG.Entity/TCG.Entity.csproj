@@ -58,8 +58,9 @@
     <Compile Include="Resources\Resources.cs" />
     <Compile Include="Sheif\SheifCategorieConfig.cs" />
     <Compile Include="Sheif\SheifSourceInfo.cs" />
-    <Compile Include="Skin\CategorieProperties.cs" />
+    <Compile Include="Skin\Properties.cs" />
     <Compile Include="Skin\Categories.cs" />
+    <Compile Include="Skin\PropertiesCategorie.cs" />
     <Compile Include="Skin\Skin.cs" />
     <Compile Include="Skin\Speciality.cs" />
     <Compile Include="Skin\Template.cs" />

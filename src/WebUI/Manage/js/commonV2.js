@@ -357,9 +357,7 @@ function AjaxPostFormBack(data) {
             } else {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
             }
-            return;
         }
-        SetAjaxDiv("ok", false, data.message);
     } else {
         SetAjaxDiv("err", false, data.message);
     }
@@ -373,9 +371,7 @@ function AjaxPostFormBack2(data) {
             } else {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
             }
-            return;
         }
-        SetAjaxDivAdminMian("ok", false, data.message);
     } else {
         SetAjaxDivAdminMian("err", false, data.message);
     }

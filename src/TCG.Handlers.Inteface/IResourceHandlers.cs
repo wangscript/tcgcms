@@ -110,5 +110,7 @@ namespace TCG.Handlers
 
         DataTable GetResourcePropertiesByRIdEntity(string rid);
 
+        int DelResourcesProperties(string resid);
+
     }
 }

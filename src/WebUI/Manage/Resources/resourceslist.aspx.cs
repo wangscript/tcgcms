@@ -44,6 +44,9 @@ public partial class resources_resourceslist : BasePage
                 case "CREATE":
                     this.CreateNews();
                     break;
+                case "CHECK" :
+                    this.CheckNews();
+                    break;
             }
             return;
         }
@@ -223,6 +226,52 @@ public partial class resources_resourceslist : BasePage
         try
         {
             rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, resourceid);
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
+            return;
+        }
+
+        base.AjaxErch(rtn, "<a>" + errText.Replace("\\", "/") + "</a>", "CreateBack");
+    }
+
+    private void CheckNews()
+    {
+        int resourceid = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
+        if (resourceid <= 0)
+        {
+            base.AjaxErch("-1000000051");
+            return;
+        }
+        Resources res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
+        if (res == null)
+        {
+            base.AjaxErch("-1000000051");
+            return;
+        }
+
+        int rtn = 0;
+        string errText = string.Empty;
+        try
+        {
+            if (res.cChecked == "Y")
+            {
+                res.cChecked = "N";
+                res.cCreated = "N";
+                errText = "审核文章[" + res.vcTitle + "]状态为:<font color='red'>审核不通过</font> 并删除静态文件";
+                rtn = base.handlerService.resourcsService.resourcesHandlers.DelNewsInfoHtmlByIds(res.Id);
+            }
+            else
+            {
+                res.cChecked = "Y";
+                res.cCreated = "Y";
+                rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, resourceid);
+                errText = "审核文章[" + res.vcTitle + "]状态为:<font color='green'>审核通过</font> 并生成静态文件";
+            }
+
+            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(res);
+            
         }
         catch (Exception ex)
         {

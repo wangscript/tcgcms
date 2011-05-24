@@ -114,12 +114,16 @@ namespace TCG.Entity
         /// </summary>
         public string SheifUrl { get { return this._sheifurl; } set { this._sheifurl = value; } }
 
+        /// <summary>
+        ///  Ù–‘∑÷¿‡ID
+        /// </summary>
+        public int PropertiesCategorieId { get; set; }
+
         public string GetUrl()
         {
             return string.IsNullOrEmpty(this.vcUrl) ? this.vcFilePath : this.vcUrl;
         }
-          
-
+         
 
         private Categories _iClassID = new Categories();
         private string _vcTitle = string.Empty;

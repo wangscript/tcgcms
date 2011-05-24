@@ -20,9 +20,9 @@ namespace TCG.Entity
         /// </summary>
         public string PropertieValue { get; set; }
         /// <summary>
-        /// 属性对应的分类属性编号
+        /// 属性编号
         /// </summary>
-        public int CategoriePropertieId { get; set; }
+        public int PropertieId { get; set; }
 
     }
 }

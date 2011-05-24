@@ -63,5 +63,38 @@ namespace TCG.Handlers
             }
         }
         private SkinHandlers _skinhandlers = null;
+
+
+        /// <summary>
+        /// 属性操作类
+        /// </summary>
+        public PropertiesHandlers propertiesHandlers
+        {
+            get
+            {
+                if (this._propertieshandlers == null)
+                {
+                    this._propertieshandlers = new PropertiesHandlers();
+                }
+                return this._propertieshandlers;
+            }
+        }
+        private PropertiesHandlers _propertieshandlers = null;
+
+        /// <summary>
+        /// 特性操作类
+        /// </summary>
+        public SpecialityHandlers specialityHandlers
+        {
+            get
+            {
+                if (this._specialityhandlers == null)
+                {
+                    this._specialityhandlers = new SpecialityHandlers();
+                }
+                return this._specialityhandlers;
+            }
+        }
+        private SpecialityHandlers _specialityhandlers = null;
     }
 }

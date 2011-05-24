@@ -38,7 +38,7 @@
 		<span class="info1" id="urlmsg">单页时必须填写地址</span>
 		<span class="info1" id="conmsg"></span>
 	</div>
-	<div class="Page_arrb arb_pr templateaddnew1">
+	<div class="Page_arrb arb_pr">
 		<textarea cols="140" rows="13" id="vcContent" name="vcContent" runat="server" onblur="CheckContent()"></textarea>
 	</div>
 	<div class="Page_arrb arb_pr">

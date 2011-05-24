@@ -175,9 +175,10 @@ namespace TCG.Handlers
                     sb.Append("iParentId:" + filecategories.iParentId.ToString() + ",");
                     sb.Append("vcFileName:\"" + filecategories.vcFileName + "\"");
                     break;
-                case "TCG.Entity.CategorieProperties":
-                    CategorieProperties categorieProperties = (CategorieProperties)entity;
+                case "TCG.Entity.Properties":
+                    Properties categorieProperties = (Properties)entity;
                     sb.Append("Id:" + categorieProperties.Id + ",");
+                    sb.Append("PropertiesCategorieId:" + categorieProperties.PropertiesCategorieId + ",");
                     sb.Append("ProertieName:\"" + categorieProperties.ProertieName + "\",");
                     sb.Append("Type:\"" + categorieProperties.Type + "\",");
                     sb.Append("Values:\"" + categorieProperties.Values + "\",");
@@ -191,8 +192,15 @@ namespace TCG.Handlers
                     sb.Append("ResourceId:\"" + rategorieProperties.ResourceId + "\",");
                     sb.Append("PropertieName:\"" + rategorieProperties.PropertieName + "\",");
                     sb.Append("PropertieValue:\"" + rategorieProperties.PropertieValue + "\",");
-                    sb.Append("CategoriePropertieId:" + rategorieProperties.CategoriePropertieId + "");
+                    sb.Append("PropertieId:" + rategorieProperties.PropertieId + "");
+                    break;
 
+                case "TCG.Entity.Speciality":
+                    Speciality speciality = (Speciality)entity;
+                    sb.Append("Id:" + speciality.Id + ",");
+                    sb.Append("iParent:" + speciality.iParent + ",");
+                    sb.Append("SkinId:'" + speciality.SkinId + "',");
+                    sb.Append("vcTitle:'" + speciality.vcTitle + "'");
                     break;
             }
             sb.Append("}");
