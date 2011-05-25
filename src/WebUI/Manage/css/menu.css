@@ -16,7 +16,7 @@ body {background-image: url(../images/menu_bg.jpg);background-repeat: repeat-y;b
 
 .title_icon { float:left;width:8px; height:8px;margin-right:6px; margin-top:8px;background-image:url(../images/f1_03.gif); background-repeat:no-repeat; font-size:1px;}
 
-.stitle{height:29px; padding-left:14px;text-align:left;}
+.stitle{height:29px; padding-left:14px;text-align:left; }
 
 .sbg1{background-image:url(../images/menu_stitle_bg1.jpg);background-repeat:no-repeat;background-position: 8px;}
 .sbg2{background-image:none;}

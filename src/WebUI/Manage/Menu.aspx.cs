@@ -39,15 +39,62 @@ public partial class aMenu : BasePage
         int ParentId = objectHandlers.ToInt(objectHandlers.Get("ParendId"));
         if (ParentId == 0) ParentId = 1;
 
+
+        //获取管理员权限
         Dictionary<int, Popedom> cpop = base.handlerService.manageService.adminHandlers.GetChildManagePopedomEntity(ParentId);
 
         StringBuilder sb = new StringBuilder();
         StringBuilder script = new StringBuilder();
 
+        
+        
+
         script.Append("<script type=\"text/javascript\">\r\n");
         script.Append("var btNum =" + cpop.Count.ToString() + ";\r\n");
 
         int i = 0;
+
+        if (ParentId == 18)
+        {
+            //加载2级资讯分类
+            Dictionary<string, EntityBase> categries = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId("0", ConfigServiceEx.DefaultSkinId);
+            if (categries != null && categries.Count > 0)
+            {
+                foreach (KeyValuePair<string, EntityBase> keyvalue in categries)
+                {
+                    Categories categorie = (Categories)keyvalue.Value;
+                    if (0 == i)
+                    {
+                        script.Append("window.parent.main.location.href='resources/resourceslist.aspx?skinid=" + ConfigServiceEx.DefaultSkinId
+                            + "&iclassid=" + categorie.Id + "';\r\n");
+                    }
+
+                    sb.Append(string.Format(tempClass, i,
+                        "resources/resourceslist.aspx?skinid=" + ConfigServiceEx.DefaultSkinId + "&iclassid=" + categorie.Id
+                        , categorie.vcClassName));
+
+                    Dictionary<string, EntityBase> categries1 = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(categorie.Id, ConfigServiceEx.DefaultSkinId);
+                    if (categries1 != null && categries1.Count > 0)
+                    {
+                        script.Append("stNums[" + i.ToString() + "]=" + categries1.Count.ToString() + ";\r\n");
+                        int m = 0;
+                        foreach (KeyValuePair<string, EntityBase> keyvalue1 in categries1)
+                        {
+                            Categories categorie12 = (Categories)keyvalue1.Value;
+                            sb.Append(string.Format(tempSClass, i, m,
+                                "resources/resourceslist.aspx?skinid=" + ConfigServiceEx.DefaultSkinId + "&iclassid=" + categorie12.Id,
+                                categorie12.vcClassName, 23));
+
+                            m++;
+                        }
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        
         foreach (KeyValuePair<int, Popedom> keyvalue in cpop)
         {
             string Url = keyvalue.Value.vcUrl;

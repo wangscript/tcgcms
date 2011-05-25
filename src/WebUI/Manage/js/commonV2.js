@@ -356,7 +356,9 @@ function AjaxPostFormBack(data) {
                 try { eval(data.callback); } catch (err) { }
             } else {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
+                return;
             }
+            SetAjaxDiv("err", false, data.message);
         }
     } else {
         SetAjaxDiv("err", false, data.message);
@@ -370,7 +372,9 @@ function AjaxPostFormBack2(data) {
                 try { eval(data.callback); } catch (err) { }
             } else {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
+                return;
             }
+            SetAjaxDivAdminMian("err", false, data.message);
         }
     } else {
         SetAjaxDivAdminMian("err", false, data.message);

@@ -296,14 +296,14 @@ namespace TCG.Handlers
             this._tagtext = tempNew;
         }
 
-        private void NewslistTagFieldsReplace(ref string temp,ref TCGTagPagerInfo pagerinfo, Resources item)
+        private void NewslistTagFieldsReplace(ref string temp, ref TCGTagPagerInfo pagerinfo, Resources item)
         {
             bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
             if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle) ? "" : " - ") + item.vcTitle;
 
             if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
                 + item.vcTitle + "</font>";
-            if (item.cStrong == "Y") item.vcTitle = "<strong>" +"<TCG>" + item.vcTitle + "</strong>";
+            if (item.cStrong == "Y") item.vcTitle = "<strong>" + "<TCG>" + item.vcTitle + "</strong>";
             temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + item.vcTitle + "</TCG>");
 
             //替换正文内容，检查图片
@@ -352,27 +352,63 @@ namespace TCG.Handlers
             bool isshowrp = objectHandlers.ToBoolen(this.GetAttribute("inpropertie"), false);
             if (isshowrp)
             {
-                Match mh = Regex.Match(temp, @"(<ResourcePropertiesList>)([\S\s]*?)(</ResourcePropertiesList>)", RegexOptions.Singleline | RegexOptions.Multiline);
-                string rplist = string.Empty;
-                if (mh.Success)
-                {
-                    string temp1 = mh.Result("$2");
-                    Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(item.Id);
 
-                    if (ress != null || ress.Count != 0)
+                
+                Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(item.Id);
+
+                if (ress != null || ress.Count != 0)
+                {
+                    Match mh = Regex.Match(temp, @"(<ResourcePropertiesList>)([\S\s]*?)(</ResourcePropertiesList>)", RegexOptions.Singleline | RegexOptions.Multiline);
+                    string rplist = string.Empty;
+                    if (mh.Success)
                     {
+                        string temp1 = mh.Result("$2");
                         foreach (KeyValuePair<string, EntityBase> entity in ress)
                         {
                             string temp2 = temp1;
                             ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
                             temp2 = temp2.Replace("$PropertieName$", resourceProperties.PropertieName);
                             temp2 = temp2.Replace("$PropertieValue$", resourceProperties.PropertieValue);
-                            rplist += temp2;
-                            temp = temp.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
+                            rplist += temp2; 
+                        }
+                        temp = Regex.Replace(temp, @"(<ResourcePropertiesList>)(.+?)(</ResourcePropertiesList>)", rplist, RegexOptions.Singleline | RegexOptions.Multiline);
+                    }
+
+                    Match mh1 = Regex.Match(temp, @"<ResourcePropertiesList num='([0-9]+)'>([\S\s]*?)</ResourcePropertiesList>", RegexOptions.Singleline | RegexOptions.Multiline);
+                    string rplist1 = string.Empty;
+                    if (mh1.Success)
+                    {
+                        string temp11 = mh1.Result("$2");
+                        int num = objectHandlers.ToInt(mh1.Result("$1"));
+                        if (num > 0)
+                        {
+                            int i = 0;
+                            foreach (KeyValuePair<string, EntityBase> entity in ress)
+                            {
+                                if (i <= num - 1)
+                                {
+                                    string temp21 = temp11;
+                                    ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
+                                    temp21 = temp21.Replace("$PropertieName$", resourceProperties.PropertieName);
+                                    temp21 = temp21.Replace("$PropertieValue$", resourceProperties.PropertieValue);
+                                    rplist1 += temp21;
+                                   
+                                }
+                                i++;
+                            }
+                            temp = Regex.Replace(temp, @"<ResourcePropertiesList num='([0-9]+)'>([\S\s]*?)</ResourcePropertiesList>", rplist1, RegexOptions.Singleline | RegexOptions.Multiline);
                         }
                     }
+
+
+                    foreach (KeyValuePair<string, EntityBase> entity in ress)
+                    {
+                        ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
+                        temp = temp.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
+                    }
+
                 }
-                temp = Regex.Replace(temp, @"(<ResourcePropertiesList>)(.+?)(</ResourcePropertiesList>)", rplist, RegexOptions.Singleline | RegexOptions.Multiline);
+               
             }
 
             temp = base.tcgTagStringFunHandlers.StringColoumFun(temp, false);
