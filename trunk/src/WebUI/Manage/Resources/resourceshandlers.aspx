@@ -86,7 +86,7 @@
 	    </div>
 
         <div class="Page_arrb arb_pr1">
-		    <span class="p_a_t1 lfl">资讯类别： </span>
+		    <span class="p_a_t1 lfl">特新选择： </span>
 		    <span class="p_a_t1 lfl">
 		    <div class="cagegoriesSelect">
 		        <input id="iSpeciality_t" name="iSpeciality" type="text"  class="itxt1" />

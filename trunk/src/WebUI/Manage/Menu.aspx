@@ -28,7 +28,7 @@
 <TCG:Span id='temp1' runat='server'>
 <div class="title_bg" id="menu_{0}"><a class="title_icon" onclick="ChangeIcon({0})" href="javascript:GoTo();" id="menu_{0}_icon">&nbsp;</a><a href="{1}" target="main" onclick="ChangeIcon({0})">{2}</a></div>
 </tcg:span><TCG:Span id='temp2' runat='server'>
-<div class="stitle sbg2" id="menu_{0}_{1}"><img src="images/icon/{4}.gif" /><a href="{2}" onmouseover="$('menu_{0}_{1}').className='stitle sbg1'" onmouseout="$('menu_{0}_{1}').className='stitle sbg2'" target="main">{3}</a></div>
+<div class="stitle sbg2" id="menu_{0}_{1}" style="display:none;"><img src="images/icon/{4}.gif" /><a href="{2}" onmouseover="$('menu_{0}_{1}').className='stitle sbg1'" onmouseout="$('menu_{0}_{1}').className='stitle sbg2'" target="main">{3}</a></div>
 </tcg:span>
 </form>
 </body>

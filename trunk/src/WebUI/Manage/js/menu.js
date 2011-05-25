@@ -23,4 +23,12 @@ function ChangeIcon(num) {
             st.toggle();
         }
     }
+
+    var small = $(document).find(".sbg2");
+    small.each(function (n) {
+        var tsmall = $(small[n]);
+        if (tsmall.attr("id").indexOf("menu_" + num) == -1) {
+            tsmall.css({ "display": "none" })
+        }
+    });
 }
