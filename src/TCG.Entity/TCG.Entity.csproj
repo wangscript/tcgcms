@@ -66,6 +66,7 @@
     <Compile Include="Skin\Template.cs" />
     <Compile Include="Skin\TemplateType.cs" />
     <Compile Include="TCGTagPagerInfo.cs" />
+    <Compile Include="User\FeedBack.cs" />
     <Compile Include="Version\VersionItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

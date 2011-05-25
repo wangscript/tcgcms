@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\FeedBackHandlers.cs" />
     <Compile Include="Handlers\HandlersFactory.cs" />
     <Compile Include="Handlers\AdminHandlers.cs" />
     <Compile Include="Handlers\CategoriesHandlers.cs" />

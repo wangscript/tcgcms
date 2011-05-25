@@ -42,7 +42,7 @@
 	</asp:Repeater>
 	<input type="hidden" id="Work" name="Work" value="SetDefalutSkinId" />
 	<input type="hidden" id="SkinId" name="SkinId" value="" />
-	<div class="Page_arrb arb_pr">
+	<div class="Page_arrb arb_pr" style="clear:both">
 		<span class="green bold">小提示：</span>
 		<span class="info1">各站点内的单篇文章管理，在模板里面！</span>
 	</div>
