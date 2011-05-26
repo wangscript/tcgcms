@@ -298,6 +298,7 @@ namespace TCG.Handlers
 
                 pagerhtml = pagerhtml.Replace("$pagecount$", this._pagerinfo.PageCount.ToString());
                 pagerhtml = pagerhtml.Replace("$topiccount$", this._pagerinfo.TopicCount.ToString());
+                pagerhtml = pagerhtml.Replace("$page$", this._pagerinfo.Page.ToString());
 
                 Match mh1 = Regex.Match(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", RegexOptions.Singleline | RegexOptions.Multiline);
                 if (mh1.Success)
