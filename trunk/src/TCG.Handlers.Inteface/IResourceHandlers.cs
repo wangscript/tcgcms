@@ -112,5 +112,7 @@ namespace TCG.Handlers
 
         int DelResourcesProperties(string resid);
 
+        int DelResourcesPropertiesOnIds(string resid, string ids);
+
     }
 }

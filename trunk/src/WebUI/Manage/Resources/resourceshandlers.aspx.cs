@@ -183,7 +183,7 @@ public partial class resources_resourceshandlers : BasePage
             }
             
             if (rtn == 1)
-            {   
+            {
 
                 foreach (string key in Request.Form.AllKeys)
                 {
@@ -196,6 +196,7 @@ public partial class resources_resourceshandlers : BasePage
                         rps.ResourceId = item.Id;
                         rps.PropertieValue = objectHandlers.Post("rpvalue_" + keys[1]);
                         rps.PropertieId = objectHandlers.ToInt(objectHandlers.Post("cpid_" + keys[1]));
+                        rps.iOrder = objectHandlers.ToInt(objectHandlers.Post("rporder_" + keys[1]));
                         rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, rps);
                     }
                 }

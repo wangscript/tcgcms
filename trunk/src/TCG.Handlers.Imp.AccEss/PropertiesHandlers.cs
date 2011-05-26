@@ -53,8 +53,9 @@ namespace TCG.Handlers.Imp.AccEss
             string sql = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
-                sql = "INSERT INTO Properties(PropertiesCategorieId,ProertieName,[Type],[Values],width,height) VALUES("
-                + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+                sql = "INSERT INTO Properties(PropertiesCategorieId,ProertieName,[Type],[Values],width,height,iOrder) VALUES("
+                + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + ","
+                + cp.height + ",iOrder=" + cp.iOrder + ")";
             }
             else
             {
@@ -62,12 +63,13 @@ namespace TCG.Handlers.Imp.AccEss
                 if (ncount > 0)
                 {
                     sql = "UPDATE Properties SET PropertiesCategorieId='" + cp.PropertiesCategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
-                        + "',[Values]='" + cp.Values + "',width=" + cp.width + ",height=" + cp.height + " WHERE id=" + cp.Id;
+                        + "',[Values]='" + cp.Values + "',width=" + cp.width + ",height=" + cp.height + ",iOrder=" + cp.iOrder + " WHERE id=" + cp.Id;
                 }
                 else
                 {
-                    sql = "INSERT INTO Properties(PropertiesCategorieId,ProertieName,[Type],[Values],width,height) VALUES("
-            + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+                    sql = "INSERT INTO Properties(PropertiesCategorieId,ProertieName,[Type],[Values],width,height,iOrder) VALUES("
+            + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + ","
+            + cp.height + "," + cp.iOrder + ")";
                 }
             }
 

@@ -15,7 +15,23 @@ $(document).ready(function () {
 
 });
 
+function FeedBackDel() {
 
+    var temps = GetCheckBoxValues("CheckID");
+    if (temps == "") {
+        SetAjaxDiv("err", false, "您没选择需要删除的留言！");
+        return;
+    }
+
+    if (!confirm("您确定删除选定的留言么?")) {
+        return;
+    }
+
+    SetAjaxDiv("loader", false, "正在发送请求...");
+    $("#work").val("DEL");
+    $("#DelClassId").val(temps);
+    $("#form1").submit();
+}
 
 function classTitleInit() {
     var m = $("#classTitle");
@@ -30,4 +46,19 @@ function classTitleInit() {
         }
     }
     m.html("<span class='txt bold'>" + a + "留言列表</span>");
+}
+
+
+function ShowContent(id) {
+    var cs = $(".list_content");
+    if (cs != null && cs.length > 0) {
+        cs.each(function (i) {
+            var o = cs.eq(i);
+            if (o.attr("id") == ("content_" + id)) {
+                $(o).toggle();
+            } else {
+                $(o).hide();
+            }
+        });
+    }
 }

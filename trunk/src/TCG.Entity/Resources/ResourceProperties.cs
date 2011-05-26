@@ -23,6 +23,10 @@ namespace TCG.Entity
         /// 属性编号
         /// </summary>
         public int PropertieId { get; set; }
+        /// <summary>
+        /// 排序规则
+        /// </summary>
+        public int iOrder { get; set; }
 
     }
 }

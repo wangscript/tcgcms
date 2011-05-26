@@ -22,7 +22,7 @@ $(document).ready(function () {
         if (_Properties != null) {
             for (var i = 0; i < _Properties.length; i++) {
                 var cp = _Properties[i];
-                var chtml = CategoriePropertieMdyHtml(cp.Id, cp.ProertieName, cp.Type, cp.Values, cp.width, cp.height);
+                var chtml = CategoriePropertieMdyHtml(cp.Id, cp.ProertieName, cp.Type, cp.Values, cp.width, cp.height, cp.iOrder);
                 var ohtml = a2from.html();
                 var line = ohtml.toString().length == 0 ? "" : "<div id=\"line_" + cp.Id + "\" class=\"ln-c-mid ln-thin\"></div>";
                 a2from.html(ohtml + line + chtml);
@@ -87,9 +87,10 @@ function CategoriePropertieHTMLAdd() {
     var MaxPid = $("#iMaxPId");
     var n = parseInt(MaxPid.val()) + 1;
     MaxPid.val(n);
-    var chtml = CategoriePropertieMdyHtml(n, "", null, "", 0, 0);
+    var chtml = CategoriePropertieMdyHtml(n, "", null, "", 0, 0, $("#iMaxPId").val());
     var line = "<div id=\"line_" + n + "\" class=\"ln-c-mid ln-thin\"></div>";
-    $("#a2_from").html(ohtml + line + chtml);
+
+    $(line + chtml).appendTo($("#a2_from"));
 }
 
 function CategoriePropertieHTMLDel(id) {

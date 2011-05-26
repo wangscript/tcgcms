@@ -175,8 +175,8 @@ namespace TCG.Handlers.Imp.AccEss
             string sql = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
-                sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId) VALUES("
-                + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "')";
+                sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId,iOrder) VALUES("
+                + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "'," + cp.iOrder + ")";
             }
             else
             {
@@ -185,12 +185,12 @@ namespace TCG.Handlers.Imp.AccEss
                 if (ncount > 0)
                 {
                     sql = "UPDATE ResourceProperties SET ResourceId='" + cp.ResourceId + "',PropertieName='" + cp.PropertieName + "',PropertieValue='" + cp.PropertieValue
-                        + "',PropertieId='" + cp.PropertieId + "' WHERE id=" + cp.Id;
+                        + "',PropertieId='" + cp.PropertieId + "',iOrder=" + cp.iOrder + " WHERE id=" + cp.Id;
                 }
                 else
                 {
-                    sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId) VALUES("
-                 + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "')";
+                    sql = "INSERT INTO ResourceProperties(ResourceId,PropertieName,PropertieValue,PropertieId,iOrder) VALUES("
+                 + "'" + cp.ResourceId + "','" + cp.PropertieName + "','" + cp.PropertieValue + "','" + cp.PropertieId + "'," + cp.iOrder + ")";
                 }
             }
 
@@ -201,7 +201,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         public DataTable GetResourcePropertiesByRIdEntity(string rid)
         {
-            return AccessFactory.conn.DataTable("SELECT * FROM ResourceProperties WHERE ResourceId='" + rid + "'");
+            return AccessFactory.conn.DataTable("SELECT * FROM ResourceProperties WHERE ResourceId='" + rid + "' order by iOrder");
         }
 
         public int DelResourcesProperties(string resid)
@@ -209,6 +209,11 @@ namespace TCG.Handlers.Imp.AccEss
              AccessFactory.conn.DataTable("DELETE FROM ResourceProperties WHERE ResourceId='" + resid + "'");
              return 1;
         }
-        
+
+        public int DelResourcesPropertiesOnIds(string resid, string ids)
+        {
+            AccessFactory.conn.DataTable("DELETE FROM ResourceProperties WHERE ResourceId='" + resid + "' and id not in(" + ids + ")");
+            return 1;
+        }
     }
 }

@@ -242,6 +242,7 @@ namespace TCG.Handlers
                     categorieProperties.Values = row["Values"].ToString();
                     categorieProperties.width = objectHandlers.ToInt(row["width"].ToString());
                     categorieProperties.height = objectHandlers.ToInt(row["height"].ToString());
+                    categorieProperties.iOrder = objectHandlers.ToInt(row["iOrder"].ToString());
                     return (EntityBase)categorieProperties;
                 case "TCG.Entity.ResourceProperties":
                     ResourceProperties rategorieProperties = new ResourceProperties();
@@ -250,6 +251,7 @@ namespace TCG.Handlers
                     rategorieProperties.PropertieName = row["PropertieName"].ToString();
                     rategorieProperties.PropertieValue = row["PropertieValue"].ToString();
                     rategorieProperties.PropertieId = objectHandlers.ToInt(row["PropertieId"].ToString());
+                    rategorieProperties.iOrder = objectHandlers.ToInt(row["iOrder"].ToString());
                     return (EntityBase)rategorieProperties;
                 case "TCG.Entity.PropertiesCategorie":
                     PropertiesCategorie pc = new PropertiesCategorie();

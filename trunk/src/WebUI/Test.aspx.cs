@@ -23,6 +23,14 @@ public partial class Test : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        List<byte> sa = new List<byte>(12);
+
+        for (int i = 0; i < 2223; i++)
+        {
+            sa.Add(new byte());
+        }
+
+        sa.Clear();
         //Response.Write(Guid.NewGuid().ToString());
         //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
         //Response.Write(Guid.NewGuid().ToString());
