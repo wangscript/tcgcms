@@ -223,18 +223,17 @@ namespace TCG.Utils
         /// <summary>
         /// 初始化基本配置信息
         /// </summary>
-        private static void BaseConfigInit()
+        public static void BaseConfigInit()
         {
             //获得所有需要登陆的特殊页面
             XmlNodeList baseconfig = GetXmlNotListByTagNameAndFilePath(m_BaseConfigFilePath, "Item");
-            if (baseconfig != null)
+
+            _baseconfig = new Dictionary<string, string>();
+            foreach (XmlElement element in baseconfig)
             {
-                _baseconfig = new Dictionary<string, string>();
-                foreach (XmlElement element in baseconfig)
-                {
-                    _baseconfig.Add(element.SelectSingleNode("Name").InnerText, element.SelectSingleNode("Value").InnerText);
-                }
+                _baseconfig.Add(element.SelectSingleNode("Name").InnerText, element.SelectSingleNode("Value").InnerText);
             }
+
         }
 
         /// <summary>

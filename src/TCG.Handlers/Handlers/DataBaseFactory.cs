@@ -132,5 +132,20 @@ namespace TCG.Handlers
             }
         }
         private static ISpecialityHandlers _specialityhandlers;
+
+        public static IFeedBackHandlers feedBackHandlers
+        {
+            get
+            {
+                if (_feedbackhandlers == null)
+                {
+                    string assc = "TCG.Handlers.Imp." + ConfigServiceEx.baseConfig["dbtype"];
+                    string className = assc + ".FeedBackHandlers";
+                    _feedbackhandlers = (IFeedBackHandlers)Assembly.Load(assc).CreateInstance(className);
+                }
+                return _feedbackhandlers;
+            }
+        }
+        private static IFeedBackHandlers _feedbackhandlers;
     }
 }

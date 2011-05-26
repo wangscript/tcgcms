@@ -50,6 +50,7 @@ public partial class ConfigSetting : BasePage
             try
             {
                 document.Save(this._file);
+                ConfigServiceEx.BaseConfigInit();
                 base.AjaxErch("1");
             }
             catch

@@ -242,7 +242,6 @@ namespace TCG.Handlers
                     categorieProperties.Values = row["Values"].ToString();
                     categorieProperties.width = objectHandlers.ToInt(row["width"].ToString());
                     categorieProperties.height = objectHandlers.ToInt(row["height"].ToString());
-
                     return (EntityBase)categorieProperties;
                 case "TCG.Entity.ResourceProperties":
                     ResourceProperties rategorieProperties = new ResourceProperties();
@@ -252,7 +251,6 @@ namespace TCG.Handlers
                     rategorieProperties.PropertieValue = row["PropertieValue"].ToString();
                     rategorieProperties.PropertieId = objectHandlers.ToInt(row["PropertieId"].ToString());
                     return (EntityBase)rategorieProperties;
-                    break;
                 case "TCG.Entity.PropertiesCategorie":
                     PropertiesCategorie pc = new PropertiesCategorie();
                     pc.CategoriePropertiesName = row["CategoriePropertiesName"].ToString();
@@ -260,8 +258,6 @@ namespace TCG.Handlers
                     pc.Visible = row["Visible"].ToString();
                     pc.Visible = row["Visible"].ToString();
                     return (EntityBase)pc;
-                    break;
-
                 case "TCG.Entity.Speciality":
                     Speciality speciality = new Speciality();
                     speciality.Id = row["Id"].ToString();
@@ -271,7 +267,17 @@ namespace TCG.Handlers
                     speciality.vcExplain = (string)row["vcExplain"];
                     speciality.dUpDateDate = (DateTime)row["dUpDateDate"];
                     return (EntityBase)speciality;
-                    break;
+                case "TCG.Entity.FeedBack":
+                    FeedBack feedBack = new FeedBack();
+                    feedBack.Id = row["Id"].ToString();
+                    feedBack.UserName = row["UserName"].ToString();
+                    feedBack.Tel = row["Tel"].ToString();
+                    feedBack.QQ = row["QQ"].ToString();
+                    feedBack.Content = row["Content"].ToString();
+                    feedBack.AddDate = objectHandlers.ToTime(row["AddDate"].ToString());
+                    feedBack.Ip = row["Ip"].ToString();
+                    feedBack.SkinId = row["SkinId"].ToString();
+                    return (EntityBase)feedBack;
             }
             return null;
         }

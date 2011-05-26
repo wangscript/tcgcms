@@ -111,7 +111,7 @@ public partial class Template_templateadd : BasePage
             item.iParentId = objectHandlers.Post("iParentid");
             item.iSystemType = objectHandlers.ToInt(objectHandlers.Post("SytemType"));
             item.vcUrl = objectHandlers.Post("vcUrl");
-            item.Content = objectHandlers.Post("vcContent");
+            item.Content = objectHandlers.Post("vcContent").Replace("&#43;", "+");
             item.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId( objectHandlers.Post("iSiteId"));
 
             if (string.IsNullOrEmpty(item.vcTempName) || string.IsNullOrEmpty(item.Content))

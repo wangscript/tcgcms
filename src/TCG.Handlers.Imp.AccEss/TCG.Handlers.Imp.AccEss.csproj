@@ -45,6 +45,7 @@
     <Compile Include="AccessFactory.cs" />
     <Compile Include="AdminHandlers.cs" />
     <Compile Include="CategoriesHandlers.cs" />
+    <Compile Include="FeedBackHandlers.cs" />
     <Compile Include="FileHandlers.cs" />
     <Compile Include="PropertiesHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
