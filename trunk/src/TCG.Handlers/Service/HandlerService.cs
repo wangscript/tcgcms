@@ -95,5 +95,18 @@ namespace TCG.Handlers
             }
         }
         private TagService _ragservice = null;
+
+        public FeedBackHandlers feedBackHandlers
+        {
+            get
+            {
+                if (this._feedbackhandlers == null)
+                {
+                    this._feedbackhandlers = new FeedBackHandlers();
+                }
+                return this._feedbackhandlers;
+            }
+        }
+        private FeedBackHandlers _feedbackhandlers = null;
     }
 }

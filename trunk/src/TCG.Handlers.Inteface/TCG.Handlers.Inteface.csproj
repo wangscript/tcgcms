@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IAdminHandlers.cs" />
     <Compile Include="ICategoriesHandlers.cs" />
+    <Compile Include="IFeedBackHandlers.cs" />
     <Compile Include="IFileHandlers.cs" />
     <Compile Include="IPropertiesHandlers.cs" />
     <Compile Include="IResourceHandlers.cs" />

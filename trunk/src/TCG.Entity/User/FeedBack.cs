@@ -10,26 +10,30 @@ namespace TCG.Entity
         /// <summary>
         /// 姓名
         /// </summary>
-        string UserName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 电话号码
         /// </summary>
-        string Tel { get; set; }
+        public string Tel { get; set; }
         /// <summary>
         /// QQ号码
         /// </summary>
-        string QQ { get; set; }
+        public string QQ { get; set; }
         /// <summary>
         /// 留言内容
         /// </summary>
-        string Content { get; set; }
+        public string Content { get; set; }
         /// <summary>
         /// 添加时间
         /// </summary>
-        DateTime AddDate { get; set; }
+        public DateTime AddDate { get; set; }
         /// <summary>
         /// 添加人IP
         /// </summary>
-        string Ip { get; set; }
+        public string Ip { get; set; }
+        /// <summary>
+        /// 皮肤ID
+        /// </summary>
+        public string SkinId { get; set; }
     }
 }

@@ -39,7 +39,7 @@ public partial class Template_templatemdy : BasePage
             this.parentPath.Value =  filepatch.Substring(0, filepatch.LastIndexOf(item.vcTempName));
 
             this.vcTempName.Value = item.vcTempName;
-            this.vcContent.Value = item.Content;
+            this.vcContent.Value = item.Content.Replace("+", "&#43;");
             this.vcUrl.Value =  filepatch;
 
             this.iSiteId.Value = item.SkinInfo.Id;
@@ -83,7 +83,7 @@ public partial class Template_templatemdy : BasePage
 
             item.TemplateType = base.handlerService.skinService.templateHandlers.GetTemplateType(objectHandlers.ToInt(this.tType.Value));
             item.vcUrl = objectHandlers.Post("vcUrl");
-            item.Content = objectHandlers.Post("vcContent");
+            item.Content = objectHandlers.Post("vcContent").Replace("&#43;","+");
             item.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(objectHandlers.Post("iSiteId"));
             if (item.SkinInfo == null)
             {
