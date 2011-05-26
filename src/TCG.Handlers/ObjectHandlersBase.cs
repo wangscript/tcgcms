@@ -183,7 +183,8 @@ namespace TCG.Handlers
                     sb.Append("Type:\"" + categorieProperties.Type + "\",");
                     sb.Append("Values:\"" + categorieProperties.Values + "\",");
                     sb.Append("width:" + categorieProperties.width + ",");
-                    sb.Append("height:" + categorieProperties.height + "");
+                    sb.Append("height:" + categorieProperties.height + ",");
+                    sb.Append("iOrder:" + categorieProperties.iOrder + "");
                     break;
 
                 case "TCG.Entity.ResourceProperties":
@@ -192,7 +193,8 @@ namespace TCG.Handlers
                     sb.Append("ResourceId:\"" + rategorieProperties.ResourceId + "\",");
                     sb.Append("PropertieName:\"" + rategorieProperties.PropertieName + "\",");
                     sb.Append("PropertieValue:\"" + rategorieProperties.PropertieValue + "\",");
-                    sb.Append("PropertieId:" + rategorieProperties.PropertieId + "");
+                    sb.Append("PropertieId:" + rategorieProperties.PropertieId + ",");
+                    sb.Append("iOrder:" + rategorieProperties.iOrder + "");
                     break;
 
                 case "TCG.Entity.Speciality":

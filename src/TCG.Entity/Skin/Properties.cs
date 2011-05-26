@@ -13,6 +13,7 @@ namespace TCG.Entity
         public string Values { get; set; }
         public int width { get; set; }
         public int height { get; set; }
+        public int iOrder { get; set; }
 
     }
 }

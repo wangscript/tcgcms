@@ -30,8 +30,8 @@ public partial class Manage_feedback : BasePage
         }
         else
         {
-            string Action = objectHandlers.Post("iAction");
-            switch (Action)
+            string work = objectHandlers.Post("work");
+            switch (work)
             {
                 case "DEL":
                     this.DelFeedBack();
@@ -52,12 +52,16 @@ public partial class Manage_feedback : BasePage
         Span stel = (Span)e.Item.FindControl("stel");
         Span sadddate = (Span)e.Item.FindControl("sadddate");
         Span scontent = (Span)e.Item.FindControl("scontent");
-        scontent.Text = feedBack.Content;
+        scontent.Text = objectHandlers.HtmlEncode(feedBack.Content);
 
         CheckID.Text = feedBack.Id;
         cid.Text = feedBack.Id;
         ipid.Text = feedBack.Id;
-        lname.Text = feedBack.UserName;
+
+        string text = "<a href=\"javascript:GoTo();\" title=\"查看留言内容\" onclick=\"ShowContent("+feedBack.Id+")\">"
+            + "<img src=\"../images/icon/magnifier.png\" border=\"0\"></a>";
+
+        lname.Text = text + feedBack.UserName;
         sqq.Text = feedBack.QQ;
         stel.Text = feedBack.Tel;
         sadddate.Text = feedBack.AddDate.ToString();
@@ -66,7 +70,27 @@ public partial class Manage_feedback : BasePage
 
     private void DelFeedBack()
     {
+        string delids = objectHandlers.Post("DelClassId");
+        if (string.IsNullOrEmpty(delids))
+        {
+            base.AjaxErch(-1000000051, "");
+            return;
+        }
 
+        int rtn = 0;
+
+        try
+        {
+            rtn = base.handlerService.feedBackHandlers.DelFeedBackById(base.adminInfo, delids);
+        }
+        catch (Exception ex)
+        {
+            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+            base.AjaxErch(base.ajaxdata);
+            return;
+        }
+
+        base.AjaxErch(rtn, "", "refinsh()");
     }
 
     private void SearchInit()

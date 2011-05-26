@@ -414,7 +414,12 @@ namespace TCG.Handlers
 
         public int DelResourcesProperties(string resid)
         {
-            return     DataBaseFactory.ResourceHandlers.DelResourcesProperties(resid);
+            return DataBaseFactory.ResourceHandlers.DelResourcesProperties(resid);
+        }
+
+        public int DelResourcesPropertiesOnIds(string resid,string ids)
+        {
+            return DataBaseFactory.ResourceHandlers.DelResourcesPropertiesOnIds(resid, ids);
         }
         
     }

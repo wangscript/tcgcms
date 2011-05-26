@@ -946,6 +946,7 @@ namespace TCG.Utils
             Builder.Replace("<br>", "\r\n");
             return Builder.ToString();
         }
+
         /// <summary>
         /// 文本操作 执行HTML编码
         /// </summary>
@@ -963,6 +964,7 @@ namespace TCG.Utils
             Builder.Replace("\t", "&nbsp; &nbsp; ");
             Builder.Replace("\r\n\r\n", "<p></p>");
             Builder.Replace("\r\n", "<br />");
+            Builder.Replace("\n", "<br />");
             return Builder.ToString();
         }
         /// <summary>

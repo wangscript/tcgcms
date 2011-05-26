@@ -61,6 +61,7 @@ public partial class Manage_Skin_propertieshandlers : BasePage
                             cps.Values = objectHandlers.Post("pttext_" + keys[1]);
                             cps.width = objectHandlers.ToInt(objectHandlers.Post("pwidth_" + keys[1]));
                             cps.height = objectHandlers.ToInt(objectHandlers.Post("pheight_" + keys[1]));
+                            cps.iOrder = objectHandlers.ToInt(objectHandlers.Post("porder_" + keys[1]));
                             rtn = base.handlerService.skinService.propertiesHandlers.PropertiesManage(base.adminInfo, cps);
                         }
                     }

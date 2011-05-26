@@ -24,7 +24,7 @@
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
-		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsClassDel();">
+		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FeedBackDel();">
 			<img src="../images/icon/08.gif" />É¾³ý
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
@@ -51,7 +51,7 @@
         <TCG:Span class='l_classname hidover' id='stel' runat='server'/>
         <TCG:Span class='l_updatedate' id='sadddate' runat='server'/>
 	</div>	
-    <div class="list_content" id="content_<TCG:Span id='cid' runat='server' />">
+    <div class="list_content hid" id="content_<TCG:Span id='cid' runat='server' />">
         <TCG:Span id='scontent' runat='server'/>
     </div>
 		</ItemTemplate>
@@ -59,7 +59,6 @@
 	<div class="list_bottom">
 		<TCG:Pager Id='pager' runat='server'/>
 	</div>
-	<input type="hidden" id="iClassId" name="iClassId" runat="server" />
     <input type="hidden" id="iPage" name="iPage" runat="server" />
 	<input type="hidden" id="DelClassId" name="DelClassId" runat="server" />
 	<input type="hidden" id="work" name="work"/>

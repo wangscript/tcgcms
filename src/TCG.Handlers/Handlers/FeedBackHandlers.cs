@@ -26,5 +26,39 @@ namespace TCG.Handlers
 
             return res;
         }
+
+        public int DelFeedBackById(Admin admininfo, string ids)
+        {
+            int rtn = HandlersFactory.adminHandlers.CheckAdminPower(admininfo);
+            if (rtn < 0) return rtn;
+
+            return DataBaseFactory.feedBackHandlers.DelFeedBackById(ids);
+        }
+
+        public int CreateFeedBack(FeedBack feedback)
+        {
+
+            if (string.IsNullOrEmpty(feedback.UserName))
+            {
+                return  -1000000901;
+            }
+
+            if (string.IsNullOrEmpty(feedback.SkinId))
+            {
+                return -1000000902;
+            }
+
+            if (string.IsNullOrEmpty(feedback.Tel))
+            {
+                return -1000000903;
+            }
+
+            if (string.IsNullOrEmpty(feedback.Content))
+            {
+                return -1000000904;
+            }
+
+            return DataBaseFactory.feedBackHandlers.CreateFeedBack(feedback);
+        }
     }
 }

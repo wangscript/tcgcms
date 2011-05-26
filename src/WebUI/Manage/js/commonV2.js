@@ -358,8 +358,8 @@ function AjaxPostFormBack(data) {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
                 return;
             }
-            SetAjaxDiv("err", false, data.message);
         }
+        SetAjaxDiv("ok", false, data.message);
     } else {
         SetAjaxDiv("err", false, data.message);
     }
@@ -374,8 +374,8 @@ function AjaxPostFormBack2(data) {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }
                 return;
             }
-            SetAjaxDivAdminMian("err", false, data.message);
         }
+        SetAjaxDivAdminMian("ok", false, data.message);
     } else {
         SetAjaxDivAdminMian("err", false, data.message);
     }
@@ -393,7 +393,7 @@ function refash() {
 }
 
 
-function CategoriePropertieMdyHtml(id, name, type,Values, width, height) {
+function CategoriePropertieMdyHtml(id, name, type, Values, width, height, iOrder) {
 
     var type1Check = type == "01" ? "checked" : "";
     var type2Check = type == "02" ? "checked" : "";
@@ -410,6 +410,8 @@ function CategoriePropertieMdyHtml(id, name, type,Values, width, height) {
         + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">宽&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span>"
 	    + "<input id=\"pwidth_" + id + "\" name=\"pwidth_" + id + "\" type=\"text\" value=\"" + (width == 0 ? "" : width) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 	    + "<span class=\"p_a_t\">高&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span><input id=\"pheight_" + id + "\" name=\"pheight_" + id + "\" type=\"text\" value=\"" + (height == 0 ? "" : height) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+        +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	    + "<span class=\"p_a_t\">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</span><input id=\"porder_" + id + "\" name=\"porder_" + id + "\" type=\"text\" value=\"" + (iOrder == 0 ? "0" : iOrder) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
         + "</div>"
         + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">可选项目：</span>"
 	    + "<input id=\"pttext_" + id + "\" name=\"pttext_" + id + "\" type=\"text\" value=\"" + Values + "\" style=\"width:480px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
