@@ -204,6 +204,16 @@ namespace TCG.Handlers
                     sb.Append("SkinId:'" + speciality.SkinId + "',");
                     sb.Append("vcTitle:'" + speciality.vcTitle + "'");
                     break;
+
+                case "TCG.Entity.Resources":
+                    Resources resources = (Resources)entity;
+                    sb.Append("Id:" + resources.Id + ",");
+                    sb.Append("vcTitle:'" + resources.vcTitle + "',");
+                    sb.Append("vcSmallImg:'" + resources.vcSmallImg + "',");
+                    sb.Append("vcFilePath:'" + resources.vcFilePath + "',");
+                    sb.Append("dAddDate:'" + resources.dAddDate + "'");
+                    break;
+
             }
             sb.Append("}");
             return sb.ToString();

@@ -79,7 +79,10 @@ body{
 	margin-top: 0px;
 }
 .banner .pic {
-	POSITION: relative; DISPLAY: block; HEIGHT: auto
+	POSITION: relative;
+	DISPLAY: block;
+	HEIGHT: auto;
+	width: 1000px;
 }
 .banner .pic LI {
 	POSITION: absolute; TOP: 0px; LEFT: 0px
@@ -97,7 +100,6 @@ body{
 .banner .txt {
 	Z-INDEX: 11;
 	POSITION: absolute;
-	PADDING-LEFT: 1px;
 	WIDTH: 1000px;
 	BOTTOM: 0px;
 	HEIGHT: 78px;
@@ -107,41 +109,36 @@ body{
 	vertical-align: top;
 }
 .banner .txt LI {
+	WIDTH: 250px;
 	FLOAT: left;
 	HEIGHT: 78px;
 	text-align: left;
 	vertical-align: top;
 	list-style-type: none;
-	width: 33%;
 }
 .banner .txt LI A {
 	TEXT-ALIGN: left;
 	PADDING-BOTTOM: 0px;
 	LINE-HEIGHT: 16px;
-	PADDING-LEFT: 2px;
-	PADDING-RIGHT: 2px;
 	DISPLAY: block;
 	HEIGHT: 78px;
 	COLOR: #c8c8c8;
 	FONT-SIZE: 12px;
 	PADDING-TOP: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
 	text-decoration: none;
 	vertical-align: top;
+	margin: 0px;
 }
 .banner .txt LI IMG {
 	DISPLAY: inline;
 	FLOAT: left;
-	MARGIN-RIGHT: 10px;
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
-	margin-top: 15px;
-	margin-left: 15px;
+	margin-top: 0px;
+	height: 78px;
+	width: 250px;
 }
 .banner .txt LI B {
 COLOR: #fff
@@ -151,11 +148,12 @@ COLOR: #fff
 }
 .banner .txt LI.current A {
 	COLOR: #FFFFFF;
+	background-image: url(../images/banner_li_current.jpg);
 	background-repeat: repeat-x;
 	background-position: center top;
 	height: 78px;
 	text-decoration: underline;
-	background-color: transparent;
+	width: 250px;
 }
 /*************************************************************************/
 .MainArea .BannerArea {
@@ -403,7 +401,7 @@ COLOR: #fff
 	text-align: center;
 	vertical-align: top;
 	height: auto;
-	width: 1000px;
+	width: auto;
 }
 .MainArea .MiddleBox .ImgMiddle {
 	margin-top: 0px;
@@ -419,7 +417,7 @@ COLOR: #fff
 
 .MainArea .MiddleBox .ImgMiddle .LeftBox {
 	float: left;
-	margin-left: 15px;
+	margin-left: 10px;
 	margin-top: 35px;
 	width: 221px;
 }
@@ -443,6 +441,8 @@ COLOR: #fff
 	width: 217px;
 	margin-right: auto;
 	margin-left: auto;
+	margin-bottom: 0px;
+	height: 9px;
 }
 .MainArea .MiddleBox .ImgMiddle .LeftBox .MenuBox .MenubgBottom img {
 	text-align: center;
@@ -458,6 +458,7 @@ COLOR: #fff
 	background-position: center top;
 	height: auto;
 	width: 217px;
+	margin-top: 0px;
 }
 .MainArea .MiddleBox .ImgMiddle .LeftBox .MenuBox .MenubgCenter .#List {
 	width: auto;
@@ -575,18 +576,20 @@ COLOR: #fff
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	border-left-width: 0px;
-	padding-left: 10px;
 	padding-top: 8px;
 	color: #999999;
 	font-size: 12px;
+	margin-right: 0px;
+	padding-left: 8px;
 }
 .MainArea .MiddleBox .ImgMiddle .LeftBox .MenuBox .MenubgCenter .SearchBox .Button_ok {
 	float: left;
 	margin-left: 0px;
-	width: 34px;
-	background-image: url(../images/ok_button.jpg);
+	width: 50px;
 	background-repeat: no-repeat;
 	background-position: left center;
+	padding: 0px;
+	height: 27px;
 }
 
 
@@ -627,7 +630,7 @@ COLOR: #fff
 	text-align: left;
 	vertical-align: top;
 	float: right;
-	margin-right: 15px;
+	margin-right: 10px;
 	width: 724px;
 	margin-top: 35px;
 }
@@ -919,7 +922,7 @@ COLOR: #fff
 }
 .MainArea .MiddleBox .ImgMiddle .Newsarea {
 	float: left;
-	margin-left: 12px;
+	margin-left: 10px;
 	text-align: left;
 	margin-top: 30px;
 	margin-bottom: 0px;
@@ -954,6 +957,7 @@ COLOR: #fff
 	margin-top: 30px;
 	margin-bottom: 0px;
 	width: 359px;
+	margin-right: auto;
 }
 .MainArea .MiddleBox .ImgMiddle .NewProduct .Title {
 	margin-bottom: 8px;
@@ -987,7 +991,7 @@ COLOR: #fff
 .MainArea .MiddleBox .ImgMiddle .LoginArea {
 	text-align: right;
 	float: right;
-	margin-right: 12px;
+	margin-right: 10px;
 	margin-top: 30px;
 	margin-bottom: 0px;
 	width: 222px;
@@ -1073,4 +1077,11 @@ COLOR: #fff
 .MainArea .FootBox .MiddleImg .QuickLink a:hover {
 	color: #FFFFFF;
 	text-decoration: underline;
+}
+.job_bk {
+	padding: 2px;
+	border: 1px solid #EEEEEE;
+	background-color: #FFFFFF;
+	margin-top: 0px;
+	margin-bottom: 10px;
 }

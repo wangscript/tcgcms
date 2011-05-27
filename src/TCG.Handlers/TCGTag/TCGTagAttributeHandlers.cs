@@ -376,7 +376,7 @@ namespace TCG.Handlers
 
                 if (ress != null || ress.Count != 0)
                 {
-                    Match mh = Regex.Match(temp, @"<ResourcePropertiesList([^<>]+?)>([\S\s]*?)</ResourcePropertiesList>", RegexOptions.Singleline | RegexOptions.Multiline);
+                    Match mh = Regex.Match(temp, @"<ResourcePropertiesList([^<>]+)?>([\S\s]*?)</ResourcePropertiesList>", RegexOptions.Singleline | RegexOptions.Multiline);
                     string rplist = string.Empty;
                     if (mh.Success)
                     {
@@ -402,15 +402,34 @@ namespace TCG.Handlers
                             }
                             i++;
                         }
-                        temp = Regex.Replace(temp, @"<ResourcePropertiesList([^<>]+?)>([\S\s]*?)</ResourcePropertiesList>", rplist, RegexOptions.Singleline | RegexOptions.Multiline);
+                        temp = Regex.Replace(temp, @"<ResourcePropertiesList([^<>]+)?>([\S\s]*?)</ResourcePropertiesList>", rplist, RegexOptions.Singleline | RegexOptions.Multiline);
                     }
 
-                    foreach (KeyValuePair<string, EntityBase> entity in ress)
+                    MatchCollection mhs = Regex.Matches(temp, @"<RPItem>([\S\s]*?)</RPItem>", RegexOptions.Singleline | RegexOptions.Multiline);
+                    if (mhs.Count > 0)
                     {
-                        ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
-                        temp = temp.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
-                    }
+                        foreach (Match m in mhs)
+                        {
+                            string temp22 = m.Result("$1");
+                            foreach (KeyValuePair<string, EntityBase> entity in ress)
+                            {
+                                ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
+                                if (temp22.IndexOf("$" + resourceProperties.PropertieName + "$") > -1)
+                                {
+                                    temp22 = temp22.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
+                                }
+                            }
 
+                            if (temp22 == m.Result("$1"))
+                            {
+                                temp = temp.Replace(@"<RPItem>" + m.Result("$1") + "</RPItem>", @"");
+                            }
+                            else
+                            {
+                                temp = temp.Replace( @"<RPItem>" + m.Result("$1") + "</RPItem>", temp22);
+                            }
+                        }
+                    }
                 }
                
             }
