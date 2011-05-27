@@ -1,0 +1,116 @@
+﻿/* 
+  * Copyright (C) 2009-2009 tcgcms.com <http://www.tcgcms.cn/> 
+  *  
+  *    本代码以公共的方式开发下载，任何个人和组织可以下载， 
+  * 修改，进行第二次开发使用，但请保留作者版权信息。 
+  *  
+  *    任何个人或组织在使用本软件过程中造成的直接或间接损失， 
+  * 需要自行承担后果与本软件开发者(三云鬼)无关。 
+  *  
+  *    本软件解决中小型商家产品网络化销售方案。 
+  *     
+  *    使用中的问题，咨询作者QQ邮箱 sanyungui@vip.qq.com 
+  */
+
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+
+using TCG.Utils;
+using TCG.Entity;
+
+public partial class Interface_aspx_resources : BasePage
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        if (!Page.IsPostBack)
+        {
+            string work = objectHandlers.Get("w");
+            switch (work)
+            {
+                case "getresourcelist":
+                    this.GetResourceList();
+                    break;
+                case "getresourceproperties":
+                    this.GetResourceProperties();
+                    break;
+            }
+        }
+    }
+
+    private void GetResourceProperties()
+    {
+        string rid = objectHandlers.Get("nid");
+        Response.ContentType = "application/x-javascript";
+        string cg = base.handlerService.GetJsEntitys(base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(rid), typeof(ResourceProperties));
+        Response.Write(cg);
+        Response.End();
+    }
+
+    private void GetResourceList()
+    {
+        int page = objectHandlers.ToInt(objectHandlers.Get("page"));
+        int pageSize = objectHandlers.ToInt(objectHandlers.Get("PageSize"));
+
+        string iClassId = objectHandlers.Get("iClassId");
+        if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
+
+        string skinId = objectHandlers.Get("SkinId");
+        if (string.IsNullOrEmpty(skinId))
+        {
+            skinId = ConfigServiceEx.DefaultSkinId;
+        }
+
+        string allchild = string.Empty;
+
+        if (iClassId == "0")
+        {
+            allchild = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesIndexBySkinId(skinId);
+        }
+        else
+        {
+            allchild = base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(iClassId);
+        }
+
+        string strCondition = "iClassID in (" + allchild + ")";
+
+        string check = objectHandlers.Get("check");
+        if (!string.IsNullOrEmpty(check))
+        {
+            strCondition += " AND cChecked ='" + check + "'";
+        }
+
+        string create = objectHandlers.Get("create");
+        if (!string.IsNullOrEmpty(create))
+        {
+            strCondition += " AND cCreated ='" + create + "'";
+        }
+
+        strCondition += " AND cDel ='N'";
+
+        int curPage = 0;
+        int pageCount = 0;
+        int count = 0;
+
+
+        Dictionary<string, EntityBase> res = null;
+        try
+        {
+            res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
+                   page, pageSize, "iId DESC", strCondition);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        Response.ContentType = "application/x-javascript";
+        string cg = base.handlerService.GetJsEntitys(res, typeof(Resources));
+        Response.Write(cg);
+        Response.End();
+    }
+}
