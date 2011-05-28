@@ -1085,3 +1085,37 @@ COLOR: #fff
 	margin-top: 0px;
 	margin-bottom: 10px;
 }
+
+.p_title
+{
+	 width:100px;
+	 text-align:right;
+	 float:left;
+}
+
+.PageBox a,.leftImg a 
+{
+	text-decoration:none;
+	margin-left:5px;
+	color:Black;
+}
+
+.RightText
+{
+	text-align:left;
+}
+.leftImg
+{
+	width:270px;
+}
+
+.leftImg a,leftImg img 
+{
+	float:left;
+}
+
+.leftImg a
+{
+	width:270px;
+	text-align:center;
+}
