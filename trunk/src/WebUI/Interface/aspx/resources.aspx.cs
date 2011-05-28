@@ -55,7 +55,12 @@ public partial class Interface_aspx_resources : BasePage
     {
         int page = objectHandlers.ToInt(objectHandlers.Get("page"));
         int pageSize = objectHandlers.ToInt(objectHandlers.Get("PageSize"));
+        
 
+        if (pageSize == 0)
+        {
+            pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
+        }
         string iClassId = objectHandlers.Get("iClassId");
         if (string.IsNullOrEmpty(iClassId)) iClassId = "0";
 
@@ -90,6 +95,12 @@ public partial class Interface_aspx_resources : BasePage
             strCondition += " AND cCreated ='" + create + "'";
         }
 
+        string keywords = objectHandlers.Get("keywords");
+        if (!string.IsNullOrEmpty(keywords))
+        {
+            strCondition += " AND vcTitle like '%" + keywords + "%'";
+        }
+
         strCondition += " AND cDel ='N'";
 
         int curPage = 0;
@@ -111,6 +122,11 @@ public partial class Interface_aspx_resources : BasePage
         Response.ContentType = "application/x-javascript";
         string cg = base.handlerService.GetJsEntitys(res, typeof(Resources));
         Response.Write(cg);
+        Response.Write("var curPage=" + curPage.ToString() + ";");
+        Response.Write("var pageCount=" + pageCount.ToString() + ";");
+        Response.Write("var count=" + count.ToString() + ";");
+        Response.Write("var pageSize=" + pageSize.ToString() + ";");
+        Response.Write("var bkeywords='" + keywords + "';");
         Response.End();
     }
 }
