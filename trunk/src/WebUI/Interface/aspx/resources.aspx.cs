@@ -38,6 +38,9 @@ public partial class Interface_aspx_resources : BasePage
                 case "getresourceproperties":
                     this.GetResourceProperties();
                     break;
+                case "getresourcecount":
+                    this.GetResourceCount();
+                    break;
             }
         }
     }
@@ -127,6 +130,26 @@ public partial class Interface_aspx_resources : BasePage
         Response.Write("var count=" + count.ToString() + ";");
         Response.Write("var pageSize=" + pageSize.ToString() + ";");
         Response.Write("var bkeywords='" + keywords + "';");
+        Response.End();
+    }
+
+    private void GetResourceCount()
+    {
+        int rid = objectHandlers.ToInt(objectHandlers.Get("rid"));
+        int count = 0;
+        if (rid > 0)
+        {
+            Resources res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(rid);
+            if (res != null)
+            {
+                count = res.iCount + 1;
+                res.iCount = count;
+                base.handlerService.resourcsService.resourcesHandlers.UpdateResources(res);
+            }
+        }
+
+        Response.ContentType = "application/x-javascript";
+        Response.Write("document.write(" + count + ");");
         Response.End();
     }
 }
