@@ -26,9 +26,6 @@
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
 			<img src="../images/icon/5.gif" />取消
 		</a>
-        <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CategoriePropertieHTMLAdd();">
-			<img src="../images/add.png" />加属性
-		</a>
         <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
 			<img src="../images/icon/07.gif" />刷新
 		</a>

@@ -2056,5 +2056,15 @@ namespace TCG.Utils
             return result;
         }
 
+        public static string GetDataTimeSqlStr(string datetims)
+        {
+            if (ConfigServiceEx.baseConfig["dbtype"] == "AccEss")
+            {
+                return "#" + datetims + "#";
+            }
+
+            return "'" + datetims + "'";
+        }
+
     };
 }
