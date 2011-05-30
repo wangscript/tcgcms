@@ -92,17 +92,3 @@ $(document).ready(function () {
 
         });
 });
-
-
-        
-
-//<div class="OneProduct">
-//		  <div class="leftImg"><img src="$item2_vcSmallImg$" alt="" width="227" height="154" /></div>
-//		  <div class="RightText"><span class="BlueText">药品名称：</span> $item2_vcTitle$<br /> 
-//				<ResourcePropertiesList num="5" hide="社保类">
-//					<span class="BlueText">$PropertieName$：</span>$PropertieValue$<br />
-//				</ResourcePropertiesList>
-//                                <RPItem><span class="BlueText">&nbsp;&nbsp;</span><font color="red">☆</font>$社保类$<font color="red">☆</font><br /></RPItem>
-//				<a href="$item2_vcFilePath$"><img border="0" src="_$SkinPath$_/images/pic_more.jpg" alt="了解更多" /></a></div>
-//        <div><img src="images/bk_product.jpg" alt="" /></div>
-//		</div>

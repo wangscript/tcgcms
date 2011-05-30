@@ -17,7 +17,6 @@
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
     <script type="text/javascript" src="../js/newscommon.js"></script>
-	<script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
     <script type="text/javascript" src="../js/enmu.js"></script>
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
@@ -51,14 +50,13 @@
 	<div class="Page_arrb ">
 		<span class="p_a_t1 lfl">资讯类别：</span>
 		<span class="p_a_t1 lfl">
-		    <div class="cagegoriesSelect" style=" margin-top:8px;">
+		    <div class="cagegoriesSelect" style=" margin-top:10px;">
 		        <input id="iClassName" name="iClassName" type="text"  class="itxt1" onblur="CheckValueIsNull('iClassName','classmsg');" />
 		        <a id="SelectDivW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
-    		
+		
 		        <div id="gamelist_c" class="enmu addselect">
                     <div  class="c_box" id="gamelist">
-		                <ul id="Cagetorie_c" class="one">	
-			            </ul>
+		                <ul id="Cagetorie_c" class="one"></ul>
                     </div>
                 </div>
 		    </div>

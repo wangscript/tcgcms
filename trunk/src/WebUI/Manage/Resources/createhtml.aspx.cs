@@ -55,62 +55,63 @@ public partial class news_createhtml : BasePage
 
     private void CreateSingeTemplate()
     {
-        //string iTemplate = objectHandlers.Post("tClassId");
-        //string text = string.Empty;
-        //int rtn = 0;
-        //try
-        //{
-        //    rtn = base.handlerService.skinService.templateHandlers.CreateSingeTemplateToHtml(iTemplate, base.tagService.TCGTagHandlers, ref text);
-        //}
-        //catch (Exception ex)
-        //{
-        //    base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
-        //    return;
-        //}
+        string iTemplate = objectHandlers.Post("tClassId");
+        string text = string.Empty;
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref text);
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
+            return;
+        }
 
-        //base.AjaxErch(rtn, text, "CreateBack2");
+        base.AjaxErch(rtn, text, "CreateBack2");
     }
 
     private void CreateClassList()
     {
-        //string tClassID = objectHandlers.Post("tClassId");
-        //string text = string.Empty;
-        //int rtn = 0;
-        //try
-        //{
-        //    rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesListHtml(tClassID, base.tagService.TCGTagHandlers, ref text);
-        //}
-        //catch (Exception ex)
-        //{
-        //    base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
-        //    return;
-        //}
+        string tClassID = objectHandlers.Post("tClassId");
+        string text = string.Empty;
+        int rtn = 0;
+        int pagecount = 0;
+        try
+        {
+            rtn = base.handlerService.tagService.CreateClassList(tClassID,0,ref pagecount, ref text);
+        }
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
+            return;
+        }
 
-        //base.AjaxErch(rtn, text, "CreateBack1");
+        base.AjaxErch(rtn, text, "CreateBack1");
     }
 
     private void Create()
     {
-        //string ClassId = objectHandlers.Post("tClassId");
-        //int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
-        //string filepath = objectHandlers.Post("iFilePath");
-        //string Created = objectHandlers.Post("tCreated");
+        string ClassId = objectHandlers.Post("tClassId");
+        int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
+        string filepath = objectHandlers.Post("iFilePath");
+        string Created = objectHandlers.Post("tCreated");
 
-        //Resources item = new Resources();
-        //string text1 = "";
+        Resources item = new Resources();
+        string text1 = "";
 
-        //int rtn = 0;
-        //try
-        //{
-        //   rtn =  base.handlerService.resourcsService.resourcesHandlers.CreateResourcHtmlById(ref text1, id,base.tagService.TCGTagHandlers);
-        //   text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
-        //}
-        //catch (Exception ex)
-        //{
-        //    text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
-        //}
+        int rtn = 0;
+        try
+        {
+            rtn = base.handlerService.tagService.CreateResourcHtmlById(ref text1, id);
+            text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
+        }
+        catch (Exception ex)
+        {
+            text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
+        }
 
-        //base.AjaxErch(rtn, text1, "CreateBack");
+        base.AjaxErch(1, text1, "CreateBack");
     }
 
     private void Search()
@@ -142,11 +143,11 @@ public partial class news_createhtml : BasePage
                 int iTimeType = objectHandlers.ToInt(objectHandlers.Post("iTimeFeild"));
                 if (iTimeType == 1)
                 {
-                    strCondition += " AND (dAddDate BETWEEN '" + dStartTime.ToString() + "' AND '" + dEndTime.ToString() + "')";
+                    strCondition += " AND (dAddDate BETWEEN " +objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
                 }
                 else
                 {
-                    strCondition += " AND (dUpdateDate BETWEEN '" + dStartTime.ToString() + "' AND '" + dEndTime.ToString() + "')";
+                    strCondition += " AND (dUpdateDate BETWEEN " + objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
                 }
             }
             else if (iStypeCheck == 2)
