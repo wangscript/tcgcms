@@ -128,6 +128,7 @@ function ClassInit() {
     var iClassName = $("#iClassName");
     var iClassId = $("#iClassId");
     var SelectDivW = $("#SelectDivW");
+    
 
     var o = GetCategorieById(iClassId.val());
     if (o == null) {
@@ -168,6 +169,16 @@ $(document).ready(function () {
         function (data, textStatus) {
             data = data.substring(4, data.length);
             eval(data);
+
+            var iSpeciality = $("#iSpeciality");
+            var iSpeciality_t = $("#iSpeciality_t");
+
+            var p = GetSpecialityById(iSpeciality.val());
+            if (p == null) {
+                iSpeciality_t.val("请选择资讯特性...");
+            } else {
+                iSpeciality_t.val(p.vcTitle);
+            }
 
             GetSpecialityEnmu($("#iSpeciality_cc"), $("#iSkinId").val(), "0");
 

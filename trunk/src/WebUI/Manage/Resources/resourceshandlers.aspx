@@ -89,7 +89,7 @@
 		    <span class="p_a_t1 lfl">ÌØÐÂÑ¡Ôñ£º </span>
 		    <span class="p_a_t1 lfl">
 		    <div class="cagegoriesSelect">
-		        <input id="iSpeciality_t" name="iSpeciality" type="text"  class="itxt1" />
+		        <input id="iSpeciality_t" name="iSpeciality_t" type="text"  class="itxt1" />
 		        <a id="SelectDivWW" href="javascript:GoTo();" class="selectDiv sl_bg1"></a>
 		
 		        <div id="iSpeciality_1" class="enmu addselect">

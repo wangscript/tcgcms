@@ -60,6 +60,16 @@ function GetCategorieById(Id) {
     for (var i = 0; i < _Categories.length; i++) {
         if (_Categories[i].Id == Id) return _Categories[i];
     }
+    return null;
+}
+
+function GetSpecialityById(id) {
+    debugger;
+    if (_Speciality == null) return null;
+    for (var i = 0; i < _Speciality.length; i++) {
+        if (_Speciality[i].Id == id) return _Speciality[i];
+    }
+    return null;
 }
 
 
