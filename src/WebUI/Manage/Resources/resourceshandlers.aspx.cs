@@ -133,7 +133,7 @@ public partial class resources_resourceshandlers : BasePage
             item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(categorieid);
         }
 
-        item.vcSpeciality = objectHandlers.Post("iiSpeciality");
+        item.vcSpeciality = objectHandlers.Post("iSpeciality");
         item.vcBigImg = objectHandlers.Post("iBigImg");
         item.vcSmallImg = objectHandlers.Post("iSmallImg");
         item.vcTitleColor = objectHandlers.Post("sTitleColor");
