@@ -17,15 +17,15 @@ function getQueryStr(str) {
 var page = parseInt(getQueryStr("page"));
 $(document).ready(function () {
     page = parseInt(getQueryStr("page"));
-    if (!page) page = 0;
+    if (!page) page = 1;
 
-    $.get("/interface/aspx/resources.aspx?w=getresourcelist&iClassId=839985c8-fe76-4347-ab34-86b0db07c4fc&keywords=" + getQueryStr("keywords") + "&skinid=ZhongShengpharmacyCN&temp=" + new Date().toString(),
+    $.get("/interface/aspx/resources.aspx?w=getresourcelist&iClassId=839985c8-fe76-4347-ab34-86b0db07c4fc&page=" + page + "&keywords=" + getQueryStr("keywords") + "&skinid=ZhongShengpharmacyCN&PageSize=4&temp=" + new Date().toString(),
         { Action: "get" },
         function (data, textStatus) {
             eval(data);
 
             if (bkeywords) {
-                $("#title1").html("关键字:"+ bkeywords);
+                $("#title1").html("关键字:" + bkeywords);
                 $("#title2").html("首页 > 产品中心 > 关键字:" + bkeywords);
             } else {
                 $("#title1").html("最新产品");
@@ -37,8 +37,8 @@ $(document).ready(function () {
                 for (var i = 0; i < _Resources.length; i++) {
                     var p = _Resources[i];
                     var txt = "<div class=\"OneProduct\">"
-		                + "<div class=\"leftImg\"><img src=\"" + p.vcSmallImg + "\" alt=\"\" width=\"227\" height=\"154\" />"
-                        + "<a href=\"" + p.vcSmallImg + "\">(点击查看放大图)</a></div>"
+		                + "<div class=\"leftImg\"><a href=\"" + p.vcFilePath + "\"><img src=\"" + p.vcSmallImg + "\" alt=\"\" width=\"227\" height=\"154\" /></a>"
+                        + "</div>"
 		                + "<div class=\"RightText\"><span class=\"BlueText p_title\">药品名称：</span> " + p.vcTitle + "<br /> "
                         + "<div id=\"p_" + p.Id + "\"></div>"
                         + "<span class=\"BlueText p_title\">&nbsp;</span><a href=\"" + p.vcFilePath + "\"><img border=\"0\" src=\"/skin/ZhongShengpharmacyCN/images/pic_more.jpg\" alt=\"了解更多\" /></a></div>"
@@ -53,10 +53,11 @@ $(document).ready(function () {
                             if (_ResourceProperties != null && _ResourceProperties.length > 0) {
                                 for (var n = 0; n < _ResourceProperties.length; n++) {
                                     var o = _ResourceProperties[n];
-                                    if (n < 5 && o.PropertieName != "社保类") {
-                                        txt1 += "<span class=\"p_title BlueText\">" + o.PropertieName + "：</span>" + o.PropertieValue + "<br />";
-                                    } else if (o.PropertieName == "社保类") {
-                                        txt1 += "<span class=\"p_title BlueText\">&nbsp;&nbsp;</span><font color=\"red\">☆</font>" + o.PropertieValue + "<font color=\"red\">☆</font><br />"
+                                    var otxt = o.PropertieValue.length > 100 ? o.PropertieValue.substring(0, 100) : o.PropertieValue;
+                                    if (n < 5 && o.PropertieName != "社　保　类") {
+                                        txt1 += "<span class=\"p_title BlueText\">" + o.PropertieName + "：</span>" + otxt + "<br />";
+                                    } else if (o.PropertieName == "社　保　类") {
+                                        txt1 += "<span class=\"p_title BlueText\">&nbsp;&nbsp;</span><font color=\"red\">☆</font>" + otxt + "<font color=\"red\">☆</font><br />"
                                     }
                                 }
                             }

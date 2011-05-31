@@ -115,7 +115,7 @@ public partial class Interface_aspx_resources : BasePage
         try
         {
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                   page, pageSize, "iId DESC", strCondition);
+                   page, pageSize, "Id DESC", strCondition);
         }
         catch (Exception ex)
         {

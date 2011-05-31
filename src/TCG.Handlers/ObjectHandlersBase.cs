@@ -192,7 +192,7 @@ namespace TCG.Handlers
                     sb.Append("Id:" + rategorieProperties.Id + ",");
                     sb.Append("ResourceId:\"" + rategorieProperties.ResourceId + "\",");
                     sb.Append("PropertieName:\"" + rategorieProperties.PropertieName + "\",");
-                    sb.Append("PropertieValue:\"" + rategorieProperties.PropertieValue + "\",");
+                    sb.Append("PropertieValue:\"" + objectHandlers.JSEncode( rategorieProperties.PropertieValue) + "\",");
                     sb.Append("PropertieId:" + rategorieProperties.PropertieId + ",");
                     sb.Append("iOrder:" + rategorieProperties.iOrder + "");
                     break;

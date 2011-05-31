@@ -64,7 +64,6 @@ function GetCategorieById(Id) {
 }
 
 function GetSpecialityById(id) {
-    debugger;
     if (_Speciality == null) return null;
     for (var i = 0; i < _Speciality.length; i++) {
         if (_Speciality[i].Id == id) return _Speciality[i];

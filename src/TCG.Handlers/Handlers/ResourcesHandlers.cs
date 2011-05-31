@@ -27,8 +27,6 @@ namespace TCG.Handlers
         public int CreateResources(Resources inf)
         {
 
-            inf.dAddDate = DateTime.Now;
-
             //资讯标题不能为空
             if (string.IsNullOrEmpty(inf.vcTitle))
             {
@@ -243,7 +241,7 @@ namespace TCG.Handlers
         public string GetTagResourceCondition(string categories, string Speciality, bool check, bool del, bool create, bool havechilecategorie)
         {
             StringBuilder sqlsb = new StringBuilder();
-            sqlsb.Append("iID>0 ");
+            sqlsb.Append("ID>0 ");
             if (check) { sqlsb.Append(" AND cChecked='Y' "); } else { sqlsb.Append(" AND cChecked='N'"); }
 
             if (del) { sqlsb.Append(" AND cDel='Y' "); } else { sqlsb.Append(" AND cDel='N' "); }

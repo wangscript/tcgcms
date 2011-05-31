@@ -22,12 +22,12 @@ namespace TCG.Handlers.Imp.AccEss
         public int CreateResources(Resources inf)
         {
 
-            AccessFactory.conn.Execute("INSERT INTO resources (iid,iClassID,vcTitle,vcUrl,vcContent,vcAuthor,iCount,vcKeyWord,"
+            AccessFactory.conn.Execute("INSERT INTO resources (id,iClassID,vcTitle,vcUrl,vcContent,vcAuthor,iCount,vcKeyWord,"
         + "vcEditor,cCreated,vcSmallImg,vcBigImg,vcShortContent,vcSpeciality,cChecked,cDel,cPostByUser,"
         + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl,PropertiesCategorieId) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
         + inf.vcUrl + "','" + inf.vcContent.Replace("'", "''") + "','" + inf.vcAuthor + "','" + inf.iCount + "','" + inf.vcKeyWord + "','" + inf.vcEditor + "','" + inf.cCreated + "','"
         + inf.vcSmallImg + "','" + inf.vcBigImg + "','" + inf.vcShortContent.Replace("'", "''") + "','" + inf.vcSpeciality + "','" + inf.cChecked + "','"
-        + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + DateTime.Now.ToString() + "','" + DateTime.Now.ToString() + "','"
+        + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + inf.dAddDate + "','" + DateTime.Now.ToString() + "','"
         + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "','" + inf.PropertiesCategorieId + "')");
             return 1;
 
@@ -35,7 +35,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         public int GetMaxResourceId()
         {
-            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT max(iid) FROM resources"));
+            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT max(id) FROM resources"));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace TCG.Handlers.Imp.AccEss
                 + inf.vcShortContent.Replace("'", "''") + "',vcSpeciality='" + inf.vcSpeciality + "',cChecked='" + inf.cChecked + "',cDel='"
                 + inf.cDel + "',cPostByUser='" + inf.cPostByUser + "',vcFilePath='" + inf.vcFilePath
                 + "',dUpDateDate=now(),vcTitleColor = '" + inf.vcTitleColor + "',cStrong = '"
-                + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "' WHERE iId = " + inf.Id;
+                + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "' WHERE Id = " + inf.Id;
             AccessFactory.conn.Execute(sql);
 
             return 1;
@@ -67,7 +67,7 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetResourcesById(int resourceid)
         {
 
-            DataTable dt = AccessFactory.conn.DataTable("SELECT * FROM Resources WHERE iID = " + resourceid.ToString().Trim() + "");
+            DataTable dt = AccessFactory.conn.DataTable("SELECT * FROM Resources WHERE ID = " + resourceid.ToString().Trim() + "");
             if (dt == null) return null;
             if (dt.Rows.Count == 0) return null;
 
@@ -78,9 +78,9 @@ namespace TCG.Handlers.Imp.AccEss
 
         public DataTable GetDelNewsInfoList(string ids)
         {
-            AccessFactory.conn.Execute("UPDATE resources SET cDel = 'Y',cCreated = 'N' WHERE iId IN (" + ids + ")");
+            AccessFactory.conn.Execute("UPDATE resources SET cDel = 'Y',cCreated = 'N' WHERE Id IN (" + ids + ")");
 
-            DataSet ds = AccessFactory.conn.DataSet("SELECT * FROM resources WHERE iId IN (" + ids + ")");
+            DataSet ds = AccessFactory.conn.DataSet("SELECT * FROM resources WHERE Id IN (" + ids + ")");
 
             if (ds != null && ds.Tables.Count == 1)
             {
@@ -128,7 +128,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetResourcesListPager(ref int curPage, ref int pageCount, ref int count, int page, int pagesize, string order, string strCondition)
         {
-           return AccessFactory.conn.ExecutePager(curPage, pagesize, " * ", "Resources", strCondition, order, out pageCount, out count);
+            curPage = page;
+            return AccessFactory.conn.ExecutePager(page, pagesize, " * ", "Resources", strCondition, order, out pageCount, out count);
         }
 
         /// <summary>
@@ -148,12 +149,12 @@ namespace TCG.Handlers.Imp.AccEss
 
             if (action == "SAVE")
             {
-                AccessFactory.conn.Execute("UPDATE resources SET cDel = ''N'' WHERE iId IN (" + ids + ")");
+                AccessFactory.conn.Execute("UPDATE resources SET cDel = ''N'' WHERE Id IN (" + ids + ")");
             }
 
             if (action == "DEL")
             {
-                AccessFactory.conn.Execute("DELETE FROM resources WHERE iId IN (" + ids + ")");
+                AccessFactory.conn.Execute("DELETE FROM resources WHERE Id IN (" + ids + ")");
             }
 
             return 1;
