@@ -142,7 +142,7 @@ namespace TCG.Entity
         private string _cChecked = string.Empty;
         private string _cDel = "N";
         private string _vcFilePath = string.Empty;
-        private DateTime _dadddate;
+        private DateTime _dadddate = DateTime.Now;
         private DateTime _dupdatedate;
         private string _vctitlecolor;
         private string _cstrong;

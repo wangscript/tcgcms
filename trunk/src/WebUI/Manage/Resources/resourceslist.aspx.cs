@@ -114,7 +114,7 @@ public partial class resources_resourceslist : BasePage
         try
         {
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                   page, pageSize, "iId DESC", strCondition);
+                   page, pageSize, "Id DESC", strCondition);
         }
         catch (Exception ex)
         {
@@ -127,6 +127,7 @@ public partial class resources_resourceslist : BasePage
         this.pager.SetItem("check", check);
         this.pager.SetItem("create", create);
         this.pager.SetItem("Speciality", Speciality);
+        this.pager.SetItem("skinid", skinId);
         this.pager.Total = count;
         this.pager.Calculate();
 

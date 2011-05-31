@@ -139,7 +139,7 @@ namespace TCG.Handlers
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();
-                    resources.Id = row["iId"].ToString();
+                    resources.Id = row["Id"].ToString();
                     resources.vcTitle = row["vcTitle"].ToString();
                     resources.Categorie = categoriesHandlers.GetCategoriesById(row["iClassID"].ToString());
                     resources.vcUrl = (string)row["vcUrl"].ToString();

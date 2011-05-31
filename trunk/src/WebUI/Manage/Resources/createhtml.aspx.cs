@@ -164,7 +164,7 @@ public partial class news_createhtml : BasePage
             }
 
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                page, objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]), "iId DESC", strCondition);
+                page, objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]), "Id DESC", strCondition);
   
         }
         catch (Exception ex)

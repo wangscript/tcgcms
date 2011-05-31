@@ -398,9 +398,11 @@ namespace TCG.Handlers
                             //在制定行数是内，并且不在排除字段中
                             if (i <= num - 1 && hide.IndexOf(resourceProperties.PropertieName) == -1)
                             {
+                                int maxtlength = objectHandlers.ToInt(this.GetAttribute(attrs, "maxlength"));
+                                string temp33 = maxtlength == 0 ? resourceProperties.PropertieValue : objectHandlers.Left(resourceProperties.PropertieValue, maxtlength);
                                 string temp2 = temp1;
                                 temp2 = temp2.Replace("$PropertieName$", resourceProperties.PropertieName);
-                                temp2 = temp2.Replace("$PropertieValue$", resourceProperties.PropertieValue);
+                                temp2 = temp2.Replace("$PropertieValue$", temp33);
                                 rplist += temp2;
                             }
                             i++;
@@ -502,11 +504,19 @@ namespace TCG.Handlers
             string strCondition = base.handlerService.resourcsService.resourcesHandlers.GetTagResourceCondition(categories, Speciality, check, del, create, havechilecategorie);
             Dictionary<string, EntityBase> res = null;
 
-            string order = pagerinfo.PageSep == 0 ? "iId DESC" : "iId";
+            if (ConfigServiceEx.baseConfig["IndexListType"] == "01")
+            {
+                orders = pagerinfo.Page == 0 ? "dAddDate DESC" : "dAddDate";
+            }
+            else
+            {
+                if (pagerinfo.Page == 0) pagerinfo.Page = 1;
+            }
+
             try
             {
                 res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                       pagerinfo.Page, nums, order, strCondition);
+                       pagerinfo.Page, nums, orders, strCondition);
             }
             catch (Exception ex)
             {

@@ -299,6 +299,7 @@ namespace TCG.Handlers
                 pagerhtml = pagerhtml.Replace("$pagecount$", this._pagerinfo.PageCount.ToString());
                 pagerhtml = pagerhtml.Replace("$topiccount$", this._pagerinfo.TopicCount.ToString());
                 pagerhtml = pagerhtml.Replace("$page$", this._pagerinfo.Page.ToString());
+                pagerhtml = pagerhtml.Replace("$curpage$", this._pagerinfo.Page.ToString());
 
                 Match mh1 = Regex.Match(pagerhtml, @"(<select\s[^<>]+>)(.+?)(</select>)", RegexOptions.Singleline | RegexOptions.Multiline);
                 if (mh1.Success)
@@ -424,20 +425,13 @@ namespace TCG.Handlers
         /// <returns></returns>
         private string GetPevHtml(string pageurl, string pevhtml, int curpage)
         {
-            if (curpage == 1)
+            if (curpage > 1)
             {
-                return "";
+                return string.Format(pevhtml, string.Format(pageurl, curpage - 1));
             }
             else
             {
-                if (curpage == 2)
-                {
-                    return string.Format(pevhtml, string.Format(pageurl, ""));
-                }
-                else
-                {
-                    return string.Format(pevhtml, string.Format(pageurl, curpage - 1));
-                }
+                return string.Format(pevhtml, string.Format(pageurl, 1));
             }
         }
 
