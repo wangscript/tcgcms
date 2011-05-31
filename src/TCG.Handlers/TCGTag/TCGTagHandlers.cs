@@ -446,7 +446,7 @@ namespace TCG.Handlers
         {
             if (curpage == pagecount)
             {
-                return "";
+                return string.Format(nexthtml, string.Format(pageurl, pagecount));
             }
             else
             {
