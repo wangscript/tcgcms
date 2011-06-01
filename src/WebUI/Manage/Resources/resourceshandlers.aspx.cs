@@ -206,6 +206,10 @@ public partial class resources_resourceshandlers : BasePage
             {
                 rtn = base.handlerService.tagService.CreateResourcHtmlById(ref errText, objectHandlers.ToInt(item.Id));
             }
+
+            //更新列表分页第一页
+            int pagecount = 0;
+            rtn = base.handlerService.tagService.CreateClassList(item.Categorie.Id, 0, ref pagecount, ref errText);
         }
         catch (Exception ex)
         {

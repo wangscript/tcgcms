@@ -101,6 +101,7 @@ body{
 	PADDING-LEFT: 1px;
 	WIDTH: 1000px;
 	BOTTOM: 0px;
+	bottom:-15px;
 	HEIGHT: 78px;
 	LEFT: 0px;
 	text-align: left;
@@ -143,6 +144,7 @@ body{
 	border-left-width: 0px;
 	margin-top: 15px;
 	margin-left: 15px;
+	width:102px; height:48px;
 }
 .banner .txt LI B {
 COLOR: #fff
@@ -566,13 +568,14 @@ COLOR: #fff
 	height: 18px;
 }
 .MainArea .MiddleBox .ImgMiddle .LeftBox .MenuBox .MenubgCenter .SearchBox .TextArea {
+	float: left;
+	height: 19px;
+	width: 151px;
 	background-image: url(../images/search_bg.jpg);
 	background-repeat: no-repeat;
 	background-position: left top;
-	height: 19px;
-	width: 151px;
-	float: left;
 	margin-left: 0px;
+	margin-right:0px;
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;
@@ -586,6 +589,7 @@ COLOR: #fff
 	float: left;
 	margin-left: 0px;
 	width: 34px;
+	border:0;
 	background-image: url(../images/ok_button.jpg);
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -728,7 +732,13 @@ COLOR: #fff
 }
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .CheckBox .FormArea {
 	padding: 10px;
-	line-height: 30px;
+	line-height: 22px; margin-top:10px; table-layout:fixed;
+}
+.MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .CheckBox .FormArea th{
+	text-align:center;
+}
+.MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .CheckBox .FormArea caption{
+	text-align:center; font-size:14px; font-weight:bold; background-color:#C6E4EE;
 }
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .CheckBox .FormArea input {
 	height: 18px;
@@ -736,7 +746,7 @@ COLOR: #fff
 	border: 1px solid #ccd6db;
 }
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .CheckBox #form1 .FormArea .textarea_t3 {
-	width: 500px;
+	width: 300px;
 	margin-top: 8px;
 	border: 1px solid #CCD6DB;
 }
@@ -891,8 +901,8 @@ COLOR: #fff
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .OneProduct .RightText {
 	float: left;
 	line-height: 190%;
-	width: 426px;
-	margin-left: 8px;
+	width: 321px;
+	margin-left: 105px;
 }
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox .OneProduct .RightText .BlueText {
 	color: #1b7cda;
@@ -1096,6 +1106,8 @@ COLOR: #fff
 	 width:100px;
 	 text-align:right;
 	 float:left;
+	Margin-Left: -110px;
+	position:relative;
 }
 
 .PageBox a,.leftImg a 

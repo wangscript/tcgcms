@@ -54,11 +54,12 @@ $(document).ready(function () {
                                 for (var n = 0; n < _ResourceProperties.length; n++) {
                                     var o = _ResourceProperties[n];
                                     var otxt = o.PropertieValue.length > 100 ? o.PropertieValue.substring(0, 100) : o.PropertieValue;
-                                    if (n < 5 && o.PropertieName != "社　保　类") {
+                                    if (n < 5 && o.PropertieName != "社　保　类"&&"公　　司".indexOf(o.PropertieName) == -1) {
                                         txt1 += "<span class=\"p_title BlueText\">" + o.PropertieName + "：</span>" + otxt + "<br />";
                                     } else if (o.PropertieName == "社　保　类") {
                                         txt1 += "<span class=\"p_title BlueText\">&nbsp;&nbsp;</span><font color=\"red\">☆</font>" + otxt + "<font color=\"red\">☆</font><br />"
                                     }
+                                    
                                 }
                             }
 

@@ -349,7 +349,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + item.dAddDate.ToString("yyyyƒÍMM‘¬dd»’") + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcClassPic$", "<TCG>" + ConfigServiceEx.baseConfig["WebSite"] + "/skin/"
+            temp = temp.Replace("$" + this._tagtype + "_vcClassPic$", "<TCG>" + "/skin/"
                 + pagerinfo.SkinInfo.Filename + item.Categorie.vcPic + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcAuthor$", "<TCG>" + item.vcAuthor + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + objectHandlers.GetTextWithoutHtml(item.vcShortContent) + "</TCG>");
@@ -400,6 +400,7 @@ namespace TCG.Handlers
                             {
                                 int maxtlength = objectHandlers.ToInt(this.GetAttribute(attrs, "maxlength"));
                                 string temp33 = maxtlength == 0 ? resourceProperties.PropertieValue : objectHandlers.Left(resourceProperties.PropertieValue, maxtlength);
+                                temp33 = objectHandlers.HtmlEncode(temp33);
                                 string temp2 = temp1;
                                 temp2 = temp2.Replace("$PropertieName$", resourceProperties.PropertieName);
                                 temp2 = temp2.Replace("$PropertieValue$", temp33);
@@ -421,7 +422,7 @@ namespace TCG.Handlers
                                 ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
                                 if (temp22.IndexOf("$" + resourceProperties.PropertieName + "$") > -1)
                                 {
-                                    temp22 = temp22.Replace("$" + resourceProperties.PropertieName + "$", resourceProperties.PropertieValue);
+                                    temp22 = temp22.Replace("$" + resourceProperties.PropertieName + "$", objectHandlers.HtmlEncode(resourceProperties.PropertieValue));
                                 }
                             }
 
