@@ -86,17 +86,6 @@ public partial class Interface_aspx_resources : BasePage
 
         string strCondition = "iClassID in (" + allchild + ")";
 
-        string check = objectHandlers.Get("check");
-        if (!string.IsNullOrEmpty(check))
-        {
-            strCondition += " AND cChecked ='" + check + "'";
-        }
-
-        string create = objectHandlers.Get("create");
-        if (!string.IsNullOrEmpty(create))
-        {
-            strCondition += " AND cCreated ='" + create + "'";
-        }
 
         string keywords = objectHandlers.Get("keywords");
         if (!string.IsNullOrEmpty(keywords))
@@ -104,7 +93,7 @@ public partial class Interface_aspx_resources : BasePage
             strCondition += " AND vcTitle like '%" + keywords + "%'";
         }
 
-        strCondition += " AND cDel ='N'";
+        strCondition += " AND cDel ='N' AND cChecked='Y' AND cCreated = 'Y'";
 
         int curPage = 0;
         int pageCount = 0;

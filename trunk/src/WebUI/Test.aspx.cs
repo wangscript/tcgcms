@@ -51,16 +51,19 @@ public partial class Test : BasePage
 
 
         //产品
-        DataTable dt = _conn.DataTable("select * from production where prod_company='广东众生药业股份有限公司' and prod_type='滴眼液'  order by prod_order,prod_id asc");
-        Dictionary<string, EntityBase> ps = base.handlerService.skinService.propertiesHandlers.GetPropertiesByCIdEntity("2");
+        //DataTable dt = _conn.DataTable("select * from production where prod_company='广东众生药业股份有限公司' and prod_type='滴眼液'  order by prod_order,prod_id asc");
+        //Dictionary<string, EntityBase> ps = base.handlerService.skinService.propertiesHandlers.GetPropertiesByCIdEntity("2");
 
-        if (dt != null && dt.Rows.Count > 0)
-        {
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                DataRow row = dt.Rows[i];
+        //文体
+        //DataTable dt = _conn.DataTable("select * from culture where s_id=101 and RecDr = 0 order by id");
 
-                Resources res = new Resources();
+        //if (dt != null && dt.Rows.Count > 0)
+        //{
+        //    for (int i = 0; i < dt.Rows.Count; i++)
+        //    {
+        //        DataRow row = dt.Rows[i];
+
+        //        Resources res = new Resources();
 
 
                 #region
@@ -258,140 +261,187 @@ public partial class Test : BasePage
 
                 #region
                 //产品
-                res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-                res.vcAuthor = "-";
-                res.vcTitle = row["prod_name"].ToString();
-                res.vcUrl = "-";
-                res.vcKeyWord =  row["prod_name"].ToString();
-                res.vcContent = "-";
-                res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("1056a870-1366-44e5-94fa-e7a29209b8ee");
-                res.vcEditor = "-";
-                res.PropertiesCategorieId = 2;
-                res.vcSmallImg = "/filePatch/" + row["prod_img"].ToString();
-                res.vcBigImg = "/filePatch/" + row["prod_Bimg"].ToString();
+                //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                //res.vcAuthor = "-";
+                //res.vcTitle = row["prod_name"].ToString();
+                //res.vcUrl = "-";
+                //res.vcKeyWord =  row["prod_name"].ToString();
+                //res.vcContent = "-";
+                //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("1056a870-1366-44e5-94fa-e7a29209b8ee");
+                //res.vcEditor = "-";
+                //res.PropertiesCategorieId = 2;
+                //res.vcSmallImg = "/filePatch/" + row["prod_img"].ToString();
+                //res.vcBigImg = "/filePatch/" + row["prod_Bimg"].ToString();
 
-                int rtn = -1;
-                rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-                string txt = "";
+                //int rtn = -1;
+                //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
+                //string txt = "";
 
-                foreach (KeyValuePair<string, EntityBase> entity in ps)
-                {
-                    Properties ppti = (Properties)entity.Value;
-                    ResourceProperties pp = new ResourceProperties();
-                    pp.Id = "";
-                    pp.PropertieId = objectHandlers.ToInt(ppti.Id);
-                    pp.PropertieName = ppti.ProertieName;
+                //foreach (KeyValuePair<string, EntityBase> entity in ps)
+                //{
+                //    Properties ppti = (Properties)entity.Value;
+                //    ResourceProperties pp = new ResourceProperties();
+                //    pp.Id = "";
+                //    pp.PropertieId = objectHandlers.ToInt(ppti.Id);
+                //    pp.PropertieName = ppti.ProertieName;
 
 
-                    if (pp.PropertieId == 22) //公　　司
-                    {
-                        pp.PropertieValue = row["prod_company"].ToString();
-                    }
-                    else if (pp.PropertieId == 23) //曾用名（别称）
-                    {
-                        pp.PropertieValue = row["prod_cname"].ToString();
-                    }
-                    else if (pp.PropertieId == 24) //英文名称
-                    { pp.PropertieValue = row["prod_ename"].ToString(); }
-                    else if (pp.PropertieId == 33) //汉语拼音
-                    { pp.PropertieValue = row["prod_pname"].ToString(); }
-                    else if (pp.PropertieId == 34) //说明书类别
-                    { pp.PropertieValue = ""; }
-                    else if (pp.PropertieId == 35) //产品介绍
-                    { pp.PropertieValue = row["prod_intro"].ToString(); }
-                    else if (pp.PropertieId == 36) //产品特点
-                    { pp.PropertieValue = row["prod_td"].ToString(); }
-                    else if (pp.PropertieId == 37) //成　　份
-                    { pp.PropertieValue = row["prod_cf"].ToString(); }
-                    else if (pp.PropertieId == 38) //性　　状
-                    { pp.PropertieValue = row["prod_xz"].ToString(); }
-                    else if (pp.PropertieId == 39) //适　应　症
-                    { pp.PropertieValue = row["prod_syz"].ToString(); }
-                    else if (pp.PropertieId == 40) //规　　格
-                    { pp.PropertieValue = row["prod_gg"].ToString(); }
-                    else if (pp.PropertieId == 41) //作用类别
-                    { pp.PropertieValue = row["prod_zylb"].ToString(); }
-                    else if (pp.PropertieId == 42) //功能主治
-                    { pp.PropertieValue = row["prod_cure"].ToString(); }
-                    else if (pp.PropertieId == 43) //用法用量
-                    { pp.PropertieValue = row["prod_yfyl"].ToString(); }
-                    else if (pp.PropertieId == 44) //不良反应
-                    { pp.PropertieValue = row["prod_blfy"].ToString(); }
-                    else if (pp.PropertieId == 45) //禁　　忌
-                    { pp.PropertieValue = row["prod_jj"].ToString(); }
-                    else if (pp.PropertieId == 46) //注意事项
-                    { pp.PropertieValue = row["prod_zy"].ToString(); }
-                    else if (pp.PropertieId == 47) //孕妇及哺乳期妇女用药
-                    { pp.PropertieValue = row["prod_yun"].ToString(); }
-                    else if (pp.PropertieId == 48) //儿童用药
-                    { pp.PropertieValue = row["prod_child"].ToString(); }
-                    else if (pp.PropertieId == 49) //老年用药
-                    { pp.PropertieValue = row["prod_old"].ToString(); }
-                    else if (pp.PropertieId == 50) //药物相互作用
-                    { pp.PropertieValue = row["prod_xkzy"].ToString(); }
-                    else if (pp.PropertieId == 51) //药物过量
-                    { pp.PropertieValue = row["prod_ywgl"].ToString(); }
-                    else if (pp.PropertieId == 52) //药理毒理
-                    { pp.PropertieValue = row["prod_yldl"].ToString(); }
-                    else if (pp.PropertieId == 53) //药代动力学
-                    {
-                        pp.PropertieValue = row["prod_yddl"].ToString(); 
-                    }
-                    else if (pp.PropertieId == 54) //贮　　藏
-                    { pp.PropertieValue = row["prod_cc"].ToString(); }
-                    else if (pp.PropertieId == 55) //包　　装
-                    { pp.PropertieValue = row["prod_bz"].ToString(); }
-                    else if (pp.PropertieId == 56) //有 效 期
-                    { pp.PropertieValue = row["prod_yxq"].ToString(); }
-                    else if (pp.PropertieId == 57) //执行标准
-                    { pp.PropertieValue = row["prod_bzh"].ToString(); }
-                    else if (pp.PropertieId == 58) //说明书修订日期
-                    { pp.PropertieValue = row["prod_sms"].ToString(); }
-                    else if (pp.PropertieId == 59) //批准文号
-                    { pp.PropertieValue = row["prod_pzwh"].ToString(); }
-                    else if (pp.PropertieId == 60) //社　保　类
-                    {
+                //    if (pp.PropertieId == 22) //公　　司
+                //    {
+                //        pp.PropertieValue = row["prod_company"].ToString();
+                //    }
+                //    else if (pp.PropertieId == 23) //曾用名（别称）
+                //    {
+                //        pp.PropertieValue = row["prod_cname"].ToString();
+                //    }
+                //    else if (pp.PropertieId == 24) //英文名称
+                //    { pp.PropertieValue = row["prod_ename"].ToString(); }
+                //    else if (pp.PropertieId == 33) //汉语拼音
+                //    { pp.PropertieValue = row["prod_pname"].ToString(); }
+                //    else if (pp.PropertieId == 34) //说明书类别
+                //    { pp.PropertieValue = ""; }
+                //    else if (pp.PropertieId == 35) //产品介绍
+                //    { pp.PropertieValue = row["prod_intro"].ToString(); }
+                //    else if (pp.PropertieId == 36) //产品特点
+                //    { pp.PropertieValue = row["prod_td"].ToString(); }
+                //    else if (pp.PropertieId == 37) //成　　份
+                //    { pp.PropertieValue = row["prod_cf"].ToString(); }
+                //    else if (pp.PropertieId == 38) //性　　状
+                //    { pp.PropertieValue = row["prod_xz"].ToString(); }
+                //    else if (pp.PropertieId == 39) //适　应　症
+                //    { pp.PropertieValue = row["prod_syz"].ToString(); }
+                //    else if (pp.PropertieId == 40) //规　　格
+                //    { pp.PropertieValue = row["prod_gg"].ToString(); }
+                //    else if (pp.PropertieId == 41) //作用类别
+                //    { pp.PropertieValue = row["prod_zylb"].ToString(); }
+                //    else if (pp.PropertieId == 42) //功能主治
+                //    { pp.PropertieValue = row["prod_cure"].ToString(); }
+                //    else if (pp.PropertieId == 43) //用法用量
+                //    { pp.PropertieValue = row["prod_yfyl"].ToString(); }
+                //    else if (pp.PropertieId == 44) //不良反应
+                //    { pp.PropertieValue = row["prod_blfy"].ToString(); }
+                //    else if (pp.PropertieId == 45) //禁　　忌
+                //    { pp.PropertieValue = row["prod_jj"].ToString(); }
+                //    else if (pp.PropertieId == 46) //注意事项
+                //    { pp.PropertieValue = row["prod_zy"].ToString(); }
+                //    else if (pp.PropertieId == 47) //孕妇及哺乳期妇女用药
+                //    { pp.PropertieValue = row["prod_yun"].ToString(); }
+                //    else if (pp.PropertieId == 48) //儿童用药
+                //    { pp.PropertieValue = row["prod_child"].ToString(); }
+                //    else if (pp.PropertieId == 49) //老年用药
+                //    { pp.PropertieValue = row["prod_old"].ToString(); }
+                //    else if (pp.PropertieId == 50) //药物相互作用
+                //    { pp.PropertieValue = row["prod_xkzy"].ToString(); }
+                //    else if (pp.PropertieId == 51) //药物过量
+                //    { pp.PropertieValue = row["prod_ywgl"].ToString(); }
+                //    else if (pp.PropertieId == 52) //药理毒理
+                //    { pp.PropertieValue = row["prod_yldl"].ToString(); }
+                //    else if (pp.PropertieId == 53) //药代动力学
+                //    {
+                //        pp.PropertieValue = row["prod_yddl"].ToString(); 
+                //    }
+                //    else if (pp.PropertieId == 54) //贮　　藏
+                //    { pp.PropertieValue = row["prod_cc"].ToString(); }
+                //    else if (pp.PropertieId == 55) //包　　装
+                //    { pp.PropertieValue = row["prod_bz"].ToString(); }
+                //    else if (pp.PropertieId == 56) //有 效 期
+                //    { pp.PropertieValue = row["prod_yxq"].ToString(); }
+                //    else if (pp.PropertieId == 57) //执行标准
+                //    { pp.PropertieValue = row["prod_bzh"].ToString(); }
+                //    else if (pp.PropertieId == 58) //说明书修订日期
+                //    { pp.PropertieValue = row["prod_sms"].ToString(); }
+                //    else if (pp.PropertieId == 59) //批准文号
+                //    { pp.PropertieValue = row["prod_pzwh"].ToString(); }
+                //    else if (pp.PropertieId == 60) //社　保　类
+                //    {
 
-                        //国保类|省保类|省保及国保|先不指定
-                        string txt12 = row["prod_sb"].ToString();
-                        if(txt12 =="111")
-                        {
-                            pp.PropertieValue = "省保及国保";
-                        }  else if(txt12=="110")
-                        {
-                            pp.PropertieValue = "国保类";
-                        } else if(txt12=="101")
-                        {
-                            pp.PropertieValue = "省保类";
-                        } 
+                //        //国保类|省保类|省保及国保|先不指定
+                //        string txt12 = row["prod_sb"].ToString();
+                //        if(txt12 =="111")
+                //        {
+                //            pp.PropertieValue = "省保及国保";
+                //        }  else if(txt12=="110")
+                //        {
+                //            pp.PropertieValue = "国保类";
+                //        } else if(txt12=="101")
+                //        {
+                //            pp.PropertieValue = "省保类";
+                //        } 
                     
-                    }
-                    else if (pp.PropertieId == 61) //附加说名
-                    { pp.PropertieValue = row["prod_yddl"].ToString(); }
-                    else if (pp.PropertieId == 62) //药物作用
-                    { pp.PropertieValue = row["prod_yl"].ToString(); }
+                //    }
+                //    else if (pp.PropertieId == 61) //附加说名
+                //    { pp.PropertieValue = row["prod_yddl"].ToString(); }
+                //    else if (pp.PropertieId == 62) //药物作用
+                //    { pp.PropertieValue = row["prod_yl"].ToString(); }
 
-                    if (string.IsNullOrEmpty(pp.PropertieValue)) continue;
-                    pp.iOrder = ppti.iOrder;
-                    pp.ResourceId = res.Id;
+                //    if (string.IsNullOrEmpty(pp.PropertieValue)) continue;
+                //    pp.iOrder = ppti.iOrder;
+                //    pp.ResourceId = res.Id;
 
-                    pp.PropertieValue = pp.PropertieValue.Replace("'", "''");
+                //    pp.PropertieValue = pp.PropertieValue.Replace("'", "''");
 
-                    rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, pp);
-                    txt = rtn == 1 ? "属性[" + pp.PropertieName + "]添加成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-                    Response.Write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·" + txt + "<br/>");
-                }
+                //    rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, pp);
+                //    txt = rtn == 1 ? "属性[" + pp.PropertieName + "]添加成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
+                //    Response.Write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·" + txt + "<br/>");
+                //}
 
-                txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-                Response.Write(row["prod_name"].ToString() + "-----------" + txt + "<br/>");
+                //txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
+                //Response.Write(row["prod_name"].ToString() + "-----------" + txt + "<br/>");
                 #endregion
 
-            }
-            Response.Write("记录总数:" + dt.Rows.Count + "<br/>"); 
-        }
+
+                //文体
+
+                //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                //res.vcAuthor = "-";
+                //res.vcTitle = row["name"].ToString();
+                //res.vcKeyWord = row["name"].ToString();
+                //res.vcContent = "-";
+                //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("dc9f041d-9137-4b43-af2a-bd219d69c5dd");
+                //res.vcEditor = "-";
+                //res.vcSmallImg = "/filePatch/small/" + row["img"].ToString() + ".jpg";
+                //res.vcBigImg = "/filePatch/" + row["img_link"].ToString() + ".jpg";
+                //res.vcSpeciality = "8";
+
+                //int rtn = -1;
+                //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
+
+                //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
+                //Response.Write(row["name"].ToString() + "-----------" + txt + "<br/>");
+
+            //}
+            //Response.Write("记录总数:" + dt.Rows.Count + "<br/>"); 
+        //}
         //Response.Write(Guid.NewGuid().ToString());
         //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
         //Response.Write(Guid.NewGuid().ToString());
+
+
+        Dictionary<string, EntityBase> res = null;
+        int curpage= objectHandlers.ToInt(objectHandlers.Get("page"));
+        int pagecount = 0;
+        int count =0;
+
+        res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
+                   curpage, 5, "Id DESC", "1=1");
+
+        if (res != null)
+        {
+            foreach (KeyValuePair<string, EntityBase> entity in res)
+            {
+                Resources ppti = (Resources)entity.Value;
+
+                string errtxt = "";
+                base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
+            }
+        }
+
+        if (curpage < pagecount)
+        {
+            Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
+        }
+
+
     }
 
     private void ReadExl()
