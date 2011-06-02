@@ -367,8 +367,14 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + item.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcSpeciality$", "<TCG>" + item.vcSpeciality + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + item.vcBigImg + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_iCount$", "<TCG><script type='text/javascript' src='" + ConfigServiceEx.baseConfig["WebSite"]
-               + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iCount$", "<TCG><script type='text/javascript' src='" 
+                + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
+
+            string sssid = this._tagtype + "_nicon_" + item.Id;
+            temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'></div><script type='text/javascript'>"
+                + "$.get('/interface/aspx/resources.aspx?w=getresourcenicon&rid=" + item.Id + "',null,function(data){$('#" + sssid + "').html(data)});</script></TCG>");
+         
+
 
             bool isshowrp = objectHandlers.ToBoolen(this.GetAttribute("inpropertie"), false);
             if (isshowrp)
@@ -473,7 +479,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_Id$", "<TCG>" + categorie.Id + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + categorie.vcClassName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcName$", "<TCG>" + categorie.vcName + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcPic$", "<TCG>" + ConfigServiceEx.baseConfig["WebSite"] + "/skin/" 
+            temp = temp.Replace("$" + this._tagtype + "_vcPic$", "<TCG>/skin/" 
                 + pagerinfo.SkinInfo.Filename + categorie.vcPic + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_allchildid$", "<TCG>" + base.handlerService.skinService.categoriesHandlers.GetCategoriesChild(categorie.Id) + "</TCG>");
 
