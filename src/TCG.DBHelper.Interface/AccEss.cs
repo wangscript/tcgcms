@@ -415,7 +415,7 @@ namespace TCG.DBHelper
             if (pageIndex < 1) pageIndex = 1;
             if (pageSize < 1) pageSize = 10;
             if (string.IsNullOrEmpty(showString)) showString = "*";
-            if (string.IsNullOrEmpty(orderString)) orderString = "iID desc";
+            if (string.IsNullOrEmpty(orderString)) orderString = "ID desc";
             string myVw = string.Format(" {0} tempVw ", queryString);
 
             string text1 = string.Format(" select count(0) as recordCount from {0} WHERE {1}", myVw, whereString);

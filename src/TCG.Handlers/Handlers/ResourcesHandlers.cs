@@ -248,20 +248,32 @@ namespace TCG.Handlers
 
             if (create) { sqlsb.Append(" AND cCreated='Y' "); } else { sqlsb.Append(" AND cCreated='N' "); }
 
-            if (Speciality.IndexOf(",") > -1)
+            if (!string.IsNullOrEmpty(Speciality))
             {
-                sqlsb.Append(" AND (");
-                string[] aaa = Speciality.Split(',');
-                for (int n = 0; n < aaa.Length; n++)
+                if (Speciality.IndexOf(",") > -1)
                 {
-                    string text = n == 0 ? "" : " OR ";
-                    sqlsb.Append(text + " vcSpeciality like '%" + aaa[n] + "%'");
+                   
+                    string[] aaa = Speciality.Split(',');
+                    string text323 = string.Empty;
+                    for (int n = 0; n < aaa.Length; n++)
+                    {
+                        if (!string.IsNullOrEmpty(aaa[n]))
+                        {
+                            string text = n == 0 ? "" : " OR ";
+                            text323 += text + " vcSpeciality like '%" + aaa[n] + "%'";
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(text323))
+                    {
+                        sqlsb.Append(" AND (");
+                        sqlsb.Append(text323);
+                        sqlsb.Append(" )");
+                    }
                 }
-                sqlsb.Append(" )");
-            }
-            else
-            {
-                sqlsb.Append(" AND vcSpeciality like '%" + Speciality + "%' ");
+                else
+                {
+                    sqlsb.Append(" AND vcSpeciality like '%" + Speciality + "%' ");
+                }
             }
 
 

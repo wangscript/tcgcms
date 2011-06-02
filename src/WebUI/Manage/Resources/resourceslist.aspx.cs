@@ -114,7 +114,7 @@ public partial class resources_resourceslist : BasePage
         try
         {
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                   page, pageSize, "Id DESC", strCondition);
+                   page, pageSize, "dAddDate DESC", strCondition);
         }
         catch (Exception ex)
         {

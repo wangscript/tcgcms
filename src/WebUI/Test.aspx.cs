@@ -41,7 +41,7 @@ public partial class Test : BasePage
         //DataTable dt = _conn.DataTable("select * from medicine_info where  info_zt<>10000 and info_check=10015 order by info_send_time");
 
         //眼科用药
-        //DataTable dt = _conn.DataTable("select * from dissertation where dissertation_f='心内科' and dissertation_zt<>10000 and dissertation_pass=10015 order by dissertation_send_time");
+        DataTable dt = _conn.DataTable("select * from dissertation where dissertation_f='消化系统' and dissertation_zt<>10000 and dissertation_pass=10015 order by dissertation_send_time");
 
         //临时公告
         //DataTable dt = _conn.DataTable("select * from HN_window where win_type='定期报告' and win_zt<>10000 and win_check=10015 order by win_send_time desc  ");
@@ -57,13 +57,13 @@ public partial class Test : BasePage
         //文体
         //DataTable dt = _conn.DataTable("select * from culture where s_id=101 and RecDr = 0 order by id");
 
-        //if (dt != null && dt.Rows.Count > 0)
-        //{
-        //    for (int i = 0; i < dt.Rows.Count; i++)
-        //    {
-        //        DataRow row = dt.Rows[i];
+        if (dt != null && dt.Rows.Count > 0)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow row = dt.Rows[i];
 
-        //        Resources res = new Resources();
+                Resources res = new Resources();
 
 
                 #region
@@ -135,20 +135,28 @@ public partial class Test : BasePage
                 //Response.Write(row["info_title"].ToString() + "-----------" + txt + "<br/>");
 
                 //眼科用药
-                //res.Id = (objectHandlers.ToInt(row["dissertation_id"].ToString()) + 1750).ToString();
-                //res.vcAuthor = row["dissertation_origin"].ToString();
-                //res.vcTitle = row["dissertation_title"].ToString();
-                //res.vcKeyWord = row["dissertation_title"].ToString();
-                //res.dAddDate = objectHandlers.ToTime(row["dissertation_time"].ToString());
-                //res.vcContent = row["dissertation_content"].ToString();
-                //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("aea8674a-ef6a-48f8-a542-d57e58df1f80");
-                //res.vcEditor = row["dissertation_check"].ToString();
+                res.Id = (objectHandlers.ToInt(row["dissertation_id"].ToString()) + 1750).ToString();
+                res.vcAuthor = row["dissertation_origin"].ToString();
+                if (string.IsNullOrEmpty(row["dissertation_send_time"].ToString()))
+                {
+                    res.dAddDate = objectHandlers.ToTime(row["dissertation_time"].ToString());
+                } else{
+                    res.dAddDate = objectHandlers.ToTime(row["dissertation_send_time"].ToString());
+                }
 
-                //int rtn = -1;
-                //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
+                res.dUpDateDate = res.dAddDate;
+                res.vcTitle = row["dissertation_title"].ToString();
+                res.vcKeyWord = row["dissertation_title"].ToString();
+                
+                res.vcContent = row["dissertation_content"].ToString();
+                res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("f2aad798-225b-470c-8ea3-202a4bb09263");
+                res.vcEditor = row["dissertation_check"].ToString();
 
-                //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-                //Response.Write(row["dissertation_title"].ToString() + "-----------" + txt + "<br/>");
+                int rtn = -1;
+                rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
+
+                string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
+                Response.Write(row["dissertation_title"].ToString() + "-----------" + txt + "<br/>");
 
                 //临时公告
                 //res.Id = (objectHandlers.ToInt(row["win_id"].ToString()) + 1750).ToString();
@@ -409,37 +417,39 @@ public partial class Test : BasePage
                 //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
                 //Response.Write(row["name"].ToString() + "-----------" + txt + "<br/>");
 
-            //}
-            //Response.Write("记录总数:" + dt.Rows.Count + "<br/>"); 
-        //}
+            }
+            Response.Write("记录总数:" + dt.Rows.Count + "<br/>");
+        }
+
         //Response.Write(Guid.NewGuid().ToString());
         //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
         //Response.Write(Guid.NewGuid().ToString());
 
 
-        Dictionary<string, EntityBase> res = null;
-        int curpage= objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pagecount = 0;
-        int count =0;
+        //批量生成资讯
+        //Dictionary<string, EntityBase> res = null;
+        //int curpage= objectHandlers.ToInt(objectHandlers.Get("page"));
+        //int pagecount = 0;
+        //int count =0;
 
-        res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
-                   curpage, 5, "Id DESC", "1=1");
+        //res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
+        //           curpage, 5, "Id DESC", "1=1");
 
-        if (res != null)
-        {
-            foreach (KeyValuePair<string, EntityBase> entity in res)
-            {
-                Resources ppti = (Resources)entity.Value;
+        //if (res != null)
+        //{
+        //    foreach (KeyValuePair<string, EntityBase> entity in res)
+        //    {
+        //        Resources ppti = (Resources)entity.Value;
 
-                string errtxt = "";
-                base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
-            }
-        }
+        //        string errtxt = "";
+        //        base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
+        //    }
+        //}
 
-        if (curpage < pagecount)
-        {
-            Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
-        }
+        //if (curpage < pagecount)
+        //{
+        //    Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
+        //}
 
 
     }
