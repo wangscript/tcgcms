@@ -42,7 +42,7 @@ body{
 	vertical-align: bottom;
 	position: relative;
 	bottom: -20px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
 	padding-right: 10px;
 }
 .MainArea .LogoArea .VersionTel a {
@@ -400,7 +400,7 @@ COLOR: #fff
 	margin-left: auto;
 	background-image: url(../images/middlebg_center.jpg);
 	background-repeat: repeat-y;
-	background-position: center top;
+	background-position: left top;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	padding: 0px;
@@ -416,9 +416,10 @@ COLOR: #fff
 	margin-bottom: 0px;
 	background-image: url(../images/middlebg_top.jpg);
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: left top;
 	vertical-align: top;
 	width: 1000px;
+	overflow:hidden;
 }
 
 .MainArea .MiddleBox .ImgMiddle .LeftBox {
@@ -877,7 +878,6 @@ COLOR: #fff
 	margin-bottom: 10px;
 }
 .MainArea .MiddleBox .ImgMiddle .RightBox .ContentBox img {
-	float: left;
 	margin-right: 8px;
 	margin-bottom: 8px;
 }
@@ -1045,7 +1045,7 @@ COLOR: #fff
 	font-size: 12px;
 	font-weight: normal;
 	color: #b6dbff;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*font-family: Verdana, Arial, Helvetica, sans-serif;*/
 	width:1000px; overflow:hidden;
 }
 .MainArea .FootBox .LeftImg {

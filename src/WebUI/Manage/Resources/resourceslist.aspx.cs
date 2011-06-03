@@ -47,6 +47,9 @@ public partial class resources_resourceslist : BasePage
                 case "CHECK" :
                     this.CheckNews();
                     break;
+                case "CREATECATEGRI":
+                    this.CreateCategrie();
+                    break;
             }
             return;
         }
@@ -114,7 +117,7 @@ public partial class resources_resourceslist : BasePage
         try
         {
             res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                   page, pageSize, "dAddDate DESC", strCondition);
+                   page, pageSize, "dAddDate DESC,ID DESC", strCondition);
         }
         catch (Exception ex)
         {
@@ -237,6 +240,33 @@ public partial class resources_resourceslist : BasePage
         base.AjaxErch(rtn, "<a>" + errText.Replace("\\", "/") + "</a>", "CreateBack");
     }
 
+    private void CreateCategrie()
+    {
+        string cid = objectHandlers.Post("iClassId");
+        if (string.IsNullOrEmpty(cid))               
+        {
+            base.AjaxErch("-1000000051");
+            return;
+        }
+
+        int pagecount = 0;
+        
+        int rtn = 0;
+        string errText = string.Empty;
+        try
+        {
+            rtn = base.handlerService.tagService.CreateClassList(cid, 0, ref pagecount, ref errText);
+        }
+
+        catch (Exception ex)
+        {
+            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()), "CreateBack");
+            return;
+        }
+
+        base.AjaxErch(rtn, "<a>" + errText.Replace("\\", "/") + "</a>", "CreateBack1");
+    }
+
     private void CheckNews()
     {
         int resourceid = objectHandlers.ToInt(objectHandlers.Post("DelClassId"));
@@ -271,7 +301,7 @@ public partial class resources_resourceslist : BasePage
                 errText = "审核文章[" + res.vcTitle + "]状态为:<font color='green'>审核通过</font> 并生成静态文件";
             }
 
-            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(res);
+            rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(res); 
             
         }
         catch (Exception ex)

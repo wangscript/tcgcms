@@ -134,7 +134,19 @@ function CheckNews() {
 }
 
 function CreateBack(val) {
-	CreateDiv.SetSep(val);
+    CreateDiv.SetSep(val);
+    if (!CreateDiv.runing) {
+        CreateDiv.Start("正在生成分类列表...");
+        CreateDiv.set = 1;
+        CreateDiv.setcount = 1;
+        $("#iAction").val("CREATECATEGRI");
+        $("#DelClassId").val($("#iClassId").val());
+        $('#form1').submit();
+    }
+}
+
+function CreateBack1(val) {
+    CreateDiv.SetSep(val);
 }
 
 
