@@ -143,7 +143,7 @@ namespace TCG.Entity
         private string _cDel = "N";
         private string _vcFilePath = string.Empty;
         private DateTime _dadddate = DateTime.Now;
-        private DateTime _dupdatedate;
+        private DateTime _dupdatedate = DateTime.Now;
         private string _vctitlecolor;
         private string _cstrong;
         private string _sheifurl;
