@@ -209,7 +209,10 @@ public partial class resources_resourceshandlers : BasePage
 
             //更新列表分页第一页
             int pagecount = 0;
-            rtn = base.handlerService.tagService.CreateClassList(item.Categorie.Id, 0, ref pagecount, ref errText);
+            if (item.cChecked == "Y" && item.cCreated == "Y" && item.cDel == "N")
+            {
+                rtn = base.handlerService.tagService.CreateClassList(item.Categorie.Id, 0, ref pagecount, ref errText);
+            }
         }
         catch (Exception ex)
         {

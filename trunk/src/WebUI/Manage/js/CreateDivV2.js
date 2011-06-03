@@ -7,6 +7,7 @@ function CreateDiv() {
     this.Default = { w: 0, h: 0 };
     this.o = null;
     this.bg = null;
+    this.runing = false;
 
     this.Start = function() {
         var val, ac = arguments.length, av = arguments;
@@ -20,12 +21,14 @@ function CreateDiv() {
         this.msgstr = val;
     }
 
-    this.End = function() {
+    this.End = function () {
         this.createtitle.text("操作已经执行完成！");
         this.Msg.text(this.msgstr + "已完成!");
+        this.runing = false;
     }
 
-    this.SetSep = function() {
+    this.SetSep = function () {
+        this.runing = true;
         var val, ac = arguments.length, av = arguments;
         val = ac > 0 ? av[0] : null;
         this.create_num.text(parseInt(((this.set) / this.setcount) * 100));
