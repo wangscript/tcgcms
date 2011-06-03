@@ -27,7 +27,7 @@ namespace TCG.Handlers.Imp.AccEss
         + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl,PropertiesCategorieId) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
         + inf.vcUrl + "','" + inf.vcContent.Replace("'", "''") + "','" + inf.vcAuthor + "','" + inf.iCount + "','" + inf.vcKeyWord + "','" + inf.vcEditor + "','" + inf.cCreated + "','"
         + inf.vcSmallImg + "','" + inf.vcBigImg + "','" + inf.vcShortContent.Replace("'", "''") + "','" + inf.vcSpeciality + "','" + inf.cChecked + "','"
-        + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + inf.dAddDate + "','" + DateTime.Now.ToString() + "','"
+        + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + inf.dAddDate + "','" + inf.dUpDateDate + "','"
         + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "','" + inf.PropertiesCategorieId + "')");
             return 1;
 
@@ -44,7 +44,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="inf"></param>
         /// <returns></returns>
         public int UpdateResources(Resources inf)
-        {  
+        {
 
             string sql = "UPDATE resources SET iClassID='" + inf.Categorie.Id + "',vcTitle='" + inf.vcTitle + "',vcUrl='"
                 + inf.vcUrl + "',vcContent='" + inf.vcContent.Replace("'", "''") + "',vcAuthor='" + inf.vcAuthor + "',iCount='"
@@ -52,7 +52,7 @@ namespace TCG.Handlers.Imp.AccEss
                 + inf.cCreated + "',vcSmallImg='" + inf.vcSmallImg + "',vcBigImg='" + inf.vcBigImg + "',vcShortContent='"
                 + inf.vcShortContent.Replace("'", "''") + "',vcSpeciality='" + inf.vcSpeciality + "',cChecked='" + inf.cChecked + "',cDel='"
                 + inf.cDel + "',cPostByUser='" + inf.cPostByUser + "',vcFilePath='" + inf.vcFilePath
-                + "',dUpDateDate=now(),vcTitleColor = '" + inf.vcTitleColor + "',cStrong = '"
+                + "',dUpDateDate='" + inf.dUpDateDate + "',vcTitleColor = '" + inf.vcTitleColor + "',cStrong = '"
                 + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "' WHERE Id = " + inf.Id;
             AccessFactory.conn.Execute(sql);
 

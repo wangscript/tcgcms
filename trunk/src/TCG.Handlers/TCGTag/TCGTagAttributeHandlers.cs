@@ -371,10 +371,15 @@ namespace TCG.Handlers
                 + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
 
             string sssid = this._tagtype + "_nicon_" + item.Id;
-            temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'></div><script type='text/javascript'>"
-                + "$.get('/interface/aspx/resources.aspx?w=getresourcenicon&rid=" + item.Id + "',null,function(data){$('#" + sssid + "').html(data)});</script></TCG>");
-         
-
+            if (item.dAddDate.AddDays(5) >= DateTime.Now)
+            {
+                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'></div><script type='text/javascript'>"
+                    + "$.get('/interface/aspx/resources.aspx?w=getresourcenicon&rid=" + item.Id + "',null,function(data){$('#" + sssid + "').html(data)});</script></TCG>");
+            }
+            else
+            {
+                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "");
+            }
 
             bool isshowrp = objectHandlers.ToBoolen(this.GetAttribute("inpropertie"), false);
             if (isshowrp)
