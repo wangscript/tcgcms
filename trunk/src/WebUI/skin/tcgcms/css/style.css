@@ -38,6 +38,8 @@ img { border:0px; }
 
 .title { font-weight:bold; font-size:14px; color:#000; border-bottom:1px dotted #ccc; margin-bottom:15px; }
 .title_right{ font-weight:bold; font-size:14px; color:#000; margin-bottom:15px; }
+.detaltitle{ font-weight:bold; font-size:14px; color:#000; border-bottom:1px dotted #ccc; margin-bottom:15px;  text-align:center;}
+
 .right { width:590px; float:left;margin-left:30px;}
 .box { width:auto; border-left:1px solid #EBEEE0;  border-right:1px solid #EBEEE0; background:#F5F7EE; }
 .box a { color:#5C4A3C; }
@@ -323,3 +325,4 @@ p { margin:0px; padding:0px;}
 #hoverpage ul#outer li.page div a:hover {text-decoration:none;}
 #hoverpage ul#outer li.page a:hover {white-space:normal;}
 #hoverpage ul#outer :hover div {position:absolute; left:0; top:0;}
+
