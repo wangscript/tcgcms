@@ -70,7 +70,7 @@ li{ text-align:left}
 .inputcloseimg{position:absolute; border:0px; z-index:89;}
 
 .MsgDiv{ }
-.createtitle{text-align:left; padding-left:30px;width:392px; height:27px; line-height:27px; color:#FFFFFF; font-weight:bold; background-image:url(../images/create_title.gif);}
+.createtitle{  text-align:left; padding-left:30px;width:392px; height:27px; line-height:27px; color:#FFFFFF; font-weight:bold; background-image:url(../images/create_title.gif);}
 .createMsgbg{width:420px; background-color:#FFFFFF;height:300px; border-left:#7998b7 solid 1px; border-right:#7998b7 solid 1px;border-bottom:#7998b7 solid 1px;}
 .createjdt{height:52px; margin-bottom:2px; text-align:left; padding-top:8px;}
 .createMsg{ margin-left:4px;width:400px; height:160px;overflow-X:auto;overflow:scroll; border:#dee1e4 solid 1px; background-color:#e5e7e9;text-align:left; padding:4px;scrollbar-shadow-color: #ffffff; scrollbar-highlight-color: #ffffff; scrollbar-face-color: #d9d9d9; scrollbar-3dlight-color: #d9d9d9; scrollbar-darkshadow-color: #d9d9d9; scrollbar-track-color: #ffffff; scrollbar-arrow-color: #ffffff; font-size:9px;font-family:Geneva, Arial, Helvetica, sans-serif;}
@@ -79,5 +79,6 @@ li{ text-align:left}
 .createjdtPlace{ margin-top:4px;margin-left:5px;width:407px; height:28px; border:#7998b7 solid 1px;}
 .createjdtPlacebg{ height:28px;width:0px;background-image:url(../images/create_jdbg.jpg);}
 .rbfcreate{ border-right:#88a5c1 solid 1px;}
-.createclose{ width:20px; height:20px; position:relative; left:400px; top:20px;}
-.createclose a{ float:left; width:20px; height:20px;}
+#createtitle{float:left;}
+.createclose{ float:left; width:20px; height:20px; float:right; border:red soid 1px;}
+.createclose a{ width:20px; height:20px; display:block;}
