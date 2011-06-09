@@ -4,6 +4,7 @@
 
 -1900000000@@@db@@@数据库操作错误
 -1@@@page@@@请求参数有误
+-2@@@page@@@您没有该操作的权限
 
 -1000000001@@@SP_Manage_CheckIP@@@用户IP被锁定
 -1000000002@@@SP_Manage_AdminLogin@@@用户不存在
@@ -149,6 +150,12 @@
 -1000000902@@@feedbackhandlers@@@皮肤ID不能为空
 -1000000903@@@feedbackhandlers@@@电话号码不能为空
 -1000000904@@@feedbackhandlers@@@留言内容不能为空
+-1000000905@@@feedbackhandlers@@@留言标题不能为空
+-1000000906@@@feedbackhandlers@@@留言邮箱不能为空
+-1000000907@@@feedbackhandlers@@@邮箱格式不正确
+
+
+
 
 
 

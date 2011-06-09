@@ -58,6 +58,21 @@ namespace TCG.Handlers
                 return -1000000904;
             }
 
+            if (string.IsNullOrEmpty(feedback.Title))
+            {
+                return -1000000905;
+            }
+
+            if (string.IsNullOrEmpty(feedback.Email))
+            {
+                return -1000000906;
+            }
+
+            if (!objectHandlers.IsEmail(feedback.Email))
+            {
+                return -1000000907;
+            }
+
             return DataBaseFactory.feedBackHandlers.CreateFeedBack(feedback);
         }
     }

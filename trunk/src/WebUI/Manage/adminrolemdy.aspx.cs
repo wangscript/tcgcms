@@ -21,6 +21,7 @@ public partial class adminrolemdy : BasePage
 
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(11);
 
         if (!Page.IsPostBack)
         {
@@ -42,7 +43,11 @@ public partial class adminrolemdy : BasePage
             int rtn;
             try
             {
-                rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent, iRoleId);
+                rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo, vcRoleName, popedom, classpopedom, vcContent, iRoleId);
+                if (rtn == 1)
+                {
+                    CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
+                }
             }
             catch (Exception ex)
             {

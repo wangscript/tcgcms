@@ -19,6 +19,7 @@ public partial class adminroleadd : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(10);
 
         if (!Page.IsPostBack)
         {
@@ -38,7 +39,7 @@ public partial class adminroleadd : BasePage
             int rtn;
             try
             {
-                rtn = base.handlerService.manageService.adminHandlers.AddAdminRole(base.adminInfo.vcAdminName, vcRoleName, popedom, classpopedom, vcContent);
+                rtn = base.handlerService.manageService.adminHandlers.AddAdminRole(base.adminInfo, vcRoleName, popedom, classpopedom, vcContent);
             }
             catch (Exception ex)
             {

@@ -19,12 +19,13 @@
 	<script type="text/javascript" src="../js/listcommon.js"></script>
     <script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/feedback.js"></script>
+    <script type="text/javascript" src="../js/pager.js"></script>
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
-		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FeedBackDel();">
+		<a id="afeedbackdel" runat="server" href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FeedBackDel();">
 			<img src="../images/icon/08.gif" />删除
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
@@ -36,9 +37,7 @@
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id l_rg">编号</span>
-		<span class="l_classname bold l_rg">姓名</span>
-        <span class="l_classname bold l_rg">联系QQ</span>
-        <span class="l_classname bold l_rg">联系电话</span>
+        <span class="l_classname bold l_rg newstitle hidover">资讯标题</span>
 		<span class="l_updatedate bold">留言日期</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
@@ -46,13 +45,19 @@
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
 		<TCG:Span class='l_id' id='ipid' runat='server' />
-		<TCG:Span class='l_classname hidover' id='lname' runat='server' />
-		<TCG:Span class='l_classname hidover' id='sqq' runat='server'/>
-        <TCG:Span class='l_classname hidover' id='stel' runat='server'/>
+        <TCG:Span class='l_classname newstitle hidover' id='sTitle' runat='server' />
+		
+		
+       
         <TCG:Span class='l_updatedate' id='sadddate' runat='server'/>
 	</div>	
     <div class="list_content hid" id="content_<TCG:Span id='cid' runat='server' />">
-        <TCG:Span id='scontent' runat='server'/>
+        姓名:<TCG:Span id='lname' runat='server' /><br/>
+        联系QQ:<TCG:Span id='sqq' runat='server'/><br/>
+        联系电话: <TCG:Span id='stel' runat='server'/><br/>
+        Email:<TCG:Span  id='smail' runat='server'/><br/>
+        <TCG:Span id='scontent' runat='server'/><br/>
+
     </div>
 		</ItemTemplate>
 	</asp:Repeater>

@@ -29,6 +29,7 @@ public partial class skin_speciality : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(31);
 
         SkinId = objectHandlers.Get("skinid");
         if (string.IsNullOrEmpty(SkinId)) SkinId = ConfigServiceEx.DefaultSkinId;

@@ -27,6 +27,7 @@ public partial class Skin_skins : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(33);
 
         if (!Page.IsPostBack)
         {

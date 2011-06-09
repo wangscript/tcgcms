@@ -24,8 +24,19 @@ public partial class Manage_feedback : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(47);
         if (!Page.IsPostBack)
         {
+
+            if (base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
+            {
+                this.afeedbackdel.Visible = true;
+            }
+            else
+            {
+                this.afeedbackdel.Visible = false;
+            }
+
             this.SearchInit();
         }
         else
@@ -53,15 +64,19 @@ public partial class Manage_feedback : BasePage
         Span sadddate = (Span)e.Item.FindControl("sadddate");
         Span scontent = (Span)e.Item.FindControl("scontent");
         scontent.Text = objectHandlers.HtmlEncode(feedBack.Content);
+        Span sTitle = (Span)e.Item.FindControl("sTitle");
+        Span smail = (Span)e.Item.FindControl("smail");
 
+        string text = "<a href=\"javascript:GoTo();\" title=\"查看留言内容\" onclick=\"ShowContent(" + feedBack.Id + ")\">"
+   + "<img src=\"../images/icon/magnifier.png\" border=\"0\"></a>";
+
+        smail.Text = feedBack.Email;
+        sTitle.Text = text + (string.IsNullOrEmpty(feedBack.Title)?"&nbsp;":feedBack.Title);
         CheckID.Text = feedBack.Id;
         cid.Text = feedBack.Id;
         ipid.Text = feedBack.Id;
 
-        string text = "<a href=\"javascript:GoTo();\" title=\"查看留言内容\" onclick=\"ShowContent("+feedBack.Id+")\">"
-            + "<img src=\"../images/icon/magnifier.png\" border=\"0\"></a>";
-
-        lname.Text = text + feedBack.UserName;
+        lname.Text =  feedBack.UserName;
         sqq.Text = feedBack.QQ;
         stel.Text = feedBack.Tel;
         sadddate.Text = feedBack.AddDate.ToString();
@@ -70,6 +85,12 @@ public partial class Manage_feedback : BasePage
 
     private void DelFeedBack()
     {
+        if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
+        {
+            base.AjaxErch(-2, "");
+            return;
+        }
+
         string delids = objectHandlers.Post("DelClassId");
         if (string.IsNullOrEmpty(delids))
         {
@@ -108,8 +129,8 @@ public partial class Manage_feedback : BasePage
         Dictionary<string, EntityBase> res = null;
         try
         {
-            res = base.handlerService.feedBackHandlers.GeFeedBackListPager(ref curPage, ref pageCount, ref count,
-                   page, pageSize, "Id DESC", " skinid='" + ConfigServiceEx.DefaultSkinId + "'");
+            res = base.handlerService.feedBackHandlers.GeFeedBackListPager(ref page, ref pageCount, ref count,
+                   page, pageSize, "AddDate DESC,Id DESC", " skinid='" + ConfigServiceEx.DefaultSkinId + "'");
         }
         catch (Exception ex)
         {

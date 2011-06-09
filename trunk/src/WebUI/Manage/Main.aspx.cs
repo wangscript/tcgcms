@@ -20,6 +20,8 @@ public partial class Main : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(13);
+
         if (!Page.IsPostBack)
         {
             this.title.Text = ConfigServiceEx.baseConfig["WebTitle"] + " - " + Versions.version;
