@@ -21,6 +21,7 @@ public partial class adminRecovery : BasePage
 
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(8);
 
         if (!Page.IsPostBack)
         {

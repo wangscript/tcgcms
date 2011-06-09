@@ -57,6 +57,8 @@ public partial class Interface_aspx_feedback : BasePage
     
         feedback.QQ = objectHandlers.Post("QQ");
         feedback.Content = objectHandlers.Post("Content");
+        feedback.Title = objectHandlers.Post("Title");
+        feedback.Email = objectHandlers.Post("Email");
 
         feedback.Ip = objectHandlers.GetIP();
 

@@ -43,7 +43,9 @@ namespace TCG.Handlers
                     text1 = this.StringColoumFun(item.Result("$1"), findtcgstringfun);
                     try
                     {
-                        str = str.Replace(item.Value, objectHandlers.Left(text1,objectHandlers.ToInt(item.Result("$2"))));
+                        int lenghs = objectHandlers.ToInt(item.Result("$2"));
+                        string text = (item.Value.Length > lenghs) ? "..." : "";
+                        str = str.Replace(item.Value, objectHandlers.Left(text1, lenghs) + text);
                     }
                     catch { }
                 }

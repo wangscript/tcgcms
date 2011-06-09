@@ -114,34 +114,6 @@ namespace TCG.Handlers.Imp.AccEss
             return 1;
         }
 
-        /// <summary>
-        ///更新管理员信息
-        /// </summary>
-        /// <param name="AdminID"></param>
-        /// <param name="nickname"></param>
-        /// <param name="iRole"></param>
-        /// <param name="filesysroot"></param>
-        /// <param name="slock"></param>
-        /// <returns></returns>
-        public int UpdateAdminInfo(int AdminID, string nickname, int iRole, string filesysroot, int slock)
-        {
-
-            //SqlParameter sp0 = new SqlParameter("@id", SqlDbType.Int, 4); sp0.Value = AdminID.ToString();
-            //SqlParameter sp1 = new SqlParameter("@nickname", SqlDbType.VarChar, 50); sp1.Value = nickname;
-            //SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = iRole.ToString();
-            //SqlParameter sp3 = new SqlParameter("@filesysroot", SqlDbType.VarChar, 255); sp3.Value = filesysroot;
-            //SqlParameter sp4 = new SqlParameter("@lock", SqlDbType.TinyInt, 1); sp4.Value = slock.ToString();
-            //SqlParameter sp5 = new SqlParameter("@uptime", SqlDbType.DateTime, 8); sp5.Value = DateTime.Now;
-            //SqlParameter sp7 = new SqlParameter("@vcIp", SqlDbType.VarBinary, 15); sp7.Value = objectHandlers.UserIp;
-            //SqlParameter sp6 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp6.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_UpdateAdminInfo", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7 }, new int[] { 7 });
-            //if (reValues != null)
-            //{
-            //    return (int)Convert.ChangeType(reValues[0], typeof(int));
-            //}
-
-            return -19000000;
-        }
 
         /// <summary>
         /// 删除管理员(wait for mdy)
@@ -286,24 +258,13 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="classpop"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public int AddAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content)
+        public int AddAdminRole(string vcRoleName, string pop, string classpop, string content)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
-            //SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.VarChar, 255); sp3.Value = content;
-            //SqlParameter sp4 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp4.Value = pop;
-            //SqlParameter sp5 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp5.Value = classpop;
-            //SqlParameter sp6 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp6.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleInfoMdy", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6 },
-            //    new int[] { 6 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            AccessFactory.conn.Execute("INSERT INTO AdminRole (vcRoleName,vcContent,vcPopedom,vcClassPopedom) "
+                    + "VALUES('" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "') ");
+
+            return 1;
         }
 
         /// <summary>
@@ -316,26 +277,15 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="content"></param>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public int MdyAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content, int roleid)
+        public int MdyAdminRole(string vcRoleName, string pop, string classpop, string content, int roleid)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
-            //SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.VarChar, 255); sp3.Value = content;
-            //SqlParameter sp4 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp4.Value = pop;
-            //SqlParameter sp5 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp5.Value = classpop;
-            //SqlParameter sp6 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp6.Value = "02";
-            //SqlParameter sp7 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp7.Value = roleid.ToString();
-            //SqlParameter sp8 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp8.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleInfoMdy", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8 },
-            //    new int[] { 8 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            AccessFactory.conn.Execute("UPDATE AdminRole SET vcRoleName = '" + vcRoleName + "',vcContent='" + content + "',vcPopedom='" + pop + "', "
+                + "vcClassPopedom='" + pop + "' WHERE iID = " + roleid.ToString());
+
+            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE iRole = " + roleid.ToString());
+
+            return 1;
         }
 
         /// <summary>
@@ -344,20 +294,19 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="vcAdminname"></param>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public int DelAdminRole(string vcAdminname, int roleid)
+        public int DelAdminRole(int roleid)
         {
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = roleid.ToString();
-            //SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp3.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleDel", new SqlParameter[] { sp0, sp1, sp2, sp3 },
-            //    new int[] { 3 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+
+
+            int admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + roleid));
+            if (admincount > 0)
+            {
+                return -1000000015;
+            }
+
+            AccessFactory.conn.Execute("DELETE FROM AdminRole WHERE iID = " + roleid.ToString()); 
+
+            return 1;
         }
 
         /// <summary>
@@ -423,7 +372,6 @@ namespace TCG.Handlers.Imp.AccEss
         public void AdminLoginOut(string vcAdminname)
         {
             AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
-            //DBHelper.conn.Execute("DELETE AdminOnline WHERE vcAdminName ='" + vcAdminname + "'");
         }
 
         /// <summary>

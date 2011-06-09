@@ -29,6 +29,8 @@ public partial class resources_resourceslist : BasePage
 
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(18);
+
         if (!Page.IsPostBack)
         {
             this.SearchInit();

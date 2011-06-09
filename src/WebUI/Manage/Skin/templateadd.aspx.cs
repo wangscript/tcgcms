@@ -23,6 +23,7 @@ public partial class Template_templateadd : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(28);
 
         if (!Page.IsPostBack)
         {

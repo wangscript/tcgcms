@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Data;
@@ -29,7 +30,7 @@ public partial class Test : BasePage
     {
 
         //IConnection _conn = new TCG.DBHelper.AccEss();
-        //_conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/#ZS_data.mdb"));
+        //_conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/LY_DATA.mdb"));
 
         //员工园地
         //DataTable dt = _conn.DataTable("select * from health where  H_zt<>10000 and H_check=10015 order by H_send_time");
@@ -58,6 +59,10 @@ public partial class Test : BasePage
 
         //文体
         //DataTable dt = _conn.DataTable("select * from culture where s_id=101 and RecDr = 0 order by id");
+
+
+        //留言板
+        //DataTable dt = _conn.DataTable("select * from LY");
 
         //if (dt != null && dt.Rows.Count > 0)
         //{
@@ -439,6 +444,26 @@ public partial class Test : BasePage
                 //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
                 //Response.Write(row["name"].ToString() + "-----------" + txt + "<br/>");
 
+                //留言板
+
+        //        FeedBack bk = new FeedBack();
+        //        bk.Email = row["E_mail"].ToString();
+        //        bk.Title = row["L_title"].ToString();
+        //        bk.Content = row["L_content"].ToString().Replace("'","''");
+        //        bk.Ip = row["ip"].ToString();
+        //        bk.QQ = "";
+        //        bk.Tel = row["L_tel"].ToString();
+        //        bk.AddDate = objectHandlers.ToTime(row["L_date"].ToString());
+        //        bk.SkinId = "TCG-ZhongShengpharmacyCN";
+        //        bk.UserName = row["L_name"].ToString();
+               
+
+        //        int rtn = -1;
+        //        rtn = base.handlerService.feedBackHandlers.CreateFeedBack(bk);
+
+        //        string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
+        //        Response.Write(row["L_title"].ToString() + "-----------" + txt + "<br/>");
+
         //    }
         //    Response.Write("记录总数:" + dt.Rows.Count + "<br/>");
         //}
@@ -449,28 +474,36 @@ public partial class Test : BasePage
 
 
         //批量生成资讯
-        Dictionary<string, EntityBase> res = null;
-        int curpage = objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pagecount = 0;
-        int count = 0;
+        //Dictionary<string, EntityBase> res = null;
+        //int curpage = objectHandlers.ToInt(objectHandlers.Get("page"));
+        //int pagecount = 0;
+        //int count = 0;
 
-        res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
-                   curpage, 100, "Id DESC", "1=1");
+        //res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
+        //           curpage, 100, "Id DESC", "1=1");
 
-        if (res != null)
+        //if (res != null)
+        //{
+        //    foreach (KeyValuePair<string, EntityBase> entity in res)
+        //    {
+        //        Resources ppti = (Resources)entity.Value;
+
+        //        string errtxt = "";
+        //        base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
+        //    }
+        //}
+
+        //if (curpage < pagecount)
+        //{
+        //    Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
+        //}
+
+        string text = TxtReader.GetRequestText("http://demo.tcgcms.cn/vvvv.html", "utf-8");
+
+        MatchCollection mach = Regex.Matches(text, @"<!--4 主题-->([\S\s]*?)>([\S\s]*?)>([\S\s]*?)>([\S\s]*?)</a>", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        if (mach.Count>0)
         {
-            foreach (KeyValuePair<string, EntityBase> entity in res)
-            {
-                Resources ppti = (Resources)entity.Value;
 
-                string errtxt = "";
-                base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
-            }
-        }
-
-        if (curpage < pagecount)
-        {
-            Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
         }
 
 

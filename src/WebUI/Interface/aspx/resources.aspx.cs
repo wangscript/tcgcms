@@ -119,6 +119,39 @@ public partial class Interface_aspx_resources : BasePage
 
         strCondition += " AND cDel ='N' AND cChecked='Y' AND cCreated = 'Y'";
 
+
+        string speciality = objectHandlers.Get("sp");
+
+
+        if (!string.IsNullOrEmpty(speciality))
+        {
+            if (speciality.IndexOf(",") > -1)
+            {
+
+                string[] aaa = speciality.Split(',');
+                string text323 = string.Empty;
+                for (int n = 0; n < aaa.Length; n++)
+                {
+                    if (!string.IsNullOrEmpty(aaa[n]))
+                    {
+                        string text = n == 0 ? "" : " OR ";
+                        text323 += text + " vcSpeciality like '%" + aaa[n] + "%'";
+                    }
+                }
+                if (!string.IsNullOrEmpty(text323))
+                {
+                    strCondition += " AND (";
+                    strCondition += text323;
+                    strCondition += " )";
+                }
+            }
+            else
+            {
+                strCondition += " AND vcSpeciality like '%" + speciality + "%' ";
+            }
+        }
+
+
         int curPage = 0;
         int pageCount = 0;
         int count = 0;

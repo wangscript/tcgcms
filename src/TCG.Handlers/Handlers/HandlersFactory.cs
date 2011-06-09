@@ -279,6 +279,8 @@ namespace TCG.Handlers
                     feedBack.AddDate = objectHandlers.ToTime(row["AddDate"].ToString());
                     feedBack.Ip = row["Ip"].ToString();
                     feedBack.SkinId = row["SkinId"].ToString();
+                    feedBack.Title = row["Title"].ToString();
+                    feedBack.Email = row["Email"].ToString();
                     return (EntityBase)feedBack;
             }
             return null;

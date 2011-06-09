@@ -27,6 +27,7 @@ public partial class resources_resourcesrecovery : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(38);
 
         if (!Page.IsPostBack)
         {

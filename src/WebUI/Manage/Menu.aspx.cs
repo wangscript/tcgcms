@@ -23,6 +23,7 @@ public partial class aMenu : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(16);
 
         if (!Page.IsPostBack)
         {
@@ -40,6 +41,8 @@ public partial class aMenu : BasePage
         if (ParentId == 0) ParentId = 1;
 
 
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(ParentId);
+
         //获取管理员权限
         Dictionary<int, Popedom> cpop = base.handlerService.manageService.adminHandlers.GetChildManagePopedomEntity(ParentId);
 
@@ -54,6 +57,7 @@ public partial class aMenu : BasePage
 
         int i = 0;
 
+        //如果是资源管理，显示详细资源分类
         if (ParentId == 18)
         {
             //加载2级资讯分类
@@ -93,29 +97,37 @@ public partial class aMenu : BasePage
                 }
             }
         }
-
-        
-        foreach (KeyValuePair<int, Popedom> keyvalue in cpop)
+        else
         {
-            string Url = keyvalue.Value.vcUrl;
 
-            if (0 == i) script.Append("window.parent.main.location.href='" + Url + "';\r\n");
-            sb.Append( string.Format(tempClass, i, Url, keyvalue.Value.vcPopName));
-
-            Dictionary<int, Popedom> tpop = base.handlerService.manageService.adminHandlers.GetChildManagePopedomEntity(keyvalue.Value.iID);
-            if (tpop == null) continue;
-
-            script.Append("stNums[" + i.ToString() + "]=" + tpop.Count.ToString() + ";\r\n");
-
-            int n = 0;
-            foreach (KeyValuePair<int, Popedom> keyvalue1 in tpop)
+            foreach (KeyValuePair<int, Popedom> keyvalue in cpop)
             {
-                string Url1 = keyvalue1.Value.vcUrl;
-                sb.Append(string.Format(tempSClass, i, n, Url1, keyvalue1.Value.vcPopName, keyvalue1.Value.iID.ToString()));
-                n++;
-            }
+                string Url = keyvalue.Value.vcUrl;
 
-            i++;
+                if (base.handlerService.manageService.adminHandlers.CheckAdminPopEx(keyvalue.Value.iID))
+                {
+                    if (0 == i) script.Append("window.parent.main.location.href='" + Url + "';\r\n");
+                    sb.Append(string.Format(tempClass, i, Url, keyvalue.Value.vcPopName));
+
+                    Dictionary<int, Popedom> tpop = base.handlerService.manageService.adminHandlers.GetChildManagePopedomEntity(keyvalue.Value.iID);
+                    if (tpop == null) continue;
+
+                    script.Append("stNums[" + i.ToString() + "]=" + tpop.Count.ToString() + ";\r\n");
+
+                    int n = 0;
+                    foreach (KeyValuePair<int, Popedom> keyvalue1 in tpop)
+                    {
+                        if (base.handlerService.manageService.adminHandlers.CheckAdminPopEx(keyvalue1.Value.iID))
+                        {
+                            string Url1 = keyvalue1.Value.vcUrl;
+                            sb.Append(string.Format(tempSClass, i, n, Url1, keyvalue1.Value.vcPopName, keyvalue1.Value.iID.ToString()));
+                            n++;
+                        }
+                    }
+
+                    i++;
+                }
+            }
         }
 
 

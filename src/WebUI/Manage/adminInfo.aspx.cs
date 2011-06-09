@@ -22,6 +22,7 @@ public partial class adminInfo : BasePage
     {
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(7);
 
         if (!Page.IsPostBack)
         {

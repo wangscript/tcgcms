@@ -68,9 +68,6 @@ namespace TCG.Handlers
         int UpdateAdminInfo(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop);
 
 
-
-        int UpdateAdminInfo(int AdminID, string nickname, int iRole, string filesysroot, int slock);
-
         /// <summary>
         /// 删除管理员(wait for mdy)
         /// </summary>
@@ -129,19 +126,7 @@ namespace TCG.Handlers
         /// <param name="classpop"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        int AddAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content);
-
-        /// <summary>
-        /// 修改角色组
-        /// </summary>
-        /// <param name="vcAdminname"></param>
-        /// <param name="vcRoleName"></param>
-        /// <param name="pop"></param>
-        /// <param name="classpop"></param>
-        /// <param name="content"></param>
-        /// <param name="roleid"></param>
-        /// <returns></returns>
-        int MdyAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content, int roleid);
+        int AddAdminRole(string vcRoleName, string pop, string classpop, string content);
 
         /// <summary>
         /// 删除角色组
@@ -149,7 +134,7 @@ namespace TCG.Handlers
         /// <param name="vcAdminname"></param>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        int DelAdminRole(string vcAdminname, int roleid);
+        int DelAdminRole(int roleid);
 
         /// <summary>
         /// 删除管理员
@@ -178,5 +163,17 @@ namespace TCG.Handlers
         void AminInfoRefash();
 
         void UpdateAdminLastloginTime(string Adminname);
+
+        /// <summary>
+        /// 修改管理组权限
+        /// </summary>
+        /// <param name="vcAdminname"></param>
+        /// <param name="vcRoleName"></param>
+        /// <param name="pop"></param>
+        /// <param name="classpop"></param>
+        /// <param name="content"></param>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        int MdyAdminRole(string vcRoleName, string pop, string classpop, string content, int roleid);
     }
 }

@@ -24,6 +24,7 @@ public partial class Manage_Skin_propertieshandlers : BasePage
 
          //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(46);
 
         if (!Page.IsPostBack)
         {

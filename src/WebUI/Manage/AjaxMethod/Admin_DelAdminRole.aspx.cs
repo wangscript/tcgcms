@@ -20,14 +20,45 @@ public partial class AjaxMethod_Admin_DelAdminRole : BasePage
     {
         if (!Page.IsPostBack)
         {
-            int iRole = objectHandlers.ToInt(objectHandlers.Post("iRole"));
+            if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(7))
+            {
+                base.AjaxErch(-2, "");
+                return;
+            }
+
+            int iRole = objectHandlers.ToInt(objectHandlers.Get("iRole"));
             if (iRole == 0)
             {
                 base.AjaxErch(-1,"");
                 return;
             }
-            int rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo.vcAdminName, iRole);
-            base.AjaxErch(rtn.ToString());
+            int rtn = 0;
+
+            try
+            {
+                rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo, iRole);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
+                return;
+            }
+
+            if (rtn < 0)
+            {
+                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
+            }
+            else
+            {
+                if (rtn == 1)
+            {
+                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
+            }
+                base.AjaxErch(rtn, "删除角色组成功", "refash()");
+            }
+
+            
+           
         }
     }
 }

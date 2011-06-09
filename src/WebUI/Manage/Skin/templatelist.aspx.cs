@@ -25,6 +25,8 @@ public partial class Template_templatelist : BasePage
     {  
         //检测管理员登录
         base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+        base.handlerService.manageService.adminHandlers.CheckAdminPop(27);
+
         if (!Page.IsPostBack)
         {
             this.SearchInit();

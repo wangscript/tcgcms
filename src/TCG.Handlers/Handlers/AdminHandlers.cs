@@ -612,24 +612,19 @@ namespace TCG.Handlers
         /// <param name="classpop"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public int AddAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content)
+        public int AddAdminRole(Admin vcAdminname, string vcRoleName, string pop, string classpop, string content)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
-            //SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.VarChar, 255); sp3.Value = content;
-            //SqlParameter sp4 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp4.Value = pop;
-            //SqlParameter sp5 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp5.Value = classpop;
-            //SqlParameter sp6 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp6.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleInfoMdy", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6 },
-            //    new int[] { 6 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            if (string.IsNullOrEmpty(vcRoleName))
+            {
+                return -1000000013;
+            }
+
+            int rtn = this.CheckAdminPower(vcAdminname);
+            if (rtn < 0) return rtn;
+
+
+            return DataBaseFactory.AdminHandlers.AddAdminRole(vcRoleName, pop, classpop, content);
         }
 
         /// <summary>
@@ -642,26 +637,19 @@ namespace TCG.Handlers
         /// <param name="content"></param>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public int MdyAdminRole(string vcAdminname, string vcRoleName, string pop, string classpop, string content, int roleid)
+        public int MdyAdminRole(Admin vcAdminname, string vcRoleName, string pop, string classpop, string content, int roleid)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@vcRoleName", SqlDbType.VarChar, 50); sp2.Value = vcRoleName;
-            //SqlParameter sp3 = new SqlParameter("@vcContent", SqlDbType.VarChar, 255); sp3.Value = content;
-            //SqlParameter sp4 = new SqlParameter("@vcPopedom", SqlDbType.VarChar, 1000); sp4.Value = pop;
-            //SqlParameter sp5 = new SqlParameter("@vcClassPopedom", SqlDbType.VarChar, 255); sp5.Value = classpop;
-            //SqlParameter sp6 = new SqlParameter("@cAction", SqlDbType.Char, 2); sp6.Value = "02";
-            //SqlParameter sp7 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp7.Value = roleid.ToString();
-            //SqlParameter sp8 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp8.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleInfoMdy", new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8 },
-            //    new int[] { 8 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            if (string.IsNullOrEmpty(vcRoleName))
+            {
+                return -1000000013;
+            }
+
+            int rtn = this.CheckAdminPower(vcAdminname);
+            if (rtn < 0) return rtn;
+
+
+            return DataBaseFactory.AdminHandlers.MdyAdminRole(vcRoleName, pop, classpop, content, roleid);
         }
 
         /// <summary>
@@ -670,21 +658,18 @@ namespace TCG.Handlers
         /// <param name="vcAdminname"></param>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        public int DelAdminRole(string vcAdminname, int roleid)
+        public int DelAdminRole(Admin vcAdminname, int roleid)
         {
 
-            //SqlParameter sp0 = new SqlParameter("@vcAdminName", SqlDbType.VarChar, 50); sp0.Value = vcAdminname;
-            //SqlParameter sp1 = new SqlParameter("@vcIp", SqlDbType.VarChar, 15); sp1.Value = objectHandlers.UserIp;
-            //SqlParameter sp2 = new SqlParameter("@iRole", SqlDbType.Int, 4); sp2.Value = roleid.ToString();
-            //SqlParameter sp3 = new SqlParameter("@reValue", SqlDbType.Int, 4); sp3.Direction = ParameterDirection.Output;
-            //string[] reValues = base.conn.Execute("SP_Manage_AdminRoleDel", new SqlParameter[] { sp0, sp1, sp2, sp3 },
-            //    new int[] { 3 });
-            //if (reValues != null)
-            //{
-            //    int rtn = (int)Convert.ChangeType(reValues[0], typeof(int));
-            //    return rtn;
-            //}
-            return -19000000;
+            int rtn = this.CheckAdminPower(vcAdminname);
+            if (rtn < 0) return rtn;
+
+            if (roleid == 0)
+            {
+                return -1000000014;
+            }
+
+            return DataBaseFactory.AdminHandlers.DelAdminRole(roleid);
         }
 
         /// <summary>
@@ -777,6 +762,19 @@ namespace TCG.Handlers
                          ConfigServiceEx.baseConfig["ManagePath"] + "login.aspx", false);
                 return;
             }
+        }
+
+        /// <summary>
+        /// 检测权限操作项目
+        /// </summary>
+        /// <param name="pid">操作项编号</param>   
+        public bool CheckAdminPopEx(int pid)
+        {
+            if (!(this._admin != null && this._admin.vcPopedom != null && this._admin.vcPopedom.Count != 0 && this._admin.vcPopedom.ContainsKey(pid)))
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

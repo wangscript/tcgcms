@@ -35,5 +35,13 @@ namespace TCG.Entity
         /// 皮肤ID
         /// </summary>
         public string SkinId { get; set; }
+        /// <summary>
+        /// 留言主题
+        /// </summary>
+        public string Title { get; set; }
+        /// <summary>
+        /// 客户邮箱
+        /// </summary>
+        public string Email { get; set; }
     }
 }

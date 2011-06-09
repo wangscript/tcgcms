@@ -25,8 +25,8 @@ namespace TCG.Handlers.Imp.AccEss
 
         public int CreateFeedBack(FeedBack feedback)
         {
-            AccessFactory.conn.Execute("INSERT INTO FeedBack(UserName,Tel,QQ ,Content ,Ip ,SkinId )"
-                    + "VALUES('" + feedback.UserName + "','" + feedback.Tel + "','" + feedback.QQ + "','" 
+            AccessFactory.conn.Execute("INSERT INTO FeedBack(TITLE,Email,UserName,Tel,QQ ,Content ,Ip ,SkinId )"
+                    + "VALUES('" + feedback.Title + "','" + feedback.Email + "','" + feedback.UserName + "','" + feedback.Tel + "','" + feedback.QQ + "','" 
                     + feedback.Content + "','" + feedback.Ip + "','" + feedback.SkinId + "')");
             return 1;
         }
