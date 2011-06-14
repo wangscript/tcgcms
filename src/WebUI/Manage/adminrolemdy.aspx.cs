@@ -44,10 +44,7 @@ public partial class adminrolemdy : BasePage
             try
             {
                 rtn = base.handlerService.manageService.adminHandlers.MdyAdminRole(base.adminInfo, vcRoleName, popedom, classpopedom, vcContent, iRoleId);
-                if (rtn == 1)
-                {
-                    CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
-                }
+                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
             }
             catch (Exception ex)
             {
