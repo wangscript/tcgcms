@@ -83,6 +83,13 @@
 	      <input id="iPic" type="text" runat="server" value="0" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
 		    <span id="iPicmsg" class="info1">在列表中的显示顺序</span>
 	    </div>
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">是 否 显 示：</span>
+	      <select id="sVisite" runat="server"  onchange="CheckTemplate('sVisite','sVisitemsg')">
+	  	    <option value="Y">显示</option>
+            <option value="N">不显示</option>
+	      </select>
+		    <span id="sVisitemsg" class="info1">分类资讯详细页模板</span>
+	    </div>
    
 	<div class="dobtn arb_pr">
 		<input type="submit" class="btn2 bold" value="确定" />　　　<input type="reset" class="btn2" value="取消" />

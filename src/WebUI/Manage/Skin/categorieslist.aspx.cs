@@ -91,8 +91,10 @@ public partial class skin_categorieslist : BasePage
         Anchor directory = (Anchor)e.Item.FindControl("directory");
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sOrder = (Span)e.Item.FindControl("sOrder");
+        Span svister = (Span)e.Item.FindControl("svister");
 
         CheckID.Text = categorie.Id;
+        svister.Text = categorie.cVisible == "Y" ? "Y" : "N";
 
         sOrder.Text = categorie.iOrder.ToString();
 
@@ -173,7 +175,14 @@ public partial class skin_categorieslist : BasePage
         Categories cif = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(iMdyID);
         if (cif != null)
         {
-            cif.iOrder = objectHandlers.ToInt(KeyValue);
+            if (iFeildName == "Order")
+            {
+                cif.iOrder = objectHandlers.ToInt(KeyValue);
+            }
+            else if (iFeildName == "cVisible")
+            {
+                cif.cVisible = KeyValue == "Y" ? "Y" : "N";
+            }
             int rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategories(base.adminInfo, cif);
         }
 

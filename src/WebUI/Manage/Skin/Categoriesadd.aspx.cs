@@ -48,6 +48,7 @@ public partial class skin_categoriesadd : BasePage
             cif.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(skinid);
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
             cif.vcPic = objectHandlers.Post("iPic");
+            cif.cVisible = objectHandlers.Post("sVisite");
             
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {

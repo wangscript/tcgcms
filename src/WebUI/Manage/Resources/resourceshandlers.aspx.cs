@@ -189,9 +189,10 @@ public partial class resources_resourceshandlers : BasePage
 
                 foreach (string key in Request.Form.AllKeys)
                 {
+                    string[] keys = key.Split('_');
+
                     if (key.IndexOf("rpvalue_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))
                     {
-                        string[] keys = key.Split('_');
                         ResourceProperties rps = new ResourceProperties();
                         rps.Id = objectHandlers.Post("rpid_" + keys[1]);
                         rps.PropertieName = objectHandlers.Post("ptname_" + keys[1]);
@@ -200,6 +201,15 @@ public partial class resources_resourceshandlers : BasePage
                         rps.PropertieId = objectHandlers.ToInt(objectHandlers.Post("cpid_" + keys[1]));
                         rps.iOrder = objectHandlers.ToInt(objectHandlers.Post("rporder_" + keys[1]));
                         rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, rps);
+                    }
+                    else if (key.IndexOf("rpvalue_") > -1 && string.IsNullOrEmpty(objectHandlers.Post(key)))
+                    {
+
+                        string Id = objectHandlers.Post("rpid_" + keys[1]);
+                        if (!string.IsNullOrEmpty(Id))
+                        {
+                            rtn = base.handlerService.resourcsService.resourcesHandlers.DelResourcesPropertiesOnIds(item.Id, Id);
+                        }
                     }
                 }
             }

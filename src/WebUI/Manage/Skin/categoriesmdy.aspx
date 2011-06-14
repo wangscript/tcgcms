@@ -81,6 +81,14 @@
 		    <span id="iPicmsg" class="info1">在列表中的显示顺序</span>
 	    </div>
 
+        <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">是 否 显 示：</span>
+	      <select id="sVisite" runat="server"  onchange="CheckTemplate('sVisite','sVisitemsg')">
+	  	    <option value="Y">显示</option>
+            <option value="N">不显示</option>
+	      </select>
+		    <span id="sVisitemsg" class="info1">分类资讯详细页模板</span>
+	    </div>
+
 	<div class="dobtn arb_pr">
 	    <input type="hidden" id="Work" value="Mdy" />
         <input type="hidden" id="iMaxPId" name="iMaxPId" runat="server" />

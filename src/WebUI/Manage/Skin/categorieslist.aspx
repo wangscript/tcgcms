@@ -51,6 +51,7 @@
 		<span class="l_classname bold l_rg">分类别名</span>
 		<span class="l_classname bold l_rg">生成目录</span>
 		<span class="l_id bold l_rg">排序</span>
+        <span class="l_id bold l_rg">显示</span>
 		<span class="l_updatedate bold">更新时间</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
@@ -61,6 +62,7 @@
 		<TCG:Span class='l_classname hidover' id='lname' runat='server' />
 		<TCG:Anchor class='l_classname' id='directory' runat='server' />
 		<TCG:Span class='l_id' id='sOrder' onclick="MdyFeild(this,'Order')" runat='server'/>
+        <TCG:Span class='l_id' id='svister' onclick="MdyFeild(this,'cVisible')" runat='server'/>
 		<TCG:Span class='l_updatedate dcolor' id='updatedate' runat='server' />
 	</div>	
 		</ItemTemplate>
