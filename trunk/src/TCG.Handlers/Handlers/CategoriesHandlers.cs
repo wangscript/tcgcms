@@ -37,6 +37,29 @@ namespace TCG.Handlers
             return childcategories;
         }
 
+        /// <summary>
+        /// 根据皮肤编号和分类父亲ID获得分类信息
+        /// </summary>
+        /// <param name="parentid"></param>
+        /// <param name="skinid"></param>
+        /// <returns></returns>
+        public Dictionary<string, EntityBase> GetCategoriesEntityByParentIdForIndex(string parentid, string skinid)
+        {
+            Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
+            if (allcategories == null) return null;
+            if (allcategories.Count == 0) return null;
+            Dictionary<string, EntityBase> childcategories = new Dictionary<string, EntityBase>();
+            foreach (KeyValuePair<string, EntityBase> entity in allcategories)
+            {
+                Categories tempcategories = (Categories)entity.Value;
+                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinInfo.Id&&tempcategories.cVisible=="Y")
+                {
+                    childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
+                }
+            }
+            return childcategories;
+        }
+
 
         /// <summary>
         /// 获得某分类的顶级分类

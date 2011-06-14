@@ -52,6 +52,7 @@
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
+        <span class="l_id bold l_rg">&nbsp;</span>
 		<span class="l_classname bold l_rg newstitle hidover">资讯标题</span>
 		<span class="l_classname bold l_rg newsclass">所属主类别</span>
 		<span class="l_id bold l_rg">审核</span>
@@ -63,6 +64,7 @@
 	<div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);">
 		<span class="l_check"><input name="CheckID" type="checkbox" value="<TCG:Span id='CheckID' runat='server' />" onclick="ForBgCheck(this)" /></span>
 		<TCG:Span class='l_id' id='sId' runat='server'/>
+        <TCG:Span class='l_id' id='sedit' runat='server'/>
 		<TCG:Span class='l_classname newstitle hidover' id='sTitle' runat='server' />
 		<TCG:Span class='l_classname newsclass' id='sClassName' runat='server' />
 		<TCG:Span class='l_id' id='sChecked' runat='server' />

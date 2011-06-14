@@ -155,7 +155,7 @@ public partial class resources_resourceslist : BasePage
         Span updatedate = (Span)e.Item.FindControl("updatedate");
         Span sTitle = (Span)e.Item.FindControl("sTitle");
         Span sId = (Span)e.Item.FindControl("sId");
-        
+        Span sedit = (Span)e.Item.FindControl("sedit");
 
         CheckID.Text = res.Id;
         sId.Text = res.Id;
@@ -179,12 +179,12 @@ public partial class resources_resourceslist : BasePage
             sCreated.Text = "<img src='../images/icon/falseIcon.gif' class='imginlist' />";
         }
 
-        string text = "<a href=\"resourceshandlers.aspx?newsid=" + res.Id + "\" title=\"查看子分类\">"
-            + "<img src=\"../images/icon/11.gif\" border=\"0\"></a>";
+        sedit.Text = "<a href=\"resourceshandlers.aspx?newsid=" + res.Id + "\" title=\"查看子分类\">"
+            + "<img src=\"../images/icon/11.gif\" border=\"0\" style=\"margin-top:5px;\"></a>";
         string tstyle = string.Empty;
         if (!string.IsNullOrEmpty(res.vcTitleColor))
             tstyle = "style=' color:" + res.vcTitleColor + ";'";
-        sTitle.Text = text + "<a href='" + res.GetUrl() + "' " + tstyle 
+        sTitle.Text =  "<a href='" + res.GetUrl() + "' " + tstyle 
             + " target='_blank'>" + res.vcTitle + "</a>";
         sClassName.Text = "<script type=\"text/javascript\">ShowClassNameByClassID('" + res.Categorie.Id + "');</script>";
 

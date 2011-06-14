@@ -49,6 +49,7 @@ public partial class skin_categoriesmdy : BasePage
             cif.iOrder = objectHandlers.ToInt(objectHandlers.Post("iOrder"));
             cif.IsSinglePage = string.IsNullOrEmpty(objectHandlers.Post("iIsSinglePage")) ? "N" : "Y";
             cif.vcPic = objectHandlers.Post("iPic");
+            cif.cVisible = objectHandlers.Post("sVisite");
 
             if (string.IsNullOrEmpty(cif.vcClassName) || string.IsNullOrEmpty(cif.vcName))
             {
@@ -104,6 +105,7 @@ public partial class skin_categoriesmdy : BasePage
         this.iOrder.Value = cif.iOrder.ToString();
         this.iIsSinglePage.Checked = cif.IsSinglePage == "Y" ? true : false;
         this.iPic.Value = cif.vcPic;
+        this.sVisite.Value = cif.cVisible == "Y" ? "Y" : "N";
 
         Dictionary<string, EntityBase> templates = base.handlerService.skinService.templateHandlers.GetTemplatesByTemplateType(TemplateType.InfoType, skinid);
         int i = 0;

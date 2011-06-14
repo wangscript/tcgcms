@@ -41,9 +41,6 @@ public partial class Interface_aspx_resources : BasePage
                 case "getresourcecount":
                     this.GetResourceCount();
                     break;
-                case "getresourcenicon":
-                    this.GetResourcenIcon();
-                    break;
             }
         }
     }
@@ -57,26 +54,7 @@ public partial class Interface_aspx_resources : BasePage
         Response.End();
     }
 
-    private void GetResourcenIcon()
-    {
-        int rid = objectHandlers.ToInt(objectHandlers.Get("rid"));
-        string nicon = "";
-        if (rid > 0)
-        {
-            Resources res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesById(rid);
-            if (res != null)
-            {
-                if (res.dAddDate.AddDays(5) >= DateTime.Now)
-                {
-                    nicon = "<img src='/images/newicon.jpg'/>";
-                }     
-            }
-        }
 
-
-        Response.Write(nicon);
-        Response.End();
-    }
 
     private void GetResourceList()
     {

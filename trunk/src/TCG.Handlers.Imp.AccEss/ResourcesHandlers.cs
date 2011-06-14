@@ -213,7 +213,7 @@ namespace TCG.Handlers.Imp.AccEss
 
         public int DelResourcesPropertiesOnIds(string resid, string ids)
         {
-            AccessFactory.conn.DataTable("DELETE FROM ResourceProperties WHERE ResourceId='" + resid + "' and id not in(" + ids + ")");
+            AccessFactory.conn.DataTable("DELETE FROM ResourceProperties WHERE ResourceId='" + resid + "' and id in(" + ids + ")");
             return 1;
         }
     }

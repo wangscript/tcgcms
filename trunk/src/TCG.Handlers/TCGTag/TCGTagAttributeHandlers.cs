@@ -149,7 +149,7 @@ namespace TCG.Handlers
             string parentid = this.GetAttribute("parent");
             string skinid = this.GetAttribute("skin");
 
-            Dictionary<string, EntityBase> categories =  this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(parentid, skinid);
+            Dictionary<string, EntityBase> categories = this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentIdForIndex(parentid, skinid);
 
             if (categories == null)return;
     
@@ -319,10 +319,18 @@ namespace TCG.Handlers
             bool isintitle = objectHandlers.ToBoolen(this.GetAttribute("intitle"), false);
             if (isintitle) pagerinfo.PageTitle += (string.IsNullOrEmpty(pagerinfo.PageTitle) ? "" : " - ") + item.vcTitle;
 
-            if (!string.IsNullOrEmpty(item.vcTitleColor)) item.vcTitle = "<font color='" + item.vcTitleColor + "'>"
-                + item.vcTitle + "</font>";
-            if (item.cStrong == "Y") item.vcTitle = "<strong>" + "<TCG>" + item.vcTitle + "</strong>";
-            temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + item.vcTitle + "</TCG>");
+            int maxtitlenum = objectHandlers.ToInt(this.GetAttribute("maxtitlenum"));
+            string title = item.vcTitle;
+            if (maxtitlenum != 0)
+            {
+                 string text = (title.Length > maxtitlenum) ? "..." : "";
+                 title = objectHandlers.Left(title, maxtitlenum) + text;
+            }
+
+            if (!string.IsNullOrEmpty(item.vcTitleColor)) title = "<font color='" + item.vcTitleColor + "'>"
+                + title + "</font>";
+            if (item.cStrong == "Y") title = "<strong>" + "<TCG>" + title + "</strong>";
+            temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + title + "</TCG>");
 
             //替换正文内容，检查图片
             //try
@@ -373,8 +381,7 @@ namespace TCG.Handlers
             string sssid = this._tagtype + "_nicon_" + item.Id;
             if (item.dAddDate.AddDays(5) >= DateTime.Now)
             {
-                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'></div><script type='text/javascript'>"
-                    + "$.get('/interface/aspx/resources.aspx?w=getresourcenicon&rid=" + item.Id + "',null,function(data){$('#" + sssid + "').html(data)});</script></TCG>");
+                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'><img src='/images/newicon.jpg'/></div></TCG>");
             }
             else
             {
