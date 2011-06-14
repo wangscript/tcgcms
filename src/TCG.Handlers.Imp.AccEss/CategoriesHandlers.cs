@@ -120,7 +120,6 @@ namespace TCG.Handlers.Imp.AccEss
                 return -1000000033;
             }
             AccessFactory.conn.Execute("DELETE FROM Categories WHERE ID='" + classid + "'");
-            AccessFactory.conn.Execute("DELETE FROM CategorieProperties WHERE CategorieId='" + classid + "'");
             return 1;
         }
 
