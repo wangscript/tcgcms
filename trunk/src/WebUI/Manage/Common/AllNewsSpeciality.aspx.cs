@@ -13,20 +13,22 @@ using TCG.Utils;
 using TCG.Handlers;
 using TCG.Entity;
 
-
-
-public partial class Common_AllNewsSpeciality : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        if (!Page.IsPostBack)
-        {
-            string skinid = objectHandlers.Get("skinid");
-            Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.specialityHandlers.GetAllNewsSpecialityEntityBySkinId(skinid), typeof(Speciality));
-            Response.Write(cg);
-            Response.End();
 
+    public partial class Common_AllNewsSpeciality : BasePage
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                string skinid = objectHandlers.Get("skinid");
+                Response.ContentType = "application/x-javascript";
+                string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.specialityHandlers.GetAllNewsSpecialityEntityBySkinId(skinid), typeof(Speciality));
+                Response.Write(cg);
+                Response.End();
+
+            }
         }
     }
 }

@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllFileClass.aspx.cs" Inherits="Common_AllFileClass" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllFileClass.aspx.cs" Inherits="TCG.CMS.WebUi.Common_AllFileClass" %>

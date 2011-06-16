@@ -8,35 +8,39 @@ using System.Web.UI.WebControls;
 using TCG.Utils;
 using TCG.Release;
 
-public partial class Manage_Version_Ver : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+
+    public partial class Manage_Version_Ver : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string action = objectHandlers.Get("action");
-            switch (action)
+            if (!Page.IsPostBack)
             {
-                case "IsHaveHigherVer":
-                    this.IsHigherVer();
-                    break;
+                string action = objectHandlers.Get("action");
+                switch (action)
+                {
+                    case "IsHaveHigherVer":
+                        this.IsHigherVer();
+                        break;
+                }
             }
         }
-    }
 
-    private void IsHigherVer()
-    {
-        string txt = string.Empty;
-        if (Versions.HigherVersion == null)
+        private void IsHigherVer()
         {
-            txt = "{state:false}";
-        }
-        else
-        {
-            txt = "{state:true,version:'" + Versions.GetVerStr(Versions.HigherVersion.Ver) + "',logurl:'" +
-                Versions.HigherVersion.LogUrl + "'}";
-        }
+            string txt = string.Empty;
+            if (Versions.HigherVersion == null)
+            {
+                txt = "{state:false}";
+            }
+            else
+            {
+                txt = "{state:true,version:'" + Versions.GetVerStr(Versions.HigherVersion.Ver) + "',logurl:'" +
+                    Versions.HigherVersion.LogUrl + "'}";
+            }
 
-        base.AjaxErch(txt);
+            base.AjaxErch(txt);
+        }
     }
 }

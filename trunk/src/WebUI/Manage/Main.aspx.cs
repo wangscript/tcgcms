@@ -13,18 +13,22 @@ using TCG.Utils;
 
 using TCG.Release;
 
-
-public partial class Main : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        //检测管理员登录
-        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-        base.handlerService.manageService.adminHandlers.CheckAdminPop(13);
 
-        if (!Page.IsPostBack)
+    public partial class Main : BasePage
+    {
+        protected void Page_Load(object sender, EventArgs e)
         {
-            this.title.Text = ConfigServiceEx.baseConfig["WebTitle"] + " - " + Versions.version;
+            //检测管理员登录
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminPop(13);
+
+            if (!Page.IsPostBack)
+            {
+                this.title.Text = ConfigServiceEx.baseConfig["WebTitle"] + " - " + Versions.version;
+            }
         }
     }
+
 }

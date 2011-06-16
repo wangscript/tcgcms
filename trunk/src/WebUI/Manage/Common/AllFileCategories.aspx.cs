@@ -16,18 +16,20 @@ using TCG.Entity;
 using TCG.Handlers;
 
 
-
-public partial class Manage_Common_AllFileCategories : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Manage_Common_AllFileCategories : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.fileService.fileHandlers.GetAllFileCategoriesEntity()
-                , typeof(FileCategories));
-            Response.Write(cg);
-            Response.End();
-        } 
+            if (!Page.IsPostBack)
+            {
+                Response.ContentType = "application/x-javascript";
+                string cg = base.handlerService.GetJsEntitys(base.handlerService.fileService.fileHandlers.GetAllFileCategoriesEntity()
+                    , typeof(FileCategories));
+                Response.Write(cg);
+                Response.End();
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="propertieslist.aspx.cs" Inherits="Manage_Skin_propertieslist" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="propertieslist.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Skin_propertieslist" %>
 
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>

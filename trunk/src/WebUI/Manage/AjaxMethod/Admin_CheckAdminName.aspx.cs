@@ -14,33 +14,36 @@ using TCG.Utils;
 using TCG.Entity;
 
 
-
-public partial class AjaxMethod_Admin_CheckAdminName : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class AjaxMethod_Admin_CheckAdminName : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string adminname = objectHandlers.Get("admin", CheckGetEnum.Safety);
-            int rtn = 0;
-            try
+            if (!Page.IsPostBack)
             {
-                rtn = base.handlerService.manageService.adminHandlers.CheckAdminNameForReg(adminname);
-            }
-            catch (Exception ex)
-            {
-                base.AjaxErch("{state:false,message:'" + objectHandlers.JSEncode(ex.Message.ToString()) + "'}");
-                return;
-            }
+                string adminname = objectHandlers.Get("admin", CheckGetEnum.Safety);
+                int rtn = 0;
+                try
+                {
+                    rtn = base.handlerService.manageService.adminHandlers.CheckAdminNameForReg(adminname);
+                }
+                catch (Exception ex)
+                {
+                    base.AjaxErch("{state:false,message:'" + objectHandlers.JSEncode(ex.Message.ToString()) + "'}");
+                    return;
+                }
 
-            if (rtn == 0)
-            {
-                base.AjaxErch("{state:true,message:'该用户名可以使用!'}");
-            }
-            else
-            {
-                base.AjaxErch("{state:false,message:'该用户名已经被其他人使用!'}");
+                if (rtn == 0)
+                {
+                    base.AjaxErch("{state:true,message:'该用户名可以使用!'}");
+                }
+                else
+                {
+                    base.AjaxErch("{state:false,message:'该用户名已经被其他人使用!'}");
+                }
             }
         }
     }
+
 }

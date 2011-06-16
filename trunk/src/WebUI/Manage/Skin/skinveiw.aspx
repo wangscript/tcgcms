@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skinveiw.aspx.cs" Inherits="Manage_Skin_skinveiw" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skinveiw.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Skin_skinveiw" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

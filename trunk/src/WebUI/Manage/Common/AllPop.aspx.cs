@@ -17,35 +17,38 @@ using TCG.Utils;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Common_AllPop : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Common_AllPop : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("var _Popedom=[");
-            Dictionary<int, Popedom> allpop = base.handlerService.manageService.adminHandlers.GetAllPopedomEntity();
-
-            if (allpop != null && allpop.Count != 0)
+            if (!Page.IsPostBack)
             {
-                int i = 0;
-                foreach (KeyValuePair<int, Popedom> keyvalue in allpop)
-                {
-                    sb.Append("{");
-                    sb.Append("Id:" + keyvalue.Value.iID + ",");
-                    sb.Append("Name:'" + keyvalue.Value.vcPopName + "',");
-                    sb.Append("Addtime:'" + keyvalue.Value.dAddtime.ToString() + "',");
-                    sb.Append("ParentId:" + keyvalue.Value.iParentId.ToString() + "");
-                    sb.Append("}");
-                    i++;
-                    if (i != allpop.Count) sb.Append(",");
-                }
-            }
+                StringBuilder sb = new StringBuilder();
+                sb.Append("var _Popedom=[");
+                Dictionary<int, Popedom> allpop = base.handlerService.manageService.adminHandlers.GetAllPopedomEntity();
 
-            sb.Append("];");
-            Response.Write(sb.ToString());
-            Response.End();
+                if (allpop != null && allpop.Count != 0)
+                {
+                    int i = 0;
+                    foreach (KeyValuePair<int, Popedom> keyvalue in allpop)
+                    {
+                        sb.Append("{");
+                        sb.Append("Id:" + keyvalue.Value.iID + ",");
+                        sb.Append("Name:'" + keyvalue.Value.vcPopName + "',");
+                        sb.Append("Addtime:'" + keyvalue.Value.dAddtime.ToString() + "',");
+                        sb.Append("ParentId:" + keyvalue.Value.iParentId.ToString() + "");
+                        sb.Append("}");
+                        i++;
+                        if (i != allpop.Count) sb.Append(",");
+                    }
+                }
+
+                sb.Append("];");
+                Response.Write(sb.ToString());
+                Response.End();
+            }
         }
     }
 }

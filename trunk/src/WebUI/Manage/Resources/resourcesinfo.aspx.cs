@@ -12,11 +12,13 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-
-public partial class resources_resourcesinfo : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class resources_resourcesinfo : BasePage
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -15,40 +15,43 @@ using TCG.Utils;
 
 using TCG.Entity;
 
-public partial class AjaxMethod_Text_GetErrText : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class AjaxMethod_Text_GetErrText : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string ErrCode = objectHandlers.Get("ErrCode", CheckGetEnum.Safety);
-            if (string.IsNullOrEmpty(ErrCode))
+            if (!Page.IsPostBack)
             {
-                base.AjaxErch("错误代码请求错误！");
-                return;
-            }
-
-            if (ErrCode == "1")
-            {
-                base.AjaxErch("操作成功！");
-                return;
-            }
-
-            string ErrTexts = TxtReader.Read(ConfigurationManager.ConnectionStrings["ErrTxtPath"].ToString());
-            string errText = "";
-            if (!string.IsNullOrEmpty(ErrTexts))
-            {
-                string patten = ErrCode.ToString() + @"@@@([A-Z_a-z|]+)@@@([^-\r\n]+)";
-                Match mt = Regex.Match(ErrTexts, patten, RegexOptions.Singleline);
-                if (mt.Success)
+                string ErrCode = objectHandlers.Get("ErrCode", CheckGetEnum.Safety);
+                if (string.IsNullOrEmpty(ErrCode))
                 {
-                    errText = mt.Result("$2");
+                    base.AjaxErch("错误代码请求错误！");
+                    return;
                 }
-                mt = null;
-            }
 
-            base.AjaxErch(errText);
-            return;
+                if (ErrCode == "1")
+                {
+                    base.AjaxErch("操作成功！");
+                    return;
+                }
+
+                string ErrTexts = TxtReader.Read(ConfigurationManager.ConnectionStrings["ErrTxtPath"].ToString());
+                string errText = "";
+                if (!string.IsNullOrEmpty(ErrTexts))
+                {
+                    string patten = ErrCode.ToString() + @"@@@([A-Z_a-z|]+)@@@([^-\r\n]+)";
+                    Match mt = Regex.Match(ErrTexts, patten, RegexOptions.Singleline);
+                    if (mt.Success)
+                    {
+                        errText = mt.Result("$2");
+                    }
+                    mt = null;
+                }
+
+                base.AjaxErch(errText);
+                return;
+            }
         }
     }
 }

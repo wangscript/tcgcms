@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categories.aspx.cs" Inherits="Interface_aspx_categories" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categories.aspx.cs" Inherits="TCG.CMS.WebUi.Interface_aspx_categories" %>
 /
   * Copyright (C) 2009-2009 tcgcms.com <http://www.tcgcms.cn/> 
   *  

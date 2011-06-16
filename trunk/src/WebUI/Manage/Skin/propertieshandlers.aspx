@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="propertieshandlers.aspx.cs" Inherits="Manage_Skin_propertieshandlers" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="propertieshandlers.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Skin_propertieshandlers" %>
 
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>

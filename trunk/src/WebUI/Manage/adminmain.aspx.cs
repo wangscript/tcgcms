@@ -9,9 +9,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class adminmain : System.Web.UI.Page
+
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class adminmain : System.Web.UI.Page
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
     }
+
 }

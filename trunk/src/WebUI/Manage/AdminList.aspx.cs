@@ -9,15 +9,19 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class AdminList : System.Web.UI.Page
-{
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        if (Page.IsPostBack)
-        {
 
-            Response.Write(Request.Form["gg"]);
-            Response.End();
+namespace TCG.CMS.WebUi
+{
+    public partial class AdminList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Page.IsPostBack)
+            {
+
+                Response.Write(Request.Form["gg"]);
+                Response.End();
+            }
         }
     }
 }

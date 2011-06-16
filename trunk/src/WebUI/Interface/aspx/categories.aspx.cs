@@ -22,25 +22,28 @@ using System.Web.UI.WebControls;
 using TCG.Utils;
 using TCG.Entity;
 
-public partial class Interface_aspx_categories : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Interface_aspx_categories : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string work = objectHandlers.Get("w");
-            switch (work)
+            if (!Page.IsPostBack)
             {
-                case "getallcategories" :
-                    this.GetAllCategories();
-                    break;
+                string work = objectHandlers.Get("w");
+                switch (work)
+                {
+                    case "getallcategories":
+                        this.GetAllCategories();
+                        break;
+                }
             }
         }
-    }
 
-    private void GetAllCategories()
-    {
-        string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(ConfigServiceEx.DefaultSkinId), typeof(Categories));
-        objectHandlers.SaveFile(Server.MapPath("~/interface/js/categories.js"), cg);
+        private void GetAllCategories()
+        {
+            string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(ConfigServiceEx.DefaultSkinId), typeof(Categories));
+            objectHandlers.SaveFile(Server.MapPath("~/interface/js/categories.js"), cg);
+        }
     }
 }

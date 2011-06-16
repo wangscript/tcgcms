@@ -9,10 +9,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class Ctrl_AjaxDiv : System.Web.UI.UserControl
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Ctrl_AjaxDiv : System.Web.UI.UserControl
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
+        }
     }
+
 }

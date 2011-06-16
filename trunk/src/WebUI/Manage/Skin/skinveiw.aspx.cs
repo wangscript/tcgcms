@@ -14,36 +14,40 @@ using TCG.Controls.HtmlControls;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Manage_Skin_skinveiw : BasePage
+
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Manage_Skin_skinveiw : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
 
 
-           
+
+            }
         }
-    }
 
 
-    private void Loadcategories()
-    {
-        //string skinid = objectHandlers.Get("skinid");
+        private void Loadcategories()
+        {
+            //string skinid = objectHandlers.Get("skinid");
 
-        //CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
-        ////检测管理员登录
-        //base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
+            //CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            ////检测管理员登录
+            //base.handlerService.manageService.adminLoginHandlers.CheckAdminLogin();
 
-        //StringBuilder tempashtml = new StringBuilder();
+            //StringBuilder tempashtml = new StringBuilder();
 
-        //Dictionary<string, EntityBase> cages = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId("0", skinid);
+            //Dictionary<string, EntityBase> cages = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId("0", skinid);
 
-        //if (cages != null)
-        //{
-        //    tempashtml.Append(cages.Count.ToString());
-        //}
+            //if (cages != null)
+            //{
+            //    tempashtml.Append(cages.Count.ToString());
+            //}
 
-        //base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(tempashtml.ToString()) + "\"}");
+            //base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(tempashtml.ToString()) + "\"}");
+        }
     }
 }

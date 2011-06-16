@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CategorieProperties.aspx.cs" Inherits="Manage_Common_CategorieProperties" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CategorieProperties.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Common_CategorieProperties" %>

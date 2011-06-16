@@ -1,10 +1,10 @@
-ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="adminRecovery.aspx.cs" Inherits="adminRecovery" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="adminRecovery.aspx.cs" Inherits="TCG.CMS.WebUi.adminRecovery" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>ç®¡ç†å‘˜å›žæ”¶ç«™</title>
+    <title>¹ÜÀíÔ±»ØÊÕÕ¾</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/commonV2.js"></script>
@@ -19,17 +19,17 @@
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="page_title1 bold"><TCG:Span id='srolename' runat='server' /></div>
     <div class="listtitle">
-		<span class="txt">å…±æœ‰
-            <TCG:Span class='green bold' id='sAdmincount' runat='server' />ä¸ªç®¡ç†å‘˜</span>
-		<span class="txt">ï¼Œå…±æœ‰<TCG:Span class='green bold' id='sRolecount' runat='server' />è§’è‰²ç»„ | </span>
-		<span  class="txt"> <a href="javascript:GoTo();" onclick="RealDel();">å½»åº•åˆ é™¤</a> - <a href="javascript:GoTo();" onclick="SaveAdmins();">æ•‘å›žæ‰€é€‰</a></span>
+		<span class="txt">¹²ÓÐ
+            <TCG:Span class='green bold' id='sAdmincount' runat='server' />¸ö¹ÜÀíÔ±</span>
+		<span class="txt">£¬¹²ÓÐ<TCG:Span class='green bold' id='sRolecount' runat='server' />½ÇÉ«×é | </span>
+		<span  class="txt"> <a href="javascript:GoTo();" onclick="RealDel();">³¹µ×É¾³ý</a> - <a href="javascript:GoTo();" onclick="SaveAdmins();">¾È»ØËùÑ¡</a></span>
 	</div>
 	<div class="listtitle1 bold">
 		<span class="CheckID"><input name="SelAll" type="checkbox" value="" onclick="SetCheckBox('CheckID',this);"/></span>
-		<span class="loginName">ç™»é™†å</span>
-		<span class="nickname">æ˜µç§°</span>
-		<span class="adminrole">è§’è‰²</span>
-		<span class="updatedate">æ›´æ–°æ—¶é—´</span>
+		<span class="loginName">µÇÂ½Ãû</span>
+		<span class="nickname">êÇ³Æ</span>
+		<span class="adminrole">½ÇÉ«</span>
+		<span class="updatedate">¸üÐÂÊ±¼ä</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

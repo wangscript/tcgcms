@@ -14,26 +14,29 @@ using TCG.Utils;
 using TCG.Entity;
 
 
-public partial class AjaxMethod_Admin_CheckPwd : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class AjaxMethod_Admin_CheckPwd : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string pwd = objectHandlers.Get("PWD", CheckGetEnum.Safety);
+            if (!Page.IsPostBack)
+            {
+                string pwd = objectHandlers.Get("PWD", CheckGetEnum.Safety);
 
-            if (base.adminInfo == null)
-            {
-                base.AjaxErch(-1000000601,"");
-                return;
+                if (base.adminInfo == null)
+                {
+                    base.AjaxErch(-1000000601, "");
+                    return;
+                }
+                pwd = objectHandlers.MD5(pwd);
+                if (pwd.ToLower() == base.adminInfo.vcPassword.ToLower())
+                {
+                    base.AjaxErch(1, "原始密码输入正确！");
+                    return;
+                }
+                base.AjaxErch(-1000000602, "");
             }
-            pwd = objectHandlers.MD5(pwd);
-            if (pwd.ToLower() == base.adminInfo.vcPassword.ToLower())
-            {
-                base.AjaxErch(1,"原始密码输入正确！");
-                return;
-            }
-            base.AjaxErch(-1000000602,"");
         }
     }
 }

@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_logout.aspx.cs" Inherits="AjaxMethod_Admin_logout" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Admin_logout.aspx.cs" Inherits="TCG.CMS.WebUi.AjaxMethod_Admin_logout" %>

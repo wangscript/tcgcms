@@ -10,16 +10,20 @@ using TCG.Handlers;
 
 using TCG.Entity;
 
-public partial class Manage_Common_AllSkin : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Manage_Common_AllSkin : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.skinHandlers.GetAllSkinEntity(), typeof(Skin));
-            Response.Write(cg);
-            Response.End();
+            if (!Page.IsPostBack)
+            {
+                Response.ContentType = "application/x-javascript";
+                string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.skinHandlers.GetAllSkinEntity(), typeof(Skin));
+                Response.Write(cg);
+                Response.End();
+            }
         }
     }
+
 }

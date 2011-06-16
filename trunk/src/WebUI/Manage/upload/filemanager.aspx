@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="filemanager.aspx.cs" Inherits="Manage_upload_filemanager" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="filemanager.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_upload_filemanager" %>
