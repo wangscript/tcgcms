@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Ver.aspx.cs" Inherits="Manage_Version_Ver" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Ver.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Version_Ver" %>

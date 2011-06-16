@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="fileclass.aspx.cs" Inherits="files_fileclass" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="fileclass.aspx.cs" Inherits="TCG.CMS.WebUi.files_fileclass" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

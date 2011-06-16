@@ -22,177 +22,179 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-
-public partial class news_createhtml : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class news_createhtml : BasePage
     {
-        this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
-
-        if (Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            //检测管理员登录
-            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+            this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
-            string vwork = objectHandlers.Post("work");
-            switch (vwork)
+            if (Page.IsPostBack)
             {
-                case "Search":
-                    this.Search();
-                    break;
-                case "Create":
-                    this.Create();
-                    break;
-                case "CreateClassList":
-                    this.CreateClassList();
-                    break;
-                case "CreateSingeTemplate" :
-                    this.CreateSingeTemplate();
-                    break;
-            }
-        }
-    }
+                //检测管理员登录
+                base.handlerService.manageService.adminHandlers.CheckAdminLogin();
 
-    private void CreateSingeTemplate()
-    {
-        string iTemplate = objectHandlers.Post("tClassId");
-        string text = string.Empty;
-        int rtn = 0;
-        try
-        {
-            rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref text);
-        }
-        catch (Exception ex)
-        {
-            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
-            return;
-        }
-
-        base.AjaxErch(rtn, text, "CreateBack2");
-    }
-
-    private void CreateClassList()
-    {
-        string tClassID = objectHandlers.Post("tClassId");
-        string text = string.Empty;
-        int rtn = 0;
-        int pagecount = 0;
-        try
-        {
-            rtn = base.handlerService.tagService.CreateClassList(tClassID,0,ref pagecount, ref text);
-        }
-        catch (Exception ex)
-        {
-            base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
-            return;
-        }
-
-        base.AjaxErch(rtn, text, "CreateBack1");
-    }
-
-    private void Create()
-    {
-        string ClassId = objectHandlers.Post("tClassId");
-        int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
-        string filepath = objectHandlers.Post("iFilePath");
-        string Created = objectHandlers.Post("tCreated");
-
-        Resources item = new Resources();
-        string text1 = "";
-
-        int rtn = 0;
-        try
-        {
-            rtn = base.handlerService.tagService.CreateResourcHtmlById(ref text1, id);
-            text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
-        }
-        catch (Exception ex)
-        {
-            text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
-        }
-
-        base.AjaxErch(1, text1, "CreateBack");
-    }
-
-    private void Search()
-    {
-        Dictionary<string, EntityBase> res = null;
-        string strCondition = string.Empty;
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
-        int page = objectHandlers.ToInt(objectHandlers.Post("page"));
-        string text = "";
-
-        try
-        {
-            strCondition = "cChecked='Y'";
-
-            int create = objectHandlers.ToInt(objectHandlers.Post("Creat"));
-            if (create == 2)
-            {
-                strCondition += " AND cCreated = 'N'";
-            }
-
-            int iStypeCheck = objectHandlers.ToInt(objectHandlers.Post("StypeCheck"));
-            //根据时间搜索
-            if (iStypeCheck == 1)
-            {
-                DateTime dStartTime = objectHandlers.ToTime(objectHandlers.Post("iStartTime"));
-                DateTime dEndTime = objectHandlers.ToTime(objectHandlers.Post("iEndTime"));
-                int iTimeType = objectHandlers.ToInt(objectHandlers.Post("iTimeFeild"));
-                if (iTimeType == 1)
+                string vwork = objectHandlers.Post("work");
+                switch (vwork)
                 {
-                    strCondition += " AND (dAddDate BETWEEN " +objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
-                }
-                else
-                {
-                    strCondition += " AND (dUpdateDate BETWEEN " + objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
+                    case "Search":
+                        this.Search();
+                        break;
+                    case "Create":
+                        this.Create();
+                        break;
+                    case "CreateClassList":
+                        this.CreateClassList();
+                        break;
+                    case "CreateSingeTemplate":
+                        this.CreateSingeTemplate();
+                        break;
                 }
             }
-            else if (iStypeCheck == 2)
-            {
-                string iClassId = objectHandlers.Post("iClassId");
+        }
 
-                strCondition += " AND iClassID = '" + iClassId + "' ";
+        private void CreateSingeTemplate()
+        {
+            string iTemplate = objectHandlers.Post("tClassId");
+            string text = string.Empty;
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.tagService.CreateSingeTemplateToHtml(iTemplate, ref text);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack2");
+                return;
             }
 
-            string Condition = objectHandlers.Post("iCondition");
-            if (!string.IsNullOrEmpty(Condition))
+            base.AjaxErch(rtn, text, "CreateBack2");
+        }
+
+        private void CreateClassList()
+        {
+            string tClassID = objectHandlers.Post("tClassId");
+            string text = string.Empty;
+            int rtn = 0;
+            int pagecount = 0;
+            try
             {
-                strCondition += " AND " + Condition;
+                rtn = base.handlerService.tagService.CreateClassList(tClassID, 0, ref pagecount, ref text);
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
+                return;
             }
 
-            res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                page, objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]), "Id DESC", strCondition);
-  
-        }
-        catch (Exception ex)
-        {
-            base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()));
-            return;
+            base.AjaxErch(rtn, text, "CreateBack1");
         }
 
-        if (pageCount < page)
+        private void Create()
         {
-            base.AjaxErch(1, "已经生成了所有分页！");
-            return;
-        }
+            string ClassId = objectHandlers.Post("tClassId");
+            int id = objectHandlers.ToInt(objectHandlers.Post("iId"));
+            string filepath = objectHandlers.Post("iFilePath");
+            string Created = objectHandlers.Post("tCreated");
 
-        if (res != null)
-        {
-            foreach (KeyValuePair<string, EntityBase> entity in res)
+            Resources item = new Resources();
+            string text1 = "";
+
+            int rtn = 0;
+            try
             {
-                Resources restemp = (Resources)entity.Value;
-                string text1 = (text == "") ? "" : ",";
-                text += text1 + "{Id:'" + restemp.Id + "',ClassId:'" + restemp.Categorie.Id + "',Created:'" +
-                    restemp.cCreated + "',FilePath:'" + objectHandlers.JSEncode(restemp.vcFilePath) + "',Url:'" + objectHandlers.JSEncode(restemp.vcUrl) + "'}";
+                rtn = base.handlerService.tagService.CreateResourcHtmlById(ref text1, id);
+                text1 = "<a href='" + filepath + "' target='_blank'>生成成功:" + filepath + "...</a>";
+            }
+            catch (Exception ex)
+            {
+                text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
             }
 
-            base.AjaxErch(1, text, "SearchBack");
-            return;
+            base.AjaxErch(1, text1, "CreateBack");
         }
 
-        base.AjaxErch(1,"搜索完成！");
+        private void Search()
+        {
+            Dictionary<string, EntityBase> res = null;
+            string strCondition = string.Empty;
+            int curPage = 0;
+            int pageCount = 0;
+            int count = 0;
+            int page = objectHandlers.ToInt(objectHandlers.Post("page"));
+            string text = "";
+
+            try
+            {
+                strCondition = "cChecked='Y'";
+
+                int create = objectHandlers.ToInt(objectHandlers.Post("Creat"));
+                if (create == 2)
+                {
+                    strCondition += " AND cCreated = 'N'";
+                }
+
+                int iStypeCheck = objectHandlers.ToInt(objectHandlers.Post("StypeCheck"));
+                //根据时间搜索
+                if (iStypeCheck == 1)
+                {
+                    DateTime dStartTime = objectHandlers.ToTime(objectHandlers.Post("iStartTime"));
+                    DateTime dEndTime = objectHandlers.ToTime(objectHandlers.Post("iEndTime"));
+                    int iTimeType = objectHandlers.ToInt(objectHandlers.Post("iTimeFeild"));
+                    if (iTimeType == 1)
+                    {
+                        strCondition += " AND (dAddDate BETWEEN " + objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
+                    }
+                    else
+                    {
+                        strCondition += " AND (dUpdateDate BETWEEN " + objectHandlers.GetDataTimeSqlStr(dStartTime.ToString()) + " AND " + objectHandlers.GetDataTimeSqlStr(dEndTime.ToString()) + ")";
+                    }
+                }
+                else if (iStypeCheck == 2)
+                {
+                    string iClassId = objectHandlers.Post("iClassId");
+
+                    strCondition += " AND iClassID = '" + iClassId + "' ";
+                }
+
+                string Condition = objectHandlers.Post("iCondition");
+                if (!string.IsNullOrEmpty(Condition))
+                {
+                    strCondition += " AND " + Condition;
+                }
+
+                res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
+                    page, objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]), "Id DESC", strCondition);
+
+            }
+            catch (Exception ex)
+            {
+                base.AjaxErch(1, objectHandlers.JSEncode(ex.Message.ToString()));
+                return;
+            }
+
+            if (pageCount < page)
+            {
+                base.AjaxErch(1, "已经生成了所有分页！");
+                return;
+            }
+
+            if (res != null)
+            {
+                foreach (KeyValuePair<string, EntityBase> entity in res)
+                {
+                    Resources restemp = (Resources)entity.Value;
+                    string text1 = (text == "") ? "" : ",";
+                    text += text1 + "{Id:'" + restemp.Id + "',ClassId:'" + restemp.Categorie.Id + "',Created:'" +
+                        restemp.cCreated + "',FilePath:'" + objectHandlers.JSEncode(restemp.vcFilePath) + "',Url:'" + objectHandlers.JSEncode(restemp.vcUrl) + "'}";
+                }
+
+                base.AjaxErch(1, text, "SearchBack");
+                return;
+            }
+
+            base.AjaxErch(1, "搜索完成！");
+        }
     }
 }

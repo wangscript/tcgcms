@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceslist.aspx.cs" Inherits="resources_resourceslist" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceslist.aspx.cs" Inherits="TCG.CMS.WebUi.resources_resourceslist" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>

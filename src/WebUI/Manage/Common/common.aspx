@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="common.aspx.cs" Inherits="Manage_Common_common" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="common.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_Common_common" %>

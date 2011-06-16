@@ -11,12 +11,14 @@ using System.Web.UI.HtmlControls;
 
 using TCG.Utils;
 using TCG.Controls.HtmlControls;
-
-
-public partial class files_classadd : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
 
+    public partial class files_classadd : BasePage
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

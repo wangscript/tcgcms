@@ -10,18 +10,21 @@ using TCG.Utils;
 
 using TCG.Entity;
 
-public partial class Manage_AjaxMethod_PropertiesDel : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Manage_AjaxMethod_PropertiesDel : BasePage
     {
-
-        int id =objectHandlers.ToInt( objectHandlers.Get("id")) ;
-        int rtn = 1;
-        if(id>0)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            rtn = base.handlerService.skinService.propertiesHandlers.PropertiesDEL(base.adminInfo, id);
-        }
 
-        base.AjaxErch(1, "删除属性成功");
+            int id = objectHandlers.ToInt(objectHandlers.Get("id"));
+            int rtn = 1;
+            if (id > 0)
+            {
+                rtn = base.handlerService.skinService.propertiesHandlers.PropertiesDEL(base.adminInfo, id);
+            }
+
+            base.AjaxErch(1, "删除属性成功");
+        }
     }
 }

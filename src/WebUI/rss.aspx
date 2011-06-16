@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="rss.aspx.cs" Inherits="rss" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="rss.aspx.cs" Inherits="TCG.CMS.WebUi.rss" %>

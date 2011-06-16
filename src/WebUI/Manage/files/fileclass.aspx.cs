@@ -9,10 +9,14 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class files_fileclass : System.Web.UI.Page
-{
-    protected void Page_Load(object sender, EventArgs e)
-    {
 
+namespace TCG.CMS.WebUi
+{
+    public partial class files_fileclass : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

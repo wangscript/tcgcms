@@ -21,178 +21,181 @@ using TCG.Controls.HtmlControls;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Skin_skins : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Skin_skins : BasePage
     {
-        //检测管理员登录
-        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-        base.handlerService.manageService.adminHandlers.CheckAdminPop(33);
-
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            this.LoadSkinFiles();
-            Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
-            if (skins != null && skins.Count != 0)
-            {
-                this.ItemRepeater.DataSource = skins.Values;
-                this.ItemRepeater.DataBind();
-            }
-        }
-        else
-        {
-            string work = objectHandlers.Post("work");
-            switch (work)
-            {
-                case "SetDefalutSkinId":
-                    this.SetDefalutSkinId();
-                    break;
-                case "CreateSkinSql" :
-                    this.CreateSkinSql();
-                    break;
-                case "UpdateSkin" :
-                    this.UpdateSkin();
-                    break;
-            }
-        }
-    }
+            //检测管理员登录
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminPop(33);
 
-    private void LoadSkinFiles()
-    {
-        DirectoryInfo dinfo = new DirectoryInfo(Server.MapPath("~/skin"));
-
-        FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
-
-        foreach (FileSystemInfo fsinfo in fsinfos)
-        {
-            FileInfo finfo = new FileInfo(fsinfo.FullName);
-            FileSystemInfo[] files = new DirectoryInfo(finfo.FullName).GetFileSystemInfos();
-            foreach (FileSystemInfo file in files)
+            if (!Page.IsPostBack)
             {
-                string path = file.FullName;
-                string filename = file.Name;
-                if (filename == "skin.config")
+                this.LoadSkinFiles();
+                Dictionary<string, EntityBase> skins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
+                if (skins != null && skins.Count != 0)
                 {
-                    XmlDocument document = new XmlDocument();
-                    document.Load(path);
-                    XmlNodeList nodelist = document.GetElementsByTagName("Skin");
-                    if (nodelist != null && nodelist.Count == 1)
-                    {
-                        Skin skin = new Skin();
-                        skin.Id =  nodelist[0].SelectSingleNode("Id").InnerText.ToString();
-                        skin.WebDescription = nodelist[0].SelectSingleNode("WebDescription").InnerText.ToString();
-                        skin.Name = nodelist[0].SelectSingleNode("Name").InnerText.ToString();
-                        skin.Pic = nodelist[0].SelectSingleNode("Pic").InnerText.ToString();
-                        skin.IndexPage = nodelist[0].SelectSingleNode("IndexPage").InnerText.ToString();
-                        skin.WebKeyWords = nodelist[0].SelectSingleNode("WebKeyWords").InnerText.ToString();
-                        skin.Filename = finfo.Name;
-                        int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
-                    }
+                    this.ItemRepeater.DataSource = skins.Values;
+                    this.ItemRepeater.DataBind();
+                }
+            }
+            else
+            {
+                string work = objectHandlers.Post("work");
+                switch (work)
+                {
+                    case "SetDefalutSkinId":
+                        this.SetDefalutSkinId();
+                        break;
+                    case "CreateSkinSql":
+                        this.CreateSkinSql();
+                        break;
+                    case "UpdateSkin":
+                        this.UpdateSkin();
+                        break;
                 }
             }
         }
-        CachingService.Remove(CachingService.CACHING_ALL_SKIN_ENTITY);
-        CachingService.Remove(CachingService.CACHING_ALL_SKIN);
-    }
 
-    private void SetDefalutSkinId()
-    {
-        string SkinId = objectHandlers.Post("SkinId");
-        try
+        private void LoadSkinFiles()
         {
-            ConfigServiceEx.UpdateConfig(ConfigServiceEx.m_skinConfig, "DefaultSkinId", "Value", SkinId);
+            DirectoryInfo dinfo = new DirectoryInfo(Server.MapPath("~/skin"));
+
+            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
+
+            foreach (FileSystemInfo fsinfo in fsinfos)
+            {
+                FileInfo finfo = new FileInfo(fsinfo.FullName);
+                FileSystemInfo[] files = new DirectoryInfo(finfo.FullName).GetFileSystemInfos();
+                foreach (FileSystemInfo file in files)
+                {
+                    string path = file.FullName;
+                    string filename = file.Name;
+                    if (filename == "skin.config")
+                    {
+                        XmlDocument document = new XmlDocument();
+                        document.Load(path);
+                        XmlNodeList nodelist = document.GetElementsByTagName("Skin");
+                        if (nodelist != null && nodelist.Count == 1)
+                        {
+                            Skin skin = new Skin();
+                            skin.Id = nodelist[0].SelectSingleNode("Id").InnerText.ToString();
+                            skin.WebDescription = nodelist[0].SelectSingleNode("WebDescription").InnerText.ToString();
+                            skin.Name = nodelist[0].SelectSingleNode("Name").InnerText.ToString();
+                            skin.Pic = nodelist[0].SelectSingleNode("Pic").InnerText.ToString();
+                            skin.IndexPage = nodelist[0].SelectSingleNode("IndexPage").InnerText.ToString();
+                            skin.WebKeyWords = nodelist[0].SelectSingleNode("WebKeyWords").InnerText.ToString();
+                            skin.Filename = finfo.Name;
+                            int rtn = base.handlerService.skinService.skinHandlers.CreateSkin(skin);
+                        }
+                    }
+                }
+            }
+            CachingService.Remove(CachingService.CACHING_ALL_SKIN_ENTITY);
+            CachingService.Remove(CachingService.CACHING_ALL_SKIN);
         }
-        catch (Exception ex)
+
+        private void SetDefalutSkinId()
         {
-            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-            base.AjaxErch(base.ajaxdata);
+            string SkinId = objectHandlers.Post("SkinId");
+            try
+            {
+                ConfigServiceEx.UpdateConfig(ConfigServiceEx.m_skinConfig, "DefaultSkinId", "Value", SkinId);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch(1, "启用模板成功", "LoginCkBack");
             return;
         }
 
-        base.AjaxErch(1, "启用模板成功", "LoginCkBack");
-        return;
-    }
-
-    /// <summary>
-    /// 导入皮肤操作
-    /// </summary>
-    private void UpdateSkin()
-    {
-        string SkinId = objectHandlers.Post("SkinId");
-
-        int rtn = 0;
-        try
+        /// <summary>
+        /// 导入皮肤操作
+        /// </summary>
+        private void UpdateSkin()
         {
-            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
-            CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
-            rtn = base.handlerService.skinService.templateHandlers.UpdateTemplateFromXML(SkinId, base.adminInfo);
-            rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategoriesFromXML(base.adminInfo,SkinId);
-        }
-        catch (Exception ex)
-        {
-            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-            base.AjaxErch(base.ajaxdata);
+            string SkinId = objectHandlers.Post("SkinId");
+
+            int rtn = 0;
+            try
+            {
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+                CachingService.Remove(CachingService.CACHING_ALL_CATEGORIES);
+                rtn = base.handlerService.skinService.templateHandlers.UpdateTemplateFromXML(SkinId, base.adminInfo);
+                rtn = base.handlerService.skinService.categoriesHandlers.UpdateCategoriesFromXML(base.adminInfo, SkinId);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch(rtn, "皮肤导入成功！");
             return;
         }
 
-        base.AjaxErch(rtn, "皮肤导入成功！");
-        return;
-    }
-
-    private void CreateSkinSql()
-    {
-        string SkinId = objectHandlers.Post("SkinId");
-        int rtn = 0;
-
-        try
+        private void CreateSkinSql()
         {
-            rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(base.adminInfo,SkinId);
-            rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo,SkinId);
-        }
-        catch (Exception ex)
-        {
-            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-            base.AjaxErch(base.ajaxdata);
+            string SkinId = objectHandlers.Post("SkinId");
+            int rtn = 0;
+
+            try
+            {
+                rtn = base.handlerService.skinService.templateHandlers.CreateTemplateToXML(base.adminInfo, SkinId);
+                rtn = base.handlerService.skinService.categoriesHandlers.CreateCategoriesToXML(base.adminInfo, SkinId);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch(rtn, "模板导出成功！");
             return;
         }
 
-        base.AjaxErch(rtn, "模板导出成功！");
-        return;
+        protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Skin skininfo = (Skin)e.Item.DataItem;
+            Anchor sitename = (Anchor)e.Item.FindControl("sitename");
+            Span info = (Span)e.Item.FindControl("info");
+            Img pic = (Img)e.Item.FindControl("pic");
+            HtmlGenericControl IsDefault = (HtmlGenericControl)e.Item.FindControl("IsDefault");
+            Span sid = (Span)e.Item.FindControl("sid");
+            Span vsid = (Span)e.Item.FindControl("vsid");
+            Span vsid1 = (Span)e.Item.FindControl("vsid1");
+            Span vsid2 = (Span)e.Item.FindControl("vsid2");
+            Span sid1 = (Span)e.Item.FindControl("sid1");
+            Span sid2 = (Span)e.Item.FindControl("sid2");
+
+
+            info.Text = skininfo.WebDescription;
+            sitename.Text = skininfo.Name;
+            pic.Src = skininfo.Pic;
+            sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;
+            if (skininfo.Id == ConfigServiceEx.DefaultSkinId)
+            {
+                IsDefault.Visible = true;
+            }
+            else
+            {
+                IsDefault.Visible = false;
+            }
+            sid.Text = skininfo.Id;
+            vsid.Text = skininfo.Id;
+            vsid1.Text = skininfo.Id;
+            vsid2.Text = skininfo.Id;
+            sid1.Text = skininfo.Id;
+            sid2.Text = skininfo.Id;
+        }
     }
 
-    protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        Skin skininfo = (Skin)e.Item.DataItem;
-        Anchor sitename = (Anchor)e.Item.FindControl("sitename");
-        Span info = (Span)e.Item.FindControl("info");
-        Img pic = (Img)e.Item.FindControl("pic");
-        HtmlGenericControl IsDefault = (HtmlGenericControl)e.Item.FindControl("IsDefault");
-        Span sid = (Span)e.Item.FindControl("sid");
-        Span vsid = (Span)e.Item.FindControl("vsid");
-        Span vsid1 = (Span)e.Item.FindControl("vsid1");
-        Span vsid2 = (Span)e.Item.FindControl("vsid2");
-        Span sid1 = (Span)e.Item.FindControl("sid1");
-        Span sid2 = (Span)e.Item.FindControl("sid2");
-        
-
-        info.Text = skininfo.WebDescription;
-        sitename.Text = skininfo.Name;
-        pic.Src = skininfo.Pic;
-        sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;
-        if (skininfo.Id == ConfigServiceEx.DefaultSkinId)
-        {
-            IsDefault.Visible = true;
-        }
-        else
-        {
-            IsDefault.Visible = false;
-        }
-        sid.Text = skininfo.Id;
-        vsid.Text = skininfo.Id;
-        vsid1.Text = skininfo.Id;
-        vsid2.Text = skininfo.Id;
-        sid1.Text = skininfo.Id;
-        sid2.Text = skininfo.Id;
-    }
 }
-

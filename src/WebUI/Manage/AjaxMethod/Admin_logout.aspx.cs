@@ -13,25 +13,28 @@ using TCG.Utils;
 
 using TCG.Entity;
 
-
-public partial class AjaxMethod_Admin_logout : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class AjaxMethod_Admin_logout : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!Page.IsPostBack)
             {
-                base.handlerService.manageService.adminHandlers.Logout();
-                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
-            }
-            catch(Exception ex)
-            {
-                base.AjaxErch("{state:false}");
-                return;
-            }
+                try
+                {
+                    base.handlerService.manageService.adminHandlers.Logout();
+                    CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
+                }
+                catch (Exception ex)
+                {
+                    base.AjaxErch("{state:false}");
+                    return;
+                }
 
-            base.AjaxErch("{state:true}");
+                base.AjaxErch("{state:true}");
+            }
         }
     }
+
 }

@@ -16,14 +16,17 @@ using TCG.Handlers;
 
 using TCG.Entity;
 
-public partial class Manage_Common_common : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Manage_Common_common : BasePage
     {
-        Response.ContentType = "application/x-javascript";
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Response.ContentType = "application/x-javascript";
 
-        Response.Write("var ajaxicon = ['" + ConfigServiceEx.baseConfig["ManagePath"] + "images/ajax-loader1.gif', '" + ConfigServiceEx.baseConfig["ManagePath"]
-            + "images/post_err.gif', '" + ConfigServiceEx.baseConfig["ManagePath"] + "images/post_ok.gif'];\r\n");
-        Response.End();
+            Response.Write("var ajaxicon = ['" + ConfigServiceEx.baseConfig["ManagePath"] + "images/ajax-loader1.gif', '" + ConfigServiceEx.baseConfig["ManagePath"]
+                + "images/post_err.gif', '" + ConfigServiceEx.baseConfig["ManagePath"] + "images/post_ok.gif'];\r\n");
+            Response.End();
+        }
     }
 }

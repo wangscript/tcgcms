@@ -1,10 +1,10 @@
-ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MyAccount.aspx.cs" Inherits="MyAccount" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MyAccount.aspx.cs" Inherits="TCG.CMS.WebUi.MyAccount" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>ä¸ªäººå¸æˆ·</title>
+    <title>¸öÈËÕÊ»§</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
 	<script type="text/javascript" src="js/commonV2.js"></script>
@@ -17,23 +17,23 @@
 <body>
     <form id="form1" runat="server">
 	<input type="hidden" id="adminname" runat="server" />
-    <div class="Page_title">ä¸ªäººå¸æˆ·<span class="info1">(æ›´æ”¹æ‚¨çš„æ˜µç§°ï¼Œç™»é™†å¯†ç )</span></div>
+    <div class="Page_title">¸öÈËÕÊ»§<span class="info1">(¸ü¸ÄÄúµÄêÇ³Æ£¬µÇÂ½ÃÜÂë)</span></div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="Page_g">ç™»é™†ç›¸å…³<span class="info2">*ä¸ºå¿…å¡«é¡¹</span></div>
+	<div class="Page_g">µÇÂ½Ïà¹Ø<span class="info2">*Îª±ØÌîÏî</span></div>
 	<div class="Page_arrb">
-		<span class="p_a_t">æ˜µã€€ã€€ç§°ï¼š</span><input id="iNickName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
-		<span class="info1" id="nnmsg">ç™»é™†æ—¶çš„æ˜¾ç¤ºåï¼Œå°†ä¼šå‡ºçŽ°åœ¨èµ„æºå‘å¸ƒçš„ç¼–è¾‘è€…</span>
+		<span class="p_a_t">êÇ¡¡¡¡³Æ£º</span><input id="iNickName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
+		<span class="info1" id="nnmsg">µÇÂ½Ê±µÄÏÔÊ¾Ãû£¬½«»á³öÏÖÔÚ×ÊÔ´·¢²¼µÄ±à¼­Õß</span>
 	</div>
-	<div class="Page_arrb"><span class="p_a_t">åŽŸå§‹å¯†ç ï¼š</span><input id="iOldPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckPassword(this);"/>
-		<span id="pwdmsg" class="info1">éªŒè¯æ‚¨çš„ç™»é™†ä¿¡æ¯ï¼</span>
+	<div class="Page_arrb"><span class="p_a_t">Ô­Ê¼ÃÜÂë£º</span><input id="iOldPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckPassword(this);"/>
+		<span id="pwdmsg" class="info1">ÑéÖ¤ÄúµÄµÇÂ½ÐÅÏ¢£¡</span>
 	</div>
-	<div class="Page_arrb"><span class="p_a_t">æ–°è®¾å¯†ç ï¼š</span><input id="iNewPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckNewPassword(this);"/>
-		<span id="npwdmsg" class="info1">æ›´æ”¹çš„æ–°å¯†ç ,ä¸ä¿®æ”¹è¯·ç•™ç©ºï¼</span>
+	<div class="Page_arrb"><span class="p_a_t">ÐÂÉèÃÜÂë£º</span><input id="iNewPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckNewPassword(this);"/>
+		<span id="npwdmsg" class="info1">¸ü¸ÄµÄÐÂÃÜÂë,²»ÐÞ¸ÄÇëÁô¿Õ£¡</span>
 	</div>
-	<div class="Page_arrb"><span class="p_a_t">ç¡®è®¤å¯†ç ï¼š</span><input id="iCPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckCPWD(this);"/>
-		<span id="cpwdmsg" class="info1">ç¡®è®¤æ‚¨çš„æ–°å¯†ç ï¼</span>
+	<div class="Page_arrb"><span class="p_a_t">È·ÈÏÃÜÂë£º</span><input id="iCPWD" type="password" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckCPWD(this);"/>
+		<span id="cpwdmsg" class="info1">È·ÈÏÄúµÄÐÂÃÜÂë£¡</span>
 	</div>
-	<div class="dobtn"><input type="button" onclick="return CheckForm();" class="btn2 bold" value="ç¡®å®š" />ã€€ã€€ã€€<input type="reset" class="btn2" value="å–æ¶ˆ" /></div>
+	<div class="dobtn"><input type="button" onclick="return CheckForm();" class="btn2 bold" value="È·¶¨" />¡¡¡¡¡¡<input type="reset" class="btn2" value="È¡Ïû" /></div>
     </form>
 </body>
 </html>

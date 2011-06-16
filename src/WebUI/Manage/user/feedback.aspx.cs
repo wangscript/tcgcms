@@ -18,133 +18,137 @@ using TCG.Data;
 using TCG.Handlers;
 using TCG.Entity;
 
-public partial class Manage_feedback : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        //检测管理员登录
-        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-        base.handlerService.manageService.adminHandlers.CheckAdminPop(47);
-        if (!Page.IsPostBack)
-        {
 
-            if (base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
+    public partial class Manage_feedback : BasePage
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //检测管理员登录
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminPop(47);
+            if (!Page.IsPostBack)
             {
-                this.afeedbackdel.Visible = true;
+
+                if (base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
+                {
+                    this.afeedbackdel.Visible = true;
+                }
+                else
+                {
+                    this.afeedbackdel.Visible = false;
+                }
+
+                this.SearchInit();
             }
             else
             {
-                this.afeedbackdel.Visible = false;
+                string work = objectHandlers.Post("work");
+                switch (work)
+                {
+                    case "DEL":
+                        this.DelFeedBack();
+                        break;
+                }
+                return;
             }
-
-            this.SearchInit();
         }
-        else
+
+        protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            string work = objectHandlers.Post("work");
-            switch (work)
+            FeedBack feedBack = (FeedBack)e.Item.DataItem;
+            Span CheckID = (Span)e.Item.FindControl("CheckID");
+            Span ipid = (Span)e.Item.FindControl("ipid");
+            Span cid = (Span)e.Item.FindControl("cid");
+            Span lname = (Span)e.Item.FindControl("lname");
+            Span sqq = (Span)e.Item.FindControl("sqq");
+            Span stel = (Span)e.Item.FindControl("stel");
+            Span sadddate = (Span)e.Item.FindControl("sadddate");
+            Span scontent = (Span)e.Item.FindControl("scontent");
+            scontent.Text = objectHandlers.HtmlEncode(feedBack.Content);
+            Span sTitle = (Span)e.Item.FindControl("sTitle");
+            Span smail = (Span)e.Item.FindControl("smail");
+
+            string text = "<a href=\"javascript:GoTo();\" title=\"查看留言内容\" onclick=\"ShowContent(" + feedBack.Id + ")\">"
+       + "<img src=\"../images/icon/magnifier.png\" border=\"0\"></a>";
+
+            smail.Text = feedBack.Email;
+            sTitle.Text = text + (string.IsNullOrEmpty(feedBack.Title) ? "&nbsp;" : feedBack.Title);
+            CheckID.Text = feedBack.Id;
+            cid.Text = feedBack.Id;
+            ipid.Text = feedBack.Id;
+
+            lname.Text = feedBack.UserName;
+            sqq.Text = feedBack.QQ;
+            stel.Text = feedBack.Tel;
+            sadddate.Text = feedBack.AddDate.ToString();
+
+        }
+
+        private void DelFeedBack()
+        {
+            if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
             {
-                case "DEL":
-                    this.DelFeedBack();
-                    break;
+                base.AjaxErch(-2, "");
+                return;
             }
-            return;
-        }
-    }
 
-    protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        FeedBack feedBack = (FeedBack)e.Item.DataItem;
-        Span CheckID = (Span)e.Item.FindControl("CheckID");
-        Span ipid = (Span)e.Item.FindControl("ipid");
-        Span cid = (Span)e.Item.FindControl("cid");
-        Span lname = (Span)e.Item.FindControl("lname");
-        Span sqq = (Span)e.Item.FindControl("sqq");
-        Span stel = (Span)e.Item.FindControl("stel");
-        Span sadddate = (Span)e.Item.FindControl("sadddate");
-        Span scontent = (Span)e.Item.FindControl("scontent");
-        scontent.Text = objectHandlers.HtmlEncode(feedBack.Content);
-        Span sTitle = (Span)e.Item.FindControl("sTitle");
-        Span smail = (Span)e.Item.FindControl("smail");
+            string delids = objectHandlers.Post("DelClassId");
+            if (string.IsNullOrEmpty(delids))
+            {
+                base.AjaxErch(-1000000051, "");
+                return;
+            }
 
-        string text = "<a href=\"javascript:GoTo();\" title=\"查看留言内容\" onclick=\"ShowContent(" + feedBack.Id + ")\">"
-   + "<img src=\"../images/icon/magnifier.png\" border=\"0\"></a>";
+            int rtn = 0;
 
-        smail.Text = feedBack.Email;
-        sTitle.Text = text + (string.IsNullOrEmpty(feedBack.Title)?"&nbsp;":feedBack.Title);
-        CheckID.Text = feedBack.Id;
-        cid.Text = feedBack.Id;
-        ipid.Text = feedBack.Id;
+            try
+            {
+                rtn = base.handlerService.feedBackHandlers.DelFeedBackById(base.adminInfo, delids);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
 
-        lname.Text =  feedBack.UserName;
-        sqq.Text = feedBack.QQ;
-        stel.Text = feedBack.Tel;
-        sadddate.Text = feedBack.AddDate.ToString();
-
-    }
-
-    private void DelFeedBack()
-    {
-        if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(48))
-        {
-            base.AjaxErch(-2, "");
-            return;
+            base.AjaxErch(rtn, "", "refinsh()");
         }
 
-        string delids = objectHandlers.Post("DelClassId");
-        if (string.IsNullOrEmpty(delids))
+        private void SearchInit()
         {
-            base.AjaxErch(-1000000051, "");
-            return;
-        }
+            this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
 
-        int rtn = 0;
+            int page = objectHandlers.ToInt(objectHandlers.Get("page"));
+            int pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
 
-        try
-        {
-            rtn = base.handlerService.feedBackHandlers.DelFeedBackById(base.adminInfo, delids);
-        }
-        catch (Exception ex)
-        {
-            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-            base.AjaxErch(base.ajaxdata);
-            return;
-        }
-
-        base.AjaxErch(rtn, "", "refinsh()");
-    }
-
-    private void SearchInit()
-    {
-        this.iSkinId.Value = ConfigServiceEx.DefaultSkinId;
-
-        int page = objectHandlers.ToInt(objectHandlers.Get("page"));
-        int pageSize = objectHandlers.ToInt(ConfigServiceEx.baseConfig["PageSize"]);
-
-        int curPage = 0;
-        int pageCount = 0;
-        int count = 0;
+            int curPage = 0;
+            int pageCount = 0;
+            int count = 0;
 
 
-        Dictionary<string, EntityBase> res = null;
-        try
-        {
-            res = base.handlerService.feedBackHandlers.GeFeedBackListPager(ref page, ref pageCount, ref count,
-                   page, pageSize, "AddDate DESC,Id DESC", " skinid='" + ConfigServiceEx.DefaultSkinId + "'");
-        }
-        catch (Exception ex)
-        {
+            Dictionary<string, EntityBase> res = null;
+            try
+            {
+                res = base.handlerService.feedBackHandlers.GeFeedBackListPager(ref page, ref pageCount, ref count,
+                       page, pageSize, "AddDate DESC,Id DESC", " skinid='" + ConfigServiceEx.DefaultSkinId + "'");
+            }
+            catch (Exception ex)
+            {
 
-        }
+            }
 
-        this.pager.Per = pageSize;
-        this.pager.Total = count;
-        this.pager.Calculate();
+            this.pager.Per = pageSize;
+            this.pager.Total = count;
+            this.pager.Calculate();
 
-        if (res != null && res.Count != 0)
-        {
-            this.ItemRepeater.DataSource = res.Values;
-            this.ItemRepeater.DataBind();
+            if (res != null && res.Count != 0)
+            {
+                this.ItemRepeater.DataSource = res.Values;
+                this.ItemRepeater.DataBind();
+            }
         }
     }
 }

@@ -14,28 +14,30 @@ using TCG.Utils;
 using TCG.Entity;
 using TCG.Handlers;
 
-
-public partial class Common_AllFileClass : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Common_AllFileClass : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("var AllFileClass = new Array();\r\n");
+            if (!Page.IsPostBack)
+            {
+                Response.Write("var AllFileClass = new Array();\r\n");
 
-             Dictionary<string, EntityBase> categories =base.handlerService.fileService.fileHandlers.GetAllFileCategoriesEntity();
+                Dictionary<string, EntityBase> categories = base.handlerService.fileService.fileHandlers.GetAllFileCategoriesEntity();
 
-             if (categories != null && categories.Count > 0)
-             {
-                 int i = 0;
-                 foreach (KeyValuePair<string, EntityBase> entity in categories)
-                 {
-                     FileCategories tempfilecategories = (FileCategories)entity.Value;
-                     Response.Write("AllFileClass[" + i.ToString() + "]=[" + tempfilecategories.Id + "," + tempfilecategories.iParentId + ",\"" +
-                         tempfilecategories.vcFileName + "\",\"" + tempfilecategories.vcMeno + "\"];\r\n");
-                     i++;
-                 }
-             }
+                if (categories != null && categories.Count > 0)
+                {
+                    int i = 0;
+                    foreach (KeyValuePair<string, EntityBase> entity in categories)
+                    {
+                        FileCategories tempfilecategories = (FileCategories)entity.Value;
+                        Response.Write("AllFileClass[" + i.ToString() + "]=[" + tempfilecategories.Id + "," + tempfilecategories.iParentId + ",\"" +
+                            tempfilecategories.vcFileName + "\",\"" + tempfilecategories.vcMeno + "\"];\r\n");
+                        i++;
+                    }
+                }
+            }
         }
     }
 }

@@ -22,58 +22,61 @@ using System.Web.UI.WebControls;
 using TCG.Utils;
 using TCG.Entity;
 
-public partial class Interface_aspx_feedback : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Interface_aspx_feedback : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string work = objectHandlers.Get("w");
-            switch (work)
+            if (!Page.IsPostBack)
             {
-                case "createfeedback":
-                    this.CreateFeedBack();
-                    break;
+                string work = objectHandlers.Get("w");
+                switch (work)
+                {
+                    case "createfeedback":
+                        this.CreateFeedBack();
+                        break;
+                }
             }
         }
-    }
 
-    private void CreateFeedBack()
-    {
-        string vcodie = objectHandlers.Post("vcodie");
-        string vercoide = SessionState.Get("verification").ToString();
-
-        if (vcodie.ToLower() != vercoide)
+        private void CreateFeedBack()
         {
-            base.AjaxErch(-1000000900, "");
-            return;
+            string vcodie = objectHandlers.Post("vcodie");
+            string vercoide = SessionState.Get("verification").ToString();
+
+            if (vcodie.ToLower() != vercoide)
+            {
+                base.AjaxErch(-1000000900, "");
+                return;
+            }
+
+            FeedBack feedback = new FeedBack();
+
+            feedback.UserName = objectHandlers.Post("UserName");
+            feedback.SkinId = objectHandlers.Post("SkinId");
+            feedback.Tel = objectHandlers.Post("Tel");
+
+            feedback.QQ = objectHandlers.Post("QQ");
+            feedback.Content = objectHandlers.Post("Content");
+            feedback.Title = objectHandlers.Post("Title");
+            feedback.Email = objectHandlers.Post("Email");
+
+            feedback.Ip = objectHandlers.GetIP();
+
+            int rtn = 0;
+            try
+            {
+                rtn = base.handlerService.feedBackHandlers.CreateFeedBack(feedback);
+            }
+            catch (Exception ex)
+            {
+                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                base.AjaxErch(base.ajaxdata);
+                return;
+            }
+
+            base.AjaxErch(rtn, "您的留言添加成功！谢谢！");
         }
-
-        FeedBack feedback = new FeedBack();
-
-        feedback.UserName = objectHandlers.Post("UserName");
-        feedback.SkinId = objectHandlers.Post("SkinId");
-        feedback.Tel = objectHandlers.Post("Tel");
-    
-        feedback.QQ = objectHandlers.Post("QQ");
-        feedback.Content = objectHandlers.Post("Content");
-        feedback.Title = objectHandlers.Post("Title");
-        feedback.Email = objectHandlers.Post("Email");
-
-        feedback.Ip = objectHandlers.GetIP();
-
-        int rtn = 0;
-        try
-        {
-            rtn = base.handlerService.feedBackHandlers.CreateFeedBack(feedback);
-        }
-        catch (Exception ex)
-        {
-            base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-            base.AjaxErch(base.ajaxdata);
-            return;
-        }
-
-        base.AjaxErch(rtn, "您的留言添加成功！谢谢！");
     }
 }

@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PropertiesDel.aspx.cs" Inherits="Manage_AjaxMethod_PropertiesDel" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PropertiesDel.aspx.cs" Inherits="TCG.CMS.WebUi.Manage_AjaxMethod_PropertiesDel" %>

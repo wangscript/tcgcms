@@ -13,52 +13,55 @@ using TCG.Utils;
 
 using TCG.Entity;
 
-
-public partial class AjaxMethod_Admin_DelAdminRole : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+
+    public partial class AjaxMethod_Admin_DelAdminRole : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(7))
+            if (!Page.IsPostBack)
             {
-                base.AjaxErch(-2, "");
-                return;
-            }
+                if (!base.handlerService.manageService.adminHandlers.CheckAdminPopEx(7))
+                {
+                    base.AjaxErch(-2, "");
+                    return;
+                }
 
-            int iRole = objectHandlers.ToInt(objectHandlers.Get("iRole"));
-            if (iRole == 0)
-            {
-                base.AjaxErch(-1,"");
-                return;
-            }
-            int rtn = 0;
+                int iRole = objectHandlers.ToInt(objectHandlers.Get("iRole"));
+                if (iRole == 0)
+                {
+                    base.AjaxErch(-1, "");
+                    return;
+                }
+                int rtn = 0;
 
-            try
-            {
-                rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo, iRole);
-            }
-            catch (Exception ex)
-            {
-                base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
-                return;
-            }
+                try
+                {
+                    rtn = base.handlerService.manageService.adminHandlers.DelAdminRole(base.adminInfo, iRole);
+                }
+                catch (Exception ex)
+                {
+                    base.AjaxErch("{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}");
+                    return;
+                }
 
-            if (rtn < 0)
-            {
-                base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
-            }
-            else
-            {
-                if (rtn == 1)
-            {
-                CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
-            }
-                base.AjaxErch(rtn, "删除角色组成功", "refash()");
-            }
+                if (rtn < 0)
+                {
+                    base.AjaxErch("{state:false,message:'" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "'}");
+                }
+                else
+                {
+                    if (rtn == 1)
+                    {
+                        CachingService.Remove(CachingService.CACHING_ALL_ADMIN_ENTITY);
+                    }
+                    base.AjaxErch(rtn, "删除角色组成功", "refash()");
+                }
 
-            
-           
+
+
+            }
         }
     }
 }

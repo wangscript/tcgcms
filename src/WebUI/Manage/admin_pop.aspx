@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin_pop.aspx.cs" Inherits="admin_pop" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin_pop.aspx.cs" Inherits="TCG.CMS.WebUi.admin_pop" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head >
-    <title>角色组</title>
+    <title>��ɫ��</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admin_pop.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
@@ -20,11 +20,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="poptitle">角色组</div>
+    <div class="poptitle">��ɫ��</div>
 	<input type="hidden" name="admins" id="admins" />
 	<input type="hidden" name="iRole" id="iRole" />
 	<a id="l_1" href="adminInfo.aspx" target="adminmain" class="pop1 popbg" onmouseover="onPop2(this,0)" onmouseout="onPop2(this,1)" onclick="onPop(this);">
-		所有管理员(<TCG:Span id='admincount' runat='server' />)
+		���й���Ա(<TCG:Span id='admincount' runat='server' />)
 	</a>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
@@ -33,9 +33,9 @@
 		</ItemTemplate>
 	</asp:Repeater>	
 	<a id="l_2" href="adminRecovery.aspx" target="adminmain" class="pop2" onmouseover="onPop2(this,0)" onmouseout="onPop2(this,1)" onclick="onPop(this);">
-		管理员回收站(<TCG:Span id='deladmincount' runat='server' />)
+		����Ա����վ(<TCG:Span id='deladmincount' runat='server' />)
 	</a>
-	<a class="pop3" href="adminroleadd.aspx" target="adminmain">添加角色组</a>
+	<a class="pop3" href="adminroleadd.aspx" target="adminmain">���ӽ�ɫ��</a>
     </form>
 </body>
 </html>

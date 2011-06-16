@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categorieslist.aspx.cs" Inherits="skin_categorieslist" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categorieslist.aspx.cs" Inherits="TCG.CMS.WebUi.skin_categorieslist" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>

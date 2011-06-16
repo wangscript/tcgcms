@@ -15,17 +15,19 @@ using TCG.Utils;
 using TCG.Entity;
 using TCG.Handlers;
 
-
-public partial class Common_AllCategories : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Common_AllCategories : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity(), typeof(Categories));
-            Response.Write(cg);
-            Response.End();
-        } 
+            if (!Page.IsPostBack)
+            {
+                Response.ContentType = "application/x-javascript";
+                string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntity(), typeof(Categories));
+                Response.Write(cg);
+                Response.End();
+            }
+        }
     }
 }

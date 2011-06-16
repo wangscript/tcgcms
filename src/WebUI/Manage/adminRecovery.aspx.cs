@@ -13,77 +13,79 @@ using TCG.Utils;
 using TCG.Controls.HtmlControls;
 
 
-
-public partial class adminRecovery : BasePage
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class adminRecovery : BasePage
     {
-
-        //检测管理员登录
-        base.handlerService.manageService.adminHandlers.CheckAdminLogin();
-        base.handlerService.manageService.adminHandlers.CheckAdminPop(8);
-
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            DataSet ds = new DataSet();
-            string strRolename = string.Empty;
-            int admincount = 0;
-            int rolecount = 0;
 
+            //检测管理员登录
+            base.handlerService.manageService.adminHandlers.CheckAdminLogin();
+            base.handlerService.manageService.adminHandlers.CheckAdminPop(8);
 
-            int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
-            if (rtn < 0)
+            if (!Page.IsPostBack)
             {
-                return;
-            }
+                DataSet ds = new DataSet();
+                string strRolename = string.Empty;
+                int admincount = 0;
+                int rolecount = 0;
 
-            this.sAdmincount.Text = admincount.ToString();
-            this.sRolecount.Text = rolecount.ToString();
-            this.srolename.Text = strRolename;
-            this.ItemRepeater.DataSource = ds;
-            this.ItemRepeater.DataBind();
+
+                int rtn = base.handlerService.manageService.adminHandlers.GetAdminList(-1, ref admincount, ref rolecount, ref strRolename, ref ds);
+                if (rtn < 0)
+                {
+                    return;
+                }
+
+                this.sAdmincount.Text = admincount.ToString();
+                this.sRolecount.Text = rolecount.ToString();
+                this.srolename.Text = strRolename;
+                this.ItemRepeater.DataSource = ds;
+                this.ItemRepeater.DataBind();
+            }
+            else
+            {
+                string admins = objectHandlers.Post("admins");
+                string action = objectHandlers.Post("saction");
+
+                if (string.IsNullOrEmpty(admins) || string.IsNullOrEmpty(action))
+                {
+                    base.AjaxErch("-1");
+                    return;
+                }
+
+                int rtn = 0;
+                try
+                {
+                    rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
+                }
+                catch (Exception ex)
+                {
+                    base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
+                    base.AjaxErch(base.ajaxdata);
+                    return;
+                }
+                base.AjaxErch(rtn, "管理员[" + admins + "]删除成功！", "refash()");
+            }
         }
-        else
+
+        protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            string admins = objectHandlers.Post("admins");
-            string action = objectHandlers.Post("saction");
+            DataRowView Row = (DataRowView)e.Item.DataItem;
+            Anchor loginName = (Anchor)e.Item.FindControl("loginName");
+            Span nickname = (Span)e.Item.FindControl("nickname");
+            Anchor adminrole = (Anchor)e.Item.FindControl("adminrole");
+            Span updatedate = (Span)e.Item.FindControl("updatedate");
+            Span CheckID = (Span)e.Item.FindControl("CheckID");
 
-            if (string.IsNullOrEmpty(admins) || string.IsNullOrEmpty(action))
-            {
-                base.AjaxErch("-1");
-                return;
-            }
-
-            int rtn = 0;
-            try
-            {
-                rtn = base.handlerService.manageService.adminHandlers.DelAdmins(base.adminInfo.vcAdminName, admins, action);
-            }
-            catch (Exception ex)
-            {
-                base.ajaxdata = "{state:false,message:\"" + objectHandlers.JSEncode(ex.Message.ToString()) + "\"}";
-                base.AjaxErch(base.ajaxdata);
-                return;
-            }
-            base.AjaxErch(rtn, "管理员[" + admins + "]删除成功！", "refash()");
+            loginName.Text = Row["vcAdminName"].ToString();
+            loginName.Href = "adminmdy.aspx?adminname=" + objectHandlers.UrlEncode(Row["vcAdminName"].ToString());
+            CheckID.Text = Row["vcAdminName"].ToString();
+            nickname.Text = Row["vcNickName"].ToString();
+            adminrole.Text = Row["vcRoleName"].ToString();
+            adminrole.Href = "adminrolemdy.aspx?roleid=" + objectHandlers.UrlEncode(Row["iID"].ToString());
+            updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy年MM月dd日");
         }
-    }
-
-    protected void ItemRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        DataRowView Row = (DataRowView)e.Item.DataItem;
-        Anchor loginName = (Anchor)e.Item.FindControl("loginName");
-        Span nickname = (Span)e.Item.FindControl("nickname");
-        Anchor adminrole = (Anchor)e.Item.FindControl("adminrole");
-        Span updatedate = (Span)e.Item.FindControl("updatedate");
-        Span CheckID = (Span)e.Item.FindControl("CheckID");
-
-        loginName.Text = Row["vcAdminName"].ToString();
-        loginName.Href = "adminmdy.aspx?adminname=" + objectHandlers.UrlEncode(Row["vcAdminName"].ToString());
-        CheckID.Text = Row["vcAdminName"].ToString();
-        nickname.Text = Row["vcNickName"].ToString();
-        adminrole.Text = Row["vcRoleName"].ToString();
-        adminrole.Href = "adminrolemdy.aspx?roleid=" + objectHandlers.UrlEncode(Row["iID"].ToString());
-        updatedate.Text = ((DateTime)Row["dUpdateDate"]).ToString("yyyy年MM月dd日");
     }
 }

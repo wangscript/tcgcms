@@ -16,17 +16,20 @@ using TCG.Handlers;
 
 using TCG.Entity;
 
-public partial class Common_AllTemplates : BasePage
-
+namespace TCG.CMS.WebUi
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Common_AllTemplates : BasePage
     {
-        if (!Page.IsPostBack)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.ContentType = "application/x-javascript";
-            string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.templateHandlers.GetAllTemplatesEntity(), typeof(Template));
-            Response.Write(cg);
-            Response.End();
+            if (!Page.IsPostBack)
+            {
+                Response.ContentType = "application/x-javascript";
+                string cg = base.handlerService.GetJsEntitys(base.handlerService.skinService.templateHandlers.GetAllTemplatesEntity(), typeof(Template));
+                Response.Write(cg);
+                Response.End();
+            }
         }
     }
+
 }

@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllNewsSpeciality.aspx.cs" Inherits="Common_AllNewsSpeciality" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AllNewsSpeciality.aspx.cs" Inherits="TCG.CMS.WebUi.Common_AllNewsSpeciality" %>
