@@ -54,8 +54,12 @@ body{
 .inner dt{clear:both;height:24px; border-bottom:1px solid #dddddd;padding-left:5px;line-height:24px;}
 .inner dt .name{margin-left:20px;}
 
-.sp_title{background-image:url(../images/index_bg.png);background-position:left -800px; width:770px;height:29px; background-repeat:no-repeat;}
-.sp_title2{background-image:url(../images/index_bg.png);background-position:left -830px; width:770px;height:29px; background-repeat:no-repeat;}
+.sp_title{background-image:url(../images/index_bg.png);background-position:left -800px; width:750px;height:29px; color:#c06fb2; font-weight:bold; padding-left:20px; line-height:29px;background-repeat:no-repeat;}
+.sp_title span{ color:#828282; font-weight:100;}
+
+.sp_title2{background-image:url(../images/index_bg.png);background-position:left -830px; width:770px;height:29px; background-repeat:no-repeat;width:750px;height:29px; color:#6e83bc; font-weight:bold; padding-left:20px; line-height:29px;}
+.sp_title2 span{ color:#828282; font-weight:100;}
+
 .sp_box ul{overflow:hidden;margin-top:15px;}
 .sp_box li{margin:5px 0 5px 10px;width:140px;float:left; display:inline;line-height:24px;text-align:center;}
 .sp_box li span{clear:both; cursor:pointer; display:block;}
