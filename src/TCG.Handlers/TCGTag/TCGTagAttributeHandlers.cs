@@ -395,7 +395,7 @@ namespace TCG.Handlers
                 
                 Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(item.Id);
 
-                if (ress != null || ress.Count != 0)
+                if (ress != null && ress.Count != 0)
                 {
                     Match mh = Regex.Match(temp, @"<ResourcePropertiesList([^<>]+)?>([\S\s]*?)</ResourcePropertiesList>", RegexOptions.Singleline | RegexOptions.Multiline);
                     string rplist = string.Empty;
