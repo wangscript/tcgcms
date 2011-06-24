@@ -1,0 +1,22 @@
+
+<TcgPager>
+	  <Pev><a class="page-prev" href='{0}'><SPAN>上一页</SPAN></a></Pev>
+	  <Pages>
+		<Cur><SPAN class=page-cur><SPAN>{1}</SPAN></SPAN></Cur>
+		<Page><a href='{0}'><SPAN>{1}</SPAN></a></Page>
+		<ShowCount>7</ShowCount>
+	   </Pages>
+	  <Next><SPAN class=page-next><A class=page-next href="{0}"><SPAN>下一页</SPAN></A></SPAN></Next>
+	  <SPAN class=page-skip>
+	<FORM id="filterPageForm" method="get" name="filterPageForm" action="?" onsubmit="return pagesubmit();">
+	  共$pagecount$页 到第 <INPUT id=jumpto value=1 size=3 name=p data-min="1" data-max="100" tPage="32"> 页
+	  <BUTTON type=submit>确定</BUTTON>
+	</FORM>
+	</SPAN>
+</TcgPager>
+<script type="text/javascript">
+function pagesubmit(){
+	$("#filterPageForm").get(0).action = $("#txtpageurlt").val().replace("{0}",$("#jumpto").val());
+	return true;
+}
+</script>
