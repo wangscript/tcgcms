@@ -375,6 +375,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSmallImg$", "<TCG>" + item.vcSmallImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcSpeciality$", "<TCG>" + item.vcSpeciality + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + item.vcBigImg + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_SheifUrl$", "<TCG>" + item.SheifUrl + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iCount$", "<TCG><script type='text/javascript' src='" 
                 + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
 
