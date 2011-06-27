@@ -28,8 +28,8 @@
     <form id="form1" runat="server">
 	<div class="Page_title">资讯生成<span class="info1">(批量生成资讯的静态文件)</span></div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="Page_g"><input name="StypeCheck" type="radio" id="orderTime" value="1" />
-	生成一段时间内的所有资源<span class="info2">(根据时间段来生成资源)</span></div>
+	<div class="Page_g"><input name="StypeCheck" type="radio" id="orderTime" value="1"  checked="checked"/>
+	生成一段时间内的所有资源<span class="info2">(根据时间段来生成资源,会生成所有列表和单页)</span></div>
 	<div class="Page_arrb">
 		<span class="p_a_t1">根据字段：</span><select id="iTimeFeild" name="iTimeFeild" onchange="CheckValueIsNull('iTimeFeild','timefmsg');">
 			<option value="-1">请选择...</option>
@@ -46,7 +46,7 @@
 		<span class="p_a_t1">结束时间：</span><input id="iEndTime" readonly="true" name="iEndTime" type="text"  class="itxt1" onfocus="this.className='itxt2';setDayHM(this);" onblur="CheckValueIsDateTime('iEndTime','endtimemsg');"/>
 		<span class="info1" id="endtimemsg">时间段的结束时间！</span>
 	</div>
-	<div class="Page_g"><input id="orderClass" name="StypeCheck" type="radio" checked="checked" value="2" />指定分类及其子分类下的咨询，列表和所有单页模板<span class="info2">(根据资讯的类别来生成,含子类别！)</span></div>
+	<div class="Page_g"><input id="orderClass" name="StypeCheck" type="radio" value="2" />指定分类及其子分类下的咨询，列表和所有单页模板<span class="info2">(根据资讯的类别来生成,含子类别！)</span></div>
 	<div class="Page_arrb ">
 		<span class="p_a_t1 lfl">资讯类别：</span>
 		<span class="p_a_t1 lfl">

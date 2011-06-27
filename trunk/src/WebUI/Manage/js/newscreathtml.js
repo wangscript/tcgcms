@@ -58,7 +58,6 @@ function SelectClassValue(val,txt){
     var iClassId = $("#iClassId");
     iClassName.val(txt);
     iClassId.val(val);
-
 }
 
 function StartCreate(){

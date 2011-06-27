@@ -1,0 +1,9 @@
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\bin\Debug\ScreenShort.exe
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\bin\Debug\ScreenShort.pdb
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\ScreenShort.Properties.Resources.resources
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\ScreenShort.exe
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\ScreenShort.pdb
+E:\TCGCMS\contrib\ScreenShort\ScreenShort\obj\x86\Debug\ScreenShort.Form1.resources
