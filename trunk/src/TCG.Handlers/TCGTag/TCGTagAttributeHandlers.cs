@@ -331,6 +331,7 @@ namespace TCG.Handlers
                 + title + "</font>";
             if (item.cStrong == "Y") title = "<strong>" + "<TCG>" + title + "</strong>";
             temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + title + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcTitle1$", "<TCG>" + item.vcTitle + "</TCG>");
 
             //替换正文内容，检查图片
             //try

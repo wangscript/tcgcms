@@ -40,8 +40,9 @@ body{
 #newpro .newpro_right{background-image:url(../images/index_bg.png); background-position:left -531px;width:236px;height:185px;background-repeat:no-repeat;float:left;margin-left:12px;padding:0px 0px 0px 5px;}
 .goleft{float:left;padding:55px 5px 0px 5px;}
 .goright{float:left;padding:55px 5px 0px 5px;}
-.newpro{float:left;padding:45px 5px 0px 5px;}
-.newpro ul li{float:left;width:157px;text-align:center;}
+.newpro{float:left;padding:45px 5px 0px 5px; width:470px; height:112px; overflow:hidden;}
+.newpro ul li{float:left;width:117px;text-align:center;height:112px; overflow:hidden;}
+.newpro ul li img{height:112px;}
 .index-a{background-image:url(../images/index-a.jpg);width:768px;height:90px;clear:both;margin-top:15px;}
 .inner {POSITION: relative; BORDER-LEFT: #dddddd 1px solid; ZOOM: 1; OVERFLOW: hidden; BORDER-RIGHT: #dddddd 1px solid;z-index:100;clear:both;}
 .hd{clear:both;border-bottom:1px solid #ddd;line-height:21px;height:21px;}
@@ -75,6 +76,10 @@ dd{border-left:1px solid #FFBA29;margin:0 1px; z-index:0;border-right:1px solid 
 .sh p{margin-top:10px;line-height:24px;}
 .help{float:left; background-image:url(../images/nav_header.png); background-position:left -165px ; background-repeat:no-repeat;width:170px;height:95px;padding:5px 0px 0px 57px;}
 .gwbz{float:left; background-image:url(../images/nav_header.png); background-position:-227px -165px ; background-repeat:no-repeat;width:160px;height:95px;padding:5px 0px 0px 67px;}
+.gwbz p{ line-height:25px; height:25px; margin:0px; padding:0px;}
+.help p{ line-height:25px; height:25px; margin:0px; padding:0px;}
+.shfw p{ line-height:25px; height:25px; margin:0px; padding:0px;}
+.joinus p{ line-height:25px; height:25px; margin:0px; padding:0px;}
 .shfw{float:left; background-image:url(../images/nav_header.png); background-position:-454px -165px ; background-repeat:no-repeat;width:150px;height:95px;padding:5px 0px 0px 77px;}
 .joinus{float:left; background-image:url(../images/nav_header.png); background-position:-681px -165px ; background-repeat:no-repeat;width:150px;height:95px;padding:5px 0px 0px 77px;}
 .foot{text-align:center;line-height:24px;}
