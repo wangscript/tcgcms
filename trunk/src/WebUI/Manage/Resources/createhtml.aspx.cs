@@ -76,19 +76,20 @@ namespace TCG.CMS.WebUi
         {
             string tClassID = objectHandlers.Post("tClassId");
             string text = string.Empty;
+            int page = objectHandlers.ToInt(objectHandlers.Post("page"));
             int rtn = 0;
-            int pagecount = 0;
+            int pagecount = 1;
             try
             {
-                rtn = base.handlerService.tagService.CreateClassList(tClassID, 0, ref pagecount, ref text);
+                rtn = base.handlerService.tagService.CreateClassList(tClassID, page, ref pagecount, ref text);
             }
             catch (Exception ex)
             {
-                base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack1");
+                base.AjaxErch(1, "<a>" + ex.Message.ToString() + "</a>", "CreateBack3({page:1,message:'<a>数据操作错误，请联系开发人员</a>'})");
                 return;
             }
 
-            base.AjaxErch(rtn, text, "CreateBack1");
+            base.AjaxErch(1, text, "CreateBack3({page:" + pagecount + ",message:'<a>" + text + "</a>'})");
         }
 
         private void Create()
@@ -176,7 +177,7 @@ namespace TCG.CMS.WebUi
 
             if (pageCount < page)
             {
-                base.AjaxErch(1, "已经生成了所有分页！");
+                base.AjaxErch(1, "已经生成了所有分页！开始生成列表", "PageInit()");
                 return;
             }
 
