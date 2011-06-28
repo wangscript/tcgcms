@@ -18,26 +18,6 @@ $(document).ready(function() {
     iFilePath = $("#iFilePath");
     tCreated = $("#tCreated");
 
-    GetCagetegoriesEnmu($("#Cagetorie_c"), $("#iSkinId").val(), "0");
-
-    Menu.init("gamelist");
-
-    $("#SelectDivW").bind('click', function(e) {
-        if ($("#gamelist_c").css('display') == 'block') {
-            $("#gamelist_c").hide();
-        } else {
-            $("#gamelist_c").show();
-        }
-        e.stopPropagation();
-
-    });
-
-    $(document).bind('click', function(e) {
-
-        if ($("#gamelist_c").css('display') == 'block') {
-            $("#gamelist_c").hide();
-        }
-    });
 
     var form1 = $("#form1");
     var options;
@@ -128,41 +108,63 @@ function CreateBack(val) {
 
 function PageInit() {
     $("#page").val("1");
-    if ($("#orderClass").attr("checked")) {
-        var t = GetPostClassChild($("#iClassId").val());
-        if (t.indexOf(",") > -1) {
-            PostClasses(t);
-        } else {
-            var t_classinfo = GetCategorieById(t);
-            if (t_classinfo.Url.indexOf(".") == -1) {
-                CreateDiv.set = 1;
-                CreateDiv.setcount = 1;
-                $("#work").val("CreateClassList");
-                $("#tClassId").val(t);
-                $("#form1").submit();
-            }
+
+    CreateDiv.Start("批量生成列表...");
+    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { }
+    });
+
+    var t = GetAllClassIds();
+    if (t.indexOf(",") > -1) {
+        PostClasses(t);
+    } else {
+        var t_classinfo = GetCategorieById(t);
+        if (t_classinfo.Url.indexOf(".") == -1) {
+            CreateDiv.set = 1;
+            CreateDiv.setcount = 1;
+            $("#work").val("CreateClassList");
+            $("#tClassId").val(t);
+            $("#form1").submit();
         }
     }
 }
 
-function GetPostClassChild(id) {
-    var t = GetAllChildClassIdByClassId(id);
-    if (t == "") {
-        return id
+var classids;
+var classcreatesep = 0;
+function PostClasses(ids) {
+    classids = ids.split(",");
+    CreateDiv.set = 1;
+    CreateDiv.setcount = classids.length;
+
+    var t_classinfo = GetCategorieById(classids[i]);
+    if (t_classinfo.Url.indexOf(".") == -1) {
+        $("#work").val("CreateClassList");
+        $("#tClassId").val(classids[classcreatesep]);
+        $("#form1").submit();
     } else {
-        return id + "," + t;
+        CreateDiv.setcount--;
     }
 }
 
-function PostClasses(ids) {
-    var o = ids.split(",");
-    CreateDiv.set = 1;
-    CreateDiv.setcount = o.length;
-    for (var i = 0; i < o.length; i++) {
-        var t_classinfo = GetCategorieById(o[i]);
+//生成列表
+function CreateBack3(val) {
+
+    CreateDiv.SetSep(val.message);
+    if (classcreatesep < classids.length) {
+        if (parseInt($("#page").val()) > 1 && parseInt($("#page").val()) <= val.page) {
+            CreateDiv.setcount++;
+        }
+
+        if (parseInt($("#page").val()) >= val.page) {
+            classcreatesep = classcreatesep + 1;
+            $("#page").val("1");
+        } else {
+            $("#page").val(parseInt($("#page").val()) + 1);
+        }
+        
+        var t_classinfo = GetCategorieById(classids[i]);
         if (t_classinfo.Url.indexOf(".") == -1) {
             $("#work").val("CreateClassList");
-            $("#tClassId").val(o[i]);
+            $("#tClassId").val(classids[classcreatesep]);
             $("#form1").submit();
         } else {
             CreateDiv.setcount--;

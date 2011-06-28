@@ -29,6 +29,18 @@ function GetTemplateById(id) {
     return null;
 }
 
+function GetAllClassIds() {
+    var str = "";
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].ParentId == "0") {
+            var tt = GetAllChildClassIdByClassId(_Categories[i].Id);
+            str = str + ( str == "" ? "" : ",") + _Categories[i].Id;
+            str = str + (tt == "" ? "" : ",") + tt;
+        }
+    }
+    return str;
+}
+
 function GetAllChildClassIdByClassId(id) {
     var st = "";
     for (var i = 0; i < _Categories.length; i++) {
