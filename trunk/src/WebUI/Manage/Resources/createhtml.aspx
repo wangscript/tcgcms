@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../Common/AllCategories.aspx"></script>
+    <script type="text/javascript" src="../Common/AllTemplates.aspx"></script>
     <script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/listcommon.js"></script>
     <script type="text/javascript" src="../js/enmu.js"></script>

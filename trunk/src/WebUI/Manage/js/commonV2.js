@@ -353,7 +353,7 @@ function AjaxPostFormBack(data) {
     if (data.state) {
         if (data.callback != null) {
             if (data.callback.indexOf("(") > -1) {
-                try { eval(data.callback); } catch (err) {alert(err);}
+                try {eval(data.callback); } catch (err) {}
                 return;
             } else {
                 try { eval(data.callback + "(\"" + data.message + "\")"); } catch (err) { /*alert(err)*/ }

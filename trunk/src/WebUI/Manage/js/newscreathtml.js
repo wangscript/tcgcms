@@ -150,24 +150,38 @@ function CreateBack3(val) {
 
     CreateDiv.SetSep(val.message);
     if (classcreatesep < classids.length) {
-        if (parseInt($("#page").val()) > 1 && parseInt($("#page").val()) <= val.page) {
-            CreateDiv.setcount++;
-        }
 
         if (parseInt($("#page").val()) >= val.page) {
             classcreatesep = classcreatesep + 1;
             $("#page").val("1");
         } else {
             $("#page").val(parseInt($("#page").val()) + 1);
+            CreateDiv.setcount++;
         }
-        
-        var t_classinfo = GetCategorieById(classids[i]);
-        if (t_classinfo.Url.indexOf(".") == -1) {
+
+        var t_classinfo = GetCategorieById(classids[classcreatesep]);
+        if (t_classinfo!=null&&t_classinfo.Url.indexOf(".") == -1) {
             $("#work").val("CreateClassList");
             $("#tClassId").val(classids[classcreatesep]);
             $("#form1").submit();
         } else {
             CreateDiv.setcount--;
+        }
+    }
+
+    if (classcreatesep == classids.length) {
+
+        CreateDiv.Start("批量生成单页...");
+        layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { }
+        });
+        debugger;
+        var ot = GetSingTemplate();
+        CreateDiv.set = 1;
+        CreateDiv.setcount = ot.length;
+        for (var i = 0; i < ot.length; i++) {
+            $("#work").val("CreateSingeTemplate");
+            $("#tClassId").val(ot[i].Id);
+            $("#form1").submit();
         }
     }
 }

@@ -69,7 +69,7 @@ namespace TCG.CMS.WebUi
                 return;
             }
 
-            base.AjaxErch(rtn, text, "CreateBack2");
+            base.AjaxErch(1, text, "CreateBack2");
         }
 
         private void CreateClassList()
@@ -113,7 +113,7 @@ namespace TCG.CMS.WebUi
                 text1 = "<a><font color='red'>" + objectHandlers.JSEncode(ex.Message.ToString()) + "</font></a>";
             }
 
-            base.AjaxErch(1, text1, "CreateBack");
+            base.AjaxErch(1, "<a>" + text1 + "</a>", "CreateBack");
         }
 
         private void Search()
