@@ -33,6 +33,7 @@ function CreateDiv() {
         val = ac > 0 ? av[0] : null;
         this.create_num.text(parseInt(((this.set) / this.setcount) * 100));
         var w = parseInt(((this.set) / this.setcount) * 407);
+        if (w > 407) w = 407;
         this.createjdtPlacebg.css({ width: w + "px" });
         this.MsgDiv.html(this.MsgDiv.html() + val);
         this.MsgDiv[0].scrollTop = this.MsgDiv[0].scrollHeight;
