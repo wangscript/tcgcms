@@ -41,7 +41,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{8C9EE0E
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "WebUI_deploy", "D:\WebUI_deploy\WebUI_deploy.wdproj", "{ED80B935-D00F-4EA5-A95F-D22E59034114}"
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "WebUI_deploy", "D:\WebUI_deploy\WebUI_deploy.wdproj", "{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -257,24 +257,24 @@ Global
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Win32.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|.NET.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Default|Win32.ActiveCfg = Debug|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|.NET.ActiveCfg = Release|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{ED80B935-D00F-4EA5-A95F-D22E59034114}.Release|Win32.ActiveCfg = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|.NET.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Default|Win32.ActiveCfg = Debug|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|.NET.ActiveCfg = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ECBBD23C-9021-419F-AC1A-1803BCE3B5C3}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
