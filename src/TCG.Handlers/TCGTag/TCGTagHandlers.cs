@@ -74,79 +74,19 @@ namespace TCG.Handlers
                 for (int i = 0; i < this._tagtemplates.Count; i++)
                 {
                     this._tagtemplates[i].ReplaceTagText(ref this._pagerinfo);
-                    if (this._tagtemplates[i].Pager)
-                    {
-                        this._listtemp = null;
-                        this._listtemp = this._tagtemplates[i];
-                    }
-                    else
-                    {
-                        this._temphtml = this._tagtemplates[i].Replace(this._temphtml);
-                    }
+                    this._temphtml = this._tagtemplates[i].Replace(this._temphtml);
                 }
 
                 this._tagtemplates = null;
+
+                return this.Replace();
             }
             else
             {
-                if (!this._pagerinfo.Read) return this._pagerinfo.Read;
-
-                if (this._pagerinfo.NeedPager && this._pagerinfo.DoAllPage &&this._pagerinfo.PageSep != 0)
-                {
-                    Match item = Regex.Match(this._listtemp.TagHtml, this._pattern,RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                    if (item.Success)
-                    {
-                        this._tagtemplate = new TCGTagAttributeHandlers(base.handlerService);
-
-                        this._tagtemplate.Attribute = item.Result("$2");
-                        this._tagtemplate.Tag = string.Format(this._tcgsystemtag, this._index);
-                        this._tagtemplate.TagText = item.Result("$3");
-                        this._tagtemplate.TagType = item.Result("$1");
-                        this._tagtemplate.TagHtml = item.Value;
-
-                        this._tagtemplate.ReplaceTagText(ref this._pagerinfo);
-                        this._listtemp.TagText = this._tagtemplate.TagText;
-                        this._temphtml = this._template;
-                        this._tagtemplate = null;
-                    }
-                }
-
-                if (this._listtemp != null)
-                {
-                    if (this._pagerinfo.NeedPager)
-                    {
-                        if (this._pagerinfo.Page == 1 || !this._pagerinfo.DoAllPage)
-                        {
-                            this._template = this._temphtml;
-                        }
-                    }
-                    this._temphtml = this._listtemp.Replace(this._temphtml);
-                    this.GetPager();
-                }
-                this._start = false;
                 this.Save();
-                if (this._pagerinfo.NeedPager&&this._pagerinfo.DoAllPage)
-                {
-
-                    if (this._pagerinfo.PageSep == 0)
-                    {
-                        this._pagerinfo.PageSep = 1;
-                    }
-                    else
-                    {
-                        this._pagerinfo.Page++;
-                    }
-                    if (this._pagerinfo.Page <= this._pagerinfo.PageCount && this._pagerinfo.PageCount != 0)
-                    {
-                        this.Replace();
-                    }
-                }
                 return this._pagerinfo.Read;
             }
 
-            if (!this._pagerinfo.Read) return this._pagerinfo.Read;
-            mc = null;
-            return this.Replace();
         }
 
 
@@ -243,6 +183,7 @@ namespace TCG.Handlers
         {
             this.UpdateTopicsTitle();
             this.UpdateScriptCss();
+            this.GetPager();
 
             if (NeedCreate)
             {
