@@ -276,7 +276,7 @@ function ChangePCtype(obj) {
         });
 }
 
-var objss = ["a1","a2","a3"];
+var objss = ["a1","a2","a3","a4"];
 function SetFromsByNum(lb) {
 
     for (var i = 0; i < objss.length; i++) {
@@ -381,4 +381,8 @@ function ResourcePropertiesHTMLADD(cpobj,rpobj) {
     }
     text += "</div></div>";
     return text;
+}
+
+function ChangeCCSkin(obj) {
+    
 }
