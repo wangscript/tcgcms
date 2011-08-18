@@ -151,11 +151,20 @@
         </div>
     </div>
     <div id="a4_from">
-        <div class="Page_g">抄送站点：<select id="ccskin" name="ccskin" runat="server" onchange="ChangeCCSkin(this)">
-        </select></div>
-        <div id="Div2">
-            <div style=" border:red 1px solid; width:200px; height:200px;"></div>
+        <div class="ccmain">
+            <div class="ccleft">
+                <ul>
+                    <li>dfdf</li>
+                    <li>fdfggg3444</li>
+                </ul>
+            </div>
+            <div class="ccright">
+                <div class="cctree" id="cc_skinid1">   
+                </div> 
+            </div>
         </div>
+        
+        
     </div>
 	<div class="dobtn arb_pr1 Page_arrb" style="margin-top:5px;">
         <input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" />
