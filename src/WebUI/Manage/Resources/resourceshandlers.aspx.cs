@@ -55,17 +55,17 @@ namespace TCG.CMS.WebUi
                     }
                 }
 
-                this.ccskin.Items.Clear();
-                this.ccskin.Items.Add(new ListItem("请选择需要抄送的站点", "0"));
-                Dictionary<string, EntityBase> allskins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
-                if (allskins != null && allskins.Count != 0)
-                {
-                    foreach (KeyValuePair<string, EntityBase> keyvalue in allskins)
-                    {
-                        Skin template = (Skin)keyvalue.Value;
-                        this.ccskin.Items.Add(new ListItem(template.Name, template.Id));
-                    }
-                }
+                //this.ccskin.Items.Clear();
+                //this.ccskin.Items.Add(new ListItem("请选择需要抄送的站点", "0"));
+                //Dictionary<string, EntityBase> allskins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
+                //if (allskins != null && allskins.Count != 0)
+                //{
+                //    foreach (KeyValuePair<string, EntityBase> keyvalue in allskins)
+                //    {
+                //        Skin template = (Skin)keyvalue.Value;
+                //        this.ccskin.Items.Add(new ListItem(template.Name, template.Id));
+                //    }
+                //}
 
                 if (newsid == 0)
                 {
