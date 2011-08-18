@@ -49,6 +49,7 @@
         <a id="a1" onclick="SetFromsByNum('a1')">基本信息</a>
         <a id="a2" onclick="SetFromsByNum('a2')">详细内容</a>
         <a id="a3" onclick="SetFromsByNum('a3')">资源属性</a>
+        <a id="a4" onclick="SetFromsByNum('a4')">抄送设置</a>
     </div>
     <div id="a1_from">
 	    <div class="Page_arrb arb_pr1">
@@ -147,6 +148,13 @@
         <div class="Page_g">资讯属性：<select id="scp" name="scp" runat="server" onchange="ChangePCtype(this)">
         </select></div>
         <div id="a3_form_p">
+        </div>
+    </div>
+    <div id="a4_from">
+        <div class="Page_g">抄送站点：<select id="ccskin" name="ccskin" runat="server" onchange="ChangeCCSkin(this)">
+        </select></div>
+        <div id="Div2">
+            <div style=" border:red 1px solid; width:200px; height:200px;"></div>
         </div>
     </div>
 	<div class="dobtn arb_pr1 Page_arrb" style="margin-top:5px;">

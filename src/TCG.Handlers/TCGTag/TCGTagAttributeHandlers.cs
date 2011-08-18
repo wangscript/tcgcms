@@ -383,7 +383,7 @@ namespace TCG.Handlers
             string sssid = this._tagtype + "_nicon_" + item.Id;
             if (item.dAddDate.AddDays(5) >= DateTime.Now)
             {
-                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><div id='" + sssid + "' class='newicon'><img src='/images/newicon.jpg'/></div></TCG>");
+                temp = temp.Replace("$" + this._tagtype + "_nIcon$", "<TCG><img src='/images/newicon.jpg' style='vertical-align: middle;'/></TCG>");
             }
             else
             {
