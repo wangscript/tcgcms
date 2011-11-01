@@ -169,7 +169,7 @@ namespace TCG.Handlers
             if (tcgTagHandlers.Replace())
             {
                 pagecount = tcgTagHandlers.PagerInfo.PageCount;
-                pagepath = tcgTagHandlers.FilePath;
+                pagepath = tcgTagHandlers.GetFilePath();
                 return 1;
             }
             else

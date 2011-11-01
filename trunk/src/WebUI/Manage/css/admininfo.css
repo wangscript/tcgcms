@@ -205,3 +205,45 @@
     margin-right: 10px;
     font-weight:bold;
 }
+
+/*³­ËÍÑùÊ½*/
+.ccmain 
+{
+    clear:right;
+}
+.ccmain .ccleft
+{
+    float:left;
+    background-color:#F6F9FC;
+    width:244px;    
+    border-right:1px solid #C5D2DA;
+    margin-left:4px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.ccmain .ccleft a
+{
+    height:25px;
+    line-height:25px;
+    width:229px;
+    float:left;
+    margin-left:8px;
+    text-decoration:none;
+    text-indent:10px;
+    color:Black;
+}
+
+.ccmain .ccleft a:hover
+{
+    background-color:#5D99CE;
+    color:White;
+}
+
+.ccmain .ccright 
+{
+    float:left;
+    width:500px;
+    text-align:left;
+    margin-left:30px;
+}

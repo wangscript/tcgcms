@@ -136,6 +136,7 @@ namespace TCG.CMS.WebUi
 
         }
 
+        //生成文章分类
         private void NewsClassCreate()
         {
             string tClassID = objectHandlers.Post("DelClassId");

@@ -1,0 +1,34 @@
+
+
+.a4_from .ccmain .ccright .dtree {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666;
+	white-space: nowrap;
+	height:18px;
+	line-height:18px;
+}
+.a4_from .ccmain .ccrigh .dtree img 
+{
+    float:none;
+	border: 0px;
+	vertical-align: middle;
+}
+.a4_from .ccmain .ccrigh .dtree a {
+	color: #333;
+	text-decoration: none;
+}
+.a4_from .ccmain .ccrigh .dtree a.node, .dtree a.nodeSel {
+	white-space: nowrap;
+	padding: 1px 2px 1px 2px;
+}
+.a4_from .ccmain .ccrigh .dtree a.node:hover, .dtree a.nodeSel:hover {
+	color: #333;
+	text-decoration: underline;
+}
+.a4_from .ccmain .ccrigh .dtree a.nodeSel {
+	background-color: #c0d2ec;
+}
+.a4_from .ccmain .ccrigh .dtree .clip {
+	overflow: hidden;
+}

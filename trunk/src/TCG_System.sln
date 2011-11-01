@@ -42,6 +42,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebUI", "WebUI\", "{8C9EE0E
 		VWDPort = "7345"
 	EndProjectSection
 EndProject
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "WebUI_deploy", "..\..\WebUI_deploy\WebUI_deploy.wdproj", "{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -322,6 +324,27 @@ Global
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|Win32.ActiveCfg = Debug|Any CPU
 		{8C9EE0E9-00B7-4EA4-8D38-2B92EA47DA49}.Release|x86.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|.NET.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|Win32.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Default|x86.ActiveCfg = Debug|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|.NET.ActiveCfg = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|Win32.ActiveCfg = Release|Any CPU
+		{2F31048C-302C-44CA-BF3D-FC71A39E8B6B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

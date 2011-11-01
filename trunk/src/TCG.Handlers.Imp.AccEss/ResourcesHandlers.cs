@@ -24,11 +24,11 @@ namespace TCG.Handlers.Imp.AccEss
 
             AccessFactory.conn.Execute("INSERT INTO resources (id,iClassID,vcTitle,vcUrl,vcContent,vcAuthor,iCount,vcKeyWord,"
         + "vcEditor,cCreated,vcSmallImg,vcBigImg,vcShortContent,vcSpeciality,cChecked,cDel,cPostByUser,"
-        + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl,PropertiesCategorieId) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
+        + "vcFilePath,dAddDate,dUpDateDate,vcTitleColor,cStrong,SheifUrl,PropertiesCategorieId,CCCategories) VALUES(" + inf.Id + ",'" + inf.Categorie.Id + "','" + inf.vcTitle + "','"
         + inf.vcUrl + "','" + inf.vcContent.Replace("'", "''") + "','" + inf.vcAuthor + "','" + inf.iCount + "','" + inf.vcKeyWord + "','" + inf.vcEditor + "','" + inf.cCreated + "','"
         + inf.vcSmallImg + "','" + inf.vcBigImg + "','" + inf.vcShortContent.Replace("'", "''") + "','" + inf.vcSpeciality + "','" + inf.cChecked + "','"
         + inf.cDel + "','" + inf.cPostByUser + "','" + inf.vcFilePath + "','" + inf.dAddDate + "','" + inf.dUpDateDate + "','"
-        + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "','" + inf.PropertiesCategorieId + "')");
+        + inf.vcTitleColor + "','" + inf.cStrong + "','" + inf.SheifUrl + "','" + inf.PropertiesCategorieId + "','" + inf.CCCategories + "')");
             return 1;
 
         }
@@ -53,7 +53,7 @@ namespace TCG.Handlers.Imp.AccEss
                 + inf.vcShortContent.Replace("'", "''") + "',vcSpeciality='" + inf.vcSpeciality + "',cChecked='" + inf.cChecked + "',cDel='"
                 + inf.cDel + "',cPostByUser='" + inf.cPostByUser + "',vcFilePath='" + inf.vcFilePath
                 + "',dUpDateDate='" + inf.dUpDateDate + "',vcTitleColor = '" + inf.vcTitleColor + "',cStrong = '"
-                + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "' WHERE Id = " + inf.Id;
+                + inf.cStrong + "',PropertiesCategorieId='" + inf.PropertiesCategorieId + "',CCCategories='" + inf.CCCategories + "' WHERE Id = " + inf.Id;
             AccessFactory.conn.Execute(sql);
 
             return 1;
