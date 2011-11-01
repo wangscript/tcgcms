@@ -54,19 +54,7 @@ namespace TCG.CMS.WebUi
                         this.scp.Items.Add(new ListItem(template.CategoriePropertiesName, template.Id));
                     }
                 }
-
-                //this.ccskin.Items.Clear();
-                //this.ccskin.Items.Add(new ListItem("请选择需要抄送的站点", "0"));
-                //Dictionary<string, EntityBase> allskins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
-                //if (allskins != null && allskins.Count != 0)
-                //{
-                //    foreach (KeyValuePair<string, EntityBase> keyvalue in allskins)
-                //    {
-                //        Skin template = (Skin)keyvalue.Value;
-                //        this.ccskin.Items.Add(new ListItem(template.Name, template.Id));
-                //    }
-                //}
-
+                
                 if (newsid == 0)
                 {
                     this.iClassId.Value = categorieid;
@@ -93,6 +81,45 @@ namespace TCG.CMS.WebUi
                 this.iShortContent.Value = item.vcShortContent;
                 this.scp.Value = item.PropertiesCategorieId.ToString();
                 this.cid.Text = item.PropertiesCategorieId.ToString() + "&t=" + DateTime.Now.ToString();
+                this.ccCheckCateg.Value = item.CCCategories;
+
+                StringBuilder sb = new StringBuilder();
+                StringBuilder csb = new StringBuilder();
+                Dictionary<string, EntityBase> allskins = base.handlerService.skinService.skinHandlers.GetAllSkinEntity();
+                if (allskins != null && allskins.Count != 0)
+                {
+                    foreach (KeyValuePair<string, EntityBase> keyvalue in allskins)
+                    {
+                        Skin template = (Skin)keyvalue.Value;
+                        sb.Append("<li><a onclick=\"SelectCCSkinC('" + template.Id + "')\" id=\"c_" + template.Id + "\">" + template.Name + "</a></li>");
+
+                        csb.Append("<div class=\"cctree hid\" id=\"ct_" + template.Id + "\">");
+                        csb.Append("<script type=\"text/javascript\">\r\n");
+                        string csid = "t_" + template.Id.Replace("-","_");
+                        csb.Append("\tvar " + csid + " = new dTree('" + csid + "');\r\n");
+                        Dictionary<string, EntityBase> allcategates = base.handlerService.skinService.categoriesHandlers.GetAllCategoriesEntitySkinId(template.Id);
+                        if (allcategates != null && allcategates.Count > 0)
+                        {
+                            foreach (KeyValuePair<string, EntityBase> keyvalue1 in allcategates)
+                            {
+                                Categories categat = (Categories)keyvalue1.Value;
+                                string checkecs = item.CCCategories.IndexOf(categat.Id) > -1 ? "checked" : "";
+                                string parent = categat.Parent == "0" ? "-1" : categat.Parent;
+                                csb.Append("\t" + csid + ".add('" + categat.Id + "','" + parent + "','"
+                                 + "<input type=\"checkbox\" name=\"ccCheckBox\" id=\"ck_" + categat.Id + "\" value=\""
+                                 + categat.Id + "\" onclick=\"ccCheckBoxChange(this);\" cskin=\"" + categat.SkinInfo.Id + "\" " + checkecs + ">"  
+                                 + categat.vcClassName + "');\r\n");
+                           } 
+                        }
+                        csb.Append("\tdocument.write(" + csid + ");\r\n");
+                        csb.Append("</script>");
+                        csb.Append("</div>");
+                    }
+                }
+
+                ccskintitle.InnerHtml = sb.ToString();
+                ccright.InnerHtml = csb.ToString();
+
                 item = null;
             }
             else
@@ -142,6 +169,7 @@ namespace TCG.CMS.WebUi
             item.vcContent = objectHandlers.Post("taContent");
             item.vcAuthor = objectHandlers.Post("iAuthor");
             item.vcKeyWord = objectHandlers.Post("iKeyWords");
+            item.CCCategories = objectHandlers.Post("ccCheckBox");
 
             if (item.Categorie.Id != categorieid)
             {
@@ -187,6 +215,28 @@ namespace TCG.CMS.WebUi
                 if (!ismdy)
                 {
                     rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
+                    //处理
+                    if (!string.IsNullOrEmpty(item.CCCategories))
+                    {
+                        string mid = item.Id;
+                        item.CCCategories = item.CCCategories + ",";
+                        if (item.CCCategories.IndexOf(",") > -1)
+                        {
+                            string[] ccs = item.CCCategories.Split(',');
+                            for (int i = 0; i < ccs.Length; i++)
+                            {
+                                string txg = ccs[i];
+                                if (!string.IsNullOrEmpty(txg))
+                                {
+                                    item.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                                    item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(txg);
+                                    item.SheifUrl = mid;
+                                    item.CCCategories = "";
+                                    rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -194,6 +244,48 @@ namespace TCG.CMS.WebUi
                     if (delrpold)
                     {
                         rtn = base.handlerService.resourcsService.resourcesHandlers.DelResourcesProperties(item.Id);
+                    }
+
+                    //处理
+                    if (!string.IsNullOrEmpty(item.CCCategories))
+                    {
+                        string mid1 = item.Id;
+                        item.CCCategories = item.CCCategories + ",";
+                        if (item.CCCategories.IndexOf(",") > -1)
+                        {
+                            string[] ccs = item.CCCategories.Split(',');
+                            for (int i = 0; i < ccs.Length; i++)
+                            {
+                                string txg1 = ccs[i];
+                                if (!string.IsNullOrEmpty(txg1))
+                                {
+                                    int num3 = 0, num2 = 0, num1 = 0;
+                                    Dictionary<string, EntityBase> res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref num3,
+                                        ref num2, ref num1, 1, 1, "ID desc", "SheifUrl='" + mid1 + "' AND iClassid = '" + txg1 + "'");
+                                    if (res != null && res.Count == 1)
+                                    {
+                                        Resources res1 = null;
+                                        foreach (KeyValuePair<string, EntityBase> entity in res)
+                                        {
+                                            res1 = (Resources)entity.Value;
+                                        }
+                                        item.Id = res1.Id;
+                                        item.Categorie = res1.Categorie;
+                                        item.SheifUrl = res1.SheifUrl;
+                                        item.CCCategories = "";
+                                        rtn = base.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+                                    }
+                                    else
+                                    {
+                                        item.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                                        item.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById(txg1);
+                                        item.SheifUrl = mid1;
+                                        item.CCCategories = "";
+                                        rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(item);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 

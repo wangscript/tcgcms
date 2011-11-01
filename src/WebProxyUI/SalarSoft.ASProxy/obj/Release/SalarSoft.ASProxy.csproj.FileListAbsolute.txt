@@ -1,0 +1,14 @@
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.xml
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.dll
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.pdb
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\bin\Release\ICSharpCode.SharpZipLib.dll
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\obj\Release\ResolveAssemblyReference.cache
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\obj\Release\SalarSoft.ASProxy.dll
+F:\asproxy_5.5beta4_source\ASProxy\SalarSoft.ASProxy\obj\Release\SalarSoft.ASProxy.pdb
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.xml
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.dll
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\bin\Release\SalarSoft.ASProxy.pdb
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\obj\Release\ResolveAssemblyReference.cache
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\obj\Release\SalarSoft.ASProxy.dll
+E:\业余研究\TCGCMS\src\WebProxyUI\SalarSoft.ASProxy\obj\Release\SalarSoft.ASProxy.pdb

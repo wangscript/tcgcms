@@ -518,7 +518,7 @@ namespace TCG.Handlers
             bool create = this.GetAttribute("create") != "Y" ? false : true;
             bool havechilecategorie = this.GetAttribute("havechilecategorie") != "Y" ? false : true;
 
-            int curPage = 0;
+            int curPage = pagerinfo.Page;
             int pageCount = 0;
             int count = 0;
 

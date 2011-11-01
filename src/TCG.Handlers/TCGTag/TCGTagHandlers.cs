@@ -193,7 +193,7 @@ namespace TCG.Handlers
             }
         }
 
-        private string GetFilePath()
+        public string GetFilePath()
         {
             if (this._pagerinfo.NeedPager && this._pagerinfo.PageSep!=0)
             {

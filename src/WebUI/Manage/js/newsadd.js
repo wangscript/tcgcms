@@ -383,6 +383,41 @@ function ResourcePropertiesHTMLADD(cpobj,rpobj) {
     return text;
 }
 
-function ChangeCCSkin(obj) {
-    
+function SelectCCSkinC(id) {
+    var ahrefs = $("#ccskintitle a");
+    ahrefs.each(function (n) {
+        var obj = $(ahrefs[n]);
+        if (obj.attr("id") == ("c_" + id)) {
+            obj.css("background-color", "#5D99CE");
+            obj.css("color", "#FFFFFF");
+            $("#ct_" + obj.attr("id").split('_')[1]).show();
+        } else {
+            obj.css("background-color", "#F6F9FC");
+            obj.css("color", "#000000");
+            $("#ct_" + obj.attr("id").split('_')[1]).hide();
+        }
+    });
+
+}
+
+function ccCheckBoxChange(obj) {
+    obj = $(obj);
+    if (obj.attr("checked") == true) {
+        var skinid = obj.attr("cskin");
+        ClearFatherCheckBox(skinid, obj.val());
+    }
+}
+
+function ClearFatherCheckBox(skinid, id) {
+    if (_Categories == null) return;
+    var cate = GetCategorieById(id);
+    for (var i = 0; i < _Categories.length; i++) {
+        if (_Categories[i].Id == cate.ParentId && _Categories[i].Skin.Id == skinid) {
+            var obj1 = $("#ck_" + _Categories[i].Id);
+            if (obj1.length == 1) {
+                obj1.attr("checked", false);
+            }
+            ClearFatherCheckBox(skinid, _Categories[i].Id);
+        }
+    }
 }

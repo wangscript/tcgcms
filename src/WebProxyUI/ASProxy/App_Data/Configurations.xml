@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configurations>
+  <adminUI isAdminStarted="True" userName="admin" password="admin" />
+  <providers>
+    <providerExtensions enabled="True">
+      <disabledProviders>
+        <provider name="TemplateProvider" />
+      </disabledProviders>
+    </providerExtensions>
+    <plugins enabled="True">
+      <disabledPlugins>
+        <plugin name="TemplatePlugin" />
+      </disabledPlugins>
+    </plugins>
+  </providers>
+  <webData maxContentLength="-1" requestTimeout="60000" requestReadWriteTimeOut="70000" sendSignature="True" preferredLocalEncoding="windows-1256">
+    <userAgent mode="Default" custom="ASProxy (compatible; Mozilla/5.0;)" />
+    <downloader resumeSupport="True" forceResumeSupport="True" maxContentLength="-1" requestTimeout="120000" requestReadWriteTimeOut="300000" />
+  </webData>
+  <pages uiLanguage="zh-cn" />
+  <authentication enabled="False" />
+  <imageCompressor enabled="True" quality="14" />
+  <autoUpdate updateInfoUrl="http://asproxy.sourceforge.net/update/autoupdate.xml" engine="False" plugins="False" />
+  <logSystem fileFormat="yyyy-MM-dd" maxFileSize="5120">
+    <activityLog enabled="False" location="~/App_Data/DailyLog/{0}.log" pages="True" images="False" />
+    <errorLog enabled="False" location="~/App_Data/ErrorLog/{0}.log" />
+  </logSystem>
+  <netProxy mode="Direct">
+    <custom address="0.0.0.0" port="8080" authentication="False">
+      <authentication userName="" password="" />
+    </custom>
+  </netProxy>
+  <userOptions>
+    <options>
+      <Cookies changeable="True">True</Cookies>
+      <TempCookies changeable="True">True</TempCookies>
+      <Images changeable="True">True</Images>
+      <Links changeable="True">True</Links>
+      <Frames changeable="True">True</Frames>
+      <SubmitForms changeable="True">True</SubmitForms>
+      <RemoveObjects changeable="True">True</RemoveObjects>
+      <HttpCompression changeable="True">True</HttpCompression>
+      <ImageCompressor changeable="True">True</ImageCompressor>
+      <EncodeUrl changeable="True">True</EncodeUrl>
+      <OrginalUrl changeable="True">True</OrginalUrl>
+      <PageTitle changeable="True">True</PageTitle>
+      <ForceEncoding changeable="True">True</ForceEncoding>
+      <RemoveScripts changeable="True">True</RemoveScripts>
+      <RemoveImages changeable="True">True</RemoveImages>
+      <DocType changeable="True">True</DocType>
+    </options>
+  </userOptions>
+  <userAccessControl enabled="False">
+    <blocked />
+    <allowed />
+  </userAccessControl>
+  <customConfig />
+</Configurations>

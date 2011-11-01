@@ -1,0 +1,2588 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SalarSoft.ASProxy</name>
+    </assembly>
+    <members>
+        <member name="F:SalarSoft.ASProxy.Update.ProvidersUpdater._reminderTimer">
+            <summary>
+            Reminder timer for next execution
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.StartWaiter">
+            <summary>
+            Starts the timer to download the providers update if available
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.StopWaiter">
+            <summary>
+            Stops the timer and saves the last start time
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.DownloadProviderUpdateInfo(SalarSoft.ASProxy.ProviderInfo)">
+            <summary>
+            Downloads provider update info
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.Install(SalarSoft.ASProxy.Update.ProviderUpdateInfo)">
+            <summary>
+            Download the provider update package and install it
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.Install(System.String)">
+            <summary>
+            Download and install the provider
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.InstallLoadedProviders">
+            <summary>
+            Will automatically install all loaded providers
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.ProvidersUpdater.ApplyPackage(SalarSoft.ASProxy.Update.ProviderUpdateInfo,System.String)">
+            <summary>
+            Saves the package file to ASProxy location
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.AfterInitialize(SalarSoft.ASProxy.Exposed.IEngine)">
+            <summary>
+            0-
+            The front-end request is given and processed.
+            Here plugin can modify the request parameters.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.BeforeHandshake(SalarSoft.ASProxy.Exposed.IEngine,SalarSoft.ASProxy.Exposed.IWebData)">
+            <summary>
+            1-
+            Before sending the request to back-end website.
+            Plugin can modify request here.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.AfterHandshake(SalarSoft.ASProxy.Exposed.IEngine,SalarSoft.ASProxy.Exposed.IWebData)">
+            <summary>
+            2-
+            The handshake is done here and data is available.
+            Plugin can modify response data and headers.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.BeforeProcessor(SalarSoft.ASProxy.Exposed.IEngine,SalarSoft.ASProxy.Exposed.IDataProcessor)">
+            <summary>
+            3-
+            The response data need some proccess.
+            Plugin can modify the processor.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.AfterProcessor(SalarSoft.ASProxy.Exposed.IEngine)">
+            <summary>
+            4-
+            The processing is done.
+            Plugin can modify the results in the Engine
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginEngine.AfterExecuteToResponse(SalarSoft.ASProxy.Exposed.IEngine,System.Web.HttpResponse)">
+            <summary>
+            5-
+            Everything is done and the data is ready to send to front-end user.
+            This method will be called only by some kind of data and data types.
+            Plugin can modify the response.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IPluginHtmlProcessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginHtmlProcessor.BeforeExecute(SalarSoft.ASProxy.Exposed.IHtmlProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginHtmlProcessor.AfterExecute(SalarSoft.ASProxy.Exposed.IHtmlProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ICredentialCache">
+            <summary>
+            Generalize the CredentialCache
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICredentialCache.IsCertificated(System.String)">
+            <summary>
+            If the requested url has a authorized credentials
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICredentialCache.AddCertification(System.String,System.String,System.String)">
+            <summary>
+            Authorized the credentials for an Url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICredentialCache.GetNetworkCertification(System.String)">
+            <summary>
+            Reads the authorized credentials
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceBaseSources(System.String@,System.Boolean,System.String@)">
+            <summary>
+            Find "BASE" tag and return "HREF" attrribute value, then remove the tag "HREF" attribute.
+            </summary>
+            <param name="hrefPath">href value</param>
+            <returns>return if Base tag found or not</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.RemoveScripts(System.String@)">
+            <summary>
+            Remove all the scripts from html code
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceHttpRefresh(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Replaces head http refresh codes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceCssLinks(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            processes css style sheet links
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceAnchors(System.String@,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Processes links 
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceIFrames(System.String@,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Processes iframes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceFrameSets(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Processes framesets
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceImages(System.String@,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Processes image tags
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceScripts(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Processes script tags sources "src"
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceBackgrounds(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Processes background images
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlReplacer.ReplaceEmbeds(System.String@,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Processes embeded medias
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.HtmlParser">
+            <summary>
+            Html tags parser
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlParser.RemoveTagContent(System.String@,System.String,System.Boolean)">
+            <summary>
+            Locate and remove a tag from html codes
+            </summary>
+            <param name="pageHtml">Html codes</param>
+            <param name="tagName">Name of tags</param>
+            <param name="removeTag">Remove the tag also</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlParser.RemoveTagOnly(System.String@,System.String)">
+            <summary>
+            Removes specified tag
+            </summary>
+            <param name="pageHtml"></param>
+            <param name="tagName"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlParser.GetTagAttributeValuePos(System.String@,System.String,System.String,System.Int32)">
+            <summary>
+            Locate value of attribute position for specified html tag
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlParser.FindAttributeValuePosition(System.String@,System.Int32,System.Int32)">
+            <summary>
+            Locate value of attribute position using specified start index
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlParser.GetTagContent(System.String@,System.String)">
+            <summary>
+            Returns the content of specified tag.
+            </summary>
+            <param name="pageHtml">html code</param>
+            <param name="justTagName">The tag name like TABLE</param>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Update.PluginsUpdater._reminderTimer">
+            <summary>
+            Reminder timer for next execution
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.StartWaiter">
+            <summary>
+            Starts the timer to download the plugins update if available
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.StopWaiter">
+            <summary>
+            Stops the timer and saves the last start time
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.DownloadPluginUpdateInfo(SalarSoft.ASProxy.PluginInfo)">
+            <summary>
+            Downloads plugin update info
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.Install(SalarSoft.ASProxy.Update.PluginUpdateInfo)">
+            <summary>
+            Download the plugin update package and install it
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.Install(System.String)">
+            <summary>
+            Download and install the plugin
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.InstallLoadedPlugins">
+            <summary>
+            Will automatically install all loaded plugins
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.PluginsUpdater.ApplyPackage(SalarSoft.ASProxy.Update.PluginUpdateInfo,System.String)">
+            <summary>
+            Saves the package file to ASProxy location
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.WebMethods.IsPostMethod(System.String)">
+            <summary>
+            Checks web request method type if is POST or not
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.WebMethods.IsMethod(System.String,SalarSoft.ASProxy.WebMethods.DefaultMethods)">
+            <summary>
+            Checks web request method type
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.WebMethods.DetectMethod(System.String,SalarSoft.ASProxy.WebMethods.DefaultMethods)">
+            <summary>
+            Detects method by starting characters
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginUAC.ValidateContext(SalarSoft.ASProxy.Exposed.IUAC,System.Web.HttpContext)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ICookieManager">
+            <summary>
+            Generalize the CookieManager
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICookieManager.GetAppliedCookieNamesList(System.String)">
+            <summary>
+            Cookie names list which appllies to specifed url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICookieManager.RestoreCookiesFromResponse(System.Net.WebResponse,System.Net.CookieCollection)">
+            <summary>
+            Saves response cookies in a cookie collection
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICookieManager.RestoreCookiesFromResponse(System.Net.WebResponse,System.Boolean)">
+            <summary>
+            Reads cookies from response and saves them all in user pc
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICookieManager.AddCookiesToRequest(System.Net.WebRequest,System.Net.CookieCollection)">
+            <summary>
+            Adds specified cookies to proxy request cookies collection
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ICookieManager.AddCookiesToRequest(System.Net.WebRequest)">
+            <summary>
+            Reads cookies from ASProxy cookies and adds them to request to site
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IDataProcessor">
+            <summary>
+            Generalize the DataProcessor
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IExeptionHandled">
+            <summary>
+            Generalize the HandledExeption
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IExeptionHandled.LastStatus">
+            <summary>
+            Last activity status
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IExeptionHandled.LastException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IExeptionHandled.LastErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IDataProcessor.ExtraCodesForPage">
+            <summary>
+            Extra codes that will be trasfered before the content
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IDataProcessor.ExtraCodesForBody">
+            <summary>
+            For html contents, extra codes which should run in the body of page
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponseData.DataLength">
+            <summary>
+            Content total size in bytes
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponseData.EntityTag">
+            <summary>
+            This unique code must keep the same as long as the file does not change.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponseData.RangeRequest">
+            <summary>
+            Indicates if this is a range request 
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponseData.ApplyRangeToStream">
+            <summary>
+            If true and if RangeRequest is true the specifed range values will apply to DataStream,
+            otherwise the DataStream will send without change.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponseData.HttpMethod">
+            <summary>
+            Request http method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginWebData.BeforeExecuteGetResponse(SalarSoft.ASProxy.Exposed.IWebData,System.Net.WebRequest)">
+            <summary>
+            0-
+            Everything is ready to send the request to the back-wnd website.
+            Plugin can modify the request.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginWebData.AfterExecuteGetResponse(SalarSoft.ASProxy.Exposed.IWebData,System.Net.WebResponse)">
+            <summary>
+            1-
+            The request is done, and the response is ready to get.
+            Plugin can modify the response before every other process.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginWebData.AfterExecuteFinalizeWebResponse(SalarSoft.ASProxy.Exposed.IWebData,System.Net.WebResponse)">
+            <summary>
+            2-
+            All the headers of request is processed. The data is not readed yet.
+            Plugin can modify the WebData response results.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginWebData.AfterExecuteReadResponseData(SalarSoft.ASProxy.Exposed.IWebData)">
+            <summary>
+            3-
+            Data is read and ready. Everything about WebData is done.
+            Plugin can apply its final processes.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExEngine">
+            <summary>
+            Summary description for ExEngine
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IEngine">
+            <summary>
+            Generalize the Engine
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IEngine.ExecuteToStream(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IEngine.DataTypeToProcess">
+            <summary>
+             Type of data to is requested to be processed.
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IEngine.UserOptions">
+            <summary>
+            User defined options
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.Initialize(System.Web.HttpRequest)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.Initialize(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.ExecuteHandshake">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.ExecuteToString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.ExecuteToResponse(System.Web.HttpResponse)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExEngine.ExecuteToStream(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CSSReplacer.ReplaceStyleTagStyleUrl(System.String@,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Finds and override url addresses within "style" tag.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CSSReplacer.ReplaceCSSClassStyleUrl(System.String@,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Process the styles and replace them 
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.CookieManager">
+            <summary>
+            Oh god, I could find the problem of cookies and it was damn microsoft's CookieContainer bug!
+            I've reported this fucking bug, and it is mysteriously fixed in a day! 
+            It is late now and 3 releases of .net have this bug, what should I do? Damn it! Fixed!
+            
+            This class can work with bugless CookieContainer which arrives with .NET 4.0 .
+            </summary>
+            <autors>
+            Originally developed my SalarSoft
+            CookieContainer bugfix and contributor CallMeLaNN
+            </autors>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.CookieManager.intExpireDateNormalDays">
+            <summary>
+            6 days
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.CookieManager.intExpireDateTempMinutes">
+            <summary>
+            30 minutes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.RestoreCookiesFromResponse(System.Net.WebResponse,System.Net.CookieCollection)">
+            <summary>
+            Saves response cookies in a cookie collection
+            </summary>
+            <param name="httpResponse">proxy response instance</param>
+            <param name="cookies">Specified cookie collection</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.RestoreCookiesFromResponse(System.Net.WebResponse,System.Boolean)">
+            <summary>
+            Reads cookies from response and saves them all in user pc
+            </summary>
+            <param name="httpResponse">proxy response instance</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.AddCookiesToRequest(System.Net.WebRequest,System.Net.CookieCollection)">
+            <summary>
+            Adds specified cookies to proxy request cookies collection
+            </summary>
+            <param name="httpRequest">Proxy request</param>
+            <param name="cookies">Specified cookies</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.AddCookiesToRequest(System.Net.WebRequest)">
+            <summary>
+            Reads cookies from ASProxy cookies and adds them to request to site
+            </summary>
+            <param name="httpRequest">Proxy request</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetCookieName(System.Uri)">
+            <summary>
+            Generates cookie name to which will be stored in back-end user's browser
+            </summary>
+            <returns>Cookie name with ASProxy suffix</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetCookieName(System.String)">
+            <summary>
+            Generates cookie name to which will be stored in back-end user's browser
+            </summary>
+            <returns>Cookie name with ASProxy suffix</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetAppliedCookieNamesList(System.String)">
+            <summary>
+            Cookie names list which appllies to specifed url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.ApplyRequestCookiesToCookieContainer(System.Net.CookieContainer,System.Web.HttpRequest,System.Uri)">
+            <summary>
+            Reads request cookie and applies them to cookie container
+            </summary>
+            <remarks>
+            Here actually I am not using cookie header format, but I use my own key=value pair.
+            You can change to make it compatible like cookie header like
+              cookiename=cookievalue instead of Name=cookiename; Value=cookievalue (I seperate name and value for faster coding and good parsing)
+              expires=... instead of Expires=...
+            but actually not necessary to be same like cookie header format because this will never use at http header, but just only stored in 'browser group cookie' and only used by this CookieManager.
+            This Fix will create Cookie by setting all required property value.
+            This will store Expires, HttpOnly etc that will managed by CookieContainer.
+            string -> cookie object
+            Note: I am not sure if this work with your modified RestoreCookiesFromResponse()
+            </remarks>
+            <autor>CallMeLaNN</autor>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.ParseASProxyCookieHeader(System.String,System.Uri)">
+            <summary>
+            Parses ASProxy cookie header to a cookie object
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetAllCookies(System.Net.CookieContainer)">
+            <summary>
+            Returns all cookies stored in CookieContainer
+            </summary>
+            <returns>Collection of all cookies</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetASProxyCookieHeader(System.Net.CookieCollection)">
+            <summary>
+            encode/serialize (group all cookies) by using key value pair (actually not exactly same like cookie header)
+            </summary>
+            <returns>cookie object -> string</returns>
+            <autor>CallMeLaNN</autor>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetCookieNamesListForDomain(System.String)">
+            <summary>
+            Returns cookie names applies to specified Domain
+            </summary>
+            <returns>List of ASProxy cookie names</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.BugFix_CookieContaierFix(System.Net.CookieContainer)">
+            <summary>
+            This method is aimed to fix a goddamn CookieContainer issue,
+            It adds missed path for cookies which are not started with dot.
+            This is a dirty hack
+            </summary>
+            <remarks>
+            This method is only for .NET 2.0 which is used by .NET 3.0 and 3.5 too.
+            The issue will be fixed in .NET 4, I hope!
+            </remarks>
+            <autor>Many thanks to CallMeLaNN "dot-net-expertise.blogspot.com" to complete this method</autor>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetCookieNameByHost(System.String)">
+            <summary>
+            Applies asproxy cookie extension to a cookie name or hostname
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.GetCookieNameByDomain(System.Net.Cookie,System.Uri)">
+            <summary>
+            Returns cookie name to store in user's browser
+            </summary>
+            <returns>A cookie name</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CookieManager.IsASProxyCookie(System.String)">
+            <summary>
+            Checks cookie name if it is ASProxy stored cookie
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.CookieManager._cookieHeaderGeneratorMethod">
+            <summary>
+            Cookie has a method named "ToServerString" which returns its cookie header for transferring in the net.
+            It is hidden!
+            "ToServerString" is for Microsoft .NET framework
+            "ToClientString" is for Mono framework
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.StringCompare">
+            <summary>
+            <para>This class provides a collection of best functions and methods for application hight performance.</para>
+            <remarks>Important: IgnoreCase methods are always slower than MatchCase methods, because of thier mechanism.</remarks>
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Common">
+            <summary>
+            Genereal functions for public use
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.IsRunningOnMono">
+            <summary>
+            Checks if the application is running on Mono framework
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.IsRunningOnDotNet4">
+            <summary>
+            Checks if the application is running on dotNetFramework 4.0
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.CompareASProxyVersions(System.String,System.String)">
+            <summary>
+            Compares ASProxy version numbers, (5.5 > 5.5b1) and (5.5b3 > 5.5b1) and so on.
+            The results would be (version1>version2)==1 , (version2>version1)==-1 , (version1=version2)==0
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.GetInstalledLanguagesList">
+            <summary>
+            List of installed languages, the collection will contain their culture names.
+            The method uses the installed ResX files in App_LocalResources folder to generate the list.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.GetExceptionHttpDetailedErrorCode(System.Exception)">
+            <summary>
+            Retrieve http-status code for the specified exception, default is InternalServerError(500).
+            Returns negative error number if error is WebException but is not Http error.
+            </summary>
+            <returns>Integer number</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.GetExceptionHttpErrorCode(System.Exception)">
+            <summary>
+            Retrieve http-status code for the specified exception, default is InternalServerError(500)
+            </summary>
+            <returns>HttpStatusCode</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.GenerateUserAgent(System.Web.HttpContext)">
+            <summary>
+            Generares ASProxy usergaent for browsers,
+            it will have asproxy signature in the of user-agent string
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ReplaceStrEx(System.String,System.String,System.String,System.StringComparison)">
+            <summary>
+            Implements fast string replacing algorithm for CS
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.NameValueCollectionToString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Generates string of a name-value collection
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.AspDotNetViewStateResetToDef(System.IO.Stream)">
+            <summary>
+            Renames ASP.NET VIEW_STATE input field name to some more secure name
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ApplyViewStateResetRename(System.Byte[])">
+            <summary>
+            Renames ASP.NET VIEW_STATE input field name to some more secure name
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.AspDotNetViewStateResetToDef(System.String)">
+            <summary>
+            Restores renamed VIEW_STATE input field name
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ClearHeadersButSaveEncoding(System.Web.HttpResponse)">
+            <summary>
+            Clears response header whitout harming http-compression header
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.MimeTypeToToProcessType(SalarSoft.ASProxy.MimeContentType)">
+            <summary>
+            Converts contentType to DataTypeToProcess
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ContentTypeToString(SalarSoft.ASProxy.MimeContentType)">
+            <summary>
+            Converts content type enum value to HTTP content-type header value
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.StringToContentType(System.String)">
+            <summary>
+            Converts HTTP Content-Type to enum type
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ConvertFromBase64(System.String)">
+            <summary>
+            Base64 decoder
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Common.ConvertToBase64(System.String)">
+            <summary>
+            Base64 encoder
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.UnicodeUrlDecoder">
+            <summary>
+            Specially optiomized encoder to decode Unicode characters only in a URL
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.EPluginStopRequest">
+            <summary>
+            A plugin may throw this excpetion if it wants to stop the request
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Update.EngineUpdater._reminderTimer">
+            <summary>
+            Reminder timer for next execution
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.StartWaiter">
+            <summary>
+            Starts the timer to download the engine update if available
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.StopWaiter">
+            <summary>
+            Stops the timer and saves the last start time
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.DownloadEngineUpdateInfo">
+            <summary>
+            Downloads engine update info
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.Install(SalarSoft.ASProxy.Update.EngineUpdateInfo)">
+            <summary>
+            Download the engine update package and install it
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.Install">
+            <summary>
+            Download and update the package
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.EngineUpdater.ApplyPackage(SalarSoft.ASProxy.Update.EngineUpdateInfo,System.String)">
+            <summary>
+            Saves the package file to ASProxy location
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ILogSystem">
+            <summary>
+            Generalize the LogSystem
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ILogSystem.Log(SalarSoft.ASProxy.LogEntity,System.Object[])">
+            <summary>
+            Logs specified items in specified log entity
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ILogSystem.Log(SalarSoft.ASProxy.LogEntity,System.Web.HttpRequest,System.String,System.Object[])">
+            <summary>
+            Logs http request, requested url and specified items
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.ILogSystem.ErrorLogEnabled">
+            <summary>
+            Enable/Disable the error log system
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.ILogSystem.ActivityLogEnabled">
+            <summary>
+            Enable/Disable the activity log system
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExLogSystem">
+            <summary>
+            Summary description for ExLogSystem
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.TextRange">
+            <summary>
+            Range of a string in main text
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.RequestUrlAsReferrer">
+            <summary>
+            Determines if requested url should be sent as referrer to back-end request
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.PrrocessErrorPage">
+            <summary>
+            If enabled the error pages will be shown due an error
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.RequestMethod">
+            <summary>
+            Requested method
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.PostDataString">
+            <summary>
+            Posted data in string format
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.RedirectedFrom">
+            <summary>
+            behaves like referrer
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.InputStream">
+            <summary>
+            Post back data
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.EngineRequestInfo.CustomHeaders">
+            <summary>
+            Custom headers to send to back-end request
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.EngineRequestInfo.ContentTypeString">
+            <summary>
+            Requested content type
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.EngineRequestInfo.ContentTypeMime">
+            <summary>
+            Requested content type
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ResumableDownload.ResumableResponse">
+            <summary>
+            Original class name is "ZIPHandler" in VB.Net
+            http://www.devx.com
+            Optimization and convertion by SalarSoft
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponse.ResponseState.InProgress">
+            <summary>
+            In Progress: File is locked, and download 
+            is currently in progress
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponse.ResponseState.Broken">
+            <summary>
+            Broken: File is locked, download was in
+            progress, but was cancelled 
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ResumableDownload.ResumableResponse.ResponseState.Finished">
+            <summary>
+            Finished: File is locked, download
+            was completed
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.UrlBuilder">
+            <summary>
+            Functions for URL manipulation
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.CombinePaths(System.String,System.String)">
+            <summary>
+            Combines Url paths
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.AppendAntoherQueries(System.String,System.String)">
+            <summary>
+            Appends bunch of queries to the url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.ReplaceUrlQuery(System.String,System.String,System.String)">
+            <summary>
+            Changes value of specified query in url with new value. If the specifed query doesn't found nothing will change.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.AddUrlQuery(System.String,System.String,System.String)">
+            <summary>
+            Inserts specifed query to the url. The query will be the first query of url.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.AddUrlQueryToEnd(System.String,System.String,System.String)">
+            <summary>
+            Inserts specifed query to the url. The query will be the last query of url.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.RemoveQuery(System.String,System.String)">
+            <summary>
+            Removes the specifed query from url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.RemoveUrlBookmark(System.String,System.String@)">
+            <summary>
+            Removes bookmark part of the url.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlBuilder.ClearQuery(System.String)">
+            <summary>
+            Removes all queries from url
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExUAC">
+            <summary>
+            User Access Control
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IUAC">
+            <summary>
+            User Access Control
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IUAC.ValidateContext(System.Web.HttpContext)">
+            <summary>
+            Validates the request context for UAC
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.UAC.ValidateContext(System.Web.HttpContext)">
+            <summary>
+            Validates the request context for UAC
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.JSParser">
+            <summary>
+            Parse the javascript codes!
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindPropertyCommandRange(System.String@,System.String,System.Int32)">
+            <summary>
+            This function locates property setter location.
+            </summary>
+            <param name="source">Search place</param>
+            <param name="propertyFullName">Name of property including dot for searching</param>
+            <returns>All value</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindPropertySetterRange(System.String@,System.String,System.Int32)">
+            <summary>
+            This function locates property setter location.
+            </summary>
+            <param name="source">Search place</param>
+            <param name="propertyFullName">Name of property including dot for searching</param>
+            <returns>All value</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindPropertyGetterRange(System.String@,System.String,System.Int32)">
+            <summary>
+            Locates property getter location.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindPropertyGetterRange(System.String@,System.String[],System.String[],System.Int32)">
+            <summary>
+            Locates property getter location.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindPropertyGetterFirstPartRange(System.String@,System.String[],System.String[],System.Int32)">
+            <summary>
+            Locates property getter location.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindMethodParametersRange(System.String@,System.String,System.Int32)">
+            <summary>
+            This function locates hole text (including parameters and etc.) between start parenthesis and end parenthesis of method.
+            </summary>
+            <param name="source">Search place</param>
+            <param name="methodFullName">Name of method including dot for searching</param>
+            <returns>All parameters</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindMethodFirstParameterRange(System.String@,System.String,System.Int32)">
+            <summary>
+            Find the first parameter of a method
+            </summary>
+            <param name="source">Search place</param>
+            <param name="methodFullName">Name of method including dot for searching</param>
+            <returns>method parameter value position</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindDottedCommandSetterStartPosition(System.String@,System.String,System.Int32,System.Char)">
+            <summary>
+            Location start position of any dotted command or nodot command. ex. window.location='salarsoft';
+            </summary>
+            <param name="source">Source of codes provided for searching</param>
+            <param name="commandFullName">Name of command including dots</param>
+            <param name="searchingStartIndex">Searching start position</param>
+            <returns>Start position of command, and status of success</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindDottedCommandGetterStartPosition(System.String@,System.String[],System.String[],System.Int32,System.Char,System.Boolean)">
+            <summary>
+            Locates a command getter start position. The command names is specified in two array.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.FindMethodParameterEndRange(System.String@,System.Int32,System.Int32)">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.ReplaceChractersBetweenString(System.String,System.Int32,System.Char,System.Int32)">
+            <summary>
+            Useless. Just for test.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.Internal.FindNextValidCharacter(System.String@,System.Int32)">
+            <summary>
+            Locates next non-white space character
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSParser.Internal.FindNextControlCharacter(System.String@,System.Int32)">
+            <summary>
+            Locates next control space character
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExDataProcessor">
+            <summary>
+            Summary description for ExDataProcessor
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.UserOptions">
+            <summary>
+             User defined data processing options 
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.UserOptions.RemoveScripts">
+            <summary>
+            Specifies scripts should strip or not. This option disabled by default.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.UserOptions.DocType">
+            <summary>
+            Inherits DOCTYPE.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UserOptions.LoadDefaults">
+            <summary>
+            Initialize a new instance of UserOptions with default value
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.ProviderType">
+            <summary>
+            Provider types
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.RequesterType">
+            <summary>
+            Represents what king of page is requesting.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.DataTypeToProcess">
+            <summary>
+             Data type to process
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.DataTypeToProcess.None">
+            <summary>
+            Do not process data
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.DataTypeToProcess.AutoDetect">
+            <summary>
+            Detect data type automatically
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.DataTypeToProcess.AdobeFlash">
+            <summary>
+            Not implemented, Reserved
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.MimeContentType">
+            <summary>
+             Content MIME type
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.LastStatus">
+            <summary>
+            Last activity status
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.ReferrerType">
+            <summary>
+            Type of referrer used in ASProxy
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.AutoRedirectType.RequestInternal">
+            <summary>
+            Redirects to another page of current site
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.AutoRedirectType.External">
+            <summary>
+            Redirects to out of currect requested site
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.AutoRedirectType.ASProxyPages">
+            <summary>
+            Redirects to ASProxy's another page
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.InternetProtocols">
+            <summary>
+            Determines internet protocols which asproxy supports
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.LogEntity">
+            <summary>
+            Log entities type
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Plugins">
+            <summary>
+            Plugins provider
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Plugins._loadedPlugins">
+            <summary>
+            List of available plugins to load
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Plugins._installedPlugins">
+            <summary>
+            List of installed plugins in ASProxy
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.RegisterHost(SalarSoft.ASProxy.PluginHosts,System.Type)">
+            <summary>
+            Registers plugin host
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.UnRegisterHost(SalarSoft.ASProxy.PluginHosts,System.Type)">
+            <summary>
+            Removes the registration of a plugin host class
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.UnRegisterHost(SalarSoft.ASProxy.PluginHosts)">
+            <summary>
+            Removes the registration of a plugin host class
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.SetPluginEnableStatus(System.String,System.Boolean)">
+            <summary>
+            Changes plugin enabled status
+            </summary>
+            <param name="pluginName"></param>
+            <param name="enabled"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.FindPlugin(System.Collections.Generic.List{SalarSoft.ASProxy.PluginInfo},System.String)">
+            <summary>
+            Finds plugin
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.CallPluginMethod(SalarSoft.ASProxy.PluginHosts,System.Enum,System.Object[])">
+            <summary>
+            Calls specified method of all specified hosts.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.IsPluginAvailable(SalarSoft.ASProxy.PluginHosts)">
+            <summary>
+            Checks if there is any plugin class registered for specified type
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.GetPluginsInstances(SalarSoft.ASProxy.PluginHosts)">
+            <summary>
+            Creates and stores plugin class instances, then returns the their list
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.LoadPlugins">
+            <summary>
+            Load providers list from xml file
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.InvokeDefaultCreateInstance(System.Type)">
+            <summary>
+            Creates a new instance of specified type by calling its default constructor
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.InvokePluginHostRegister(System.Type,System.Object)">
+            <summary>
+            Calling plugin RegisterPlugin method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Plugins.ReadPluginInfo(System.String)">
+            <summary>
+            Reads plugin info from specifed plugin xml file
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Plugins.LoadedPlugins">
+            <summary>
+            Loaded plugins which will apply to the engine
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Plugins.InstalledPlugins">
+            <summary>
+            All installed plugins, includes disabled and failed to load plugins
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Plugins.LoadedPluginsList">
+            <summary>
+            The loaded plugins stores in current request's context.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ImageCompressor.CompressImage(System.IO.Stream)">
+            <summary>
+            Compresses images using configurations
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ImageCompressor.GetEncoderInfo(System.String)">
+            <summary>
+            Returns the image codec with the given mime type
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.ImageCompressor._imageFormatFindEncoder">
+            <summary>
+            Warning, dirty hack! The FindEncoder is not public
+            This method returns native used image codec.
+            Why this is not public?
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.ImageCompressor._monoImageFormatFindEncoder">
+            <summary>
+            Warning, dirty hack! Image codec detector for Mono
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ImageCompressor.FindImageCodecInfo(System.Drawing.Image)">
+            <summary>
+            Returns image format's native image codec using a dirty hack
+            </summary>
+            <returns>if something found returns ImageCodecInfo, otherwise returns null</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ImageCompressor.IsImageAnimated(System.Drawing.Image)">
+            <summary>
+            Checks if it is animation
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.HtmlProcessor">
+            <summary>
+            Summary description for ExHtmlProcessor
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExHtmlProcessor">
+            <summary>
+            Summary description for ExHtmlProcessor
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlProcessor.Execute">
+            <summary>
+            Processes the html codes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlProcessor.Execute(System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            Processes the html codes
+            </summary>
+            <param name="codes">Html codes</param>
+            <param name="pageUrl">Page url. E.G. http://Site.com/users/profile.aspx?uid=90</param>
+            <param name="rootUrl">Root path. E.G. http://Site.com/</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlProcessor.GenerateJsEncoderCodes(System.String,System.String,System.String,System.String)">
+            <summary>
+            Generate dynamic encoding javascript codes
+            </summary>
+            <param name="pageBasePath">base path of current request page</param>
+            <returns>Javascript codes</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.HtmlProcessor.Resources.ASProxyJavaScriptTag(System.String,System.String)">
+            <summary>
+            adds an additional asproxydone='2'
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.HtmlTags">
+            <summary>
+            Html tag codes generator/analyzer
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.IsEnclosedBy(System.String@,System.Int32,System.String,System.String)">
+            <summary>
+            Specifies that a string with specified position index, is enclosed by some tags
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.CorrectValueIfQuoteExists(System.String@,SalarSoft.ASProxy.TextRange)">
+            <summary>
+            Correct start and end position for value position by ignoring some characters
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.RemoveQuotesFromTagAttributeValue(System.String)">
+            <summary>
+            Remove quote from begin or end of value
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.RemoveUrlAttribCssLocation(System.String,System.String@)">
+            <summary>
+            Removes URL attribute in css urls like this: url(other.css) will change to "other.css"
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.RemoveEscapeQuotesFromTagAttributeValue(System.String)">
+            <summary>
+            Removes escaped characters from start and end of phrase
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.GetDocType(System.String@)">
+            <summary>
+            Finds and returns DOCTYPE definition.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.EncodeJavascriptString(System.String,System.Boolean)">
+            <summary>
+            Encodes quote for javascript string
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.LinkTag(System.String,System.String)">
+            <summary>
+            Hyperlink tag
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.HtmlTags.LinkTag(System.String,System.String,System.String)">
+            <summary>
+            Hyperlink tag
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginLogSystem.BeforeLog(SalarSoft.ASProxy.Exposed.ILogSystem,SalarSoft.ASProxy.LogEntity,System.Web.HttpRequest,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginLogSystem.BeforeLog(SalarSoft.ASProxy.Exposed.ILogSystem,SalarSoft.ASProxy.LogEntity,System.Object[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginLogSystem.BeforeLogError(SalarSoft.ASProxy.Exposed.ILogSystem,System.Exception,System.Web.HttpRequest,System.String,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IPluginHost">
+            <summary>
+            The plugin base class to get started.
+            The plugin should register its host classes in constructor.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginHost.RegisterPlugin">
+            <summary>
+            Registers the plugin classes
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IPluginCSSProcessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCSSProcessor.BeforeExecute(SalarSoft.ASProxy.Exposed.ICssProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCSSProcessor.AfterExecute(SalarSoft.ASProxy.Exposed.ICssProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IWebData">
+            <summary>
+            Generalize the WebData
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IWebData.Execute">
+            <summary>
+            Confirms the request and gets the data from the web.
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IWebData.ResponseInfo">
+            <summary>
+            Response information
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.IWebData.RequestInfo">
+            <summary>
+            Request information
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.Execute">
+            <summary>
+            Confirms the request and gets the data from the web.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.ReadResponseData(System.Net.WebResponse)">
+            <summary>
+            Reads response content to a stream
+            </summary>
+            <param name="webResponse"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.GetDecompressStreamIfRequired(System.Net.WebResponse,System.IO.Stream)">
+            <summary>
+            Checks if Content-Encoding served with Gzip or Deflate compression methods
+            </summary>
+            <returns>Null if there is no decompressor</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.ApplyCustomHeaders(System.Net.WebRequest)">
+            <summary>
+            Applies custom headers to the request
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.ApplyPostDataToRequest(System.Net.WebRequest)">
+            <summary>
+            Sends post data to back-end request
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.ExWebData.ApplyContentRanges(System.Net.WebRequest)">
+            <summary>
+            Applies data ranges to the request
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.ExWebData.RequestInfo">
+            <summary>
+            Request information
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Exposed.ExWebData.ResponseInfo">
+            <summary>
+            Response information
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.WebData">
+            <summary>
+            Represents data communication between a request and response
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.BuiltIn.WebData.MaxCookieSize">
+            <summary>
+            Maximum cookies size is 1 MB.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.FinalizeUnauthorizedWebResponse(System.Net.WebResponse)">
+            <summary>
+            Saves back-end error response data
+            </summary>
+            <param name="webResponse"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.FinalizeWebResponse(System.Net.WebResponse)">
+            <summary>
+            Saves back-end response data
+            </summary>
+            <param name="webResponse"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.InitializeWebRequest(System.Net.WebRequest)">
+            <summary>
+            Initializes a web request
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.ApplyResponseHttpStatus(System.Net.WebResponse)">
+            <summary>
+            Http status
+            </summary>
+            <param name="response"></param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.ReadResponseRangeInfo(System.Net.WebResponse)">
+            <summary>
+            Reads response content range info
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.DetectWebRequestProtocol(System.Net.WebRequest)">
+            <summary>
+            Detects internet protocol used
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.DetectWebResponseProtocol(System.Net.WebResponse)">
+            <summary>
+            Detects internet protocol used
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.DetectContentDispositionFile(System.String)">
+            <summary>
+            Detects Content disposition file name
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.WebData.ReplaceResponseRedirectionLocation(System.Uri,System.String,System.String)">
+            <summary>
+            Apply redirect location to request location
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetASProxyPageUrl(System.String,System.String,System.Boolean)">
+            <summary>
+            Generates ASProxy navigation URL
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetAppAbsolutePath">
+            <summary>
+            ASProxy base path.
+            For http://site.com/asproxy/surf.aspx the result will be http://site.com/asproxy/
+            </summary>
+            <returns>For http://site.com/asproxy/surf.aspx the result will be http://site.com/asproxy/</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetAppAbsoluteBasePath">
+            <summary>
+            ASProxy site root path. 
+            For http://site.com/asproxy/surf.aspx the result will be http://site.com
+            </summary>
+            <returns>For http://site.com/asproxy/surf.aspx the result will be http://site.com</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetPageAbsolutePath(System.String)">
+            <summary>
+            Gets url page full path without parameter queries
+            </summary>
+            <returns>e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns: http://www.site.com/dir1/dir2/page.ht</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetPageAbsolutePath(System.Uri)">
+            <summary>
+            Gets url page full path without parameter queries
+            </summary>
+            <returns>e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns: http://www.site.com/dir1/dir2/page.ht</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetRootPath(System.String)">
+            <summary>
+            Gets URL site base path. e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/
+            </summary>
+            <returns>e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetRootPath(System.Uri)">
+            <summary>
+            Gets URL site base path. e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/
+            </summary>
+            <returns>e.g. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.GetPagePath(System.String)">
+            <summary>
+            Gets URL site base path. E.G. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/dir1/dir2/
+            </summary>
+            <returns>E.G. http://www.site.com/dir1/dir2/page.ht?hi=1 returns only: http://www.site.com/dir1/dir2/</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.CorrectInputUrl(System.String)">
+            <summary>
+            Adds missing Http protocol to the url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IsASProxyAddressUrlIncluded(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Checks if the request to ASProxy has url addess of back-end site.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.UrlProvider._ClientSideUrls">
+            <summary>
+            List of client side url prefixes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IsClientSitdeUrl(System.String)">
+            <summary>
+            Checks if the specified url is client site url
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.UrlProvider._NonVirtualUrls">
+            <summary>
+            List of internet protocols and url prefixes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IsVirtualUrl(System.String)">
+            <summary>
+            Checks if the specified url is virtual
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IsJavascriptUrl(System.String)">
+            <summary>
+            Checks if specified url is javascript code or not
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IsFTPUrl(System.String)">
+            <summary>
+            Checks if specified url is ftp or not
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.IgnoreInvalidUrlCharctersInHtml(System.String)">
+            <summary>
+            Removes tab,line feed, new line characters from html Url
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.AddSlashToEnd(System.String)">
+            <summary>
+            Add a slash to end of url addresses. http://google.com --> http://google.com/
+            </summary>
+            <returns>Slash ended url</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.JoinUrl(System.String,System.String)">
+            <summary>
+            Joins two part of url. Path1 will be ignored if path2 is not virtual url.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.JoinUrl(System.String,System.String,System.String,System.String)">
+            <summary>
+            Joins url parts
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.DecodeUrl(System.String)">
+            <summary>
+            Decode url address from unknown to know mode
+            </summary>
+            <param name="url">An encoded url address</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.EncodeUrl(System.String)">
+            <summary>
+            Encode url address to make it unknown
+            </summary>
+            <param name="url">A url address</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.EscapeUrlQuery(System.String)">
+            <summary>
+            Encodes only a few special characters, to make the url safe for another query.
+            Only "?" , "&amp;" and "#" characters.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.UrlProvider.CorrectFileUrl(System.String)">
+            <summary>
+            Use this method for file addresses ,only. This method may be use in debug mode and is useless in the web!
+            </summary>
+            <returns>Exam: file://h:\dir1\dir2/dir3/file.zip --> file://h:\dir1\dir2\dir3\file.zip</returns>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Update.Updaters.UpdatersCheckPerriod">
+            <summary>
+            20 days
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.InstallAssemblyPackage(System.Collections.Generic.List{SalarSoft.ASProxy.Update.UpdateFileInfo},ICSharpCode.SharpZipLib.Zip.ZipFile)">
+            <summary>
+            Copies assembly files from package to Bin folder
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.InstallExtenderPackage(System.Collections.Generic.List{SalarSoft.ASProxy.Update.UpdateFileInfo},ICSharpCode.SharpZipLib.Zip.ZipFile)">
+            <summary>
+            Copies update files from package to ASProxy
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.InstallUpdatePackage(System.String)">
+            <summary>
+            Copies all package coontent to ASProxy
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.IsPackageFileForbidden(System.String)">
+            <summary>
+            Checks if file is allowed to be installed
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.GetLastRun(System.String)">
+            <summary>
+            Last execution time of specified updater
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Update.Updaters.SetLastRun(System.String,System.DateTime)">
+            <summary>
+            Set last execution time of specified updater
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IPluginJSProcessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginJSProcessor.BeforeExecute(SalarSoft.ASProxy.Exposed.IJSProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginJSProcessor.AfterExecute(SalarSoft.ASProxy.Exposed.IJSProcessor,System.String@,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.ReplaceScriptTagCodes(System.String@)">
+            <summary>
+            Finds and encode codes within "script" tag.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.ReplacePropertyUsages(System.String@,System.String,System.String)">
+            <summary>
+            Replaces the command itself when it is setting by other command
+            </summary>
+            <example> document.cookie='test'; will be something like new.cookie='test'; </example>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.ReplacePropertyInSetCommand(System.String@,System.String,System.String)">
+            <summary>
+            Replaces the command itself when it is setting by other command
+            </summary>
+            <example> document.cookie='test'; will be something like new.cookie='test'; </example>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.ReplacePropertySetCommand(System.String@,System.String,System.String)">
+            <summary>
+            Enclose property setter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.ReplacePropertyGetCommand(System.String@,System.String,System.String)">
+            <summary>
+            Replaces property getter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertySet(System.String@,System.String[],System.String)">
+            <summary>
+            Enclose property setter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertySet(System.String@,System.String,System.String)">
+            <summary>
+            Enclose property setter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertyGet(System.String@,System.String,System.String)">
+            <summary>
+            Replaces property getter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertyGet(System.String@,System.String,System.String,System.Boolean)">
+            <summary>
+            Replaces property getter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertyGet(System.String@,System.String[],System.String[],System.String,System.Boolean)">
+            <summary>
+            Replaces property getter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToPropertyGetFirstPart(System.String@,System.String[],System.String[],System.String,System.Boolean)">
+            <summary>
+            Replaces property getter with an encoder method
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.JSReplacer.AddEncoderMethodToMethodFirstParameter(System.String@,System.String,System.String)">
+            <summary>
+            Enclose method first parameter with an encoder method
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.QValue">
+            <author>
+            Dave Transom
+            http://www.singular.co.nz/blog/archive/2008/07/06/finding-preferred-accept-encoding-header-in-csharp.aspx
+            </author>
+            <summary>
+            Represents a weighted value (or quality value) from an http header e.g. gzip=0.9; deflate; x-gzip=0.5;
+            </summary>
+            <remarks>
+            accept-encoding spec:
+               http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+            </remarks>
+            <example>
+            Accept:          text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+            Accept-Encoding: gzip,deflate
+            Accept-Charset:  ISO-8859-1,utf-8;q=0.7,*;q=0.7
+            Accept-Language: en-us,en;q=0.5
+            </example>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.#ctor(System.String)">
+            <summary>
+            Creates a new QValue by parsing the given value
+            for name and weight (qvalue)
+            </summary>
+            <param name="value">The value to be parsed e.g. gzip=0.3</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.#ctor(System.String,System.Int32)">
+            <summary>
+            Creates a new QValue by parsing the given value
+            for name and weight (qvalue) and assigns the given
+            ordinal
+            </summary>
+            <param name="value">The value to be parsed e.g. gzip=0.3</param>
+            <param name="ordinal">The ordinal/index where the item
+            was found in the original list.</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.Parse(System.String)">
+            <summary>
+            Parses the given string for name and
+            weigth (qvalue)
+            </summary>
+            <param name="value">The string to parse</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.Parse(System.String,System.Int32)">
+            <summary>
+            Parses the given string for name and
+            weigth (qvalue)
+            </summary>
+            <param name="value">The string to parse</param>
+            <param name="ordinal">The order of item in sequence</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.ParseInternal(SalarSoft.ASProxy.QValue@,System.String)">
+            <summary>
+            Parses the given string for name and
+            weigth (qvalue)
+            </summary>
+            <param name="value">The string to parse</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.CompareTo(SalarSoft.ASProxy.QValue)">
+            <summary>
+            Compares this instance to another QValue by
+            comparing first weights, then ordinals.
+            </summary>
+            <param name="other">The QValue to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.CompareByWeightAsc(SalarSoft.ASProxy.QValue,SalarSoft.ASProxy.QValue)">
+            <summary>
+            Compares two QValues in ascending order.
+            </summary>
+            <param name="x">The first QValue</param>
+            <param name="y">The second QValue</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValue.CompareByWeightDesc(SalarSoft.ASProxy.QValue,SalarSoft.ASProxy.QValue)">
+            <summary>
+            Compares two QValues in descending order.
+            </summary>
+            <param name="x">The first QValue</param>
+            <param name="y">The second QValue</param>
+            <returns></returns>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValue.Name">
+            <summary>
+            The name of the value part
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValue.Weight">
+            <summary>
+            The weighting (or qvalue, quality value) of the encoding
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValue.CanAccept">
+            <summary>
+            Whether the value can be accepted
+            i.e. it's weight is greater than zero
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValue.IsEmpty">
+            <summary>
+            Whether the value is empty (i.e. has no name)
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.QValueList">
+            <summary>
+            Provides a collection for working with qvalue http headers
+            </summary>
+            <remarks>
+            accept-encoding spec:
+               http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+            </remarks>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.#ctor(System.String)">
+            <summary>
+            Creates a new instance of an QValueList list from
+            the given string of comma delimited values
+            </summary>
+            <param name="values">The raw string of qvalues to load</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.#ctor(System.String[])">
+            <summary>
+            Creates a new instance of an QValueList from
+            the given string array of qvalues
+            </summary>
+            <param name="values">The array of qvalue strings
+            i.e. name(;q=[0-9\.]+)?</param>
+            <remarks>
+            Should AcceptWildcard include */* as well?
+            What about other wildcard forms?
+            </remarks>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.Add(SalarSoft.ASProxy.QValue)">
+            <summary>
+            Adds an item to the list, then applies sorting
+            if AutoSort is enabled.
+            </summary>
+            <param name="item">The item to add</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.AddRange(System.Collections.Generic.IEnumerable{SalarSoft.ASProxy.QValue})">
+            <summary>
+            Adds a range of items to the list, then applies sorting
+            if AutoSort is enabled.
+            </summary>
+            <param name="collection">The items to add</param>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.Find(System.String)">
+            <summary>
+            Finds the first QValue with the given name (case-insensitive)
+            </summary>
+            <param name="name">The name of the QValue to search for</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.FindHighestWeight(System.String[])">
+            <summary>
+            Returns the first match found from the given candidates
+            </summary>
+            <param name="candidates">The list of QValue names to find</param>
+            <returns>The first QValue match to be found</returns>
+            <remarks>Loops from the first item in the list to the last and finds
+            the first candidate - the list must be sorted for weight prior to
+            calling this method.</remarks>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.FindPreferred(System.String[])">
+            <summary>
+            Returns the first match found from the given candidates that is accepted
+            </summary>
+            <param name="candidates">The list of names to find</param>
+            <returns>The first QValue match to be found</returns>
+            <remarks>Loops from the first item in the list to the last and finds the
+            first candidate that can be accepted - the list must be sorted for weight
+            prior to calling this method.</remarks>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.DefaultSort">
+            <summary>
+            Sorts the list comparing by weight in
+            descending order
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.applyAutoSort">
+            <summary>
+            Applies the default sorting method if
+            the autosort field is currently enabled
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.QValueList.isCandidate(System.String,System.String[])">
+            <summary>
+            Determines if the given item contained within the applied array
+            (case-insensitive)
+            </summary>
+            <param name="item">The string to search for</param>
+            <param name="candidates">The array to search in</param>
+            <returns></returns>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValueList.AcceptWildcard">
+            <summary>
+            Whether or not the wildcarded encoding is available and allowed
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValueList.AutoSort">
+            <summary>
+            Whether, after an add operation, the list should be resorted
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.QValueList.Item(System.String[])">
+            <summary>
+            Synonym for FindPreferred
+            </summary>
+            <param name="candidates">The preferred order in which to return an encoding</param>
+            <returns>An QValue based on weight, or null</returns>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Systems">
+            <summary>
+            Instances of utility classes to use in everywhere.
+            These classes are shared in application to be used between requests.
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Systems.CookieManager">
+            <summary>
+            General cookie manager
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Systems.LogSystem">
+            <summary>
+            General LogSystem
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Systems.CredentialCache">
+            <summary>
+            General credential cache system
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Systems.UAC">
+            <summary>
+            General UAC
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginEngine">
+            <summary>
+            All the units works for ASProxy's Engine. This class uses other units to
+            analyze the request, send and recevicing data, processing data and sending
+            back to the front end user.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginWebData">
+            <summary>
+            Works with backend server or website which frontend user wanted to see.
+            Any request uses this tool to get data from web.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginCookieManager">
+            <summary>
+            Saves and restores cookies for a request.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginCredentialCache">
+            <summary>
+            Saves authenticated credentials in a safe place for further uses.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginCSSProcessor">
+            <summary>
+            Analyzes and processes the CSS (Cascade style sheet) data.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginHtmlProcessor">
+            <summary>
+            Analyzes and processes the Html data.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginJSProcessor">
+            <summary>
+            Analyzes and processes the JavaScript data.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginLogSystem">
+            <summary>
+            Used to system errors and user activies to a desired place.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.PluginHosts.IPluginUAC">
+            <summary>
+            Used to block user with specified IPs from using this service.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Providers">
+            <summary>
+            Extensions Provider Loader
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.GetProvider(SalarSoft.ASProxy.ProviderType)">
+            <summary>
+            Creates an instance of requsted provider.
+            If specified provider not find the default provider will be used.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.GetBuiltinProvider(SalarSoft.ASProxy.ProviderType)">
+            <summary>
+            Creates a default instance of requsted provider.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.FindProvider(System.Collections.Generic.List{SalarSoft.ASProxy.ProviderInfo},System.String)">
+            <summary>
+            Finds provider
+            </summary>
+            <param name="providerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.SetProviderEnableStatus(System.String,System.Boolean)">
+            <summary>
+            Changes provider enabled status
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.ReadInstalledProviders">
+            <summary>
+            Reads then loads installed third-party provider extensions
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.ApplyLoadedProvider(SalarSoft.ASProxy.ProviderInfo,System.Boolean@)">
+            <summary>
+            Applies the loaded provider and makes it ready to use
+            </summary>
+            <param name="hasConflict">If this provider has any conflicts</param>
+            <returns>True ,if it was successfull to load the provider</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.ReadProviderInfo(System.String)">
+            <summary>
+            Reads provider info config from specifed provider xml file
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.GetProviderType(SalarSoft.ASProxy.ProviderType)">
+            <summary>
+            Gets specified provider class type.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.SetProviderType(SalarSoft.ASProxy.ProviderType,System.Type)">
+            <summary>
+            Sets specified provider class type
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Providers.LoadDefaultProviders">
+            <summary>
+            Load providers list from default configuration file, obsoleted.
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Providers.LoadedProviders">
+            <summary>
+            Implementation list
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.Providers.InstalledProviders">
+            <summary>
+            All installed providers, includes disabled and failed to load providers
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Configurations">
+            <summary>
+             ASProxy Configurations
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.MaxContentLength">
+            <summary>
+            In bytes, -1 for unlimited
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.RequestTimeout">
+            <summary>
+            Length of time in milliseconds, before the request times out.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.RequestReadWriteTimeOut">
+            <summary>
+            Length of time in milliseconds when writing to or reading from a stream (Back-end site).
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.SendSignature">
+            <summary>
+            Send ASProxy signature header to Back-end and Front-end users.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.PreferredLocalEncoding">
+            <summary>
+            Preferred encoding for unrecognized page encodings.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.UserAgent">
+            <summary>
+            Back-end UserAgent behaviour.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.UserAgentCustom">
+            <summary>
+            UserAgent for Back-End.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.Downloader_ResumeSupport">
+            <summary>
+            Downloader Resume-Support feature.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.Downloader_ForceResumeSupport">
+            <summary>
+            Enables Resume-Support even if back-end site doesn't support it.
+            Warning, ASProxy will use memory to buffer the whole download data.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.Downloader_MaxContentLength">
+            <summary>
+            Downloader specific. In bytes, -1 for unlimited.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.Downloader_Timeout">
+            <summary>
+            Downloader specific. Length of time in milliseconds, before the request times out.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.WebDataConfig.Downloader_ReadWriteTimeOut">
+            <summary>
+            Downloader specific. Length of time in milliseconds when writing to or reading from a stream (Back-end site).
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Mode">
+            <summary>
+            Determines proxy configuration to connect to the back-end websites.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Address">
+            <summary>
+            Proxy address for custom configuration.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Port">
+            <summary>
+            Proxy port for custom configuration.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Authentication">
+            <summary>
+            Is authentication required for specified custom proxy.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Authentication_Username">
+            <summary>
+            Custom proxy username.
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Configurations.NetProxyConfig.Authentication_Password">
+            <summary>
+            Custom proxy password.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.AjaxEngine">
+            <summary>
+            AJAX Engine provider
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.ASProxyEngine">
+            <summary>
+            This is ASProxy engine. Every user request should be handled by this class.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.Initialize(System.Web.HttpRequest)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.Initialize(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.ExecuteHandshake">
+            <summary>
+            Communicates with back-end and gets response information
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.ExecuteToString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.ExecuteToResponse(System.Web.HttpResponse)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.VerifyHttpCompressionByMimeType(System.Web.HttpResponse,SalarSoft.ASProxy.MimeContentType)">
+            <summary>
+            Disables http compression for non-text contents
+            </summary>
+            <reason>BUGFIX v5.5b2:  HttpCompression increases images size</reason>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.ExecuteToStream(System.IO.Stream)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.GetRedirectedRequestUrl(System.String,System.String)">
+            <summary>
+            Generates redirect location by specified parameters
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.GetRedirectedRequestUrl(SalarSoft.ASProxy.EngineRequestInfo,SalarSoft.ASProxy.EngineResponseInfo,System.String)">
+            <summary>
+            Generates redirect location by specified EngineRequestInfo
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.GetRedirectedRequestUrl(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Generates redirect location by specified parameters
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.HandleResponseAutoRedirect">
+            <summary>
+            Handles redirection to requested location
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.IntializeRequestInfoPostData(System.Web.HttpRequest)">
+            <summary>
+            Initializes the request info post data.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.IntializeRequestInfo(System.Web.HttpRequest)">
+            <summary>
+            Initializes the request info. This method should be called when 
+            Initializing the class directly from the request.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.ASProxyEngine.FinilizeResponseInfo(SalarSoft.ASProxy.Exposed.IWebData)">
+            <summary>
+            Applies WebData response information to responseInfo
+            </summary>
+            <param name="webData"></param>
+        </member>
+        <member name="T:SalarSoft.ASProxy.StringStream">
+            <summary>
+            A utility to work with strings throught streams
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.StringStream.GetString__HARD(System.IO.Stream,System.Boolean,System.Text.Encoding@)">
+            <summary>
+            For test
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.CurrentContext.MapAppPath(System.String)">
+            <summary>
+            Generate full physical path of a file or page.
+            </summary>
+            <param name="path">File name or page name</param>
+            <returns>Full physical path</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.CurrentContext.MapAppVPath(System.String)">
+            <summary>
+            Generate full virtual path of a page or url file address.
+            </summary>
+            <param name="path">Page name or url file</param>
+            <returns>Full virtual path. ex: /SalarSoft/topics/articles.aspx</returns>
+            <example>
+            In Local ApplicationPath is: localhost
+            <br />
+            In server ApplicationPath is: /
+            </example>
+        </member>
+        <member name="P:SalarSoft.ASProxy.CurrentContext.UserOptions">
+            <summary>
+            Current request user options
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.CurrentContext.AppPhysicalPath">
+            <summary>
+            Current application phycical path.
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.CurrentContext.AppVirtualPath">
+            <summary>
+            Current application virtual path.
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.LogSystem">
+            <summary>
+            ASproxy built-in log-system
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.Log(SalarSoft.ASProxy.LogEntity,System.Object[])">
+            <summary>
+            Logs specified items in specified log entity
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.Log(SalarSoft.ASProxy.LogEntity,System.Web.HttpRequest,System.String,System.Object[])">
+            <summary>
+            Logs http request, requested url and specified items
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.LogError(System.Exception,System.Web.HttpRequest,System.String,System.String,System.Object[])">
+            <summary>
+            Logs exception, request host, requested url and specified items
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.LogError(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs exception, requested url and specified items
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.LogError(System.String,System.String,System.Object[])">
+            <summary>
+            Logs exception message, requested url and specified items
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.LogSystem.LogError(System.String,System.Object[])">
+            <summary>
+            Logs exception message and specified items
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.BuiltIn.LogSystem.ActivityLogEnabled">
+            <summary>
+            Enable/Disable the log system
+            </summary>
+        </member>
+        <member name="P:SalarSoft.ASProxy.BuiltIn.LogSystem.ErrorLogEnabled">
+            <summary>
+            Enable/Disable the log system
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IPluginCookieManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCookieManager.AfterRestoreCookiesFromResponse(SalarSoft.ASProxy.Exposed.ICookieManager,System.Net.WebResponse,System.Net.CookieCollection)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCookieManager.AfterAddCookiesToRequest(SalarSoft.ASProxy.Exposed.ICookieManager,System.Net.WebRequest,System.Net.CookieCollection)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CSSParser.FindImportRuleUrlPosition(System.String@,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Locates @import rule value
+            </summary>
+            <param name="cssCodes"></param>
+            <param name="startindex"></param>
+            <param name="onlyWithoutUrlOption">Specifies that operator should not catch rule with URL attribute.</param>
+            <param name="captureExactInUrl">Specifies that operator should strip the URL attribute if there is any</param>
+            <returns></returns>
+        </member>
+        <member name="T:SalarSoft.ResumableDownload.ResumableTransfers">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ResumableDownload.ResumableTransfers.IsPartialContentSupported(System.Net.WebResponse)">
+            <summary>
+            Detects if response supports download resuming
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ResumableDownload.ResumableTransfers.ParseRequestHeaderRange(System.Web.HttpRequest,System.Int32@,System.Int64@,System.Boolean@)">
+            <summary>
+            Parses user request for range specifed parameters
+            </summary>
+            <param name="objRequest">The request object</param>
+            <param name="lBegin">Range start</param>
+            <param name="lEnd">Range end</param>
+            <param name="lMax">Total content length</param>
+            <param name="rangeRequest">Is the request range specified</param>
+            <returns>Returns false if the requested ranges are invalid, otherwise returns true </returns>
+        </member>
+        <member name="M:SalarSoft.ResumableDownload.ResumableTransfers.ParseRequestHeaderRange(System.Web.HttpRequest,System.Int64[]@,System.Int64[]@,System.Int64,System.Boolean@)">
+            <summary>
+            Parses user request for range specifed parameters
+            </summary>
+            <param name="objRequest">The request object</param>
+            <param name="lBegin">Range start</param>
+            <param name="lEnd">Range end</param>
+            <param name="lMax">Total content length</param>
+            <param name="rangeRequest">Is the request range specified</param>
+            <returns>Returns false if the requested ranges are invalid, otherwise returns true </returns>
+        </member>
+        <member name="T:SalarSoft.ASProxy.BuiltIn.CompareIPs">
+            <summary>
+            Used to convert and compare IP addresses.
+            
+            By Alexander Lowe, Lowe*Software.
+            http://www.lowesoftware.com
+            
+            Free for use and modification. No warranty express or implied.
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.AreEqual(System.String,System.String)">
+            <summary>
+            Compares two IP addresses for equality. 
+            </summary>
+            <param name="IPAddress1">The first IP to compare</param>
+            <param name="IPAddress2">The second IP to compare</param>
+            <returns>True if equal, false if not.</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IsGreater(System.String,System.String)">
+            <summary>
+            Compares two string representations of an Ip address to see if one
+            is greater than the other
+            </summary>
+            <param name="ToCompare">The IP address on the left hand side of the greater 
+            than operator</param>
+            <param name="CompareAgainst">The Ip address on the right hand side of the 
+            greater than operator</param>
+            <returns>True if ToCompare is greater than CompareAgainst, else false</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IsLess(System.String,System.String)">
+            <summary>
+            Compares two string representations of an Ip address to see if one
+            is less than the other
+            </summary>
+            <param name="ToCompare">The IP address on the left hand side of the less 
+            than operator</param>
+            <param name="CompareAgainst">The Ip address on the right hand side of the 
+            less than operator</param>
+            <returns>True if ToCompare is greater than CompareAgainst, else false</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IsGreaterOrEqual(System.String,System.String)">
+            <summary>
+            Compares two string representations of an Ip address to see if one
+            is greater than or equal to the other.
+            </summary>
+            <param name="ToCompare">The IP address on the left hand side of the greater 
+            than or equal operator</param>
+            <param name="CompareAgainst">The Ip address on the right hand side of the 
+            greater than or equal operator</param>
+            <returns>True if ToCompare is greater than or equal to CompareAgainst, else false</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IsLessOrEqual(System.String,System.String)">
+            <summary>
+            Compares two string representations of an Ip address to see if one
+            is less than or equal to the other.
+            </summary>
+            <param name="ToCompare">The IP address on the left hand side of the less 
+            than or equal operator</param>
+            <param name="CompareAgainst">The Ip address on the right hand side of the 
+            less than or equal operator</param>
+            <returns>True if ToCompare is greater than or equal to CompareAgainst, else false</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.LongToIPAddress(System.UInt32)">
+            <summary>
+            Converts a uint representation of an Ip address to a string.
+            </summary>
+            <param name="IPAddress">The IP address to convert</param>
+            <returns>A string representation of the IP address.</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IPAddressToLong(System.String)">
+            <summary>
+            Converts a string representation of an IP address to a uint. This
+            encoding is proper and can be used with other networking functions such
+            as the System.Net.IPAddress class.
+            </summary>
+            <param name="IPAddress">The Ip address to convert.</param>
+            <returns>Returns a uint representation of the IP address.</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.CompareIPs.IPAddressToLongBackwards(System.String)">
+            <summary>
+            This encodes the string representation of an IP address to a uint, but
+            backwards so that it can be used to compare addresses. This function is
+            used internally for comparison and is not valid for valid encoding of
+            IP address information.
+            </summary>
+            <param name="IPAddress">A string representation of the IP address to convert</param>
+            <returns>Returns a backwards uint representation of the string.</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCredentialCache.AfterAddCertification(SalarSoft.ASProxy.Exposed.ICredentialCache,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.Exposed.IPluginCredentialCache.OnGetNetworkCertification(SalarSoft.ASProxy.Exposed.ICredentialCache,System.String,System.Net.NetworkCredential)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.IDataParser">
+            <summary>
+            Generalize the DataParser
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.RegexHtmlProcessor.GenerateJsEncoderCodes(System.String,System.String,System.String,System.String)">
+            <summary>
+            Generate dynamic encoding javascript codes
+            </summary>
+            <param name="pageBasePath">base path of current request page</param>
+            <returns>Javascript codes</returns>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.RegexHtmlProcessor.RemoveTagOnly(System.String@,System.String)">
+            <summary>
+            removes tag name from html codes
+            </summary>
+        </member>
+        <member name="M:SalarSoft.ASProxy.BuiltIn.RegexHtmlProcessor.Resources.ASProxyJavaScriptTag(System.String,System.String)">
+            <summary>
+            adds an additional asproxydone='2'
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts">
+            <summary>
+            ASProxy all consts
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.General">
+            <summary>
+            General consts
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.BackEndConenction">
+            <summary>
+            Back-End conenction consts
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Consts.BackEndConenction.AJAX_Headers">
+            <summary>
+            The wrapped ajax headers will send with this header to asproxy
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.FrontEndPresentation">
+            <summary>
+            Front-End presentation consts
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.Query">
+            <summary>
+            Queries sent from url
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Consts.Query.Base64Unknowner">
+            <summary>
+            Used to make base64 coding unknown for filtering machines
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.DataProccessing">
+            <summary>
+            Data proccessors consts
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.ClientContent">
+            <summary>
+            Client content generators consts
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Consts.FilesConsts">
+            <summary>
+            Files consts
+            </summary>
+        </member>
+        <member name="F:SalarSoft.ASProxy.Consts.FilesConsts.PageDefault_Dynamic">
+            <summary>
+            The default page variable is static and can be changed during application execution
+            </summary>
+        </member>
+        <member name="T:SalarSoft.ASProxy.Exposed.ExDataParser">
+            <summary>
+            Summary description for ExDataParser
+            </summary>
+        </member>
+    </members>
+</doc>

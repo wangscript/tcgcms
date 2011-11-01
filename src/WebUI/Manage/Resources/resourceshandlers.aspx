@@ -11,6 +11,7 @@
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/layer.css" rel="stylesheet" type="text/css" />
 	<link href="../css/enmu.css" rel="stylesheet" type="text/css" />
+    <link rel="StyleSheet" href="../css/dtree.css" type="text/css" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../Common/common.aspx"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
@@ -24,6 +25,7 @@
 	<script type="text/javascript" src="../js/newsadd.js"></script>
 	<script type="text/javascript" id="cptid" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
     <script type="text/javascript" src="../Common/ResourcesProperties.aspx?nid=<asp:Literal ID='nid' runat='server'></asp:Literal>"></script>
+	<script type="text/javascript" src="../js/dtree.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -153,18 +155,13 @@
     <div id="a4_from">
         <div class="ccmain">
             <div class="ccleft">
-                <ul>
-                    <li>dfdf</li>
-                    <li>fdfggg3444</li>
-                </ul>
+                <ul id="ccskintitle" runat="server"></ul>
             </div>
-            <div class="ccright">
-                <div class="cctree" id="cc_skinid1">   
-                </div> 
+            <div class="ccright" id="ccright"  runat="server">
+               
             </div>
         </div>
-        
-        
+        <div style=" clear:both;"></div>
     </div>
 	<div class="dobtn arb_pr1 Page_arrb" style="margin-top:5px;">
         <input type="button" onclick="SaveNewsInfo()" id="btnok" class="btn2 bold" value="确定"/>　　　<input type="reset" class="btn2" value="取消" />
@@ -174,6 +171,7 @@
 	<input type="hidden" id="iFrom" name="iFrom" value="1" runat="server"/>
 	<input type="hidden" id="iNewsId" name="iNewsId" runat="server"/>
 	<input type="hidden" id="work" name="work" value="AddNew" runat="server"/>
+    <input type="hidden" id="ccCheckCateg" name="ccCheckCateg" value="" runat="server"/>
 	<input type="hidden" id="iSpeciality" name="iSpeciality" value="" runat="server"/>
 	<input type="hidden" id="iTitleColor" name="iTitleColor" value="" runat="server"/>
     </form>

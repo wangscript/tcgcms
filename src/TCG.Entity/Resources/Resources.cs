@@ -113,6 +113,10 @@ namespace TCG.Entity
         /// 抓取URL
         /// </summary>
         public string SheifUrl { get { return this._sheifurl; } set { this._sheifurl = value; } }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CCCategories { get { return this._cccategories; } set { this._cccategories = value; } }
 
         /// <summary>
         /// 属性分类ID
@@ -147,5 +151,6 @@ namespace TCG.Entity
         private string _vctitlecolor;
         private string _cstrong;
         private string _sheifurl;
+        private string _cccategories;
     }
 }
