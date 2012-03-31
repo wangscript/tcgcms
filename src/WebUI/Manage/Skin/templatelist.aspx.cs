@@ -16,7 +16,7 @@ using TCG.Controls.HtmlControls;
 using TCG.Entity;
 
 using TCG.Handlers;
-using TCG.Data;
+
 
 
 namespace TCG.CMS.WebUi
@@ -212,7 +212,7 @@ namespace TCG.CMS.WebUi
                 text = "<a>生成失败：" + errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]) + "</a>";
             }
 
-            base.AjaxErch(rtn, text, "CreateBack");
+            base.AjaxErch(rtn, text, "CreateBack(data)");
         }
     }
 }

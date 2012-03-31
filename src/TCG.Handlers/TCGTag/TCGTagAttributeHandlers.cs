@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Collections;
 
-using TCG.Data;
+
 using TCG.Utils;
 using TCG.Entity;
 
@@ -377,8 +377,8 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcSpeciality$", "<TCG>" + item.vcSpeciality + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcBigImg$", "<TCG>" + item.vcBigImg + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_SheifUrl$", "<TCG>" + item.SheifUrl + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_iCount$", "<TCG><script type='text/javascript' src='" 
-                + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iCount$", "<TCG><script type='text/javascript' src='"
+                + ConfigServiceEx.baseConfig["WebSite"] + "/interface/aspx/resources.aspx?w=getresourcecount&rid=" + item.Id + "'></script></TCG>");
 
             string sssid = this._tagtype + "_nicon_" + item.Id;
             if (item.dAddDate.AddDays(5) >= DateTime.Now)

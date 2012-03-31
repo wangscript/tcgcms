@@ -39,7 +39,13 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllFilesClassFromDb()
         {
-            return AccessFactory.conn.DataTable("SELECT * FROM filecategories");
+            string sql = "SELECT * FROM filecategories";
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         /// <summary>
@@ -64,9 +70,10 @@ namespace TCG.Handlers.Imp.AccEss
                return -1000000058;
             }
 
-            AccessFactory.conn.Execute("INSERT INTO filecategories (vcFileName,iParentId,vcMeno) VALUES('" + fcif.vcFileName + "','" + fcif.iParentId + "','" + fcif.vcMeno + "')");
+            string sql = "INSERT INTO filecategories (vcFileName,iParentId,vcMeno) VALUES('" + fcif.vcFileName + "','" + fcif.iParentId + "','" + fcif.vcMeno + "')";
 
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
 
@@ -104,11 +111,12 @@ namespace TCG.Handlers.Imp.AccEss
                 return -1000000063;
             }
 
-            AccessFactory.conn.Execute("INSERT INTO fileresources (iID,iClassId,vcFileName,iSize,vcType,dCreateDate,vcIP)"
+            string sql= "INSERT INTO fileresources (iID,iClassId,vcFileName,iSize,vcType,dCreateDate,vcIP)"
                                         + "VALUES('" + fif.Id + "'," + fif.iClassId + ",'" + fif.vcFileName + "'," + fif.iSize + ",'" 
-                                        + fif.vcType + "',now(),'" + fif.vcIP + "')");
-            
-            return 1;
+                                        + fif.vcType + "',now(),'" + fif.vcIP + "')";
+
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
 
@@ -121,7 +129,12 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetFileInfosById(string id)
         {
             string SQL = "SELECT iID,iClassId,vcFileName,iSize,vcType,iDowns,iRequest,vcIP,dCreateDate FROM fileresources WHERE iId=" + id.ToString();
-            return AccessFactory.conn.DataTable(SQL);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, SQL, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
     }

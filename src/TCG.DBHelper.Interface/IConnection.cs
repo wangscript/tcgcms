@@ -28,55 +28,15 @@ namespace TCG.DBHelper
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        void Execute(string sql);
-
-        /// <summary>
-        /// 执行存储过程
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        void Execute(string procName, SqlParameter[] parameters);
-
-        /// <summary>
-        /// 执行存储过程返回输出参数
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <param name="parInt"></param>
-        /// <returns></returns>
-        string[] Execute(string procName, SqlParameter[] parameters, int[] parInt);
+        int m_RunSQL(ref string as_ErrText, string as_SQL);
 
         /// <summary>
         /// 执行SQL语句返回记录集
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        DataSet DataSet(string sql);
+        int m_RunSQLData(ref string as_ErrText, string as_SQL, ref DataSet ads_out_Data);
 
-        /// <summary>
-        /// 执行SQL语句返回记录集
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        DataTable DataTable(string sql);
-
-        /// <summary>
-        /// 执行存储过程返回记录集
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        DataSet DataSet(string procName, SqlParameter[] parameters);
-
-        /// <summary>
-        ///  执行存储过程返回记录集 和输出参数
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <param name="parInt"></param>
-        /// <param name="ds"></param>
-        /// <returns></returns>
-        string[] DataSet(string procName, SqlParameter[] parameters, int[] parInt, ref DataSet ds);
 
         /// <summary>
         /// 设置链接字符串
@@ -85,12 +45,16 @@ namespace TCG.DBHelper
         /// <returns></returns>
         void SetConnStr(string conn);
 
+
         /// <summary>
-        /// 执行Sql查询语句并返回第一行的第一条记录,返回值为object 使用时需要拆箱操作 -> Unbox
+        /// 
         /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <returns>object 返回值 </returns>
-        object ExecuteScalar(string sql);
+        /// <param name="as_ErrText"></param>
+        /// <param name="ai_ConnectID"></param>
+        /// <param name="as_SQL"></param>
+        /// <param name="as_out_Column"></param>
+        /// <returns></returns>
+        int m_ExecuteScalar(ref string as_ErrText, string as_SQL, ref string as_out_Column);
 
         /**/
         /// <summary>
@@ -106,5 +70,36 @@ namespace TCG.DBHelper
         /// <param name="recordCount">传出参数：总记录统计</param>
         /// <returns>装载记录的DataTable</returns>
         DataTable ExecutePager(int pageIndex, int pageSize, string showString, string queryString, string whereString, string orderString, out int pageCount, out int recordCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="as_ErrText"></param>
+        /// <param name="as_ParamName"></param>
+        /// <param name="adt_DataType"></param>
+        /// <param name="apd_Direction"></param>
+        /// <param name="ai_DataLength"></param>
+        /// <param name="as_ParamValue"></param>
+        /// <returns></returns>
+        int m_ParamAdd(ref string as_ErrText, string as_ParamName, SqlDbType adt_DataType, ParameterDirection apd_Direction, int ai_DataLength, string as_ParamValue);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="as_ErrText"></param>
+        /// <param name="as_ParamName"></param>
+        /// <param name="as_ParamValue"></param>
+        /// <returns></returns>
+        int m_ParamGet(ref string as_ErrText, string as_ParamName, ref string as_ParamValue);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="as_ErrText"></param>
+        /// <param name="as_SPName"></param>
+        /// <returns></returns>
+        int m_RunSP(ref string as_ErrText, string as_SPName);
+
+        int m_RunSPData(ref string as_ErrText, string as_SPName, ref DataSet ads_out_Data);
     }
 }

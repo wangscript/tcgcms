@@ -35,8 +35,8 @@ namespace TCG.Handlers.Imp.AccEss
 
             string sql = "INSERT INTO Speciality(SkinId,iParent,dUpDateDate,vcTitle,vcExplain) VALUES("
             + "'" + nif.SkinId + "'," + nif.iParent.ToString() + ",now(),'" + nif.vcTitle + "','" + nif.vcExplain + "')";
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace TCG.Handlers.Imp.AccEss
         {
             string sql = "UPDATE Speciality SET SkinId='" + nif.SkinId + "',iParent=" + nif.iParent + ",dUpDateDate=now()"
                 + ",vcTitle='" + nif.vcTitle + "',vcExplain='" + nif.vcExplain + "' WHERE id=" + nif.Id.ToString();
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
 
@@ -65,8 +65,8 @@ namespace TCG.Handlers.Imp.AccEss
         public int NewSpecialityDel(string ids)
         {
             string sql = "DELETE FROM Speciality WHERE id in (" + ids + ")";
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
 
@@ -77,7 +77,13 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllNewsSpecialityInfo(string skinid)
         {
-            return AccessFactory.conn.DataTable("SELECT * FROM Speciality WHERE SkinId='" + skinid + "'");
+            string Sql = "SELECT * FROM Speciality WHERE SkinId='" + skinid + "'";
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
     }
 }

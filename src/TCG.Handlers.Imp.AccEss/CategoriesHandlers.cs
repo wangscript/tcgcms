@@ -23,28 +23,40 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetAllCategoriesWithOutCaching()
         {
             string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic FROM Categories order by iorder";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         public DataTable GetCategoriePropertiesByCIdWithOutCaching(string cid)
         {
             string Sql = "SELECT * FROM CategorieProperties WHERE CategorieId='" + cid + "' order by id";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         public int CreateCategories(Categories cif)
         {
 
-            AccessFactory.conn.Execute("INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic)"
+            string Sql = "INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic)"
                     + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinInfo.Id + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
                     + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" 
-                    + cif.IsSinglePage + "','"+cif.vcPic+"')");
-            return 1;
+                    + cif.IsSinglePage + "','"+cif.vcPic+"')";
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
 
         public int CategoriePropertiesManage(Properties cp)
         {
             string sql = string.Empty;
+            string errText = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
                 sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
@@ -52,7 +64,13 @@ namespace TCG.Handlers.Imp.AccEss
             }
             else
             {
-                int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM CategorieProperties WHERE id = " + cp.Id + ""));
+                string s_cont = string.Empty;
+                int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM CategorieProperties WHERE id = " + cp.Id + "", ref s_cont);
+
+                if (rtn < 0) return rtn;
+
+                int ncount = objectHandlers.ToInt(s_cont);
+
                 if (ncount > 0)
                 {
                     sql = "UPDATE CategorieProperties SET CategorieId='" + cp.PropertiesCategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
@@ -65,17 +83,15 @@ namespace TCG.Handlers.Imp.AccEss
                 }
             }
 
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         public int CategoriePropertiesDEL(int cpid)
         {
-            //删除属性
-            AccessFactory.conn.Execute("DELETE FROM ResourceProperties WHERE CategoriePropertieId='" + cpid + "'");
-            AccessFactory.conn.Execute("DELETE FROM CategorieProperties WHERE id=" + cpid + "");
-
-            return 1;
+            string errText = string.Empty;
+            int rtn = AccessFactory.conn.m_RunSQL(ref errText, "DELETE FROM ResourceProperties WHERE CategoriePropertieId='" + cpid + "''");
+            rtn = AccessFactory.conn.m_RunSQL(ref errText, "DELETE FROM CategorieProperties WHERE id=" + cpid + "");
+            return rtn;
         }
 
         /// <summary>
@@ -88,11 +104,12 @@ namespace TCG.Handlers.Imp.AccEss
         public int UpdateCategories(Categories cif)
         {
 
-            AccessFactory.conn.Execute("UPDATE Categories SET vcClassName='" + cif.vcClassName + "',vcName='" + cif.vcName + "',Parent='" + cif.Parent + "',"
+           string Sql = "UPDATE Categories SET vcClassName='" + cif.vcClassName + "',vcName='" + cif.vcName + "',Parent='" + cif.Parent + "',"
                     + "iTemplate='" + cif.ResourceTemplate.Id + "',iListTemplate='" + cif.ResourceListTemplate.Id + "',vcDirectory='" + cif.vcDirectory + "',vcUrl='"
                     + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "', IsSinglePage = '"
-                    + cif.IsSinglePage + "',vcPic='" + cif.vcPic + "' WHERE ID ='" + cif.Id + "'");
-            return 1;
+                    + cif.IsSinglePage + "',vcPic='" + cif.vcPic + "' WHERE ID ='" + cif.Id + "'";
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
 
         /// <summary>
@@ -104,23 +121,29 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int DelCategories(string classid)
         {
+            string s_cont = string.Empty;
+            string errText = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM resources WHERE iClassID = '" + classid + "'", ref s_cont);
 
-            int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM resources WHERE iClassID = '" + classid + "'"));
+            if (rtn < 0) return rtn;
+
+            int ncount = objectHandlers.ToInt(s_cont);
             //该分类下还存在资源，请移出后再删除
             if (ncount > 0)
             {
                 return -1000000032;
             }
 
-            ncount = 0;
-            ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT  COUNT(1) FROM Categories WHERE Parent = '" + classid + "'"));
+            rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT  COUNT(1) FROM Categories WHERE Parent = '" + classid + "'", ref s_cont);
+            if (rtn < 0) return rtn;
+            ncount = objectHandlers.ToInt(s_cont);
 
             if (ncount > 0)
             {
                 return -1000000033;
             }
-            AccessFactory.conn.Execute("DELETE FROM Categories WHERE ID='" + classid + "'");
-            return 1;
+            string Sql = "DELETE FROM Categories WHERE ID='" + classid + "'";
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
 
     }

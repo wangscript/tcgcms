@@ -71,8 +71,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\Admin.cs" />
@@ -86,6 +92,7 @@
     <Compile Include="File\FileCategories.cs" />
     <Compile Include="File\FileResources.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="PageSearchItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ResourceProperties.cs" />
     <Compile Include="Resources\Resources.cs" />

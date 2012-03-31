@@ -17,11 +17,10 @@ using TCG.Utils;
 using TCG.Entity;
 //using TCG.Release;
 
-using TCG.Data;
 
 using System.Reflection;
 using System.ComponentModel;
-using TCG.Data;
+
 using TCG.DBHelper;
 
 namespace TCG.CMS.WebUi
@@ -31,485 +30,347 @@ namespace TCG.CMS.WebUi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            //IConnection _conn = new TCG.DBHelper.AccEss();
-            //_conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/LY_DATA.mdb"));
-
-            //员工园地
-            //DataTable dt = _conn.DataTable("select * from health where  H_zt<>10000 and H_check=10015 order by H_send_time");
-
-            //媒体聚焦
-            //DataTable dt = _conn.DataTable("select * from HN_window where win_type='媒体聚焦' and win_zt<>10000 and win_check=10015 order by win_send_time ");
-            //公司动态
-            //DataTable dt = _conn.DataTable("select * from HN_window where win_type='公司动态' and win_zt<>10000 and win_check=10015 order by win_send_time ");
-            //行业动态
-            //DataTable dt = _conn.DataTable("select * from medicine_info where  info_zt<>10000 and info_check=10015 order by info_send_time");
-
-            //眼科用药
-            //DataTable dt = _conn.DataTable("select * from dissertation where dissertation_f='消化系统' and dissertation_zt<>10000 and dissertation_pass=10015 order by dissertation_send_time");
-
-            //临时公告
-            //DataTable dt = _conn.DataTable("select * from HN_window where win_type='定期报告' and win_zt<>10000 and win_check=10015 order by win_send_time desc  ");
-
-            //招聘信息
-            //DataTable dt = _conn.DataTable("select * from job where recdr = 0 order by order_id  ");
-
-            //产品变更公告
-            //DataTable dt = _conn.DataTable("select * from proclaim where  zt<>10000 and check=10015 order by check_time desc ");
-            //产品
-            //DataTable dt = _conn.DataTable("select * from production where prod_company='广东众生药业股份有限公司' and prod_type='滴眼液'  order by prod_order,prod_id asc");
-            //Dictionary<string, EntityBase> ps = base.handlerService.skinService.propertiesHandlers.GetPropertiesByCIdEntity("2");
-
-            //文体
-            //DataTable dt = _conn.DataTable("select * from culture where s_id=101 and RecDr = 0 order by id");
-
-
-            //留言板
-            //DataTable dt = _conn.DataTable("select * from LY");
-
-            //if (dt != null && dt.Rows.Count > 0)
-            //{
-            //    for (int i = 0; i < dt.Rows.Count; i++)
-            //    {
-            //        DataRow row = dt.Rows[i];
-
-            //        Resources res = new Resources();
-
-
-            #region
-            //员工园地
-
-            //res.Id = (objectHandlers.ToInt(row["H_id"].ToString()) + 750).ToString();
-            //res.vcAuthor = row["H_origin"].ToString();
-            //res.vcTitle = row["H_title"].ToString();
-            //res.vcKeyWord = row["H_title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["H_date"].ToString());
-            //res.vcContent = row["H_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("39ce6488-bda9-4481-902a-5ae2c8626f49");
-            //res.vcEditor = row["H_origin"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["H_title"].ToString() + "-----------" + txt + "<br/>");
-
-
-            //媒体聚焦
-            //res.Id = (objectHandlers.ToInt(row["win_id"].ToString()) + 0).ToString();
-            //res.vcAuthor = row["win_origin"].ToString();
-            //res.vcTitle = row["win_title"].ToString();
-            //res.vcKeyWord = row["win_title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["win_date"].ToString());
-            //res.vcContent = row["win_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("e0733fed-61df-4ced-b65e-601bc49ddaf7");
-            //res.vcEditor = row["win_origin"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["win_title"].ToString() + "-----------" + txt + "<br/>");
-
-            //公司动态
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = row["win_origin"].ToString();
-            //res.vcTitle = row["win_title"].ToString();
-            //res.vcKeyWord = row["win_title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["win_send_time"].ToString());
-            //res.dUpDateDate = objectHandlers.ToTime(row["win_send_time"].ToString()); ;
-            //res.vcContent = row["win_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("36fab2c8-a5f2-4e6b-a9ff-c514b3c51c69");
-            //res.vcEditor = row["win_origin"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["win_title"].ToString() + "-----------" + txt + "<br/>");
-
-
-            //行业动态
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = row["info_origin"].ToString();
-            //res.vcTitle = row["info_title"].ToString();
-            //res.vcKeyWord = row["info_title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["info_send_time"].ToString());
-            //res.dUpDateDate = objectHandlers.ToTime(row["info_send_time"].ToString());
-            //res.vcContent = row["info_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("a4264578-1723-46c3-86f6-86fa6b669e54");
-            //res.vcEditor = row["info_origin"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["info_title"].ToString() + "-----------" + txt + "<br/>");
-
-            //眼科用药
-            //res.Id = (objectHandlers.ToInt(row["dissertation_id"].ToString()) + 1750).ToString();
-            //res.vcAuthor = row["dissertation_origin"].ToString();
-            //if (string.IsNullOrEmpty(row["dissertation_send_time"].ToString()))
-            //{
-            //    res.dAddDate = objectHandlers.ToTime(row["dissertation_time"].ToString());
-            //} else{
-            //    res.dAddDate = objectHandlers.ToTime(row["dissertation_send_time"].ToString());
-            //}
-
-            //res.dUpDateDate = res.dAddDate;
-            //res.vcTitle = row["dissertation_title"].ToString();
-            //res.vcKeyWord = row["dissertation_title"].ToString();
-
-            //res.vcContent = row["dissertation_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("f2aad798-225b-470c-8ea3-202a4bb09263");
-            //res.vcEditor = row["dissertation_check"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["dissertation_title"].ToString() + "-----------" + txt + "<br/>");
-
-            //临时公告
-            //res.Id = (objectHandlers.ToInt(row["win_id"].ToString()) + 1750).ToString();
-            //res.vcAuthor = row["win_origin"].ToString();
-            //res.vcTitle = row["win_title"].ToString();
-            //res.vcUrl = row["win_content"].ToString();
-            //res.vcKeyWord = row["win_title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["win_date"].ToString());
-            //res.vcContent = row["win_content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("18d8de5a-9e61-4a45-abac-a8494009e4db");
-            //res.vcEditor = row["win_check"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["win_title"].ToString() + "---" + row["win_content"].ToString() + "-----------" + txt + "<br/>");
-            #endregion
-
-
-            //产品变更公告
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = row["edit"].ToString();
-            //res.vcTitle = row["title"].ToString();
-            //res.vcKeyWord = row["title"].ToString();
-            //res.dAddDate = objectHandlers.ToTime(row["send_time"].ToString());
-            //res.dUpDateDate = objectHandlers.ToTime(row["send_time"].ToString());
-            //res.vcContent = row["content"].ToString();
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("1c339f2d-282b-47e4-a598-0735352a0995");
-            //res.vcEditor = "-";
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["title"].ToString() + "-----------" + txt + "<br/>");
-
-            #region//招聘信息
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = "-";
-            //res.vcTitle = row["position"].ToString();
-            //res.vcUrl = "-";
-            //res.vcKeyWord =  row["position"].ToString();
-            //res.vcContent = "-";
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("67eed636-a078-4568-a081-b7ba6e35bc97");
-            //res.vcEditor = "-";
-            //res.PropertiesCategorieId = 1;
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-            //string txt = "";
-
-            //foreach (KeyValuePair<string, EntityBase> entity in ps)
-            //{
-            //    Properties ppti = (Properties)entity.Value;
-            //    ResourceProperties pp = new ResourceProperties();
-            //    pp.Id = "";
-            //    pp.PropertieId = objectHandlers.ToInt(ppti.Id);
-            //    pp.PropertieName = ppti.ProertieName;
-
-            //    if (pp.PropertieId == 21)
-            //    {
-            //        pp.PropertieValue = row["age"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 25)   //招聘人数
-            //    {
-            //        pp.PropertieValue = row["num"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 26)  //专业要求
-            //    {
-            //        pp.PropertieValue = row["specialized"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 27)
-            //    {
-            //        string p = row["sex"].ToString();
-            //        if (p == "1")
-            //        {
-            //            pp.PropertieValue = "男";
-            //        }
-            //        else if (p == "2")
-            //        {
-            //            pp.PropertieValue = "女";
-            //        }
-            //        else
-            //        {
-            //            pp.PropertieValue = "不限";
-            //        }
-            //    }
-            //    else if (pp.PropertieId == 28)
-            //    {
-            //        pp.PropertieValue = row["title"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 29)
-            //    {
-            //        pp.PropertieValue = row["record"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 30)
-            //    {
-            //        pp.PropertieValue = row["experience"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 31)
-            //    {
-            //        pp.PropertieValue = row["department"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 32)
-            //    {
-            //        pp.PropertieValue = row["other"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 63)
-            //    {
-            //        pp.PropertieValue = row["other"].ToString();
-            //    }
-
-
-            //    pp.iOrder = ppti.iOrder;
-            //    pp.ResourceId = res.Id;
-
-            //    rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, pp);
-            //    txt = rtn == 1 ? "属性[" + pp.PropertieName + "]添加成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //    Response.Write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·" + txt + "<br/>");
-
-            //}
-
-
-            //txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["position"].ToString() + "-----------" + txt + "<br/>");
-            #endregion
-
-            #region
-            //产品
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = "-";
-            //res.vcTitle = row["prod_name"].ToString();
-            //res.vcUrl = "-";
-            //res.vcKeyWord =  row["prod_name"].ToString();
-            //res.vcContent = "-";
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("1056a870-1366-44e5-94fa-e7a29209b8ee");
-            //res.vcEditor = "-";
-            //res.PropertiesCategorieId = 2;
-            //res.vcSmallImg = "/filePatch/" + row["prod_img"].ToString();
-            //res.vcBigImg = "/filePatch/" + row["prod_Bimg"].ToString();
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-            //string txt = "";
-
-            //foreach (KeyValuePair<string, EntityBase> entity in ps)
-            //{
-            //    Properties ppti = (Properties)entity.Value;
-            //    ResourceProperties pp = new ResourceProperties();
-            //    pp.Id = "";
-            //    pp.PropertieId = objectHandlers.ToInt(ppti.Id);
-            //    pp.PropertieName = ppti.ProertieName;
-
-
-            //    if (pp.PropertieId == 22) //公　　司
-            //    {
-            //        pp.PropertieValue = row["prod_company"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 23) //曾用名（别称）
-            //    {
-            //        pp.PropertieValue = row["prod_cname"].ToString();
-            //    }
-            //    else if (pp.PropertieId == 24) //英文名称
-            //    { pp.PropertieValue = row["prod_ename"].ToString(); }
-            //    else if (pp.PropertieId == 33) //汉语拼音
-            //    { pp.PropertieValue = row["prod_pname"].ToString(); }
-            //    else if (pp.PropertieId == 34) //说明书类别
-            //    { pp.PropertieValue = ""; }
-            //    else if (pp.PropertieId == 35) //产品介绍
-            //    { pp.PropertieValue = row["prod_intro"].ToString(); }
-            //    else if (pp.PropertieId == 36) //产品特点
-            //    { pp.PropertieValue = row["prod_td"].ToString(); }
-            //    else if (pp.PropertieId == 37) //成　　份
-            //    { pp.PropertieValue = row["prod_cf"].ToString(); }
-            //    else if (pp.PropertieId == 38) //性　　状
-            //    { pp.PropertieValue = row["prod_xz"].ToString(); }
-            //    else if (pp.PropertieId == 39) //适　应　症
-            //    { pp.PropertieValue = row["prod_syz"].ToString(); }
-            //    else if (pp.PropertieId == 40) //规　　格
-            //    { pp.PropertieValue = row["prod_gg"].ToString(); }
-            //    else if (pp.PropertieId == 41) //作用类别
-            //    { pp.PropertieValue = row["prod_zylb"].ToString(); }
-            //    else if (pp.PropertieId == 42) //功能主治
-            //    { pp.PropertieValue = row["prod_cure"].ToString(); }
-            //    else if (pp.PropertieId == 43) //用法用量
-            //    { pp.PropertieValue = row["prod_yfyl"].ToString(); }
-            //    else if (pp.PropertieId == 44) //不良反应
-            //    { pp.PropertieValue = row["prod_blfy"].ToString(); }
-            //    else if (pp.PropertieId == 45) //禁　　忌
-            //    { pp.PropertieValue = row["prod_jj"].ToString(); }
-            //    else if (pp.PropertieId == 46) //注意事项
-            //    { pp.PropertieValue = row["prod_zy"].ToString(); }
-            //    else if (pp.PropertieId == 47) //孕妇及哺乳期妇女用药
-            //    { pp.PropertieValue = row["prod_yun"].ToString(); }
-            //    else if (pp.PropertieId == 48) //儿童用药
-            //    { pp.PropertieValue = row["prod_child"].ToString(); }
-            //    else if (pp.PropertieId == 49) //老年用药
-            //    { pp.PropertieValue = row["prod_old"].ToString(); }
-            //    else if (pp.PropertieId == 50) //药物相互作用
-            //    { pp.PropertieValue = row["prod_xkzy"].ToString(); }
-            //    else if (pp.PropertieId == 51) //药物过量
-            //    { pp.PropertieValue = row["prod_ywgl"].ToString(); }
-            //    else if (pp.PropertieId == 52) //药理毒理
-            //    { pp.PropertieValue = row["prod_yldl"].ToString(); }
-            //    else if (pp.PropertieId == 53) //药代动力学
-            //    {
-            //        pp.PropertieValue = row["prod_yddl"].ToString(); 
-            //    }
-            //    else if (pp.PropertieId == 54) //贮　　藏
-            //    { pp.PropertieValue = row["prod_cc"].ToString(); }
-            //    else if (pp.PropertieId == 55) //包　　装
-            //    { pp.PropertieValue = row["prod_bz"].ToString(); }
-            //    else if (pp.PropertieId == 56) //有 效 期
-            //    { pp.PropertieValue = row["prod_yxq"].ToString(); }
-            //    else if (pp.PropertieId == 57) //执行标准
-            //    { pp.PropertieValue = row["prod_bzh"].ToString(); }
-            //    else if (pp.PropertieId == 58) //说明书修订日期
-            //    { pp.PropertieValue = row["prod_sms"].ToString(); }
-            //    else if (pp.PropertieId == 59) //批准文号
-            //    { pp.PropertieValue = row["prod_pzwh"].ToString(); }
-            //    else if (pp.PropertieId == 60) //社　保　类
-            //    {
-
-            //        //国保类|省保类|省保及国保|先不指定
-            //        string txt12 = row["prod_sb"].ToString();
-            //        if(txt12 =="111")
-            //        {
-            //            pp.PropertieValue = "省保及国保";
-            //        }  else if(txt12=="110")
-            //        {
-            //            pp.PropertieValue = "国保类";
-            //        } else if(txt12=="101")
-            //        {
-            //            pp.PropertieValue = "省保类";
-            //        } 
-
-            //    }
-            //    else if (pp.PropertieId == 61) //附加说名
-            //    { pp.PropertieValue = row["prod_yddl"].ToString(); }
-            //    else if (pp.PropertieId == 62) //药物作用
-            //    { pp.PropertieValue = row["prod_yl"].ToString(); }
-
-            //    if (string.IsNullOrEmpty(pp.PropertieValue)) continue;
-            //    pp.iOrder = ppti.iOrder;
-            //    pp.ResourceId = res.Id;
-
-            //    pp.PropertieValue = pp.PropertieValue.Replace("'", "''");
-
-            //    rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, pp);
-            //    txt = rtn == 1 ? "属性[" + pp.PropertieName + "]添加成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //    Response.Write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·" + txt + "<br/>");
-            //}
-
-            //txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["prod_name"].ToString() + "-----------" + txt + "<br/>");
-            #endregion
-
-
-            //文体
-
-            //res.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
-            //res.vcAuthor = "-";
-            //res.vcTitle = row["name"].ToString();
-            //res.vcKeyWord = row["name"].ToString();
-            //res.vcContent = "-";
-            //res.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("dc9f041d-9137-4b43-af2a-bd219d69c5dd");
-            //res.vcEditor = "-";
-            //res.vcSmallImg = "/filePatch/small/" + row["img"].ToString() + ".jpg";
-            //res.vcBigImg = "/filePatch/" + row["img_link"].ToString() + ".jpg";
-            //res.vcSpeciality = "8";
-
-            //int rtn = -1;
-            //rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(res);
-
-            //string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //Response.Write(row["name"].ToString() + "-----------" + txt + "<br/>");
-
-            //留言板
-
-            //        FeedBack bk = new FeedBack();
-            //        bk.Email = row["E_mail"].ToString();
-            //        bk.Title = row["L_title"].ToString();
-            //        bk.Content = row["L_content"].ToString().Replace("'","''");
-            //        bk.Ip = row["ip"].ToString();
-            //        bk.QQ = "";
-            //        bk.Tel = row["L_tel"].ToString();
-            //        bk.AddDate = objectHandlers.ToTime(row["L_date"].ToString());
-            //        bk.SkinId = "TCG-ZhongShengpharmacyCN";
-            //        bk.UserName = row["L_name"].ToString();
-
-
-            //        int rtn = -1;
-            //        rtn = base.handlerService.feedBackHandlers.CreateFeedBack(bk);
-
-            //        string txt = rtn == 1 ? "导入成功！" : errHandlers.GetErrTextByErrCode(rtn, ConfigServiceEx.baseConfig["ManagePath"]);
-            //        Response.Write(row["L_title"].ToString() + "-----------" + txt + "<br/>");
-
-            //    }
-            //    Response.Write("记录总数:" + dt.Rows.Count + "<br/>");
-            //}
-
-            //Response.Write(Guid.NewGuid().ToString());
-            //Resources res = (Resources)CachingService.Get("0555408c-bb8e-429a-ab01-5232c5b30e43");
-            //Response.Write(Guid.NewGuid().ToString());
-
-
-            //批量生成资讯
-            //Dictionary<string, EntityBase> res = null;
-            //int curpage = objectHandlers.ToInt(objectHandlers.Get("page"));
-            //int pagecount = 0;
-            //int count = 0;
-
-            //res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage, ref pagecount, ref count,
-            //           curpage, 100, "Id DESC", "1=1");
-
-            //if (res != null)
-            //{
-            //    foreach (KeyValuePair<string, EntityBase> entity in res)
-            //    {
-            //        Resources ppti = (Resources)entity.Value;
-
-            //        string errtxt = "";
-            //        base.handlerService.tagService.CreateResourcHtmlById(ref  errtxt, objectHandlers.ToInt(ppti.Id));
-            //    }
-            //}
-
-            //if (curpage < pagecount)
-            //{
-            //    Response.Redirect("test.aspx?page=" + (curpage + 1).ToString());
-            //}
-
-            string text = TxtReader.GetRequestText("http://demo.tcgcms.cn/vvvv.html", "utf-8");
-
-            MatchCollection mach = Regex.Matches(text, @"<!--4 主题-->([\S\s]*?)>([\S\s]*?)>([\S\s]*?)>([\S\s]*?)</a>", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-            if (mach.Count > 0)
+            int page = objectHandlers.ToInt(objectHandlers.Get("page"), 1);
+            TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB111104.mdb"));
+
+            int curpage = 0, count = 0, pagecount = 0, pagesize = 20;
+            Dictionary<string, EntityBase> resources = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage,
+                ref pagecount, ref count, page, pagesize, " ID DESC ", "iClassID='0ecdbbdd-fe89-48d6-a2a0-d9b5f29ffdd0' AND id>2621 ");
+
+            //DELETE FROM resources WHERE iClassId = '6b110384-8a7e-4516-b9df-f92a433743dd'
+            if (resources != null && resources.Count > 0)
             {
+                foreach (KeyValuePair<string, EntityBase> entity in resources)
+                {
+                    Resources restemp = (Resources)entity.Value;
 
+                    TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB111104.mdb"));
+                    Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(restemp.Id);
+
+                    TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+
+                    restemp.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                    restemp.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("0ecdbbdd-fe89-48d6-a2a0-d9b5f29ffdd0");
+
+                    if (restemp.PropertiesCategorieId == 1)
+                    {
+                        restemp.PropertiesCategorieId = 3;
+                    }
+                    else if (restemp.PropertiesCategorieId == 2)
+                    {
+                        restemp.PropertiesCategorieId = 4;
+                    }
+
+                    if (restemp.vcSpeciality == "10")
+                    {
+                        restemp.vcSpeciality = "18";
+                    }
+                    else if (restemp.vcSpeciality == "11")
+                    {
+                        restemp.vcSpeciality = "19";
+                    }
+
+                    else if (restemp.vcSpeciality == "6")
+                    {
+                        restemp.vcSpeciality = "14";
+                    }
+                    else if (restemp.vcSpeciality == "7")
+                    {
+                        restemp.vcSpeciality = "15";
+                    }
+
+                    else if (restemp.vcSpeciality == "8")
+                    {
+                        restemp.vcSpeciality = "16";
+                    }
+
+                    int rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(restemp);
+
+                    if (rtn == 1)
+                    {
+                        Response.Write(" - 导入文章[" + restemp.vcTitle + "][" + restemp.Categorie.vcClassName + "]成功!<br/>");
+                        if (ress != null && ress.Count > 0)
+                        {
+                            foreach (KeyValuePair<string, EntityBase> entity1 in ress)
+                            {
+                                ResourceProperties restemp1 = (ResourceProperties)entity1.Value;
+                                restemp1.ResourceId = restemp.Id;
+                                restemp1.Id = "";
+                                restemp1.PropertieValue = restemp1.PropertieValue.Replace("'", "''");
+
+                                #region 属性ID转换
+                                if (restemp1.PropertieId == 21)
+                                {
+                                    restemp1.PropertieId = 64;
+                                }
+                                else if (restemp1.PropertieId == 25)
+                                {
+                                    restemp1.PropertieId = 65;
+                                }
+                                else if (restemp1.PropertieId == 26)
+                                {
+                                    restemp1.PropertieId = 66;
+                                }
+                                else if (restemp1.PropertieId == 27)
+                                {
+                                    restemp1.PropertieId = 67;
+                                }
+                                else if (restemp1.PropertieId == 28)
+                                {
+                                    restemp1.PropertieId = 68;
+                                }
+                                else if (restemp1.PropertieId == 29)
+                                {
+                                    restemp1.PropertieId = 69;
+                                }
+                                else if (restemp1.PropertieId == 30)
+                                {
+                                    restemp1.PropertieId = 70;
+                                }
+                                else if (restemp1.PropertieId == 31)
+                                {
+                                    restemp1.PropertieId = 71;
+                                }
+                                else if (restemp1.PropertieId == 32)
+                                {
+                                    restemp1.PropertieId = 72;
+                                }
+                                else if (restemp1.PropertieId == 63)
+                                {
+                                    restemp1.PropertieId = 73;
+                                }
+                                else if (restemp1.PropertieId == 22)
+                                {
+                                    restemp1.PropertieId = 74;
+                                }
+                                else if (restemp1.PropertieId == 23)
+                                {
+                                    restemp1.PropertieId = 75;
+                                }
+                                else if (restemp1.PropertieId == 24)
+                                {
+                                    restemp1.PropertieId = 76;
+                                }
+                                else if (restemp1.PropertieId == 33)
+                                {
+                                    restemp1.PropertieId = 77;
+                                }
+                                else if (restemp1.PropertieId == 34)
+                                {
+                                    restemp1.PropertieId = 78;
+                                }
+                                else if (restemp1.PropertieId == 35)
+                                {
+                                    restemp1.PropertieId = 79;
+                                }
+                                else if (restemp1.PropertieId == 36)
+                                {
+                                    restemp1.PropertieId = 80;
+                                }
+                                else if (restemp1.PropertieId == 37)
+                                {
+                                    restemp1.PropertieId = 81;
+                                }
+                                else if (restemp1.PropertieId == 38)
+                                {
+                                    restemp1.PropertieId = 82;
+                                }
+                                else if (restemp1.PropertieId == 39)
+                                {
+                                    restemp1.PropertieId = 83;
+                                }
+                                else if (restemp1.PropertieId == 40)
+                                {
+                                    restemp1.PropertieId = 84;
+                                }
+                                else if (restemp1.PropertieId == 41)
+                                {
+                                    restemp1.PropertieId = 85;
+                                }
+                                else if (restemp1.PropertieId == 42)
+                                {
+                                    restemp1.PropertieId = 86;
+                                }
+                                else if (restemp1.PropertieId == 43)
+                                {
+                                    restemp1.PropertieId = 87;
+                                }
+                                else if (restemp1.PropertieId == 44)
+                                {
+                                    restemp1.PropertieId = 88;
+                                }
+                                else if (restemp1.PropertieId == 45)
+                                {
+                                    restemp1.PropertieId = 89;
+                                }
+                                else if (restemp1.PropertieId == 46)
+                                {
+                                    restemp1.PropertieId = 90;
+                                }
+                                else if (restemp1.PropertieId == 47)
+                                {
+                                    restemp1.PropertieId = 91;
+                                }
+                                else if (restemp1.PropertieId == 48)
+                                {
+                                    restemp1.PropertieId = 92;
+                                }
+                                else if (restemp1.PropertieId == 49)
+                                {
+                                    restemp1.PropertieId = 93;
+                                }
+                                else if (restemp1.PropertieId == 50)
+                                {
+                                    restemp1.PropertieId = 94;
+                                }
+                                else if (restemp1.PropertieId == 51)
+                                {
+                                    restemp1.PropertieId = 95;
+                                }
+                                else if (restemp1.PropertieId == 52)
+                                {
+                                    restemp1.PropertieId = 96;
+                                }
+                                else if (restemp1.PropertieId == 53)
+                                {
+                                    restemp1.PropertieId = 97;
+                                }
+                                else if (restemp1.PropertieId == 54)
+                                {
+                                    restemp1.PropertieId = 98;
+                                }
+                                else if (restemp1.PropertieId == 55)
+                                {
+                                    restemp1.PropertieId = 99;
+                                }
+                                else if (restemp1.PropertieId == 56)
+                                {
+                                    restemp1.PropertieId = 100;
+                                }
+                                else if (restemp1.PropertieId == 57)
+                                {
+                                    restemp1.PropertieId = 101;
+                                }
+                                else if (restemp1.PropertieId == 58)
+                                {
+                                    restemp1.PropertieId = 102;
+                                }
+                                else if (restemp1.PropertieId == 59)
+                                {
+                                    restemp1.PropertieId = 103;
+                                }
+                                else if (restemp1.PropertieId == 60)
+                                {
+                                    restemp1.PropertieId = 104;
+                                }
+                                else if (restemp1.PropertieId == 61)
+                                {
+                                    restemp1.PropertieId = 105;
+                                }
+                                else if (restemp1.PropertieId == 62)
+                                {
+                                    restemp1.PropertieId = 106;
+                                }
+
+                                #endregion
+
+
+                                rtn = base.handlerService.resourcsService.resourcesHandlers.ResourcePropertiesManage(base.adminInfo, restemp1);
+                                if (rtn == 1)
+                                {
+                                    Response.Write(" -- 导入文章[" + restemp1.PropertieName + "][" + restemp1.PropertieValue + "]成功!<br/>");
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+
+            if (page < pagecount)
+            {
+                Response.Redirect("test.aspx?page=" + (page + 1));
             }
 
 
+
+
+            /*
+            int page = objectHandlers.ToInt(objectHandlers.Get("page"),1);
+            TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(  HttpContext.Current.Server.MapPath("/database/TCG_DB111031.mdb"));
+
+            int curpage = 0, count = 0, pagecount = 0, pagesize = 20;
+           Dictionary<string, EntityBase> resources =  base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curpage,
+               ref pagecount, ref count, page, pagesize, " ID DESC ", "iClassID='dc9f041d-9137-4b43-af2a-bd219d69c5dd'");
+
+            //DELETE FROM resources WHERE iClassId = '6b110384-8a7e-4516-b9df-f92a433743dd'
+           if (resources != null && resources.Count > 0)
+           {
+               foreach (KeyValuePair<string, EntityBase> entity in resources)
+               {
+                   Resources restemp = (Resources)entity.Value;
+
+
+                   
+                   TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(  HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+
+                   restemp.Id = (base.handlerService.resourcsService.resourcesHandlers.GetMaxResourceId() + 1).ToString();
+                   restemp.Categorie = base.handlerService.skinService.categoriesHandlers.GetCategoriesById("86726cbc-aa3d-41ca-b427-7c3870e1510f");
+
+                   if (restemp.vcSpeciality == "6")
+                   {
+                       restemp.vcSpeciality = "14";
+                   }
+                   else if (restemp.vcSpeciality == "7")
+                   {
+                       restemp.vcSpeciality = "15";
+                   }
+
+                   else if (restemp.vcSpeciality == "8")
+                   {
+                       restemp.vcSpeciality = "16";
+                   }
+
+                   int rtn = base.handlerService.resourcsService.resourcesHandlers.CreateResources(restemp);
+
+                   if (rtn == 1)
+                   {
+                       Response.Write(" - 导入文章[" + restemp.vcTitle + "][" + restemp.Categorie.vcClassName + "]成功!<br/>");
+                   }
+               }
+           }
+
+           TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+
+           if (page < pagecount)
+           {
+               Response.Redirect("test.aspx?page=" + (page + 1));
+           }
+             */
+
+
+            /*
+            TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB111031.mdb"));
+            Dictionary<string, EntityBase> proerties = base.handlerService.skinService.propertiesHandlers.GetPropertiesByCIdEntity("2");
+            if (proerties != null && proerties.Count > 0)
+            {
+                foreach (KeyValuePair<string, EntityBase> entity in proerties)
+                {
+                    Properties restemp = (Properties)entity.Value;
+                    TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+
+                    restemp.Id = (base.handlerService.skinService.propertiesHandlers.GetMaxProperties() + 1).ToString();
+                    restemp.PropertiesCategorieId = "4";
+
+                    int rtn = base.handlerService.skinService.propertiesHandlers.PropertiesManage(base.adminInfo, restemp);
+                    Response.Write(" - 导入属性[" + restemp.ProertieName + "]成功!<br/>");
+                }
+            }
+
+            TCG.Handlers.Imp.AccEss.AccessFactory.conn.SetConnStr(HttpContext.Current.Server.MapPath("/database/TCG_DB.mdb"));
+             */
         }
 
         private void ReadExl()

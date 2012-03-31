@@ -34,85 +34,56 @@ namespace TCG.DBHelper
             this.ConnStr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + conn;
         }
 
-
-        /// <summary>
-        /// 执行SQL语句，返回结果
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        public void Execute(string sqlstr)
+        public int m_RunSQL(ref string as_ErrText, string as_SQL)
         {
+            if (as_SQL == "")
+            {
+                as_ErrText = "SQL语句为空";
+                return -190010005; //SQL语句为空
+            }
+
             try
             {
                 this.connOpen();
                 comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
+                comm.CommandText = as_SQL;
                 comm.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                as_ErrText = "数据库操作错误@@@@m_RunSQL：" + ex.Message + "@@@@" + as_SQL;
+                return -190010002;
             }
             finally
             {
                 this.connClose();
             }
+
+            return 1;
         }
 
-        /// <summary>
-        /// 执行Sql查询语句并返回第一行的第一条记录,返回值为object 使用时需要拆箱操作 -> Unbox
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <returns>object 返回值 </returns>
-        public object ExecuteScalar(string sqlstr)
+        public int m_ExecuteScalar(ref string as_ErrText, string as_SQL, ref string as_out_Column)
         {
             object obj = new object();
             try
             {
                 this.connOpen();
                 comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
+                comm.CommandText = as_SQL;
                 obj = comm.ExecuteScalar();
+
+                as_out_Column = obj.ToString();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                as_ErrText = "数据库操作错误@@@@m_RunSQLData：" + ex.Message + "@@@@" + as_SQL;
+                return -190010002;
             }
             finally
             {
                 this.connClose();
             }
-            return obj;
-        }
-
-        /// <summary>
-        /// 执行Sql查询语句,同时进行事务处理
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        public void ExecuteSqlWithTransaction(string sqlstr)
-        {
-            connClose();
-            connOpen();
-
-            OleDbTransaction trans;
-            trans = conn.BeginTransaction();
-            comm.Transaction = trans;
-            try
-            {
-                connOpen();
-                comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
-                comm.ExecuteNonQuery();
-                trans.Commit();
-            }
-            catch
-            {
-                trans.Rollback();
-            }
-            finally
-            {
-                connClose();
-            }
+            return 1;
         }
 
         /// <summary>
@@ -145,91 +116,32 @@ namespace TCG.DBHelper
             return dr;
         }
 
-        /// <summary>
-        /// 返回指定Sql语句的OleDbDataReader，请注意，在使用后请关闭本对象，同时将自动调用closeConnection()来关闭数据库连接
-        /// 方法关闭数据库连接
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <param name="dr">传入的ref DataReader 对象</param>
-        public void DataReader(string sqlstr, ref OleDbDataReader dr)
-        {
-            try
-            {
-                connOpen();
-                comm.CommandText = sqlstr;
-                comm.CommandType = CommandType.Text;
-                dr = comm.ExecuteReader(CommandBehavior.CloseConnection);
-            }
-            catch
-            {
-                try
-                {
-                    if (dr != null && !dr.IsClosed)
-                        dr.Close();
-                }
-                catch
-                {
-                }
-                finally
-                {
-                    connClose();
-                }
-            }
-        }
 
-        /// <summary>
-        /// 返回指定Sql语句的DataSet
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <returns>DataSet</returns>
-        public DataSet DataSet(string sqlstr)
+        public int m_RunSQLData(ref string as_ErrText, string as_SQL, ref DataSet ads_out_Data)
         {
-            DataSet ds = new DataSet();
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
             {
+                if (ads_out_Data == null) ads_out_Data = new DataSet();
                 connOpen();
                 comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
+                comm.CommandText = as_SQL;
                 da.SelectCommand = comm;
-                da.Fill(ds);
+                da.Fill(ads_out_Data);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                as_ErrText = "数据库操作错误@@@@m_RunSQLData：" + ex.Message + "@@@@" + as_SQL;
+                return -190010002;
             }
             finally
             {
                 connClose();
             }
-            return ds;
+            return 1;
         }
 
-        /// <summary>
-        /// 返回指定Sql语句的DataSet
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <param name="ds">传入的引用DataSet对象</param>
-        public void DataSet(string sqlstr, ref DataSet ds)
-        {
-            OleDbDataAdapter da = new OleDbDataAdapter();
-            try
-            {
-                connOpen();
-                comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
-                da.SelectCommand = comm;
-                da.Fill(ds);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                connClose();
-            }
-        }
+        
         /// <summary>
         /// 返回指定Sql语句的DataTable
         /// </summary>
@@ -258,61 +170,6 @@ namespace TCG.DBHelper
             return Datatable;
         }
 
-        /// <summary>
-        /// 执行指定Sql语句,同时给传入DataTable进行赋值
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <param name="dt">ref DataTable dt </param>
-        public void DataTable(string sqlstr, ref DataTable dt)
-        {
-            OleDbDataAdapter da = new OleDbDataAdapter();
-            try
-            {
-                connOpen();
-                comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
-                da.SelectCommand = comm;
-                da.Fill(dt);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                connClose();
-            }
-        }
-
-        /// <summary>
-        /// 返回指定Sql语句的DataView
-        /// </summary>
-        /// <param name="sqlstr">传入的Sql语句</param>
-        /// <returns>DataView</returns>
-        public DataView DataView(string sqlstr)
-        {
-            OleDbDataAdapter da = new OleDbDataAdapter();
-            DataView dv = new DataView();
-            DataSet ds = new DataSet();
-            try
-            {
-                connOpen();
-                comm.CommandType = CommandType.Text;
-                comm.CommandText = sqlstr;
-                da.SelectCommand = comm;
-                da.Fill(ds);
-                dv = ds.Tables[0].DefaultView;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                connClose();
-            }
-            return dv;
-        }
 
         /// <summary> 
         /// 关闭数据库 
@@ -350,53 +207,6 @@ namespace TCG.DBHelper
         private string ConnStr = string.Empty;
 
 
-        /// <summary>
-        /// 执行存储过程返回输出参数
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <param name="parInt"></param>
-        /// <returns></returns>
-        public string[] Execute(string procName, SqlParameter[] parameters, int[] parInt)
-        {
-            throw new Exception("ACCESS数据库不支持该方法! string[] Execute(string procName, SqlParameter[] parameters, int[] parInt)");
-        }
-
-        /// <summary>
-        /// 执行存储过程返回记录集
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public DataSet DataSet(string procName, SqlParameter[] parameters)
-        {
-            throw new Exception("ACCESS数据库不支持该方法! DataSet DataSet(string procName, SqlParameter[] parameters)");
-        }
-
-        /// <summary>
-        ///  执行存储过程返回记录集 和输出参数
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        /// <param name="parInt"></param>
-        /// <param name="ds"></param>
-        /// <returns></returns>
-        public string[] DataSet(string procName, SqlParameter[] parameters, int[] parInt, ref DataSet ds)
-        {
-            throw new Exception("ACCESS数据库不支持该方法! string[] DataSet(string procName, SqlParameter[] parameters, int[] parInt, ref DataSet ds");
-        }
-
-
-        /// <summary>
-        /// 执行存储过程
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <param name="parameters"></param>
-        public void Execute(string procName, SqlParameter[] parameters)
-        {
-            throw new Exception("ACCESS数据库不支持该方法!   Execute(string procName, SqlParameter[] parameters)");
-        }
-
         /**/
         /// <summary>
         /// 获取当前页应该显示的记录，注意：查询中必须包含名为ID的自动编号列，若不符合你的要求，就修改一下源码吧 :)
@@ -420,7 +230,16 @@ namespace TCG.DBHelper
 
             string text1 = string.Format(" select count(0) as recordCount from {0} WHERE {1}", myVw, whereString);
 
-            recordCount = Convert.ToInt32(this.ExecuteScalar(text1));
+            string errText =string .Empty;
+            string s_recordCount = string.Empty;
+            int rtn = m_ExecuteScalar(ref  errText, text1, ref s_recordCount);
+            if (rtn <0)
+            {
+                recordCount = 0;
+                pageCount = 0;
+                return null;
+            }
+            recordCount = Convert.ToInt32(s_recordCount);
 
             if ((recordCount % pageSize) > 0)
                 pageCount = recordCount / pageSize + 1;
@@ -470,5 +289,24 @@ namespace TCG.DBHelper
             return result.Substring(1);
         }
 
+        public int m_ParamAdd(ref string as_ErrText, string as_ParamName, SqlDbType adt_DataType, ParameterDirection apd_Direction, int ai_DataLength, string as_ParamValue)
+        {
+            throw new Exception("AccEss数据库不使用该方法");
+        }
+
+        public int m_ParamGet(ref string as_ErrText, string as_ParamName, ref string as_ParamValue)
+        {
+            throw new Exception("AccEss数据库不使用该方法");
+        }
+
+        public int m_RunSP(ref string as_ErrText, string as_SPName)
+        {
+            throw new Exception("AccEss数据库不使用该方法");
+        }
+
+        public int m_RunSPData(ref string as_ErrText, string as_SPName, ref DataSet ads_out_Data)
+        {
+            throw new Exception("AccEss数据库不使用该方法");
+        }
     }
 }

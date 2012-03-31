@@ -140,32 +140,25 @@ function sTypeChange(obj) {
 }
 
 //生成模板
+var o = [];
 function PageCreat() {
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
         SetAjaxDiv("err", false, "您没选择需要生成的模版！");
         return;
     }
-    
+
     CreateDiv.Start("生成单页模版文件");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
     var work = $("#work");
     var iTemplateId = $("#iTemplateId");
     if (temps.indexOf(",") > -1) {
-        var o = temps.split(",");
-
+        o = temps.split(",");
         o = CheckCreateTemplate(o);
         
         CreateDiv.set = 1;
         CreateDiv.setcount = o.length;
-        for (var i = 0; i < o.length; i++) {
-            var t = GetTemplateById(o[i]);
-
-            work.val("Create");
-            iTemplateId.val(o[i]);
-            $('#form1').submit();
-
-        }
+        CreateStart();
     } else {
         var t2 = GetTemplateById(temps);
         var s = true;
@@ -188,6 +181,19 @@ function PageCreat() {
     }
 }
 
+function CreateStart(){
+   
+    if(o.length>0){
+        var work = $("#work");
+        var iTemplateId = $("#iTemplateId");
+        work.val("Create");
+        iTemplateId.val(o[o.length-1]);
+        $('#form1').attr("action",$('#form1').attr("action") + "&t=" + new Date());
+        $('#form1').submit();
+    }
+    o.pop();
+}
+
 
 function CheckCreateTemplate(temps) {
     var tempstr = "";
@@ -202,7 +208,8 @@ function CheckCreateTemplate(temps) {
 }
 
 function CreateBack(data) {
-    CreateDiv.SetSep(data);
+    CreateDiv.SetSep(data.message);
+    CreateStart();
 }
 
 function operback() {

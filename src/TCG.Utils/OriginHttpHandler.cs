@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-using TCG.Data;
 using TCG.Entity;
 
 namespace TCG.Utils

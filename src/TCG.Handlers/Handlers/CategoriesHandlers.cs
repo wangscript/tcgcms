@@ -84,7 +84,7 @@ namespace TCG.Handlers
         /// <returns></returns>
         public Dictionary<string, EntityBase> GetAllCategoriesEntity()
         {
-            Dictionary<string, EntityBase> allcategories = (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
+            Dictionary<string, EntityBase> allcategories = null;// (Dictionary<string, EntityBase>)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES_ENTITY);
             if (allcategories == null)
             {
                 DataTable dt = GetAllCategories();
@@ -103,7 +103,7 @@ namespace TCG.Handlers
         public DataTable GetAllCategories()
         {
 
-            DataTable allcategories = (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
+            DataTable allcategories = null;// (DataTable)CachingService.Get(CachingService.CACHING_ALL_CATEGORIES);
             if (allcategories == null)
             {
                 allcategories = DataBaseFactory.CategoriesHandlers.GetAllCategoriesWithOutCaching();

@@ -19,16 +19,17 @@ namespace TCG.Handlers.Imp.AccEss
 
         public int DelFeedBackById(string ids)
         {
-            AccessFactory.conn.DataTable("DELETE FROM FeedBack WHERE id in (" + ids + ")");
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText,"DELETE FROM FeedBack WHERE id in (" + ids + ")");
         }
 
         public int CreateFeedBack(FeedBack feedback)
         {
-            AccessFactory.conn.Execute("INSERT INTO FeedBack(TITLE,Email,UserName,Tel,QQ ,Content ,Ip ,SkinId )"
+            string Sql = "INSERT INTO FeedBack(TITLE,Email,UserName,Tel,QQ ,Content ,Ip ,SkinId )"
                     + "VALUES('" + feedback.Title + "','" + feedback.Email + "','" + feedback.UserName + "','" + feedback.Tel + "','" + feedback.QQ + "','" 
-                    + feedback.Content + "','" + feedback.Ip + "','" + feedback.SkinId + "')");
-            return 1;
+                    + feedback.Content + "','" + feedback.Ip + "','" + feedback.SkinId + "')";
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
     }
 }

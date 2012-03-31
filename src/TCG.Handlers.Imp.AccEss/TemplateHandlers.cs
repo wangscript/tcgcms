@@ -20,7 +20,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string Sql = "SELECT * FROM Template";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
 
@@ -45,11 +50,12 @@ namespace TCG.Handlers.Imp.AccEss
                 return -1000000027;
             }
 
-            AccessFactory.conn.Execute("INSERT INTO Template (Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl,dUpdateDate,dAddDate)"
+            string Sql = "INSERT INTO Template (Id,SkinId,TemplateType,iParentId,iSystemType,vcTempName,vcContent,vcUrl,dUpdateDate,dAddDate)"
                 + "VALUES('" + item.Id + "','" + item.SkinInfo.Id + "','" + (int)item.TemplateType + "','" + item.iParentId + "','" + item.iSystemType + "','"
-                + item.vcTempName + "','" + item.Content.Replace("'", "''") + "','" + item.vcUrl + "',now(),now())");
+                + item.vcTempName + "','" + item.Content.Replace("'", "''") + "','" + item.vcUrl + "',now(),now())";
 
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
 
         /// <summary>
@@ -66,8 +72,9 @@ namespace TCG.Handlers.Imp.AccEss
                 return -1000000028;
             }
 
-            AccessFactory.conn.Execute("DELETE FROM Template WHERE Id IN (" + temps + ")");
-            return 1;
+            string Sql = "DELETE FROM Template WHERE Id IN (" + temps + ")";
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
 
         /// <summary>
@@ -93,9 +100,8 @@ namespace TCG.Handlers.Imp.AccEss
             string sql = "UPDATE Template SET vcTempName='" + item.vcTempName + "',vcContent='" + item.Content.Replace("'", "''") + "',vcUrl='" + item.vcUrl
                                     + "',dUpdateDate=now(),iParentId='" + item.iParentId + "' WHERE Id = '" + item.Id + "'";
 
-            AccessFactory.conn.Execute(sql);
-
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
     }
