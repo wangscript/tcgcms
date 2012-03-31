@@ -20,7 +20,6 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Collections;
 
-using TCG.Data;
 using TCG.Utils;
 using TCG.Entity;
 

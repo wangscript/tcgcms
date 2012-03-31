@@ -39,10 +39,11 @@ namespace TCG.Handlers.Imp.AccEss
         public int AdminLogin(Admin admininfo, string pwd)
         {
             
-            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'Y',vcLastLoginIp = '" + objectHandlers.GetIP()
-                + "',iLoginCount = iLoginCount+1,dLastLoginDate=now() WHERE vcAdminName ='" + admininfo.vcAdminName + "'");
+            string sql = "UPDATE admin SET cIsOnline = 'Y',vcLastLoginIp = '" + objectHandlers.GetIP()
+                + "',iLoginCount = iLoginCount+1,dLastLoginDate=now() WHERE vcAdminName ='" + admininfo.vcAdminName + "'";
 
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         
@@ -54,7 +55,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string sql = "SELECT iID,vcRoleName,vcContent,vcPopedom,vcClassPopedom,dUpdateDate FROM AdminRole";
-            return AccessFactory.conn.DataTable(sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         /// <summary>
@@ -66,7 +72,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string sql = "SELECT vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom,cIsDel,cIsOnline,vcLastLoginIp FROM Admin";
-            return AccessFactory.conn.DataTable(sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         /// <summary>
@@ -82,9 +93,10 @@ namespace TCG.Handlers.Imp.AccEss
         public int AddAdmin(string admin, string vcAdminName, string nickname, string vPassWord, int iRole, string clock, string vcPopedom, string classpop)
         {
 
-            AccessFactory.conn.Execute("INSERT INTO admin (vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom)"
-                                + "VALUES('" + vcAdminName + "','" + nickname + "','" + vPassWord + "'," + iRole + ",'" + clock + "','" + vcPopedom + "','" + classpop + "')");
-            return 1;
+            string sql = "INSERT INTO admin (vcAdminName,vcNickName,vcPassWord,iRole,clock,vcPopedom,vcClassPopedom)"
+                                + "VALUES('" + vcAdminName + "','" + nickname + "','" + vPassWord + "'," + iRole + ",'" + clock + "','" + vcPopedom + "','" + classpop + "')";
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -110,8 +122,8 @@ namespace TCG.Handlers.Imp.AccEss
             }
 
             SQL += "vcNickName='" + nickname + "',iRole=" + iRole + ",clock='" + clock + "',vcPopedom='" + vcPopedom + "',vcClassPopedom='" + vcPopedom + "' WHERE vcAdminName='" + vcAdminName + "'";
-            AccessFactory.conn.Execute(SQL);
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, SQL);
         }
 
 
@@ -125,7 +137,8 @@ namespace TCG.Handlers.Imp.AccEss
 
             if (AdminID == 0) return -19000000;
             string sql = "DELETE FROM T_Manage_Admin WHERE id=" + AdminID.ToString();
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -136,7 +149,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string sql = "SELECT iID,vcPopName,dAddTime,vcUrl,cValid,iParentId FROM Popedom";
-            return AccessFactory.conn.DataTable(sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
 
@@ -150,21 +168,21 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int ChanageAdminLoginInfo(Admin admininfo, string oldpwd, string npwd, string nickname)
         {
-
-
+            string sql = string.Empty;
             if (string.IsNullOrEmpty(npwd))
             {
                 admininfo.vcNickName = nickname;
-                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'");
+               sql = "UPDATE admin SET vcNickName = '" + nickname + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'";
             }
             else
             {
                 admininfo.vcNickName = nickname;
                 admininfo.vcPassword = npwd;
-                AccessFactory.conn.Execute("UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'");
+                sql = "UPDATE admin SET vcNickName = '" + nickname + "',vcPassword = '" + npwd + "' WHERE vcAdminName='" + admininfo.vcAdminName + "'";
             }
 
-            return 1;
+            string errText = string.Empty;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -175,12 +193,21 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int GetAdminRoleInfo(ref int admincount, ref int delcount, ref DataSet ds)
         {
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'", ref s_cont);
 
-            admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'"));
-            delcount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM  admin WHERE cIsDel = 'Y'"));
-            ds = AccessFactory.conn.DataSet("SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE [iRole] "
-                +"= A.iID AND cIsDel <> 'Y') AS [num]  FROM AdminRole A ");
-            return 1;
+            if (rtn < 0) return rtn;
+            admincount = objectHandlers.ToInt(s_cont);
+
+            rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM  admin WHERE cIsDel = 'Y'", ref s_cont);
+            if (rtn < 0) return rtn;
+            delcount = objectHandlers.ToInt(s_cont);
+
+            rtn = AccessFactory.conn.m_RunSQLData(ref errText, "SELECT iID,vcRoleName,(SELECT COUNT(1) FROM admin WHERE [iRole] "
+                +"= A.iID AND cIsDel <> 'Y') AS [num]  FROM AdminRole A ", ref ds);
+          
+            return rtn;
         }
 
         /// <summary>
@@ -194,34 +221,54 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int GetAdminList(int iRoleID, ref int admincount, ref int rolecount, ref string rolename, ref DataSet ds)
         {
-
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            string sql = string.Empty;
+            int rtn = 1;
             if (iRoleID == 0)
             {
-
                 rolename = "所有管理员";
-                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel <> 'Y' "));
-                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
-                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel <> 'Y'  ");
+                rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM  admin WHERE cIsDel <> 'Y'", ref s_cont);
+
+                if (rtn < 0) return rtn;
+                admincount = objectHandlers.ToInt(s_cont);
+
+                sql = "SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                        + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel <> 'Y'  ";
+                rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
             }
             else if (iRoleID > 0)
             {
-                rolename = objectHandlers.ToString(AccessFactory.conn.ExecuteScalar("SELECT vcRoleName FROM AdminRole WHERE iId = " + iRoleID.ToString()));
-                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + iRoleID.ToString() + " AND cIsDel <> 'Y' "));
+                rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT vcRoleName FROM AdminRole WHERE iId = " + iRoleID.ToString(), ref s_cont);
 
-                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
-                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND B.iID = " + iRoleID.ToString() + " AND A.cIsDel <> 'Y'  ");
+                if (rtn < 0) return rtn;
+                rolename = s_cont;
+
+                rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM admin WHERE iRole = " + iRoleID.ToString() + " AND cIsDel <> 'Y' ", ref s_cont);
+
+                if (rtn < 0) return rtn;
+                admincount = objectHandlers.ToInt(s_cont);
+
+                sql = "SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND B.iID = " + iRoleID.ToString() + " AND A.cIsDel <> 'Y'  ";
+                rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
             }
             else if (iRoleID==-1)
             {
 
                 rolename = "管理员回收站";
-                admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE cIsDel = 'Y' "));
 
-                ds = AccessFactory.conn.DataSet("SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
-                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel = 'Y'  ");
+                rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM admin WHERE cIsDel = 'Y' ", ref s_cont);
+
+                if (rtn < 0) return rtn;
+                admincount = objectHandlers.ToInt(s_cont);
+
+                sql = "SELECT A.vcAdminName,A.vcNickName,A.cLock,A.dAddDate,A.dUpdateDate,B.vcRoleName,B.iID "
+                                            + "FROM admin A ,AdminRole B WHERE A.iRole = B.iID AND A.cIsDel = 'Y'  ";
+                rtn = AccessFactory.conn.m_RunSQLData(ref errText, sql, ref ds);
             }
 
-            return 1;
+            return rtn;
         }
 
         /// <summary>
@@ -233,20 +280,21 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int AdminChangeGroup(string admins, int irole)
         {
-
+            string errText = string.Empty;
+            string sql = string.Empty;
             if (admins.IndexOf(",") > -1)
             {
-                AccessFactory.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
-                    + " WHERE vcAdminName IN (+admins+)");
+               sql = "UPDATE admin SET iRole = " + irole.ToString()
+                    + " WHERE vcAdminName IN (+admins+)";
             }
             else
             {
                 admins = admins.Replace("'", "");
-                AccessFactory.conn.Execute("UPDATE admin SET iRole = " + irole.ToString()
-                    + " WHERE vcAdminName = '" + admins + "'");
+                sql = "UPDATE admin SET iRole = " + irole.ToString()
+                    + " WHERE vcAdminName = '" + admins + "'";
             }
 
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -260,11 +308,11 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int AddAdminRole(string vcRoleName, string pop, string classpop, string content)
         {
+            string errText = string.Empty;
+            string sql = "INSERT INTO AdminRole (vcRoleName,vcContent,vcPopedom,vcClassPopedom) "
+                    + "VALUES('" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "') ";
 
-            AccessFactory.conn.Execute("INSERT INTO AdminRole (vcRoleName,vcContent,vcPopedom,vcClassPopedom) "
-                    + "VALUES('" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "','" + vcRoleName + "') ");
-
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -279,13 +327,14 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int MdyAdminRole(string vcRoleName, string pop, string classpop, string content, int roleid)
         {
+            string errText = string.Empty;
+            string sql = "UPDATE AdminRole SET vcRoleName = '" + vcRoleName + "',vcContent='" + content + "',vcPopedom='" + pop + "', "
+                 + "vcClassPopedom='" + pop + "' WHERE iID = " + roleid.ToString();
+            int rtn = AccessFactory.conn.m_RunSQL(ref errText, sql);
+            if (rtn < 0) return rtn;
+            sql = "UPDATE admin SET cIsOnline = 'N' WHERE iRole = " + roleid.ToString();
 
-            AccessFactory.conn.Execute("UPDATE AdminRole SET vcRoleName = '" + vcRoleName + "',vcContent='" + content + "',vcPopedom='" + pop + "', "
-                + "vcClassPopedom='" + pop + "' WHERE iID = " + roleid.ToString());
-
-            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE iRole = " + roleid.ToString());
-
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>
@@ -296,17 +345,19 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int DelAdminRole(int roleid)
         {
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM admin WHERE iRole = " + roleid, ref s_cont);
 
+            if (rtn < 0) return rtn;
 
-            int admincount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM admin WHERE iRole = " + roleid));
+            int admincount = objectHandlers.ToInt(s_cont);
             if (admincount > 0)
             {
                 return -1000000015;
             }
 
-            AccessFactory.conn.Execute("DELETE FROM AdminRole WHERE iID = " + roleid.ToString()); 
-
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, "DELETE FROM AdminRole WHERE iID = " + roleid.ToString());
         }
 
         /// <summary>
@@ -318,7 +369,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int DelAdmins( string admins, string action)
         {
-
+            string errText = string.Empty;
+            string sql = string.Empty;
              //尚未选择需要删除的管理员 
             if (string.IsNullOrEmpty(admins))
             {
@@ -329,40 +381,40 @@ namespace TCG.Handlers.Imp.AccEss
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN (" + admins + ") ");
+                   sql = "UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName IN (" + admins + ") ";
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName ='" + admins + "' ");
+                    sql = "UPDATE admin SET cIsDel = 'Y' WHERE vcAdminName ='" + admins + "' ";
                 }
             }
             else if(action == "02")
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    AccessFactory.conn.Execute("DELETE FROM admin WHERE vcAdminName IN (" + admins + ") ");
+                    sql = "DELETE FROM admin WHERE vcAdminName IN (" + admins + ") ";
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    AccessFactory.conn.Execute("DELETE FROM admin WHERE vcAdminName ='" + admins + "' ");
+                    sql = "DELETE FROM admin WHERE vcAdminName ='" + admins + "' ";
                 }
             }
             else if (action == "03")
             {
                 if (admins.IndexOf(",") > -1)
                 {
-                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN (" + admins + ") ");
+                   sql = "UPDATE admin SET cIsDel = 'N' WHERE vcAdminName IN (" + admins + ") ";
                 }
                 else
                 {
                     admins = admins.Replace("'", "");
-                    AccessFactory.conn.Execute("UPDATE admin SET cIsDel = 'N' WHERE vcAdminName ='" + admins + "' ");
+                    sql = "UPDATE admin SET cIsDel = 'N' WHERE vcAdminName ='" + admins + "' ";
                 }
             }
 
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText,sql); 
         }
 
         /// <summary>
@@ -371,7 +423,8 @@ namespace TCG.Handlers.Imp.AccEss
         /// <param name="vcAdminname"></param>
         public void AdminLoginOut(string vcAdminname)
         {
-            AccessFactory.conn.Execute("UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
+            string errText = string.Empty;
+            AccessFactory.conn.m_RunSQL(ref errText,"UPDATE admin SET cIsOnline = 'N' WHERE vcAdminName ='" + vcAdminname + "'");
         }
 
         /// <summary>
@@ -382,24 +435,37 @@ namespace TCG.Handlers.Imp.AccEss
         public int CheckAdminNameForReg(string adminname)
         {
             if (string.IsNullOrEmpty(adminname)) return -1;
-            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Admin WHERE vcAdminName='" + adminname + "'"));
+
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM Admin WHERE vcAdminName='" + adminname + "'", ref s_cont);
+
+            if (rtn < 0) return rtn;
+
+            return objectHandlers.ToInt(s_cont);
         }
 
        
 
         public void Logout(Admin admin)
         {
-            AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + admin.vcAdminName + "'");
+            string errText = string.Empty;
+            string sql = "UPDATE [admin] SET cIsOnline='N' WHERE vcAdminName='" + admin.vcAdminName + "'";
+            AccessFactory.conn.m_RunSQL(ref errText, sql); 
         }
 
         public void AminInfoRefash()
         {
-            AccessFactory.conn.Execute("UPDATE [admin] SET cIsOnline='N' WHERE DATEDIFF('n',dLastLoginDate,now())>30");
+            string errText = string.Empty;
+            string sql = "UPDATE [admin] SET cIsOnline='N' WHERE DATEDIFF('n',dLastLoginDate,now())>30";
+            AccessFactory.conn.m_RunSQL(ref errText, sql); 
         }
 
         public void UpdateAdminLastloginTime(string Adminname)
         {
-            AccessFactory.conn.Execute("UPDATE [admin] SET dLastLoginDate= now() WHERE vcAdminName ='" + Adminname + "'");
+            string errText = string.Empty;
+            string sql = "UPDATE [admin] SET dLastLoginDate= now() WHERE vcAdminName ='" + Adminname + "'";
+            AccessFactory.conn.m_RunSQL(ref errText, sql); 
         }
 
         private HttpCookie _admincookie = null;

@@ -18,7 +18,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 
-using TCG.Data;
 using TCG.Utils;
 using TCG.Entity;
 
@@ -45,23 +44,6 @@ namespace TCG.Handlers
         }
         private HandlerService _handlerservice = null;
 
-
-        /// <summary>
-        /// 设置数据库链接
-        /// </summary>
-        public Connection conn
-        {
-            set
-            {
-                this._conn = value;
-            }
-            get
-            {
-                return this._conn;
-            }
-        }
-
-        private Connection _conn = null;
 
         /// <summary>
         /// 获得配置信息支持

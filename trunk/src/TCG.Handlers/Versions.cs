@@ -20,7 +20,6 @@ using System.Xml;
 
 using TCG.Entity;
 using TCG.Utils;
-using TCG.Data;
 
 namespace TCG.Release
 {
@@ -150,42 +149,6 @@ namespace TCG.Release
             }
         }
 
-        /// <summary>
-        /// 执行SQL更新语句
-        /// </summary>
-        /// <param name="conn"></param>
-        /// <param name="num"></param>
-        /// <param name="SqlText"></param>
-        /// <returns></returns>
-        public static bool RunSqlSep(Connection conn, int num,ref string SqlText)
-        {
-            string sqltxtPath = WebSite + "/update/" + GetVerStr(HigherVersion.Ver) + "/sql/" + num.ToString() + ".sql";
-            string sql = TxtReader.GetRequestText(sqltxtPath, "gb2312");
-            if (string.IsNullOrEmpty(sql)) return false;
-
-            string patten = @"\/\*\*\*(.*?)\$\[(.*?)\]\*\*\*\/";
-            Match mt = Regex.Match(sql, patten, RegexOptions.Singleline);
-            if (mt.Success)
-            {
-                SqlText = mt.Result("$1");
-            }
-            else
-            {
-                SqlText = "未检测到更新SQL";
-                return false;
-            }
-            mt = null;
-
-            try
-            {
-                conn.Execute(sql);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
-        }
+      
     }
 }

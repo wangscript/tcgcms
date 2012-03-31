@@ -14,16 +14,20 @@ namespace TCG.Handlers.Imp.AccEss
         public DataTable GetPropertiesByCIdWithOutCaching(string cid)
         {
             string Sql = "SELECT * FROM Properties WHERE PropertiesCategorieId='" + cid + "' order by id";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText,Sql,ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         public int PropertiesDEL(int cpid)
         {
-            //删除属性
-            AccessFactory.conn.Execute("DELETE FROM ResourceProperties WHERE PropertieId='" + cpid + "'");
-            AccessFactory.conn.Execute("DELETE FROM Properties WHERE id=" + cpid + "");
-
-            return 1;
+            string errText = string.Empty;
+            int rtn = AccessFactory.conn.m_RunSQL(ref errText,"DELETE FROM ResourceProperties WHERE PropertieId='" + cpid + "'");
+            rtn = AccessFactory.conn.m_RunSQL(ref errText, "DELETE FROM Properties WHERE id=" + cpid + "");
+            return rtn;
         }
 
 
@@ -31,7 +35,13 @@ namespace TCG.Handlers.Imp.AccEss
         {
             string sql = string.Empty;
 
-            int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM PropertiesCategorie WHERE id = " + cp.Id + ""));
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM PropertiesCategorie WHERE id = " + cp.Id + "", ref s_cont);
+
+            if (rtn < 0) return rtn;
+
+            int ncount = objectHandlers.ToInt(s_cont);
             if (ncount > 0)
             {
                 sql = "UPDATE PropertiesCategorie SET CategoriePropertiesName='" + cp.CategoriePropertiesName + "',Visible='" + cp.Visible + "',[SkinId]='" + cp.SkinId
@@ -43,13 +53,13 @@ namespace TCG.Handlers.Imp.AccEss
                       + "" + cp.Id + ",'" + cp.CategoriePropertiesName + "','" + cp.Visible + "','" + cp.SkinId + "')";
             }
 
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
 
         public int PropertiesManage(Properties cp)
         {
+            string errText = string.Empty;
             string sql = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
@@ -59,7 +69,12 @@ namespace TCG.Handlers.Imp.AccEss
             }
             else
             {
-                int ncount = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Properties WHERE id = " + cp.Id + ""));
+                string s_cont = string.Empty;
+                int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM Properties WHERE id = " + cp.Id + "", ref s_cont);
+
+                if (rtn < 0) return rtn;
+
+                int ncount = objectHandlers.ToInt(s_cont);
                 if (ncount > 0)
                 {
                     sql = "UPDATE Properties SET PropertiesCategorieId='" + cp.PropertiesCategorieId + "',ProertieName='" + cp.ProertieName + "',[Type]='" + cp.Type
@@ -73,24 +88,42 @@ namespace TCG.Handlers.Imp.AccEss
                 }
             }
 
-            AccessFactory.conn.Execute(sql);
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
+            
         }
 
         public int GetMaxPropertiesCategrie()
         {
-            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT Max(id) FROM PropertiesCategorie"));
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT Max(id) FROM PropertiesCategorie", ref s_cont);
+
+            if (rtn < 0) return rtn;
+
+            return objectHandlers.ToInt(s_cont);
         }
 
         public int GetMaxProperties()
         {
-            return objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT Max(id) FROM Properties"));
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT Max(id) FROM Properties", ref s_cont);
+
+            if (rtn < 0) return rtn;
+
+            return objectHandlers.ToInt(s_cont);
         }
 
         public DataTable GetPropertiesCategoriesBySkinId(string skinid)
         {
             string Sql = "SELECT * FROM PropertiesCategorie WHERE SkinId='" + skinid + "' order by id";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
     }
 }

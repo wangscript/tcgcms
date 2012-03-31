@@ -21,7 +21,12 @@ namespace TCG.Handlers.Imp.AccEss
         {
 
             string Sql = "SELECT * FROM Skin";
-            return AccessFactory.conn.DataTable(Sql);
+            string errText = string.Empty;
+            DataSet ds = null;
+            int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
+            if (rtn < 0) return null;
+            if (ds == null || ds.Tables.Count == 0) return null;
+            return ds.Tables[0];
         }
 
         /// <summary>
@@ -31,8 +36,14 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public int CreateSkin(Skin skin)
         {
-            int count = objectHandlers.ToInt(AccessFactory.conn.ExecuteScalar("SELECT COUNT(1) FROM Skin WHERE id = '" + skin.Id + "'"));
+            string errText = string.Empty;
+            string s_cont = string.Empty;
+            int rtn = AccessFactory.conn.m_ExecuteScalar(ref errText, "SELECT COUNT(1) FROM Skin WHERE id = '" + skin.Id + "'", ref s_cont);
 
+            if (rtn < 0) return rtn;
+            int count = objectHandlers.ToInt(s_cont);
+
+  
             string sql = "UPDATE Skin SET [Name]='" + skin.Name + "',Pic='" + skin.Pic + "',WebDescription='" + skin.WebDescription + "',Filename='" + skin.Filename
                 + "',IndexPage='" + skin.IndexPage + "',WebKeyWords='" + skin.WebKeyWords + "' WHERE id = '" + skin.Id + "'";
             if (count == 0)
@@ -41,9 +52,7 @@ namespace TCG.Handlers.Imp.AccEss
                     + skin.Pic + "','" + skin.WebDescription + "','" + skin.Filename + "','" + skin.IndexPage + "','" + skin.WebKeyWords + "')";
             }
 
-            AccessFactory.conn.Execute(sql);
-           
-            return 1;
+            return AccessFactory.conn.m_RunSQL(ref errText, sql);
         }
 
         /// <summary>

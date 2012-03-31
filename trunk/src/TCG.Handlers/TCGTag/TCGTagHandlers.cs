@@ -22,7 +22,6 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
 
-using TCG.Data;
 using TCG.Utils;
 using TCG.Entity;
 using TCG.Release;

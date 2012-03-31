@@ -18,7 +18,6 @@ using System.Text;
 
 using TCG.Utils;
 using TCG.Entity;
-using TCG.Data;
 
 namespace TCG.Handlers
 {

@@ -30,6 +30,8 @@ namespace TCG.CMS.WebUi
                 this.ltitle.Text = ConfigServiceEx.baseConfig["WebTitle"];
                 this.month.Text = DateTime.Now.Month.ToString();
 
+                //Response.Write(objectHandlers.MD5("admin"));
+
                 HttpCookie lname = TCG.Utils.Cookie.Get(ConfigServiceEx.baseConfig["AdminLoginName"]);
                 if (lname != null)
                 {
