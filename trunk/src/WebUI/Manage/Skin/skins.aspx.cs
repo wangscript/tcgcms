@@ -180,7 +180,7 @@ namespace TCG.CMS.WebUi
             info.Text = skininfo.WebDescription;
             sitename.Text = skininfo.Name;
             pic.Src = skininfo.Pic;
-            sitename.Href = "skinveiw.aspx?skinid=" + skininfo.Id;
+            sitename.Href = "#";
             if (skininfo.Id == ConfigServiceEx.DefaultSkinId)
             {
                 IsDefault.Visible = true;
