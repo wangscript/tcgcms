@@ -121,7 +121,7 @@ namespace TCG.Handlers
                 if (mh.Success)
                 {
                     this._temphtml = Regex.Replace(this._temphtml, @"(<title>)(.+?)(</title>)",
-                    "$1" + this._pagerinfo.PageTitle + " - $2$3", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    "$1 " + this._pagerinfo.PageTitle + " - $2$3 ", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     this._pagerinfo.PageTitle = string.Empty;
                 }
 

@@ -365,7 +365,10 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + item.Categorie.vcClassName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iClassId$", "<TCG>" + item.Categorie.Id + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iClassParentId$", "<TCG>" + item.Categorie.Parent + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_iClassParentId2$", "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id).Id + "</TCG>");
+            Categories cinfo = this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(item.Categorie.Id);
+            temp = temp.Replace("$" + this._tagtype + "_iClassParentId2$", "<TCG>" + cinfo.Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iClassParentvcClassName2$", "<TCG>" + cinfo.vcClassName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iClassParentvcName2$", "<TCG>" + cinfo.vcName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_TopicClassTitleList$",
                 "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(item.Categorie.Id, " > ") + "</TCG>");
 
@@ -483,7 +486,10 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcUrl$", "<TCG>" + url + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_iParent$", "<TCG>" + categorie.Parent.ToString() + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_iParent2$", "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(categorie.Id).Id + "</TCG>");
+            Categories cinfo = this.handlerService.skinService.categoriesHandlers.GetCategoriesParent2(categorie.Id);
+            temp = temp.Replace("$" + this._tagtype + "_iParentId2$", "<TCG>" + cinfo.Id + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iParentvcClassName2$", "<TCG>" + cinfo.vcClassName + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_iParentvcName2$", "<TCG>" + cinfo.vcName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_ClassTitleList$",
                     "<TCG>" + this.handlerService.skinService.categoriesHandlers.GetResourcesCategoriesIndex(categorie.Id, " > ") + "</TCG>");
 

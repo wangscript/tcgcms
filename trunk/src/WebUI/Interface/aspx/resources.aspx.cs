@@ -141,7 +141,7 @@ namespace TCG.CMS.WebUi
             try
             {
                 res = base.handlerService.resourcsService.resourcesHandlers.GetResourcesListPager(ref curPage, ref pageCount, ref count,
-                       page, pageSize, "Id DESC", strCondition);
+                       page, pageSize, "dUpDateDate DESC", strCondition);
             }
             catch (Exception ex)
             {
