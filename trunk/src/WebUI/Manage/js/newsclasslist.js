@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -12,7 +12,7 @@ function classTitleInit() {
    
         a = "";
         GetNewsListTitleByClassId(classobj.val());
-        a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>Õ¾µã¸ùÄ¿Â¼</a>>>" + a;
+        a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>ç«™ç‚¹æ ¹ç›®å½•</a>>>" + a;
         m.html("<span class='txt bold'>" + a + "</span>");
    
 }
@@ -101,32 +101,32 @@ function SetCloseBack(){
 function NewsClassDel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñÐèÒªÉ¾³ýµÄ·ÖÀà£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„åˆ†ç±»ï¼");
 		return;
 	}
 	if(temps.indexOf(",")>-1){
-		SetAjaxDiv("err",false,"Ò»´ÎÖ»ÄÜÉ¾³ýÒ»¸öÄ£°æ£¡");
+		SetAjaxDiv("err",false,"ä¸€æ¬¡åªèƒ½åˆ é™¤ä¸€ä¸ªæ¨¡ç‰ˆï¼");
 		return;
 	}
 	$("#DelClassId").val(temps);
 	$("#work").val("DEL");
-	SetAjaxDiv("loader",false,"ÕýÔÚ·¢ËÍÇëÇó...");
+	SetAjaxDiv("loader",false,"æ­£åœ¨å‘é€è¯·æ±‚...");
 	$("#form1").submit();
 }
 
 function DelPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"·ÖÀàÒÑ¾­É¾³ý³É¹¦£¡");
+	SetAjaxDiv("ok",false,"åˆ†ç±»å·²ç»åˆ é™¤æˆåŠŸï¼");
 }
 
 function NewsClassCreateHtml() {
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
-        SetAjaxDiv("err", false, "ÄúÃ»ÓÐÑ¡ÔñÐèÒªÉú³ÉµÄ·ÖÀà£¡");
+        SetAjaxDiv("err", false, "æ‚¨æ²¡æœ‰é€‰æ‹©éœ€è¦ç”Ÿæˆçš„åˆ†ç±»ï¼");
         return;
     }
 
-    CreateDiv.Start("ÅúÁ¿Éú³É·ÖÀàÁÐ±í");
+    CreateDiv.Start("æ‰¹é‡ç”Ÿæˆåˆ†ç±»åˆ—è¡¨");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
 
     if (temps.indexOf(",") > -1) {

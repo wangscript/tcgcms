@@ -1055,7 +1055,67 @@ namespace TCG.DBHelper
 
         public DataTable ExecutePager(int pageIndex, int pageSize, string showString, string queryString, string whereString, string orderString, out int pageCount, out int recordCount)
         {
-            throw new Exception("MsSql数据库不使用该方法分页");
+            string errText = string.Empty;
+
+            this.ClearSqlParams(ref errText);
+            int rtn = this.m_ParamAdd(ref errText, "@tblName", SqlDbType.NVarChar, ParameterDirection.Input, 500, queryString);
+            rtn = this.m_ParamAdd(ref errText, "@fldName", SqlDbType.NVarChar, ParameterDirection.Input, 500, showString);
+            rtn = this.m_ParamAdd(ref errText, "@fldSort", SqlDbType.NVarChar, ParameterDirection.Input, 200, orderString);
+            rtn = this.m_ParamAdd(ref errText, "@strCondition", SqlDbType.NVarChar, ParameterDirection.Input, 4000, whereString);
+            rtn = this.m_ParamAdd(ref errText, "@pageSize", SqlDbType.Int, ParameterDirection.Input, 4, pageSize.ToString());
+            rtn = this.m_ParamAdd(ref errText, "@page", SqlDbType.Int, ParameterDirection.Input, 4, pageIndex.ToString());
+
+            rtn = this.m_ParamAdd(ref errText, "@curpage", SqlDbType.Int, ParameterDirection.Output, 4, "");
+            rtn = this.m_ParamAdd(ref errText, "@pageCount", SqlDbType.Int, ParameterDirection.Output, 4, "");
+            rtn = this.m_ParamAdd(ref errText, "@counts", SqlDbType.Int, ParameterDirection.Output, 4, "");
+            rtn = this.m_ParamAdd(ref errText, "@retval", SqlDbType.Int, ParameterDirection.Output, 4, "");
+
+            string _val = string.Empty, _curpage = string.Empty, _pageCount = string.Empty, _counts = string.Empty;
+            DataSet ds = null;
+            rtn = this.m_RunSPData(ref errText, "SP_TCG_GetPage",ref ds);
+            if (rtn == 1)
+            {
+                rtn = this.m_ParamGet(ref errText, "@retval", ref _val);
+                if (rtn < 0)
+                {
+                    pageCount = 0;
+                    recordCount = 0;
+                    return null;
+                }
+                rtn = this.m_ParamGet(ref errText, "@curpage", ref _curpage);
+                if (rtn < 0)
+                {
+                    pageCount = 0;
+                    recordCount = 0;
+                    return null;
+                }
+                rtn = this.m_ParamGet(ref errText, "@pageCount", ref _pageCount);
+                if (rtn < 0)
+                {
+                    pageCount = 0;
+                    recordCount = 0;
+                    return null;
+                }
+                rtn = this.m_ParamGet(ref errText, "@counts", ref _counts);
+                if (rtn < 0)
+                {
+                    pageCount = 0;
+                    recordCount = 0;
+                    return null;
+                }
+
+                pageCount = int.Parse(_pageCount);
+                recordCount = int.Parse(_counts);
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    return ds.Tables[0];
+                }
+            }
+
+            pageCount = 0;
+            recordCount = 0;
+            return null;
+
         }
 
     }

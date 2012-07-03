@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 
 function onPop2(obj,action){
@@ -24,7 +24,7 @@ function onPop(obj){
 }
 
 $(document).ready(function () {
-    //Ìí¼ÓÌá½»·½·¨
+    //æ·»åŠ æäº¤æ–¹æ³•
     var options = {
         beforeSubmit: function () { return true; },
         dataType: 'json',
@@ -35,23 +35,23 @@ $(document).ready(function () {
 
 var GroupDiv = new MenuDiv();
 function GetAddGroupDiv(){
-	var sa = {href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminroleadd.aspx';",Text:"Ôö¼ÓĞÂ½ÇÉ«×é"};
+	var sa = {href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminroleadd.aspx';",Text:"å¢åŠ æ–°è§’è‰²ç»„"};
 	GroupDiv.CreadDiv("addgroup",null,alist,150,sa,0,6);
 }
 
 function GetAddDiv(){
-	var addlist = [{href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminadd.aspx';",Text:"Ôö¼ÓĞÂ¹ÜÀíÔ±"},{href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminroleadd.aspx';",Text:"Ôö¼ÓĞÂ½ÇÉ«×é"}];
+	var addlist = [{href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminadd.aspx';",Text:"å¢åŠ æ–°ç®¡ç†å‘˜"},{href:"javascript:GoTo();",onclick:"window.parent.adminmain.location.href='adminroleadd.aspx';",Text:"å¢åŠ æ–°è§’è‰²ç»„"}];
 	GroupDiv.CreadDiv("add",null,addlist,150,null,0,6);
 }
 
 function AddGroup(iRole){
 	var admins = window.parent.adminmain.GetCheckBoxValuesForSql("CheckID");
 	if(admins==""){
-		window.parent.adminmain.SetAjaxDiv("err",false,"Äú»¹Ã»Ñ¡ÔñĞèÒªÒÆ¶¯µÄ¹ÜÀíÔ±!");
+		window.parent.adminmain.SetAjaxDiv("err",false,"æ‚¨è¿˜æ²¡é€‰æ‹©éœ€è¦ç§»åŠ¨çš„ç®¡ç†å‘˜!");
 		return;
 	}
 	$("#admins").val(admins);
 	$("#iRole").val(iRole);
-	SetAjaxDivAdminMian("loader", false, "ÕıÔÚ·¢ËÍÒÆ¶¯ÇëÇó...");
+	SetAjaxDivAdminMian("loader", false, "æ­£åœ¨å‘é€ç§»åŠ¨è¯·æ±‚...");
 	$("#form1").submit();
 }

@@ -1,4 +1,4 @@
-function list_bgchange(obj,num){
+﻿function list_bgchange(obj,num){
 	if(obj==null)return;
 	if(num==1){
 		if(obj.className!="list_title_c lb_2")obj.className="list_title_c lb_1";

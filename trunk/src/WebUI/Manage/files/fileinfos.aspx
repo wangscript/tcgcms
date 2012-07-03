@@ -5,12 +5,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>文件管理列表</title>
+    <title>鏂囦欢绠＄悊鍒楄〃</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/filesinfo.css" rel="stylesheet" type="text/css" />
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
@@ -23,16 +23,16 @@
     <form id="form1" runat="server">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="ShowFilesCreate(this);">
-			<img src="../images/icon/24.gif" />新建
+			<img src="../images/icon/24.gif" />鏂板缓
 		</a>
 		<a href="#" class="tnew1" onmouseover="this.className='tnew1 nbg1'" onmouseout="this.className='tnew1'" onclick="MoveFiles(this);">
-			<img src="../images/icon/move.gif" />移动
+			<img src="../images/icon/move.gif" />绉诲姩
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FilesDel();">
-			<img src="../images/icon/08.gif" />删除
+			<img src="../images/icon/08.gif" />鍒犻櫎
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />刷新
+			<img src="../images/icon/07.gif" />鍒锋柊
 		</a>
 	</div>
 	<div class="newslistt" id="classTitle"></div>
@@ -40,21 +40,21 @@
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
 		<span class="l_id bold l_rg"><img src="../images/icon/9.gif"  class="fileico"/></span>
-		<span class="l_classname bold l_rg ">标题</span>
-		<span class="l_classname bold l_rg newsclass">备注</span>
-		<span class="l_classname bold l_rg newsclass">大小(bit)</span>
+		<span class="l_classname bold l_rg ">鏍囬</span>
+		<span class="l_classname bold l_rg newsclass">澶囨敞</span>
+		<span class="l_classname bold l_rg newsclass">澶у皬(bit)</span>
 		<span class="l_classname bold l_rg">Key</span>
-		<span class="l_updatedate bold">创建时间</span>
+		<span class="l_updatedate bold">鍒涘缓鏃堕棿</span>
 	</div>
 	<div class="list_title_c hid" id="AddFileClass" style="height:25px; line-height:25px;" >
 		<span class="l_check "> - </span>
 		<span class="l_id bold "> - </span>
-		<span class="l_id bold  green">新建:</span>
+		<span class="l_id bold  green">鏂板缓:</span>
 		<span class="l_classname"><input type="text" id="inTitle" style=" margin-top:2px;" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/></span>
 		<span class="l_classname newsclass"> <input type="text" style=" width:110px;margin-left:5px; margin-top:2px;" id="inInfo" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/> </span>
 		<span class="l_classname newsclass"> <input type="text" style=" width:110px; margin-left:10px; margin-top:2px;" id="iSize" runat="server"  class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/> </span>
 		<span class="l_classname bold  newsclass"></span>
-		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" onclick=" CreateCatge();" class="btn2 bold addbtn" value="确定" /><input type="reset" class="btn2 addbtn" value="取消" onclick="CAdd();"/></span>
+		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" onclick=" CreateCatge();" class="btn2 bold addbtn" value="纭畾" /><input type="reset" class="btn2 addbtn" value="鍙栨秷" onclick="CAdd();"/></span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

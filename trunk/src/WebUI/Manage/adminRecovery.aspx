@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>¹ÜÀíÔ±»ØÊÕÕ¾</title>
+    <title>ç®¡ç†å‘˜å›žæ”¶ç«™</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css" />
 	<link href="css/admininfo.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="js/commonV2.js"></script>
@@ -12,24 +12,24 @@
 	<script type="text/javascript" src="js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/adminRecovery.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="page_title1 bold"><TCG:Span id='srolename' runat='server' /></div>
     <div class="listtitle">
-		<span class="txt">¹²ÓÐ
-            <TCG:Span class='green bold' id='sAdmincount' runat='server' />¸ö¹ÜÀíÔ±</span>
-		<span class="txt">£¬¹²ÓÐ<TCG:Span class='green bold' id='sRolecount' runat='server' />½ÇÉ«×é | </span>
-		<span  class="txt"> <a href="javascript:GoTo();" onclick="RealDel();">³¹µ×É¾³ý</a> - <a href="javascript:GoTo();" onclick="SaveAdmins();">¾È»ØËùÑ¡</a></span>
+		<span class="txt">å…±æœ‰
+            <TCG:Span class='green bold' id='sAdmincount' runat='server' />ä¸ªç®¡ç†å‘˜</span>
+		<span class="txt">ï¼Œå…±æœ‰<TCG:Span class='green bold' id='sRolecount' runat='server' />è§’è‰²ç»„ | </span>
+		<span  class="txt"> <a href="javascript:GoTo();" onclick="RealDel();">å½»åº•åˆ é™¤</a> - <a href="javascript:GoTo();" onclick="SaveAdmins();">æ•‘å›žæ‰€é€‰</a></span>
 	</div>
 	<div class="listtitle1 bold">
 		<span class="CheckID"><input name="SelAll" type="checkbox" value="" onclick="SetCheckBox('CheckID',this);"/></span>
-		<span class="loginName">µÇÂ½Ãû</span>
-		<span class="nickname">êÇ³Æ</span>
-		<span class="adminrole">½ÇÉ«</span>
-		<span class="updatedate">¸üÐÂÊ±¼ä</span>
+		<span class="loginName">ç™»é™†å</span>
+		<span class="nickname">æ˜µç§°</span>
+		<span class="adminrole">è§’è‰²</span>
+		<span class="updatedate">æ›´æ–°æ—¶é—´</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

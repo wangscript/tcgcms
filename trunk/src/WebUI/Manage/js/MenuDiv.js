@@ -1,4 +1,4 @@
-function MenuDiv() {
+﻿function MenuDiv() {
     this.DivList = new Array();
     this.DivCount = 0;
     this.DefZIndex = 100;

@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>×ÊÑ¶»ØÊÕÕ¾</title>
+    <title>èµ„è®¯å›žæ”¶ç«™</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -20,31 +20,31 @@
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/pager.js"></script>
 	<script type="text/javascript" src="../js/newslist.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="SaveNews();">
-			<img src="../images/icon/05.gif" />¾È×ÊÑ¶
+			<img src="../images/icon/05.gif" />æ•‘èµ„è®¯
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="realdel();">
-			<img src="../images/icon/08.gif" />ÓÀÉ¾³ý
+			<img src="../images/icon/08.gif" />æ°¸åˆ é™¤
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />Ë¢ÐÂ
+			<img src="../images/icon/07.gif" />åˆ·æ–°
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="newslistt bold">×ÊÑ¶»ØÊÕÕ¾</div>
+	<div class="newslistt bold">èµ„è®¯å›žæ”¶ç«™</div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
-		<span class="l_classname bold l_rg newstitle hidover">×ÊÑ¶±êÌâ</span>
-		<span class="l_classname bold l_rg newsclass">ËùÊôÖ÷Àà±ð</span>
-		<span class="l_id bold l_rg">ÉóºË</span>
-		<span class="l_id bold l_rg">Éú³É</span>
-		<span class="l_updatedate bold">¸üÐÂÊ±¼ä</span>
+		<span class="l_classname bold l_rg newstitle hidover">èµ„è®¯æ ‡é¢˜</span>
+		<span class="l_classname bold l_rg newsclass">æ‰€å±žä¸»ç±»åˆ«</span>
+		<span class="l_id bold l_rg">å®¡æ ¸</span>
+		<span class="l_id bold l_rg">ç”Ÿæˆ</span>
+		<span class="l_updatedate bold">æ›´æ–°æ—¶é—´</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

@@ -1,4 +1,4 @@
-
+﻿
 
 function UploadFile(){
 	this.Screen={w:window.screen.availWidth,h:window.screen.availHeight};

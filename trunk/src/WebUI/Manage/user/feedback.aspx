@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>无标题页</title>
+    <title>鏃犳爣棰橀〉</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -20,25 +20,25 @@
     <script type="text/javascript" src="../js/newscommon.js"></script>
 	<script type="text/javascript" src="../js/feedback.js"></script>
     <script type="text/javascript" src="../js/pager.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
 		<a id="afeedbackdel" runat="server" href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="FeedBackDel();">
-			<img src="../images/icon/08.gif" />删除
+			<img src="../images/icon/08.gif" />鍒犻櫎
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />刷新
+			<img src="../images/icon/07.gif" />鍒锋柊
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<div class="newslistt" id="classTitle"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
-		<span class="l_id l_rg">编号</span>
-        <span class="l_classname bold l_rg newstitle hidover">资讯标题</span>
-		<span class="l_updatedate bold">留言日期</span>
+		<span class="l_id l_rg">缂栧彿</span>
+        <span class="l_classname bold l_rg newstitle hidover">璧勮鏍囬</span>
+		<span class="l_updatedate bold">鐣欒█鏃ユ湡</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
@@ -52,9 +52,9 @@
         <TCG:Span class='l_updatedate' id='sadddate' runat='server'/>
 	</div>	
     <div class="list_content hid" id="content_<TCG:Span id='cid' runat='server' />">
-        姓名:<TCG:Span id='lname' runat='server' /><br/>
-        联系QQ:<TCG:Span id='sqq' runat='server'/><br/>
-        联系电话: <TCG:Span id='stel' runat='server'/><br/>
+        濮撳悕:<TCG:Span id='lname' runat='server' /><br/>
+        鑱旂郴QQ:<TCG:Span id='sqq' runat='server'/><br/>
+        鑱旂郴鐢佃瘽: <TCG:Span id='stel' runat='server'/><br/>
         Email:<TCG:Span  id='smail' runat='server'/><br/>
         <TCG:Span id='scontent' runat='server'/><br/>
 

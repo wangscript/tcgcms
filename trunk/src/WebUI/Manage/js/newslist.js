@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -11,7 +11,7 @@ function classTitleInit() {
     a = "";
 
     GetNewsListTitleByClassId(classobj.val());
-    m.html("<span class='txt bold lfl'><a href='?iClassId=0&skinid=" + $("#iSkinId").val() + "'>ËùÓĞ×ÊÑ¶</a>>>" + a + "</span>" + m.html());
+    m.html("<span class='txt bold lfl'><a href='?iClassId=0&skinid=" + $("#iSkinId").val() + "'>æ‰€æœ‰èµ„è®¯</a>>>" + a + "</span>" + m.html());
 
 }
 
@@ -57,11 +57,11 @@ function GetNewsListTitleByClassId(classid) {
 function EditNewsInfo(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª±à¼­µÄĞÂÎÅ£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦ç¼–è¾‘çš„æ–°é—»ï¼");
 		return;
 	}
 	if(temps.indexOf(",")>-1){
-		SetAjaxDiv("err",false,"Çë±£Ö¤ÄúÖ»Ñ¡ÔñÁËÒ»¸ö×ÊÔ´£¡");
+		SetAjaxDiv("err",false,"è¯·ä¿è¯æ‚¨åªé€‰æ‹©äº†ä¸€ä¸ªèµ„æºï¼");
 		return;
 	}
 	window.location.href = "resourceshandlers.aspx?newsid=" + temps;
@@ -80,10 +80,10 @@ function AddNewsInfo(){
 function CreateNews(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒªÉú³ÉµÄ×ÊÑ¶£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦ç”Ÿæˆçš„èµ„è®¯ï¼");
 		return;
 	}
-	CreateDiv.Start("ÅúÁ¿Éú³ÉÎÄ¼ş");
+	CreateDiv.Start("æ‰¹é‡ç”Ÿæˆæ–‡ä»¶");
 	layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function() { } });
 	
 	if(temps.indexOf(",")>-1){
@@ -108,10 +108,10 @@ function CreateNews(){
 function CheckNews() {
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
-        SetAjaxDiv("err", false, "ÄúÃ»Ñ¡ÔñĞèÒªÉóºËµÄ×ÊÑ¶£¡");
+        SetAjaxDiv("err", false, "æ‚¨æ²¡é€‰æ‹©éœ€è¦å®¡æ ¸çš„èµ„è®¯ï¼");
         return;
     }
-    CreateDiv.Start("ÅúÁ¿ÉóºËÎÄ¼ş");
+    CreateDiv.Start("æ‰¹é‡å®¡æ ¸æ–‡ä»¶");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { } });
 
     if (temps.indexOf(",") > -1) {
@@ -136,7 +136,7 @@ function CheckNews() {
 function CreateBack(val) {
     CreateDiv.SetSep(val);
     if (!CreateDiv.runing) {
-        CreateDiv.Start("ÕıÔÚÉú³É·ÖÀàÁĞ±í...");
+        CreateDiv.Start("æ­£åœ¨ç”Ÿæˆåˆ†ç±»åˆ—è¡¨...");
         CreateDiv.set = 1;
         CreateDiv.setcount = 1;
         $("#iAction").val("CREATECATEGRI");
@@ -232,13 +232,13 @@ function GetSpecialItemsW(id){
 function NewsDel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒªÉ¾³ıµÄ×ÊÑ¶£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„èµ„è®¯ï¼");
 		return;
 	}
 	$("#iAction").val("DEL");
 	$("#DelClassId").val(temps);
-	if(confirm("ÄúÈ·¶¨É¾³ı×ÊÑ¶["+temps+"]")){
-	    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
+	if(confirm("æ‚¨ç¡®å®šåˆ é™¤èµ„è®¯["+temps+"]")){
+	    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
 	    $("#form1").submit();
 	}
 }
@@ -246,24 +246,24 @@ function NewsDel(){
 function SaveNews(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª¾È»ØµÄ×ÊÑ¶£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦æ•‘å›çš„èµ„è®¯ï¼");
 		return;
 	}
 	$("#iAction").val("SAVE");
 	$("#DelClassId").val(temps);
-	SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
+	SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
 	$("#form1").submit();
 }
 
 function realdel(){
 	var temps=GetCheckBoxValues("CheckID");
 	if(temps==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª³¹µ×É¾³ıµÄ×ÊÑ¶£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦å½»åº•åˆ é™¤çš„èµ„è®¯ï¼");
 		return;
 	}
 	$("#iAction").val("DEL");
 	$("#DelClassId").val(temps);
-	SetAjaxDiv("loader",false,"ÕıÔÚ·¢ËÍÉ¾³ıÇëÇó...");
+	SetAjaxDiv("loader",false,"æ­£åœ¨å‘é€åˆ é™¤è¯·æ±‚...");
 	$("#form1").submit();
 }
 

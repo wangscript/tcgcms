@@ -1,4 +1,4 @@
-/**
+﻿/**
 Name    : jMessageBox
 Author  : kingthy
 Email   : kingthy@gmail.com

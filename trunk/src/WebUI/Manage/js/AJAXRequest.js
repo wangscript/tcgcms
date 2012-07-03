@@ -1,4 +1,4 @@
-/*------------------------------------------
+﻿/*------------------------------------------
 Name: AJAXRequest
 Author: xujiwei
 Website: http://www.xujiwei.cn

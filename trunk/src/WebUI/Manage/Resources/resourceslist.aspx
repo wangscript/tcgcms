@@ -1,11 +1,11 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceslist.aspx.cs" Inherits="TCG.CMS.WebUi.resources_resourceslist" %>
+ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceslist.aspx.cs" Inherits="TCG.CMS.WebUi.resources_resourceslist" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.PageControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>×ÊÑ¶ÄÚÈÝÁÐ±í</title>
+    <title>èµ„è®¯å†…å®¹åˆ—è¡¨</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -22,42 +22,42 @@
     <script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/newslist.js"></script>
 	<script type="text/javascript" src="../js/layer.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="page_title">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="AddNewsInfo();">
-			<img src="../images/icon/24.gif" /> ÐÂ½¨
+			<img src="../images/icon/24.gif" /> æ–°å»º
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="EditNewsInfo();">
-			<img src="../images/icon/05.gif" />±à¼­
+			<img src="../images/icon/05.gif" />ç¼–è¾‘
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsDel();">
-			<img src="../images/icon/08.gif" />É¾³ý
+			<img src="../images/icon/08.gif" />åˆ é™¤
 		</a>
         <a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CheckNews();">
-			<img src="../images/icon/8.gif" />ÉóºË
+			<img src="../images/icon/8.gif" />å®¡æ ¸
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CreateNews();">
-			<img src="../images/icon/8.gif" />Éú³É
+			<img src="../images/icon/8.gif" />ç”Ÿæˆ
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />Ë¢ÐÂ
+			<img src="../images/icon/07.gif" />åˆ·æ–°
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
-	<div class="newslistt" id="classTitle"> <a href="javascript:GoTo();" onmousemove="ShowClassTitle(this);" onmouseout="HidClassTitle()" class="ClassTitleA" id="ClassTitleA" title="ÏÔÊ¾×Ó·ÖÀà"><img src="../images/icon/2.gif" /></a></div>
+	<div class="newslistt" id="classTitle"> <a href="javascript:GoTo();" onmousemove="ShowClassTitle(this);" onmouseout="HidClassTitle()" class="ClassTitleA" id="ClassTitleA" title="æ˜¾ç¤ºå­åˆ†ç±»"><img src="../images/icon/2.gif" /></a></div>
 	<div class="ChildclassTitle hid" id="ChildclassTitle" onmouseout="HidClassTitle()" onmousemove="ShowClassTitle($('#ClassTitleA').get(0));"></div>
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
         <span class="l_id bold l_rg">&nbsp;</span>
-		<span class="l_classname bold l_rg newstitle hidover">×ÊÑ¶±êÌâ</span>
-		<span class="l_classname bold l_rg newsclass">ËùÊôÖ÷Àà±ð</span>
-		<span class="l_id bold l_rg">ÉóºË</span>
-		<span class="l_id bold l_rg">Éú³É</span>
-		<span class="l_updatedate bold">¸üÐÂÊ±¼ä</span>
+		<span class="l_classname bold l_rg newstitle hidover">èµ„è®¯æ ‡é¢˜</span>
+		<span class="l_classname bold l_rg newsclass">æ‰€å±žä¸»ç±»åˆ«</span>
+		<span class="l_id bold l_rg">å®¡æ ¸</span>
+		<span class="l_id bold l_rg">ç”Ÿæˆ</span>
+		<span class="l_updatedate bold">æ›´æ–°æ—¶é—´</span>
 	</div>
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
@@ -74,13 +74,13 @@
 		</ItemTemplate>
 	</asp:Repeater>
 	<div class="list_bottom">
-		<span class="bold lfl">²é¿´£º</span>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchAll();">È«²¿</a>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchChecked('Y');">- ÒÑÉó</a>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchChecked('N');">- Î´Éó</a>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchCreated('Y');">- ÒÑÉú³É</a>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchCreated('N');">- Î´Éú³É</a>
-		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchBQ(this);">- °´±êÇ©</a>
+		<span class="bold lfl">æŸ¥çœ‹ï¼š</span>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchAll();">å…¨éƒ¨</a>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchChecked('Y');">- å·²å®¡</a>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchChecked('N');">- æœªå®¡</a>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchCreated('Y');">- å·²ç”Ÿæˆ</a>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchCreated('N');">- æœªç”Ÿæˆ</a>
+		<a href="javascript:GoTo();" class="gray lfl ck" onclick="SearchBQ(this);">- æŒ‰æ ‡ç­¾</a>
 		<TCG:Pager Id='pager' runat='server'/>
 	</div>
 	<div class="Manage list_b_bg">

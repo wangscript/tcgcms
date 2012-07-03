@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * jQuery Form Plugin
  * version: 2.32 (17-SEP-2009)
  * @requires jQuery v1.2.2 or later
@@ -647,7 +647,7 @@ function log() {
 
 $.fn.param=function( a ) {
 
-   var encode=function(v){//Èç¹û°üº¬ÖĞÎÄ¾Íescape,±ÜÃâÖØ¸´escape)
+   var encode=function(v){//å¦‚æœåŒ…å«ä¸­æ–‡å°±escape,é¿å…é‡å¤escape)
         return /[^\x00-\xff]/g.test(v)?escape(v):v;
    }
    var s = [];

@@ -1,4 +1,4 @@
-//--------------
+﻿//--------------
 var ajax = new AJAXRequest();
 
 function AddSkinInfo(){

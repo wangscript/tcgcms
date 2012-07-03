@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>Ìí¼Ó×ÊÑ¶·ÖÀà</title>
+    <title>æ·»åŠ èµ„è®¯åˆ†ç±»</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="../Common/AllSkin.aspx"></script>
 	<script type="text/javascript" src="../js/propertieshandler.js"></script>
     <script type="text/javascript" src="../Common/CategorieProperties.aspx?cid=<asp:Literal ID='cid' runat='server'></asp:Literal>"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -25,45 +25,45 @@
     <input type="hidden" id="iMaxPId" name="iMaxPId" runat="server" />
     <div class="page_title" style="margin-bottom:5px;">
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="$('#form1').submit();">
-			<img src="../images/icon/save.gif" /> ±£´æ
+			<img src="../images/icon/save.gif" /> ä¿å­˜
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="javascript:window.history.back();">
-			<img src="../images/icon/5.gif" />È¡Ïû
+			<img src="../images/icon/5.gif" />å–æ¶ˆ
 		</a>
         <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="CategoriePropertieHTMLAdd();">
-			<img src="../images/add.png" />¼ÓÊôÐÔ
+			<img src="../images/add.png" />åŠ å±žæ€§
 		</a>
         <a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />Ë¢ÐÂ
+			<img src="../images/icon/07.gif" />åˆ·æ–°
 		</a>
         
 	</div>
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
     <div class="g-tabnav">
         <a style="margin-left:-13px;"></a>
-        <a id="a1" onclick="SetFromsByNum('a1')">»ù±¾ÐÅÏ¢</a>
-        <a id="a2" onclick="SetFromsByNum('a2')">·ÖÀàÊôÐÔ</a>
+        <a id="a1" onclick="SetFromsByNum('a1')">åŸºæœ¬ä¿¡æ¯</a>
+        <a id="a2" onclick="SetFromsByNum('a2')">åˆ†ç±»å±žæ€§</a>
     </div>
     <div id="a1_from">
 	    <div id="placemsg" class="Page_arrb arb_pr classaddline">
-		    <span class="p_a_t">Ëù Êô Æ¤ ·ô£º</span>
+		    <span class="p_a_t">æ‰€ å±ž çš® è‚¤ï¼š</span>
 	    </div>
 	    <script type="text/javascript">GetParentTitle();</script>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">·Ö Àà Ãû ³Æ£º</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">åˆ† ç±» å ç§°ï¼š</span>
 	      <input id="iClassName" type="text" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="CheckValueIsNull('iClassName','cnamemsg');"/>
-		    <span id="cnamemsg" class="info1">·ÖÀàÃû³Æ£¬±ØÐëÌîÐ´</span>
+		    <span id="cnamemsg" class="info1">åˆ†ç±»åç§°ï¼Œå¿…é¡»å¡«å†™</span>
 	    </div>
-	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">ÊÇ ·ñ ¿É ÓÃ£º</span>
+	    <div class="Page_arrb arb_pr classaddline"><span class="p_a_t">æ˜¯ å¦ å¯ ç”¨ï¼š</span>
 	      <select id="iVisible" runat="server">
-                <option value="Y">¿ÉÓÃ</option>
-                <option value="N">²»¿ÉÓÃ</option>
+                <option value="Y">å¯ç”¨</option>
+                <option value="N">ä¸å¯ç”¨</option>
 	      </select>
-		    <span id="Span1" class="info1">Èç¹ûÐüÔÚ²»¿ÉÓÃ£¬ÔÚ·¢²¼µÄÊ±ºò½«ÎÞ·¨Ñ¡Ôñ¸ÃÊôÐÔ·ÖÀà</span>
+		    <span id="Span1" class="info1">å¦‚æžœæ‚¬åœ¨ä¸å¯ç”¨ï¼Œåœ¨å‘å¸ƒçš„æ—¶å€™å°†æ— æ³•é€‰æ‹©è¯¥å±žæ€§åˆ†ç±»</span>
 	    </div>
     </div>
     <div id="a2_from"></div>
 	<div class="dobtn arb_pr">
-		<input type="submit" class="btn2 bold" value="È·¶¨" />¡¡¡¡¡¡<input type="reset" class="btn2" value="È¡Ïû" />
+		<input type="submit" class="btn2 bold" value="ç¡®å®š" />ã€€ã€€ã€€<input type="reset" class="btn2" value="å–æ¶ˆ" />
 	</div>
     </form>
 </body>

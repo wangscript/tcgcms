@@ -1,4 +1,4 @@
-var bluraction="";
+﻿var bluraction="";
 var imgaction="";
 var CreateInputobj=null;
 function CreateInput(){

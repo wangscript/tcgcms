@@ -1,21 +1,21 @@
-
+ï»¿
 function RealDel(){
 	var admins = GetCheckBoxValuesForSql("CheckID");
 	if(admins==""){
-		SetAjaxDiv("err",false,"Äú»¹Ã»Ñ¡ÔñĞèÒªÉ¾³ıµÄ¹ÜÀíÔ±!");
+		SetAjaxDiv("err",false,"æ‚¨è¿˜æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„ç®¡ç†å‘˜!");
 		return;
 	}
 	$("#admins").val(admins);
 	$("#saction").val("02");
-	if (!confirm("ÄúÈ·¶¨³¹µ×É¾³ı¹ÜÀíÔ±[" + admins + "]?")) return;
+	if (!confirm("æ‚¨ç¡®å®šå½»åº•åˆ é™¤ç®¡ç†å‘˜[" + admins + "]?")) return;
 
-	SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÉ¾³ı[" + admins + "]µÄÇëÇó...");
+	SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€åˆ é™¤[" + admins + "]çš„è¯·æ±‚...");
 	$("#form1").submit();
 
 }
 
 $(document).ready(function () {
-    //Ìí¼ÓÌá½»·½·¨
+    //æ·»åŠ æäº¤æ–¹æ³•
     var options = {
         beforeSubmit: function () { return true; },
         dataType: 'json',
@@ -27,13 +27,13 @@ $(document).ready(function () {
 function SaveAdmins(){
 	var admins = GetCheckBoxValuesForSql("CheckID");
 	if(admins==""){
-		SetAjaxDiv("err",false,"Äú»¹Ã»Ñ¡ÔñĞèÒª¾È»ØµÄ¹ÜÀíÔ±!");
+		SetAjaxDiv("err",false,"æ‚¨è¿˜æ²¡é€‰æ‹©éœ€è¦æ•‘å›çš„ç®¡ç†å‘˜!");
 		return;
 	}
 	$("#admins").val(admins);
 	$("#saction").val("03");
-	if(!confirm("ÄúÈ·¶¨¾È»Ø¹ÜÀíÔ±["+admins+"]?"))return;
-	SetAjaxDiv("loader",false,"ÕıÔÚ·¢ËÍ»ØÊÕ["+admins+"]µÄÇëÇó...");
+	if(!confirm("æ‚¨ç¡®å®šæ•‘å›ç®¡ç†å‘˜["+admins+"]?"))return;
+	SetAjaxDiv("loader",false,"æ­£åœ¨å‘é€å›æ”¶["+admins+"]çš„è¯·æ±‚...");
 	$("#form1").submit();
 }
 

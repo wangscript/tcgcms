@@ -48,10 +48,10 @@ namespace TCG.Handlers
             }
 
 
-            if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != objectHandlers.GetIP())
-            {
-                return -1000000005;
-            }
+            //if (admininfo.cIsOnline == "Y" && admininfo.vcLastLoginIp != objectHandlers.GetIP())
+            //{
+            //    return -1000000005;
+            //}
 
             //用户密码错误
             if (admininfo.vcPassword != objectHandlers.MD5(pwd))

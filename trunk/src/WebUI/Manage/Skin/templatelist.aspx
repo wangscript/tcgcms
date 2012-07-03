@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>站点模版列表</title>
+    <title>绔欑偣妯＄増鍒楄〃</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
@@ -22,25 +22,25 @@
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/tempnewslist.js"></script>
 	<script type="text/javascript" src="../js/layer.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="form1" runat="server">
      <div class="page_title">
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="AddTemplate();">
-			<img src="../images/icon/24.gif" /> 新建
+			<img src="../images/icon/24.gif" /> 鏂板缓
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="EditTemplate();">
-			<img src="../images/icon/05.gif" />编辑
+			<img src="../images/icon/05.gif" />缂栬緫
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="TempDel();">
-			<img src="../images/icon/08.gif" />删除
+			<img src="../images/icon/08.gif" />鍒犻櫎
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="PageCreat();">
-			<img src="../images/icon/8.gif" />生成
+			<img src="../images/icon/8.gif" />鐢熸垚
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />刷新
+			<img src="../images/icon/07.gif" />鍒锋柊
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
@@ -48,7 +48,7 @@
 	<div class="list_title">
 	  <span class="l_check l_rg"><input name="" id="CheckBoxMain" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id1 bold l_rg">ID</span>
-		<span class="l_classname newstitle bold l_rg">模版名称</span><span class="l_updatedate bold">更新时间</span>
+		<span class="l_classname newstitle bold l_rg">妯＄増鍚嶇О</span><span class="l_updatedate bold">鏇存柊鏃堕棿</span>
 	</div>
 
     <div class="list_title_c" onmousemove="list_bgchange(this,1);" onmouseout="list_bgchange(this,0);" onclick="list_click(this);" id="systemlisttemplateDiv" runat="server">

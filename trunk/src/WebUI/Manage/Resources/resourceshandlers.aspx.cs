@@ -292,6 +292,10 @@ namespace TCG.CMS.WebUi
 
                     foreach (string key in Request.Form.AllKeys)
                     {
+                        if (key == string.Empty)
+                        {
+                            string sdgsg = "";
+                        }
                         string[] keys = key.Split('_');
 
                         if (key.IndexOf("rpvalue_") > -1 && !string.IsNullOrEmpty(objectHandlers.Post(key)))

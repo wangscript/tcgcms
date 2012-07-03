@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title><TCG:Span id='title' runat='server' /></title>
-<meta http-equiv="Content-Type" content="text/html;charset=gb2312" /></head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /></head>
 <frameset rows="91,*" cols="*" framespacing="0" frameborder="yes" border="0" bordercolor="#CCCCCC">
   <frame src="Top.aspx" name="frameTop" frameborder="no" scrolling="NO" bordercolor="#CCCCCC">
   <frameset rows="*" cols="188,*" framespacing="1" frameborder="yes" border="0" id="fram1">
