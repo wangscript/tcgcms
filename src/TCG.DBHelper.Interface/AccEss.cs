@@ -308,5 +308,10 @@ namespace TCG.DBHelper
         {
             throw new Exception("AccEss数据库不使用该方法");
         }
+
+        public int ClearSqlParams(ref string errText)
+        {
+            throw new Exception("AccEss数据库不使用该方法");
+        }
     }
 }

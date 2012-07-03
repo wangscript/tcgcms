@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var a = "";
 function classTitleInit() {
@@ -8,7 +8,7 @@ function classTitleInit() {
 
     a = "";
     GetNewsListTitleByClassId(iParentID.val());
-    a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>Õ¾µã¸ùÄ¿Â¼</a>>>" + a;
+    a = "<a href='?iParentId=0&skinid=" + $("#iSkinId").val() + "'>ç«™ç‚¹æ ¹ç›®å½•</a>>>" + a;
     m.html("<span class='txt bold'>" + a + "</span>");
 
 }
@@ -65,7 +65,7 @@ $(document).ready(function () {
         });
 
 
-    SetAjaxDiv("ok", false, "Ğ¡ÌáÊ¾£ºÌØĞÔµÄĞŞ¸Ä£¬ÔÚÁĞ±íÖĞ¾Í¿ÉÒÔÍê³É£¡");
+    SetAjaxDiv("ok", false, "å°æç¤ºï¼šç‰¹æ€§çš„ä¿®æ”¹ï¼Œåœ¨åˆ—è¡¨ä¸­å°±å¯ä»¥å®Œæˆï¼");
 });
 
 
@@ -112,7 +112,7 @@ function NewsSDel() {
     iAction[0].value = "DEL";
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
-        SetAjaxDiv("err", false, "ÄúÃ»Ñ¡ÔñĞèÒªÉ¾³ıµÄÌØĞÔ£¡");
+        SetAjaxDiv("err", false, "æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„ç‰¹æ€§ï¼");
         return;
     }
     iIds[0].value = temps;

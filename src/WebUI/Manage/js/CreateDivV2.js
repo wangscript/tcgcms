@@ -1,4 +1,4 @@
-
+ï»¿
 function CreateDiv() {
     this.set = 1;
     this.setcount = 0;
@@ -16,14 +16,14 @@ function CreateDiv() {
         this.create_num.val(0);
         this.createjdtPlacebg.css({ "width": "0px" });
         this.MsgDiv.html("");
-        this.Msg.text("ÕıÔÚ" + val + "...");
-        this.createtitle.text("²Ù×÷ÕıÔÚ½øĞĞÖĞ...");
+        this.Msg.text("æ­£åœ¨" + val + "...");
+        this.createtitle.text("æ“ä½œæ­£åœ¨è¿›è¡Œä¸­...");
         this.msgstr = val;
     }
 
     this.End = function () {
-        this.createtitle.text("²Ù×÷ÒÑ¾­Ö´ĞĞÍê³É£¡");
-        this.Msg.text(this.msgstr + "ÒÑÍê³É!");
+        this.createtitle.text("æ“ä½œå·²ç»æ‰§è¡Œå®Œæˆï¼");
+        this.Msg.text(this.msgstr + "å·²å®Œæˆ!");
         this.runing = false;
     }
 
@@ -52,7 +52,7 @@ function CreateDiv() {
 
     this.CreateDivIntoPage = function() {
         this.o = $("<div id='CreateMsgPlace' class='MsgDiv'></div>");
-        this.o.append("<div class=\"createtitle\"><span id=\"createtitle\">²Ù×÷ÕıÔÚ½øĞĞÖĞ...</span><div class=\"createclose\"><a onclick=\"javascript:layer.closeLayer();\"  href='javascript:GoTo();'></a></div></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">Íê³É¶È:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>");
+        this.o.append("<div class=\"createtitle\"><span id=\"createtitle\">æ“ä½œæ­£åœ¨è¿›è¡Œä¸­...</span><div class=\"createclose\"><a onclick=\"javascript:layer.closeLayer();\"  href='javascript:GoTo();'></a></div></div><div class=\"createMsgbg\"><div class=\"createjdt\"><span style=\"margin-left:5px;\" id=\"Msg\"></span><span style=\"margin-left:15px;\">å®Œæˆåº¦:<span class=\"bold\" id=\"create_num\">0</span>%</span><div class=\"createjdtPlace\"><div class=\"createjdtPlacebg rbfcreate\" id=\"createjdtPlacebg\"></div></div></div><div class=\"createMsg\" id=\"MsgDiv\"></div><div class=\"createbottom\"></div></div>");
         this.bg = $("<div id=\"layerbox\" class=\"layerbox\"></div>");
         this.bg.append(this.o);
         $('body').append(this.bg);

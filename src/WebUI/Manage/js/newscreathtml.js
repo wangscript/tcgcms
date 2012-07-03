@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 
@@ -72,7 +72,7 @@ function SearchBack(val) {
 	if(val=="")return;
 	eval("o=["+val+"]");
 	if(o!=null){
-	    CreateDiv.Start("ÅúÁ¿Éú³É×ÊÔ´...µÚ" + $("#page").val() + "Ò³");
+	    CreateDiv.Start("æ‰¹é‡ç”Ÿæˆèµ„æº...ç¬¬" + $("#page").val() + "é¡µ");
 	    layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function() { } 
 	    });
 		CreateDiv.set =1;
@@ -109,7 +109,7 @@ function CreateBack(val) {
 function PageInit() {
     $("#page").val("1");
 
-    CreateDiv.Start("ÅúÁ¿Éú³ÉÁĞ±í...");
+    CreateDiv.Start("æ‰¹é‡ç”Ÿæˆåˆ—è¡¨...");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { }
     });
 
@@ -145,7 +145,7 @@ function PostClasses(ids) {
     }
 }
 
-//Éú³ÉÁĞ±í
+//ç”Ÿæˆåˆ—è¡¨
 function CreateBack3(val) {
 
     CreateDiv.SetSep(val.message);
@@ -171,7 +171,7 @@ function CreateBack3(val) {
 
     if (classcreatesep == classids.length) {
 
-        CreateDiv.Start("ÅúÁ¿Éú³Éµ¥Ò³...");
+        CreateDiv.Start("æ‰¹é‡ç”Ÿæˆå•é¡µ...");
         layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: function () { }
         });
         debugger;

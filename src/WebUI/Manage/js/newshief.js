@@ -1,4 +1,4 @@
-var ajax = new AJAXRequest();
+锘縱ar ajax = new AJAXRequest();
 var GroupDiv = new MenuDiv();
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -12,7 +12,7 @@ function ClassInit(){
 	SelectDivW.style.left=(pos.x+iClassName.offsetWidth-20)+"px";
 	var o=GetNewsItemById(iClassId.value);
 	if(o==null){
-		iClassName.value="请选择资讯分类...";
+		iClassName.value="璇烽�夋嫨璧勮鍒嗙被...";
 	}else{
 		iClassName.value=o[2];
 	}
@@ -107,7 +107,7 @@ function SearchBack(val){
 	eval("o=["+val+"]");
 	if(o!=null){
 		var work=$("work");		
-		CreateDiv.Start("批量生成文件");
+		CreateDiv.Start("鎵归噺鐢熸垚鏂囦欢");
 		CreateDiv.set =1;
 		CreateDiv.setcount=o.length;
 		sheifnum = o.length-1;

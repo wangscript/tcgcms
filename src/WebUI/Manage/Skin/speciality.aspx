@@ -5,11 +5,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>×ÊÔ´ÌØÐÔÁÐ±í</title>
+    <title>èµ„æºç‰¹æ€§åˆ—è¡¨</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/adminlist.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<script type="text/javascript" src="../js/commonV2.js"></script>
 	<script type="text/javascript" src="../Common/common.aspx"></script>
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
@@ -24,13 +24,13 @@
     <form id="form1" runat="server">
     <div class="page_title">
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="AddNewSAction();">
-			<img src="../images/icon/24.gif" /> ÐÂ½¨
+			<img src="../images/icon/24.gif" /> æ–°å»º
 		</a>
 		<a href="#" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="NewsSDel();">
-			<img src="../images/icon/08.gif" />É¾³ý
+			<img src="../images/icon/08.gif" />åˆ é™¤
 		</a>
 		<a href="javascript:GoTo();" class="tnew" onmouseover="this.className='tnew nbg'" onmouseout="this.className='tnew'" onclick="refinsh();">
-			<img src="../images/icon/07.gif" />Ë¢ÐÂ
+			<img src="../images/icon/07.gif" />åˆ·æ–°
 		</a>
 	</div>
 	<TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
@@ -38,19 +38,19 @@
 	<div class="list_title">
 		<span class="l_check l_rg"><input name="" type="checkbox" value="" onclick="SetCheckBoxBg('CheckID',this);"/></span>
 		<span class="l_id bold l_rg">ID</span>
-		<span class="l_classname bold l_rg">ÌØÐÔÃû³Æ</span>
-		<span class="l_classname bold l_rg list_info_w">ÌØÐÔ¼ò½é</span>
-		<span class="l_id bold l_rg">¸¸ÀàID</span>
-		<span class="l_updatedate bold">¸üÐÂÊ±¼ä</span>
+		<span class="l_classname bold l_rg">ç‰¹æ€§åç§°</span>
+		<span class="l_classname bold l_rg list_info_w">ç‰¹æ€§ç®€ä»‹</span>
+		<span class="l_id bold l_rg">çˆ¶ç±»ID</span>
+		<span class="l_updatedate bold">æ›´æ–°æ—¶é—´</span>
 	</div>
 	<div class="list_title_c hid" id="AddNewS" style="height:25px; line-height:25px;">
 		<span class="l_check">&nbsp;</span>
-		<span class='l_id green bold'>ÐÂÔö:</span>
+		<span class='l_id green bold'>æ–°å¢ž:</span>
 		<span class='l_classname' ><input type="text" id="inTitle" runat="server"  class="itxt1" style="margin-top:2px;" onfocus="this.className='itxt2'" onblur="this.className='itxt1'"/>
 		</span>
 		<span class='l_classname hidover list_info_w'><input type="text" id="inExplain" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'" style="width:320px; margin-top:2px;"/></span>
 		<span class='l_id'><input type="text" id="inParentId" runat="server" class="itxt1" onfocus="this.className='itxt2'" onblur="this.className='itxt1'" value="0" style="width:30px;margin-top:2px;" /></span>
-		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" class="btn2 bold addbtn" value="È·¶¨" /><input type="reset" class="btn2 addbtn" value="È¡Ïû" onclick="CAdd();"/></span>
+		<span class='l_updatedate dcolor' style="width:160px;"><input type="submit" class="btn2 bold addbtn" value="ç¡®å®š" /><input type="reset" class="btn2 addbtn" value="å–æ¶ˆ" onclick="CAdd();"/></span>
 	</div>	
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>

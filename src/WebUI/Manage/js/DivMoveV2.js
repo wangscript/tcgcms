@@ -1,4 +1,4 @@
-var DivMoves=new Array();
+ï»¿var DivMoves=new Array();
 
 function DivMove(){
 	this.oldwid={w:1,h:1};
@@ -11,11 +11,11 @@ function DivMove(){
 	this.DefaultPos={w:0,h:0};
 	this.times=10;
 	this.a=1;
-	this.i=1;//¼ÇÂ¼¼ÓËÙ¶È
+	this.i=1;//è®°å½•åŠ é€Ÿåº¦
 	this.sound=null;
-	this.bAction=false;//±ß¿ò¶¯»­
-	this.bw=8;//±ß¿ò¿í¶È*2
-	this.n=1;//¼ÇÂ¼±ß¿ò
+	this.bAction=false;//è¾¹æ¡†åŠ¨ç”»
+	this.bw=8;//è¾¹æ¡†å®½åº¦*2
+	this.n=1;//è®°å½•è¾¹æ¡†
 	
 	this.getAbsolutePosition = function (){
 		var obj,ac=arguments.length,av=arguments;

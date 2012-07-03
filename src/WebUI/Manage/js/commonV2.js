@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var ajaxiconRoot = ['images/ajax-loader1.gif', 'images/post_err.gif', 'images/post_ok.gif'];
 
@@ -23,7 +23,7 @@ function SetInnerText(obj,value){
     obj.text(value);
 }
 
-//»ñµÃCeckboxÑ¡ÖĞµÄÖµ
+//è·å¾—Ceckboxé€‰ä¸­çš„å€¼
 function GetCheckBoxValues(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return "";
@@ -48,7 +48,7 @@ function GetCheckBoxValuesForSql(BoxName){
 	return str;
 }
 
-//»ñµÃcheckboxµÄ¸öÊı
+//è·å¾—checkboxçš„ä¸ªæ•°
 function GetCheckBoxCount(BoxName){
 	var boxs = document.getElementsByName(BoxName);
 	if(boxs==null)return 0;
@@ -69,7 +69,7 @@ function GetCheckedBoxSetting(vals){
 	return os;
 }
 
-//ÉèÖÃcheckboxÑ¡ÔñÊôĞÔ
+//è®¾ç½®checkboxé€‰æ‹©å±æ€§
 function SetCheckBox(BoxName,Action){
 	if(Action==null)Action="SELECT ALL";
 	var boxs = document.getElementsByName(BoxName);
@@ -401,20 +401,20 @@ function CategoriePropertieMdyHtml(id, name, type, Values, width, height, iOrder
     var type3Check = type == "03" ? "checked" : "";
 
     return "<div id=\"cp_" + id + "\" style=\"height:100px;\"><a class=\"fn-bg Bopned\" href=\"javascript:GoTo()\" onclick=\"CategoriePropertieHTMLDel(" + id
-        + ")\"></a><div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">ÊôĞÔÃû³Æ£º</span>"
+        + ")\"></a><div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">å±æ€§åç§°ï¼š</span>"
 	    + "<input id=\"name_" + id + "\" name=\"name_" + id + "\" type=\"text\" value=\"" + name + "\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
-		+ "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_1\" " + type1Check + " value=\"01\" /><label for=\"type_" + id + "_1\">ÊäÈë</label>"
-        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_2\" " + type2Check + " value=\"02\" /><label for=\"type_" + id + "_2\">µ¥Ñ¡</label>"
-        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_3\" " + type3Check + " value=\"03\" /><label for=\"type_" + id + "_3\">¸´Ñ¡</label>"
-        + "<span id=\"Span1\" class=\"info1\">¿ÉÑ¡ÏîÄ¿ÇëÓÃ\"|\"¼ä¸ô</span>"
+		+ "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_1\" " + type1Check + " value=\"01\" /><label for=\"type_" + id + "_1\">è¾“å…¥</label>"
+        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_2\" " + type2Check + " value=\"02\" /><label for=\"type_" + id + "_2\">å•é€‰</label>"
+        + "<input type=\"radio\" name=\"type_" + id + "\" id=\"type_" + id + "_3\" " + type3Check + " value=\"03\" /><label for=\"type_" + id + "_3\">å¤é€‰</label>"
+        + "<span id=\"Span1\" class=\"info1\">å¯é€‰é¡¹ç›®è¯·ç”¨\"|\"é—´éš”</span>"
 	    + "</div>"
-        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">¿í&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¶È£º</span>"
+        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">å®½&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;åº¦ï¼š</span>"
 	    + "<input id=\"pwidth_" + id + "\" name=\"pwidth_" + id + "\" type=\"text\" value=\"" + (width == 0 ? "" : width) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-	    + "<span class=\"p_a_t\">¸ß&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¶È£º</span><input id=\"pheight_" + id + "\" name=\"pheight_" + id + "\" type=\"text\" value=\"" + (height == 0 ? "" : height) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+	    + "<span class=\"p_a_t\">é«˜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;åº¦ï¼š</span><input id=\"pheight_" + id + "\" name=\"pheight_" + id + "\" type=\"text\" value=\"" + (height == 0 ? "" : height) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
         +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-	    + "<span class=\"p_a_t\">ÅÅ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ğò£º</span><input id=\"porder_" + id + "\" name=\"porder_" + id + "\" type=\"text\" value=\"" + (iOrder == 0 ? "0" : iOrder) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
+	    + "<span class=\"p_a_t\">æ’&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;åºï¼š</span><input id=\"porder_" + id + "\" name=\"porder_" + id + "\" type=\"text\" value=\"" + (iOrder == 0 ? "0" : iOrder) + "\" style=\"width:80px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
         + "</div>"
-        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">¿ÉÑ¡ÏîÄ¿£º</span>"
+        + "<div class=\"Page_arrb arb_pr classaddline\"><span class=\"p_a_t\">å¯é€‰é¡¹ç›®ï¼š</span>"
 	    + "<input id=\"pttext_" + id + "\" name=\"pttext_" + id + "\" type=\"text\" value=\"" + Values + "\" style=\"width:480px;\" class=\"itxt1\" onfocus=\"this.className='itxt2'\" onblur=\"this.className='itxt1'\"/>"
 	    + "</div>"
         + "<input name=\"cpid_" + id + "\" type=\"hidden\" id=\"cpid_" + id + "\" value=\"" + id + "\" /></div>";

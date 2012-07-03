@@ -1,4 +1,4 @@
-//--------------
+﻿//--------------
 
 function show() {
     var small = $(document).find(".sbg2");

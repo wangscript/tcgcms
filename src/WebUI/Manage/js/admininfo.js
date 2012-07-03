@@ -1,20 +1,20 @@
-//--------------
+ï»¿//--------------
 /// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function DeleteRole() {
     if (iRoleId == 0) return false;
     var count = GetCheckBoxCount("CheckID");
     if (count > 0) {
-        SetAjaxDiv("err", false, "ÒªÉ¾³ı´ËÁªÏµ×é£¬ÇëÏÈÒÆ³ö»òÉ¾³ı´Ë×éÖĞµÄ¹ÜÀíÔ±");
+        SetAjaxDiv("err", false, "è¦åˆ é™¤æ­¤è”ç³»ç»„ï¼Œè¯·å…ˆç§»å‡ºæˆ–åˆ é™¤æ­¤ç»„ä¸­çš„ç®¡ç†å‘˜");
         return false;
     }
-    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
+    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
     $("#form1").submit();
 }
 
 var iRoleId = 0;
 $(document).ready(function () {
-    //Ìí¼ÓÌá½»·½·¨
+    //æ·»åŠ æäº¤æ–¹æ³•
     iRoleId = $("#iRoleId").val();
     var options = {
         beforeSubmit: function () { return true; },

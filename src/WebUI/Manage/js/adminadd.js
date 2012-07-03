@@ -1,4 +1,4 @@
-//--------------
+ï»¿//--------------
 
 
 function CheckForm() {
@@ -9,17 +9,17 @@ function CheckForm() {
     var lockmsg = $("#lockmsg");
     if (p.attr("checked") == false && o.attr("checked") == false) {
         lockmsg[0].className = "info_err";
-        lockmsg.text("»¹Î´Éè¶¨¹ÜÀíÔ±µÄ×´Ì¬");
+        lockmsg.text("è¿˜æœªè®¾å®šç®¡ç†å‘˜çš„çŠ¶æ€");
     } else {
         lockmsg[0].className = "info_ok";
-        lockmsg.text("³É¹¦ÉèÖÃ¹ÜÀíÔ±×´Ì¬!");
+        lockmsg.text("æˆåŠŸè®¾ç½®ç®¡ç†å‘˜çŠ¶æ€!");
     }
 
     var nnmsg = $("#nnmsg");
     var iNickName = $("#iNickName");
     if (iNickName.val() == "") {
         nnmsg[0].className = "info_err";
-        nnmsg.text("êÇ³Æ²»ÄÜÎª¿Õ!");
+        nnmsg.text("æ˜µç§°ä¸èƒ½ä¸ºç©º!");
     }
 
     if (!(CheckAdminName() && CheckRole() && CheckNewPassword(pwd) && CheckCPWD(cpwd))) return false;
@@ -28,7 +28,7 @@ function CheckForm() {
 
 
 $(document).ready(function() {
-    //Ìí¼ÓÌá½»·½·¨
+    //æ·»åŠ æäº¤æ–¹æ³•
     var options = {
         beforeSubmit: CheckForm,
         dataType: 'json',
@@ -56,7 +56,7 @@ function CheckAdminName(){
         if (adminname.length == 0) return;
         if (adminname.val() == "" || (adminname.val().length < 3 || adminname.val() > 18)) {
             adminmsg[0].className = "info_err";
-            adminmsg.text("µÇÂ½Ãû²»ÄÜÎª¿Õ»ò³¤¶È²»ÔÚ3-18¸ö×Ö·ûÖ®¼ä!");
+            adminmsg.text("ç™»é™†åä¸èƒ½ä¸ºç©ºæˆ–é•¿åº¦ä¸åœ¨3-18ä¸ªå­—ç¬¦ä¹‹é—´!");
             adminmsg.focus();
             return false;
         }
@@ -84,10 +84,10 @@ function CheckRole(){
 	var rolemsg = $("#rolemsg");
 	if(sRole.val()=="0"){
 		rolemsg[0].className="info_err";
-		rolemsg.text("»¹Î´¸ø¹ÜÀíÔ±·ÖÅä½ÇÉ«!");
+		rolemsg.text("è¿˜æœªç»™ç®¡ç†å‘˜åˆ†é…è§’è‰²!");
 		return false;
 	}
 	rolemsg[0].className="info_ok";
-	rolemsg.text("¹ÜÀíÔ±½ÇÉ«·ÖÅä³É¹¦!");
+	rolemsg.text("ç®¡ç†å‘˜è§’è‰²åˆ†é…æˆåŠŸ!");
 	return true;
 }

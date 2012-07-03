@@ -1,4 +1,4 @@
-
+ï»¿
 function Editer(){
 	this.EditInput=null;
 	this.width=0;
@@ -17,7 +17,7 @@ function Editer(){
 	}
 	
 	this.Start=function(){
-		this.EditBgInit();//³õÊ¼»¯±³¾° 
+		this.EditBgInit();//åˆå§‹åŒ–èƒŒæ™¯ 
 		this.iframeInit();
 	}
 	

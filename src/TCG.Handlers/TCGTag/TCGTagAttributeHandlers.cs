@@ -273,8 +273,6 @@ namespace TCG.Handlers
 
         private void TagForNewsListWithOutPager(ref TCGTagPagerInfo pagerinfo)
         {
-
-
             int nums = objectHandlers.ToInt(this.GetAttribute("num"));
             string categories = this.GetAttribute("categories");
             string Speciality = this.GetAttribute("speciality");
@@ -476,10 +474,40 @@ namespace TCG.Handlers
             }
             else
             {
-                Resources res = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(categorie.Id);
-                if (res != null && categorie.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
+                if (categorie.IsSinglePage == "Y")
                 {
-                    url = res.vcFilePath;
+                    Resources res = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(categorie.Id);
+                    if (res != null && categorie.IsSinglePage == "Y" && !string.IsNullOrEmpty(res.vcFilePath))
+                    {
+                        url = res.vcFilePath;
+                    }
+                }
+                else
+                {
+                   Dictionary<string,EntityBase> chiledcategorys = base.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentId(categorie.Id, categorie.SkinInfo.Id);
+                   foreach (KeyValuePair<string, EntityBase> keyvalue in chiledcategorys)
+                   {
+                       Categories ctgr = keyvalue.Value as Categories;
+                       if (ctgr != null)
+                       {
+                           if (!string.IsNullOrEmpty(ctgr.vcUrl))
+                           {
+                               url = (ctgr.vcUrl.IndexOf(".") > -1) ? ctgr.vcUrl : ctgr.vcUrl + ConfigServiceEx.baseConfig["FileExtension"];
+                           }
+                           else
+                           {
+                               if (ctgr.IsSinglePage == "Y")
+                               {
+                                   Resources res1 = base.handlerService.resourcsService.resourcesHandlers.GetNewsResourcesAtCategorie(ctgr.Id);
+                                   if (res1 != null && ctgr.IsSinglePage == "Y" && !string.IsNullOrEmpty(res1.vcFilePath))
+                                   {
+                                       url = res1.vcFilePath;
+                                   }
+                               }
+                           }
+                       }
+                       if (!string.IsNullOrEmpty(url)) break;
+                   }
                 }
             }
 

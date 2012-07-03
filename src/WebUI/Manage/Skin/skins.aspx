@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>资讯模版管理</title>
+    <title>璧勮妯＄増绠＄悊</title>
 	<link href="../css/base.css" rel="stylesheet" type="text/css" />
 	<link href="../css/admininfo.css" rel="stylesheet" type="text/css" />
 	<link href="../css/template.css" rel="stylesheet" type="text/css" />
@@ -13,12 +13,12 @@
 	<script type="text/javascript" src="../js/jquery.1.3.2.js"></script>
 	<script type="text/javascript" src="../js/jquery.form.js"></script>
 	<script type="text/javascript" src="../js/skins.js"></script>
-	<meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 
 <body>
     <form id="form1" runat="server">
-	<div class="Page_title">站点皮肤管理<span class="info1">(设置,修改站点皮肤的导航页)</span></div>
+	<div class="Page_title">绔欑偣鐨偆绠＄悊<span class="info1">(璁剧疆,淇敼绔欑偣鐨偆鐨勫鑸〉)</span></div>
     <TCG:AjaxDiv ID="AjaxDiv1" runat="server" />
 	<asp:Repeater id="ItemRepeater" runat="server" onitemdatabound="ItemRepeater_ItemDataBound" EnableViewState="False">
 		<ItemTemplate>
@@ -27,14 +27,14 @@
 		<TCG:Anchor id='sitename' runat='server' />
 		<TCG:Span id='info' class="info2" runat='server' />
 		<span class="info2">
-		    <a href="javascript:void 0;" onclick="CreateSql('<TCG:Span id='sid1' runat='server' />')">导出</a>
-		    <a href="javascript:void 0;" onclick="UpdateSkin('<TCG:Span id='sid2' runat='server' />')">导入</a>
-		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a>
+		    <a href="javascript:void 0;" onclick="CreateSql('<TCG:Span id='sid1' runat='server' />')">瀵煎嚭</a>
+		    <a href="javascript:void 0;" onclick="UpdateSkin('<TCG:Span id='sid2' runat='server' />')">瀵煎叆</a>
+		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">鍚敤</a>
 		</span>
 		<span class="info3">
-		    <a href="templatelist.aspx?skinid=<TCG:Span id='vsid' runat='server' />">模板</a>
-		    <a href="categorieslist.aspx?skinid=<TCG:Span id='vsid1' runat='server' />">分类</a>
-		    <a href="speciality.aspx?skinid=<TCG:Span id='vsid2' runat='server' />">特性</a>
+		    <a href="templatelist.aspx?skinid=<TCG:Span id='vsid' runat='server' />">妯℃澘</a>
+		    <a href="categorieslist.aspx?skinid=<TCG:Span id='vsid1' runat='server' />">鍒嗙被</a>
+		    <a href="speciality.aspx?skinid=<TCG:Span id='vsid2' runat='server' />">鐗规��</a>
 		</span>
 		<div class="used" id="IsDefault" runat='server'><img src="../images/icon/used_skin.png" /></div>
 	</div>
@@ -43,8 +43,8 @@
 	<input type="hidden" id="Work" name="Work" value="SetDefalutSkinId" />
 	<input type="hidden" id="SkinId" name="SkinId" value="" />
 	<div class="Page_arrb arb_pr" style="clear:both">
-		<span class="green bold">小提示：</span>
-		<span class="info1">各站点内的单篇文章管理，在模板里面！</span>
+		<span class="green bold">灏忔彁绀猴細</span>
+		<span class="info1">鍚勭珯鐐瑰唴鐨勫崟绡囨枃绔犵鐞嗭紝鍦ㄦā鏉块噷闈紒</span>
 	</div>
     </form>
 </body>

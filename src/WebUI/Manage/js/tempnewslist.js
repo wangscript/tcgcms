@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.3.1-vsdoc.js" />
+ï»¿/// <reference path="jquery-1.3.1-vsdoc.js" />
 
 var CreateDiv=new CreateDiv();
 CreateDiv.Default={w:-230,h:-455};
@@ -31,11 +31,11 @@ $(document).ready(function() {
 function GetTempTitleBy(site, parentid) {
 
     if (parentid == "1") {
-        return ">> <a href='?iParentid=1&SkinId=" + site + "'>ÏêÏ¸Ò³Ä£°å</a>"
+        return ">> <a href='?iParentid=1&SkinId=" + site + "'>è¯¦ç»†é¡µæ¨¡æ¿</a>"
     } else if (parentid == "2"){
-        return ">> <a href='?iParentid=2&SkinId=" + site + "'>ÁĞ±íÄ£°å</a>"
+        return ">> <a href='?iParentid=2&SkinId=" + site + "'>åˆ—è¡¨æ¨¡æ¿</a>"
     } else if (parentid == "3") {
-        return ">> <a href='?iParentid=3&SkinId=" + site + "'>Ô­¼şÄ£°å</a>"
+        return ">> <a href='?iParentid=3&SkinId=" + site + "'>åŸä»¶æ¨¡æ¿</a>"
     }
     for (var i = 0; i < _Template.length; i++) {
         if (_Template[i].SkinId == site && _Template[i].Id == parentid) {
@@ -49,13 +49,13 @@ function GetTempTitleBy(site, parentid) {
 function TempDel() {
     var temps = GetCheckBoxValuesForSql("CheckID");
     if (temps == "") {
-        SetAjaxDiv("err", false, "ÄúÃ»Ñ¡ÔñĞèÒªÉ¾³ıµÄÄ£°æ£¡");
+        SetAjaxDiv("err", false, "æ‚¨æ²¡é€‰æ‹©éœ€è¦åˆ é™¤çš„æ¨¡ç‰ˆï¼");
         return false;
     }
     var t = CheckTempsUsed(temps);
    
     if (t == "") {
-        SetAjaxDiv("err", false, "ÄúÑ¡ÔñµÄÄ£°æ£¬ÕıÔÚÊ¹ÓÃÖĞ£¬ÎŞ·¨É¾³ı£¡");
+        SetAjaxDiv("err", false, "æ‚¨é€‰æ‹©çš„æ¨¡ç‰ˆï¼Œæ­£åœ¨ä½¿ç”¨ä¸­ï¼Œæ— æ³•åˆ é™¤ï¼");
         return false;
     }
 
@@ -64,12 +64,12 @@ function TempDel() {
         CheckBoxMain.checked = false;
         SetCheckBoxBg('CheckID', CheckBoxMain);
         SetCheckBox("CheckID", GetCheckedBoxSetting(t));
-        SetAjaxDiv("err", false, "ÄúÑ¡ÔñµÄÄ£°æÖĞº¬ÓĞÕıÔÚÊ¹ÓÃµÄÄ£°æ£¬ÏµÍ³ÒÑ¾­×Ô¶¯Ñ¡Ôñ¿ÉÒÔÉ¾³ıµÄ²¿·Ö£¡");
+        SetAjaxDiv("err", false, "æ‚¨é€‰æ‹©çš„æ¨¡ç‰ˆä¸­å«æœ‰æ­£åœ¨ä½¿ç”¨çš„æ¨¡ç‰ˆï¼Œç³»ç»Ÿå·²ç»è‡ªåŠ¨é€‰æ‹©å¯ä»¥åˆ é™¤çš„éƒ¨åˆ†ï¼");
         return false;
     }
     $("#temps").val(t);
     $("#work").val("DEL");
-    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
+    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
     $('#form1').submit();
 }
 
@@ -115,11 +115,11 @@ function AddTemplate(){
 function EditTemplate(){
 	var vs=GetCheckBoxValues("CheckID")
 	if(vs==""){
-		SetAjaxDiv("err",false,"ÄúÃ»Ñ¡ÔñĞèÒª±à¼­µÄÄ£°æ£¡");
+		SetAjaxDiv("err",false,"æ‚¨æ²¡é€‰æ‹©éœ€è¦ç¼–è¾‘çš„æ¨¡ç‰ˆï¼");
 		return;
 	}else{
 		if(vs.indexOf(",")>-1){
-			SetAjaxDiv("err",false,"Ò»´ÎÖ»ÄÜ±à¼­Ò»¸öÄ£°æ£¡");
+			SetAjaxDiv("err",false,"ä¸€æ¬¡åªèƒ½ç¼–è¾‘ä¸€ä¸ªæ¨¡ç‰ˆï¼");
 			return;
 		}
 	}
@@ -139,16 +139,16 @@ function sTypeChange(obj) {
     }
 }
 
-//Éú³ÉÄ£°å
+//ç”Ÿæˆæ¨¡æ¿
 var o = [];
 function PageCreat() {
     var temps = GetCheckBoxValues("CheckID");
     if (temps == "") {
-        SetAjaxDiv("err", false, "ÄúÃ»Ñ¡ÔñĞèÒªÉú³ÉµÄÄ£°æ£¡");
+        SetAjaxDiv("err", false, "æ‚¨æ²¡é€‰æ‹©éœ€è¦ç”Ÿæˆçš„æ¨¡ç‰ˆï¼");
         return;
     }
 
-    CreateDiv.Start("Éú³Éµ¥Ò³Ä£°æÎÄ¼ş");
+    CreateDiv.Start("ç”Ÿæˆå•é¡µæ¨¡ç‰ˆæ–‡ä»¶");
     layer.openLayer({ id: 'layerbox', width: 426, height: 332, callBack: operback });
     var work = $("#work");
     var iTemplateId = $("#iTemplateId");
@@ -169,7 +169,7 @@ function PageCreat() {
         }
 
         if (!s) {
-            SetAjaxDiv("err", false, "ÄúÑ¡ÔñµÄÄ£°æ²»ÊÇµ¥Ò³Ä£°æ£¡");
+            SetAjaxDiv("err", false, "æ‚¨é€‰æ‹©çš„æ¨¡ç‰ˆä¸æ˜¯å•é¡µæ¨¡ç‰ˆï¼");
             return;
         }
      

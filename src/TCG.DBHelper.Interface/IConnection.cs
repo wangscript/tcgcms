@@ -101,5 +101,7 @@ namespace TCG.DBHelper
         int m_RunSP(ref string as_ErrText, string as_SPName);
 
         int m_RunSPData(ref string as_ErrText, string as_SPName, ref DataSet ads_out_Data);
+
+        int ClearSqlParams(ref string errText);
     }
 }

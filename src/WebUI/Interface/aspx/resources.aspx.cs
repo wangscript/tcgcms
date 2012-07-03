@@ -91,7 +91,7 @@ namespace TCG.CMS.WebUi
             string strCondition = "iClassID in (" + allchild + ")";
 
 
-            string keywords = objectHandlers.Get("keywords");
+            string keywords = objectHandlers.UrlDecode( objectHandlers.Get("keywords"));
             if (!string.IsNullOrEmpty(keywords))
             {
                 strCondition += " AND vcTitle like '%" + keywords + "%'";

@@ -1,4 +1,4 @@
-//--------------
+ï»¿//--------------
 /// <reference path="jquery-1.3.1-vsdoc.js" />
 
 function CheckAddClassForm() {
@@ -11,7 +11,7 @@ function CheckAddClassForm() {
         return false;
     }
     
-    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
+    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
     return true;
 }
 
@@ -20,11 +20,11 @@ function GetParentTitle() {
     if (o == null) return;
     var placemsg = $("#placemsg");
     if (o.length == 0) {
-        placemsg.html(placemsg.html() + "×÷ÎªÍøÕ¾·ÖÀà");
+        placemsg.html(placemsg.html() + "ä½œä¸ºç½‘ç«™åˆ†ç±»");
     } else {
         a = "";
         GetNewsListTitleByClassIdW(o.val());
-        a = "¸ùÀà±ğ>>" + a;
+        a = "æ ¹ç±»åˆ«>>" + a;
         placemsg.html(placemsg.html() + a);
     }
 }
@@ -70,18 +70,18 @@ function CheckEditClassForm() {
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
         return false;
     }
-    SetAjaxDiv("loader", false, "ÕıÔÚ·¢ËÍÇëÇó...");
+    SetAjaxDiv("loader", false, "æ­£åœ¨å‘é€è¯·æ±‚...");
     return true;
 }
 
 function EditClassPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"×ÊÑ¶·ÖÀàĞŞ¸Ä³É¹¦£¡");
+	SetAjaxDiv("ok",false,"èµ„è®¯åˆ†ç±»ä¿®æ”¹æˆåŠŸï¼");
 }
 
 function AddClassPostBack(val){
 	if(GetErrText(val))return;
-	SetAjaxDiv("ok",false,"×ÊÑ¶·ÖÀàÌí¼Ó³É¹¦£¡");
+	SetAjaxDiv("ok",false,"èµ„è®¯åˆ†ç±»æ·»åŠ æˆåŠŸï¼");
 }
 
 function CheckTemplate(on, jn) {
