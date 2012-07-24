@@ -195,8 +195,8 @@ namespace TCG.Handlers
                     sb.Append("vcFilePath:'" + resources.vcFilePath + "',");
                     sb.Append("dAddDate:'" + resources.dAddDate + "',");
                     sb.Append("vcBigImg:'" + resources.vcBigImg + "',");
-                    sb.Append("vcShortContent:'" + resources.vcShortContent + "',");
-                    sb.Append("vcContent:'" + objectHandlers.JSEncode( objectHandlers.GetTextWithoutHtml( resources.vcContent)) + "'");
+                    sb.Append("vcShortContent:'" +  objectHandlers.JSEncode(objectHandlers.HtmlEncode(resources.vcShortContent)) + "',");
+                    sb.Append("vcContent:'" + objectHandlers.JSEncode(resources.vcContent) + "'");
                     break;
 
             }
