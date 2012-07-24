@@ -359,7 +359,7 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcClassPic$", "<TCG>" + "/skin/"
                 + pagerinfo.SkinInfo.Filename + item.Categorie.vcPic + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcAuthor$", "<TCG>" + item.vcAuthor + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + objectHandlers.GetTextWithoutHtml(item.vcShortContent) + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_vcShortContent$", "<TCG>" + objectHandlers.HtmlEncode(item.vcShortContent) + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcClassName$", "<TCG>" + item.Categorie.vcClassName + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iClassId$", "<TCG>" + item.Categorie.Id + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iClassParentId$", "<TCG>" + item.Categorie.Parent + "</TCG>");

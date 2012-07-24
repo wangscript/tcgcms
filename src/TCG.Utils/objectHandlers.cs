@@ -1215,12 +1215,7 @@ namespace TCG.Utils
         /// <returns></returns>
         public static string JSEncode(string s)
         {
-            StringBuilder builder1 = new StringBuilder(s);
-            builder1.Replace("\"", "\\\"");
-            builder1.Replace("/", "//");
-            builder1.Replace("\r\n", "\\n");
-            builder1.Replace("\n", "\\n");
-            return builder1.ToString();
+            return s.Replace("\"", "").Replace("'", "").Replace("[", "【").Replace("]", "】").Replace("\r", "").Replace("\n", "");
         }
 
         /// <summary>
