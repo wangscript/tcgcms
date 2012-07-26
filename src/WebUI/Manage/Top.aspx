@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Top.aspx.cs" Inherits="TCG.CMS.WebUi.Top" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Top.aspx.cs" Inherits="TCG.CMS.WebUi.Top" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -20,11 +20,13 @@
 			<TCG:Span id='adminName' runat='server' /></strong> [
 			<a onclick="LoginOut()" href="#">退出</a>&nbsp;&nbsp;
           	<a onclick="GoMyAccount();" href="MyAccount.aspx" target="main">个人帐户</a>]
-	  </td>
-		<td width="21%" rowspan="2">&nbsp;</td>
+            </td>
+		<td width="21%" rowspan="2"></td>
 	</tr>
 	<tr>
-	  <td>&nbsp;</td>
+	  <td align="left" class="logininf">
+            &nbsp;&nbsp;当前正在生成：<a href="#">http://www.sina.com/</a>
+	  </td>
 	  </tr>
 	</form>
 </table>

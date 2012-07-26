@@ -7,4 +7,5 @@
 .tempitembg { background-image:url(../images/tempinfo_bg.jpg)}
 .TempItem .used{ position:absolute; left:70px; top:50px;}
 .TempItem .used img { width:32px; height:32px; border:none;}
-.TempItem .info3 a { padding-left:3px;float:left;width:30px; color:#236DA0; font-weight:normal; text-decoration:underline;}
+.TempItem .info3 { margin-left:3px;}
+.TempItem .info3 a {float:left;width:30px; color:#236DA0; font-weight:normal; text-decoration:underline;}
