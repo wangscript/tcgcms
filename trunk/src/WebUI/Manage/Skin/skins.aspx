@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skins.aspx.cs" Inherits="TCG.CMS.WebUi.Skin_skins" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="skins.aspx.cs" Inherits="TCG.CMS.WebUi.Skin_skins" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -30,11 +30,13 @@
 		    <a href="javascript:void 0;" onclick="CreateSql('<TCG:Span id='sid1' runat='server' />')">导出</a>
 		    <a href="javascript:void 0;" onclick="UpdateSkin('<TCG:Span id='sid2' runat='server' />')">导入</a>
 		    <a href="javascript:void 0;" onclick="SetDefaultSkin('<TCG:Span id='sid' runat='server' />')">启用</a>
+            <a href="javascript:void 0;" >删除</a>
 		</span>
 		<span class="info3">
 		    <a href="templatelist.aspx?skinid=<TCG:Span id='vsid' runat='server' />">模板</a>
 		    <a href="categorieslist.aspx?skinid=<TCG:Span id='vsid1' runat='server' />">分类</a>
 		    <a href="speciality.aspx?skinid=<TCG:Span id='vsid2' runat='server' />">特性</a>
+            <a href="#">配置</a>
 		</span>
 		<div class="used" id="IsDefault" runat='server'><img src="../images/icon/used_skin.png" /></div>
 	</div>

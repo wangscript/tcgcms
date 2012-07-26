@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categoriesadd.aspx.cs" Inherits="TCG.CMS.WebUi.skin_categoriesadd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="categoriesadd.aspx.cs" Inherits="TCG.CMS.WebUi.skin_categoriesadd" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="../js/CreateDivV2.js"></script>
 	<script type="text/javascript" src="../js/newsclasslist.js"></script>
 	<script type="text/javascript" src="../js/newsclassadd.js"></script>
+
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
