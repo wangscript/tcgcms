@@ -130,7 +130,8 @@ namespace TCG.Handlers
                     sb.Append("DataBaseService:\"" + categories.DataBaseService + "\",");
                     sb.Append("Name:\"" + categories.vcName + "\",");
                     sb.Append("Skin:" + this.GetJsEntity((EntityBase)categories.SkinInfo, typeof(Skin)) + ",");
-                    sb.Append("ClassName:\"" + categories.vcClassName + "\"");
+                    sb.Append("ClassName:\"" + categories.vcClassName + "\",");
+                    sb.Append("Speciality:'" + categories.vcSpeciality + "'");
                     break;
                 case "TCG.Entity.Template":
                     Template template = (Template)entity;

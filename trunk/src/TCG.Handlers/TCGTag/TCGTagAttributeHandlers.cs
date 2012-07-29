@@ -148,8 +148,9 @@ namespace TCG.Handlers
             string tempNew = string.Empty;
             string parentid = this.GetAttribute("parent");
             string skinid = this.GetAttribute("skin");
+            string Speciality = this.GetAttribute("speciality");
 
-            Dictionary<string, EntityBase> categories = this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentIdForIndex(parentid, skinid);
+            Dictionary<string, EntityBase> categories = this.handlerService.skinService.categoriesHandlers.GetCategoriesEntityByParentIdForIndex(parentid, skinid, Speciality);
 
             if (categories == null)return;
     

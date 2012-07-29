@@ -7,7 +7,7 @@ function CheckAddClassForm() {
     if (!(CheckValueIsNull('iClassName', 'cnamemsg') && CheckValueIsNull('iName', 'inamemsg')
 			&& CheckValueIsNull('iDirectory', 'dirmsg') &&
 			CheckTemplate('sTemplate', 'stdmsg') && CheckTemplate('slTemplate', 'stsdmsg'))) {
-        SetFromsByNum("a1");
+        
         return false;
     }
     
@@ -66,13 +66,14 @@ $(document).ready(function () {
         { Action: "get" },
         function (data, textStatus) {
             data = data.substring(4, data.length);
+
             eval(data);
 
             var iSpeciality = $("#iSpeciality");
             var iSpeciality_t = $("#iSpeciality_t");
 
             var p = GetSpecialityById(iSpeciality.val());
-            
+
             if (p == null) {
                 iSpeciality_t.val("请选择资讯特性...");
             } else {
@@ -81,8 +82,38 @@ $(document).ready(function () {
 
             GetSpecialityEnmu($("#iSpeciality_cc"), $("#skinid").val(), "0");
 
+            var sc = $("#iSpeciality_cc").find("a");
+           
+            sc.each(function (n) {
+                $(sc[n]).bind("click", function (e) {
+                    e.stopPropagation();
+                });
+            });
+
             Menu.init("iSpeciality_c");
         });
+
+
+    $("#SelectDivWW").bind('click', function (e) {
+        if ($("#iSpeciality_1").css('display') == 'block') {
+            $("#iSpeciality_1").hide();
+        } else {
+            $("#iSpeciality_1").show();
+        }
+        e.stopPropagation();
+
+    });
+
+    $(document).bind('click', function (e) {
+
+        if ($("#gamelist_c").css('display') == 'block') {
+            $("#gamelist_c").hide();
+        }
+
+        if ($("#iSpeciality_1").css('display') == 'block') {
+            $("#iSpeciality_1").hide();
+        }
+    });
 
     $("#form1").ajaxForm(options);
 
@@ -146,4 +177,24 @@ function SetFromsByNum(lb) {
             $("#" + objss[i] + "_from").hide();
         }
     }
+}
+
+function SelectSpecialityValue(val) {
+
+    if ($("#iiSpeciality_" + val).attr("checked") == false) {
+        $("#iiSpeciality_" + val).attr("checked", true);
+    } else {
+        $("#iiSpeciality_" + val).attr("checked", false);
+    }
+    var t = "";
+    var txt = "";
+    $("[name='iiSpeciality']").each(function () {
+        if ($(this).attr("checked")) {
+            t = t + ((t == "") ? "" : ",") + $(this).val().split('|')[0];
+            txt = txt + ((txt == "") ? "" : ",") + $(this).val().split('|')[1];
+        }
+    });
+
+    $("#iSpeciality_t").val(txt);
+    $("#iSpeciality").val(t);
 }

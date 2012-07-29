@@ -43,7 +43,7 @@ namespace TCG.Handlers
         /// <param name="parentid"></param>
         /// <param name="skinid"></param>
         /// <returns></returns>
-        public Dictionary<string, EntityBase> GetCategoriesEntityByParentIdForIndex(string parentid, string skinid)
+        public Dictionary<string, EntityBase> GetCategoriesEntityByParentIdForIndex(string parentid, string skinid, string Speciality)
         {
             Dictionary<string, EntityBase> allcategories = this.GetAllCategoriesEntity();
             if (allcategories == null) return null;
@@ -52,7 +52,29 @@ namespace TCG.Handlers
             foreach (KeyValuePair<string, EntityBase> entity in allcategories)
             {
                 Categories tempcategories = (Categories)entity.Value;
-                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinInfo.Id&&tempcategories.cVisible=="Y")
+
+                bool IsSpecialitys = true;
+                if (!string.IsNullOrEmpty(Speciality))
+                {
+                    string[] Specialitys = Speciality.Split(',');
+                    IsSpecialitys = false;
+                    if (!string.IsNullOrEmpty(tempcategories.vcSpeciality))
+                    {
+                        string[] cSpecialitys = tempcategories.vcSpeciality.Split(',');
+                       
+                        foreach (string t in Specialitys)
+                        {
+                            foreach (string tt in cSpecialitys)
+                            {
+                                if (t == tt)
+                                {
+                                    IsSpecialitys = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (tempcategories.Parent == parentid && skinid == tempcategories.SkinInfo.Id&&tempcategories.cVisible=="Y"&&IsSpecialitys)
                 {
                     childcategories.Add(tempcategories.Id, (EntityBase)tempcategories);
                 }

@@ -419,3 +419,5 @@ function CategoriePropertieMdyHtml(id, name, type, Values, width, height, iOrder
 	    + "</div>"
         + "<input name=\"cpid_" + id + "\" type=\"hidden\" id=\"cpid_" + id + "\" value=\"" + id + "\" /></div>";
 }
+
+var _Speciality;

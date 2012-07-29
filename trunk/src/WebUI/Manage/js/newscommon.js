@@ -120,8 +120,9 @@ function GetSpecialityEnmu(obj, Skinid, CagetegorId) {
     for (var i = 0; i < _Speciality.length; i++) {
         if (_Speciality[i].iParent == CagetegorId && _Speciality[i].SkinId == Skinid) {
             var checkh = $("#iSpeciality").val().indexOf(_Speciality[i].Id) > -1 ? "checked" : "";
-            var li = $("<li><input type=\"checkbox\" name=\"iiSpeciality\" value=\"" + _Speciality[i].Id + "\" " + checkh + " /><a href=\"javascript:SelectSpecialityValue('" + _Speciality[i].Id
-                + "','" + _Speciality[i].vcTitle + "');\" ><span>" + _Speciality[i].vcTitle + "</span></a></li>");
+            var li = $("<li><a href=\"javascript:SelectSpecialityValue('" + _Speciality[i].Id
+                + "');\"><input type=\"checkbox\" name=\"iiSpeciality\" value=\""
+                + _Speciality[i].Id + "|" + _Speciality[i].vcTitle + "\" " + checkh + " id=\"iiSpeciality_" + _Speciality[i].Id + "\" /><span>" + _Speciality[i].vcTitle + "</span></a></li>");
             $(o).append(li);
             find = true;
             GetSpecialityEnmu(li, _Speciality[i].SkinId, _Speciality[i].Id);
