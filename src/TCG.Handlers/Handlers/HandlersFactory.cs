@@ -136,6 +136,7 @@ namespace TCG.Handlers
                     categories.SkinInfo = skinHandlers.GetSkinEntityBySkinId(row["SkinId"].ToString().Trim());
                     categories.IsSinglePage = row["IsSinglePage"].ToString().Trim();
                     categories.vcPic = row["vcPic"].ToString().Trim();
+                    categories.vcSpeciality = row["vcSpeciality"].ToString();
                     return (EntityBase)categories;
                 case "TCG.Entity.Resources":
                     Resources resources = new Resources();

@@ -76,6 +76,10 @@ namespace TCG.Entity
         public string IsSinglePage { get { return this._sssinglepage; } set { this._sssinglepage = value; } }
 
         public string vcPic { get; set; }
+        /// <summary>
+        /// 资源特性
+        /// </summary>
+        public string vcSpeciality { get { return this._vcSpeciality; } set { this._vcSpeciality = value; } }
         
         private string _iparent;
         private Template _itemplate;
@@ -91,5 +95,6 @@ namespace TCG.Entity
         private string _skinid;
         private string _sssinglepage;
         private Skin _skin;
+        private string _vcSpeciality;
     }
 }

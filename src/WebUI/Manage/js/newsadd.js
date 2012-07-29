@@ -114,10 +114,24 @@ function SelectClassValue(val, txt) {
     iClassId.val(val);
 }
 
-function SelectSpecialityValue(val, txt) {
-    $("#iSpeciality_t").val(txt);
-    $("#iSpeciality").val(val);
+function SelectSpecialityValue(val) {
 
+    if ($("#iiSpeciality_" + val).attr("checked") == false) {
+        $("#iiSpeciality_" + val).attr("checked", true);
+    } else {
+        $("#iiSpeciality_" + val).attr("checked", false);
+    }
+    var t = "";
+    var txt = "";
+    $("[name='iiSpeciality']").each(function () {
+        if ($(this).attr("checked")) {
+            t = t + ((t == "") ? "" : ",") + $(this).val().split('|')[0];
+            txt = txt + ((txt == "") ? "" : ",") + $(this).val().split('|')[1];
+        }
+    });
+
+    $("#iSpeciality_t").val(txt);
+    $("#iSpeciality").val(t);
 }
 
 
@@ -181,6 +195,14 @@ $(document).ready(function () {
             }
 
             GetSpecialityEnmu($("#iSpeciality_cc"), $("#iSkinId").val(), "0");
+
+            var sc = $("#iSpeciality_cc").find("a");
+
+            sc.each(function (n) {
+                $(sc[n]).bind("click", function (e) {
+                    e.stopPropagation();
+                });
+            });
 
             Menu.init("iSpeciality_c");
         });
