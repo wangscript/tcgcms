@@ -11,6 +11,26 @@ function LoginOut(){
 	    dataType: "json"
 	});
 }
+var t = null;
+$(document).ready(function () {
+    t = setInterval("LoadCreatingFile()", 4000);
+});
+
+function LoadCreatingFile() {
+    $.ajax({
+        type: "GET", url: "Common/CreatingFileStatus.aspx?temp=" + new Date().toString(), data: "",
+        errror: function () { },
+        success: function (data) {
+            if (data.FilePath == '') {
+                $("#tdCreateFlie").html("");
+            } else {
+                $("#tdCreateFlie").html('&nbsp;&nbsp;当前正在生成：<a href="' + data.FilePath + '">' + data.FilePath + '</a>');
+            }
+        },
+        dataType: "json"
+    });
+}
+
 
 function GoMyAccount(){
 	top.menu.show();

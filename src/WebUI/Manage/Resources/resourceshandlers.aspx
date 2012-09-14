@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceshandlers.aspx.cs" Inherits="TCG.CMS.WebUi.resources_resourceshandlers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="resourceshandlers.aspx.cs" Inherits="TCG.CMS.WebUi.resources_resourceshandlers" %>
 <%@ Register tagPrefix="TCG" namespace="TCG.Controls.HtmlControls" assembly="TCG.Controls"%>
 <%@ Register src="../Ctrl/AjaxDiv.ascx" tagname="AjaxDiv" tagprefix="TCG"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -124,7 +124,7 @@
     </div>
     <div id="a2_from">
 	    <div class="Page_arrb arb_pr1">
-		    <script type="text/javascript" charset="gb2312" src="../KindEditer/kindeditor-min.js"></script>
+		    <script type="text/javascript" charset="utf-8" src="../KindEditer/kindeditor.js"></script>
                 <script type="text/javascript">
                     KE.show({
                         id: 'taContent',

@@ -208,6 +208,12 @@ namespace TCG.CMS.WebUi
             string errText = string.Empty;
             int rtn = 0;
 
+            if (!string.IsNullOrEmpty(item.vcUrl))
+            {
+                item.cCreated = "Y";
+                item.cChecked = "Y";
+            }
+
             try
             {
                 if (!ismdy)

@@ -24,8 +24,7 @@
 		<td width="21%" rowspan="2"></td>
 	</tr>
 	<tr>
-	  <td align="left" class="logininf">
-            &nbsp;&nbsp;当前正在生成：<a href="#">http://www.sina.com/</a>
+	  <td align="left" class="logininf" id="tdCreateFlie">
 	  </td>
 	  </tr>
 	</form>
