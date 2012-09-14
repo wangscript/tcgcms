@@ -66,7 +66,7 @@ KE.setting = {
 		'superscript', '|', 'selectall', '-',
 		'title', 'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold',
 		'italic', 'underline', 'strikethrough', 'removeformat', '|', 'image',
-		'flash', 'media', 'advtable', 'hr', 'emoticons', 'link', 'unlink', '|', 'about'
+		'flash', 'media', 'advtable', 'hr', 'emoticons', 'link', 'unlink','page', '|', 'about'
 	],
 	colorTable : [
 		['#E53333', '#E56600', '#FF9900', '#64451D', '#DFC5A4', '#FFE500'],
@@ -3059,6 +3059,7 @@ KE.lang = {
 	link : '超级链接',
 	unlink : '取消超级链接',
 	fullscreen : '全屏显示',
+    page : '插入分页',
 	about : '关于',
 	print : '打印',
 	fileManager : '浏览服务器',
@@ -3523,6 +3524,15 @@ KE.plugin['hr'] = {
 		KE.util.focus(id);
 	}
 };
+
+KE.plugin['page'] = {
+    click : function(id) {
+       KE.util.selection(id);
+       KE.util.insertHtml(id, '[PageNext]');
+       KE.util.focus(id);
+    }
+};
+
 
 KE.plugin['print'] = {
 	click : function(id) {

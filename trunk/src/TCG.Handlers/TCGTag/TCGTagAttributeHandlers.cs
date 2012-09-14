@@ -1,15 +1,15 @@
-/* 
+ï»¿/* 
   * Copyright (C) 2009-2009 tcgcms.com <http://www.tcgcms.cn/> 
   *  
-  *    ±¾´úÂëÒÔ¹«¹²µÄ·½Ê½¿ª·¢ÏÂÔØ£¬ÈÎºÎ¸öÈËºÍ×éÖ¯¿ÉÒÔÏÂÔØ£¬ 
-  * ĞŞ¸Ä£¬½øĞĞµÚ¶ş´Î¿ª·¢Ê¹ÓÃ£¬µ«Çë±£Áô×÷Õß°æÈ¨ĞÅÏ¢¡£ 
+  *    æœ¬ä»£ç ä»¥å…¬å…±çš„æ–¹å¼å¼€å‘ä¸‹è½½ï¼Œä»»ä½•ä¸ªäººå’Œç»„ç»‡å¯ä»¥ä¸‹è½½ï¼Œ 
+  * ä¿®æ”¹ï¼Œè¿›è¡Œç¬¬äºŒæ¬¡å¼€å‘ä½¿ç”¨ï¼Œä½†è¯·ä¿ç•™ä½œè€…ç‰ˆæƒä¿¡æ¯ã€‚ 
   *  
-  *    ÈÎºÎ¸öÈË»ò×éÖ¯ÔÚÊ¹ÓÃ±¾Èí¼ş¹ı³ÌÖĞÔì³ÉµÄÖ±½Ó»ò¼ä½ÓËğÊ§£¬ 
-  * ĞèÒª×ÔĞĞ³Ğµ£ºó¹ûÓë±¾Èí¼ş¿ª·¢Õß(ÈıÔÆ¹í)ÎŞ¹Ø¡£ 
+  *    ä»»ä½•ä¸ªäººæˆ–ç»„ç»‡åœ¨ä½¿ç”¨æœ¬è½¯ä»¶è¿‡ç¨‹ä¸­é€ æˆçš„ç›´æ¥æˆ–é—´æ¥æŸå¤±ï¼Œ 
+  * éœ€è¦è‡ªè¡Œæ‰¿æ‹…åæœä¸æœ¬è½¯ä»¶å¼€å‘è€…(ä¸‰äº‘é¬¼)æ— å…³ã€‚ 
   *  
-  *    ±¾Èí¼ş½â¾öÖĞĞ¡ĞÍÉÌ¼Ò²úÆ·ÍøÂç»¯ÏúÊÛ·½°¸¡£ 
+  *    æœ¬è½¯ä»¶è§£å†³ä¸­å°å‹å•†å®¶äº§å“ç½‘ç»œåŒ–é”€å”®æ–¹æ¡ˆã€‚ 
   *     
-  *    Ê¹ÓÃÖĞµÄÎÊÌâ£¬×ÉÑ¯×÷ÕßQQÓÊÏä sanyungui@vip.qq.com 
+  *    ä½¿ç”¨ä¸­çš„é—®é¢˜ï¼Œå’¨è¯¢ä½œè€…QQé‚®ç®± sanyungui@vip.qq.com 
   */
 
 using System;
@@ -34,27 +34,27 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ±êÇ©Ìæ»»ºóHTML µÄÔİ´æ±êÇ© ±ÜÃâ¶ş´ÎÆ¥Åä
+        /// æ ‡ç­¾æ›¿æ¢åHTML çš„æš‚å­˜æ ‡ç­¾ é¿å…äºŒæ¬¡åŒ¹é…
         /// </summary>
         public string Tag { get { return this._tag; } set { this._tag = value; } }
         /// <summary>
-        /// ±êÇ©°üº¬µÄHTML
+        /// æ ‡ç­¾åŒ…å«çš„HTML
         /// </summary>
         public string TagText { get { return this._tagtext; } set { this._tagtext = value; } }
         /// <summary>
-        /// ±êÇ©ITEM Êı×Ö
+        /// æ ‡ç­¾ITEM æ•°å­—
         /// </summary>
         public string TagType { get { return this._tagtype; } set { this._tagtype = value; } }
         /// <summary>
-        /// ±êÇ©ÊôĞÔ×Ö·û´®
+        /// æ ‡ç­¾å±æ€§å­—ç¬¦ä¸²
         /// </summary>
         public string Attribute { get { return this._attribute; } set { this._attribute = value; } }
         /// <summary>
-        /// ±êÇ©µÄÈ«²¿HTML
+        /// æ ‡ç­¾çš„å…¨éƒ¨HTML
         /// </summary>
         public string TagHtml { get { return this._taghtml; } set { this._taghtml = value; } }
         /// <summary>
-        /// ÊÇ·ñÎªÁĞ±íÊôĞÔ
+        /// æ˜¯å¦ä¸ºåˆ—è¡¨å±æ€§
         /// </summary>
         public bool Pager { get { return this._pager; } set { this._pager = value; } }
 
@@ -92,7 +92,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ¸ú±êÇ©Ãû»ñµÃ±êÖ¾ÊôĞÔ
+        /// è·Ÿæ ‡ç­¾åè·å¾—æ ‡å¿—å±æ€§
         /// </summary>
         /// <param name="feild"></param>
         /// <returns></returns>
@@ -116,7 +116,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ¸ú±êÇ©Ãû»ñµÃ±êÖ¾ÊôĞÔ
+        /// è·Ÿæ ‡ç­¾åè·å¾—æ ‡å¿—å±æ€§
         /// </summary>
         /// <param name="feild"></param>
         /// <returns></returns>
@@ -134,7 +134,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// »ñµÃ±êÇ©
+        /// è·å¾—æ ‡ç­¾
         /// </summary>
         /// <param name="pagerinfo"></param>
         private void TagForScriptCss(ref TCGTagPagerInfo pagerinfo)
@@ -177,7 +177,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ´¦Àíµ¥Æª×ÊÑ¶µÄ±êÇ©
+        /// å¤„ç†å•ç¯‡èµ„è®¯çš„æ ‡ç­¾
         /// </summary>
         private void TagForNewsTopic(ref TCGTagPagerInfo pagerinfo)
         {
@@ -191,6 +191,30 @@ namespace TCG.Handlers
             Resources item = this.handlerService.resourcsService.resourcesHandlers.GetResourcesById(resourceid);
             if (item != null)
             {
+                string[] ResourcesPages = item.vcContent.Split(new string[] { "[PageNext]" }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (ResourcesPages.Length > 1)
+                {
+                    pagerinfo.NeedPager = true;
+                    this._pager = true;
+                    pagerinfo.PageCount = ResourcesPages.Length;
+                    pagerinfo.DoAllPage = true;
+                    pagerinfo.TopicCount = ResourcesPages.Length;
+
+                    int i =  pagerinfo.PageSep -1 ;
+                    if (i <= 0) 
+                    { 
+                        i = 0;
+                        pagerinfo.curPage = 1;
+                        pagerinfo.Page = 1;
+                    }
+                    if (i < ResourcesPages.Length)
+                    {
+                        item.vcContent = ResourcesPages[i];
+                    }
+                }
+
+
                 string temp = this._tagtext;
                 this.NewslistTagFieldsReplace(ref temp, ref pagerinfo, item);
                 this._tagtext = temp;
@@ -198,7 +222,7 @@ namespace TCG.Handlers
             }
             else
             {
-                throw new Exception("±àºÅÎª:[" + resourceid + "]µÄÎÄÕÂÕÒ²»µ½£¡");
+                throw new Exception("ç¼–å·ä¸º:[" + resourceid + "]çš„æ–‡ç« æ‰¾ä¸åˆ°ï¼");
                 return;
             }
 
@@ -230,7 +254,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ´¦ÀíÄÚÇ©Ä£°æµÄ±êÇ©
+        /// å¤„ç†å†…ç­¾æ¨¡ç‰ˆçš„æ ‡ç­¾
         /// </summary>
         private void TagForNewsTemplate(ref TCGTagPagerInfo pagerinfo)
         {
@@ -256,7 +280,7 @@ namespace TCG.Handlers
         }
 
         /// <summary>
-        /// ´¦Àí×ÊÑ¶ÁĞ±í
+        /// å¤„ç†èµ„è®¯åˆ—è¡¨
         /// </summary>
         private void TagForNewsList(ref TCGTagPagerInfo pagerinfo)
         {
@@ -326,13 +350,13 @@ namespace TCG.Handlers
                  title = objectHandlers.Left(title, maxtitlenum) + text;
             }
 
-            if (!string.IsNullOrEmpty(item.vcTitleColor)) title = "<font color='" + item.vcTitleColor + "'>"
+            if (!string.IsNullOrEmpty(item.vcTitleColor)) title = "<font color=\"" + item.vcTitleColor + "\">"
                 + title + "</font>";
             if (item.cStrong == "Y") title = "<strong>" + "<TCG>" + title + "</strong>";
             temp = temp.Replace("$" + this._tagtype + "_vcTitle$", "<TCG>" + title + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcTitle1$", "<TCG>" + item.vcTitle + "</TCG>");
 
-            //Ìæ»»ÕıÎÄÄÚÈİ£¬¼ì²éÍ¼Æ¬
+            //æ›¿æ¢æ­£æ–‡å†…å®¹ï¼Œæ£€æŸ¥å›¾ç‰‡
             //try
             //{
             //    string tContent = this.handlerService.fileService.fileHandlers.ImgPatchInit(item, "", adminInfo,
@@ -353,8 +377,8 @@ namespace TCG.Handlers
             temp = temp.Replace("$" + this._tagtype + "_vcContent$", "<TCG>" + item.vcContent + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_iId$", "<TCG>" + item.Id.ToString() + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_dUpdateDate$", "<TCG>" + item.dUpDateDate.ToString("yyyyÄêMMÔÂddÈÕ") + "</TCG>");
-            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + item.dAddDate.ToString("yyyyÄêMMÔÂddÈÕ") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dUpdateDate$", "<TCG>" + item.dUpDateDate.ToString("yyyyå¹´MMæœˆddæ—¥") + "</TCG>");
+            temp = temp.Replace("$" + this._tagtype + "_dAddDate$", "<TCG>" + item.dAddDate.ToString("yyyyå¹´MMæœˆddæ—¥") + "</TCG>");
 
             temp = temp.Replace("$" + this._tagtype + "_vcKeyWord$", "<TCG>" + item.vcKeyWord + "</TCG>");
             temp = temp.Replace("$" + this._tagtype + "_vcClassPic$", "<TCG>" + "/skin/"
@@ -396,7 +420,6 @@ namespace TCG.Handlers
             bool isshowrp = objectHandlers.ToBoolen(this.GetAttribute("inpropertie"), false);
             if (isshowrp)
             {
-
                 
                 Dictionary<string, EntityBase> ress = base.handlerService.resourcsService.resourcesHandlers.GetResourcePropertiesByRIdEntity(item.Id);
 
@@ -418,7 +441,7 @@ namespace TCG.Handlers
                         foreach (KeyValuePair<string, EntityBase> entity in ress)
                         {
                             ResourceProperties resourceProperties = (ResourceProperties)entity.Value;
-                            //ÔÚÖÆ¶¨ĞĞÊıÊÇÄÚ£¬²¢ÇÒ²»ÔÚÅÅ³ı×Ö¶ÎÖĞ
+                            //åœ¨åˆ¶å®šè¡Œæ•°æ˜¯å†…ï¼Œå¹¶ä¸”ä¸åœ¨æ’é™¤å­—æ®µä¸­
                             if (i <= num - 1 && hide.IndexOf(resourceProperties.PropertieName) == -1)
                             {
                                 int maxtlength = objectHandlers.ToInt(this.GetAttribute(attrs, "maxlength"));
@@ -538,12 +561,10 @@ namespace TCG.Handlers
 
 
         /// <summary>
-        /// ´¦Àí×ÊÑ¶ÁĞ±í£¬´ø·ÖÒ³
+        /// å¤„ç†èµ„è®¯åˆ—è¡¨ï¼Œå¸¦åˆ†é¡µ
         /// </summary>
         private void TagForNewsListWithPager(ref TCGTagPagerInfo pagerinfo)
         {
-            pagerinfo.NeedPager = true;
-            this._pager = true;
 
             int nums = objectHandlers.ToInt(this.GetAttribute("num"));
             string categories = this.GetAttribute("categories");
@@ -580,6 +601,8 @@ namespace TCG.Handlers
                 throw new Exception(ex.Message.ToString());
             }
 
+            pagerinfo.NeedPager = true;
+            this._pager = true;
             pagerinfo.PageCount = pageCount;
             pagerinfo.curPage = curPage;
             pagerinfo.TopicCount = count;
@@ -610,7 +633,7 @@ namespace TCG.Handlers
         private string _tagtype = string.Empty;
         private string _tagtext = string.Empty;
         private string _tag = string.Empty;
-        private string _taghtml = string.Empty;         //±êÇ©µÄÈ«²¿HTML
+        private string _taghtml = string.Empty;         //æ ‡ç­¾çš„å…¨éƒ¨HTML
 
     }
 }

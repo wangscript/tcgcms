@@ -349,5 +349,7 @@ namespace TCG.Utils
 
         private Dictionary<string,DataBaseConnStr> _resourcedatabaseconfig = null;
         public string m_ResourceDataBaseConfigFilePath = "~/config/resourceDataBase.Config";               //资源数据库配置
+
+        public static string CreateIngFilePath = string.Empty;                                              //当前正在生成的文件路径
     }
 }

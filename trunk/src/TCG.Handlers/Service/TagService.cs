@@ -52,6 +52,12 @@ namespace TCG.Handlers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="errText"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int CreateResourcHtmlById(ref string errText, int id)
         {
             if (id <= 0) return -1000000308;
@@ -59,7 +65,13 @@ namespace TCG.Handlers
             Resources item = tcgTagHandlers.handlerService.resourcsService.resourcesHandlers.GetResourcesById(id);
             if (item == null) return -1000000309;
 
-            if (item.vcUrl.IndexOf(".") > -1) return -1000000310;
+            if (item.vcUrl.IndexOf(".") > -1)
+            {
+                item.cCreated = "Y";
+                item.cChecked = "Y";
+                tcgTagHandlers.handlerService.resourcsService.resourcesHandlers.UpdateResources(item);
+                return -1000000310;
+            }
 
             int rtn = 0;
             tcgTagHandlers = new TCGTagHandlers(base.handlerService);

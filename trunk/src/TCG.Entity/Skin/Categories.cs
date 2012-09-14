@@ -54,9 +54,12 @@ namespace TCG.Entity
         /// </summary>
         public string vcName { get { return this._vcname; } set { this._vcname = value; } }
         /// <summary>
-        /// 磁盘路径
+        /// 分类下详细页生成地址
         /// </summary>
         public string vcDirectory { get { return this._vcdirectory; } set { this._vcdirectory = value; } }
+        /// <summary>
+        /// 分类列表地址
+        /// </summary>
         public string vcUrl { get { return this._vcurl; } set { this._vcurl = value; } }
         /// <summary>
         /// 是否显示
@@ -74,27 +77,30 @@ namespace TCG.Entity
         /// 是否为单页
         /// </summary>
         public string IsSinglePage { get { return this._sssinglepage; } set { this._sssinglepage = value; } }
-
-        public string vcPic { get; set; }
+        /// <summary>
+        /// 分类展示图片
+        /// </summary>
+        public string vcPic { get { return this._pic; } set { this._pic = value; } }
         /// <summary>
         /// 资源特性
         /// </summary>
         public string vcSpeciality { get { return this._vcSpeciality; } set { this._vcSpeciality = value; } }
-        
-        private string _iparent;
+
+        private string _iparent = string.Empty;
         private Template _itemplate;
         private Template _ilisttemplate;
         private int _iorder;
         private DateTime _dupdatedate;
-        private string _vcclassname;
-        private string _vcname;
-        private string _vcdirectory;
-        private string _vcurl;
-        private string _cvisible;
+        private string _vcclassname = string.Empty;
+        private string _vcname = string.Empty;
+        private string _vcdirectory = string.Empty;
+        private string _vcurl = string.Empty;
+        private string _cvisible = string.Empty;
         private string _dbService = null;
-        private string _skinid;
-        private string _sssinglepage;
+        private string _skinid = string.Empty;
+        private string _sssinglepage = string.Empty;
         private Skin _skin;
-        private string _vcSpeciality;
+        private string _pic = string.Empty;
+        private string _vcSpeciality = string.Empty;
     }
 }

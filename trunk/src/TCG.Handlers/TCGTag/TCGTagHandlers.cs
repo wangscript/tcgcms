@@ -190,6 +190,15 @@ namespace TCG.Handlers
                 this._pagerinfo.CreatePagesNotic += "<a>生成文件:" + text1 + "</a>";
                 objectHandlers.SaveFile(text1, this._temphtml);
             }
+
+            if (this._pagerinfo.DoAllPage && this._pagerinfo.Page <= this._pagerinfo.PageCount)
+            {
+                this._pagerinfo.Page++;
+                this._pagerinfo.curPage++;
+                this._pagerinfo.PageSep++;
+                this._start = false;
+                this.Replace();
+            }
         }
 
         public string GetFilePath()
@@ -409,6 +418,7 @@ namespace TCG.Handlers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="NodeName"></param>
         /// <param name="pageshtml"></param>
         /// <returns></returns>
         private string GetPagerNode(string NodeName, string pageshtml)
@@ -425,7 +435,9 @@ namespace TCG.Handlers
         /// 当前页
         /// </summary>
         public int CurrentPage { get { return this._currentpage; } set { this._currentpage = value; } }
-
+        /// <summary>
+        /// 网站前台路径
+        /// </summary>
         public string WebPath { get { return this._webpath; } set { this._webpath = value; } }
         /// <summary>
         ///设置获得模板
