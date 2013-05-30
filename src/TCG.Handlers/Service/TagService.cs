@@ -190,6 +190,25 @@ namespace TCG.Handlers
 
         }
 
+        public string ReplaceTCGTag(string strHtml, string DefaultSkinId)
+        {
+            tcgTagHandlers = new TCGTagHandlers(base.handlerService);
+            tcgTagHandlers.Template = strHtml;
+            tcgTagHandlers.FilePath = "";
+            tcgTagHandlers.WebPath = "";
+            tcgTagHandlers.PagerInfo.DoAllPage = false;
+            tcgTagHandlers.PagerInfo.Page = 0;
+            tcgTagHandlers.PagerInfo.PageSep = 0;
+            tcgTagHandlers.SkinInfo = base.handlerService.skinService.skinHandlers.GetSkinEntityBySkinId(DefaultSkinId);
+
+            tcgTagHandlers.NeedCreate = false;
+
+            tcgTagHandlers.Replace();
+
+
+            return tcgTagHandlers.Template;
+        }
+
         private TCGTagHandlers _tcgtaghandlers;
         private HandlerService _handlerservice;
     }

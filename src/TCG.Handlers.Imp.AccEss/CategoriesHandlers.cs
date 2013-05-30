@@ -22,7 +22,7 @@ namespace TCG.Handlers.Imp.AccEss
         /// <returns></returns>
         public DataTable GetAllCategoriesWithOutCaching()
         {
-            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic FROM Categories order by iorder";
+            string Sql = "SELECT Id,vcClassName,vcName,SkinId,Parent,dUpdateDate,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic,vcSpeciality FROM Categories order by iorder";
             string errText = string.Empty;
             DataSet ds = null;
             int rtn = AccessFactory.conn.m_RunSQLData(ref errText, Sql, ref ds);
@@ -45,10 +45,10 @@ namespace TCG.Handlers.Imp.AccEss
         public int CreateCategories(Categories cif)
         {
 
-            string Sql = "INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic)"
+            string Sql = "INSERT INTO Categories(Id,vcClassName,vcName,SkinId,Parent,iTemplate,iListTemplate,vcDirectory,vcUrl,iOrder,Visible,DataBaseService,IsSinglePage,vcPic,vcSpeciality)"
                     + "VALUES('" + cif.Id + "','" + cif.vcClassName + "','" + cif.vcName + "','" + cif.SkinInfo.Id + "','" + cif.Parent + "','" + cif.ResourceTemplate.Id + "','"
-                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','" 
-                    + cif.IsSinglePage + "','"+cif.vcPic+"')";
+                    + cif.ResourceListTemplate.Id + "','" + cif.vcDirectory + "','" + cif.vcUrl + "','" + cif.iOrder + "','" + cif.cVisible + "','" + cif.DataBaseService + "','"
+                    + cif.IsSinglePage + "','" + cif.vcPic + "','" + cif.vcSpeciality + "')";
             string errText = string.Empty;
             return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
@@ -59,8 +59,8 @@ namespace TCG.Handlers.Imp.AccEss
             string errText = string.Empty;
             if (string.IsNullOrEmpty(cp.Id))
             {
-                sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height) VALUES("
-                + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + ")";
+                sql = "INSERT INTO CategorieProperties(CategorieId,ProertieName,[Type],[Values],width,height,vcSpeciality) VALUES("
+                + "'" + cp.PropertiesCategorieId + "','" + cp.ProertieName + "','" + cp.Type + "','" + cp.Values + "'," + cp.width + "," + cp.height + "," + cp.height + ")";
             }
             else
             {
@@ -107,7 +107,7 @@ namespace TCG.Handlers.Imp.AccEss
            string Sql = "UPDATE Categories SET vcClassName='" + cif.vcClassName + "',vcName='" + cif.vcName + "',Parent='" + cif.Parent + "',"
                     + "iTemplate='" + cif.ResourceTemplate.Id + "',iListTemplate='" + cif.ResourceListTemplate.Id + "',vcDirectory='" + cif.vcDirectory + "',vcUrl='"
                     + cif.vcUrl + "',iOrder=" + cif.iOrder + ",Visible = '" + cif.cVisible + "',DataBaseService='" + cif.DataBaseService + "', IsSinglePage = '"
-                    + cif.IsSinglePage + "',vcPic='" + cif.vcPic + "' WHERE ID ='" + cif.Id + "'";
+                    + cif.IsSinglePage + "',vcPic='" + cif.vcPic + "',vcSpeciality='" + cif.vcSpeciality + "' WHERE ID ='" + cif.Id + "'";
             string errText = string.Empty;
             return AccessFactory.conn.m_RunSQL(ref errText, Sql);
         }
